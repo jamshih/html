@@ -50,6 +50,7 @@ function taipeiDateParts(date = new Date()) {
 }
 
 function isTuesday(dateString) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return false;
   const [year, month, day] = dateString.split('-').map(Number);
   return new Date(Date.UTC(year, month - 1, day)).getUTCDay() === 2;
 }
@@ -173,7 +174,7 @@ app.post('/api/book', async (req, res) => {
   });
 });
 
-app.get('*', (_req, res) => {
+app.use((_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
