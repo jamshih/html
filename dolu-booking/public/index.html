@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f1e8" />
+  <meta name="description" content="DOLU pet grooming & spa｜台中大里寵物美容、寵物安親與用品。線上查看可預約時段。" />
+  <title>DOLU pet grooming & spa｜台中大里寵物美容</title>
+  <style>
+    :root {
+      --paper:#f5f1e8;
+      --ink:#15241f;
+      --muted:#67706b;
+      --green:#214c3b;
+      --green-2:#2f6650;
+      --orange:#df7b49;
+      --white:#fffdf8;
+      --line:rgba(21,36,31,.13);
+      --shadow:0 24px 60px rgba(30,49,42,.12);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC",sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .wrap{width:min(1160px,calc(100% - 40px));margin:0 auto}
+    header{position:sticky;top:0;z-index:50;background:rgba(245,241,232,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.04em}
+    .brand-mark{width:38px;height:38px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;font-size:13px;letter-spacing:.08em}
+    .brand span{display:block;font-size:12px;color:var(--muted);font-weight:650;letter-spacing:.02em}
+    .navlinks{display:flex;align-items:center;gap:24px;color:var(--muted);font-size:14px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:0 20px;border:1px solid var(--line);font-weight:800;cursor:pointer;transition:.2s ease}
+    .button.primary{background:var(--green);color:white;border-color:var(--green)}
+    .button.primary:hover{background:var(--green-2);transform:translateY(-1px)}
+    .button.ghost:hover{background:var(--white)}
+    .hero{padding:72px 0 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center;min-height:660px}
+    .hero h1{font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(56px,8vw,102px);line-height:.92;letter-spacing:-.055em;margin:0 0 28px;font-weight:600}
+    .hero h1 em{display:block;font-style:normal;color:var(--orange)}
+    .hero p{max-width:580px;color:var(--muted);font-size:18px;margin:0 0 30px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-panel{min-height:500px;border-radius:38px;background:var(--green);color:white;padding:36px;position:relative;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between}
+    .hero-panel:before,.hero-panel:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.07)}
+    .hero-panel:before{width:320px;height:320px;right:-90px;top:-80px}
+    .hero-panel:after{width:210px;height:210px;left:-70px;bottom:-80px}
+    .panel-top{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;align-items:start}
+    .panel-top small{color:rgba(255,255,255,.67);display:block;margin-bottom:6px}
+    .rating{font-size:40px;font-family:Georgia,serif}
+    .rating span{font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f2c29f;display:block;margin-top:4px}
+    .big-word{position:relative;z-index:2;font-family:Georgia,serif;font-size:112px;line-height:.8;letter-spacing:-.06em;opacity:.98}
+    .panel-bottom{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .mini{border-top:1px solid rgba(255,255,255,.25);padding-top:16px;color:rgba(255,255,255,.74);font-size:13px}
+    .mini strong{display:block;color:white;font-size:16px;margin-bottom:2px}
+    section{padding:92px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:38px}
+    .section-head h2{font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(38px,5vw,62px);line-height:1.02;margin:0;font-weight:600}
+    .section-head p{max-width:460px;color:var(--muted);margin:0}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:30px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between}
+    .service-num{font-size:12px;letter-spacing:.12em;color:var(--orange);font-weight:900}
+    .service h3{font-family:Georgia,"Noto Serif TC",serif;font-size:34px;line-height:1.08;margin:48px 0 12px;font-weight:600}
+    .service p{color:var(--muted);margin:0}
+    .facts-band{background:var(--white);border-block:1px solid var(--line)}
+    .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+    .fact{padding:32px 28px;border-right:1px solid var(--line)}
+    .fact:last-child{border-right:0}
+    .fact small{display:block;color:var(--muted);margin-bottom:7px}
+    .fact strong{font-size:18px}
+    .booking{background:var(--ink);color:white}
+    .booking-shell{display:grid;grid-template-columns:.8fr 1.2fr;gap:68px;align-items:start}
+    .booking-copy{position:sticky;top:110px}
+    .booking-copy h2{font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(42px,5vw,64px);line-height:1.02;margin:0 0 22px;font-weight:600}
+    .booking-copy p{color:rgba(255,255,255,.66);margin:0 0 30px}
+    .checks{display:grid;gap:13px;color:rgba(255,255,255,.83);font-size:14px}
+    .checks b{color:#f1aa7e;margin-right:9px}
+    .form-card{background:var(--white);color:var(--ink);border-radius:32px;padding:34px;box-shadow:0 28px 72px rgba(0,0,0,.2)}
+    .form-title{display:flex;justify-content:space-between;align-items:start;gap:18px;margin-bottom:24px}
+    .form-title h3{font-family:Georgia,"Noto Serif TC",serif;font-size:30px;margin:0}
+    .form-title span{font-size:12px;color:var(--muted);padding-top:8px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+    .field{display:grid;gap:7px}.field.full{grid-column:1/-1}
+    label{font-size:13px;font-weight:850}
+    input,select,textarea{width:100%;border:1px solid var(--line);background:#fffefa;border-radius:14px;padding:13px 14px;outline:none;color:var(--ink);transition:.2s}
+    input:focus,select:focus,textarea:focus{border-color:rgba(33,76,59,.5);box-shadow:0 0 0 4px rgba(33,76,59,.08)}
+    textarea{min-height:100px;resize:vertical}
+    .form-card .button{width:100%;margin-top:20px;border:0;min-height:54px}
+    .form-card .button:disabled{opacity:.55;cursor:wait;transform:none}
+    .status{display:none;margin-top:16px;border-radius:15px;padding:14px;font-size:14px}
+    .status.show{display:block}.status.success{background:#eaf5ed;color:#245d35}.status.error{background:#fff0ed;color:#9a3f2f}
+    .location-grid{display:grid;grid-template-columns:.76fr 1.24fr;gap:20px}
+    .location-card,.map{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+    .location-card{padding:32px}
+    .location-card h3{font-family:Georgia,"Noto Serif TC",serif;font-size:31px;margin:0 0 26px}
+    .detail{padding:15px 0;border-top:1px solid var(--line)}
+    .detail:first-of-type{border-top:0;padding-top:0}
+    .detail small{display:block;color:var(--muted);margin-bottom:4px}
+    .detail strong{font-size:17px}
+    .map iframe{display:block;width:100%;min-height:470px;border:0}
+    footer{padding:34px 0 95px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+    .footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .mobile-book{display:none}
+    @media(max-width:900px){
+      .navlinks{display:none}.hero{grid-template-columns:1fr;gap:36px;padding-top:48px}.hero-panel{min-height:430px}.services{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}.fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid var(--line)}.booking-shell,.location-grid{grid-template-columns:1fr}.booking-copy{position:static}
+    }
+    @media(max-width:620px){
+      .wrap{width:min(100% - 26px,1160px)}nav{height:64px}.nav-cta{display:none}.hero{padding:36px 0 48px;min-height:auto}.hero h1{font-size:58px}.hero p{font-size:16px}.hero-panel{min-height:380px;padding:25px;border-radius:28px}.big-word{font-size:82px}.panel-bottom{grid-template-columns:1fr}.section-head{display:grid}.facts{grid-template-columns:1fr}.fact{border-right:0;border-bottom:1px solid var(--line)}.fact:last-child{border-bottom:0}.form-card{padding:22px;border-radius:24px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.form-title{display:block}.mobile-book{display:flex;position:fixed;left:14px;right:14px;bottom:14px;z-index:80;align-items:center;justify-content:center;min-height:52px;border-radius:999px;background:var(--green);color:white;font-weight:900;box-shadow:0 14px 32px rgba(0,0,0,.2)}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="#top"><span class="brand-mark">DO</span><div>DOLU <span>pet grooming & spa</span></div></a>
+        <div class="navlinks">
+          <a href="#services">服務</a>
+          <a href="#location">店家資訊</a>
+          <a href="tel:+886966331334">0966-331-334</a>
+        </div>
+        <a class="button primary nav-cta" href="#booking">線上預約</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero">
+        <div>
+          <h1>舒服洗澡，<em>漂亮回家。</em></h1>
+          <p>DOLU pet grooming & spa 位於台中大里，提供寵物美容、寵物安親與寵物用品服務。現在可以直接在線上查看時段並送出預約。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#booking">查看可預約時段</a>
+            <a class="button ghost" href="tel:+886966331334">電話詢問</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="DOLU 店家資訊摘要">
+          <div class="panel-top">
+            <div><small>Google 評價</small><div class="rating">5.0 ★<span>33 則公開評論</span></div></div>
+            <div style="text-align:right"><small>台中・大里</small><strong>11:00 — 20:00</strong></div>
+          </div>
+          <div class="big-word">DOLU</div>
+          <div class="panel-bottom">
+            <div class="mini"><strong>寵物美容</strong>Pet grooming</div>
+            <div class="mini"><strong>寵物安親</strong>Pet sitting</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="facts-band">
+      <div class="wrap facts">
+        <div class="fact"><small>電話</small><strong><a href="tel:+886966331334">0966-331-334</a></strong></div>
+        <div class="fact"><small>地址</small><strong>台中市大里區大里路132之1號</strong></div>
+        <div class="fact"><small>營業時間</small><strong>11:00–20:00</strong></div>
+        <div class="fact"><small>Google</small><strong>5.0 ★ / 33 則評論</strong></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>把毛孩交給<br>熟悉照顧的人。</h2>
+          <p>依照公開店家資訊整理目前提供的服務類型。實際美容項目、犬貓狀況與費用，建議在預約時備註，店家可再與你確認。</p>
+        </div>
+        <div class="services">
+          <article class="service"><span class="service-num">01 · GROOMING</span><div><h3>寵物美容</h3><p>日常洗護、整理與美容需求，可於預約備註毛孩狀況及希望處理的項目。</p></div></article>
+          <article class="service"><span class="service-num">02 · SITTING</span><div><h3>寵物安親</h3><p>需要短時間照顧毛孩時，可先送出需求與日期，再由店家確認安排。</p></div></article>
+          <article class="service"><span class="service-num">03 · PET STORE</span><div><h3>寵物用品</h3><p>店家亦登記為寵物用品服務類型；需要特定用品可先電話詢問是否有現貨。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking" id="booking">
+      <div class="wrap booking-shell">
+        <div class="booking-copy">
+          <h2>選日期、選時間，<br>直接送出預約。</h2>
+          <p>系統會顯示目前仍可預約的時段，送出後保留該時段，並將預約資料整理給店家。</p>
+          <div class="checks">
+            <div><b>✓</b>即時查看可預約時段</div>
+            <div><b>✓</b>同時段不可重複預約</div>
+            <div><b>✓</b>記錄飼主、毛孩與服務需求</div>
+            <div><b>✓</b>可串接店家 LINE 新預約通知</div>
+          </div>
+        </div>
+
+        <form class="form-card" id="bookingForm">
+          <div class="form-title"><h3>預約 DOLU</h3><span>週二不開放預約</span></div>
+          <div class="form-grid">
+            <div class="field"><label for="ownerName">飼主姓名</label><input id="ownerName" name="ownerName" autocomplete="name" required placeholder="你的姓名" /></div>
+            <div class="field"><label for="phone">聯絡電話</label><input id="phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="09xx-xxx-xxx" /></div>
+            <div class="field"><label for="petName">毛孩名字</label><input id="petName" name="petName" required placeholder="例如：Mochi" /></div>
+            <div class="field"><label for="petType">毛孩類型</label><select id="petType" name="petType" required><option value="狗狗">狗狗</option><option value="貓咪">貓咪</option><option value="其他">其他</option></select></div>
+            <div class="field"><label for="service">預約需求</label><select id="service" name="service" required><option value="寵物美容">寵物美容</option><option value="寵物安親">寵物安親</option><option value="其他需求">其他需求</option></select></div>
+            <div class="field"><label for="date">日期</label><input id="date" name="date" type="date" required /></div>
+            <div class="field full"><label for="time">可預約時段</label><select id="time" name="time" required disabled><option value="">請先選擇日期</option></select></div>
+            <div class="field full"><label for="note">備註</label><textarea id="note" name="note" placeholder="可以寫毛孩品種、體型、個性、想做的美容內容或其他需要店家知道的事。"></textarea></div>
+          </div>
+          <button class="button primary" type="submit" id="submitBtn">送出預約</button>
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="location">
+      <div class="wrap">
+        <div class="section-head"><h2>來 DOLU。</h2><p>位於台中市大里區大里路。出發前若需要確認服務內容或毛孩狀況，可以先直接電話聯絡。</p></div>
+        <div class="location-grid">
+          <div class="location-card">
+            <h3>DOLU pet grooming & spa</h3>
+            <div class="detail"><small>地址</small><strong>台中市大里區大里路132之1號</strong></div>
+            <div class="detail"><small>電話</small><strong><a href="tel:+886966331334">0966-331-334</a></strong></div>
+            <div class="detail"><small>營業時間</small><strong>週三至週一 11:00–20:00</strong></div>
+            <div class="detail"><small>公開評價</small><strong>Google 5.0 ★（33 則）</strong></div>
+            <a class="button primary" style="margin-top:24px" href="https://www.google.com/maps/search/?api=1&query=DOLU%20pet%20grooming%20%26%20spa%20Taichung" target="_blank" rel="noreferrer">開啟 Google 地圖</a>
+          </div>
+          <div class="map"><iframe title="DOLU pet grooming & spa 地圖" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=DOLU%20pet%20grooming%20%26%20spa%20Taichung&output=embed"></iframe></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-row"><span>© DOLU pet grooming & spa</span><span>台中市大里區大里路132之1號 · 0966-331-334</span></div></footer>
+  <a class="mobile-book" href="#booking">線上預約</a>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const dateInput = document.getElementById('date');
+    const timeSelect = document.getElementById('time');
+    const statusBox = document.getElementById('status');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei' }).format(new Date());
+    dateInput.min = today;
+
+    function setStatus(type, message) {
+      statusBox.className = `status show ${type}`;
+      statusBox.textContent = message;
+    }
+
+    function isTuesday(value) {
+      if (!value) return false;
+      const [y,m,d] = value.split('-').map(Number);
+      return new Date(Date.UTC(y,m-1,d)).getUTCDay() === 2;
+    }
+
+    async function loadAvailability() {
+      const date = dateInput.value;
+      statusBox.className = 'status';
+      timeSelect.innerHTML = '<option value="">載入中…</option>';
+      timeSelect.disabled = true;
+      if (!date) {
+        timeSelect.innerHTML = '<option value="">請先選擇日期</option>';
+        return;
+      }
+      if (isTuesday(date)) {
+        timeSelect.innerHTML = '<option value="">週二店休</option>';
+        setStatus('error', '週二不開放預約，請選擇其他日期。');
+        return;
+      }
+      try {
+        const response = await fetch(`/api/availability?date=${encodeURIComponent(date)}`);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'availability_failed');
+        if (!data.available.length) {
+          timeSelect.innerHTML = '<option value="">當天已無可預約時段</option>';
+          setStatus('error', '這一天目前已沒有可預約時段，請選擇其他日期。');
+          return;
+        }
+        timeSelect.innerHTML = '<option value="">選擇時間</option>' + data.available.map(t => `<option value="${t}">${t}</option>`).join('');
+        timeSelect.disabled = false;
+      } catch {
+        timeSelect.innerHTML = '<option value="">無法讀取時段</option>';
+        setStatus('error', '目前無法讀取可預約時段，請稍後再試或直接電話聯絡店家。');
+      }
+    }
+
+    dateInput.addEventListener('change', loadAvailability);
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusBox.className = 'status';
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送出中…';
+      const payload = Object.fromEntries(new FormData(form).entries());
+      try {
+        const response = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          if (data.error === 'slot_taken') throw new Error('這個時段剛剛已被預約，請重新選擇。');
+          if (data.error === 'closed_tuesday') throw new Error('週二不開放預約，請選擇其他日期。');
+          throw new Error('資料未完整送出，請檢查姓名、電話、日期與時段。');
+        }
+        setStatus('success', `預約已送出：${data.booking.date} ${data.booking.time}，預約編號 ${data.booking.id}。店家可再依毛孩狀況與你確認細節。`);
+        const keepDate = payload.date;
+        form.reset();
+        dateInput.min = today;
+        dateInput.value = keepDate;
+        await loadAvailability();
+      } catch (error) {
+        setStatus('error', error.message || '預約失敗，請稍後再試。');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '送出預約';
+      }
+    });
+  </script>
+</body>
+</html>
