@@ -15,14 +15,22 @@ function clean(value, max = 120) {
   return String(value || '').trim().slice(0, max);
 }
 
+function todayInTaipei() {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Taipei',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).formatToParts(new Date());
+  const map = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${map.year}-${map.month}-${map.day}`;
+}
+
 function isValidDate(dateString) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return false;
-  const date = new Date(`${dateString}T00:00:00+08:00`);
-  if (Number.isNaN(date.getTime())) return false;
-  const now = new Date();
-  const todayTW = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
-  todayTW.setHours(0, 0, 0, 0);
-  return date >= todayTW;
+  const parsed = new Date(`${dateString}T00:00:00+08:00`);
+  if (Number.isNaN(parsed.getTime())) return false;
+  return dateString >= todayInTaipei();
 }
 
 async function sendLineNotification(booking) {
