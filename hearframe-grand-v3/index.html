@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hearframe — Video Hello World Calibration POC</title>
+<style>
+:root{
+  color-scheme:dark; --bg:#090b10; --panel:#121620; --panel2:#0d1118;
+  --line:#262c38; --text:#f5f6fb; --muted:#9ca5b7; --accent:#cec6ff;
+  --good:#87efb8; --bad:#ffaaa8; --warn:#ffd38d;
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text)}
+main{width:min(1220px,calc(100% - 32px));margin:auto;padding:42px 0 80px}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:800}
+h1{font-size:clamp(54px,8vw,105px);line-height:.91;letter-spacing:-.065em;margin:20px 0 24px}
+h1 span{color:var(--accent);font-weight:500}
+.lead{font-size:18px;line-height:1.65;color:#bdc4d1;max-width:860px}
+.finding{margin:26px 0 0;padding:16px 18px;border:1px solid #4c4535;background:#17140e;border-radius:14px;color:#f6d797;line-height:1.55}
+.finding strong{color:#fff0ca}
+.top-controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+button{border:1px solid var(--line);background:#151a23;color:var(--text);border-radius:12px;padding:13px 16px;font-weight:760;cursor:pointer}
+button:hover:not(:disabled){border-color:#4a5263}
+button.primary{background:var(--text);color:#090b10;border-color:var(--text)}
+button:disabled{opacity:.35;cursor:not-allowed}
+.status{margin-top:15px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:13px}
+.status.good{color:var(--good)} .status.bad{color:var(--bad)} .status.warn{color:var(--warn)}
+.progress{height:8px;border-radius:99px;background:#1b2029;overflow:hidden;margin-top:16px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#897cff,#dedaff);transition:width .06s linear}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--panel);overflow:hidden}
+.card.active{outline:2px solid #756cff;outline-offset:1px}
+.video-wrap{background:#000;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
+video{width:100%;height:100%;object-fit:contain;background:#000}
+.card-body{padding:22px}
+.meta{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.09em}
+.word{font-size:54px;letter-spacing:-.06em;font-weight:850;margin:6px 0}
+.quote{font-size:16px;line-height:1.55;color:#cbd1dc;margin:0}
+.quote mark{background:var(--accent);color:#11131a;border-radius:4px;padding:1px 3px}
+.evidence{margin-top:15px;padding:11px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:12px;line-height:1.5}
+.evidence strong{color:var(--text)}
+.card-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.card-controls button{font-size:12px;padding:10px 12px}
+.cal{margin-top:15px;border-top:1px solid var(--line);padding-top:15px}
+.cal-head{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.time{font-variant-numeric:tabular-nums;color:var(--accent);font-size:13px}
+.nudge{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.nudge button{padding:8px 10px;font-size:11px}
+.diag{margin-top:13px;color:var(--muted);font-size:11px;line-height:1.5;min-height:34px;word-break:break-word}
+.diag.good{color:var(--good)} .diag.bad{color:var(--bad)}
+.source-row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.source-row a,.small{font-size:11px;color:var(--muted)}
+.audit{margin-top:26px;padding:19px;border:1px solid var(--line);border-radius:16px;background:#0d1118}
+.audit h2{font-size:17px;margin:0 0 12px}
+.audit table{width:100%;border-collapse:collapse;font-size:12px}
+.audit th,.audit td{text-align:left;padding:10px;border-top:1px solid var(--line);vertical-align:top}
+.audit th{color:var(--muted);font-weight:650}.goodtxt{color:var(--good)}.warntxt{color:var(--warn)}
+@media(max-width:850px){
+  .grid{grid-template-columns:1fr}
+  .top-controls{display:grid}.top-controls button{width:100%}
+  .audit{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">HEARFRAME / VIDEO + TIMESTAMP CALIBRATION</div>
+<h1>Make history say<br><span>Hello World.</span></h1>
+<p class="lead">This version shows the real source videos. It also separates <b>source timestamp evidence</b> from the tiny word-level cut so we can see exactly what is being played instead of trusting a hidden seek.</p>
+
+<div class="finding"><strong>Bug found:</strong> the previous proof used the JFK audio-only timeline and a guessed Nixon start. Video timelines are different. This build uses the JFK video timestamp and a Nixon video timestamp near the historically linked 128-second position, then lets you nudge the exact cut by 100 ms while watching the footage.</div>
+
+<div class="top-controls">
+  <button id="speaker">🔊 Test speakers</button>
+  <button id="load">1. Load both videos</button>
+  <button id="grand" class="primary" disabled>▶ GRAND HELLO WORLD</button>
+</div>
+<div id="status" class="status">Load the videos. Then test each target with the footage visible.</div>
+<div class="progress"><div id="fill" class="fill"></div></div>
+
+<section class="grid">
+  <article class="card" id="helloCard">
+    <div class="video-wrap"><video id="helloVideo" controls playsinline preload="metadata"></video></div>
+    <div class="card-body">
+      <div class="meta">1969 · Richard Nixon · Apollo 11 call</div>
+      <div class="word">HELLO</div>
+      <p class="quote">“<mark>Hello</mark>, Neil and Buzz…”</p>
+      <div class="evidence"><strong>Evidence:</strong> a historical article links the Nixon Library video to <b>~02:08 (128 s)</b> for this phone-call passage. This is not a word-level caption, so this target remains calibratable.</div>
+      <div class="card-controls">
+        <button id="helloContext" disabled>▶ Watch 7s context</button>
+        <button id="helloTarget" disabled>▶ Play target cut</button>
+        <button id="helloHere" disabled>Use current frame as start</button>
+      </div>
+      <div class="cal">
+        <div class="cal-head"><span class="small">Target window</span><span class="time" id="helloWindow"></span></div>
+        <div class="nudge">
+          <button data-h="-0.10" disabled>−100 ms</button>
+          <button data-h="-0.02" disabled>−20 ms</button>
+          <button data-h="0.02" disabled>+20 ms</button>
+          <button data-h="0.10" disabled>+100 ms</button>
+          <button id="helloReset" disabled>Reset</button>
+        </div>
+      </div>
+      <div id="helloDiag" class="diag">Not loaded.</div>
+      <div class="source-row"><span class="small">Nixon Library / NARA · public domain</span><a href="https://commons.wikimedia.org/wiki/File:President_Nixon_speaking_with_astronauts_Armstrong_and_Aldrin_on_the_Moon.webm" target="_blank" rel="noreferrer">source ↗</a></div>
+    </div>
+  </article>
+
+  <article class="card" id="worldCard">
+    <div class="video-wrap"><video id="worldVideo" controls playsinline preload="metadata"></video></div>
+    <div class="card-body">
+      <div class="meta">1961 · John F. Kennedy · Inaugural Address</div>
+      <div class="word">WORLD</div>
+      <p class="quote">“The <mark>world</mark> is very different now.”</p>
+      <div class="evidence"><strong>Verified video subtitle:</strong> the sentence starts at <b>02:01.192</b> in the inauguration video. The old 00:50.5 position belonged to a separate audio-only file.</div>
+      <div class="card-controls">
+        <button id="worldContext" disabled>▶ Watch 6s context</button>
+        <button id="worldTarget" disabled>▶ Play target cut</button>
+        <button id="worldHere" disabled>Use current frame as start</button>
+      </div>
+      <div class="cal">
+        <div class="cal-head"><span class="small">Target window</span><span class="time" id="worldWindow"></span></div>
+        <div class="nudge">
+          <button data-w="-0.10" disabled>−100 ms</button>
+          <button data-w="-0.02" disabled>−20 ms</button>
+          <button data-w="0.02" disabled>+20 ms</button>
+          <button data-w="0.10" disabled>+100 ms</button>
+          <button id="worldReset" disabled>Reset</button>
+        </div>
+      </div>
+      <div id="worldDiag" class="diag">Not loaded.</div>
+      <div class="source-row"><span class="small">JFK Library · public domain</span><a href="https://commons.wikimedia.org/wiki/File:John_F._Kennedy_Inauguration_Speech.ogv" target="_blank" rel="noreferrer">source ↗</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="audit">
+  <h2>Timestamp audit</h2>
+  <table>
+    <thead><tr><th>Target</th><th>Old build</th><th>What was wrong</th><th>v3 source basis</th></tr></thead>
+    <tbody>
+      <tr><td>HELLO</td><td>0.00 s</td><td class="warntxt">Guessed; not derived from this edited video.</td><td>~128 s historical deep-link + visual calibration</td></tr>
+      <tr><td>WORLD</td><td>50.55 s</td><td class="warntxt">Correct only for the audio-only OGG, not the inauguration video.</td><td class="goodtxt">Video subtitle line begins 121.192 s</td></tr>
+    </tbody>
+  </table>
+</section>
+</main>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const hv=$('helloVideo'), wv=$('worldVideo');
+const hc=$('helloCard'), wc=$('worldCard');
+const status=$('status'), fill=$('fill'), loadBtn=$('load'), grand=$('grand');
+const hd=$('helloDiag'), wd=$('worldDiag');
+
+const NIXON=[
+'https://upload.wikimedia.org/wikipedia/commons/1/15/President_Nixon_speaking_with_astronauts_Armstrong_and_Aldrin_on_the_Moon.webm',
+'https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/President_Nixon_speaking_with_astronauts_Armstrong_and_Aldrin_on_the_Moon.webm/President_Nixon_speaking_with_astronauts_Armstrong_and_Aldrin_on_the_Moon.webm.360p.webm'
+];
+const JFK=[
+'https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm',
+'https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.240p.vp9.webm'
+];
+
+const H_DEF={start:127.85,end:128.85,contextStart:125.0,contextEnd:132.0};
+const W_DEF={start:121.36,end:122.02,contextStart:119.2,contextEnd:125.2};
+let H={...H_DEF}, W={...W_DEF}, loaded=false, busy=false;
+
+function fmt(s){
+  const m=Math.floor(s/60), sec=s-m*60;
+  return `${String(m).padStart(2,'0')}:${sec.toFixed(3).padStart(6,'0')}`;
+}
+function refresh(){
+  $('helloWindow').textContent=`${fmt(H.start)} → ${fmt(H.end)}`;
+  $('worldWindow').textContent=`${fmt(W.start)} → ${fmt(W.end)}`;
+}
+refresh();
+
+function setStatus(t,k=''){status.textContent=t;status.className='status'+(k?' '+k:'')}
+function mediaErr(v){
+  if(!v.error) return 'unknown media error';
+  return ({1:'aborted',2:'network error',3:'decode error',4:'format/source not supported'})[v.error.code]||`media error ${v.error.code}`;
+}
+function setDiag(el,t,k=''){el.textContent=t;el.className='diag'+(k?' '+k:'')}
+function waitMeta(v,timeout=25000){
+  return new Promise((resolve,reject)=>{
+    if(v.readyState>=1) return resolve();
+    let timer;
+    const clean=()=>{clearTimeout(timer);v.removeEventListener('loadedmetadata',ok);v.removeEventListener('error',bad)};
+    const ok=()=>{clean();resolve()};
+    const bad=()=>{clean();reject(new Error(mediaErr(v)))};
+    v.addEventListener('loadedmetadata',ok); v.addEventListener('error',bad);
+    timer=setTimeout(()=>{clean();reject(new Error('timed out loading metadata'))},timeout);
+  });
+}
+async function loadCandidates(v,cands,diag,label){
+  const errors=[];
+  for(let i=0;i<cands.length;i++){
+    const u=cands[i];
+    setDiag(diag,`${label}: loading candidate ${i+1}/${cands.length}…`);
+    try{
+      v.pause(); v.removeAttribute('src'); v.load();
+      v.src=u; v.muted=false; v.volume=1; v.load();
+      await waitMeta(v);
+      setDiag(diag,`Loaded · duration ${v.duration.toFixed(2)}s · visible video · unmuted\n${u}`,'good');
+      return u;
+    }catch(e){ errors.push(`#${i+1}: ${e.message}`); }
+  }
+  setDiag(diag,`${label} failed\n${errors.join('\n')}`,'bad');
+  throw new Error(`${label} video failed to load`);
+}
+function enableAll(on){
+  document.querySelectorAll('button[id], button[data-h], button[data-w]').forEach(b=>{
+    if(b.id==='speaker' || b.id==='load') return;
+    b.disabled=!on;
+  });
+  grand.disabled=!on;
+}
+async function loadVideos(){
+  loadBtn.disabled=true; enableAll(false); setStatus('Loading both historical videos…');
+  try{
+    await Promise.all([
+      loadCandidates(hv,NIXON,hd,'HELLO'),
+      loadCandidates(wv,JFK,wd,'WORLD')
+    ]);
+    loaded=true; enableAll(true); loadBtn.textContent='✓ Videos loaded';
+    setStatus('Both videos loaded. Watch context first, then test each target cut.','good');
+  }catch(e){
+    console.error(e); setStatus(e.message,'bad'); loadBtn.disabled=false;
+  }
+}
+function activate(card){
+  hc.classList.toggle('active',card===hc); wc.classList.toggle('active',card===wc);
+}
+async function playRange(v,start,end,card,label,p0=0,p1=1){
+  if(!loaded) throw new Error('Load videos first.');
+  [hv,wv].forEach(x=>{if(x!==v)x.pause()});
+  activate(card); v.muted=false; v.volume=1; v.currentTime=start;
+  await new Promise(r=>{
+    if(v.readyState>=2) return r();
+    const done=()=>r(); v.addEventListener('canplay',done,{once:true}); setTimeout(done,3500);
+  });
+  await v.play();
+  const len=end-start, t0=performance.now();
+  return new Promise((resolve,reject)=>{
+    const tick=()=>{
+      const p=Math.max(0,Math.min(1,(v.currentTime-start)/len));
+      fill.style.width=`${(p0+(p1-p0)*p)*100}%`;
+      if(v.error){v.pause();reject(new Error(`${label}: ${mediaErr(v)}`));}
+      else if(v.currentTime>=end || performance.now()-t0>(len+5)*1000){v.pause();resolve();}
+      else requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+async function run(fn){
+  if(busy) return; busy=true; enableAll(false); fill.style.width='0%';
+  try{await fn()}catch(e){console.error(e);setStatus(e.message,'bad')}
+  finally{busy=false;enableAll(loaded)}
+}
+function playContext(which){
+  return run(async()=>{
+    if(which==='h'){
+      setStatus('Showing Nixon context around the HELLO target…');
+      await playRange(hv,H.contextStart,H.contextEnd,hc,'HELLO context');
+    }else{
+      setStatus('Showing JFK context around the WORLD target…');
+      await playRange(wv,W.contextStart,W.contextEnd,wc,'WORLD context');
+    }
+    fill.style.width='100%'; setStatus('Context playback complete. Use the visible controls to inspect or nudge the cut.','good');
+  });
+}
+function playTarget(which){
+  return run(async()=>{
+    if(which==='h'){
+      setStatus(`Playing HELLO target ${fmt(H.start)} → ${fmt(H.end)}…`);
+      await playRange(hv,H.start,H.end,hc,'HELLO');
+    }else{
+      setStatus(`Playing WORLD target ${fmt(W.start)} → ${fmt(W.end)}…`);
+      await playRange(wv,W.start,W.end,wc,'WORLD');
+    }
+    fill.style.width='100%'; setStatus(`${which==='h'?'HELLO':'WORLD'} target completed. Did the visible speaker say the expected word?`,'good');
+  });
+}
+async function grandRun(){
+  return run(async()=>{
+    setStatus('Nixon → HELLO…');
+    await playRange(hv,H.start,H.end,hc,'HELLO',0,.48);
+    fill.style.width='50%'; await new Promise(r=>setTimeout(r,55));
+    setStatus('Hard cut → JFK → WORLD…');
+    await playRange(wv,W.start,W.end,wc,'WORLD',.52,1);
+    fill.style.width='100%';
+    setStatus('Grand Hello World complete. Both source videos were visible during playback.','good');
+  });
+}
+async function beep(){
+  try{
+    const C=window.AudioContext||window.webkitAudioContext,c=new C; await c.resume();
+    const o=c.createOscillator(),g=c.createGain(); o.frequency.value=660;
+    g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.15,c.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.3);
+    o.connect(g).connect(c.destination);o.start();o.stop(c.currentTime+.32);
+    setStatus('Speaker test played.','good');setTimeout(()=>c.close(),600);
+  }catch(e){setStatus(`Speaker test failed: ${e.message}`,'bad')}
+}
+
+$('speaker').onclick=beep; loadBtn.onclick=loadVideos; grand.onclick=grandRun;
+$('helloContext').onclick=()=>playContext('h'); $('worldContext').onclick=()=>playContext('w');
+$('helloTarget').onclick=()=>playTarget('h'); $('worldTarget').onclick=()=>playTarget('w');
+$('helloHere').onclick=()=>{const width=H.end-H.start;H.start=hv.currentTime;H.end=H.start+width;refresh();setStatus(`HELLO start set from visible frame: ${fmt(H.start)}`,'warn')};
+$('worldHere').onclick=()=>{const width=W.end-W.start;W.start=wv.currentTime;W.end=W.start+width;refresh();setStatus(`WORLD start set from visible frame: ${fmt(W.start)}`,'warn')};
+document.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{const d=Number(b.dataset.h);H.start+=d;H.end+=d;refresh()});
+document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{const d=Number(b.dataset.w);W.start+=d;W.end+=d;refresh()});
+$('helloReset').onclick=()=>{H={...H_DEF};refresh()};
+$('worldReset').onclick=()=>{W={...W_DEF};refresh()};
+})();
+</script>
+</body>
+</html>
