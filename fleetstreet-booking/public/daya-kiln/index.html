@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="大雅燒傑出窯｜大雅趙家窯網站提案展示版" />
+  <title>大雅燒傑出窯｜大雅趙家窯</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#27221e;--paper:#f7f3ec;--clay:#8e4d32;--clay2:#b56e4d;--ash:#cfc2b0;--tea:#4b5a49;--muted:#756d64;--line:#ded4c6;--white:#fff;--shadow:0 24px 70px rgba(58,42,31,.12)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Noto Sans TC',sans-serif}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+    .proposal{background:#25211e;color:#efe8de;padding:8px 16px;text-align:center;font-size:12px;letter-spacing:.06em}
+    header{position:sticky;top:0;z-index:20;height:76px;padding:0 max(5vw,22px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,243,236,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(222,212,198,.9)}
+    .brand strong{display:block;font-family:'Noto Serif TC',serif;font-size:22px}.brand span{font-size:10px;letter-spacing:.18em;color:var(--muted)}nav{display:flex;gap:24px;font-size:13px;font-weight:600}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:2px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:var(--clay);color:#fff}.outline{border:1px solid #9b8c7d;background:transparent}
+    .hero{min-height:650px;display:grid;grid-template-columns:1.05fr .95fr}.hero-copy{padding:92px 7vw;display:flex;flex-direction:column;justify-content:center}.hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(44px,5.3vw,74px);line-height:1.2;margin:0 0 24px}.hero h1 em{font-style:normal;color:var(--clay)}.hero p{max-width:650px;color:#5f574f;line-height:2;font-size:16px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .hero-art{min-height:650px;position:relative;overflow:hidden;background:linear-gradient(155deg,#d9c9b7 0%,#e9e1d5 48%,#c3aa94 100%)}.sun{position:absolute;width:360px;height:360px;border-radius:50%;background:#efe6da;right:10%;top:12%;box-shadow:0 40px 80px rgba(84,57,40,.12)}.vessel{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);width:240px;height:330px;border-radius:40% 40% 22% 22% / 18% 18% 15% 15%;background:linear-gradient(100deg,#7f402d 0%,#a65e3f 45%,#6f3829 100%);box-shadow:0 35px 55px rgba(69,42,29,.28)}.vessel:before{content:'';position:absolute;width:132px;height:30px;border-radius:50%;background:#3f2c24;left:54px;top:-11px;box-shadow:inset 0 5px 8px rgba(0,0,0,.35)}.vessel:after{content:'';position:absolute;width:190px;height:100px;border-radius:50%;left:25px;bottom:28px;border:2px solid rgba(235,211,186,.35);transform:rotate(-6deg)}.straw{position:absolute;left:12%;bottom:0;width:3px;height:260px;background:#b9945f;transform:rotate(-10deg);box-shadow:25px -12px 0 #b9945f,52px 8px 0 #c4a16e,80px -20px 0 #b9945f,110px 4px 0 #c7a771}
+    .proof{width:min(1160px,90%);margin:-34px auto 0;position:relative;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}.proof div{padding:22px;border-right:1px solid var(--line)}.proof div:last-child{border:0}.proof strong{display:block;font-size:14px}.proof span{display:block;color:var(--muted);font-size:12px;line-height:1.6;margin-top:4px}
+    section{padding:88px max(5vw,24px)}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:34px}.section-head h2{font-family:'Noto Serif TC',serif;font-size:38px;margin:0}.section-head p{max-width:620px;line-height:1.9;color:var(--muted);margin:0}.story{display:grid;grid-template-columns:.9fr 1.1fr;gap:38px;align-items:center}.story-panel{background:#fff;border:1px solid var(--line);padding:34px}.story-panel p{line-height:2;color:#625a52}.material{height:420px;position:relative;background:#44372f;overflow:hidden}.material:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(204,124,79,.55),transparent 26%),radial-gradient(circle at 75% 72%,rgba(197,164,115,.32),transparent 28%),linear-gradient(120deg,#533829,#27211d)}.material:after{content:'紅土 × 麥稈灰釉 × 1230°C';position:absolute;left:32px;bottom:30px;color:#f1e8de;font-family:'Noto Serif TC',serif;font-size:26px;letter-spacing:.04em}
+    .works{background:#fff}.work-list{border-top:1px solid var(--line)}.work{display:grid;grid-template-columns:90px 1fr 1.2fr;gap:30px;padding:27px 0;border-bottom:1px solid var(--line)}.work .num{font-family:'Noto Serif TC',serif;color:var(--clay2);font-size:22px}.work h3{margin:0;font-size:20px}.work p{margin:0;color:var(--muted);font-size:14px;line-height:1.8}
+    .band{background:#2c2926;color:#f4ede5;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}.band h2{font-family:'Noto Serif TC',serif;font-size:42px;margin:0 0 18px}.band p{line-height:2;color:#d3c9c0}.tea-set{height:320px;position:relative;background:#37332f;overflow:hidden}.cup{position:absolute;border-radius:0 0 44px 44px;background:linear-gradient(90deg,#8d4d36,#b66b4b);bottom:55px}.cup.big{width:145px;height:120px;left:18%}.cup.small{width:95px;height:76px;left:54%}.cup:before{content:'';position:absolute;left:8%;right:8%;top:-8px;height:17px;border-radius:50%;background:#372923}.handle{position:absolute;width:55px;height:62px;border:10px solid #8d4d36;border-left:0;border-radius:0 50% 50% 0;right:-48px;top:28px}
+    .info-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px}.info-card{background:#fff;border:1px solid var(--line);padding:30px}.fact{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #ece5db}.fact span{font-size:13px;color:var(--muted)}.map{min-height:410px;border:1px solid var(--line);overflow:hidden}.map iframe{width:100%;height:100%;min-height:410px;border:0}
+    .request{background:#eadfce}.request-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:40px}.request h2{font-family:'Noto Serif TC',serif;font-size:42px;margin:0 0 18px}.request p{line-height:1.9;color:#665d55}.request ul{list-style:none;padding:0;margin-top:26px}.request li{padding:10px 0;border-bottom:1px solid #d2c2ad}.request li:before{content:'—';color:var(--clay);margin-right:10px}.form{background:#fff;border:1px solid #d7cab8;padding:30px;box-shadow:var(--shadow)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700;color:#5f5851}.field input,.field select,.field textarea{padding:13px 14px;border:1px solid #d9d0c5;border-radius:2px;background:#fff}.field textarea{min-height:110px;resize:vertical}.form small{display:block;color:#81776f;line-height:1.7;margin-top:12px}.submit{width:100%;margin-top:16px;padding:14px}.links{background:#fff}.link-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.link{border:1px solid var(--line);padding:24px}.link strong{display:block;margin-bottom:7px}.link span{font-size:13px;color:var(--muted)}footer{background:#211e1b;color:#cbc1b7;padding:34px max(5vw,24px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px}
+    @media(max-width:900px){nav{display:none}.hero{grid-template-columns:1fr}.hero-art{min-height:430px}.proof{grid-template-columns:1fr 1fr}.story,.band,.request-grid,.info-grid{grid-template-columns:1fr}.work{grid-template-columns:60px 1fr}.work p{grid-column:2}.link-row{grid-template-columns:1fr}}
+    @media(max-width:560px){header{height:70px}.hero-copy{padding:62px 22px}.hero h1{font-size:42px}.hero-art{min-height:350px}.vessel{width:190px;height:260px}.vessel:before{width:106px;left:42px}.proof{width:100%;grid-template-columns:1fr;margin:0}.proof div{border-right:0;border-bottom:1px solid var(--line)}section{padding:66px 22px}.section-head{align-items:flex-start;flex-direction:column}.section-head h2,.band h2,.request h2{font-size:32px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.work{grid-template-columns:44px 1fr;gap:14px}.material{height:320px}.material:after{font-size:20px;left:20px}.tea-set{height:260px}}
+  </style>
+</head>
+<body>
+  <div class="proposal">大雅燒傑出窯｜網站提案展示版・內容以店家最終確認為準</div>
+  <header>
+    <a class="brand" href="#top"><strong>大雅燒傑出窯</strong><span>DAYA OUTSTANDING KILN</span></a>
+    <nav><a href="#story">品牌故事</a><a href="#works">作品方向</a><a href="#visit">窯場資訊</a><a href="#request">作品／合作詢問</a></nav>
+    <a class="btn primary" href="#request">提出需求</a>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>把大雅的<em>紅土與麥香</em>，燒成日常器物。</h1>
+        <p>大雅燒傑出窯延續趙家窯的在地陶藝脈絡，以清泉崗紅土為基底、融入大雅小麥桿灰釉，再經高溫窯燒，形成具有地方文化辨識度的「臺灣鐵陶」。</p>
+        <div class="actions"><a class="btn primary" href="#works">認識作品</a><a class="btn outline" href="#visit">查看窯場資訊</a></div>
+      </div>
+      <div class="hero-art" aria-label="紅土陶器與麥田意象"><div class="sun"></div><div class="straw"></div><div class="vessel"></div></div>
+    </section>
+
+    <div class="proof">
+      <div><strong>1988 趙家窯</strong><span>長期深耕大雅在地陶藝文化</span></div>
+      <div><strong>2017 大雅燒</strong><span>以地方材料重新詮釋陶器</span></div>
+      <div><strong>臺灣鐵陶</strong><span>清泉崗紅土 × 小麥桿灰釉</span></div>
+      <div><strong>茶 × 咖啡 × 器物</strong><span>讓工藝回到日常使用情境</span></div>
+    </div>
+
+    <section id="story">
+      <div class="section-head"><h2>從土地開始的陶藝</h2><p>網站把「為什麼是大雅燒」放在作品之前，讓第一次認識品牌的人先理解材料、地方與器物之間的關係。</p></div>
+      <div class="story">
+        <div class="story-panel"><h3>大雅在地材料，成為作品語言</h3><p>公開品牌資料指出，大雅燒採集大雅在地清泉崗紅土為基底，並使用具有地方特色的小麥桿灰作為釉料，再以約 1230°C 高溫燒製。這種從土地取材、回到生活使用的方式，形成品牌所稱的「臺灣鐵陶」。</p><p>正式網站可以進一步加入窯燒過程、原料來源、作品細節與歷年展覽，讓品牌價值不只停留在商品名稱。</p></div>
+        <div class="material"></div>
+      </div>
+    </section>
+
+    <section class="works" id="works">
+      <div class="section-head"><h2>作品與使用情境</h2><p>依目前公開作品資料整理。正式版本可依實際販售品項、價格與庫存更新。</p></div>
+      <div class="work-list">
+        <article class="work"><div class="num">01</div><h3>茶器與飲食器物</h3><p>以陶土與灰釉呈現溫潤手感，適合茶席、日常飲食與收藏使用。</p></article>
+        <article class="work"><div class="num">02</div><h3>咖啡手沖器物</h3><p>公開作品包含手沖濾杯等咖啡器具，可把陶藝與現代咖啡文化放在同一個使用場景裡。</p></article>
+        <article class="work"><div class="num">03</div><h3>花器與藝術作品</h3><p>從花器到展覽型作品，呈現大雅燒在功能器與藝術表現之間的延伸。</p></article>
+        <article class="work"><div class="num">04</div><h3>收藏／送禮／合作詢問</h3><p>可透過網站集中整理作品詢問、收藏需求、企業送禮或展覽合作，再由窯場確認細節。</p></article>
+      </div>
+    </section>
+
+    <section class="band">
+      <div><h2>台灣茶、咖啡，與一件有地方感的器物。</h2><p>大雅燒的特色不是只在「手工陶器」，而是在器物裡留下大雅的土地與農業痕跡。正式網站可以把茶器、咖啡器具與地方文化做成完整品牌敘事，而不是只靠單一購物頁面呈現。</p></div>
+      <div class="tea-set"><div class="cup big"><span class="handle"></span></div><div class="cup small"></div></div>
+    </section>
+
+    <section id="visit">
+      <div class="section-head"><h2>大雅趙家窯</h2><p>目前公開資料顯示窯場位於大雅區大林路，營業時間每日 09:30–17:00；實際到訪前仍建議先向店家確認。</p></div>
+      <div class="info-grid">
+        <div class="info-card"><h3>大雅燒傑出窯／大雅趙家窯</h3>
+          <div class="fact"><span>Google</span><strong>4.4 ★｜35 則評價</strong></div>
+          <div class="fact"><span>地址</span><strong>台中市大雅區大林路66巷12號</strong></div>
+          <div class="fact"><span>電話</span><strong><a href="tel:+886425662056">04-2566-2056</a></strong></div>
+          <div class="fact"><span>Email</span><strong><a href="mailto:s25662056@gmail.com">s25662056@gmail.com</a></strong></div>
+          <div class="fact"><span>公開時間</span><strong>09:30–17:00</strong></div>
+          <div class="actions"><a class="btn primary" href="tel:+886425662056">電話聯絡</a><a class="btn outline" href="mailto:s25662056@gmail.com">Email</a></div>
+        </div>
+        <div class="map"><iframe loading="lazy" allowfullscreen src="https://www.google.com/maps?q=%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%A4%A7%E9%9B%85%E5%8D%80%E5%A4%A7%E6%9E%97%E8%B7%AF66%E5%B7%B712%E8%99%9F&output=embed"></iframe></div>
+      </div>
+    </section>
+
+    <section class="request" id="request">
+      <div class="request-grid">
+        <div><h2>作品、訂製與合作需求</h2><p>先讓客人把需求整理清楚，再交由窯場確認品項、庫存、價格與是否能承接。</p><ul><li>茶器／咖啡器物作品詢問</li><li>花器／收藏作品詢問</li><li>企業送禮與客製需求</li><li>展覽／品牌／文化合作</li><li>參訪與其他合作需求</li></ul></div>
+        <form class="form" id="requestForm">
+          <div class="fields">
+            <div class="field"><label>需求類型</label><select name="type" required><option value="">請選擇</option><option>茶器／咖啡器物詢問</option><option>花器／收藏作品詢問</option><option>企業送禮／客製需求</option><option>展覽／品牌合作</option><option>參訪／其他需求</option></select></div>
+            <div class="field"><label>希望日期（可選）</label><input type="date" name="date"></div>
+            <div class="field"><label>姓名／聯絡人</label><input name="name" maxlength="50" required placeholder="您的姓名"></div>
+            <div class="field"><label>Email</label><input type="email" name="email" maxlength="120" required placeholder="name@example.com"></div>
+            <div class="field"><label>電話（可選）</label><input type="tel" name="phone" maxlength="30" placeholder="09xx-xxx-xxx"></div>
+            <div class="field"><label>預算（可選）</label><input name="budget" maxlength="60" placeholder="例如 3,000–5,000"></div>
+            <div class="field full"><label>需求內容</label><textarea name="note" maxlength="800" required placeholder="例如：想詢問兩組手沖濾杯作為送禮／希望了解某件花器是否仍可收藏／想詢問企業合作…"></textarea></div>
+          </div>
+          <small>展示版不保存資料；送出後會整理成 Email 內容，由您自行寄給大雅燒。實際作品、價格、交期與合作內容以店家確認為準。</small>
+          <button class="btn primary submit" type="submit">整理 Email 詢問</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="links"><div class="section-head"><h2>公開品牌資訊</h2><p>正式網站可成為品牌主要入口，同時保留現有購物與工藝平台。</p></div><div class="link-row"><a class="link" href="https://twc.ntcri.gov.tw/BrandInfo.aspx?brandsn=247&n=8&s=618" target="_blank" rel="noopener"><strong>臺灣工藝型錄</strong><span>品牌故事、作品與店舖資訊</span></a><a class="link" href="https://ciao-.cashier.ecpay.com.tw/" target="_blank" rel="noopener"><strong>現有綠界入口</strong><span>保留目前對外購物／付款管道</span></a><a class="link" href="mailto:s25662056@gmail.com"><strong>Email</strong><span>s25662056@gmail.com</span></a></div></section>
+  </main>
+  <footer><div><strong>大雅燒傑出窯</strong><br>大雅趙家窯｜臺灣鐵陶・茶器・咖啡器物</div><div>網站提案展示版｜實際作品、價格、庫存與服務以店家最終確認為準</div></footer>
+  <script>
+    document.getElementById('requestForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+      const subject=encodeURIComponent(`大雅燒作品／合作詢問｜${d.type||'一般詢問'}`);
+      const body=encodeURIComponent([
+        '您好，我想詢問大雅燒傑出窯：','',
+        `需求類型：${d.type||''}`,
+        `希望日期：${d.date||'未指定'}`,
+        `姓名／聯絡人：${d.name||''}`,
+        `Email：${d.email||''}`,
+        `電話：${d.phone||'未填'}`,
+        `預算：${d.budget||'未填'}`,'',
+        `需求內容：${d.note||''}`
+      ].join('\n'));
+      location.href=`mailto:s25662056@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
