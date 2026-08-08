@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="美家花藝工坊｜台中烏日花禮、鮮花、外送與花藝需求展示網站" />
+  <title>美家花藝工坊｜台中烏日花店</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#2f2c2c;--paper:#fbf8f4;--white:#fff;--rose:#b76573;--rose-deep:#8f4857;--leaf:#536d58;--sage:#dce6dc;--pink:#f2e3e4;--line:#e4d9d6;--muted:#766d6c;--shadow:0 22px 60px rgba(67,49,51,.11)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Noto Sans TC',sans-serif}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+    .demo-note{font-size:12px;text-align:center;padding:8px 16px;background:#342f30;color:#f8efef;letter-spacing:.06em}
+    header{position:sticky;top:0;z-index:20;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(5vw,22px);background:rgba(251,248,244,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(228,217,214,.9)}
+    .brand strong{font-family:'Noto Serif TC',serif;font-size:24px}.brand span{display:block;font-size:10px;letter-spacing:.2em;color:var(--muted);margin-top:2px}.nav{display:flex;gap:26px;font-size:13px;font-weight:600}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:12px 19px;font-weight:700;cursor:pointer}.primary{background:var(--rose-deep);color:#fff}.outline{border:1px solid #a98f92;background:transparent;color:var(--ink)}
+    .hero{min-height:650px;display:grid;grid-template-columns:1.08fr .92fr}.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:86px 7vw}.hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(43px,5vw,70px);line-height:1.22;margin:0 0 22px;max-width:760px}.hero h1 em{font-style:normal;color:var(--rose-deep)}.hero p{font-size:16px;line-height:2;color:#625a5a;max-width:620px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .hero-art{position:relative;overflow:hidden;min-height:650px;background:linear-gradient(150deg,#efe1df,#e9eee6)}.petal,.leaf{position:absolute;border-radius:70% 30% 65% 35% / 50% 60% 40% 50%;box-shadow:0 22px 50px rgba(82,63,65,.12)}.petal{background:linear-gradient(145deg,#df9fab,#b45f71)}.leaf{background:linear-gradient(145deg,#6c8a6d,#4d6652)}.p1{width:210px;height:285px;left:18%;top:16%;transform:rotate(-32deg)}.p2{width:170px;height:240px;left:42%;top:27%;transform:rotate(32deg);opacity:.86}.p3{width:155px;height:200px;left:30%;top:50%;transform:rotate(76deg);background:linear-gradient(145deg,#f0c7c8,#cc8791)}.l1{width:145px;height:270px;right:11%;top:15%;transform:rotate(23deg)}.l2{width:125px;height:225px;right:17%;bottom:12%;transform:rotate(72deg);opacity:.83}.stem{position:absolute;left:52%;top:14%;width:8px;height:500px;background:#60775d;border-radius:10px;transform:rotate(10deg);transform-origin:center}.seal{position:absolute;right:8%;bottom:8%;background:rgba(255,255,255,.86);padding:18px 19px;border:1px solid #e8dada;box-shadow:var(--shadow);font-family:'Noto Serif TC',serif;line-height:1.7}
+    .proof{width:min(1160px,90%);margin:-34px auto 0;position:relative;z-index:5;background:#fff;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);box-shadow:var(--shadow)}.proof div{padding:22px 24px;border-right:1px solid var(--line)}.proof div:last-child{border:0}.proof strong{display:block;font-size:14px}.proof span{display:block;font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
+    section{padding:90px max(5vw,24px)}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:34px}.section-head h2{font-family:'Noto Serif TC',serif;font-size:39px;margin:0}.section-head p{max-width:620px;margin:0;color:var(--muted);line-height:1.9}
+    .services{background:#fff}.service-list{border-top:1px solid var(--line)}.service{display:grid;grid-template-columns:80px .8fr 1.2fr;gap:28px;padding:28px 0;border-bottom:1px solid var(--line)}.service .num{font-family:'Noto Serif TC',serif;font-size:21px;color:var(--rose)}.service h3{margin:0;font-size:20px}.service p{margin:0;color:var(--muted);font-size:14px;line-height:1.8}
+    .occasion{background:#34453a;color:#f6f2ec;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.occasion h2{font-family:'Noto Serif TC',serif;font-size:42px;margin:0 0 20px}.occasion p{line-height:2;color:#d7dfd7}.occasion-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.occasion-item{border:1px solid rgba(255,255,255,.18);padding:20px;min-height:110px;background:rgba(255,255,255,.035)}.occasion-item strong{display:block;margin-bottom:7px}.occasion-item span{font-size:13px;color:#d5ded7;line-height:1.6}
+    .visit-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px}.card{background:#fff;border:1px solid var(--line);padding:30px}.fact{display:grid;grid-template-columns:105px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #eee5e2}.fact span{color:var(--muted);font-size:13px}.map{border:1px solid var(--line);min-height:390px;overflow:hidden}.map iframe{border:0;width:100%;height:100%;min-height:390px}
+    .request{background:#efe6e2}.request-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:42px}.request-copy h2{font-family:'Noto Serif TC',serif;font-size:42px;margin:0 0 18px}.request-copy p{color:#6a6060;line-height:1.9}.request-copy ul{padding:0;list-style:none;margin-top:26px}.request-copy li{padding:10px 0;border-bottom:1px solid #d8cbc8}.request-copy li:before{content:'—';color:var(--rose-deep);margin-right:10px}.form{background:#fff;border:1px solid #d9cdca;padding:30px;box-shadow:var(--shadow)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700;color:#625959}.field input,.field select,.field textarea{border:1px solid #d8cecc;border-radius:8px;padding:13px 14px;background:#fff}.field textarea{min-height:115px;resize:vertical}.form small{display:block;margin-top:12px;color:#817675;line-height:1.7}.submit{width:100%;margin-top:16px;padding:14px}.status{display:none;margin-top:14px;padding:13px;border-radius:8px;background:#edf3ee;border:1px solid #cbdccb;color:#38543c}.status.show{display:block}
+    footer{background:#2d292a;color:#d8cecc;padding:34px max(5vw,24px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;line-height:1.7}
+    @media(max-width:900px){.nav{display:none}.hero{grid-template-columns:1fr}.hero-art{min-height:430px}.proof{grid-template-columns:1fr 1fr}.service{grid-template-columns:55px 1fr}.service p{grid-column:2}.occasion,.request-grid,.visit-grid{grid-template-columns:1fr}}
+    @media(max-width:560px){header{height:70px}.brand strong{font-size:20px}.hero-copy{padding:60px 22px}.hero h1{font-size:41px}.hero-art{min-height:360px}.proof{width:100%;margin:0;grid-template-columns:1fr}.proof div{border-right:0;border-bottom:1px solid var(--line)}section{padding:66px 22px}.section-head{align-items:flex-start;flex-direction:column}.section-head h2,.occasion h2,.request-copy h2{font-size:31px}.occasion-grid,.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.service{grid-template-columns:40px 1fr;gap:14px}}
+  </style>
+</head>
+<body>
+  <div class="demo-note">美家花藝工坊｜網站提案展示版・實際花材、價格與配送請以店家最終確認為準</div>
+  <header>
+    <a class="brand" href="#top"><strong>美家花藝工坊</strong><span>MEIJIA FLORAL STUDIO</span></a>
+    <nav class="nav"><a href="#services">花藝服務</a><a href="#occasion">送花情境</a><a href="#visit">店家資訊</a><a href="#request">花禮需求</a></nav>
+    <a class="btn primary" href="#request">快速詢問花禮</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>讓每一次送花，<em>更快抵達心意。</em></h1>
+        <p>美家花藝工坊位於台中烏日，提供鮮花、花禮與配送相關服務。這個網站把用途、預算、日期、取花或配送需求集中整理，讓客人不用先來回問很多次，就能把重要資訊一次說清楚。</p>
+        <div class="actions"><a class="btn primary" href="#request">填寫花禮需求</a><a class="btn outline" href="tel:0423370659">直接打電話</a></div>
+      </div>
+      <div class="hero-art" aria-label="抽象花藝視覺"><div class="stem"></div><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="seal">烏日・花禮・鮮花<br>到店取花／配送需求</div></div>
+    </section>
+
+    <div class="proof">
+      <div><strong>台中烏日在地花店</strong><span>興祥街 82-1 號</span></div>
+      <div><strong>到店取花</strong><span>可先整理需求再與店家確認</span></div>
+      <div><strong>配送需求</strong><span>公開商家資訊列有外送服務</span></div>
+      <div><strong>即日需求</strong><span>是否可接單仍以當日花材與店家確認為準</span></div>
+    </div>
+
+    <section class="services" id="services">
+      <div class="section-head"><h2>常見花藝需求</h2><p>展示版先以公開可驗證的花店服務為基礎整理，不自行假設固定花款或價格；正式版本可依店家實際品項、節慶與配送範圍調整。</p></div>
+      <div class="service-list">
+        <article class="service"><div class="num">01</div><h3>生日／紀念花禮</h3><p>先提供送花對象、場合、預算與希望色系，由店家依當日花材確認合適做法。</p></article>
+        <article class="service"><div class="num">02</div><h3>祝賀與開幕花禮</h3><p>企業開幕、升遷、祝賀等需求，可一起整理落款、卡片文字與配送時間。</p></article>
+        <article class="service"><div class="num">03</div><h3>致意／追思需求</h3><p>需要較正式或特定場合的花禮，可先說明用途、日期與預算，再由店家確認合適形式。</p></article>
+        <article class="service"><div class="num">04</div><h3>到店取花／外送</h3><p>公開商家資訊列有到店取貨與配送服務；實際配送區域、費用與即日安排仍由店家確認。</p></article>
+      </div>
+    </section>
+
+    <section class="occasion" id="occasion">
+      <div><h2>先把需求說清楚，花店就能更快回覆。</h2><p>送花常常不是「選一束花」這麼簡單。預算、對象、場合、希望日期、卡片文字與配送地點都會影響最後安排。網站先幫客人把資訊整理好，再交由花店判斷花材與價格。</p></div>
+      <div class="occasion-grid"><div class="occasion-item"><strong>生日／週年</strong><span>對象、色系、預算、卡片內容</span></div><div class="occasion-item"><strong>開幕／祝賀</strong><span>公司名稱、落款、送達時間與地點</span></div><div class="occasion-item"><strong>致意／追思</strong><span>場合、日期、形式與預算需求</span></div><div class="occasion-item"><strong>急件需求</strong><span>直接標示日期與希望時間，由店家確認能否安排</span></div></div>
+    </section>
+
+    <section id="visit">
+      <div class="section-head"><h2>店家資訊</h2><p>以下資訊依台灣花店協會及近期公開商家資料整理；營業時間、配送與現場花材請以店家最新回覆為準。</p></div>
+      <div class="visit-grid">
+        <div class="card"><h3>美家花藝工坊</h3><div class="fact"><span>地址</span><strong>台中市烏日區仁德里興祥街82-1號</strong></div><div class="fact"><span>電話</span><strong><a href="tel:0423370659">04-2337-0659</a></strong></div><div class="fact"><span>Email</span><strong><a href="mailto:cathy04062008@yahoo.com.tw">cathy04062008@yahoo.com.tw</a></strong></div><div class="fact"><span>公開服務</span><strong>外送、到店取貨、門市購物、即日配送</strong></div><div class="actions"><a class="btn primary" href="tel:0423370659">電話聯絡</a><a class="btn outline" href="mailto:cathy04062008@yahoo.com.tw">Email</a></div></div>
+        <div class="map"><iframe loading="lazy" allowfullscreen src="https://www.google.com/maps?q=%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E8%88%88%E7%A5%A5%E8%A1%9782%E4%B9%8B1%E8%99%9F&output=embed"></iframe></div>
+      </div>
+    </section>
+
+    <section class="request" id="request">
+      <div class="request-grid">
+        <div class="request-copy"><h2>快速整理花禮需求</h2><p>展示版不會直接替店家接單。填完後會把內容整理成 Email，由客人自行寄出，再由美家花藝工坊確認花材、價格、配送與是否能承接。</p><ul><li>花禮用途與送花對象</li><li>預算與希望色系</li><li>取花或配送日期</li><li>配送地址與卡片內容</li></ul></div>
+        <form class="form" id="requestForm">
+          <div class="fields">
+            <div class="field"><label>花禮用途</label><select name="type" required><option value="">請選擇</option><option>生日／紀念花禮</option><option>開幕／祝賀花禮</option><option>致意／追思花禮</option><option>一般鮮花需求</option><option>其他</option></select></div>
+            <div class="field"><label>希望日期</label><input type="date" name="date" required></div>
+            <div class="field"><label>姓名</label><input name="name" required maxlength="40" placeholder="您的姓名"></div>
+            <div class="field"><label>聯絡電話</label><input name="phone" maxlength="30" placeholder="09xx-xxx-xxx"></div>
+            <div class="field"><label>預算</label><input name="budget" maxlength="40" placeholder="例如 NT$1,500 左右"></div>
+            <div class="field"><label>取花方式</label><select name="fulfillment"><option>到店取花</option><option>希望配送</option><option>請店家建議</option></select></div>
+            <div class="field full"><label>需求內容</label><textarea name="note" required maxlength="700" placeholder="例如：送朋友生日，希望粉白色系；若配送請填寫地址、希望送達時段、卡片文字等。"></textarea></div>
+          </div>
+          <small>實際花材、售價、配送範圍、配送費與可接單時間均以店家確認為準。</small>
+          <button class="btn primary submit" type="submit">整理需求並開啟 Email</button>
+          <div class="status" id="status">已整理完成，正在開啟您的 Email App。</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer><div><strong>美家花藝工坊</strong><br>台中烏日・花禮・鮮花・配送需求</div><div>網站提案展示版｜公開資料整理，實際服務與價格以店家確認為準</div></footer>
+
+  <script>
+    const form=document.getElementById('requestForm');
+    const status=document.getElementById('status');
+    const date=form.elements.date;
+    const fmt=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'});
+    date.min=fmt.format(new Date());
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const d=Object.fromEntries(new FormData(form).entries());
+      const subject=`花禮需求｜${d.type}｜${d.date}`;
+      const body=[
+        '您好，我想詢問花禮需求：','',
+        `用途：${d.type}`,
+        `希望日期：${d.date}`,
+        `姓名：${d.name}`,
+        `聯絡電話：${d.phone||'未填'}`,
+        `預算：${d.budget||'未填'}`,
+        `取花方式：${d.fulfillment}`,
+        '',`其他需求：${d.note}`,'',
+        '實際花材、價格與配送請再協助確認，謝謝。'
+      ].join('\n');
+      status.classList.add('show');
+      window.location.href=`mailto:cathy04062008@yahoo.com.tw?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
+</body>
+</html>
