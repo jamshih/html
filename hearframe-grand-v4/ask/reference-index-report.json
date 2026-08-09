@@ -11,5 +11,9 @@
     "no-speech": 6,
     "low-speech": 7
   },
-  "pass": true
+  "pass": true,
+  "spliceCalibrationApplied": true,
+  "spliceCandidateCount": 3636,
+  "goldPostCalibrationMaxErrorMs": 21.8,
+  "goldPostCalibrationMeanErrorMs": 11.3
 }
