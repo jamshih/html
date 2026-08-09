@@ -1,0 +1,15 @@
+{
+  "catalogReferences": 100,
+  "processedReferences": 100,
+  "indexedSpeechReferences": 87,
+  "sampleSecondsPerReference": 45.0,
+  "acceptedWordOccurrences": 6247,
+  "uniqueWords": 1635,
+  "medianAlignmentScore": 0.904,
+  "statusCounts": {
+    "indexed": 87,
+    "no-speech": 6,
+    "low-speech": 7
+  },
+  "pass": true
+}
