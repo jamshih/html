@@ -1,0 +1,33 @@
+name: Build Hearframe rendered media
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/rendered-build-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  build-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure ffmpeg
+        run: |
+          if ! command -v ffmpeg >/dev/null; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
+          ffmpeg -version | head -n 2
+      - name: Render calibrated clips
+        run: python .github/scripts/build-hearframe-rendered.py
+      - name: Commit rendered MP4s and metadata
+        run: |
+          git config user.name 'hearframe-renderer'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/rendered/media
+          git commit -m 'Render Hearframe calibrated Hello World MP4s'
+          git pull --rebase origin main
+          git push origin HEAD:main
