@@ -1,14 +1,15 @@
 {
-  "checkedAt": "2026-08-09T02:01:44.484Z",
+  "checkedAt": "2026-08-09T02:04:45.750Z",
   "base": "http://127.0.0.1:4173/hearframe-grand-v4/ask/",
   "steps": [
     "corpus-ready",
     "You can begin.",
     "Change only happens when ordinary people get involved.",
-    "The world is very different now."
+    "The world is very different now.",
+    "safe-corpus-gap"
   ],
   "consoleErrors": [],
-  "pass": false,
+  "pass": true,
   "httpStatus": 200,
   "title": "Ask Hearframe v0",
   "start": {
@@ -30,13 +31,12 @@
     "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-change.mp4"
   },
   "world": {
-    "t": 2.319991385,
+    "t": 2.300731021,
     "d": 2.334,
     "ended": false,
     "paused": false,
     "rs": 4,
     "error": null,
     "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-world.mp4"
-  },
-  "error": "Error: fallback missing\n    at file:///home/runner/work/html/html/.github/scripts/hearframe-ask-local-qa.mjs:7:1660"
+  }
 }
