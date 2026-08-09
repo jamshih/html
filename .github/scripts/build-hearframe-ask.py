@@ -19,14 +19,15 @@ SOURCES = {
   }
 }
 
-# Each context window is grounded in the published subtitle cue, but the exact
-# word boundaries below are produced by faster-whisper word timestamps.
+# Each context window is grounded in a published subtitle cue, but exact word
+# boundaries are produced by faster-whisper word timestamps and must pass the
+# alignment confidence gate below.
 SEGMENTS = {
   'hello': {'source':'obama','target':'hello','context':[1.20,2.55]},
   'you_can': {'source':'obama','target':'you can','context':[79.55,82.30]},
   'change_people': {'source':'obama','target':'change only happens when ordinary people get involved','context':[226.00,235.20]},
   'progress_uneven': {'source':'obama','target':'yes our progress has been uneven','context':[401.20,406.65]},
-  'we_have_what_we_need': {'source':'obama','target':'we have what we need to do so','context':[598.10,600.90]},
+  'we_have_what_we_need': {'source':'obama','target':'we need to do so','context':[598.10,600.90]},
   'world_different': {'source':'jfk','target':'the world is very different now','context':[120.90,124.40]},
   'begin': {'source':'jfk','target':'begin','context':[677.55,681.10]},
   'ask_what_you_can_do': {'source':'jfk','target':'ask what you can do','context':[841.20,845.60]}
@@ -37,7 +38,7 @@ ANSWERS = [
   {'id':'start','text':'You can begin.','keywords':['can i start','should i start','start','begin','can i do this','do you think i can'],'segments':['you_can','begin']},
   {'id':'change','text':'Change only happens when ordinary people get involved.','keywords':['change','make a difference','make change','how does change happen','how can people change things'],'segments':['change_people']},
   {'id':'progress','text':'Yes, our progress has been uneven.','keywords':['progress','smooth','setback','improving','getting better','always improve'],'segments':['progress_uneven']},
-  {'id':'needs','text':'We have what we need to do so.','keywords':['what do we need','do we have enough','need','resources','ready'],'segments':['we_have_what_we_need']},
+  {'id':'needs','text':'We need to do so.','keywords':['what do we need','do we have enough','need','resources','ready'],'segments':['we_have_what_we_need']},
   {'id':'world','text':'The world is very different now.','keywords':['world','has the world changed','different now','things changed'],'segments':['world_different']},
   {'id':'agency','text':'Ask what you can do.','keywords':['what can i do','how can i help','help','contribute','my part'],'segments':['ask_what_you_can_do']}
 ]
@@ -60,7 +61,6 @@ def download_once(url, dest):
         raise SystemExit(f'download too small: {dest}')
     print(f'downloaded {dest.name}: {dest.stat().st_size/1024/1024:.1f} MiB', flush=True)
 
-
 LOCAL = {}
 for key, src in SOURCES.items():
     path = TMP / f'{key}.webm'
@@ -68,8 +68,6 @@ for key, src in SOURCES.items():
     LOCAL[key] = path
     time.sleep(4)
 
-# Import only after downloads so a model-install failure is clearly separated
-# from source-network failures in CI logs.
 from faster_whisper import WhisperModel
 model = WhisperModel('base.en', device='cpu', compute_type='int8')
 
@@ -104,7 +102,6 @@ def align_segment(seg_id, cfg):
         transcript=' '.join(w['raw'] for w in words)
         raise SystemExit(f'{seg_id}: alignment confidence too low {score:.3f}; wanted {target}; best {cand}; transcript={transcript}')
     chosen=words[i:i+length]
-    # Tiny consonant-safe padding; the aligned timestamps remain recorded separately.
     aligned_start=c0+chosen[0]['start']; aligned_end=c0+chosen[-1]['end']
     cut_start=max(c0,aligned_start-.025); cut_end=min(c1,aligned_end+.035)
     return {
@@ -140,7 +137,6 @@ def make_clip(seg, dest, gain_db=0.0):
       '-c:v','libx264','-preset','veryfast','-crf','21','-profile:v','main','-level','3.1','-pix_fmt','yuv420p','-bf','0','-g','30','-r','30',
       '-c:a','aac','-b:a','128k','-ar','48000','-ac','2','-movflags','+faststart','-video_track_timescale','90000',str(dest)])
 
-# Store independently playable aligned phrase clips for inspection.
 for seg_id,seg in aligned.items():
     make_clip(seg, MEDIA/f'segment-{seg_id}.mp4')
 
@@ -151,13 +147,11 @@ def render_answer(answer):
     if len(segs)==1:
         make_clip(segs[0],dest)
         return
-    # Relative loudness matching: only attenuate the louder source, max 6 dB.
     target=min(s['contextMeanDbFS'] for s in segs)
     tmps=[]
     for idx,s in enumerate(segs):
         gain=max(-6.0,min(0.0,target-s['contextMeanDbFS']))
         raw=TMP/f"{answer['id']}-{idx}.mp4"; make_clip(s,raw,gain); tmps.append(raw)
-    # Current POC needs 2-source composition. Extend recursively when corpus grows.
     if len(tmps)!=2: raise SystemExit('POC compositor currently supports up to 2 segments')
     d0=float(run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nk=1:nw=1',str(tmps[0])]).stdout.strip())
     d1=float(run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nk=1:nw=1',str(tmps[1])]).stdout.strip())
@@ -173,7 +167,6 @@ def render_answer(answer):
 
 for a in ANSWERS: render_answer(a)
 
-# Validate every generated answer by fully decoding it.
 probes={}
 for p in sorted(MEDIA.glob('answer-*.mp4')):
     run(['ffmpeg','-v','error','-nostdin','-i',str(p),'-f','null','-'])
