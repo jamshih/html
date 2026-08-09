@@ -1,0 +1,12 @@
+{
+  "version": "hearframe-ai-api-v0.1",
+  "syntax": "success",
+  "contractTests": "success",
+  "pass": true,
+  "testedContracts": [
+    "audio critic can only select a rendered candidate",
+    "hallucinated candidate ids are rejected",
+    "video director rejects unavailable corpus words",
+    "health endpoint does not expose OPENAI_API_KEY"
+  ]
+}
