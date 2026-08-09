@@ -9,7 +9,7 @@ on:
       - 'hearframe-grand-v4/ai-api-test-trigger.txt'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   contract-tests:
@@ -17,10 +17,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Check syntax
+        id: syntax
+        continue-on-error: true
         run: |
           node --check hearframe-ai-api/server.mjs
           node --check hearframe-ai-api/lib/openai.mjs
@@ -28,5 +32,38 @@ jobs:
           node --check hearframe-ai-api/lib/director.mjs
           node --check hearframe-ai-api/scripts/refine-word.mjs
       - name: Run provider-contract tests
+        id: tests
+        continue-on-error: true
         working-directory: hearframe-ai-api
         run: npm test
+      - name: Write QA result
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          syntax='${{ steps.syntax.outcome }}'
+          tests='${{ steps.tests.outcome }}'
+          payload={
+            'version':'hearframe-ai-api-v0.1',
+            'syntax':syntax,
+            'contractTests':tests,
+            'pass':syntax=='success' and tests=='success',
+            'testedContracts':[
+              'audio critic can only select a rendered candidate',
+              'hallucinated candidate ids are rejected',
+              'video director rejects unavailable corpus words',
+              'health endpoint does not expose OPENAI_API_KEY'
+            ]
+          }
+          os.makedirs('hearframe-grand-v4/ask',exist_ok=True)
+          open('hearframe-grand-v4/ask/ai-api-contract-qa.json','w').write(json.dumps(payload,indent=2))
+          PY
+          git config user.name 'hearframe-ai-api-qa'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/ai-api-contract-qa.json
+          git commit -m 'Record Hearframe AI API contract QA [skip ci]' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Fail on QA failure
+        if: steps.syntax.outcome != 'success' || steps.tests.outcome != 'success'
+        run: exit 1
