@@ -1,0 +1,495 @@
+{
+  "version": "ask-v0.1",
+  "alignment": "faster-whisper base.en word timestamps",
+  "sources": {
+    "obama": {
+      "speaker": "Barack Obama",
+      "year": 2017,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm"
+    },
+    "jfk": {
+      "speaker": "John F. Kennedy",
+      "year": 1961,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm"
+    }
+  },
+  "segments": {
+    "hello": {
+      "id": "hello",
+      "source": "obama",
+      "target": "hello",
+      "contextStart": 1.2,
+      "contextEnd": 2.55,
+      "alignedStart": 1.2,
+      "alignedEnd": 1.44,
+      "cutStart": 1.2,
+      "cutEnd": 1.475,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "Hello,",
+          "token": "hello",
+          "start": 1.2,
+          "end": 1.44,
+          "probability": 0.5063
+        }
+      ],
+      "contextTranscript": "Hello, Chicago!",
+      "contextMeanDbFS": -17.3
+    },
+    "you_can": {
+      "id": "you_can",
+      "source": "obama",
+      "target": "you can",
+      "contextStart": 79.55,
+      "contextEnd": 82.3,
+      "alignedStart": 79.55,
+      "alignedEnd": 79.99,
+      "cutStart": 79.55,
+      "cutEnd": 80.025,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "You",
+          "token": "you",
+          "start": 79.55,
+          "end": 79.99,
+          "probability": 0.3085
+        },
+        {
+          "word": "can",
+          "token": "can",
+          "start": 79.99,
+          "end": 79.99,
+          "probability": 0.9942
+        }
+      ],
+      "contextTranscript": "You can tell, you can tell that I'm...",
+      "contextMeanDbFS": -20.0
+    },
+    "change_people": {
+      "id": "change_people",
+      "source": "obama",
+      "target": "change only happens when ordinary people get involved",
+      "contextStart": 226.0,
+      "contextEnd": 235.2,
+      "alignedStart": 227.9,
+      "alignedEnd": 232.02,
+      "cutStart": 227.875,
+      "cutEnd": 232.055,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "change",
+          "token": "change",
+          "start": 227.9,
+          "end": 228.18,
+          "probability": 0.9929
+        },
+        {
+          "word": "only",
+          "token": "only",
+          "start": 228.18,
+          "end": 228.48,
+          "probability": 0.9977
+        },
+        {
+          "word": "happens",
+          "token": "happens",
+          "start": 228.48,
+          "end": 228.98,
+          "probability": 0.9979
+        },
+        {
+          "word": "when",
+          "token": "when",
+          "start": 228.98,
+          "end": 230.6,
+          "probability": 0.74
+        },
+        {
+          "word": "ordinary",
+          "token": "ordinary",
+          "start": 230.6,
+          "end": 230.96,
+          "probability": 0.9981
+        },
+        {
+          "word": "people",
+          "token": "people",
+          "start": 230.96,
+          "end": 231.42,
+          "probability": 0.9993
+        },
+        {
+          "word": "get",
+          "token": "get",
+          "start": 231.42,
+          "end": 231.6,
+          "probability": 0.9992
+        },
+        {
+          "word": "involved",
+          "token": "involved",
+          "start": 231.6,
+          "end": 232.02,
+          "probability": 0.9959
+        }
+      ],
+      "contextTranscript": "Now, this is where I learned that change only happens when ordinary people get involved and they get engaged and they come Um...",
+      "contextMeanDbFS": -31.5
+    },
+    "progress_uneven": {
+      "id": "progress_uneven",
+      "source": "obama",
+      "target": "yes our progress has been uneven",
+      "contextStart": 401.2,
+      "contextEnd": 406.65,
+      "alignedStart": 401.2,
+      "alignedEnd": 403.22,
+      "cutStart": 401.2,
+      "cutEnd": 403.255,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "Yes,",
+          "token": "yes",
+          "start": 401.2,
+          "end": 401.4,
+          "probability": 0.7678
+        },
+        {
+          "word": "our",
+          "token": "our",
+          "start": 401.66,
+          "end": 401.74,
+          "probability": 0.9876
+        },
+        {
+          "word": "progress",
+          "token": "progress",
+          "start": 401.74,
+          "end": 402.16,
+          "probability": 0.9867
+        },
+        {
+          "word": "has",
+          "token": "has",
+          "start": 402.16,
+          "end": 402.4,
+          "probability": 0.9804
+        },
+        {
+          "word": "been",
+          "token": "been",
+          "start": 402.4,
+          "end": 402.64,
+          "probability": 0.9988
+        },
+        {
+          "word": "uneven.",
+          "token": "uneven",
+          "start": 402.64,
+          "end": 403.22,
+          "probability": 0.8849
+        }
+      ],
+      "contextTranscript": "Yes, our progress has been uneven. The work of the...",
+      "contextMeanDbFS": -36.4
+    },
+    "we_have_what_we_need": {
+      "id": "we_have_what_we_need",
+      "source": "obama",
+      "target": "we need to do so",
+      "contextStart": 598.1,
+      "contextEnd": 600.9,
+      "alignedStart": 598.1,
+      "alignedEnd": 598.8,
+      "cutStart": 598.1,
+      "cutEnd": 598.835,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "We",
+          "token": "we",
+          "start": 598.1,
+          "end": 598.1,
+          "probability": 0.518
+        },
+        {
+          "word": "need",
+          "token": "need",
+          "start": 598.1,
+          "end": 598.28,
+          "probability": 0.8287
+        },
+        {
+          "word": "to",
+          "token": "to",
+          "start": 598.28,
+          "end": 598.42,
+          "probability": 0.9965
+        },
+        {
+          "word": "do",
+          "token": "do",
+          "start": 598.42,
+          "end": 598.58,
+          "probability": 0.9969
+        },
+        {
+          "word": "so.",
+          "token": "so",
+          "start": 598.58,
+          "end": 598.8,
+          "probability": 0.9482
+        }
+      ],
+      "contextTranscript": "We need to do so. We have...",
+      "contextMeanDbFS": -33.8
+    },
+    "world_different": {
+      "id": "world_different",
+      "source": "jfk",
+      "target": "the world is very different now",
+      "contextStart": 120.9,
+      "contextEnd": 124.4,
+      "alignedStart": 121.58,
+      "alignedEnd": 123.84,
+      "cutStart": 121.555,
+      "cutEnd": 123.875,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "The",
+          "token": "the",
+          "start": 121.58,
+          "end": 122.26,
+          "probability": 0.7654
+        },
+        {
+          "word": "world",
+          "token": "world",
+          "start": 122.26,
+          "end": 122.56,
+          "probability": 0.9778
+        },
+        {
+          "word": "is",
+          "token": "is",
+          "start": 122.56,
+          "end": 122.86,
+          "probability": 0.9964
+        },
+        {
+          "word": "very",
+          "token": "very",
+          "start": 122.86,
+          "end": 123.12,
+          "probability": 0.9934
+        },
+        {
+          "word": "different",
+          "token": "different",
+          "start": 123.12,
+          "end": 123.5,
+          "probability": 0.9958
+        },
+        {
+          "word": "now.",
+          "token": "now",
+          "start": 123.5,
+          "end": 123.84,
+          "probability": 0.9879
+        }
+      ],
+      "contextTranscript": "The world is very different now.",
+      "contextMeanDbFS": -18.5
+    },
+    "begin": {
+      "id": "begin",
+      "source": "jfk",
+      "target": "begin",
+      "contextStart": 677.55,
+      "contextEnd": 681.1,
+      "alignedStart": 679.33,
+      "alignedEnd": 679.77,
+      "cutStart": 679.305,
+      "cutEnd": 679.805,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "begin.",
+          "token": "begin",
+          "start": 679.33,
+          "end": 679.77,
+          "probability": 0.7717
+        }
+      ],
+      "contextTranscript": "I'm trying to but let us begin.",
+      "contextMeanDbFS": -22.9
+    },
+    "ask_what_you_can_do": {
+      "id": "ask_what_you_can_do",
+      "source": "jfk",
+      "target": "ask what you can do",
+      "contextStart": 841.2,
+      "contextEnd": 845.6,
+      "alignedStart": 841.2,
+      "alignedEnd": 843.4,
+      "cutStart": 841.2,
+      "cutEnd": 843.435,
+      "alignmentScore": 1.0,
+      "words": [
+        {
+          "word": "ask",
+          "token": "ask",
+          "start": 841.2,
+          "end": 842.28,
+          "probability": 0.3637
+        },
+        {
+          "word": "what",
+          "token": "what",
+          "start": 842.28,
+          "end": 842.62,
+          "probability": 0.9881
+        },
+        {
+          "word": "you",
+          "token": "you",
+          "start": 842.62,
+          "end": 842.92,
+          "probability": 0.9939
+        },
+        {
+          "word": "can",
+          "token": "can",
+          "start": 842.92,
+          "end": 843.18,
+          "probability": 0.9973
+        },
+        {
+          "word": "do",
+          "token": "do",
+          "start": 843.18,
+          "end": 843.4,
+          "probability": 0.9985
+        }
+      ],
+      "contextTranscript": "ask what you can do for your country.",
+      "contextMeanDbFS": -21.8
+    }
+  },
+  "answers": [
+    {
+      "id": "greeting",
+      "text": "Hello.",
+      "keywords": [
+        "hello",
+        "hi",
+        "hey"
+      ],
+      "segments": [
+        "hello"
+      ],
+      "media": "media/answer-greeting.mp4"
+    },
+    {
+      "id": "start",
+      "text": "You can begin.",
+      "keywords": [
+        "can i start",
+        "should i start",
+        "start",
+        "begin",
+        "can i do this",
+        "do you think i can"
+      ],
+      "segments": [
+        "you_can",
+        "begin"
+      ],
+      "media": "media/answer-start.mp4"
+    },
+    {
+      "id": "change",
+      "text": "Change only happens when ordinary people get involved.",
+      "keywords": [
+        "change",
+        "make a difference",
+        "make change",
+        "how does change happen",
+        "how can people change things"
+      ],
+      "segments": [
+        "change_people"
+      ],
+      "media": "media/answer-change.mp4"
+    },
+    {
+      "id": "progress",
+      "text": "Yes, our progress has been uneven.",
+      "keywords": [
+        "progress",
+        "smooth",
+        "setback",
+        "improving",
+        "getting better",
+        "always improve"
+      ],
+      "segments": [
+        "progress_uneven"
+      ],
+      "media": "media/answer-progress.mp4"
+    },
+    {
+      "id": "needs",
+      "text": "We need to do so.",
+      "keywords": [
+        "what do we need",
+        "do we have enough",
+        "need",
+        "resources",
+        "ready"
+      ],
+      "segments": [
+        "we_have_what_we_need"
+      ],
+      "media": "media/answer-needs.mp4"
+    },
+    {
+      "id": "world",
+      "text": "The world is very different now.",
+      "keywords": [
+        "world",
+        "has the world changed",
+        "different now",
+        "things changed"
+      ],
+      "segments": [
+        "world_different"
+      ],
+      "media": "media/answer-world.mp4"
+    },
+    {
+      "id": "agency",
+      "text": "Ask what you can do.",
+      "keywords": [
+        "what can i do",
+        "how can i help",
+        "help",
+        "contribute",
+        "my part"
+      ],
+      "segments": [
+        "ask_what_you_can_do"
+      ],
+      "media": "media/answer-agency.mp4"
+    }
+  ],
+  "fallback": {
+    "text": "I do not have enough indexed speech to answer that yet. Try a question about starting, change, progress, what you need, the world, or what you can do."
+  },
+  "notes": "The response planner prefers a whole indexed phrase. Only the start answer currently demonstrates a two-source splice: Obama \u201cyou can\u201d + JFK \u201cbegin\u201d."
+}
