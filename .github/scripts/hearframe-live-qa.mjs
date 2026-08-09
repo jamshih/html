@@ -2,7 +2,7 @@ import { chromium, webkit } from 'playwright';
 import fs from 'node:fs';
 
 const base = 'https://hearframe-grand-hello-world-v4.onrender.com';
-const expectedMarker = 'v4.5 LIVE QA';
+const expectedMarker = 'v4.6 LIVE QA';
 const routes = ['/', '/seamless/'];
 const results = { checkedAt: new Date().toISOString(), expectedMarker, base, routes: {}, overall: 'pending' };
 
