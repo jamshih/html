@@ -1,0 +1,75 @@
+{
+  "version": "splice-calibration-v1",
+  "purpose": "Convert full acoustic forced-alignment word envelopes into tighter Hearframe splice windows. Raw word timestamps remain authoritative alignment data.",
+  "goldWordCount": 2,
+  "baseInsetMs": {
+    "start": 77.0,
+    "end": 91.5
+  },
+  "durationFractionCap": 0.2,
+  "minimumRetainedFraction": 0.55,
+  "goldPostCalibrationMaxErrorMs": 21.8,
+  "goldPostCalibrationMeanErrorMs": 11.3,
+  "goldRows": [
+    {
+      "name": "gold-hello",
+      "token": "hello",
+      "raw": {
+        "start": 1.245,
+        "end": 1.591
+      },
+      "gold": {
+        "token": "hello",
+        "start": 1.308,
+        "end": 1.5
+      },
+      "neededInsetMs": {
+        "start": 63.0,
+        "end": 91.0
+      },
+      "calibrated": {
+        "start": 1.3142,
+        "end": 1.5218
+      },
+      "appliedInsetMs": {
+        "start": 69.2,
+        "end": 69.2
+      },
+      "calibratedErrorMs": {
+        "start": 6.2,
+        "end": 21.8
+      }
+    },
+    {
+      "name": "gold-world",
+      "token": "world",
+      "raw": {
+        "start": 122.349,
+        "end": 122.792
+      },
+      "gold": {
+        "token": "world",
+        "start": 122.44,
+        "end": 122.7
+      },
+      "neededInsetMs": {
+        "start": 91.0,
+        "end": 92.0
+      },
+      "calibrated": {
+        "start": 122.426,
+        "end": 122.7034
+      },
+      "appliedInsetMs": {
+        "start": 77.0,
+        "end": 88.6
+      },
+      "calibratedErrorMs": {
+        "start": 14.0,
+        "end": 3.4
+      }
+    }
+  ],
+  "caveat": "This is a splice-window calibration trained on two human-tuned words, not a claim that automatic phonetic boundaries are universally within this error.",
+  "pass": true
+}
