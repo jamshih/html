@@ -31,6 +31,8 @@
   ],
   "duration": 8.266667,
   "fullDecode": "pass",
+  "corpusVersionAfterBuild": "ask-v0.3",
+  "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
   "probe": {
     "programs": [],
     "streams": [

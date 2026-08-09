@@ -1,5 +1,5 @@
 {
-  "version": "ask-v0.2",
+  "version": "ask-v0.3",
   "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
   "sources": {
     "obama": {
@@ -554,5 +554,5 @@
   "fallback": {
     "text": "I do not have enough indexed speech to answer that yet. Try a question about starting, change, progress, what you need, the world, or what you can do."
   },
-  "notes": "Includes a five-fragment, 22-word long-answer regression test in addition to phrase-first answers."
+  "notes": "Forced-aligned phrase-first corpus plus a five-fragment, 22-word long-answer regression test."
 }
