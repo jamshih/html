@@ -1,5 +1,5 @@
 {
-  "version": "rendered-v2",
+  "version": "rendered-v3",
   "hello": {
     "start": 1.308,
     "end": 1.5
@@ -22,7 +22,8 @@
     "smooth": 35
   },
   "audioCurve": "qsin equal-power-style",
-  "videoCodec": "H.264 yuv420p",
+  "videoTransition": "hard cut; audio crossfade only",
+  "videoCodec": "H.264 Main yuv420p CFR 30fps, no B-frames",
   "audioCodec": "AAC 48kHz stereo",
-  "notes": "Each remote source is downloaded once. Context loudness is measured locally; only the louder source is attenuated, capped at 6 dB. Word windows remain exactly user-calibrated."
+  "notes": "Each remote source is downloaded once. Context loudness is measured locally; only the louder source is attenuated, capped at 6 dB. Word windows remain exactly user-calibrated. Combined files use a simple Safari-safe video concat and qsin audio crossfade."
 }

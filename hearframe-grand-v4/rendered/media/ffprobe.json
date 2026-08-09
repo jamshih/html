@@ -4,15 +4,20 @@
     "streams": [
       {
         "codec_name": "h264",
-        "codec_type": "video"
+        "codec_type": "video",
+        "start_time": "0.000000",
+        "duration": "0.466667"
       },
       {
         "codec_name": "aac",
-        "codec_type": "audio"
+        "codec_type": "audio",
+        "start_time": "0.000000",
+        "duration": "0.466000"
       }
     ],
     "format": {
-      "duration": "0.444000"
+      "start_time": "0.000000",
+      "duration": "0.466667"
     }
   },
   "hello-world-natural.mp4": {
@@ -20,15 +25,20 @@
     "streams": [
       {
         "codec_name": "h264",
-        "codec_type": "video"
+        "codec_type": "video",
+        "start_time": "0.000000",
+        "duration": "0.466667"
       },
       {
         "codec_name": "aac",
-        "codec_type": "audio"
+        "codec_type": "audio",
+        "start_time": "0.000000",
+        "duration": "0.466000"
       }
     ],
     "format": {
-      "duration": "0.459000"
+      "start_time": "0.000000",
+      "duration": "0.466667"
     }
   },
   "hello-world-smooth.mp4": {
@@ -36,15 +46,20 @@
     "streams": [
       {
         "codec_name": "h264",
-        "codec_type": "video"
+        "codec_type": "video",
+        "start_time": "0.000000",
+        "duration": "0.466667"
       },
       {
         "codec_name": "aac",
-        "codec_type": "audio"
+        "codec_type": "audio",
+        "start_time": "0.000000",
+        "duration": "0.466000"
       }
     ],
     "format": {
-      "duration": "0.434000"
+      "start_time": "0.000000",
+      "duration": "0.466667"
     }
   },
   "hello.mp4": {
@@ -52,14 +67,19 @@
     "streams": [
       {
         "codec_name": "h264",
-        "codec_type": "video"
+        "codec_type": "video",
+        "start_time": "0.000000",
+        "duration": "0.200000"
       },
       {
         "codec_name": "aac",
-        "codec_type": "audio"
+        "codec_type": "audio",
+        "start_time": "0.000000",
+        "duration": "0.192000"
       }
     ],
     "format": {
+      "start_time": "0.000000",
       "duration": "0.200000"
     }
   },
@@ -68,14 +88,19 @@
     "streams": [
       {
         "codec_name": "h264",
-        "codec_type": "video"
+        "codec_type": "video",
+        "start_time": "0.000000",
+        "duration": "0.266667"
       },
       {
         "codec_name": "aac",
-        "codec_type": "audio"
+        "codec_type": "audio",
+        "start_time": "0.000000",
+        "duration": "0.267000"
       }
     ],
     "format": {
+      "start_time": "0.000000",
       "duration": "0.267000"
     }
   }

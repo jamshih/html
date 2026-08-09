@@ -9,7 +9,7 @@ Input #0, matroska,webm, from '/tmp/hearframe-rendered/obama.webm':
   Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
   Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
   Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
-[Parsed_volumedetect_0 @ 0x55c5a60d5a80] n_samples: 0
+[Parsed_volumedetect_0 @ 0x55fad9803a80] n_samples: 0
 Stream mapping:
   Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
 Output #0, null, to 'pipe:':
@@ -19,12 +19,12 @@ Output #0, null, to 'pipe:':
     Metadata:
       encoder         : Lavc60.31.102 pcm_s16le
 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
-[out#0/null @ 0x55c5a6095180] video:0kB audio:131kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-size=N/A time=00:00:00.68 bitrate=N/A speed=91.5x    
-[Parsed_volumedetect_0 @ 0x55c5a60f0300] n_samples: 69456
-[Parsed_volumedetect_0 @ 0x55c5a60f0300] mean_volume: -16.9 dB
-[Parsed_volumedetect_0 @ 0x55c5a60f0300] max_volume: -7.2 dB
-[Parsed_volumedetect_0 @ 0x55c5a60f0300] histogram_7db: 164
+[out#0/null @ 0x55fad97c3180] video:0kB audio:131kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+size=N/A time=00:00:00.68 bitrate=N/A speed=97.4x    
+[Parsed_volumedetect_0 @ 0x55fad981e300] n_samples: 69456
+[Parsed_volumedetect_0 @ 0x55fad981e300] mean_volume: -16.9 dB
+[Parsed_volumedetect_0 @ 0x55fad981e300] max_volume: -7.2 dB
+[Parsed_volumedetect_0 @ 0x55fad981e300] histogram_7db: 164
 
 + ffmpeg -hide_banner -nostdin -ss 122.140 -i /tmp/hearframe-rendered/jfk.webm -t 0.850 -vn -af volumedetect -f null -
 Input #0, matroska,webm, from '/tmp/hearframe-rendered/jfk.webm':
@@ -33,7 +33,7 @@ Input #0, matroska,webm, from '/tmp/hearframe-rendered/jfk.webm':
   Duration: 00:15:30.10, start: -0.007000, bitrate: 493 kb/s
   Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 480x360, SAR 1:1 DAR 4:3, 29.97 fps, 29.97 tbr, 1k tbn (default)
   Stream #0:1: Audio: opus, 48000 Hz, stereo, fltp (default)
-[Parsed_volumedetect_0 @ 0x55742b8e8c40] n_samples: 0
+[Parsed_volumedetect_0 @ 0x5591af3c8c40] n_samples: 0
 Stream mapping:
   Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
 Output #0, null, to 'pipe:':
@@ -43,16 +43,16 @@ Output #0, null, to 'pipe:':
     Metadata:
       encoder         : Lavc60.31.102 pcm_s16le
 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
-[out#0/null @ 0x55742b8a8180] video:0kB audio:159kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
-size=N/A time=00:00:00.84 bitrate=N/A speed=29.6x    
-[Parsed_volumedetect_0 @ 0x55742b8ff440] n_samples: 84576
-[Parsed_volumedetect_0 @ 0x55742b8ff440] mean_volume: -15.7 dB
-[Parsed_volumedetect_0 @ 0x55742b8ff440] max_volume: -5.3 dB
-[Parsed_volumedetect_0 @ 0x55742b8ff440] histogram_5db: 52
-[Parsed_volumedetect_0 @ 0x55742b8ff440] histogram_6db: 500
+[out#0/null @ 0x5591af388180] video:0kB audio:159kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+size=N/A time=00:00:00.84 bitrate=N/A speed=30.7x    
+[Parsed_volumedetect_0 @ 0x5591af3df440] n_samples: 84576
+[Parsed_volumedetect_0 @ 0x5591af3df440] mean_volume: -15.7 dB
+[Parsed_volumedetect_0 @ 0x5591af3df440] max_volume: -5.3 dB
+[Parsed_volumedetect_0 @ 0x5591af3df440] histogram_5db: 52
+[Parsed_volumedetect_0 @ 0x5591af3df440] histogram_6db: 500
 
 context loudness -16.9 -15.7 gains 0.0 -1.1999999999999993
-+ ffmpeg -y -hide_banner -nostdin -ss 1.308 -i /tmp/hearframe-rendered/obama.webm -t 0.192 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart /tmp/hearframe-rendered/hello-raw.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 1.308 -i /tmp/hearframe-rendered/obama.webm -t 0.192 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 /tmp/hearframe-rendered/hello-raw.mp4
 Input #0, matroska,webm, from '/tmp/hearframe-rendered/obama.webm':
   Metadata:
     encoder         : Lavf57.56.101
@@ -62,14 +62,14 @@ Input #0, matroska,webm, from '/tmp/hearframe-rendered/obama.webm':
 Stream mapping:
   Stream #0:0 -> #0:0 (vp9 (native) -> h264 (libx264))
   Stream #0:1 -> #0:1 (opus (native) -> aac (native))
-[libx264 @ 0x55a4fbc2dfc0] using SAR=1/1
-[libx264 @ 0x55a4fbc2dfc0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x55a4fbc2dfc0] profile Main, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x55a4fbc2dfc0] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[libx264 @ 0x55f3f95c0040] using SAR=1/1
+[libx264 @ 0x55f3f95c0040] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x55f3f95c0040] profile Main, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x55f3f95c0040] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=1 keyint=30 keyint_min=3 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to '/tmp/hearframe-rendered/hello-raw.mp4':
   Metadata:
     encoder         : Lavf60.16.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn (default)
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 90k tbn (default)
     Metadata:
       encoder         : Lavc60.31.102 libx264
     Side data:
@@ -77,26 +77,23 @@ Output #0, mp4, to '/tmp/hearframe-rendered/hello-raw.mp4':
   Stream #0:1(eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
     Metadata:
       encoder         : Lavc60.31.102 aac
-frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.06 bitrate=   6.0kbits/s speed= 1.8x    
-[mp4 @ 0x55a4fbc2d6c0] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x55a4fbbef380] video:35kB audio:3kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 4.103005%
-frame=    6 fps=0.0 q=-1.0 Lsize=      40kB time=00:00:00.17 bitrate=1929.1kbits/s speed=2.34x    
-[libx264 @ 0x55a4fbc2dfc0] frame I:1     Avg QP:19.25  size: 26099
-[libx264 @ 0x55a4fbc2dfc0] frame P:2     Avg QP:22.93  size:  2636
-[libx264 @ 0x55a4fbc2dfc0] frame B:3     Avg QP:23.62  size:  1359
-[libx264 @ 0x55a4fbc2dfc0] consecutive B-frames: 33.3%  0.0%  0.0% 66.7%
-[libx264 @ 0x55a4fbc2dfc0] mb I  I16..4: 45.4%  0.0% 54.6%
-[libx264 @ 0x55a4fbc2dfc0] mb P  I16..4:  2.5%  0.0%  1.3%  P16..4: 13.5%  6.2%  2.4%  0.0%  0.0%    skip:74.2%
-[libx264 @ 0x55a4fbc2dfc0] mb B  I16..4:  0.2%  0.0%  0.0%  B16..8: 12.3%  3.4%  0.4%  direct: 4.3%  skip:79.4%  L0:43.0% L1:39.6% BI:17.4%
-[libx264 @ 0x55a4fbc2dfc0] coded y,uvDC,uvAC intra: 51.5% 74.3% 49.3% inter: 2.6% 4.5% 0.0%
-[libx264 @ 0x55a4fbc2dfc0] i16 v,h,dc,p: 67% 16%  9%  8%
-[libx264 @ 0x55a4fbc2dfc0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 19% 12%  8%  7%  9%  6%  6%  6%
-[libx264 @ 0x55a4fbc2dfc0] i8c dc,h,v,p: 35% 15% 39% 11%
-[libx264 @ 0x55a4fbc2dfc0] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x55a4fbc2dfc0] kb/s:1417.84
-[aac @ 0x55a4fbc51380] Qavg: 338.964
+frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.06 bitrate=   6.0kbits/s speed=1.75x    
+[mp4 @ 0x55f3f95bf740] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x55f3f9581480] video:37kB audio:3kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.791938%
+frame=    6 fps=0.0 q=-1.0 Lsize=      42kB time=00:00:00.17 bitrate=2015.7kbits/s speed=2.37x    
+[libx264 @ 0x55f3f95c0040] frame I:1     Avg QP:19.81  size: 25125
+[libx264 @ 0x55f3f95c0040] frame P:5     Avg QP:22.04  size:  2456
+[libx264 @ 0x55f3f95c0040] mb I  I16..4: 47.8%  0.0% 52.2%
+[libx264 @ 0x55f3f95c0040] mb P  I16..4:  2.1%  0.0%  0.1%  P16..4: 16.7%  6.8%  3.1%  0.0%  0.0%    skip:71.3%
+[libx264 @ 0x55f3f95c0040] coded y,uvDC,uvAC intra: 47.5% 73.2% 47.3% inter: 4.5% 6.6% 0.1%
+[libx264 @ 0x55f3f95c0040] i16 v,h,dc,p: 68% 15%  9%  8%
+[libx264 @ 0x55f3f95c0040] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 18% 12%  8%  7%  9%  5%  6%  6%
+[libx264 @ 0x55f3f95c0040] i8c dc,h,v,p: 35% 15% 40% 11%
+[libx264 @ 0x55f3f95c0040] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x55f3f95c0040] kb/s:1496.28
+[aac @ 0x55f3f95e3840] Qavg: 338.964
 
-+ ffmpeg -y -hide_banner -nostdin -ss 122.440 -i /tmp/hearframe-rendered/jfk.webm -t 0.260 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=-1.200dB -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart /tmp/hearframe-rendered/world-raw.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 122.440 -i /tmp/hearframe-rendered/jfk.webm -t 0.260 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=-1.200dB -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 /tmp/hearframe-rendered/world-raw.mp4
 Input #0, matroska,webm, from '/tmp/hearframe-rendered/jfk.webm':
   Metadata:
     encoder         : Lavf57.56.101
@@ -106,14 +103,14 @@ Input #0, matroska,webm, from '/tmp/hearframe-rendered/jfk.webm':
 Stream mapping:
   Stream #0:0 -> #0:0 (vp9 (native) -> h264 (libx264))
   Stream #0:1 -> #0:1 (opus (native) -> aac (native))
-[libx264 @ 0x55b208a34680] using SAR=1/1
-[libx264 @ 0x55b208a34680] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x55b208a34680] profile Main, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x55b208a34680] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[libx264 @ 0x557768db1740] using SAR=1/1
+[libx264 @ 0x557768db1740] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x557768db1740] profile Main, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x557768db1740] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=1 keyint=30 keyint_min=3 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to '/tmp/hearframe-rendered/world-raw.mp4':
   Metadata:
     encoder         : Lavf60.16.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn (default)
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 90k tbn (default)
     Metadata:
       encoder         : Lavc60.31.102 libx264
     Side data:
@@ -121,24 +118,21 @@ Output #0, mp4, to '/tmp/hearframe-rendered/world-raw.mp4':
   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
     Metadata:
       encoder         : Lavc60.31.102 aac
-frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.09 bitrate=   4.0kbits/s dup=1 drop=0 speed=0.833x    
-[mp4 @ 0x55b208a00a00] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x55b2089f6340] video:45kB audio:5kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.436221%
-frame=    8 fps=0.0 q=-1.0 Lsize=      51kB time=00:00:00.24 bitrate=1693.5kbits/s dup=1 drop=0 speed=1.47x    
-[libx264 @ 0x55b208a34680] frame I:1     Avg QP:18.30  size: 31502
-[libx264 @ 0x55b208a34680] frame P:2     Avg QP:24.66  size:  4076
-[libx264 @ 0x55b208a34680] frame B:5     Avg QP:23.88  size:  1061
-[libx264 @ 0x55b208a34680] consecutive B-frames: 12.5%  0.0% 37.5% 50.0%
-[libx264 @ 0x55b208a34680] mb I  I16..4: 39.0%  0.0% 61.0%
-[libx264 @ 0x55b208a34680] mb P  I16..4:  3.8%  0.0%  0.9%  P16..4: 22.6% 14.1%  6.2%  0.0%  0.0%    skip:52.4%
-[libx264 @ 0x55b208a34680] mb B  I16..4:  1.2%  0.0%  0.0%  B16..8: 13.4%  3.5%  0.3%  direct: 3.0%  skip:78.6%  L0:55.2% L1:29.7% BI:15.2%
-[libx264 @ 0x55b208a34680] coded y,uvDC,uvAC intra: 53.2% 53.3% 22.8% inter: 3.4% 3.0% 0.0%
-[libx264 @ 0x55b208a34680] i16 v,h,dc,p: 58% 30%  8%  4%
-[libx264 @ 0x55b208a34680] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 22%  9%  7%  6%  8%  6%  9%  7%
-[libx264 @ 0x55b208a34680] i8c dc,h,v,p: 51% 23% 16% 10%
-[libx264 @ 0x55b208a34680] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x55b208a34680] kb/s:1348.77
-[aac @ 0x55b208a857c0] Qavg: 311.557
+frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.09 bitrate=   4.0kbits/s dup=1 drop=0 speed=0.821x    
+[mp4 @ 0x557768d7d900] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x557768d73480] video:47kB audio:5kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.161691%
+frame=    8 fps=0.0 q=-1.0 Lsize=      54kB time=00:00:00.24 bitrate=1785.8kbits/s dup=1 drop=0 speed=1.48x    
+[libx264 @ 0x557768db1740] frame I:1     Avg QP:18.91  size: 30466
+[libx264 @ 0x557768db1740] frame P:7     Avg QP:23.17  size:  2492
+[libx264 @ 0x557768db1740] mb I  I16..4: 40.7%  0.0% 59.3%
+[libx264 @ 0x557768db1740] mb P  I16..4:  2.9%  0.0%  0.2%  P16..4: 17.0%  9.7%  4.1%  0.0%  0.0%    skip:66.1%
+[libx264 @ 0x557768db1740] coded y,uvDC,uvAC intra: 50.0% 53.4% 20.0% inter: 5.7% 3.8% 0.0%
+[libx264 @ 0x557768db1740] i16 v,h,dc,p: 53% 34% 10%  4%
+[libx264 @ 0x557768db1740] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 28% 21% 10%  7%  6%  8%  5%  8%  7%
+[libx264 @ 0x557768db1740] i8c dc,h,v,p: 50% 25% 16%  9%
+[libx264 @ 0x557768db1740] Weighted P-Frames: Y:14.3% UV:0.0%
+[libx264 @ 0x557768db1740] kb/s:1437.21
+[aac @ 0x557768e02a40] Qavg: 311.557
 
 + ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -af afade=t=in:st=0:d=0.0080:curve=qsin,afade=t=out:st=0.1840:d=0.0080:curve=qsin -c:v copy -c:a aac -b:a 128k -movflags +faststart hearframe-grand-v4/rendered/media/hello.mp4
 Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/hello-raw.mp4':
@@ -147,8 +141,8 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/hello-raw.mp4':
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:00.20, start: 0.000000, bitrate: 1646 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1445 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:00.20, start: 0.000000, bitrate: 1720 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1521 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -166,7 +160,7 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello.mp4':
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 1445 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 1521 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -177,10 +171,10 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello.mp4':
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 aac
 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
-[mp4 @ 0x55736b49b580] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x55736b44ed00] video:35kB audio:3kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 4.130989%
-size=      40kB time=00:00:00.17 bitrate=1915.4kbits/s speed=13.4x    
-[aac @ 0x55736b4e0700] Qavg: 258.553
+[mp4 @ 0x55af29501640] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x55af29501c40] video:37kB audio:3kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.816423%
+size=      42kB time=00:00:00.17 bitrate=2001.9kbits/s speed=13.3x    
+[aac @ 0x55af296132c0] Qavg: 258.553
 
 + ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/world-raw.mp4 -af afade=t=in:st=0:d=0.0080:curve=qsin,afade=t=out:st=0.2520:d=0.0080:curve=qsin -c:v copy -c:a aac -b:a 128k -movflags +faststart hearframe-grand-v4/rendered/media/world.mp4
 Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
@@ -189,8 +183,8 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:00.27, start: 0.000000, bitrate: 1562 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1369 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:00.27, start: 0.000000, bitrate: 1647 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1455 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -208,7 +202,7 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/world.mp4':
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 1369 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Stream #0:0(und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 1455 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -219,21 +213,29 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/world.mp4':
       vendor_id       : [0][0][0][0]
       encoder         : Lavc60.31.102 aac
 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
-[mp4 @ 0x561e546ef7c0] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x561e546efe40] video:45kB audio:5kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.416242%
-size=      51kB time=00:00:00.24 bitrate=1694.2kbits/s speed=  17x    
-[aac @ 0x561e547fe680] Qavg: 261.665
+[mp4 @ 0x564ef5513280] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x564ef54c6e00] video:47kB audio:5kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.142954%
+size=      54kB time=00:00:00.24 bitrate=1786.5kbits/s speed=  17x    
+[aac @ 0x564ef555e340] Qavg: 261.665
 
-+ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -i /tmp/hearframe-rendered/world-raw.mp4 -filter_complex [0:v][1:v]xfade=transition=fade:duration=0.010:offset=0.182[v];[0:a][1:a]acrossfade=d=0.010:c1=qsin:c2=qsin[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart hearframe-grand-v4/rendered/media/hello-world-natural.mp4
-       : [0][0][0][0]
++ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -i /tmp/hearframe-rendered/world-raw.mp4 -filter_complex [0:v]settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]settb=AVTB,setpts=PTS-STARTPTS[v1];[v0][v1]concat=n=2:v=1:a=0,fps=30,setpts=PTS-STARTPTS[v];[0:a]aresample=48000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=48000,asetpts=PTS-STARTPTS[a1];[a0][a1]acrossfade=d=0.010:c1=qsin:c2=qsin,apad=whole_dur=0.466667,atrim=duration=0.466667,asetpts=PTS-STARTPTS[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/rendered/media/hello-world-natural.mp4
+6:9], 1521 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
 Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:00.27, start: 0.000000, bitrate: 1562 kb/s
-  Stream #1:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1369 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:00.27, start: 0.000000, bitrate: 1647 kb/s
+  Stream #1:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1455 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -243,23 +245,23 @@ Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
 Stream mapping:
-  Stream #0:0 (h264) -> xfade
-  Stream #0:1 (aac) -> acrossfade
-  Stream #1:0 (h264) -> xfade
-  Stream #1:1 (aac) -> acrossfade
-  xfade:default -> Stream #0:0 (libx264)
-  acrossfade:default -> Stream #0:1 (aac)
-[libx264 @ 0x55f4002546c0] using SAR=1/1
-[libx264 @ 0x55f4002546c0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x55f4002546c0] profile Main, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x55f4002546c0] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+  Stream #0:0 (h264) -> settb:default
+  Stream #0:1 (aac) -> aresample:default
+  Stream #1:0 (h264) -> settb:default
+  Stream #1:1 (aac) -> aresample:default
+  setpts:default -> Stream #0:0 (libx264)
+  asetpts:default -> Stream #0:1 (aac)
+[libx264 @ 0x55691142e700] using SAR=1/1
+[libx264 @ 0x55691142e700] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x55691142e700] profile Main, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x55691142e700] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=1 keyint=30 keyint_min=3 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello-world-natural.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 90k tbn
     Metadata:
       encoder         : Lavc60.31.102 libx264
     Side data:
@@ -267,35 +269,41 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello-world-natural.mp4':
   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.10 bitrate=   3.6kbits/s speed=7.19x    
-[mp4 @ 0x55f400253680] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x55f400253580] video:69kB audio:8kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 2.276130%
-frame=   10 fps=0.0 q=-1.0 Lsize=      79kB time=00:00:00.44 bitrate=1439.5kbits/s dup=0 drop=4 speed=4.59x    
-[libx264 @ 0x55f4002546c0] frame I:2     Avg QP:17.73  size: 29414
-[libx264 @ 0x55f4002546c0] frame P:3     Avg QP:23.40  size:  2239
-[libx264 @ 0x55f4002546c0] frame B:5     Avg QP:23.08  size:   945
-[libx264 @ 0x55f4002546c0] consecutive B-frames: 30.0%  0.0% 30.0% 40.0%
-[libx264 @ 0x55f4002546c0] mb I  I16..4: 38.5%  0.0% 61.5%
-[libx264 @ 0x55f4002546c0] mb P  I16..4:  2.6%  0.0%  1.0%  P16..4: 12.8%  6.1%  2.4%  0.0%  0.0%    skip:75.1%
-[libx264 @ 0x55f4002546c0] mb B  I16..4:  0.2%  0.0%  0.0%  B16..8:  9.7%  2.5%  0.4%  direct: 2.9%  skip:84.3%  L0:51.4% L1:31.4% BI:17.2%
-[libx264 @ 0x55f4002546c0] coded y,uvDC,uvAC intra: 54.3% 66.2% 37.1% inter: 1.6% 3.3% 0.1%
-[libx264 @ 0x55f4002546c0] i16 v,h,dc,p: 70% 18%  7%  6%
-[libx264 @ 0x55f4002546c0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 30% 22%  9%  7%  6%  7%  5%  7%  6%
-[libx264 @ 0x55f4002546c0] i8c dc,h,v,p: 42% 18% 29% 11%
-[libx264 @ 0x55f4002546c0] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x55f4002546c0] kb/s:1686.46
-[aac @ 0x55f400256140] Qavg: 365.396
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    
+[mp4 @ 0x55691142d6c0] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x55691142d580] video:82kB audio:8kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.986777%
+frame=   14 fps=0.0 q=-1.0 Lsize=      92kB time=00:00:00.44 bitrate=1674.7kbits/s speed=5.86x    
+[libx264 @ 0x55691142e700] frame I:2     Avg QP:17.68  size: 29010
+[libx264 @ 0x55691142e700] frame P:12    Avg QP:21.91  size:  2121
+[libx264 @ 0x55691142e700] mb I  I16..4: 39.4%  0.0% 60.6%
+[libx264 @ 0x55691142e700] mb P  I16..4:  2.0%  0.0%  0.2%  P16..4: 15.8%  7.0%  3.9%  0.0%  0.0%    skip:71.0%
+[libx264 @ 0x55691142e700] coded y,uvDC,uvAC intra: 49.8% 64.1% 33.4% inter: 3.6% 5.0% 0.1%
+[libx264 @ 0x55691142e700] i16 v,h,dc,p: 64% 22%  8%  5%
+[libx264 @ 0x55691142e700] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 22%  9%  7%  6%  7%  5%  7%  6%
+[libx264 @ 0x55691142e700] i8c dc,h,v,p: 42% 20% 28% 10%
+[libx264 @ 0x55691142e700] Weighted P-Frames: Y:8.3% UV:0.0%
+[libx264 @ 0x55691142e700] kb/s:1430.95
+[aac @ 0x556911430240] Qavg: 365.396
 
-+ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -i /tmp/hearframe-rendered/world-raw.mp4 -filter_complex [0:v][1:v]xfade=transition=fade:duration=0.025:offset=0.167[v];[0:a][1:a]acrossfade=d=0.025:c1=qsin:c2=qsin[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart hearframe-grand-v4/rendered/media/hello-world-balanced.mp4
-      : [0][0][0][0]
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/rendered/media/hello-world-natural.mp4 -f null -
++ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -i /tmp/hearframe-rendered/world-raw.mp4 -filter_complex [0:v]settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]settb=AVTB,setpts=PTS-STARTPTS[v1];[v0][v1]concat=n=2:v=1:a=0,fps=30,setpts=PTS-STARTPTS[v];[0:a]aresample=48000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=48000,asetpts=PTS-STARTPTS[a1];[a0][a1]acrossfade=d=0.025:c1=qsin:c2=qsin,apad=whole_dur=0.466667,atrim=duration=0.466667,asetpts=PTS-STARTPTS[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/rendered/media/hello-world-balanced.mp4
+9], 1521 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
 Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:00.27, start: 0.000000, bitrate: 1562 kb/s
-  Stream #1:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1369 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:00.27, start: 0.000000, bitrate: 1647 kb/s
+  Stream #1:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1455 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -305,23 +313,23 @@ Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
 Stream mapping:
-  Stream #0:0 (h264) -> xfade
-  Stream #0:1 (aac) -> acrossfade
-  Stream #1:0 (h264) -> xfade
-  Stream #1:1 (aac) -> acrossfade
-  xfade:default -> Stream #0:0 (libx264)
-  acrossfade:default -> Stream #0:1 (aac)
-[libx264 @ 0x5651da3276c0] using SAR=1/1
-[libx264 @ 0x5651da3276c0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x5651da3276c0] profile Main, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x5651da3276c0] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+  Stream #0:0 (h264) -> settb:default
+  Stream #0:1 (aac) -> aresample:default
+  Stream #1:0 (h264) -> settb:default
+  Stream #1:1 (aac) -> aresample:default
+  setpts:default -> Stream #0:0 (libx264)
+  asetpts:default -> Stream #0:1 (aac)
+[libx264 @ 0x55da0a009700] using SAR=1/1
+[libx264 @ 0x55da0a009700] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x55da0a009700] profile Main, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x55da0a009700] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=1 keyint=30 keyint_min=3 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello-world-balanced.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 90k tbn
     Metadata:
       encoder         : Lavc60.31.102 libx264
     Side data:
@@ -329,35 +337,41 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello-world-balanced.mp4':
   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.08 bitrate=   4.5kbits/s speed=5.97x    
-[mp4 @ 0x5651da326680] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x5651da326580] video:69kB audio:7kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 2.279384%
-frame=   10 fps=0.0 q=-1.0 Lsize=      78kB time=00:00:00.42 bitrate=1506.0kbits/s dup=0 drop=4 speed=4.31x    
-[libx264 @ 0x5651da3276c0] frame I:2     Avg QP:17.73  size: 29414
-[libx264 @ 0x5651da3276c0] frame P:3     Avg QP:23.40  size:  2239
-[libx264 @ 0x5651da3276c0] frame B:5     Avg QP:23.08  size:   945
-[libx264 @ 0x5651da3276c0] consecutive B-frames: 30.0%  0.0% 30.0% 40.0%
-[libx264 @ 0x5651da3276c0] mb I  I16..4: 38.5%  0.0% 61.5%
-[libx264 @ 0x5651da3276c0] mb P  I16..4:  2.6%  0.0%  1.0%  P16..4: 12.8%  6.1%  2.4%  0.0%  0.0%    skip:75.1%
-[libx264 @ 0x5651da3276c0] mb B  I16..4:  0.2%  0.0%  0.0%  B16..8:  9.7%  2.5%  0.4%  direct: 2.9%  skip:84.3%  L0:51.4% L1:31.4% BI:17.2%
-[libx264 @ 0x5651da3276c0] coded y,uvDC,uvAC intra: 54.3% 66.2% 37.1% inter: 1.6% 3.3% 0.1%
-[libx264 @ 0x5651da3276c0] i16 v,h,dc,p: 70% 18%  7%  6%
-[libx264 @ 0x5651da3276c0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 30% 22%  9%  7%  6%  7%  5%  7%  6%
-[libx264 @ 0x5651da3276c0] i8c dc,h,v,p: 42% 18% 29% 11%
-[libx264 @ 0x5651da3276c0] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x5651da3276c0] kb/s:1686.46
-[aac @ 0x5651da329140] Qavg: 361.441
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    
+[mp4 @ 0x55da0a0086c0] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x55da0a008580] video:82kB audio:7kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.992888%
+frame=   14 fps=0.0 q=-1.0 Lsize=      91kB time=00:00:00.44 bitrate=1669.7kbits/s speed=5.76x    
+[libx264 @ 0x55da0a009700] frame I:2     Avg QP:17.68  size: 29010
+[libx264 @ 0x55da0a009700] frame P:12    Avg QP:21.91  size:  2121
+[libx264 @ 0x55da0a009700] mb I  I16..4: 39.4%  0.0% 60.6%
+[libx264 @ 0x55da0a009700] mb P  I16..4:  2.0%  0.0%  0.2%  P16..4: 15.8%  7.0%  3.9%  0.0%  0.0%    skip:71.0%
+[libx264 @ 0x55da0a009700] coded y,uvDC,uvAC intra: 49.8% 64.1% 33.4% inter: 3.6% 5.0% 0.1%
+[libx264 @ 0x55da0a009700] i16 v,h,dc,p: 64% 22%  8%  5%
+[libx264 @ 0x55da0a009700] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 22%  9%  7%  6%  7%  5%  7%  6%
+[libx264 @ 0x55da0a009700] i8c dc,h,v,p: 42% 20% 28% 10%
+[libx264 @ 0x55da0a009700] Weighted P-Frames: Y:8.3% UV:0.0%
+[libx264 @ 0x55da0a009700] kb/s:1430.95
+[aac @ 0x55da0a00b240] Qavg: 3195.117
 
-+ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -i /tmp/hearframe-rendered/world-raw.mp4 -filter_complex [0:v][1:v]xfade=transition=fade:duration=0.035:offset=0.157[v];[0:a][1:a]acrossfade=d=0.035:c1=qsin:c2=qsin[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart hearframe-grand-v4/rendered/media/hello-world-smooth.mp4
-   vendor_id       : [0][0][0][0]
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/rendered/media/hello-world-balanced.mp4 -f null -
++ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-rendered/hello-raw.mp4 -i /tmp/hearframe-rendered/world-raw.mp4 -filter_complex [0:v]settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]settb=AVTB,setpts=PTS-STARTPTS[v1];[v0][v1]concat=n=2:v=1:a=0,fps=30,setpts=PTS-STARTPTS[v];[0:a]aresample=48000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=48000,asetpts=PTS-STARTPTS[a1];[a0][a1]acrossfade=d=0.035:c1=qsin:c2=qsin,apad=whole_dur=0.466667,atrim=duration=0.466667,asetpts=PTS-STARTPTS[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/rendered/media/hello-world-smooth.mp4
+6:9], 1521 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
 Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Duration: 00:00:00.27, start: 0.000000, bitrate: 1562 kb/s
-  Stream #1:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1369 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+  Duration: 00:00:00.27, start: 0.000000, bitrate: 1647 kb/s
+  Stream #1:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1455 kb/s, 30 fps, 30 tbr, 90k tbn (default)
     Metadata:
       handler_name    : VideoHandler
       vendor_id       : [0][0][0][0]
@@ -367,23 +381,23 @@ Input #1, mov,mp4,m4a,3gp,3g2,mj2, from '/tmp/hearframe-rendered/world-raw.mp4':
       handler_name    : SoundHandler
       vendor_id       : [0][0][0][0]
 Stream mapping:
-  Stream #0:0 (h264) -> xfade
-  Stream #0:1 (aac) -> acrossfade
-  Stream #1:0 (h264) -> xfade
-  Stream #1:1 (aac) -> acrossfade
-  xfade:default -> Stream #0:0 (libx264)
-  acrossfade:default -> Stream #0:1 (aac)
-[libx264 @ 0x5576ee9036c0] using SAR=1/1
-[libx264 @ 0x5576ee9036c0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x5576ee9036c0] profile Main, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x5576ee9036c0] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+  Stream #0:0 (h264) -> settb:default
+  Stream #0:1 (aac) -> aresample:default
+  Stream #1:0 (h264) -> settb:default
+  Stream #1:1 (aac) -> aresample:default
+  setpts:default -> Stream #0:0 (libx264)
+  asetpts:default -> Stream #0:1 (aac)
+[libx264 @ 0x5637e2af8700] using SAR=1/1
+[libx264 @ 0x5637e2af8700] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x5637e2af8700] profile Main, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x5637e2af8700] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=1 keyint=30 keyint_min=3 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello-world-smooth.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2avc1mp41
     encoder         : Lavf60.16.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 90k tbn
     Metadata:
       encoder         : Lavc60.31.102 libx264
     Side data:
@@ -391,26 +405,24 @@ Output #0, mp4, to 'hearframe-grand-v4/rendered/media/hello-world-smooth.mp4':
   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
     Metadata:
       encoder         : Lavc60.31.102 aac
-frame=    0 fps=0.0 q=0.0 size=       0kB time=00:00:00.08 bitrate=   4.5kbits/s speed=6.08x    
-[mp4 @ 0x5576ee902680] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x5576ee902580] video:88kB audio:7kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.924650%
-frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits/s speed=3.78x    
-[libx264 @ 0x5576ee9036c0] frame I:1     Avg QP:19.06  size: 25160
-[libx264 @ 0x5576ee9036c0] frame P:4     Avg QP:22.74  size: 13319
-[libx264 @ 0x5576ee9036c0] frame B:8     Avg QP:23.48  size:  1385
-[libx264 @ 0x5576ee9036c0] consecutive B-frames: 15.4%  0.0% 23.1% 61.5%
-[libx264 @ 0x5576ee9036c0] mb I  I16..4: 43.0%  0.0% 57.0%
-[libx264 @ 0x5576ee9036c0] mb P  I16..4: 19.7%  0.0% 29.1%  P16..4:  9.6%  5.0%  1.8%  0.0%  0.0%    skip:34.8%
-[libx264 @ 0x5576ee9036c0] mb B  I16..4:  1.4%  0.0%  0.1%  B16..8: 10.2%  3.8%  0.4%  direct: 4.5%  skip:79.6%  L0:34.9% L1:52.5% BI:12.7%
-[libx264 @ 0x5576ee9036c0] coded y,uvDC,uvAC intra: 49.9% 63.6% 29.2% inter: 3.0% 4.4% 0.1%
-[libx264 @ 0x5576ee9036c0] i16 v,h,dc,p: 63% 23%  8%  6%
-[libx264 @ 0x5576ee9036c0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 30% 21% 11%  7%  6%  8%  5%  7%  6%
-[libx264 @ 0x5576ee9036c0] i8c dc,h,v,p: 41% 19% 30% 10%
-[libx264 @ 0x5576ee9036c0] Weighted P-Frames: Y:25.0% UV:25.0%
-[libx264 @ 0x5576ee9036c0] kb/s:1652.62
-[aac @ 0x5576ee905140] Qavg: 346.583
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    
+[mp4 @ 0x5637e2af76c0] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x5637e2af7580] video:82kB audio:7kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.992758%
+frame=   14 fps=0.0 q=-1.0 Lsize=      91kB time=00:00:00.44 bitrate=1669.8kbits/s speed=5.82x    
+[libx264 @ 0x5637e2af8700] frame I:2     Avg QP:17.68  size: 29010
+[libx264 @ 0x5637e2af8700] frame P:12    Avg QP:21.91  size:  2121
+[libx264 @ 0x5637e2af8700] mb I  I16..4: 39.4%  0.0% 60.6%
+[libx264 @ 0x5637e2af8700] mb P  I16..4:  2.0%  0.0%  0.2%  P16..4: 15.8%  7.0%  3.9%  0.0%  0.0%    skip:71.0%
+[libx264 @ 0x5637e2af8700] coded y,uvDC,uvAC intra: 49.8% 64.1% 33.4% inter: 3.6% 5.0% 0.1%
+[libx264 @ 0x5637e2af8700] i16 v,h,dc,p: 64% 22%  8%  5%
+[libx264 @ 0x5637e2af8700] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 22%  9%  7%  6%  7%  5%  7%  6%
+[libx264 @ 0x5637e2af8700] i8c dc,h,v,p: 42% 20% 28% 10%
+[libx264 @ 0x5637e2af8700] Weighted P-Frames: Y:8.3% UV:0.0%
+[libx264 @ 0x5637e2af8700] kb/s:1430.95
+[aac @ 0x5637e2afa240] Qavg: 3180.905
 
-+ ffprobe -v error -show_entries stream=codec_type,codec_name -show_entries format=duration -of json hearframe-grand-v4/rendered/media/hello-world-balanced.mp4
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/rendered/media/hello-world-smooth.mp4 -f null -
++ ffprobe -v error -show_entries stream=codec_type,codec_name,start_time,duration -show_entries format=duration,start_time -of json hearframe-grand-v4/rendered/media/hello-world-balanced.mp4
 {
     "programs": [
 
@@ -418,19 +430,24 @@ frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits
     "streams": [
         {
             "codec_name": "h264",
-            "codec_type": "video"
+            "codec_type": "video",
+            "start_time": "0.000000",
+            "duration": "0.466667"
         },
         {
             "codec_name": "aac",
-            "codec_type": "audio"
+            "codec_type": "audio",
+            "start_time": "0.000000",
+            "duration": "0.466000"
         }
     ],
     "format": {
-        "duration": "0.444000"
+        "start_time": "0.000000",
+        "duration": "0.466667"
     }
 }
 
-+ ffprobe -v error -show_entries stream=codec_type,codec_name -show_entries format=duration -of json hearframe-grand-v4/rendered/media/hello-world-natural.mp4
++ ffprobe -v error -show_entries stream=codec_type,codec_name,start_time,duration -show_entries format=duration,start_time -of json hearframe-grand-v4/rendered/media/hello-world-natural.mp4
 {
     "programs": [
 
@@ -438,19 +455,24 @@ frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits
     "streams": [
         {
             "codec_name": "h264",
-            "codec_type": "video"
+            "codec_type": "video",
+            "start_time": "0.000000",
+            "duration": "0.466667"
         },
         {
             "codec_name": "aac",
-            "codec_type": "audio"
+            "codec_type": "audio",
+            "start_time": "0.000000",
+            "duration": "0.466000"
         }
     ],
     "format": {
-        "duration": "0.459000"
+        "start_time": "0.000000",
+        "duration": "0.466667"
     }
 }
 
-+ ffprobe -v error -show_entries stream=codec_type,codec_name -show_entries format=duration -of json hearframe-grand-v4/rendered/media/hello-world-smooth.mp4
++ ffprobe -v error -show_entries stream=codec_type,codec_name,start_time,duration -show_entries format=duration,start_time -of json hearframe-grand-v4/rendered/media/hello-world-smooth.mp4
 {
     "programs": [
 
@@ -458,19 +480,24 @@ frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits
     "streams": [
         {
             "codec_name": "h264",
-            "codec_type": "video"
+            "codec_type": "video",
+            "start_time": "0.000000",
+            "duration": "0.466667"
         },
         {
             "codec_name": "aac",
-            "codec_type": "audio"
+            "codec_type": "audio",
+            "start_time": "0.000000",
+            "duration": "0.466000"
         }
     ],
     "format": {
-        "duration": "0.434000"
+        "start_time": "0.000000",
+        "duration": "0.466667"
     }
 }
 
-+ ffprobe -v error -show_entries stream=codec_type,codec_name -show_entries format=duration -of json hearframe-grand-v4/rendered/media/hello.mp4
++ ffprobe -v error -show_entries stream=codec_type,codec_name,start_time,duration -show_entries format=duration,start_time -of json hearframe-grand-v4/rendered/media/hello.mp4
 {
     "programs": [
 
@@ -478,19 +505,24 @@ frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits
     "streams": [
         {
             "codec_name": "h264",
-            "codec_type": "video"
+            "codec_type": "video",
+            "start_time": "0.000000",
+            "duration": "0.200000"
         },
         {
             "codec_name": "aac",
-            "codec_type": "audio"
+            "codec_type": "audio",
+            "start_time": "0.000000",
+            "duration": "0.192000"
         }
     ],
     "format": {
+        "start_time": "0.000000",
         "duration": "0.200000"
     }
 }
 
-+ ffprobe -v error -show_entries stream=codec_type,codec_name -show_entries format=duration -of json hearframe-grand-v4/rendered/media/world.mp4
++ ffprobe -v error -show_entries stream=codec_type,codec_name,start_time,duration -show_entries format=duration,start_time -of json hearframe-grand-v4/rendered/media/world.mp4
 {
     "programs": [
 
@@ -498,20 +530,25 @@ frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits
     "streams": [
         {
             "codec_name": "h264",
-            "codec_type": "video"
+            "codec_type": "video",
+            "start_time": "0.000000",
+            "duration": "0.266667"
         },
         {
             "codec_name": "aac",
-            "codec_type": "audio"
+            "codec_type": "audio",
+            "start_time": "0.000000",
+            "duration": "0.267000"
         }
     ],
     "format": {
+        "start_time": "0.000000",
         "duration": "0.267000"
     }
 }
 
 {
-  "version": "rendered-v2",
+  "version": "rendered-v3",
   "hello": {
     "start": 1.308,
     "end": 1.5
@@ -534,7 +571,8 @@ frame=   13 fps=0.0 q=-1.0 Lsize=      97kB time=00:00:00.42 bitrate=1868.7kbits
     "smooth": 35
   },
   "audioCurve": "qsin equal-power-style",
-  "videoCodec": "H.264 yuv420p",
+  "videoTransition": "hard cut; audio crossfade only",
+  "videoCodec": "H.264 Main yuv420p CFR 30fps, no B-frames",
   "audioCodec": "AAC 48kHz stereo",
-  "notes": "Each remote source is downloaded once. Context loudness is measured locally; only the louder source is attenuated, capped at 6 dB. Word windows remain exactly user-calibrated."
+  "notes": "Each remote source is downloaded once. Context loudness is measured locally; only the louder source is attenuated, capped at 6 dB. Word windows remain exactly user-calibrated. Combined files use a simple Safari-safe video concat and qsin audio crossfade."
 }
