@@ -1,0 +1,42 @@
+name: Ask Hearframe Live QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/ask-qa-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  live-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install WebKit
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps webkit
+      - name: Test deployed Ask Hearframe on iPad WebKit
+        id: qa
+        continue-on-error: true
+        run: node .github/scripts/hearframe-ask-live-qa.mjs
+      - name: Record live QA
+        if: always()
+        run: |
+          git config user.name 'hearframe-ask-live-qa'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/live-qa.json || true
+          git commit -m 'Record Ask Hearframe live QA [skip ci]' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Fail if QA failed
+        if: steps.qa.outcome != 'success'
+        run: exit 1
