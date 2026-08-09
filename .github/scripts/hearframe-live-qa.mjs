@@ -2,7 +2,7 @@ import { chromium, webkit } from 'playwright';
 import fs from 'node:fs';
 
 const base = 'https://hearframe-grand-hello-world-v4.onrender.com';
-const expectedMarker = 'v4.4 LIVE QA';
+const expectedMarker = 'v4.5 LIVE QA';
 const routes = ['/', '/seamless/'];
 const results = { checkedAt: new Date().toISOString(), expectedMarker, base, routes: {}, overall: 'pending' };
 
@@ -37,6 +37,17 @@ async function waitForStatus(page, goodNeedle, timeout = 45000) {
     await page.waitForTimeout(250);
   }
   throw new Error(`status timeout waiting for ${goodNeedle}; last=${last}`);
+}
+
+async function waitForSoundResult(page, timeout = 35000) {
+  const started = Date.now();
+  let last = '';
+  while (Date.now() - started < timeout) {
+    last = (await page.locator('#soundStatus').innerText()).trim();
+    if (/^Analysis ready\.|^Analysis unavailable:|Web Audio is unavailable/i.test(last)) return last;
+    await page.waitForTimeout(250);
+  }
+  throw new Error(`sound analysis status timeout; last=${last}`);
 }
 
 async function runFlow(browserType, route) {
@@ -74,6 +85,12 @@ async function runFlow(browserType, route) {
     await page.locator('#grand').click();
     record.grandStatus = await waitForStatus(page, 'Patched Hello World complete', 25000);
     record.steps.push('grand-pass');
+
+    if (route === '/seamless/' && await page.locator('#analyzeSound').count()) {
+      await page.locator('#analyzeSound').click();
+      record.soundAnalysisStatus = await waitForSoundResult(page);
+      record.steps.push('sound-analysis-safe-pass');
+    }
 
     record.finalStatus = (await page.locator('#status').innerText()).trim();
     record.pass = true;
