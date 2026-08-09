@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-08-09T01:32:10.036Z",
+  "checkedAt": "2026-08-09T01:37:54.249Z",
   "base": "https://hearframe-grand-hello-world-v4.onrender.com/rendered/",
   "marker": "v5.1 RENDERED LIVE QA",
   "browsers": {
@@ -26,30 +26,30 @@
         "hello-pass",
         "world-pass",
         "natural-map-pass",
-        "balanced-map-pass"
+        "balanced-map-pass",
+        "grand-pass",
+        "smooth-grand-pass"
       ],
-      "consoleErrors": [
-        "Error: playback clock stalled at 0.001 / 0.445 s (readyState 2, paused false)"
-      ],
+      "consoleErrors": [],
       "httpStatus": 200,
       "title": "Hearframe — Rendered Hello World v5.1 RENDERED LIVE QA",
       "canPlayH264": "probably",
       "audioDetails": "Auto balance from source context: HELLO -16.9 dBFS, WORLD -15.7 dBFS. Applied gain: HELLO 0.0 dB, WORLD -1.2 dB. Output: H.264 + AAC, 48 kHz stereo.",
       "hello": "HELLO playback complete.",
       "world": "WORLD playback complete.",
-      "pass": false,
-      "error": "Error: Patched Hello World · 25 ms failed: playback clock stalled at 0.001 / 0.445 s (readyState 2, paused false)\n    at waitText (file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:6:276)\n    at async test (file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:8:2004)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:9:122",
-      "finalStatus": "Patched Hello World · 25 ms failed: playback clock stalled at 0.001 / 0.445 s (readyState 2, paused false)",
-      "videoState": {
-        "currentTime": 0.0010752,
-        "duration": 0.445,
+      "grand": "Patched Hello World · 25 ms playback complete.",
+      "grandState": {
+        "currentTime": 0.447764166,
+        "duration": 0.467,
         "ended": false,
-        "paused": false,
-        "readyState": 2,
-        "currentSrc": "https://hearframe-grand-hello-world-v4.onrender.com/rendered/media/hello-world-balanced.mp4",
-        "error": null
-      }
+        "paused": true,
+        "readyState": 4,
+        "currentSrc": "https://hearframe-grand-hello-world-v4.onrender.com/rendered/media/hello-world-balanced.mp4"
+      },
+      "grandSmooth": "Patched Hello World · 35 ms playback complete.",
+      "videoSrc": "https://hearframe-grand-hello-world-v4.onrender.com/rendered/media/hello-world-smooth.mp4",
+      "pass": true
     }
   },
-  "overall": "fail"
+  "overall": "pass"
 }
