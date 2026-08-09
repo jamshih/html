@@ -1,1 +1,1 @@
-run ask hearframe local webkit qa
+run ask hearframe local webkit qa v2
