@@ -49,12 +49,13 @@ run(['ffmpeg','-y','-hide_banner','-nostdin',*args,'-filter_complex',fc,'-map','
 run(['ffmpeg','-v','error','-nostdin','-i',str(OUT),'-f','null','-'])
 probe=json.loads(run(['ffprobe','-v','error','-show_entries','stream=codec_type,codec_name','-show_entries','format=duration','-of','json',str(OUT)]).stdout)
 if {s.get('codec_type') for s in probe.get('streams',[])} != {'video','audio'}: raise SystemExit('long answer missing A/V')
-# Update corpus idempotently.
+# Update corpus idempotently without downgrading the corpus/alignment version.
 corpus['answers']=[a for a in corpus['answers'] if a.get('id')!='long-demo']
 corpus['answers'].append({'id':'long-demo','text':TEXT,'keywords':['long answer','longer answer','long sentence','longer sentence','say something longer','give me a longer answer','test long sentence'],'segments':SEG_IDS,'media':'media/answer-long-demo.mp4'})
-corpus['version']='ask-v0.2'
-corpus['notes']='Includes a five-fragment, 22-word long-answer regression test in addition to phrase-first answers.'
+if corpus.get('version') in (None,'ask-v0.1','ask-v0.2') and 'WhisperX phoneme/CTC forced alignment' in corpus.get('alignment',''):
+    corpus['version']='ask-v0.3'
+corpus['notes']='Forced-aligned phrase-first corpus plus a five-fragment, 22-word long-answer regression test.'
 (ROOT/'corpus.json').write_text(json.dumps(corpus,indent=2))
-report={'text':TEXT,'wordCount':len(re.findall(r"[A-Za-z']+",TEXT)),'segments':SEG_IDS,'segmentCount':len(SEG_IDS),'sourceMeansDbFS':means,'appliedGainDb':gains,'crossfadeMs':[round(x*1000,1) for x in xfades],'duration':float(probe['format']['duration']),'fullDecode':'pass','probe':probe,'pass':True}
+report={'text':TEXT,'wordCount':len(re.findall(r"[A-Za-z']+",TEXT)),'segments':SEG_IDS,'segmentCount':len(SEG_IDS),'sourceMeansDbFS':means,'appliedGainDb':gains,'crossfadeMs':[round(x*1000,1) for x in xfades],'duration':float(probe['format']['duration']),'fullDecode':'pass','corpusVersionAfterBuild':corpus.get('version'),'alignment':corpus.get('alignment'),'probe':probe,'pass':True}
 (ROOT/'long-sentence-qa.json').write_text(json.dumps(report,indent=2))
 print(json.dumps(report,indent=2))
