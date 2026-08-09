@@ -1,0 +1,247 @@
+{
+  "version": "word-alignment-v2",
+  "method": "WhisperX phoneme/CTC forced alignment with WAV2VEC2_ASR_LARGE_LV60K_960H",
+  "goldBoundaryToleranceMs": 120,
+  "goldMaxBoundaryErrorMs": 92.0,
+  "goldMeanBoundaryErrorMs": 84.2,
+  "longSentenceStructuralCheck": true,
+  "tests": [
+    {
+      "name": "gold-hello",
+      "source": "obama",
+      "context": [
+        0.9,
+        2.2
+      ],
+      "text": "Hello Chicago",
+      "alignModel": "WAV2VEC2_ASR_LARGE_LV60K_960H",
+      "words": [
+        {
+          "word": "Hello",
+          "token": "hello",
+          "start": 1.245,
+          "end": 1.591,
+          "score": 0.61
+        },
+        {
+          "word": "Chicago",
+          "token": "chicago",
+          "start": 1.611,
+          "end": 2.078,
+          "score": 0.386
+        }
+      ],
+      "gold": {
+        "token": "hello",
+        "start": 1.308,
+        "end": 1.5
+      },
+      "boundaryErrorMs": {
+        "start": 63.0,
+        "end": 91.0,
+        "mean": 77.0
+      }
+    },
+    {
+      "name": "gold-world",
+      "source": "jfk",
+      "context": [
+        121.0,
+        124.1
+      ],
+      "text": "The world is very different now",
+      "alignModel": "WAV2VEC2_ASR_LARGE_LV60K_960H",
+      "words": [
+        {
+          "word": "The",
+          "token": "the",
+          "start": 122.188,
+          "end": 122.288,
+          "score": 1.0
+        },
+        {
+          "word": "world",
+          "token": "world",
+          "start": 122.349,
+          "end": 122.792,
+          "score": 0.888
+        },
+        {
+          "word": "is",
+          "token": "is",
+          "start": 122.852,
+          "end": 122.932,
+          "score": 0.87
+        },
+        {
+          "word": "very",
+          "token": "very",
+          "start": 122.993,
+          "end": 123.234,
+          "score": 1.0
+        },
+        {
+          "word": "different",
+          "token": "different",
+          "start": 123.295,
+          "end": 123.637,
+          "score": 0.987
+        },
+        {
+          "word": "now",
+          "token": "now",
+          "start": 123.697,
+          "end": 123.919,
+          "score": 1.0
+        }
+      ],
+      "gold": {
+        "token": "world",
+        "start": 122.44,
+        "end": 122.7
+      },
+      "boundaryErrorMs": {
+        "start": 91.0,
+        "end": 92.0,
+        "mean": 91.5
+      }
+    },
+    {
+      "name": "long-change",
+      "source": "obama",
+      "context": [
+        227.6,
+        232.35
+      ],
+      "text": "change only happens when ordinary people get involved",
+      "alignModel": "WAV2VEC2_ASR_LARGE_LV60K_960H",
+      "words": [
+        {
+          "word": "change",
+          "token": "change",
+          "start": 228.021,
+          "end": 228.362,
+          "score": 0.978
+        },
+        {
+          "word": "only",
+          "token": "only",
+          "start": 228.482,
+          "end": 228.662,
+          "score": 1.0
+        },
+        {
+          "word": "happens",
+          "token": "happens",
+          "start": 228.722,
+          "end": 229.123,
+          "score": 0.986
+        },
+        {
+          "word": "when",
+          "token": "when",
+          "start": 230.546,
+          "end": 230.686,
+          "score": 0.846
+        },
+        {
+          "word": "ordinary",
+          "token": "ordinary",
+          "start": 230.827,
+          "end": 231.168,
+          "score": 1.0
+        },
+        {
+          "word": "people",
+          "token": "people",
+          "start": 231.228,
+          "end": 231.508,
+          "score": 0.864
+        },
+        {
+          "word": "get",
+          "token": "get",
+          "start": 231.548,
+          "end": 231.669,
+          "score": 1.0
+        },
+        {
+          "word": "involved",
+          "token": "involved",
+          "start": 231.729,
+          "end": 232.17,
+          "score": 0.997
+        }
+      ]
+    },
+    {
+      "name": "long-agency",
+      "source": "jfk",
+      "context": [
+        841.0,
+        845.6
+      ],
+      "text": "ask what you can do for your country",
+      "alignModel": "WAV2VEC2_ASR_LARGE_LV60K_960H",
+      "words": [
+        {
+          "word": "ask",
+          "token": "ask",
+          "start": 842.286,
+          "end": 842.466,
+          "score": 0.922
+        },
+        {
+          "word": "what",
+          "token": "what",
+          "start": 842.527,
+          "end": 842.687,
+          "score": 0.926
+        },
+        {
+          "word": "you",
+          "token": "you",
+          "start": 842.768,
+          "end": 843.049,
+          "score": 0.854
+        },
+        {
+          "word": "can",
+          "token": "can",
+          "start": 843.109,
+          "end": 843.29,
+          "score": 0.887
+        },
+        {
+          "word": "do",
+          "token": "do",
+          "start": 843.33,
+          "end": 843.511,
+          "score": 0.897
+        },
+        {
+          "word": "for",
+          "token": "for",
+          "start": 843.591,
+          "end": 843.692,
+          "score": 0.992
+        },
+        {
+          "word": "your",
+          "token": "your",
+          "start": 843.732,
+          "end": 843.913,
+          "score": 0.918
+        },
+        {
+          "word": "country",
+          "token": "country",
+          "start": 843.953,
+          "end": 844.314,
+          "score": 0.949
+        }
+      ]
+    }
+  ],
+  "pass": true
+}
