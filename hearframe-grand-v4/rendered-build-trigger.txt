@@ -1,1 +1,1 @@
-build rendered same-origin media v3 single-download
+build rendered same-origin media v4 safari-safe concat
