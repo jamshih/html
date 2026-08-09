@@ -1,1 +1,1 @@
-build rendered same-origin media v1
+build rendered same-origin media v2 diagnostics
