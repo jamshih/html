@@ -1,0 +1,51 @@
+{
+  "text": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+  "wordCount": 22,
+  "segments": [
+    "you_can",
+    "begin",
+    "ask_what_you_can_do",
+    "change_people",
+    "world_different"
+  ],
+  "segmentCount": 5,
+  "sourceMeansDbFS": [
+    -18.1,
+    -23.4,
+    -22.7,
+    -31.1,
+    -18.1
+  ],
+  "appliedGainDb": [
+    -4.599999999999998,
+    0.6999999999999993,
+    0.0,
+    6.0,
+    -4.599999999999998
+  ],
+  "crossfadeMs": [
+    25.0,
+    25.0,
+    25.0,
+    25.0
+  ],
+  "duration": 9.766667,
+  "fullDecode": "pass",
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ],
+    "format": {
+      "duration": "9.766667"
+    }
+  },
+  "pass": true
+}

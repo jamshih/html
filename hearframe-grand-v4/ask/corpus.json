@@ -1,5 +1,5 @@
 {
-  "version": "ask-v0.1",
+  "version": "ask-v0.2",
   "alignment": "faster-whisper base.en word timestamps",
   "sources": {
     "obama": {
@@ -486,10 +486,31 @@
         "ask_what_you_can_do"
       ],
       "media": "media/answer-agency.mp4"
+    },
+    {
+      "id": "long-demo",
+      "text": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+      "keywords": [
+        "long answer",
+        "longer answer",
+        "long sentence",
+        "longer sentence",
+        "say something longer",
+        "give me a longer answer",
+        "test long sentence"
+      ],
+      "segments": [
+        "you_can",
+        "begin",
+        "ask_what_you_can_do",
+        "change_people",
+        "world_different"
+      ],
+      "media": "media/answer-long-demo.mp4"
     }
   ],
   "fallback": {
     "text": "I do not have enough indexed speech to answer that yet. Try a question about starting, change, progress, what you need, the world, or what you can do."
   },
-  "notes": "The response planner prefers a whole indexed phrase. Only the start answer currently demonstrates a two-source splice: Obama \u201cyou can\u201d + JFK \u201cbegin\u201d."
+  "notes": "Includes a five-fragment, 22-word long-answer regression test in addition to phrase-first answers."
 }
