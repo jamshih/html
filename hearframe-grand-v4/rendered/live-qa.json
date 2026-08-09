@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-08-09T01:26:07.667Z",
+  "base": "https://hearframe-grand-hello-world-v4.onrender.com/rendered/",
+  "marker": "v5 RENDERED LIVE QA",
+  "browsers": {
+    "chromium": {
+      "browser": "chromium",
+      "steps": [
+        "page-loaded",
+        "metadata-loaded"
+      ],
+      "consoleErrors": [
+        "NotSupportedError: Failed to load because no supported source was found."
+      ],
+      "httpStatus": 200,
+      "title": "Hearframe — Rendered Hello World v5 RENDERED LIVE QA",
+      "canPlayH264": "",
+      "audioDetails": "Auto balance from source context: HELLO -16.9 dBFS, WORLD -15.7 dBFS. Applied gain: HELLO 0.0 dB, WORLD -1.2 dB. Output: H.264 + AAC, 48 kHz stereo.",
+      "pass": false,
+      "error": "Error: HELLO failed: Failed to load because no supported source was found.\n    at waitText (file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:6:262)\n    at async test (file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:8:1157)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:9:122",
+      "finalStatus": "HELLO failed: Failed to load because no supported source was found."
+    },
+    "webkit-ipad": {
+      "browser": "webkit-ipad",
+      "steps": [
+        "page-loaded",
+        "metadata-loaded",
+        "hello-pass",
+        "world-pass",
+        "natural-map-pass",
+        "balanced-map-pass"
+      ],
+      "consoleErrors": [],
+      "httpStatus": 200,
+      "title": "Hearframe — Rendered Hello World v5 RENDERED LIVE QA",
+      "canPlayH264": "probably",
+      "audioDetails": "Auto balance from source context: HELLO -16.9 dBFS, WORLD -15.7 dBFS. Applied gain: HELLO 0.0 dB, WORLD -1.2 dB. Output: H.264 + AAC, 48 kHz stereo.",
+      "hello": "HELLO playback complete.",
+      "world": "WORLD playback complete.",
+      "pass": false,
+      "error": "Error: timeout waiting for Patched Hello World · 25 ms playback complete.; last=Playing Patched Hello World · 25 ms…\n    at waitText (file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:6:311)\n    at async test (file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:8:1782)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-rendered-live-qa.mjs:9:122",
+      "finalStatus": "Playing Patched Hello World · 25 ms…"
+    }
+  },
+  "overall": "fail"
+}
