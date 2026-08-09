@@ -1,1 +1,1 @@
-discover and verify 100 reference videos v2 diagnostics
+discover 100 API-verified reference videos v3 fast
