@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-08-09T00:54:33.981Z",
-  "expectedMarker": "v4.4 LIVE QA",
+  "checkedAt": "2026-08-09T01:06:00.522Z",
+  "expectedMarker": "v4.5 LIVE QA",
   "base": "https://hearframe-grand-hello-world-v4.onrender.com",
   "routes": {
     "/": {
       "chromium": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786236926578",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786237561625",
         "browser": "chromium",
         "steps": [
           "page-loaded",
@@ -16,7 +16,7 @@
         ],
         "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.4 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
@@ -25,7 +25,7 @@
         "pass": true
       },
       "webkit-ipad": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786236933762",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786237566046",
         "browser": "webkit-ipad",
         "steps": [
           "page-loaded",
@@ -33,42 +33,42 @@
           "hello-pass",
           "world-pass"
         ],
-        "consoleErrors": [
-          "Error: canplay timed out"
-        ],
+        "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.4 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
         "pass": false,
-        "error": "Error: status failure: canplay timed out\n    at waitForStatus (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:36:89)\n    at async runFlow (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:75:26)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:96:17",
-        "finalStatus": "canplay timed out"
+        "error": "Error: status timeout waiting for Patched Hello World complete; last=STITCH 1/2 · Obama → HELLO\n    at waitForStatus (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:39:9)\n    at async runFlow (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:86:26)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:113:17",
+        "finalStatus": "STITCH 1/2 · Obama → HELLO"
       }
     },
     "/seamless/": {
       "chromium": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786236952212",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786237596954",
         "browser": "chromium",
         "steps": [
           "page-loaded",
           "prepare-pass",
           "hello-pass",
           "world-pass",
-          "grand-pass"
+          "grand-pass",
+          "sound-analysis-safe-pass"
         ],
         "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.4 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
         "grandStatus": "Patched Hello World complete · 25 ms equal-power overlap · manual-level.",
+        "soundAnalysisStatus": "Analysis ready. HELLO -16.7 dBFS · WORLD -14.6 dBFS · auto gains 100% / 79% · spectral distance 3.9 dB. Tone-aware mode uses this distance to adapt the overlap; broad EQ is not forced when the browser cannot safely route the external media.",
         "finalStatus": "Patched Hello World complete · 25 ms equal-power overlap · manual-level.",
         "pass": true
       },
       "webkit-ipad": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786236961673",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786237607729",
         "browser": "webkit-ipad",
         "steps": [
           "page-loaded",
@@ -76,17 +76,15 @@
           "hello-pass",
           "world-pass"
         ],
-        "consoleErrors": [
-          "Error: canplay timed out"
-        ],
+        "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.4 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
         "pass": false,
-        "error": "Error: status failure: canplay timed out\n    at waitForStatus (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:36:89)\n    at async runFlow (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:75:26)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:96:17",
-        "finalStatus": "canplay timed out"
+        "error": "Error: status timeout waiting for Patched Hello World complete; last=STITCH 1/2 · HELLO → 25 ms equal-power overlap\n    at waitForStatus (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:39:9)\n    at async runFlow (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:86:26)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:113:17",
+        "finalStatus": "STITCH 1/2 · HELLO → 25 ms equal-power overlap"
       }
     }
   },
