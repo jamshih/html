@@ -1,0 +1,1 @@
+run forced word alignment qa v1
