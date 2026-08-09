@@ -1,0 +1,280 @@
++ curl --fail --location --show-error --silent --retry 12 --retry-delay 10 --retry-all-errors --connect-timeout 30 --max-time 900 --user-agent HearframePrototype/1.0 (public historical speech indexing prototype; github.com/jamshih/html) https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm --output /tmp/hearframe-ask/obama.webm
+downloaded obama.webm: 132.4 MiB
++ curl --fail --location --show-error --silent --retry 12 --retry-delay 10 --retry-all-errors --connect-timeout 30 --max-time 900 --user-agent HearframePrototype/1.0 (public historical speech indexing prototype; github.com/jamshih/html) https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm --output /tmp/hearframe-ask/jfk.webm
+downloaded jfk.webm: 54.7 MiB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
++ ffmpeg -y -hide_banner -nostdin -ss 1.200 -i /tmp/hearframe-ask/obama.webm -t 1.350 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask/hello.wav
+Input #0, matroska,webm, from '/tmp/hearframe-ask/obama.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, wav, to '/tmp/hearframe-ask/hello.wav':
+  Metadata:
+    ISFT            : Lavf60.16.100
+  Stream #0:0(eng): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, mono, s16, 256 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[out#0/wav @ 0x55e7b6091180] video:0kB audio:42kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.180556%
+size=      42kB time=00:00:01.34 bitrate= 258.3kbits/s speed= 125x    
+
+ALIGNED hello {
+  "id": "hello",
+  "source": "obama",
+  "target": "hello",
+  "contextStart": 1.2,
+  "contextEnd": 2.55,
+  "alignedStart": 1.2,
+  "alignedEnd": 1.44,
+  "cutStart": 1.2,
+  "cutEnd": 1.475,
+  "alignmentScore": 1.0,
+  "words": [
+    {
+      "word": "Hello,",
+      "token": "hello",
+      "start": 1.2,
+      "end": 1.44,
+      "probability": 0.5063
+    }
+  ],
+  "contextTranscript": "Hello, Chicago!"
+}
++ ffmpeg -y -hide_banner -nostdin -ss 79.550 -i /tmp/hearframe-ask/obama.webm -t 2.750 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask/you_can.wav
+Input #0, matroska,webm, from '/tmp/hearframe-ask/obama.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, wav, to '/tmp/hearframe-ask/you_can.wav':
+  Metadata:
+    ISFT            : Lavf60.16.100
+  Stream #0:0(eng): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, mono, s16, 256 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[out#0/wav @ 0x55a96ef17180] video:0kB audio:86kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.088636%
+size=      86kB time=00:00:02.73 bitrate= 258.1kbits/s speed= 102x    
+
+ALIGNED you_can {
+  "id": "you_can",
+  "source": "obama",
+  "target": "you can",
+  "contextStart": 79.55,
+  "contextEnd": 82.3,
+  "alignedStart": 79.55,
+  "alignedEnd": 79.99,
+  "cutStart": 79.55,
+  "cutEnd": 80.025,
+  "alignmentScore": 1.0,
+  "words": [
+    {
+      "word": "You",
+      "token": "you",
+      "start": 79.55,
+      "end": 79.99,
+      "probability": 0.3085
+    },
+    {
+      "word": "can",
+      "token": "can",
+      "start": 79.99,
+      "end": 79.99,
+      "probability": 0.9942
+    }
+  ],
+  "contextTranscript": "You can tell, you can tell that I'm..."
+}
++ ffmpeg -y -hide_banner -nostdin -ss 226.000 -i /tmp/hearframe-ask/obama.webm -t 9.200 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask/change_people.wav
+Input #0, matroska,webm, from '/tmp/hearframe-ask/obama.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, wav, to '/tmp/hearframe-ask/change_people.wav':
+  Metadata:
+    ISFT            : Lavf60.16.100
+  Stream #0:0(eng): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, mono, s16, 256 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[out#0/wav @ 0x561887ae7180] video:0kB audio:288kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.026495%
+size=     288kB time=00:00:09.18 bitrate= 256.6kbits/s speed= 136x    
+
+ALIGNED change_people {
+  "id": "change_people",
+  "source": "obama",
+  "target": "change only happens when ordinary people get involved",
+  "contextStart": 226.0,
+  "contextEnd": 235.2,
+  "alignedStart": 227.9,
+  "alignedEnd": 232.02,
+  "cutStart": 227.875,
+  "cutEnd": 232.055,
+  "alignmentScore": 1.0,
+  "words": [
+    {
+      "word": "change",
+      "token": "change",
+      "start": 227.9,
+      "end": 228.18,
+      "probability": 0.9929
+    },
+    {
+      "word": "only",
+      "token": "only",
+      "start": 228.18,
+      "end": 228.48,
+      "probability": 0.9977
+    },
+    {
+      "word": "happens",
+      "token": "happens",
+      "start": 228.48,
+      "end": 228.98,
+      "probability": 0.9979
+    },
+    {
+      "word": "when",
+      "token": "when",
+      "start": 228.98,
+      "end": 230.6,
+      "probability": 0.74
+    },
+    {
+      "word": "ordinary",
+      "token": "ordinary",
+      "start": 230.6,
+      "end": 230.96,
+      "probability": 0.9981
+    },
+    {
+      "word": "people",
+      "token": "people",
+      "start": 230.96,
+      "end": 231.42,
+      "probability": 0.9993
+    },
+    {
+      "word": "get",
+      "token": "get",
+      "start": 231.42,
+      "end": 231.6,
+      "probability": 0.9992
+    },
+    {
+      "word": "involved",
+      "token": "involved",
+      "start": 231.6,
+      "end": 232.02,
+      "probability": 0.9959
+    }
+  ],
+  "contextTranscript": "Now, this is where I learned that change only happens when ordinary people get involved and they get engaged and they come Um..."
+}
++ ffmpeg -y -hide_banner -nostdin -ss 401.200 -i /tmp/hearframe-ask/obama.webm -t 5.450 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask/progress_uneven.wav
+Input #0, matroska,webm, from '/tmp/hearframe-ask/obama.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, wav, to '/tmp/hearframe-ask/progress_uneven.wav':
+  Metadata:
+    ISFT            : Lavf60.16.100
+  Stream #0:0(eng): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, mono, s16, 256 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[out#0/wav @ 0x55bc06d48180] video:0kB audio:170kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.044725%
+size=     170kB time=00:00:05.44 bitrate= 256.6kbits/s speed= 114x    
+
+ALIGNED progress_uneven {
+  "id": "progress_uneven",
+  "source": "obama",
+  "target": "yes our progress has been uneven",
+  "contextStart": 401.2,
+  "contextEnd": 406.65,
+  "alignedStart": 401.2,
+  "alignedEnd": 403.22,
+  "cutStart": 401.2,
+  "cutEnd": 403.255,
+  "alignmentScore": 1.0,
+  "words": [
+    {
+      "word": "Yes,",
+      "token": "yes",
+      "start": 401.2,
+      "end": 401.4,
+      "probability": 0.7678
+    },
+    {
+      "word": "our",
+      "token": "our",
+      "start": 401.66,
+      "end": 401.74,
+      "probability": 0.9876
+    },
+    {
+      "word": "progress",
+      "token": "progress",
+      "start": 401.74,
+      "end": 402.16,
+      "probability": 0.9867
+    },
+    {
+      "word": "has",
+      "token": "has",
+      "start": 402.16,
+      "end": 402.4,
+      "probability": 0.9804
+    },
+    {
+      "word": "been",
+      "token": "been",
+      "start": 402.4,
+      "end": 402.64,
+      "probability": 0.9988
+    },
+    {
+      "word": "uneven.",
+      "token": "uneven",
+      "start": 402.64,
+      "end": 403.22,
+      "probability": 0.8849
+    }
+  ],
+  "contextTranscript": "Yes, our progress has been uneven. The work of the..."
+}
++ ffmpeg -y -hide_banner -nostdin -ss 598.100 -i /tmp/hearframe-ask/obama.webm -t 2.800 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask/we_have_what_we_need.wav
+Input #0, matroska,webm, from '/tmp/hearframe-ask/obama.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, wav, to '/tmp/hearframe-ask/we_have_what_we_need.wav':
+  Metadata:
+    ISFT            : Lavf60.16.100
+  Stream #0:0(eng): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, mono, s16, 256 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[out#0/wav @ 0x5593df4b5180] video:0kB audio:88kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.087054%
+size=      88kB time=00:00:02.78 bitrate= 258.0kbits/s speed=82.4x    
+
+we_have_what_we_need: alignment confidence too low 0.460; wanted ['we', 'have', 'what', 'we', 'need', 'to', 'do', 'so']; best ['we', 'need', 'to', 'do', 'so', 'we', 'have']; transcript=We need to do so. We have...
