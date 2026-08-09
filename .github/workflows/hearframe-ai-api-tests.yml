@@ -1,0 +1,32 @@
+name: Hearframe AI API Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-ai-api/**'
+      - '.github/workflows/hearframe-ai-api-tests.yml'
+      - 'hearframe-grand-v4/ai-api-test-trigger.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check syntax
+        run: |
+          node --check hearframe-ai-api/server.mjs
+          node --check hearframe-ai-api/lib/openai.mjs
+          node --check hearframe-ai-api/lib/audio-critic.mjs
+          node --check hearframe-ai-api/lib/director.mjs
+          node --check hearframe-ai-api/scripts/refine-word.mjs
+      - name: Run provider-contract tests
+        working-directory: hearframe-ai-api
+        run: npm test
