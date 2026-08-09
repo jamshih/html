@@ -1,0 +1,10 @@
+{
+  "count": 100,
+  "candidateCount": 149,
+  "uniqueTitles": 100,
+  "uniqueSourceUrls": 100,
+  "allHaveLicense": true,
+  "allHaveMediaUrl": true,
+  "mediaDecodeValidation": "delegated to reference word-index workflow",
+  "pass": true
+}
