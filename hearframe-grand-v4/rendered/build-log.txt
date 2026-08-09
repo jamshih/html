@@ -1,0 +1,65 @@
++ ffmpeg -hide_banner -nostdin -ss 1.058 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm -t 0.700 -vn -af volumedetect -f null -
+[https @ 0x56063d084600] HTTP error 429 Too many requests (f061ab2)
+Input #0, matroska,webm, from 'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:51:25.91, start: -0.007000, bitrate: 359 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 640x360, SAR 1:1 DAR 16:9, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+[Parsed_volumedetect_0 @ 0x56063d3dd600] n_samples: 0
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, null, to 'pipe:':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0(eng): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=N/A bitrate=N/A speed=N/A    
+[out#0/null @ 0x56063d092e00] video:0kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+[out#0/null @ 0x56063d092e00] Output file is empty, nothing was encoded(check -ss / -t / -frames parameters if used)
+size=N/A time=N/A bitrate=N/A speed=N/A    
+[Parsed_volumedetect_0 @ 0x56063d3f7d80] n_samples: 1296
+[Parsed_volumedetect_0 @ 0x56063d3f7d80] mean_volume: -29.3 dB
+[Parsed_volumedetect_0 @ 0x56063d3f7d80] max_volume: -22.3 dB
+[Parsed_volumedetect_0 @ 0x56063d3f7d80] histogram_22db: 20
+
++ ffmpeg -hide_banner -nostdin -ss 122.140 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm -t 0.850 -vn -af volumedetect -f null -
+[https @ 0x55a32bcc2540] HTTP error 429 Too many requests (f061ab2)
+Input #0, matroska,webm, from 'https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm':
+  Metadata:
+    encoder         : Lavf57.56.101
+  Duration: 00:15:30.10, start: -0.007000, bitrate: 493 kb/s
+  Stream #0:0: Video: vp9 (Profile 0), yuv420p(tv, progressive), 480x360, SAR 1:1 DAR 4:3, 29.97 fps, 29.97 tbr, 1k tbn (default)
+  Stream #0:1: Audio: opus, 48000 Hz, stereo, fltp (default)
+[Parsed_volumedetect_0 @ 0x55a32c01b640] n_samples: 0
+Stream mapping:
+  Stream #0:1 -> #0:0 (opus (native) -> pcm_s16le (native))
+Output #0, null, to 'pipe:':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)
+    Metadata:
+      encoder         : Lavc60.31.102 pcm_s16le
+size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[out#0/null @ 0x55a32bcd0b00] video:0kB audio:159kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+size=N/A time=00:00:00.84 bitrate=N/A speed=2.97x    
+[Parsed_volumedetect_0 @ 0x55a32c031e40] n_samples: 84576
+[Parsed_volumedetect_0 @ 0x55a32c031e40] mean_volume: -15.7 dB
+[Parsed_volumedetect_0 @ 0x55a32c031e40] max_volume: -5.3 dB
+[Parsed_volumedetect_0 @ 0x55a32c031e40] histogram_5db: 52
+[Parsed_volumedetect_0 @ 0x55a32c031e40] histogram_6db: 500
+
+context loudness -29.3 -15.7 gains 0.0 -6.0
++ ffmpeg -y -hide_banner -nostdin -ss 1.308 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm -t 0.192 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 20 -profile:v main -level 3.1 -pix_fmt yuv420p -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart /tmp/hearframe-rendered/hello-raw.mp4
+[https @ 0x56085129d800] HTTP error 429 Too many requests (f061ab2)
+[in#0 @ 0x56085129d040] Error opening input: Server returned 4XX Client Error, but not one of 40{0,1,3,4}
+Error opening input file https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm.
+Error opening input files: Server returned 4XX Client Error, but not one of 40{0,1,3,4}
+
+command failed (8): ['ffmpeg', '-y', '-hide_banner', '-nostdin', '-ss', '1.308', '-i', 'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm', '-t', '0.192', '-vf', 'scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p', '-af', 'aresample=48000,volume=0.000dB', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-profile:v', 'main', '-level', '3.1', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-ar', '48000', '-ac', '2', '-movflags', '+faststart', '/tmp/hearframe-rendered/hello-raw.mp4']
+[https @ 0x56085129d800] HTTP error 429 Too many requests (f061ab2)
+[in#0 @ 0x56085129d040] Error opening input: Server returned 4XX Client Error, but not one of 40{0,1,3,4}
+Error opening input file https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm.
+Error opening input files: Server returned 4XX Client Error, but not one of 40{0,1,3,4}
+
