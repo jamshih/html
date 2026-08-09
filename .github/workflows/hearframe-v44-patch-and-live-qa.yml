@@ -1,0 +1,49 @@
+name: Hearframe v4.4 patch and live QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/v44-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply minimal warm-seek regression fix
+        run: python .github/scripts/patch-hearframe-v44.py
+      - name: Commit patched app
+        run: |
+          git config user.name 'hearframe-v44'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/index.html hearframe-grand-v4/seamless/index.html
+          git commit -m 'Fix Hearframe fresh prepare seek regression v4.4'
+          git push origin HEAD:main
+      - name: Install Playwright browsers
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Test public Render deployment
+        id: liveqa
+        continue-on-error: true
+        run: node .github/scripts/hearframe-live-qa.mjs
+      - name: Record live QA result
+        if: always()
+        run: |
+          git pull --rebase origin main
+          git add hearframe-grand-v4/live-qa.json
+          git commit -m 'Record Hearframe v4.4 live QA [skip ci]' || true
+          git push origin HEAD:main
+      - name: Fail if public-site QA failed
+        if: steps.liveqa.outcome != 'success'
+        run: exit 1
