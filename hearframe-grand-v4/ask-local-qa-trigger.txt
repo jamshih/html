@@ -1,1 +1,1 @@
-run ask hearframe local webkit qa v2
+run ask hearframe forced-aligned long-answer webkit qa v3
