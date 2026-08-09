@@ -1,42 +1,63 @@
 {
-  "checkedAt": "2026-08-09T02:11:47.879Z",
+  "checkedAt": "2026-08-09T02:49:11.393Z",
   "base": "https://hearframe-grand-hello-world-v4.onrender.com/ask/",
   "steps": [
-    "corpus-ready",
+    "page-and-corpus-ready",
+    "100-reference-index-pass",
     "You can begin.",
-    "Change only happens when ordinary people get involved.",
-    "The world is very different now.",
+    "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+    "long-word-trace-present",
     "safe-corpus-gap"
   ],
   "consoleErrors": [],
   "pass": true,
   "httpStatus": 200,
-  "title": "Ask Hearframe v0",
+  "title": "Ask Hearframe v0.3",
+  "catalog": {
+    "count": 100,
+    "candidateCount": 149,
+    "uniqueTitles": 100,
+    "uniqueSourceUrls": 100,
+    "allHaveLicense": true,
+    "allHaveMediaUrl": true,
+    "mediaDecodeValidation": "delegated to reference word-index workflow",
+    "pass": true
+  },
+  "referenceIndex": {
+    "catalogReferences": 100,
+    "processedReferences": 100,
+    "indexedSpeechReferences": 87,
+    "sampleSecondsPerReference": 45,
+    "acceptedWordOccurrences": 6247,
+    "uniqueWords": 1635,
+    "medianAlignmentScore": 0.904,
+    "statusCounts": {
+      "indexed": 87,
+      "no-speech": 6,
+      "low-speech": 7
+    },
+    "pass": true,
+    "spliceCalibrationApplied": true,
+    "spliceCandidateCount": 3636,
+    "goldPostCalibrationMaxErrorMs": 21.8,
+    "goldPostCalibrationMeanErrorMs": 11.3
+  },
   "start": {
-    "t": 0.967,
-    "d": 0.967,
+    "t": 0.9,
+    "d": 0.9,
     "ended": true,
-    "paused": true,
-    "rs": 3,
+    "paused": false,
+    "rs": 4,
     "error": null,
     "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-start.mp4"
   },
-  "change": {
-    "t": 4.198228337,
-    "d": 4.2,
+  "long": {
+    "t": 8.222485469,
+    "d": 8.267,
     "ended": false,
     "paused": false,
     "rs": 4,
     "error": null,
-    "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-change.mp4"
-  },
-  "world": {
-    "t": 2.312488969,
-    "d": 2.334,
-    "ended": false,
-    "paused": false,
-    "rs": 4,
-    "error": null,
-    "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-world.mp4"
+    "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-long-demo.mp4"
   }
 }
