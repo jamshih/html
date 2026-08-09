@@ -1,1 +1,1 @@
-run ask hearframe forced-aligned long-answer webkit qa v3
+run ask hearframe forced-aligned long-answer webkit qa v4 with index
