@@ -1,24 +1,44 @@
 from pathlib import Path
-import re
 
 files = [Path('hearframe-grand-v4/index.html'), Path('hearframe-grand-v4/seamless/index.html')]
 for path in files:
     text = path.read_text()
-    text = re.sub(r'<title>Hearframe — Grand Hello World [^<]+</title>', '<title>Hearframe — Grand Hello World v4.4 LIVE QA</title>', text, count=1)
 
-    pattern = r"const H0=\{start:1\.308,end:1\.500\},\s*W0=\{start:122\.440,end:122\.700\};"
-    replacement = "const H0={start:1.308,end:1.500}, W0={start:122.440,end:122.700};\nconst H_WARM=1.468,W_WARM=121.36;"
-    text, n = re.subn(pattern, replacement, text, count=1)
-    if n != 1:
-        raise SystemExit(f'{path}: failed to insert warm seek constants')
+    text = text.replace('v4.4 LIVE QA', 'v4.5 LIVE QA')
 
-    old = "await Promise.all([loadSource(nv,NIXON,'Obama'),loadSource(jv,JFK,'JFK')]);await Promise.all([seekExact(nv,H.start,'HELLO'),seekExact(jv,W.start,'WORLD')]);"
-    new = "await Promise.all([loadSource(nv,NIXON,'Obama'),loadSource(jv,JFK,'JFK')]);setStatus('Warming the source ranges that previously prepared successfully…');await Promise.all([seekExact(nv,H_WARM,'HELLO warm-up'),seekExact(jv,W_WARM,'WORLD warm-up')]);setStatus('Moving to your calibrated word windows…');await Promise.all([seekExact(nv,H.start,'HELLO'),seekExact(jv,W.start,'WORLD')]);"
-    if old not in text:
-        raise SystemExit(f'{path}: prepare sequence not found')
-    text = text.replace(old, new, 1)
+    helper_anchor = 'async function loadSource(v,cands,label)'
+    helper = "async function waitReady(v,min,label,timeout=12000){const started=performance.now();while(v.readyState<min){if(v.error)throw new Error(`${label}: ${mediaError(v)}`);if(performance.now()-started>timeout)throw new Error(`${label}: media readiness timed out (readyState ${v.readyState})`);await new Promise(r=>setTimeout(r,50))}}\n"
+    if 'async function waitReady(' not in text:
+        if helper_anchor not in text:
+            raise SystemExit(f'{path}: loadSource anchor missing')
+        text = text.replace(helper_anchor, helper + helper_anchor, 1)
 
-    # Visible marker for the live runner as a fallback to the title check.
-    text = text.replace('<div class="eyebrow">REAL-SPEECH SPLICER / ONE PATCHED VIDEO STAGE</div>', '<div class="eyebrow">REAL-SPEECH SPLICER / ONE PATCHED VIDEO STAGE · v4.4 LIVE QA</div>', 1)
+    old_ready = "if(v.readyState<3)await waitEvent(v,'canplay',12000);"
+    if old_ready not in text:
+        raise SystemExit(f'{path}: old canplay readiness check missing')
+    text = text.replace(old_ready, "await waitReady(v,2,label,12000);", 1)
+
+    # Sound-analysis media uses the same readiness polling instead of waiting for a canplay event.
+    text = text.replace("if(v.readyState<2)await waitEvent(v,'canplay',12000);", "await waitReady(v,2,label,12000);", 1)
+
+    if path.name == 'index.html' and path.parent.name == 'hearframe-grand-v4':
+        old_sig = "async function playWindow(v,clip,which,word,fillEl,targetGain){\n await seekExact(v,clip.start,word);"
+        new_sig = "async function playWindow(v,clip,which,word,fillEl,targetGain,alreadySeeked=false){\n if(!alreadySeeked)await seekExact(v,clip.start,word);"
+        if old_sig not in text:
+            raise SystemExit(f'{path}: main playWindow signature missing')
+        text = text.replace(old_sig, new_sig, 1)
+        text = text.replace("await playWindow(nv,H,'n','HELLO',hf,helloGain);", "await playWindow(nv,H,'n','HELLO',hf,helloGain,true);", 1)
+        text = text.replace("await playWindow(jv,W,'j','WORLD',wf,worldGain);", "await playWindow(jv,W,'j','WORLD',wf,worldGain,true);", 1)
+    else:
+        old_sig = "async function playWindow(v,clip,which,word,fillEl,level){await seekExact(v,clip.start,word);"
+        new_sig = "async function playWindow(v,clip,which,word,fillEl,level,alreadySeeked=false){if(!alreadySeeked)await seekExact(v,clip.start,word);"
+        if old_sig not in text:
+            raise SystemExit(f'{path}: seamless playWindow signature missing')
+        text = text.replace(old_sig, new_sig, 1)
+        duplicate = "await seekExact(jv,W.start,'WORLD');jv.volume=0;await jv.play();"
+        if duplicate not in text:
+            raise SystemExit(f'{path}: redundant WORLD seek missing')
+        text = text.replace(duplicate, "jv.volume=0;await jv.play();", 1)
+
     path.write_text(text)
     print('patched', path)
