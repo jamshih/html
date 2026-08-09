@@ -1,0 +1,32 @@
+name: Hearframe Long Sentence Render
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/long-answer-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure ffmpeg
+        run: |
+          if ! command -v ffmpeg >/dev/null; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
+      - name: Render five-fragment long answer
+        run: python .github/scripts/build-hearframe-long-answer.py
+      - name: Commit long-answer media and QA
+        run: |
+          git config user.name 'hearframe-long-answer'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/corpus.json hearframe-grand-v4/ask/media/answer-long-demo.mp4 hearframe-grand-v4/ask/long-sentence-qa.json
+          git commit -m 'Add Hearframe 22-word multi-source answer [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
