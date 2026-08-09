@@ -1,0 +1,45 @@
+name: Hearframe Live QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/index.html'
+      - 'hearframe-grand-v4/seamless/index.html'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hearframe-live-qa
+  cancel-in-progress: true
+
+jobs:
+  live-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Test deployed Render site
+        id: liveqa
+        continue-on-error: true
+        run: node .github/scripts/hearframe-live-qa.mjs
+      - name: Commit live QA result
+        if: always()
+        run: |
+          git config user.name 'hearframe-live-qa'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/live-qa.json
+          git commit -m 'Record Hearframe live QA [skip ci]' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Fail if QA failed
+        if: steps.liveqa.outcome != 'success'
+        run: exit 1
