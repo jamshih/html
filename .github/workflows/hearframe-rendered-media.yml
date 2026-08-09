@@ -21,13 +21,26 @@ jobs:
         run: |
           if ! command -v ffmpeg >/dev/null; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
           ffmpeg -version | head -n 2
-      - name: Render calibrated clips
-        run: python .github/scripts/build-hearframe-rendered.py
-      - name: Commit rendered MP4s and metadata
+      - name: Render calibrated clips and capture log
+        id: render
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python .github/scripts/build-hearframe-rendered.py > hearframe-grand-v4/rendered/build-log.txt 2>&1
+          code=$?
+          echo "exit_code=$code" > hearframe-grand-v4/rendered/build-result.txt
+          tail -n 150 hearframe-grand-v4/rendered/build-log.txt
+          exit $code
+      - name: Commit media or failure diagnostics
+        if: always()
         run: |
           git config user.name 'hearframe-renderer'
           git config user.email 'actions@users.noreply.github.com'
-          git add hearframe-grand-v4/rendered/media
-          git commit -m 'Render Hearframe calibrated Hello World MP4s'
+          git add hearframe-grand-v4/rendered
+          git commit -m 'Record Hearframe rendered media build result [skip ci]' || true
           git pull --rebase origin main
           git push origin HEAD:main
+      - name: Fail if render failed
+        if: steps.render.outcome != 'success'
+        run: exit 1
