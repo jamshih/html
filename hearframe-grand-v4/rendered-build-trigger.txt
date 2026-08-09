@@ -1,1 +1,1 @@
-build rendered same-origin media v2 diagnostics
+build rendered same-origin media v3 single-download
