@@ -1,42 +1,36 @@
 {
-  "checkedAt": "2026-08-09T02:04:45.750Z",
+  "checkedAt": "2026-08-09T02:43:23.273Z",
   "base": "http://127.0.0.1:4173/hearframe-grand-v4/ask/",
   "steps": [
-    "corpus-ready",
+    "forced-corpus-ready",
     "You can begin.",
-    "Change only happens when ordinary people get involved.",
-    "The world is very different now.",
+    "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+    "22-word-long-video-pass",
     "safe-corpus-gap"
   ],
-  "consoleErrors": [],
-  "pass": true,
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "pass": false,
   "httpStatus": 200,
-  "title": "Ask Hearframe v0",
+  "title": "Ask Hearframe v0.3",
   "start": {
-    "t": 0.967,
-    "d": 0.967,
-    "ended": true,
-    "paused": true,
-    "rs": 3,
-    "error": null,
-    "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-start.mp4"
-  },
-  "change": {
-    "t": 4.2,
-    "d": 4.2,
-    "ended": true,
-    "paused": true,
-    "rs": 3,
-    "error": null,
-    "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-change.mp4"
-  },
-  "world": {
-    "t": 2.300731021,
-    "d": 2.334,
+    "t": 0.893724674,
+    "d": 0.9,
     "ended": false,
     "paused": false,
     "rs": 4,
     "error": null,
-    "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-world.mp4"
-  }
+    "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-start.mp4"
+  },
+  "long": {
+    "t": 8.267,
+    "d": 8.267,
+    "ended": true,
+    "paused": true,
+    "rs": 3,
+    "error": null,
+    "src": "http://127.0.0.1:4173/hearframe-grand-v4/ask/media/answer-long-demo.mp4"
+  },
+  "error": "Error: console errors [\"Failed to load resource: the server responded with a status of 404 (File not found)\"]\n    at file:///home/runner/work/html/html/.github/scripts/hearframe-ask-local-qa.mjs:8:1880"
 }
