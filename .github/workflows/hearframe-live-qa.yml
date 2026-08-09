@@ -6,6 +6,7 @@ on:
     paths:
       - 'hearframe-grand-v4/index.html'
       - 'hearframe-grand-v4/seamless/index.html'
+      - 'hearframe-grand-v4/qa-trigger.txt'
 
 permissions:
   contents: write
