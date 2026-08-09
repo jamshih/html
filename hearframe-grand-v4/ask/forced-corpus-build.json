@@ -1,0 +1,326 @@
+{
+  "version": "ask-v0.3",
+  "segments": {
+    "hello": {
+      "start": 1.308,
+      "end": 1.5,
+      "words": [
+        {
+          "word": "Hello,",
+          "token": "hello",
+          "start": 1.308,
+          "end": 1.5,
+          "score": 0.582,
+          "timingSource": "human-gold"
+        }
+      ]
+    },
+    "you_can": {
+      "start": 80.891,
+      "end": 81.132,
+      "words": [
+        {
+          "word": "You",
+          "token": "you",
+          "start": 80.891,
+          "end": 80.991,
+          "score": 0.776,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "can",
+          "token": "can",
+          "start": 81.012,
+          "end": 81.132,
+          "score": 0.873,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    },
+    "change_people": {
+      "start": 228.039,
+      "end": 232.196,
+      "words": [
+        {
+          "word": "change",
+          "token": "change",
+          "start": 228.039,
+          "end": 228.38,
+          "score": 0.966,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "only",
+          "token": "only",
+          "start": 228.481,
+          "end": 228.682,
+          "score": 1.0,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "happens",
+          "token": "happens",
+          "start": 228.722,
+          "end": 229.144,
+          "score": 0.965,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "when",
+          "token": "when",
+          "start": 230.569,
+          "end": 230.71,
+          "score": 0.915,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "ordinary",
+          "token": "ordinary",
+          "start": 230.85,
+          "end": 231.192,
+          "score": 1.0,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "people",
+          "token": "people",
+          "start": 231.232,
+          "end": 231.513,
+          "score": 0.949,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "get",
+          "token": "get",
+          "start": 231.573,
+          "end": 231.694,
+          "score": 0.839,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "involved",
+          "token": "involved",
+          "start": 231.734,
+          "end": 232.196,
+          "score": 0.976,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    },
+    "progress_uneven": {
+      "start": 401.271,
+      "end": 403.606,
+      "words": [
+        {
+          "word": "Yes,",
+          "token": "yes",
+          "start": 401.271,
+          "end": 401.493,
+          "score": 0.75,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "our",
+          "token": "our",
+          "start": 401.714,
+          "end": 401.815,
+          "score": 0.873,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "progress",
+          "token": "progress",
+          "start": 401.875,
+          "end": 402.318,
+          "score": 0.906,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "has",
+          "token": "has",
+          "start": 402.358,
+          "end": 402.479,
+          "score": 1.0,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "been",
+          "token": "been",
+          "start": 402.539,
+          "end": 402.761,
+          "score": 1.0,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "uneven.",
+          "token": "uneven",
+          "start": 403.183,
+          "end": 403.606,
+          "score": 0.979,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    },
+    "we_have_what_we_need": {
+      "start": 598.131,
+      "end": 598.898,
+      "words": [
+        {
+          "word": "We",
+          "token": "we",
+          "start": 598.131,
+          "end": 598.171,
+          "score": 0.0,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "need",
+          "token": "need",
+          "start": 598.212,
+          "end": 598.393,
+          "score": 0.79,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "to",
+          "token": "to",
+          "start": 598.413,
+          "end": 598.474,
+          "score": 0.733,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "do",
+          "token": "do",
+          "start": 598.514,
+          "end": 598.635,
+          "score": 0.999,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "so.",
+          "token": "so",
+          "start": 598.716,
+          "end": 598.898,
+          "score": 0.893,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    },
+    "world_different": {
+      "start": 122.186,
+      "end": 123.997,
+      "words": [
+        {
+          "word": "The",
+          "token": "the",
+          "start": 122.186,
+          "end": 122.287,
+          "score": 0.996,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "world",
+          "token": "world",
+          "start": 122.44,
+          "end": 122.7,
+          "score": 0.927,
+          "timingSource": "human-gold"
+        },
+        {
+          "word": "is",
+          "token": "is",
+          "start": 122.857,
+          "end": 122.918,
+          "score": 0.912,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "very",
+          "token": "very",
+          "start": 123.0,
+          "end": 123.244,
+          "score": 1.0,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "different",
+          "token": "different",
+          "start": 123.305,
+          "end": 123.651,
+          "score": 0.95,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "now.",
+          "token": "now",
+          "start": 123.692,
+          "end": 123.997,
+          "score": 0.997,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    },
+    "begin": {
+      "start": 679.535,
+      "end": 680.039,
+      "words": [
+        {
+          "word": "begin.",
+          "token": "begin",
+          "start": 679.535,
+          "end": 680.039,
+          "score": 0.969,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    },
+    "ask_what_you_can_do": {
+      "start": 842.299,
+      "end": 843.507,
+      "words": [
+        {
+          "word": "ask",
+          "token": "ask",
+          "start": 842.299,
+          "end": 842.48,
+          "score": 0.985,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "what",
+          "token": "what",
+          "start": 842.541,
+          "end": 842.702,
+          "score": 0.972,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "you",
+          "token": "you",
+          "start": 842.762,
+          "end": 843.064,
+          "score": 0.827,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "can",
+          "token": "can",
+          "start": 843.125,
+          "end": 843.286,
+          "score": 0.992,
+          "timingSource": "whisperx-wav2vec2"
+        },
+        {
+          "word": "do",
+          "token": "do",
+          "start": 843.346,
+          "end": 843.507,
+          "score": 1.0,
+          "timingSource": "whisperx-wav2vec2"
+        }
+      ]
+    }
+  },
+  "pass": true
+}

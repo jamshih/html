@@ -1,0 +1,119 @@
++ curl --fail --location --silent --show-error --retry 12 --retry-delay 10 --retry-all-errors --user-agent HearframePrototype/2.0 (forced-aligned corpus; github.com/jamshih/html) https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm -o /tmp/hearframe-ask-v2/obama.webm
++ curl --fail --location --silent --show-error --retry 12 --retry-delay 10 --retry-all-errors --user-agent HearframePrototype/2.0 (forced-aligned corpus; github.com/jamshih/html) https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm -o /tmp/hearframe-ask-v2/jfk.webm
+[0;93m2026-08-09 02:33:23.878961753 [W:onnxruntime:Default, device_discovery.cc:134 GetPciBusId] Skipping pci_bus_id for PCI path at "/sys/devices/LNXSYSTM:00/LNXSYBUS:00/ACPI0004:00/MSFT1000:00/5620e0c7-8062-4dce-aeb7-520c7ef76171" because filename "5620e0c7-8062-4dce-aeb7-520c7ef76171" did not match expected pattern of [0-9a-f]+:[0-9a-f]+:[0-9a-f]+[.][0-9a-f]+[m
+2026-08-09 02:33:28 - whisperx.vads.pyannote - INFO - Performing voice activity detection using Pyannote...
+Lightning automatically upgraded your loaded checkpoint from v1.5.4 to v2.6.5. To apply the upgrade to your files permanently, run `python -m lightning.pytorch.utilities.upgrade_checkpoint ../../../../../opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/whisperx/assets/pytorch_model.bin`
+Downloading: "https://download.pytorch.org/torchaudio/models/wav2vec2_fairseq_large_lv60k_asr_ls960.pth" to /home/runner/.cache/torch/hub/checkpoints/wav2vec2_fairseq_large_lv60k_asr_ls960.pth
+  0%|          | 0.00/1.18G [00:00<?, ?B/s]  3%|▎         | 32.4M/1.18G [00:00<00:03, 339MB/s]  7%|▋         | 83.6M/1.18G [00:00<00:02, 456MB/s] 12%|█▏        | 145M/1.18G [00:00<00:02, 540MB/s]  16%|█▋        | 198M/1.18G [00:00<00:01, 548MB/s] 21%|██        | 250M/1.18G [00:00<00:01, 539MB/s] 25%|██▌       | 302M/1.18G [00:00<00:01, 535MB/s] 29%|██▉       | 353M/1.18G [00:00<00:01, 524MB/s] 34%|███▎      | 403M/1.18G [00:00<00:01, 525MB/s] 38%|███▊      | 455M/1.18G [00:00<00:01, 531MB/s] 42%|████▏     | 508M/1.18G [00:01<00:01, 538MB/s] 46%|████▋     | 560M/1.18G [00:01<00:01, 537MB/s] 51%|█████     | 611M/1.18G [00:01<00:01, 513MB/s] 55%|█████▍    | 660M/1.18G [00:01<00:01, 456MB/s] 59%|█████▊    | 705M/1.18G [00:01<00:01, 332MB/s] 62%|██████▏   | 752M/1.18G [00:01<00:01, 368MB/s] 67%|██████▋   | 801M/1.18G [00:01<00:01, 402MB/s] 71%|███████   | 852M/1.18G [00:01<00:00, 437MB/s] 75%|███████▍  | 898M/1.18G [00:02<00:00, 427MB/s] 78%|███████▊  | 941M/1.18G [00:02<00:00, 419MB/s] 82%|████████▏ | 982M/1.18G [00:02<00:00, 404MB/s] 85%|████████▍ | 1.00G/1.18G [00:02<00:00, 403MB/s] 88%|████████▊ | 1.04G/1.18G [00:02<00:00, 405MB/s] 92%|█████████▏| 1.08G/1.18G [00:02<00:00, 435MB/s] 96%|█████████▌| 1.13G/1.18G [00:02<00:00, 428MB/s] 99%|█████████▉| 1.17G/1.18G [00:02<00:00, 438MB/s]100%|██████████| 1.18G/1.18G [00:02<00:00, 452MB/s]
++ ffmpeg -y -hide_banner -loglevel error -ss 0.900 -i /tmp/hearframe-ask-v2/obama.webm -t 1.300 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/hello.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 79.550 -i /tmp/hearframe-ask-v2/obama.webm -t 2.750 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/you_can.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 226.000 -i /tmp/hearframe-ask-v2/obama.webm -t 9.200 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/change_people.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 401.200 -i /tmp/hearframe-ask-v2/obama.webm -t 5.450 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/progress_uneven.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 598.100 -i /tmp/hearframe-ask-v2/obama.webm -t 2.800 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/we_have_what_we_need.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 121.000 -i /tmp/hearframe-ask-v2/jfk.webm -t 3.100 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/world_different.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 677.550 -i /tmp/hearframe-ask-v2/jfk.webm -t 3.550 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/begin.wav
++ ffmpeg -y -hide_banner -loglevel error -ss 841.000 -i /tmp/hearframe-ask-v2/jfk.webm -t 4.600 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-ask-v2/ask_what_you_can_do.wav
++ ffmpeg -hide_banner -nostdin -ss 1.083 -i /tmp/hearframe-ask-v2/obama.webm -t 0.652 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 80.666 -i /tmp/hearframe-ask-v2/obama.webm -t 0.701 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 227.814 -i /tmp/hearframe-ask-v2/obama.webm -t 4.617 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 401.046 -i /tmp/hearframe-ask-v2/obama.webm -t 2.795 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 597.906 -i /tmp/hearframe-ask-v2/obama.webm -t 1.227 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 121.961 -i /tmp/hearframe-ask-v2/jfk.webm -t 2.271 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 679.310 -i /tmp/hearframe-ask-v2/jfk.webm -t 0.964 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -ss 842.074 -i /tmp/hearframe-ask-v2/jfk.webm -t 1.668 -vn -af volumedetect -f null -
++ ffmpeg -y -hide_banner -nostdin -ss 1.2830 -i /tmp/hearframe-ask-v2/obama.webm -t 0.2520 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-hello.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 80.8660 -i /tmp/hearframe-ask-v2/obama.webm -t 0.3010 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-you_can.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 228.0140 -i /tmp/hearframe-ask-v2/obama.webm -t 4.2170 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-change_people.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 401.2460 -i /tmp/hearframe-ask-v2/obama.webm -t 2.3950 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-progress_uneven.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 598.1060 -i /tmp/hearframe-ask-v2/obama.webm -t 0.8270 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-we_have_what_we_need.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 122.1610 -i /tmp/hearframe-ask-v2/jfk.webm -t 1.8710 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-world_different.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 679.5100 -i /tmp/hearframe-ask-v2/jfk.webm -t 0.5640 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-begin.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 842.2740 -i /tmp/hearframe-ask-v2/jfk.webm -t 1.2680 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 1.2830 -i /tmp/hearframe-ask-v2/obama.webm -t 0.2520 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-greeting.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 80.8660 -i /tmp/hearframe-ask-v2/obama.webm -t 0.3010 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=-0.700dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 /tmp/hearframe-ask-v2/start-0.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 679.5100 -i /tmp/hearframe-ask-v2/jfk.webm -t 0.5640 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 /tmp/hearframe-ask-v2/start-1.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 /tmp/hearframe-ask-v2/start-0.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 /tmp/hearframe-ask-v2/start-1.mp4
++ ffmpeg -y -hide_banner -nostdin -i /tmp/hearframe-ask-v2/start-0.mp4 -i /tmp/hearframe-ask-v2/start-1.mp4 -filter_complex [0:v]settb=AVTB,setpts=PTS-STARTPTS[v0];[1:v]settb=AVTB,setpts=PTS-STARTPTS[v1];[v0][v1]concat=n=2:v=1:a=0,fps=30,setpts=PTS-STARTPTS[v];[0:a]aresample=48000,asetpts=PTS-STARTPTS[a0];[1:a]aresample=48000,asetpts=PTS-STARTPTS[a1];[a0][a1]acrossfade=d=0.0250:c1=qsin:c2=qsin,apad=whole_dur=0.900000,atrim=duration=0.900000,asetpts=PTS-STARTPTS[a] -map [v] -map [a] -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-start.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 228.0140 -i /tmp/hearframe-ask-v2/obama.webm -t 4.2170 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-change.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 401.2460 -i /tmp/hearframe-ask-v2/obama.webm -t 2.3950 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-progress.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 598.1060 -i /tmp/hearframe-ask-v2/obama.webm -t 0.8270 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-needs.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 122.1610 -i /tmp/hearframe-ask-v2/jfk.webm -t 1.8710 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-world.mp4
++ ffmpeg -y -hide_banner -nostdin -ss 842.2740 -i /tmp/hearframe-ask-v2/jfk.webm -t 1.2680 -vf scale=960:540:force_original_aspect_ratio=decrease,pad=960:540:(ow-iw)/2:(oh-ih)/2:black,fps=30,format=yuv420p -af aresample=48000,volume=0.000dB -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-agency.mp4
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-progress.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-greeting.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-agency.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-long-demo.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-start.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-world.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-needs.mp4 -f null -
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-change.mp4 -f null -
+{
+  "version": "ask-v0.3",
+  "segmentCount": 8,
+  "answerCount": 7
+}
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-you_can.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-begin.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-change_people.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-world_different.mp4
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-you_can.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-begin.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-change_people.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-world_different.mp4 -vn -af volumedetect -f null -
++ ffmpeg -y -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-you_can.mp4 -i hearframe-grand-v4/ask/media/segment-begin.mp4 -i hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4 -i hearframe-grand-v4/ask/media/segment-change_people.mp4 -i hearframe-grand-v4/ask/media/segment-world_different.mp4 -filter_complex [0:v]settb=AVTB,setpts=PTS-STARTPTS[v0];[0:a]aresample=48000,volume=6.000dB,asetpts=PTS-STARTPTS[a0];[1:v]settb=AVTB,setpts=PTS-STARTPTS[v1];[1:a]aresample=48000,volume=0.000dB,asetpts=PTS-STARTPTS[a1];[2:v]settb=AVTB,setpts=PTS-STARTPTS[v2];[2:a]aresample=48000,volume=-1.900dB,asetpts=PTS-STARTPTS[a2];[3:v]settb=AVTB,setpts=PTS-STARTPTS[v3];[3:a]aresample=48000,volume=6.000dB,asetpts=PTS-STARTPTS[a3];[4:v]settb=AVTB,setpts=PTS-STARTPTS[v4];[4:a]aresample=48000,volume=-6.000dB,asetpts=PTS-STARTPTS[a4];[v0][v1][v2][v3][v4]concat=n=5:v=1:a=0,fps=30,setpts=PTS-STARTPTS[vout];[a0][a1]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax1];[ax1][a2]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax2];[ax2][a3]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax3];[ax3][a4]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax4];[ax4]apad=whole_dur=8.266667,atrim=duration=8.266667,asetpts=PTS-STARTPTS[aout] -map [vout] -map [aout] -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-long-demo.mp4
++ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-long-demo.mp4 -f null -
++ ffprobe -v error -show_entries stream=codec_type,codec_name -show_entries format=duration -of json hearframe-grand-v4/ask/media/answer-long-demo.mp4
+{
+  "text": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+  "wordCount": 22,
+  "segments": [
+    "you_can",
+    "begin",
+    "ask_what_you_can_do",
+    "change_people",
+    "world_different"
+  ],
+  "segmentCount": 5,
+  "sourceMeansDbFS": [
+    -32.5,
+    -25.0,
+    -23.1,
+    -31.2,
+    -16.9
+  ],
+  "appliedGainDb": [
+    6.0,
+    0.0,
+    -1.8999999999999986,
+    6.0,
+    -6.0
+  ],
+  "crossfadeMs": [
+    25.0,
+    25.0,
+    25.0,
+    25.0
+  ],
+  "duration": 8.266667,
+  "fullDecode": "pass",
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio"
+      }
+    ],
+    "format": {
+      "duration": "8.266667"
+    }
+  },
+  "pass": true
+}
