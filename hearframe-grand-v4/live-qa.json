@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-08-09T01:06:00.522Z",
-  "expectedMarker": "v4.5 LIVE QA",
+  "checkedAt": "2026-08-09T01:11:05.203Z",
+  "expectedMarker": "v4.6 LIVE QA",
   "base": "https://hearframe-grand-hello-world-v4.onrender.com",
   "routes": {
     "/": {
       "chromium": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786237561625",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786237866255",
         "browser": "chromium",
         "steps": [
           "page-loaded",
@@ -16,7 +16,7 @@
         ],
         "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.6 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
@@ -25,7 +25,7 @@
         "pass": true
       },
       "webkit-ipad": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786237566046",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/?qa=1786237873748",
         "browser": "webkit-ipad",
         "steps": [
           "page-loaded",
@@ -35,7 +35,7 @@
         ],
         "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.6 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
@@ -46,7 +46,7 @@
     },
     "/seamless/": {
       "chromium": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786237596954",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786237904149",
         "browser": "chromium",
         "steps": [
           "page-loaded",
@@ -58,7 +58,7 @@
         ],
         "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.6 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
@@ -68,7 +68,7 @@
         "pass": true
       },
       "webkit-ipad": {
-        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786237607729",
+        "url": "https://hearframe-grand-hello-world-v4.onrender.com/seamless/?qa=1786237914676",
         "browser": "webkit-ipad",
         "steps": [
           "page-loaded",
@@ -78,13 +78,13 @@
         ],
         "consoleErrors": [],
         "httpStatus": 200,
-        "title": "Hearframe — Grand Hello World v4.5 LIVE QA",
+        "title": "Hearframe — Grand Hello World v4.6 LIVE QA",
         "prepareStatus": "Prepared. Both videos are paused at their exact target positions.",
         "helloStatus": "HELLO clip complete.",
         "worldStatus": "WORLD clip complete.",
         "pass": false,
-        "error": "Error: status timeout waiting for Patched Hello World complete; last=STITCH 1/2 · HELLO → 25 ms equal-power overlap\n    at waitForStatus (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:39:9)\n    at async runFlow (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:86:26)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:113:17",
-        "finalStatus": "STITCH 1/2 · HELLO → 25 ms equal-power overlap"
+        "error": "Error: status timeout waiting for Patched Hello World complete; last=STITCH 1/2 · HELLO → Safari-safe 25 ms handoff\n    at waitForStatus (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:39:9)\n    at async runFlow (file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:86:26)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-qa.mjs:113:17",
+        "finalStatus": "STITCH 1/2 · HELLO → Safari-safe 25 ms handoff"
       }
     }
   },
