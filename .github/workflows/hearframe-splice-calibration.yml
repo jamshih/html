@@ -1,0 +1,28 @@
+name: Hearframe Splice Window Calibration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/splice-calibration-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Calibrate splice windows against human-gold cuts
+        run: python .github/scripts/calibrate-hearframe-splice-windows.py
+      - name: Commit calibration
+        run: |
+          git config user.name 'hearframe-splice-calibration'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/splice-calibration.json
+          git commit -m 'Calibrate Hearframe splice windows [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
