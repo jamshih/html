@@ -1,1 +1,1 @@
-run public ask hearframe webkit qa
+run public ask hearframe v0.3 forced-aligned 100-reference long-answer qa
