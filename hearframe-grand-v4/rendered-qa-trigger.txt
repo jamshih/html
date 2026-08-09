@@ -1,1 +1,1 @@
-test rendered v5 on live Chromium and WebKit iPad
+test rendered v5.1 on live WebKit iPad
