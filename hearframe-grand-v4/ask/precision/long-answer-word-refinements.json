@@ -1,0 +1,54 @@
+{
+  "version": "long-answer-word-refinement-v1.2",
+  "answerId": "long-demo",
+  "singleWordSegmentsRequired": 1,
+  "singleWordSegmentsRefined": 1,
+  "allSingleWordsRefined": true,
+  "refinements": {
+    "begin": {
+      "segmentId": "begin",
+      "targetWord": "begin",
+      "forcedStart": 679.535,
+      "forcedEnd": 680.039,
+      "aiRefinedStart": 679.535,
+      "aiRefinedEnd": 680.039,
+      "startDeltaMs": 0.0,
+      "endDeltaMs": 0.0,
+      "method": "gemini-audio-critic rendered-candidate coarse/fine + five-candidate micro",
+      "precisionStatus": "ai-refined",
+      "media": "media/segment-begin-ai-v1.mp4",
+      "passes": [
+        {
+          "pass": "coarse",
+          "candidateCount": 9,
+          "winnerId": "begin-coarse-s+0-e+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.9,
+          "reason": "Candidate begin-coarse-s+0-e+0 captures the entire word 'begin' clearly without clipping the onset or ending, and contains minimal neighboring speech with a clean boundary.",
+          "ranking": null
+        },
+        {
+          "pass": "fine",
+          "candidateCount": 9,
+          "winnerId": "begin-fine-s+0-e+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.9,
+          "reason": "The candidate 'begin-fine-s+0-e+0' captures the complete word cleanly with minimal surrounding noise and well-timed boundaries.",
+          "ranking": null
+        },
+        {
+          "pass": "micro",
+          "candidateCount": 5,
+          "winnerId": "begin-micro-s+0-e+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 1,
+          "reason": "The candidate 'begin-micro-s+0-e+0' captures the entire word 'begin' clearly without clipping the onset or offset, and contains no extraneous neighboring speech.",
+          "ranking": null
+        }
+      ]
+    }
+  }
+}
