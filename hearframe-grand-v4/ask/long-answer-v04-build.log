@@ -1,0 +1,98 @@
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-world_different.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-change_people.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-you_can.mp4
++ ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 hearframe-grand-v4/ask/media/segment-begin-ai-v1.mp4
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-world_different.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-change_people.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-you_can.mp4 -vn -af volumedetect -f null -
++ ffmpeg -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-begin-ai-v1.mp4 -vn -af volumedetect -f null -
++ ffmpeg -y -hide_banner -nostdin -i hearframe-grand-v4/ask/media/segment-world_different.mp4 -i hearframe-grand-v4/ask/media/segment-change_people.mp4 -i hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4 -i hearframe-grand-v4/ask/media/segment-you_can.mp4 -i hearframe-grand-v4/ask/media/segment-begin-ai-v1.mp4 -filter_complex [0:v]settb=AVTB,setpts=(PTS-STARTPTS)/1.0800[v0];[0:a]aresample=48000,atempo=1.0800,volume=-6.000dB,asetpts=PTS-STARTPTS[a0];[1:v]settb=AVTB,setpts=(PTS-STARTPTS)/1.0800[v1];[1:a]aresample=48000,atempo=1.0800,volume=6.000dB,asetpts=PTS-STARTPTS[a1];[2:v]settb=AVTB,setpts=(PTS-STARTPTS)/0.9200[v2];[2:a]aresample=48000,atempo=0.9200,volume=-1.500dB,asetpts=PTS-STARTPTS[a2];[3:v]settb=AVTB,setpts=(PTS-STARTPTS)/0.9500[v3];[3:a]aresample=48000,atempo=0.9500,volume=6.000dB,asetpts=PTS-STARTPTS[a3];[4:v]settb=AVTB,setpts=(PTS-STARTPTS)/1.0047[v4];[4:a]aresample=48000,atempo=1.0047,volume=0.000dB,asetpts=PTS-STARTPTS[a4];[v0][v1][v2][v3][v4]concat=n=5:v=1:a=0,fps=30,setpts=PTS-STARTPTS[vout];[a0][a1]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax1];[ax1][a2]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax2];[ax2][a3]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax3];[ax3][a4]acrossfade=d=0.0250:c1=qsin:c2=qsin[ax4];[ax4]apad=whole_dur=7.933333,atrim=duration=7.933333,asetpts=PTS-STARTPTS[aout] -map [vout] -map [aout] -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/answer-long-demo.mp4
+or_id       : [0][0][0][0]
+Input #2, mov,mp4,m4a,3gp,3g2,mj2, from 'hearframe-grand-v4/ask/media/segment-ask_what_you_can_do.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.16.100
+  Duration: 00:00:01.27, start: 0.000000, bitrate: 1272 kb/s
+  Stream #2:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1128 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #2:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Input #3, mov,mp4,m4a,3gp,3g2,mj2, from 'hearframe-grand-v4/ask/media/segment-you_can.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.16.100
+  Duration: 00:00:00.33, start: 0.000000, bitrate: 1186 kb/s
+  Stream #3:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 960x540 [SAR 1:1 DAR 16:9], 1029 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #3:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 120 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Input #4, mov,mp4,m4a,3gp,3g2,mj2, from 'hearframe-grand-v4/ask/media/segment-begin-ai-v1.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.16.100
+  Duration: 00:00:00.53, start: 0.000000, bitrate: 1590 kb/s
+  Stream #4:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720 [SAR 1:1 DAR 16:9], 1434 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 libx264
+  Stream #4:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 129 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 (h264) -> settb:default
+  Stream #0:1 (aac) -> aresample:default
+  Stream #1:0 (h264) -> settb:default
+  Stream #1:1 (aac) -> aresample:default
+  Stream #2:0 (h264) -> settb:default
+  Stream #2:1 (aac) -> aresample:default
+  Stream #3:0 (h264) -> settb:default
+  Stream #3:1 (aac) -> aresample:default
+  Stream #4:0 (h264) -> settb:default
+  Stream #4:1 (aac) -> aresample:default
+  setpts:default -> Stream #0:0 (libx264)
+  asetpts:default -> Stream #0:1 (aac)
+[Parsed_concat_30 @ 0x5631158d77c0] Input link in0:v0 parameters (size 1280x720, SAR 1:1) do not match the corresponding output link in0:v0 parameters (960x540, SAR 1:1)
+[Parsed_concat_30 @ 0x5631158d77c0] Failed to configure output pad on Parsed_concat_30
+[fc#0 @ 0x56311388d540] Error reinitializing filters!
+Failed to inject frame into filter network: Invalid argument
+Error while filtering: Invalid argument
+[Parsed_concat_30 @ 0x5631158e3e80] Input link in0:v0 parameters (size 1280x720, SAR 1:1) do not match the corresponding output link in0:v0 parameters (960x540, SAR 1:1)
+[Parsed_concat_30 @ 0x5631158e3e80] Failed to configure output pad on Parsed_concat_30
+[fc#0 @ 0x56311388d540] Error reinitializing filters!
+Failed to inject frame into filter network: Invalid argument
+[Parsed_concat_30 @ 0x5631158d7500] Input link in0:v0 parameters (size 1280x720, SAR 1:1) do not match the corresponding output link in0:v0 parameters (960x540, SAR 1:1)
+[Parsed_concat_30 @ 0x5631158d7500] Failed to configure output pad on Parsed_concat_30
+[fc#0 @ 0x56311388d540] Error reinitializing filters!
+Failed to inject frame into filter network: Invalid argument
+[Parsed_concat_30 @ 0x56311392de00] Input link in0:v0 parameters (size 1280x720, SAR 1:1) do not match the corresponding output link in0:v0 parameters (960x540, SAR 1:1)
+[Parsed_concat_30 @ 0x56311392de00] Failed to configure output pad on Parsed_concat_30
+[fc#0 @ 0x56311388d540] Error reinitializing filters!
+Failed to inject frame into filter network: Invalid argument
+[Parsed_concat_30 @ 0x563113dc57c0] Input link in0:v0 parameters (size 1280x720, SAR 1:1) do not match the corresponding output link in0:v0 parameters (960x540, SAR 1:1)
+[Parsed_concat_30 @ 0x563113dc57c0] Failed to configure output pad on Parsed_concat_30
+[fc#0 @ 0x56311388d540] Error reinitializing filters!
+Failed to inject frame into filter network: Invalid argument
+[out#0/mp4 @ 0x563115607180] Nothing was written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0kB time=N/A bitrate=N/A speed=N/A    
+Conversion failed!
+
