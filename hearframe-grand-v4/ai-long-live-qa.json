@@ -1,15 +1,16 @@
 {
-  "checkedAt": "2026-08-10T10:19:31.614Z",
-  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-1",
+  "checkedAt": "2026-08-10T10:24:00.141Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-2",
   "pass": false,
   "results": [
     {
-      "browser": "chromium",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-1",
-      "pass": false,
+      "browser": "chromium-logic-and-media-http",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-2",
+      "pass": true,
       "steps": [
         "plans-ready",
-        "long-answer"
+        "long-answer",
+        "media-http-200"
       ],
       "consoleErrors": [
         "NotSupportedError: Failed to load because no supported source was found."
@@ -17,29 +18,24 @@
       "httpStatus": 200,
       "answer": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
       "wordCount": 22,
-      "error": "locator.evaluate: NotSupportedError: Failed to load because no supported source was found.\n    at run (/home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:5:1236)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:6:14"
+      "mediaSrc": "./ask/media/answer-long-demo.mp4",
+      "mediaHttpStatus": 200,
+      "mediaContentType": "video/mp4"
     },
     {
-      "browser": "webkit-ipad",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-1",
-      "pass": true,
+      "browser": "webkit-ipad-full-playback",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-2",
+      "pass": false,
       "steps": [
-        "plans-ready",
-        "long-answer",
-        "video-complete"
+        "plans-ready"
       ],
-      "consoleErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+        "Error: shared_ai_provider_error (502)"
+      ],
       "httpStatus": 200,
-      "answer": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
-      "wordCount": 22,
-      "media": {
-        "t": 8.24752226,
-        "d": 8.267,
-        "rs": 4,
-        "error": null,
-        "ended": false,
-        "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-long-demo.mp4"
-      }
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at run (/home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:5:713)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:7:14"
     }
-  ]
+  ],
+  "note": "Playwright bundled Chromium does not ship proprietary H.264 decoding; Chromium validates director logic and live MP4 HTTP response, while WebKit performs full H.264/AAC playback."
 }
