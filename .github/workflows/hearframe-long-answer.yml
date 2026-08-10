@@ -20,13 +20,22 @@ jobs:
       - name: Ensure ffmpeg
         run: |
           if ! command -v ffmpeg >/dev/null; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
-      - name: Render five-fragment long answer
-        run: python .github/scripts/build-hearframe-long-answer.py
-      - name: Commit long-answer media and QA
+      - name: Render phrase-first speed-matched answer with conclusion
+        id: render
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python .github/scripts/build-hearframe-long-answer.py 2>&1 | tee hearframe-grand-v4/ask/long-answer-v04-build.log
+      - name: Record media or exact failure
+        if: always()
         run: |
           git config user.name 'hearframe-long-answer'
           git config user.email 'actions@users.noreply.github.com'
-          git add hearframe-grand-v4/ask/corpus.json hearframe-grand-v4/ask/media/answer-long-demo.mp4 hearframe-grand-v4/ask/long-sentence-qa.json
-          git commit -m 'Add Hearframe 22-word multi-source answer [skip ci]'
+          git add hearframe-grand-v4/ask/long-answer-v04-build.log || true
+          git add hearframe-grand-v4/ask/corpus.json hearframe-grand-v4/ask/media/answer-long-demo.mp4 hearframe-grand-v4/ask/long-sentence-qa.json 2>/dev/null || true
+          git commit -m 'Record Hearframe v0.4 long-answer render [skip ci]' || true
           git pull --rebase origin main
           git push origin HEAD:main
+      - name: Fail if render failed
+        if: steps.render.outcome != 'success'
+        run: exit 1
