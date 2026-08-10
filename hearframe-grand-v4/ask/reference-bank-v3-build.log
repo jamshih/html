@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 84, in <module>
+    for title in search(q,quota-len(bucket_titles),all_titles):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 57, in search
+    data=api(p)
+         ^^^^^^
+  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 46, in api
+    raise last
+  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 43, in api
+    with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests
