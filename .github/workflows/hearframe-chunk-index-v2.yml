@@ -18,12 +18,21 @@ jobs:
         with:
           fetch-depth: 0
       - name: Build phrase/sentence candidates from forced-aligned words
-        run: python .github/scripts/build-hearframe-chunk-index-v2.py
-      - name: Commit chunk index and QA report
+        id: build
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python .github/scripts/build-hearframe-chunk-index-v2.py 2>&1 | tee hearframe-grand-v4/ask/reference-chunk-index-v2-build.log
+      - name: Record chunk index or failure log
+        if: always()
         run: |
           git config user.name 'hearframe-chunk-index'
           git config user.email 'actions@users.noreply.github.com'
-          git add hearframe-grand-v4/ask/reference-chunk-index-v2.json hearframe-grand-v4/ask/reference-chunk-index-v2-report.json
-          git commit -m 'Add phrase and sentence retrieval index [skip ci]'
+          git add hearframe-grand-v4/ask/reference-chunk-index-v2-build.log || true
+          git add hearframe-grand-v4/ask/reference-chunk-index-v2.json hearframe-grand-v4/ask/reference-chunk-index-v2-report.json 2>/dev/null || true
+          git commit -m 'Record phrase and sentence retrieval-index result [skip ci]' || true
           git pull --rebase origin main
           git push origin HEAD:main
+      - name: Fail if chunk index failed
+        if: steps.build.outcome != 'success'
+        run: exit 1
