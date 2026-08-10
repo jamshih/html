@@ -1,5 +1,5 @@
 {
-  "version": "ask-v0.3",
+  "version": "ask-v0.4",
   "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
   "sources": {
     "obama": {
@@ -531,28 +531,63 @@
     },
     {
       "id": "long-demo",
-      "text": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+      "text": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
       "keywords": [
         "long answer",
         "longer answer",
         "long sentence",
         "longer sentence",
         "say something longer",
+        "say something inspiring",
         "give me a longer answer",
         "test long sentence"
       ],
       "segments": [
-        "you_can",
-        "begin",
-        "ask_what_you_can_do",
+        "world_different",
         "change_people",
-        "world_different"
+        "ask_what_you_can_do",
+        "you_can",
+        "begin"
       ],
-      "media": "media/answer-long-demo.mp4"
+      "roles": [
+        "body",
+        "body",
+        "body",
+        "conclusion",
+        "conclusion"
+      ],
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "phrase",
+        "word"
+      ],
+      "media": "media/answer-long-demo.mp4",
+      "wordCount": 22,
+      "hasConclusion": true,
+      "conclusionText": "You can begin.",
+      "conclusionSegmentIds": [
+        "you_can",
+        "begin"
+      ],
+      "speedAdjusted": true,
+      "speedFactors": [
+        1.08,
+        1.08,
+        0.92,
+        0.95,
+        1.0047
+      ],
+      "phraseFirst": true,
+      "singleWordPrecisionGate": "passed",
+      "singleWordSegments": [
+        "begin"
+      ]
     }
   ],
   "fallback": {
     "text": "I do not have enough indexed speech to answer that yet. Try a question about starting, change, progress, what you need, the world, or what you can do."
   },
-  "notes": "Forced-aligned phrase-first corpus plus a five-fragment, 22-word long-answer regression test."
+  "notes": "Phrase/sentence-first corpus; every single-word chunk used by the long-answer render passes Gemini audio-window refinement first. Long answers end with an explicit conclusion and use conservative per-clip tempo matching."
 }
