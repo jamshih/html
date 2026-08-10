@@ -1,5 +1,5 @@
 {
-  "version": "reference-bank-v3.5-report",
+  "version": "reference-bank-v3.5.1-report",
   "legacyCount": 100,
   "newCount": 10500,
   "totalCount": 10600,
@@ -117,5 +117,7 @@
   "alignmentStatus": "Original aligned sample plus lazy alignment for retrieval references; isolated words require hardened AI boundary refinement before render.",
   "licensePolicy": "Because the 10K bank is only discovery metadata, license/attribution is fetched and validated from the Commons file page at selection time before a clip is eligible for production rendering.",
   "pass": true,
-  "plus500Report": "reference-bank-plus500-report.json"
+  "plus500Report": "reference-bank-plus500-report.json",
+  "plus500SportsMinimum": 80,
+  "plus500SportsActual": 80
 }

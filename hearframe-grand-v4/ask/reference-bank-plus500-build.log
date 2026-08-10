@@ -1,87 +1,60 @@
-celebrity-interviews 180 target 180 new total 180
-Commons HTTP 429; retry 1/7 in 39.0s
-Commons HTTP 429; retry 1/7 in 49.0s
-sports-stars 0 target 150 new total 180
-entertainment-talk 100 target 100 new total 280
-experts-public-figures 45 target 45 new total 325
-Commons HTTP 429; retry 1/7 in 47.0s
-general-speech 175 target 175 new total 500
 {
   "version": "reference-bank-plus500-v1-report",
   "baseCount": 10100,
+  "startCount": 10600,
   "requestedAdd": 500,
-  "addedThisRun": 500,
+  "addedThisRun": 0,
   "totalCount": 10600,
   "targetTotal": 10600,
+  "pass": true,
+  "note": "Incremental +500 bank already present; no duplicate expansion performed."
+}
+Commons HTTP 429; retry 1/7 in 10.0s
+{
+  "version": "reference-bank-plus500-v1.1-report",
+  "baseCount": 10100,
+  "requestedAdd": 500,
+  "totalCount": 10600,
+  "targetTotal": 10600,
+  "incrementalCount": 500,
   "bucketCounts": {
     "celebrity-interviews": 180,
     "entertainment-talk": 100,
     "experts-public-figures": 45,
-    "general-speech": 175
+    "general-speech": 95,
+    "sports-stars": 80
   },
-  "queryCounts": {
-    "filetype:video interview": 180,
-    "filetype:video celebrity conversation": 5,
-    "filetype:video actor Q&A": 22,
-    "filetype:video singer Q&A": 16,
-    "filetype:video musician Q&A": 57,
-    "filetype:video scientist interview": 27,
-    "filetype:video astronaut interview": 18,
-    "filetype:video panel discussion": 51,
-    "filetype:video presentation speaker": 124
+  "sportsMinimum": 80,
+  "sportsActual": 80,
+  "replacedEntries": 80,
+  "sportsQueryCounts": {
+    "filetype:video \"Warrior Games\"": 7,
+    "filetype:video \"Invictus Games\"": 23,
+    "filetype:video \"Paralympic Games\"": 2,
+    "filetype:video \"athlete profile\"": 1,
+    "filetype:video sports DVIDS": 47
   },
-  "sampleTitles": {
-    "celebrity-interviews": [
-      "File:Toine Mandres - How can we bridge the communication gap between EU and the common people-- TVP.webmsd.webm",
-      "File:Wikimedia Foundation Interview with Chief of Finance and Administration Garfield Byrd October 7, 2011.webm",
-      "File:Int Molteni Liste pulite.webm",
-      "File:Jessica Coates and Jane Hornibrook, Creative Commons-GNUnify.webm",
-      "File:Reflections on the interview with Mukti Datta Those who really work for development they care about conservation.webm",
-      "File:Reflections on the interview with Mukti Datta - Projects tare sustaiable only when the main stakeholders own them.webm",
-      "File:Reflections on the interview with Mukti Datta - persons not organizations are the protagonists of real change.webm",
-      "File:Wikipedians speak - Konkani Wikipedian Rusita Paryekar-en 1080p.webm"
-    ],
-    "sports-stars": [],
-    "entertainment-talk": [
-      "File:Sofie Vanthournout ESC2017.webm",
-      "File:Doing It - Shiloh Fernandez.webm",
-      "File:Doing It - Jimmy Jean Louis.webm",
-      "File:Doing It - Obba Babatunde and Anna Marie Horsford.webm",
-      "File:Doing It - Sterling ‘Steelo’ Brim.webm",
-      "File:Davos 2016 - An Insight, An Idea with Kevin Spacey.webm",
-      "File:The Confederate Ironclad (1912).webm",
-      "File:The Man from Home (1922).webm"
-    ],
-    "experts-public-figures": [
-      "File:Science and Peace - Jean-Marie Lehn.webm",
-      "File:I Am CDC - Kiersten Kugeler.webm",
-      "File:RAGCYT - Gloria Dubner.webm",
-      "File:Horse logging hazard trees in southwest Oregon.webm",
-      "File:2012 and the Future of Fire.webm",
-      "File:Faceofaids intro.webm",
-      "File:Water Released from Moon- Director's Cut X8Zz14hQzgg.webm",
-      "File:Sam dollimore - No Strings Attached.webm"
-    ],
-    "general-speech": [
-      "File:Wikipedia 15 - The impact of 15 years of Wikipedia.webm",
-      "File:Andrew Copson defining humanism, skepticism, religion.webm",
-      "File:Video Part 3- Fifth Annual CSIS South China Sea Conference.webm",
-      "File:President Obama Speaks at the National Rx Drug Abuse & Heroin Summit.webm",
-      "File:Gorka- 'Rebuild Relationships Broken in Last Eight Years'.webm",
-      "File:Identity politics, Communalism and multiculturalism.webm",
-      "File:Should We Leave Islam - Armin Navabi.webm",
-      "File:Wikimania 2012- Featured Session- SOPA.webm"
-    ],
-    "fallback": []
-  },
-  "rejectedDuringDiscovery": 326,
-  "rejectionReasons": {
-    "not-direct-video": 326
-  },
+  "sportsSamples": [
+    "File:JMSDF & NBHC Sasebo Sports Day (988156).webm",
+    "File:SPOT - Camp Zama Cherry Blossom Festival 2026 - Event Cancelled (998465).webm",
+    "File:CP25 Community Relations Sports Day in Costa Rica (972738).webm",
+    "File:KATUSA Friendship Week 2026 (1011144).webm",
+    "File:KATUSA Friendship Week 2026 (1013034).webm",
+    "File:260630-SDB-Drill (1014412).webm",
+    "File:Hydrate (1014419).webm",
+    "File:CODEL Visit B-roll (1014255).webm",
+    "File:Base Customs (1013794).webm",
+    "File:SHAPE Community Life December (949039).webm",
+    "File:Explore Europe- Siracusa (952978).webm",
+    "File:MWR Mardi Gras Tour (955493).webm",
+    "File:Reel- SETAF-AF conducts ‘Lions Legacy’ physical training event (956264).webm",
+    "File:MWR Tour of Lemon Farm (955506).webm",
+    "File:InFocus- Pro Pickleball Tour (956784).webm"
+  ],
   "uniqueTitles": 10600,
   "uniqueSourceUrls": 10600,
   "policy": {
-    "priority": "celebrity interviews + sports stars + entertainment speech",
+    "priority": "interviews + sports stars + entertainment speech",
     "license": "validate on use",
     "speech": "validate before indexing",
     "alignment": "forced-align only after selection",
