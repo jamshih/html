@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-08-10T11:27:02.505Z",
+  "checkedAt": "2026-08-10T11:29:42.445Z",
   "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
   "pass": false,
   "requirements": {
@@ -17,14 +17,28 @@
       "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
       "pass": false,
       "steps": [
-        "plans-ready"
+        "plans-ready",
+        "long-answer-v04-metadata",
+        "media-http-200"
       ],
       "consoleErrors": [
-        "Failed to load resource: the server responded with a status of 502 ()",
-        "Error: shared_ai_provider_error (502)\n    at HTMLButtonElement.run (https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4:1:5104)"
+        "NotSupportedError: Failed to load because no supported source was found."
       ],
       "httpStatus": 200,
-      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at run (/home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:6:713)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:7:14"
+      "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring, and the 'long-demo' plan provides a complete, multi-sentence inspirational speech that fits the criteria.",
+      "wordCount": 22,
+      "tempoFactors": [
+        1.08,
+        1.08,
+        0.92,
+        0.95,
+        1.005
+      ],
+      "mediaSrc": "./ask/media/answer-long-demo.mp4",
+      "mediaHttpStatus": 200,
+      "mediaContentType": "video/mp4",
+      "error": "Error: console errors: [\"NotSupportedError: Failed to load because no supported source was found.\"]\n    at run (file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:6:3242)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:7:14"
     },
     {
       "browser": "webkit-ipad-full-playback",
@@ -39,7 +53,7 @@
       "consoleErrors": [],
       "httpStatus": 200,
       "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring. The 'long-demo' plan provides a complete, inspiring multi-sentence message ('The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.') that meets the length and quality criteria.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe 'long-demo' plan provides a longer, inspiring message that matches the user's request for an extended and motivating statement, featuring a strong concluding thought ('You can begin.') and passing all audio precision gates.",
       "wordCount": 22,
       "tempoFactors": [
         1.08,
