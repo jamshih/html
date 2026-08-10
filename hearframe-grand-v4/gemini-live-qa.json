@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-08-10T09:24:35.341Z",
+  "backend": "https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai",
+  "origin": "https://hearframe-grand-hello-world-v4.onrender.com",
+  "director": {
+    "status": 200,
+    "json": {
+      "ok": true,
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "answer": "Hello world.",
+      "tokens": [
+        "hello",
+        "world"
+      ],
+      "rationale": "Uses the available intact phrase verbatim to deliver a natural, seamless greeting within the requested 2–8 word length, avoiding unnecessary edits.",
+      "constructible": true
+    }
+  },
+  "audioCritic": {
+    "status": 200,
+    "json": {
+      "ok": true,
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "bestCandidateId": "tone-high",
+      "confidence": 0.95,
+      "reason": "'tone-high' provides a clean, clear electronic tone that perfectly matches the canonical high-pitched audio cue for 'beep' with smooth onset and fade-out.",
+      "ranking": [
+        {
+          "id": "tone-high",
+          "score": 95,
+          "onsetComplete": true,
+          "endingComplete": true,
+          "extraSpeech": false,
+          "cleanBoundary": true,
+          "notes": "Clean high-pitched tone with smooth attack and decay, highly recognizable as a standard beep."
+        },
+        {
+          "id": "tone-low",
+          "score": 88,
+          "onsetComplete": true,
+          "endingComplete": true,
+          "extraSpeech": false,
+          "cleanBoundary": true,
+          "notes": "Clean tone with no clipping or truncation, but noticeably lower in pitch than a standard beep cue."
+        }
+      ],
+      "selectedWindow": {
+        "startMs": 105,
+        "endMs": 385
+      }
+    }
+  },
+  "pass": true
+}
