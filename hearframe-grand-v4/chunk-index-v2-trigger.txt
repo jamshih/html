@@ -1,1 +1,1 @@
-build sentence phrase chunk index v2 from forced aligned 100-reference corpus
+build sentence phrase chunk index v2 from forced aligned 100-reference corpus diagnostics
