@@ -1,1 +1,1 @@
-run v0.4 conclusion speed precision phrase-first public QA
+run v0.4 conclusion speed precision phrase-first public QA director v3
