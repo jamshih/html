@@ -21,12 +21,22 @@ jobs:
         run: |
           if ! command -v ffmpeg >/dev/null; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
       - name: Refine every single-word unit used by the long answer
-        run: python .github/scripts/refine-hearframe-long-answer-words.py
-      - name: Commit precision overlay and refined word media
+        id: refine
+        continue-on-error: true
+        run: |
+          mkdir -p hearframe-grand-v4/ask/precision
+          set -o pipefail
+          python .github/scripts/refine-hearframe-long-answer-words.py 2>&1 | tee hearframe-grand-v4/ask/precision/word-refine-build.log
+      - name: Record precision output or failure log
+        if: always()
         run: |
           git config user.name 'hearframe-word-precision'
           git config user.email 'actions@users.noreply.github.com'
-          git add hearframe-grand-v4/ask/precision/long-answer-word-refinements.json hearframe-grand-v4/ask/media/segment-*-ai-v1.mp4
-          git commit -m 'AI-refine Hearframe single-word answer clips [skip ci]'
+          git add hearframe-grand-v4/ask/precision/word-refine-build.log || true
+          git add hearframe-grand-v4/ask/precision/long-answer-word-refinements.json hearframe-grand-v4/ask/media/segment-*-ai-v1.mp4 2>/dev/null || true
+          git commit -m 'Record Hearframe single-word precision result [skip ci]' || true
           git pull --rebase origin main
           git push origin HEAD:main
+      - name: Fail if precision gate failed
+        if: steps.refine.outcome != 'success'
+        run: exit 1
