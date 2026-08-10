@@ -1,11 +1,10 @@
 {
-  "version": "reference-bank-v3-report",
+  "version": "reference-bank-v3.4-report",
   "legacyCount": 100,
   "newCount": 10000,
   "totalCount": 10100,
   "targetNew": 10000,
-  "metadataValidatedNew": 10000,
-  "alignmentStatus": "The original 100-video sample corpus is aligned/indexed. The additional 10,000 are a metadata-validated retrieval bank and are aligned lazily when selected; they are not falsely labeled as already word-aligned.",
+  "directVideoUrlValidatedNew": 10000,
   "bucketCounts": {
     "interviews": 2600,
     "sports": 2200,
@@ -14,36 +13,35 @@
     "general-speech": 1700
   },
   "queryCounts": {
-    "filetype:video interview": 855,
+    "filetype:video interview": 854,
     "filetype:video \"press conference\"": 700,
     "filetype:video \"post-match\"": 4,
     "filetype:video \"Q&A\"": 521,
     "filetype:video \"talk show\"": 41,
-    "filetype:video conversation": 479,
+    "filetype:video conversation": 480,
     "filetype:video athlete": 144,
-    "filetype:video basketball": 341,
+    "filetype:video basketball": 368,
     "filetype:video football": 373,
     "filetype:video soccer": 54,
     "filetype:video tennis": 118,
     "filetype:video baseball": 267,
     "filetype:video boxing": 87,
     "filetype:video Olympic": 352,
-    "filetype:video swimmer": 192,
-    "filetype:video cyclist": 272,
-    "filetype:video actor": 365,
+    "filetype:video coach": 437,
+    "filetype:video actor": 364,
     "filetype:video actress": 244,
     "filetype:video singer": 401,
     "filetype:video musician": 294,
-    "filetype:video rapper": 401,
+    "filetype:video rapper": 402,
     "filetype:video comedian": 295,
     "filetype:video scientist": 430,
-    "filetype:video astronaut": 453,
+    "filetype:video astronaut": 455,
     "filetype:video entrepreneur": 182,
-    "filetype:video CEO": 419,
-    "filetype:video author": 16,
-    "filetype:video speech": 364,
-    "filetype:video panel": 361,
-    "filetype:video presentation": 392,
+    "filetype:video CEO": 420,
+    "filetype:video author": 13,
+    "filetype:video speech": 365,
+    "filetype:video panel": 364,
+    "filetype:video presentation": 388,
     "filetype:video English": 302,
     "filetype:video people speaking": 281
   },
@@ -56,7 +54,9 @@
       "File:Bernhard Hoeper - Interview for Millennium Village Project.webm",
       "File:Interview of Amlan Das Gupta at Digital Humanities Consultation 2013.webm",
       "File:Interview with the developers of Gopher.webm",
-      "File:Auto-Interview de Dominique Gisin.webm"
+      "File:Auto-Interview de Dominique Gisin.webm",
+      "File:WikiCon - WikiTV-Interview - Dreisam.webm",
+      "File:George Monbiot interview with The Green Interview.webm"
     ],
     "sports": [
       "File:Maroni, Antonio Rossi futuro assessore allo sport, Bergamo - 22-02-2013.webm",
@@ -66,7 +66,9 @@
       "File:Marines Royally Ready to Win Gold at Warrior Games, Again 130511-M-SO228-581.webm",
       "File:Warrior Games Opening Ceremony DVIDS363334.webm",
       "File:Tim-Kevin Ravnjak for Jacques Lemans.webm",
-      "File:British Polo Day - Moscow 2014.webm"
+      "File:British Polo Day - Moscow 2014.webm",
+      "File:Invictus Games Team USA Archery Finals.webm",
+      "File:Invictus Games Team USA Archery Finals 2.webm"
     ],
     "entertainment": [
       "File:C B Rao - Being Human and being Humane-- TVP.webm",
@@ -76,7 +78,9 @@
       "File:Jalebi being prepared, Bangalore.webm",
       "File:Rangoli being prepared by a Rangoli mould selling vendor, Bangalore.webm",
       "File:Live seafood being sold in Temple street Hong Kong.webm",
-      "File:Example of a Modern Scrapbooking Page being done with varieties of arts and crafts.webmhd.webm"
+      "File:Example of a Modern Scrapbooking Page being done with varieties of arts and crafts.webmhd.webm",
+      "File:Bauxite being digested by washing with hot Sodium Hydroxide.webm",
+      "File:Bauxite being digested by washing with hot Sodium Hydroxide at NALCO.webm"
     ],
     "experts-public-figures": [
       "File:Jyoti Sapru - Should Coltures Dialogue more or Less?-- TVP.webmsd.webm",
@@ -86,7 +90,9 @@
       "File:Jyoti Sapru - Challanges facing Gender Discrimination and Empowerment-- TVP.webmsd.webm",
       "File:Army Scientists Make Ebola Vaccine Advances 141103-A-AB123-007.webm",
       "File:Emily Temple-Wood (2minutes27seconds).webm",
-      "File:President Obama and Bill Nye Talk Earth Day in the Everglades.webm"
+      "File:President Obama and Bill Nye Talk Earth Day in the Everglades.webm",
+      "File:Neil deGrasse Tyson Thanks Teachers.webm",
+      "File:Bill Nye visits Goddard Space Flight Center.webm"
     ],
     "general-speech": [
       "File:Emily Dievendorf speaking at Michigan Pride 2012.webm",
@@ -96,98 +102,19 @@
       "File:2014 State Of The Union Address Enhanced.webm",
       "File:Nikhil Mohan Pattnaik speaking during FUEL GILT Conference 2014, Pune.webm",
       "File:GLAM-WIKI 2015 - 11 April - Keynote speech by Paul Keller.webm",
-      "File:Alex Jones presenter talking in Welsh.webm"
+      "File:Alex Jones presenter talking in Welsh.webm",
+      "File:2016-03-12 President Obama's Weekly Address.webm",
+      "File:Weekly Address - President Obama's Supreme Court Nomination.webm"
     ],
     "fallback": []
   },
-  "topLicenses": [
-    [
-      "CC BY 3.0",
-      3546
-    ],
-    [
-      "Public domain",
-      2777
-    ],
-    [
-      "CC BY-SA 4.0",
-      1843
-    ],
-    [
-      "CC BY 4.0",
-      871
-    ],
-    [
-      "CC BY-SA 3.0",
-      443
-    ],
-    [
-      "CC0",
-      343
-    ],
-    [
-      "CC BY 2.0",
-      71
-    ],
-    [
-      "CC BY-SA 2.0",
-      25
-    ],
-    [
-      "OGL v1.0",
-      16
-    ],
-    [
-      "Copyrighted free use",
-      11
-    ],
-    [
-      "CC BY-SA 3.0 igo",
-      10
-    ],
-    [
-      "CC BY 2.5",
-      7
-    ],
-    [
-      "CC BY-SA 3.0 nl",
-      6
-    ],
-    [
-      "GPL",
-      5
-    ],
-    [
-      "FAL",
-      5
-    ],
-    [
-      "GODL-India",
-      5
-    ],
-    [
-      "Public Domain",
-      4
-    ],
-    [
-      "Attribution",
-      2
-    ],
-    [
-      "GPLv3",
-      2
-    ],
-    [
-      "CC BY-SA 2.5",
-      1
-    ]
-  ],
-  "rejectedDuringMetadata": 2230,
+  "rejectedDuringDiscovery": 1974,
   "rejectionReasons": {
-    "not-video": 2228,
-    "missing-license-or-url": 2
+    "not-direct-video": 1974
   },
   "uniqueTitles": 10100,
   "uniqueSourceUrls": 10100,
+  "alignmentStatus": "Original 100 reference sample is WhisperX/word indexed. New 10,000 are direct-video retrieval references and are speech-detected/forced-aligned lazily when selected. Any isolated word must then pass Gemini audio-boundary refinement before rendering.",
+  "licensePolicy": "Because the 10K bank is only discovery metadata, license/attribution is fetched and validated from the Commons file page at selection time before a clip is eligible for production rendering.",
   "pass": true
 }
