@@ -1,1 +1,1 @@
-expand canonical Hearframe bank from 10100 to exactly 10600; prioritize celebrity interviews sports stars entertainment conversations experts and speech; preserve existing references
+keep canonical Hearframe bank at exactly 10600 while replacing lower-priority plus500 general-speech slots with fresh sports-focused references; require at least 80 sports-star entries in the incremental 500
