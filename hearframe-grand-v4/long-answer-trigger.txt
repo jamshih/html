@@ -1,1 +1,1 @@
-render v0.4 phrase-first speed-matched conclusion answer normalized 1280x720 AI-refined word gate
+render v0.5 sentence/phrase-first speed-smoothed conclusion answer using hardened word-boundary v1.3.1 gate; preserve source-independent conclusion selection
