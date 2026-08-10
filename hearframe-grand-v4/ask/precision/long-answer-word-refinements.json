@@ -1,9 +1,12 @@
 {
-  "version": "long-answer-word-refinement-v1.2",
+  "version": "long-answer-word-refinement-v1.3.1",
   "answerId": "long-demo",
+  "policy": "Forced alignment is only the seed. Start and end are optimized independently at ±80/40 ms, then ±20/10 ms, then ±5 ms. Each critic batch stays small; uncertain boundaries fail closed.",
+  "minimumConfidence": 0.82,
   "singleWordSegmentsRequired": 1,
   "singleWordSegmentsRefined": 1,
   "allSingleWordsRefined": true,
+  "allQualityGatesPassed": true,
   "refinements": {
     "begin": {
       "segmentId": "begin",
@@ -14,38 +17,78 @@
       "aiRefinedEnd": 680.039,
       "startDeltaMs": 0.0,
       "endDeltaMs": 0.0,
-      "method": "gemini-audio-critic rendered-candidate coarse/fine + five-candidate micro",
+      "forcedDurationMs": 504.0,
+      "refinedDurationMs": 504.0,
+      "method": "gemini-audio-critic independent start/end wide→fine→micro search",
       "precisionStatus": "ai-refined",
+      "qualityGate": "passed",
+      "minimumPassConfidence": 0.85,
       "media": "media/segment-begin-ai-v1.mp4",
       "passes": [
         {
-          "pass": "coarse",
-          "candidateCount": 9,
-          "winnerId": "begin-coarse-s+0-e+0",
-          "start": 679.535,
-          "end": 680.039,
-          "confidence": 0.9,
-          "reason": "Candidate begin-coarse-s+0-e+0 captures the entire word 'begin' clearly without clipping the onset or ending, and contains minimal neighboring speech with a clean boundary.",
-          "ranking": null
-        },
-        {
-          "pass": "fine",
-          "candidateCount": 9,
-          "winnerId": "begin-fine-s+0-e+0",
-          "start": 679.535,
-          "end": 680.039,
-          "confidence": 0.9,
-          "reason": "The candidate 'begin-fine-s+0-e+0' captures the complete word cleanly with minimal surrounding noise and well-timed boundaries.",
-          "ranking": null
-        },
-        {
-          "pass": "micro",
+          "pass": "coarse-start",
+          "edge": "start",
           "candidateCount": 5,
-          "winnerId": "begin-micro-s+0-e+0",
+          "winnerId": "begin-coarse-start-start+0",
           "start": 679.535,
           "end": 680.039,
-          "confidence": 1,
-          "reason": "The candidate 'begin-micro-s+0-e+0' captures the entire word 'begin' clearly without clipping the onset or offset, and contains no extraneous neighboring speech.",
+          "confidence": 0.9,
+          "reason": "The candidate 'begin-coarse-start-start+0' captures the entire word 'begin' with clear onset and offset boundaries, avoiding unnecessary surrounding speech.",
+          "ranking": null
+        },
+        {
+          "pass": "coarse-end",
+          "edge": "end",
+          "candidateCount": 5,
+          "winnerId": "begin-coarse-end-end+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.95,
+          "reason": "The candidate 'begin-coarse-end-end+0' captures the complete word 'begin' with clean acoustic boundaries and minimal surrounding noise.",
+          "ranking": null
+        },
+        {
+          "pass": "fine-start",
+          "edge": "start",
+          "candidateCount": 5,
+          "winnerId": "begin-fine-start-start+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.9,
+          "reason": "The candidate 'begin-fine-start-start+0' captures the onset and full duration of the word 'begin' clearly without clipping or excess neighboring speech compared to the other offsets.",
+          "ranking": null
+        },
+        {
+          "pass": "fine-end",
+          "edge": "end",
+          "candidateCount": 5,
+          "winnerId": "begin-fine-end-end+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.85,
+          "reason": "Candidate begin-fine-end-end+0 captures the full word cleanly without clipping the onset or trailing boundary, and contains minimal excess background sound.",
+          "ranking": null
+        },
+        {
+          "pass": "micro-start",
+          "edge": "start",
+          "candidateCount": 3,
+          "winnerId": "begin-micro-start-start+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.9,
+          "reason": "The candidate 'begin-micro-start-start+0' captures the complete onset and offset of the target word 'begin' with minimal neighboring speech and clean boundaries.",
+          "ranking": null
+        },
+        {
+          "pass": "micro-end",
+          "edge": "end",
+          "candidateCount": 3,
+          "winnerId": "begin-micro-end-end+0",
+          "start": 679.535,
+          "end": 680.039,
+          "confidence": 0.9,
+          "reason": "The candidate begin-micro-end-end+0 captures the entire word 'begin' clearly without clipping the onset or trailing sounds, whereas the -5 variant cuts it too short and the +5 variant includes extra background noise/speech.",
           "ranking": null
         }
       ]
