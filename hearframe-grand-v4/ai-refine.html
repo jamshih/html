@@ -17,8 +17,8 @@
 <div class="grid">
 <section class="card">
   <h2>1 · Shared Interview AIBot backend</h2>
-  <div class="note">Only the backend URL lives here. The Gemini API key stays on the Interview AIBot server and is never entered into this page.</div>
-  <div class="field"><label for="backend">INTERVIEW AIBOT BASE URL</label><input id="backend" placeholder="https://your-interview-aibot-host.example" autocomplete="off" /></div>
+  <div class="note">Preconfigured to the existing Interview AIBot Supabase Edge Function. Only a browser-safe Supabase publishable key is used here; the Gemini API key stays in Supabase Edge Function Secrets and is never entered into Hearframe.</div>
+  <div class="field"><label for="backend">INTERVIEW AIBOT SHARED BACKEND</label><input id="backend" placeholder="Interview AIBot Edge Function URL" autocomplete="off" /></div>
   <div class="row"><button id="saveBackend">Save URL</button><button id="testBackend" class="primary">Test Gemini backend</button></div>
   <div class="status" id="backendStatus">Not tested.</div>
 </section>
@@ -72,6 +72,8 @@
 'use strict';
 const Core=window.HearframeAICore;
 const $=id=>document.getElementById(id);
+const DEFAULT_BACKEND='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai';
+const INTERVIEW_PUBLISHABLE_KEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx';
 const NIXON=[
  'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm',
  'https://upload.wikimedia.org/wikipedia/commons/2/23/20170110_President_Obama_Farewell_Speech_HD.webm'
@@ -90,7 +92,7 @@ const graphs=new WeakMap();
 let sourcesLoaded=false,busy=false;
 
 const backendInput=$('backend'),backendStatus=$('backendStatus'),criticStatus=$('criticStatus'),directorStatus=$('directorStatus'),passes=$('passes'),previewStatus=$('previewStatus');
-backendInput.value=localStorage.getItem('hearframeInterviewBackend')||'';
+backendInput.value=localStorage.getItem('hearframeInterviewBackend')||DEFAULT_BACKEND;
 
 function setStatus(el,text,kind=''){el.textContent=text;el.className='status'+(kind?' '+kind:'')}
 function fmt(t){const m=Math.floor(t/60),s=t-m*60;return `${String(m).padStart(2,'0')}:${s.toFixed(3).padStart(6,'0')}`}
@@ -106,12 +108,12 @@ function baseUrl(){
  return value;
 }
 async function api(path,options={}){
- const res=await fetch(baseUrl()+path,{...options,headers:{'content-type':'application/json',...(options.headers||{})}});
+ const res=await fetch(baseUrl()+path,{...options,headers:{'content-type':'application/json','apikey':INTERVIEW_PUBLISHABLE_KEY,...(options.headers||{})}});
  const text=await res.text();let data;try{data=JSON.parse(text)}catch{data={error:text||`HTTP ${res.status}`}}
  if(!res.ok)throw new Error(`${data.error||'request_failed'} (${res.status})`);
  return data;
 }
-$('saveBackend').onclick=()=>{const value=Core.backendBase(backendInput.value);localStorage.setItem('hearframeInterviewBackend',value);backendInput.value=value;setStatus(backendStatus,'Backend URL saved locally. No API key is stored in Hearframe.','good')};
+$('saveBackend').onclick=()=>{const value=Core.backendBase(backendInput.value);localStorage.setItem('hearframeInterviewBackend',value);backendInput.value=value;setStatus(backendStatus,'Backend URL saved locally. Only the Supabase publishable key is in the browser; GEMINI_API_KEY remains server-side.','good')};
 $('testBackend').onclick=async()=>{try{setStatus(backendStatus,'Testing shared backend…');const data=await api('/api/shared-ai/health',{method:'GET',headers:{}});if(!data.configured)throw new Error('Backend is reachable, but GEMINI_API_KEY is not configured on the server.');setStatus(backendStatus,`Connected · ${data.provider} · ${data.model} · audio=${data.audioInput} · store=${data.geminiStore}`,'good')}catch(e){setStatus(backendStatus,e.message,'bad')}};
 
 $('runDirector').onclick=async()=>{try{
