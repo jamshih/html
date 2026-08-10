@@ -12,19 +12,17 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Extract exact audio-only contexts from source video timelines
+      - name: Extract audio-only contexts from already-rendered Hearframe media
         run: |
           set -euo pipefail
           mkdir -p hearframe-grand-v4/ai-audio
-          OBAMA='https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm'
-          JFK='https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm'
-          ffmpeg -hide_banner -loglevel error -y -ss 1.100 -i "$OBAMA" -t 0.650 -vn -ac 1 -ar 16000 -c:a pcm_s16le hearframe-grand-v4/ai-audio/hello-context.wav
-          ffmpeg -hide_banner -loglevel error -y -ss 122.200 -i "$JFK" -t 0.800 -vn -ac 1 -ar 16000 -c:a pcm_s16le hearframe-grand-v4/ai-audio/world-context.wav
+          ffmpeg -hide_banner -loglevel error -y -i hearframe-grand-v4/ask/media/answer-greeting.mp4 -vn -ac 1 -ar 16000 -c:a pcm_s16le hearframe-grand-v4/ai-audio/hello-context.wav
+          ffmpeg -hide_banner -loglevel error -y -i hearframe-grand-v4/ask/media/answer-world.mp4 -vn -ac 1 -ar 16000 -c:a pcm_s16le hearframe-grand-v4/ai-audio/world-context.wav
           python3 - <<'PY'
           import json, subprocess
           from pathlib import Path
@@ -32,11 +30,11 @@ jobs:
           def duration(name):
               return float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nw=1:nk=1',str(root/name)],text=True).strip())
           h=duration('hello-context.wav'); w=duration('world-context.wav')
-          if h < .60 or w < .75: raise SystemExit(f'context extraction too short: hello={h}, world={w}')
+          if h < .20 or w < 1.5: raise SystemExit(f'context extraction too short: hello={h}, world={w}')
           meta={
-            'version':'exact-video-audio-context-v1',
-            'hello':{'url':'./ai-audio/hello-context.wav','contextStart':1.100,'duration':h,'anchorStart':1.308,'anchorEnd':1.500},
-            'world':{'url':'./ai-audio/world-context.wav','contextStart':122.200,'duration':w,'anchorStart':122.440,'anchorEnd':122.700}
+            'version':'rendered-source-audio-context-v1',
+            'hello':{'url':'./ai-audio/hello-context.wav','contextStart':1.283,'duration':h,'anchorStart':1.308,'anchorEnd':1.500,'coarseMs':[-10,0,10],'fineMs':[-5,0,5],'microMs':[-2,0,2]},
+            'world':{'url':'./ai-audio/world-context.wav','contextStart':122.161,'duration':w,'anchorStart':122.440,'anchorEnd':122.700,'coarseMs':[-40,0,40],'fineMs':[-10,0,10],'microMs':[-5,0,5]}
           }
           (root/'contexts.json').write_text(json.dumps(meta,indent=2)+'\n')
           print(json.dumps(meta,indent=2))
@@ -49,8 +47,11 @@ jobs:
           p=Path('hearframe-grand-v4/ai-refine.html')
           s=p.read_text()
           marker="const labels={h:'HELLO',w:'WORLD'};"
-          if 'const STATIC_AUDIO_CONTEXTS=' not in s:
-              s=s.replace(marker, marker+"\nconst STATIC_AUDIO_CONTEXTS={h:{url:'./ai-audio/hello-context.wav?v=1',start:1.100},w:{url:'./ai-audio/world-context.wav?v=1',start:122.200}};")
+          constant="const STATIC_AUDIO_CONTEXTS={h:{url:'./ai-audio/hello-context.wav?v=2',start:1.283,coarse:[-10,0,10],fine:[-5,0,5],micro:[-2,0,2]},w:{url:'./ai-audio/world-context.wav?v=2',start:122.161,coarse:[-40,0,40],fine:[-10,0,10],micro:[-5,0,5]}};"
+          if 'const STATIC_AUDIO_CONTEXTS=' in s:
+              s=re.sub(r"const STATIC_AUDIO_CONTEXTS=.*?;",constant,s,count=1)
+          else:
+              s=s.replace(marker, marker+'\n'+constant)
           old="""await Promise.all([\n  loadSource(captureVideos.h,NIXON,'HELLO analysis'),loadSource(captureVideos.w,JFK,'WORLD analysis'),\n  loadSource(previewVideos.h,NIXON,'HELLO preview'),loadSource(previewVideos.w,JFK,'WORLD preview')\n ]);"""
           new="""await Promise.all([\n  loadSource(previewVideos.h,NIXON,'HELLO preview'),loadSource(previewVideos.w,JFK,'WORLD preview')\n ]);"""
           s=s.replace(old,new)
@@ -73,7 +74,11 @@ jobs:
 function toBase64'''
           s2,n=re.subn(r'async function captureContext\(key,center\)\{.*?\n\}\nfunction toBase64',replacement,s,flags=re.S)
           if n!=1: raise SystemExit(f'expected one captureContext replacement, got {n}')
-          p.write_text(s2)
+          s=s2
+          s=s.replace("const coarse=Core.makeCandidateGrid(anchor,[-40,0,40],.06,`${key}-coarse`);", "const coarse=Core.makeCandidateGrid(anchor,STATIC_AUDIO_CONTEXTS[key]?.coarse||[-40,0,40],.06,`${key}-coarse`);")
+          s=s.replace("const fine=Core.makeCandidateGrid(coarseWinner,[-10,0,10],.06,`${key}-fine`);", "const fine=Core.makeCandidateGrid(coarseWinner,STATIC_AUDIO_CONTEXTS[key]?.fine||[-10,0,10],.06,`${key}-fine`);")
+          s=s.replace("const micro=Core.makeCandidateGrid(fineWinner,[-5,0,5],.06,`${key}-micro`);", "const micro=Core.makeCandidateGrid(fineWinner,STATIC_AUDIO_CONTEXTS[key]?.micro||[-5,0,5],.06,`${key}-micro`);")
+          p.write_text(s)
           PY
       - name: Commit contexts and lab
         run: |
