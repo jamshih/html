@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-08-10T11:32:47.394Z",
+  "checkedAt": "2026-08-10T11:48:16.776Z",
   "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
   "pass": true,
   "requirements": {
@@ -27,7 +27,7 @@
       ],
       "httpStatus": 200,
       "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe 'long-demo' plan provides an inspiring, multi-sentence message ('Change only happens when ordinary people get involved...') that concludes with a clear final thought ('You can begin.'), meeting the user's request for a longer and inspiring statement while satisfying all precision and tempo criteria.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring. The 'long-demo' plan provides a complete, inspiring message with multiple sentences ('The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.'), meets the length requirement, and passed all audio precision and tempo checks.",
       "wordCount": 22,
       "tempoFactors": [
         1.08,
@@ -54,7 +54,7 @@
       "consoleErrors": [],
       "httpStatus": 200,
       "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring. The 'long-demo' plan provides a complete, inspiring multi-sentence message with strong pacing and a clear concluding thought that meets all quality and length criteria.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring, and the 'long-demo' plan provides a complete, multi-sentence inspirational message that matches this criteria.",
       "wordCount": 22,
       "tempoFactors": [
         1.08,
