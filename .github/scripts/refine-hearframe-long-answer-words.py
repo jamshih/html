@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import base64, io, json, math, os, re, subprocess, urllib.request, wave
+import base64, io, json, math, os, re, subprocess, time, urllib.error, urllib.request, wave
 
 ROOT=Path('hearframe-grand-v4/ask')
 MEDIA=ROOT/'media'
@@ -12,9 +12,8 @@ AI_ENDPOINT=os.environ.get('HEARFRAME_AI_ENDPOINT','https://rfpkznuntzxfoeeavwwf
 PUBLISHABLE_KEY=os.environ.get('HEARFRAME_PUBLISHABLE_KEY','sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx')
 PASS_DELTAS=[('coarse',[-40,0,40]),('fine',[-10,0,10]),('micro',[-5,0,5])]
 MIN_DUR=.06
+TRANSIENT={429,500,502,503,504}
 
-# Current long-answer plan. The renderer may reorder these later, but any single-word
-# unit used by the production answer must pass this refinement gate first.
 answer=next((a for a in CORPUS.get('answers',[]) if a.get('id')=='long-demo'),None)
 if not answer: raise SystemExit('long-demo answer is missing')
 segment_ids=answer.get('segments') or []
@@ -61,14 +60,30 @@ def judge(target,cands,frames,sr,context_start):
     payload={'targetWord':target,'candidates':[]}
     for c in cands:
         payload['candidates'].append({'id':c['id'],'audioBase64':wav_slice_base64(frames,sr,context_start,c['start'],c['end']),'mimeType':'audio/wav','startMs':round(c['start']*1000),'endMs':round(c['end']*1000)})
-    req=urllib.request.Request(AI_ENDPOINT,data=json.dumps(payload).encode(),headers={'content-type':'application/json','apikey':PUBLISHABLE_KEY},method='POST')
-    try:
-        with urllib.request.urlopen(req,timeout=55) as r: data=json.load(r)
-    except Exception as e:
-        raise RuntimeError(f'Gemini audio critic failed: {e}')
-    winner=next((c for c in cands if c['id']==data.get('bestCandidateId')),None)
-    if not winner: raise RuntimeError(f"AI returned non-rendered candidate: {data.get('bestCandidateId')}")
-    return data,winner
+    body=json.dumps(payload,separators=(',',':')).encode()
+    last=None
+    for attempt in range(1,6):
+        req=urllib.request.Request(AI_ENDPOINT,data=body,headers={'content-type':'application/json','apikey':PUBLISHABLE_KEY,'user-agent':'HearframeWordPrecision/1.1'},method='POST')
+        try:
+            with urllib.request.urlopen(req,timeout=65) as r:
+                data=json.load(r)
+            winner=next((c for c in cands if c['id']==data.get('bestCandidateId')),None)
+            if not winner: raise RuntimeError(f"AI returned non-rendered candidate: {data.get('bestCandidateId')}")
+            return data,winner
+        except urllib.error.HTTPError as e:
+            detail=e.read().decode('utf-8','replace')[:1200]
+            last=RuntimeError(f'Gemini audio critic HTTP {e.code}: {detail}')
+            print(f'critic attempt {attempt}/5 failed: {last}',flush=True)
+            if e.code not in TRANSIENT or attempt==5: raise last
+            retry=e.headers.get('Retry-After') if e.headers else None
+            wait=float(retry) if retry and retry.replace('.','',1).isdigit() else min(20,2**attempt)
+            time.sleep(wait)
+        except (urllib.error.URLError,TimeoutError) as e:
+            last=RuntimeError(f'Gemini audio critic transport failure: {e}')
+            print(f'critic attempt {attempt}/5 failed: {last}',flush=True)
+            if attempt==5: raise last
+            time.sleep(min(20,2**attempt))
+    raise last or RuntimeError('Gemini audio critic failed without a response')
 
 def render_refined_video(sid,source_url,start,end):
     out=MEDIA/f'segment-{sid}-ai-v1.mp4'
@@ -99,9 +114,11 @@ for sid in segment_ids:
     passes=[]
     for name,deltas in PASS_DELTAS:
         grid=candidate_grid(center,deltas,f'{sid}-{name}')
+        print(f'{sid} {name}: sending {len(grid)} real WAV candidates to Gemini',flush=True)
         result,winner=judge(toks[0],grid,frames,sr,context_start)
         passes.append({'pass':name,'candidateCount':len(grid),'winnerId':winner['id'],'start':winner['start'],'end':winner['end'],'confidence':result.get('confidence'),'reason':result.get('reason'),'ranking':result.get('ranking')})
         center={'start':winner['start'],'end':winner['end']}
+        time.sleep(1.25)
     media=render_refined_video(sid,source_url,center['start'],center['end'])
     refinements[sid]={
       'segmentId':sid,'targetWord':toks[0].lower(),'forcedStart':float(seg['alignedStart']),'forcedEnd':float(seg['alignedEnd']),
@@ -111,6 +128,6 @@ for sid in segment_ids:
     }
 
 if not refinements: raise SystemExit('No single-word segments found; refinement gate did not run')
-report={'version':'long-answer-word-refinement-v1','answerId':'long-demo','singleWordSegmentsRequired':len(refinements),'singleWordSegmentsRefined':len(refinements),'allSingleWordsRefined':True,'refinements':refinements}
+report={'version':'long-answer-word-refinement-v1.1','answerId':'long-demo','singleWordSegmentsRequired':len(refinements),'singleWordSegmentsRefined':len(refinements),'allSingleWordsRefined':True,'refinements':refinements}
 OUT.write_text(json.dumps(report,indent=2,ensure_ascii=False))
 print(json.dumps({k:{'forced':[v['forcedStart'],v['forcedEnd']],'refined':[v['aiRefinedStart'],v['aiRefinedEnd']],'deltaMs':[v['startDeltaMs'],v['endDeltaMs']]} for k,v in refinements.items()},indent=2))
