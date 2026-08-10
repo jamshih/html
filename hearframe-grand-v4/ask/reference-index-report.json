@@ -1,19 +1,16 @@
 {
   "catalogReferences": 100,
   "processedReferences": 100,
-  "indexedSpeechReferences": 87,
+  "indexedSpeechReferences": 86,
   "sampleSecondsPerReference": 45.0,
-  "acceptedWordOccurrences": 6247,
-  "uniqueWords": 1635,
+  "acceptedWordOccurrences": 6227,
+  "uniqueWords": 1634,
   "medianAlignmentScore": 0.904,
   "statusCounts": {
-    "indexed": 87,
+    "indexed": 86,
     "no-speech": 6,
-    "low-speech": 7
+    "low-speech": 7,
+    "error": 1
   },
-  "pass": true,
-  "spliceCalibrationApplied": true,
-  "spliceCandidateCount": 3636,
-  "goldPostCalibrationMaxErrorMs": 21.8,
-  "goldPostCalibrationMeanErrorMs": 11.3
+  "pass": true
 }

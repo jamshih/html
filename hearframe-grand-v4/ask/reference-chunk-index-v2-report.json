@@ -1,0 +1,15 @@
+{
+  "version": "reference-chunk-index-v2-report",
+  "referencesWithChunks": 88,
+  "sentenceCandidates": 482,
+  "uniqueExactPhrases": 26040,
+  "phraseOccurrencesBeforeDedup": 30320,
+  "maxPhraseWords": 8,
+  "maxSentenceWords": 30,
+  "retrievalOrder": [
+    "sentence",
+    "phrase",
+    "ai-refined-word"
+  ],
+  "pass": true
+}
