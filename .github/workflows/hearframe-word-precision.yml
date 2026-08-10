@@ -1,0 +1,32 @@
+name: Hearframe Word Precision Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/word-precision-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure ffmpeg
+        run: |
+          if ! command -v ffmpeg >/dev/null; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
+      - name: Refine every single-word unit used by the long answer
+        run: python .github/scripts/refine-hearframe-long-answer-words.py
+      - name: Commit precision overlay and refined word media
+        run: |
+          git config user.name 'hearframe-word-precision'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/precision/long-answer-word-refinements.json hearframe-grand-v4/ask/media/segment-*-ai-v1.mp4
+          git commit -m 'AI-refine Hearframe single-word answer clips [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
