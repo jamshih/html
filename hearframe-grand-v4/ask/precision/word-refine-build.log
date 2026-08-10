@@ -1,22 +1,36 @@
-+ ffmpeg -y -hide_banner -nostdin -loglevel error -ss 679.355 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm -t 0.864 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-begin-precision.wav
-begin coarse: sending 9 real WAV candidates to Gemini
-begin fine: sending 9 real WAV candidates to Gemini
-begin micro: sending 5 single-edge ±5 ms WAV candidates to Gemini after cooldown
-+ ffmpeg -y -hide_banner -nostdin -loglevel error -ss 679.535 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm -t 0.504 -vf scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:black,fps=30 -af aresample=48000 -c:v libx264 -preset veryfast -crf 21 -profile:v main -level 3.1 -pix_fmt yuv420p -bf 0 -g 30 -r 30 -c:a aac -b:a 128k -ar 48000 -ac 2 -movflags +faststart -video_track_timescale 90000 hearframe-grand-v4/ask/media/segment-begin-ai-v1.mp4
-+ ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/segment-begin-ai-v1.mp4 -f null -
-{
-  "begin": {
-    "forced": [
-      679.535,
-      680.039
-    ],
-    "refined": [
-      679.535,
-      680.039
-    ],
-    "deltaMs": [
-      0.0,
-      0.0
-    ]
-  }
-}
++ ffmpeg -y -hide_banner -nostdin -loglevel error -ss 679.255 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm -t 1.064 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-begin-precision.wav
+begin coarse: sending 25 independently-adjusted real WAV candidates to Gemini
+critic attempt 1/6 failed: Gemini audio critic HTTP 400: {"error":"invalid_request"}
+Traceback (most recent call last):
+  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 80, in judge
+    with urllib.request.urlopen(req,timeout=70) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 146, in <module>
+    result,winner=judge(toks[0],grid,frames,sr,context_start,name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 92, in judge
+    if e.code not in TRANSIENT or attempt==6: raise last
+                                              ^^^^^^^^^^
+RuntimeError: Gemini audio critic HTTP 400: {"error":"invalid_request"}
