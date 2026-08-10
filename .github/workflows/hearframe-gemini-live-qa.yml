@@ -24,13 +24,13 @@ jobs:
         id: probe
         continue-on-error: true
         run: node .github/scripts/hearframe-gemini-live-qa.mjs
-      - name: Record result
+      - name: Record result and exported vocabulary
         if: always()
         run: |
           git config user.name 'hearframe-gemini-live-qa'
           git config user.email 'actions@users.noreply.github.com'
-          git add hearframe-grand-v4/gemini-live-qa.json || true
-          git commit -m 'Record Hearframe Gemini live QA [skip ci]' || true
+          git add hearframe-grand-v4/gemini-live-qa.json hearframe-grand-v4/ask/corpus-vocabulary.json || true
+          git commit -m 'Record Hearframe real-corpus Gemini QA [skip ci]' || true
           git pull --rebase origin main
           git push origin HEAD:main
       - name: Fail when live Gemini probe failed
