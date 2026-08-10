@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-08-10T09:38:16.086Z",
+  "base": "https://hearframe-grand-hello-world-v4.onrender.com",
+  "page": {
+    "status": 200,
+    "hasCorpusStatus": true,
+    "loadsVocabulary": true,
+    "stillDefaultHelloWorld": false
+  },
+  "vocabulary": {
+    "status": 200,
+    "version": "reference-100-vocab-v1",
+    "sourceCount": 87,
+    "processedSources": 100,
+    "uniqueWordCount": 1635,
+    "availableWordsCount": 1635,
+    "preferredPhraseCount": 11
+  },
+  "pass": true
+}
