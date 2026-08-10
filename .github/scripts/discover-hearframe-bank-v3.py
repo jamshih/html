@@ -7,7 +7,7 @@ BASE=json.loads((ROOT/'reference-videos.json').read_text())
 OUT=ROOT/'reference-bank-v3.json'
 REPORT=ROOT/'reference-bank-v3-report.json'
 API='https://commons.wikimedia.org/w/api.php'
-UA='HearframePrototype/3.1 (licensed speech-video corpus research; github.com/jamshih/html)'
+UA='HearframePrototype/3.2 (licensed speech-video corpus research; github.com/jamshih/html)'
 TARGET_NEW=10_000
 TARGET_TOTAL=len(BASE.get('videos',[]))+TARGET_NEW
 REQUEST_GAP=.38
@@ -36,13 +36,19 @@ PRIORITY={'interviews':1.0,'sports':.96,'entertainment':.96,'experts-public-figu
 def api(params,retries=8):
     global _last_request
     params={**params,'format':'json','formatversion':'2','maxlag':'5'}
-    url=API+'?'+urllib.parse.urlencode(params)
+    encoded=urllib.parse.urlencode(params).encode()
+    # Search continuations are small and cache-friendly as GET. Metadata batches can
+    # contain very long Commons filenames, so send those as form-encoded POST to avoid 414.
+    use_post=('titles' in params or len(encoded)>5000)
     last=None
     for attempt in range(1,retries+1):
         gap=REQUEST_GAP-(time.monotonic()-_last_request)
         if gap>0: time.sleep(gap)
         try:
-            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'application/json'})
+            if use_post:
+                req=urllib.request.Request(API,data=encoded,headers={'User-Agent':UA,'Accept':'application/json','Content-Type':'application/x-www-form-urlencoded'},method='POST')
+            else:
+                req=urllib.request.Request(API+'?'+encoded.decode(),headers={'User-Agent':UA,'Accept':'application/json'})
             _last_request=time.monotonic()
             with urllib.request.urlopen(req,timeout=75) as r:
                 data=json.load(r)
@@ -101,7 +107,6 @@ for bucket,quota,queries in BUCKETS:
             if len(bucket_titles)>=quota:break
         if len(bucket_titles)>=quota:break
     if len(bucket_titles)<quota:
-        # Use multiple broad bucket synonyms rather than hammering the first query again.
         for q in queries:
             if len(bucket_titles)>=quota:break
             for title in search(q,quota-len(bucket_titles),all_titles):
@@ -109,8 +114,6 @@ for bucket,quota,queries in BUCKETS:
     discovered.extend(bucket_titles[:quota])
     print(bucket,len(bucket_titles[:quota]),flush=True)
 
-# Keep a metadata-validation reserve. This also fills bucket shortfalls without changing
-# the fact that high-priority interview/sport/entertainment results appear first.
 reserve_target=TARGET_NEW+2500
 if len(discovered)<reserve_target:
     need=reserve_target-len(discovered)
