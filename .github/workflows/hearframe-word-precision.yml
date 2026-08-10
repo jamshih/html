@@ -23,6 +23,8 @@ jobs:
       - name: Refine every single-word unit used by the long answer
         id: refine
         continue-on-error: true
+        env:
+          HEARFRAME_AI_ENDPOINT: https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-audio-critic-lite
         run: |
           mkdir -p hearframe-grand-v4/ask/precision
           set -o pipefail
