@@ -8,7 +8,8 @@ if not precision_path.exists(): raise SystemExit('single-word precision overlay 
 precision=json.loads(precision_path.read_text())
 
 # Output order is independent of where the clips occur in their original speeches.
-# The last two chunks form an explicit conclusion.
+# A conclusion is an answer-role, not a source-timeline constraint: the source clip can
+# come from anywhere in the original speech as long as it is placed at the end here.
 SEG_IDS=['world_different','change_people','ask_what_you_can_do','you_can','begin']
 ROLES=['body','body','body','conclusion','conclusion']
 CONCLUSION='You can begin.'
@@ -37,6 +38,8 @@ def chunk_type(n):
     return 'sentence'
 
 def speed_bounds(n):
+    # Tempo correction is conservative and pitch-preserving. Single words barely move;
+    # complete phrases/sentences can absorb a little more smoothing without sounding fake.
     if n==1: return (.98,1.02)
     if n<=3: return (.95,1.05)
     return (.92,1.08)
@@ -51,9 +54,12 @@ for sid in SEG_IDS:
     if n==1:
         single_word_ids.append(sid)
         ref=refined_map.get(sid)
-        if not ref or ref.get('precisionStatus')!='ai-refined': raise SystemExit(f'{sid}: single word has not passed Gemini precision refinement')
+        if not ref or ref.get('precisionStatus')!='ai-refined' or ref.get('qualityGate')!='passed':
+            raise SystemExit(f'{sid}: single word has not passed the hardened word-boundary gate')
         p=ROOT/ref['media']
     else:
+        # Preserve intact phrase/sentence media whenever available. Do not split a good
+        # sentence into isolated words merely because word-level units also exist.
         p=MEDIA/f'segment-{sid}.mp4'
     if not p.exists(): raise SystemExit(f'missing {p}')
     inputs.append(p)
@@ -72,6 +78,8 @@ for rate,n,role in zip(raw_wps,counts,ROLES):
     desired=(target_wps/rate) if rate>0 else 1.0
     speed=clamp(desired,lo,hi)
     if abs(speed-1.0)<.012: speed=1.0
+    # A conclusion should settle slightly rather than rush, but still stay inside the
+    # same conservative per-chunk bounds.
     if role=='conclusion': speed=clamp(speed*.985,lo,hi)
     speeds.append(round(speed,4))
 adj_durs=[d/s for d,s in zip(raw_durs,speeds)]
@@ -86,8 +94,6 @@ args=[]
 for p in inputs: args += ['-i',str(p)]
 filters=[]
 for i,(g,speed) in enumerate(zip(gains,speeds)):
-    # Normalize every source to the exact same Safari-safe 1280x720 canvas before concat.
-    # This does not change any source timing/window; it only resolves mixed source resolutions.
     filters.append(f'[{i}:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30,settb=AVTB,setpts=(PTS-STARTPTS)/{speed:.4f}[v{i}]')
     filters.append(f'[{i}:a]aresample=48000,atempo={speed:.4f},volume={g:.3f}dB,asetpts=PTS-STARTPTS[a{i}]')
 filters.append(''.join(f'[v{i}]' for i in range(len(inputs)))+f'concat=n={len(inputs)}:v=1:a=0,fps=30,setpts=PTS-STARTPTS[vout]')
@@ -108,26 +114,31 @@ video_stream=next(s for s in probe['streams'] if s.get('codec_type')=='video')
 if (video_stream.get('width'),video_stream.get('height')) != (1280,720): raise SystemExit('final video is not 1280x720')
 if not TEXT.rstrip().endswith(CONCLUSION): raise SystemExit('answer does not end with the required conclusion')
 if ROLES[-1] != 'conclusion': raise SystemExit('final chunk is not marked as conclusion')
+if not any(t=='sentence' for t in types): raise SystemExit('render plan unexpectedly contains no intact sentence chunk')
 
 plan={
  'id':'long-demo','text':TEXT,
  'keywords':['long answer','longer answer','long sentence','longer sentence','say something longer','say something inspiring','give me a longer answer','test long sentence'],
  'segments':SEG_IDS,'roles':ROLES,'chunkTypes':types,'media':'media/answer-long-demo.mp4',
  'wordCount':wc(TEXT),'hasConclusion':True,'conclusionText':CONCLUSION,'conclusionSegmentIds':['you_can','begin'],
- 'speedAdjusted':any(abs(s-1)>1e-6 for s in speeds),'speedFactors':speeds,'phraseFirst':True,
- 'singleWordPrecisionGate':'passed','singleWordSegments':single_word_ids
+ 'conclusionSourcePositionIndependent':True,
+ 'speedAdjusted':any(abs(s-1)>1e-6 for s in speeds),'speedFactors':speeds,
+ 'retrievalOrder':['sentence','phrase','ai-refined-word'],'phraseFirst':True,
+ 'singleWordPrecisionGate':'passed','singleWordPrecisionVersion':precision.get('version'),
+ 'singleWordSegments':single_word_ids
 }
 corpus['answers']=[a for a in corpus.get('answers',[]) if a.get('id')!='long-demo']
 corpus['answers'].append(plan)
-corpus['version']='ask-v0.4'
-corpus['notes']='Phrase/sentence-first corpus; every single-word chunk used by the long-answer render passes Gemini audio-window refinement first. Long answers end with an explicit conclusion and use conservative per-clip tempo matching.'
+corpus['version']='ask-v0.5'
+corpus['notes']='Sentence/phrase-first corpus. Isolated words are fallback-only and must pass independent-edge AI boundary refinement first. Long answers end with an explicit conclusion chosen independently of source timeline position and use conservative per-clip tempo matching.'
 (ROOT/'corpus.json').write_text(json.dumps(corpus,indent=2))
 report={
- 'version':'long-answer-qa-v0.4','text':TEXT,'wordCount':wc(TEXT),'segments':SEG_IDS,'roles':ROLES,'chunkTypes':types,'segmentCount':len(SEG_IDS),
- 'conclusion':CONCLUSION,'hasConclusion':True,'sourceOrderIndependent':True,
- 'singleWordSegments':single_word_ids,'singleWordPrecisionGate':'passed','precisionOverlay':str(precision_path.relative_to(ROOT)),
+ 'version':'long-answer-qa-v0.5','text':TEXT,'wordCount':wc(TEXT),'segments':SEG_IDS,'roles':ROLES,'chunkTypes':types,'segmentCount':len(SEG_IDS),
+ 'retrievalOrder':['sentence','phrase','ai-refined-word'],'sentenceClipPresent':any(t=='sentence' for t in types),
+ 'conclusion':CONCLUSION,'hasConclusion':True,'sourceOrderIndependent':True,'conclusionSourcePositionIndependent':True,
+ 'singleWordSegments':single_word_ids,'singleWordPrecisionGate':'passed','singleWordPrecisionVersion':precision.get('version'),'precisionOverlay':str(precision_path.relative_to(ROOT)),
  'rawDurations':raw_durs,'rawWordsPerSecond':[round(x,3) for x in raw_wps],'targetWordsPerSecond':round(target_wps,3),
- 'speedFactors':speeds,'adjustedDurations':[round(x,4) for x in adj_durs],'adjustedWordsPerSecond':[round(x,3) for x in adj_wps],
+ 'speedFactors':speeds,'speedAdjusted':any(abs(s-1)>1e-6 for s in speeds),'adjustedDurations':[round(x,4) for x in adj_durs],'adjustedWordsPerSecond':[round(x,3) for x in adj_wps],
  'sourceMeansDbFS':means,'appliedGainDb':[round(x,3) for x in gains],'crossfadeMs':[round(x*1000,1) for x in xfades],
  'duration':float(probe['format']['duration']),'fullDecode':'pass','normalizedVideo':'1280x720','corpusVersionAfterBuild':corpus.get('version'),'alignment':corpus.get('alignment'),'probe':probe,
  'pass':True
