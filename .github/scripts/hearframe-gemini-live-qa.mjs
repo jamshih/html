@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 
-const html = fs.readFileSync('hearframe-grand-v4/ai-refine.html','utf8');
+const htmlPath='hearframe-grand-v4/ai-refine.html';
+let html = fs.readFileSync(htmlPath,'utf8');
 const backend = html.match(/const DEFAULT_BACKEND='([^']+)'/)?.[1];
 const apikey = html.match(/const INTERVIEW_PUBLISHABLE_KEY='([^']+)'/)?.[1];
 if (!backend || !apikey) throw new Error('Could not resolve live Interview AIBot backend configuration');
@@ -23,6 +24,21 @@ for(const ans of corpus.answers||[]){
 const stats=index.stats||{};
 const vocabulary={version:'reference-100-vocab-v1',sourceCount:stats.speechBearingSources||stats.indexedSources||87,processedSources:stats.processedSources||100,uniqueWordCount:words.length,availableWords:words,preferredPhrases:phrases};
 fs.writeFileSync('hearframe-grand-v4/ask/corpus-vocabulary.json',JSON.stringify(vocabulary,null,2)+'\n');
+
+// Upgrade the visible lab from the two-word demo to the actual indexed vocabulary.
+if(!html.includes('id="corpusStatus"')){
+  html=html.replace(
+    '<div class="note">The director may only answer with words we say exist in the indexed video corpus. The backend verifies the answer after Gemini responds.</div>',
+    '<div class="note">The director is automatically loaded with the real 100-reference Hearframe vocabulary. It may only answer with indexed words, and the backend verifies every output token after Gemini responds.</div><div class="status" id="corpusStatus">Loading real Hearframe corpus…</div>'
+  );
+  html=html.replace('<textarea id="words">hello world</textarea>','<textarea id="words">Loading real corpus…</textarea>');
+  html=html.replace('<textarea id="phrases">hello world</textarea>','<textarea id="phrases">Loading intact phrases…</textarea>');
+  const marker="backendInput.value=localStorage.getItem('hearframeInterviewBackend')||DEFAULT_BACKEND;";
+  const loader=`\nconst corpusStatus=$('corpusStatus'),runDirectorBtn=$('runDirector');\nrunDirectorBtn.disabled=true;\nconst corpusVocabularyPromise=fetch('./ask/corpus-vocabulary.json?v=reference-100-v1',{cache:'no-store'})\n .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})\n .then(v=>{\n   if(!Array.isArray(v.availableWords)||v.availableWords.length<1000)throw new Error('indexed vocabulary is incomplete');\n   $('words').value=v.availableWords.join(' ');\n   $('phrases').value=(v.preferredPhrases||[]).join('\\n');\n   runDirectorBtn.disabled=false;\n   setStatus(corpusStatus,\\`Real corpus loaded · \\${v.uniqueWordCount||v.availableWords.length} indexed words · \\${v.sourceCount||'?'} speech-bearing references.\\`,'good');\n   return v;\n })\n .catch(e=>{\n   $('words').value='hello world';$('phrases').value='hello world';runDirectorBtn.disabled=false;\n   setStatus(corpusStatus,'Real corpus failed to load: '+e.message,'bad');\n   return null;\n });`;
+  if(!html.includes(marker)) throw new Error('Could not find lab backend initialization marker');
+  html=html.replace(marker,marker+loader);
+  fs.writeFileSync(htmlPath,html);
+}
 
 const origin='https://hearframe-grand-hello-world-v4.onrender.com';
 const result={checkedAt:new Date().toISOString(),backend,origin,vocabulary:{uniqueWordCount:words.length,sourceCount:vocabulary.sourceCount,processedSources:vocabulary.processedSources,preferredPhraseCount:phrases.length},shortDirector:null,longDirector:null,audioCritic:null,pass:false};
