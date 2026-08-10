@@ -1,1 +1,1 @@
-run final v0.4 public QA after 10100-video bank deploy
+run final v0.4 public QA after latest 10100-video deploy
