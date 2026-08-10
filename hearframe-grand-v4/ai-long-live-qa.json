@@ -1,11 +1,14 @@
 {
-  "checkedAt": "2026-08-10T12:16:58.918Z",
-  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
-  "pass": true,
+  "checkedAt": "2026-08-10T12:35:33.500Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.5",
+  "pass": false,
   "requirements": {
+    "referenceBankTotal": 10600,
+    "wordBoundaryRefinement": "v1.3+",
     "minimumWords": 12,
     "explicitConclusion": "You can begin.",
-    "phraseFirst": true,
+    "conclusionSourceTimelineIndependent": true,
+    "retrievalOrder": "sentence > phrase > AI-refined word",
     "singleWordPrecision": "passed",
     "tempoAdjustment": true,
     "sentencePhraseWordMix": true,
@@ -14,67 +17,31 @@
   "results": [
     {
       "browser": "chromium-logic-and-media-http",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
-      "pass": true,
-      "steps": [
-        "plans-ready",
-        "long-answer-v04-metadata",
-        "media-http-200",
-        "expected-chromium-codec-warning-only"
-      ],
-      "consoleErrors": [
-        "NotSupportedError: Failed to load because no supported source was found."
-      ],
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.5",
+      "pass": false,
+      "steps": [],
+      "consoleErrors": [],
       "httpStatus": 200,
-      "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring. The 'long-demo' plan provides a complete, multi-sentence inspirational message ('The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.') that meets all the length, content, and audio precision criteria.",
-      "wordCount": 22,
-      "tempoFactors": [
-        1.08,
-        1.08,
-        0.92,
-        0.95,
-        1.005
-      ],
-      "mediaSrc": "./ask/media/answer-long-demo.mp4",
-      "mediaHttpStatus": 200,
-      "mediaContentType": "video/mp4",
-      "unexpectedConsoleErrors": []
+      "bank": {
+        "version": "reference-bank-v3.4-report",
+        "totalCount": 10100,
+        "newCount": 10000
+      },
+      "error": "Error: reference bank total 10100; expected 10600\n    at run (file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:8:731)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:9:14"
     },
     {
       "browser": "webkit-ipad-full-playback",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
-      "pass": true,
-      "steps": [
-        "plans-ready",
-        "long-answer-v04-metadata",
-        "media-http-200",
-        "video-complete"
-      ],
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.5",
+      "pass": false,
+      "steps": [],
       "consoleErrors": [],
       "httpStatus": 200,
-      "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring, and the 'long-demo' plan provides a complete, inspiring multi-sentence thought that fits the prompt.",
-      "wordCount": 22,
-      "tempoFactors": [
-        1.08,
-        1.08,
-        0.92,
-        0.95,
-        1.005
-      ],
-      "mediaSrc": "./ask/media/answer-long-demo.mp4",
-      "mediaHttpStatus": 200,
-      "mediaContentType": "video/mp4",
-      "media": {
-        "t": 7.914475824,
-        "d": 7.934,
-        "rs": 4,
-        "error": null,
-        "ended": false,
-        "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-long-demo.mp4"
+      "bank": {
+        "version": "reference-bank-v3.4-report",
+        "totalCount": 10100,
+        "newCount": 10000
       },
-      "unexpectedConsoleErrors": []
+      "error": "Error: reference bank total 10100; expected 10600\n    at run (file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:8:731)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:10:14"
     }
   ],
   "note": "Playwright bundled Chromium lacks proprietary H.264 decoding, so only its specific expected codec warning is ignored on the logic/media-HTTP leg. Any other Chromium console error still fails. WebKit performs full H.264/AAC playback."
