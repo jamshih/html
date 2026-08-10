@@ -10,7 +10,6 @@ CORPUS=json.loads((ROOT/'corpus.json').read_text())
 OUT=PRECISION/'long-answer-word-refinements.json'
 AI_ENDPOINT=os.environ.get('HEARFRAME_AI_ENDPOINT','https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai/audio-critic')
 PUBLISHABLE_KEY=os.environ.get('HEARFRAME_PUBLISHABLE_KEY','sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx')
-PASS_DELTAS=[('coarse',[-40,0,40]),('fine',[-10,0,10]),('micro',[-5,0,5])]
 MIN_DUR=.06
 TRANSIENT={429,500,502,503,504}
 
@@ -40,6 +39,18 @@ def candidate_grid(center,deltas,prefix):
             out.append({'id':f'{prefix}-s{ds:+d}-e{de:+d}','start':s,'end':e,'startDeltaMs':ds,'endDeltaMs':de})
     return out
 
+def micro_candidates(center,prefix):
+    # The fine pass has already searched start/end independently at ±10 ms. For the
+    # last ±5 ms pass, avoid nine nearly indistinguishable audio inputs: compare the
+    # center plus each single-edge movement. This still allows either boundary to move.
+    pairs=[(-5,0),(0,-5),(0,0),(0,5),(5,0)]
+    out=[]
+    for ds,de in pairs:
+        s=round_ms(center['start']+ds/1000); e=round_ms(center['end']+de/1000)
+        if s<0 or e-s<MIN_DUR: continue
+        out.append({'id':f'{prefix}-s{ds:+d}-e{de:+d}','start':s,'end':e,'startDeltaMs':ds,'endDeltaMs':de})
+    return out
+
 def read_wav(path):
     with wave.open(str(path),'rb') as w:
         if w.getsampwidth()!=2 or w.getnchannels()!=1: raise RuntimeError('context WAV must be mono PCM16')
@@ -62,10 +73,10 @@ def judge(target,cands,frames,sr,context_start):
         payload['candidates'].append({'id':c['id'],'audioBase64':wav_slice_base64(frames,sr,context_start,c['start'],c['end']),'mimeType':'audio/wav','startMs':round(c['start']*1000),'endMs':round(c['end']*1000)})
     body=json.dumps(payload,separators=(',',':')).encode()
     last=None
-    for attempt in range(1,6):
-        req=urllib.request.Request(AI_ENDPOINT,data=body,headers={'content-type':'application/json','apikey':PUBLISHABLE_KEY,'user-agent':'HearframeWordPrecision/1.1'},method='POST')
+    for attempt in range(1,7):
+        req=urllib.request.Request(AI_ENDPOINT,data=body,headers={'content-type':'application/json','apikey':PUBLISHABLE_KEY,'user-agent':'HearframeWordPrecision/1.2'},method='POST')
         try:
-            with urllib.request.urlopen(req,timeout=65) as r:
+            with urllib.request.urlopen(req,timeout=70) as r:
                 data=json.load(r)
             winner=next((c for c in cands if c['id']==data.get('bestCandidateId')),None)
             if not winner: raise RuntimeError(f"AI returned non-rendered candidate: {data.get('bestCandidateId')}")
@@ -73,16 +84,16 @@ def judge(target,cands,frames,sr,context_start):
         except urllib.error.HTTPError as e:
             detail=e.read().decode('utf-8','replace')[:1200]
             last=RuntimeError(f'Gemini audio critic HTTP {e.code}: {detail}')
-            print(f'critic attempt {attempt}/5 failed: {last}',flush=True)
-            if e.code not in TRANSIENT or attempt==5: raise last
+            print(f'critic attempt {attempt}/6 failed: {last}',flush=True)
+            if e.code not in TRANSIENT or attempt==6: raise last
             retry=e.headers.get('Retry-After') if e.headers else None
-            wait=float(retry) if retry and retry.replace('.','',1).isdigit() else min(20,2**attempt)
+            wait=float(retry) if retry and retry.replace('.','',1).isdigit() else min(35,3*(2**(attempt-1)))
             time.sleep(wait)
         except (urllib.error.URLError,TimeoutError) as e:
             last=RuntimeError(f'Gemini audio critic transport failure: {e}')
-            print(f'critic attempt {attempt}/5 failed: {last}',flush=True)
-            if attempt==5: raise last
-            time.sleep(min(20,2**attempt))
+            print(f'critic attempt {attempt}/6 failed: {last}',flush=True)
+            if attempt==6: raise last
+            time.sleep(min(35,3*(2**(attempt-1))))
     raise last or RuntimeError('Gemini audio critic failed without a response')
 
 def render_refined_video(sid,source_url,start,end):
@@ -112,22 +123,27 @@ for sid in segment_ids:
     run(['ffmpeg','-y','-hide_banner','-nostdin','-loglevel','error','-ss',f'{context_start:.3f}','-i',source_url,'-t',f'{context_end-context_start:.3f}','-vn','-ac','1','-ar','16000','-c:a','pcm_s16le',str(context)])
     sr,frames=read_wav(context)
     passes=[]
-    for name,deltas in PASS_DELTAS:
+    for name,deltas in [('coarse',[-40,0,40]),('fine',[-10,0,10])]:
         grid=candidate_grid(center,deltas,f'{sid}-{name}')
         print(f'{sid} {name}: sending {len(grid)} real WAV candidates to Gemini',flush=True)
         result,winner=judge(toks[0],grid,frames,sr,context_start)
         passes.append({'pass':name,'candidateCount':len(grid),'winnerId':winner['id'],'start':winner['start'],'end':winner['end'],'confidence':result.get('confidence'),'reason':result.get('reason'),'ranking':result.get('ranking')})
         center={'start':winner['start'],'end':winner['end']}
-        time.sleep(1.25)
+        time.sleep(2.0 if name=='coarse' else 20.0)
+    grid=micro_candidates(center,f'{sid}-micro')
+    print(f'{sid} micro: sending {len(grid)} single-edge ±5 ms WAV candidates to Gemini after cooldown',flush=True)
+    result,winner=judge(toks[0],grid,frames,sr,context_start)
+    passes.append({'pass':'micro','candidateCount':len(grid),'winnerId':winner['id'],'start':winner['start'],'end':winner['end'],'confidence':result.get('confidence'),'reason':result.get('reason'),'ranking':result.get('ranking')})
+    center={'start':winner['start'],'end':winner['end']}
     media=render_refined_video(sid,source_url,center['start'],center['end'])
     refinements[sid]={
       'segmentId':sid,'targetWord':toks[0].lower(),'forcedStart':float(seg['alignedStart']),'forcedEnd':float(seg['alignedEnd']),
       'aiRefinedStart':center['start'],'aiRefinedEnd':center['end'],
       'startDeltaMs':round((center['start']-float(seg['alignedStart']))*1000,1),'endDeltaMs':round((center['end']-float(seg['alignedEnd']))*1000,1),
-      'method':'gemini-audio-critic rendered-candidate coarse/fine/micro','precisionStatus':'ai-refined','media':media,'passes':passes
+      'method':'gemini-audio-critic rendered-candidate coarse/fine + five-candidate micro','precisionStatus':'ai-refined','media':media,'passes':passes
     }
 
 if not refinements: raise SystemExit('No single-word segments found; refinement gate did not run')
-report={'version':'long-answer-word-refinement-v1.1','answerId':'long-demo','singleWordSegmentsRequired':len(refinements),'singleWordSegmentsRefined':len(refinements),'allSingleWordsRefined':True,'refinements':refinements}
+report={'version':'long-answer-word-refinement-v1.2','answerId':'long-demo','singleWordSegmentsRequired':len(refinements),'singleWordSegmentsRefined':len(refinements),'allSingleWordsRefined':True,'refinements':refinements}
 OUT.write_text(json.dumps(report,indent=2,ensure_ascii=False))
 print(json.dumps({k:{'forced':[v['forcedStart'],v['forcedEnd']],'refined':[v['aiRefinedStart'],v['aiRefinedEnd']],'deltaMs':[v['startDeltaMs'],v['endDeltaMs']]} for k,v in refinements.items()},indent=2))
