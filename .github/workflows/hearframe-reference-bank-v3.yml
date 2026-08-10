@@ -1,4 +1,4 @@
-name: Build Hearframe 10K Reference Bank
+name: Expand Hearframe Reference Bank to 10,600
 
 on:
   push:
@@ -14,29 +14,29 @@ permissions:
   contents: write
 
 jobs:
-  discover:
+  expand:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Discover 10,000 additional diverse licensed video references
-        id: discover
+      - name: Add the scoped 500 interview sports celebrity and speech references
+        id: expand
         continue-on-error: true
         run: |
           set -o pipefail
-          python .github/scripts/discover-hearframe-bank-v3.py 2>&1 | tee hearframe-grand-v4/ask/reference-bank-v3-build.log
-      - name: Record bank output or failure log
+          python .github/scripts/expand-hearframe-bank-plus500.py 2>&1 | tee hearframe-grand-v4/ask/reference-bank-plus500-build.log
+      - name: Record expanded bank output or exact failure
         if: always()
         run: |
           git config user.name 'hearframe-bank-v3'
           git config user.email 'actions@users.noreply.github.com'
-          git add hearframe-grand-v4/ask/reference-bank-v3-build.log || true
-          git add hearframe-grand-v4/ask/reference-bank-v3.json hearframe-grand-v4/ask/reference-bank-v3-report.json 2>/dev/null || true
-          git commit -m 'Record Hearframe 10K reference-bank result [skip ci]' || true
+          git add hearframe-grand-v4/ask/reference-bank-plus500-build.log || true
+          git add hearframe-grand-v4/ask/reference-bank-v3.json hearframe-grand-v4/ask/reference-bank-v3-report.json hearframe-grand-v4/ask/reference-bank-plus500-report.json 2>/dev/null || true
+          git commit -m 'Record Hearframe +500 reference-bank result [skip ci]' || true
           git pull --rebase origin main
           git push origin HEAD:main
-      - name: Fail if bank discovery failed
-        if: steps.discover.outcome != 'success'
+      - name: Fail if +500 expansion failed
+        if: steps.expand.outcome != 'success'
         run: exit 1
