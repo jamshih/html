@@ -1,0 +1,85 @@
+name: Hearframe Static Audio Contexts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/static-audio-context-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract exact audio-only contexts from source video timelines
+        run: |
+          set -euo pipefail
+          mkdir -p hearframe-grand-v4/ai-audio
+          OBAMA='https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm'
+          JFK='https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm'
+          ffmpeg -hide_banner -loglevel error -y -ss 1.100 -i "$OBAMA" -t 0.650 -vn -ac 1 -ar 16000 -c:a pcm_s16le hearframe-grand-v4/ai-audio/hello-context.wav
+          ffmpeg -hide_banner -loglevel error -y -ss 122.200 -i "$JFK" -t 0.800 -vn -ac 1 -ar 16000 -c:a pcm_s16le hearframe-grand-v4/ai-audio/world-context.wav
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('hearframe-grand-v4/ai-audio')
+          def duration(name):
+              return float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nw=1:nk=1',str(root/name)],text=True).strip())
+          h=duration('hello-context.wav'); w=duration('world-context.wav')
+          if h < .60 or w < .75: raise SystemExit(f'context extraction too short: hello={h}, world={w}')
+          meta={
+            'version':'exact-video-audio-context-v1',
+            'hello':{'url':'./ai-audio/hello-context.wav','contextStart':1.100,'duration':h,'anchorStart':1.308,'anchorEnd':1.500},
+            'world':{'url':'./ai-audio/world-context.wav','contextStart':122.200,'duration':w,'anchorStart':122.440,'anchorEnd':122.700}
+          }
+          (root/'contexts.json').write_text(json.dumps(meta,indent=2)+'\n')
+          print(json.dumps(meta,indent=2))
+          PY
+      - name: Patch AI lab to analyze same-origin WAV instead of cross-origin video audio
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('hearframe-grand-v4/ai-refine.html')
+          s=p.read_text()
+          marker="const labels={h:'HELLO',w:'WORLD'};"
+          if 'const STATIC_AUDIO_CONTEXTS=' not in s:
+              s=s.replace(marker, marker+"\nconst STATIC_AUDIO_CONTEXTS={h:{url:'./ai-audio/hello-context.wav?v=1',start:1.100},w:{url:'./ai-audio/world-context.wav?v=1',start:122.200}};")
+          old="""await Promise.all([\n  loadSource(captureVideos.h,NIXON,'HELLO analysis'),loadSource(captureVideos.w,JFK,'WORLD analysis'),\n  loadSource(previewVideos.h,NIXON,'HELLO preview'),loadSource(previewVideos.w,JFK,'WORLD preview')\n ]);"""
+          new="""await Promise.all([\n  loadSource(previewVideos.h,NIXON,'HELLO preview'),loadSource(previewVideos.w,JFK,'WORLD preview')\n ]);"""
+          s=s.replace(old,new)
+          replacement=r'''async function captureContext(key,center){
+ const label=labels[key],def=STATIC_AUDIO_CONTEXTS[key];
+ await ensureAudio();
+ if(!def)throw new Error(`${label}: no same-origin audio context configured.`);
+ const response=await fetch(def.url,{cache:'no-store'});
+ if(!response.ok)throw new Error(`${label}: audio context HTTP ${response.status}`);
+ const raw=await response.arrayBuffer();
+ const decoded=await audioCtx.decodeAudioData(raw.slice(0));
+ const frames=decoded.length,channels=Math.max(1,decoded.numberOfChannels),mono=new Float32Array(frames);
+ for(let ch=0;ch<channels;ch+=1){const data=decoded.getChannelData(ch);for(let i=0;i<frames;i+=1)mono[i]+=data[i]/channels;}
+ const mediaStart=def.start,mediaEnd=def.start+frames/decoded.sampleRate;
+ const blocks=[{mediaStart,mediaEnd,data:mono}];
+ const probe=Core.sliceCapturedBlocks(blocks,center.start,center.end,decoded.sampleRate);
+ if(Core.rms(probe)<0.00002)throw new Error(`${label}: same-origin audio context is silent.`);
+ return {blocks,sampleRate:decoded.sampleRate};
+}
+function toBase64'''
+          s2,n=re.subn(r'async function captureContext\(key,center\)\{.*?\n\}\nfunction toBase64',replacement,s,flags=re.S)
+          if n!=1: raise SystemExit(f'expected one captureContext replacement, got {n}')
+          p.write_text(s2)
+          PY
+      - name: Commit contexts and lab
+        run: |
+          git config user.name 'hearframe-audio-context-build'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ai-audio hearframe-grand-v4/ai-refine.html
+          git commit -m 'Use same-origin audio-only contexts for Gemini refinement [skip ci]' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
