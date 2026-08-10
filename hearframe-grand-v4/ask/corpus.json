@@ -1,5 +1,5 @@
 {
-  "version": "ask-v0.4",
+  "version": "ask-v0.5",
   "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
   "sources": {
     "obama": {
@@ -571,6 +571,7 @@
         "you_can",
         "begin"
       ],
+      "conclusionSourcePositionIndependent": true,
       "speedAdjusted": true,
       "speedFactors": [
         1.08,
@@ -579,8 +580,14 @@
         0.95,
         1.0047
       ],
+      "retrievalOrder": [
+        "sentence",
+        "phrase",
+        "ai-refined-word"
+      ],
       "phraseFirst": true,
       "singleWordPrecisionGate": "passed",
+      "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
       "singleWordSegments": [
         "begin"
       ]
@@ -589,5 +596,5 @@
   "fallback": {
     "text": "I do not have enough indexed speech to answer that yet. Try a question about starting, change, progress, what you need, the world, or what you can do."
   },
-  "notes": "Phrase/sentence-first corpus; every single-word chunk used by the long-answer render passes Gemini audio-window refinement first. Long answers end with an explicit conclusion and use conservative per-clip tempo matching."
+  "notes": "Sentence/phrase-first corpus. Isolated words are fallback-only and must pass independent-edge AI boundary refinement first. Long answers end with an explicit conclusion chosen independently of source timeline position and use conservative per-clip tempo matching."
 }

@@ -12,7 +12,7 @@
 + ffmpeg -v error -nostdin -i hearframe-grand-v4/ask/media/answer-long-demo.mp4 -f null -
 + ffprobe -v error -show_entries stream=codec_type,codec_name,width,height -show_entries format=duration -of json hearframe-grand-v4/ask/media/answer-long-demo.mp4
 {
-  "version": "long-answer-qa-v0.4",
+  "version": "long-answer-qa-v0.5",
   "text": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
   "wordCount": 22,
   "segments": [
@@ -37,13 +37,21 @@
     "word"
   ],
   "segmentCount": 5,
+  "retrievalOrder": [
+    "sentence",
+    "phrase",
+    "ai-refined-word"
+  ],
+  "sentenceClipPresent": true,
   "conclusion": "You can begin.",
   "hasConclusion": true,
   "sourceOrderIndependent": true,
+  "conclusionSourcePositionIndependent": true,
   "singleWordSegments": [
     "begin"
   ],
   "singleWordPrecisionGate": "passed",
+  "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
   "precisionOverlay": "precision/long-answer-word-refinements.json",
   "rawDurations": [
     1.871,
@@ -67,6 +75,7 @@
     0.95,
     1.0047
   ],
+  "speedAdjusted": true,
   "adjustedDurations": [
     1.7324,
     3.9198,
@@ -104,7 +113,7 @@
   "duration": 7.933,
   "fullDecode": "pass",
   "normalizedVideo": "1280x720",
-  "corpusVersionAfterBuild": "ask-v0.4",
+  "corpusVersionAfterBuild": "ask-v0.5",
   "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
   "probe": {
     "programs": [],
