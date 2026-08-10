@@ -6,6 +6,10 @@ on:
     paths:
       - 'hearframe-grand-v4/reference-bank-v3-trigger.txt'
 
+concurrency:
+  group: hearframe-reference-bank-v3
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
