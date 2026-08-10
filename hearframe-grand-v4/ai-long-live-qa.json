@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-08-10T10:19:31.614Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-1",
+  "pass": false,
+  "results": [
+    {
+      "browser": "chromium",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-1",
+      "pass": false,
+      "steps": [
+        "plans-ready",
+        "long-answer"
+      ],
+      "consoleErrors": [
+        "NotSupportedError: Failed to load because no supported source was found."
+      ],
+      "httpStatus": 200,
+      "answer": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+      "wordCount": 22,
+      "error": "locator.evaluate: NotSupportedError: Failed to load because no supported source was found.\n    at run (/home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:5:1236)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:6:14"
+    },
+    {
+      "browser": "webkit-ipad",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-1",
+      "pass": true,
+      "steps": [
+        "plans-ready",
+        "long-answer",
+        "video-complete"
+      ],
+      "consoleErrors": [],
+      "httpStatus": 200,
+      "answer": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
+      "wordCount": 22,
+      "media": {
+        "t": 8.24752226,
+        "d": 8.267,
+        "rs": 4,
+        "error": null,
+        "ended": false,
+        "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-long-demo.mp4"
+      }
+    }
+  ]
+}
