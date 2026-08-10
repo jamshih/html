@@ -1,1 +1,1 @@
-render 22-word five-fragment forced-aligned answer v2
+render v0.4 phrase-first speed-matched conclusion answer with AI-refined word gate
