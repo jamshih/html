@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hearframe — Gemini Audio Precision Lab v2</title>
+<style>
+:root{color-scheme:dark;--bg:#080a0f;--panel:#11151d;--panel2:#0c1016;--line:#252b35;--text:#f7f7fb;--muted:#99a3b4;--accent:#cfc7ff;--good:#85efb6;--bad:#ffaaa8;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}main{width:min(1080px,calc(100% - 28px));margin:auto;padding:34px 0 70px}.eyebrow{font-size:11px;letter-spacing:.16em;font-weight:850;color:var(--muted)}h1{font-size:clamp(42px,7vw,82px);line-height:.94;letter-spacing:-.055em;margin:18px 0}.lead{max-width:880px;color:#bbc2d0;font-size:16px;line-height:1.65}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}.card{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:18px}.card h2{font-size:15px;margin:0 0 6px}.note{font-size:12px;color:var(--muted);line-height:1.55}.field{margin-top:12px}.field label{display:block;color:#cbd1dd;font-size:11px;font-weight:800;margin-bottom:7px}.field input,.field textarea{width:100%;border:1px solid var(--line);background:#0a0d12;color:var(--text);border-radius:10px;padding:11px;font:inherit;font-size:13px}.field textarea{min-height:86px;resize:vertical}.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}button{border:1px solid var(--line);background:#161b24;color:var(--text);border-radius:11px;padding:11px 13px;font-weight:780;cursor:pointer}button.primary{background:var(--text);color:#080a0f;border-color:var(--text)}button:disabled{opacity:.35;cursor:not-allowed}.status{margin-top:12px;border:1px solid var(--line);border-radius:11px;padding:11px 12px;font-size:12px;color:var(--muted);white-space:pre-wrap;line-height:1.55}.status.good{color:var(--good)}.status.bad{color:var(--bad)}.stage{position:relative;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:12px}.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;opacity:0}.stage video.active{opacity:1}.overlay{position:absolute;left:14px;bottom:12px;font-size:clamp(28px,6vw,58px);font-weight:900;text-shadow:0 3px 16px #000;z-index:3}.chip{position:absolute;top:10px;left:10px;z-index:3;background:rgba(8,10,15,.74);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 9px;font-size:10px}.times{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.timebox{border:1px solid var(--line);border-radius:11px;padding:11px;background:var(--panel2)}.timebox .name{font-size:11px;font-weight:850}.timebox .value{margin-top:5px;font-variant-numeric:tabular-nums;color:var(--accent);font-size:12px}.passes{margin-top:10px;font:11px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#b7c0cf;white-space:pre-wrap}.warning{margin-top:16px;border-left:3px solid #f2cc60;padding:8px 11px;color:#c7cbd4;font-size:12px;line-height:1.55;background:#11131a}.small{font-size:11px;color:var(--muted)}@media(max-width:760px){.grid{grid-template-columns:1fr}.times{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}.stage{aspect-ratio:4/3}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">HEARFRAME / GEMINI AUDIO-ONLY PRECISION LAB · v2</div>
+<h1>Listen. Compare.<br>Move the cut.</h1>
+<p class="lead">This version removes cross-origin audio capture. Hearframe fetches its own already-rendered MP4, decodes only the audio track in the browser, renders bounded WAV candidate windows, and sends those audio candidates to the shared Interview AIBot Gemini backend. Gemini never sees the video and cannot invent a timestamp.</p>
+
+<div class="grid">
+<section class="card">
+  <h2>1 · Shared Interview AIBot backend</h2>
+  <div class="note">Your existing Interview AIBot Supabase Edge Function is preconfigured. The Gemini API key remains server-side.</div>
+  <div class="status" id="backendStatus">Checking backend…</div>
+  <div class="row"><button id="testBackend" class="primary">Test Gemini backend</button></div>
+</section>
+
+<section class="card">
+  <h2>2 · Gemini video content director</h2>
+  <div class="note">The real indexed vocabulary is loaded automatically. Gemini may only return words that exist in the corpus; the backend verifies every token.</div>
+  <div class="status" id="corpusStatus">Loading real Hearframe corpus…</div>
+  <div class="field"><label for="question">QUESTION / INTENT</label><input id="question" value="can you say something longer and inspiring" /></div>
+  <details class="field"><summary class="small">Show corpus supplied to Gemini</summary><label for="words">AVAILABLE CORPUS WORDS</label><textarea id="words">Loading…</textarea><label for="phrases" style="margin-top:10px">PREFERRED INTACT PHRASES</label><textarea id="phrases">Loading…</textarea></details>
+  <div class="row"><button id="runDirector" class="primary" disabled>Ask Gemini video director</button></div>
+  <div class="status" id="directorStatus">Waiting.</div>
+</section>
+</div>
+
+<section class="card" style="margin-top:16px">
+  <h2>3 · Real speech audio precision critic</h2>
+  <div class="note">HELLO and WORLD start from your confirmed manual windows. Each pass sends only real WAV slices cut from same-origin rendered Hearframe media. Coarse → fine → micro keeps the final proposal inside a deterministic set of tested windows.</div>
+  <div class="times">
+    <div class="timebox"><div class="name">HELLO · Obama 2017</div><div class="value" id="helloTime"></div></div>
+    <div class="timebox"><div class="name">WORLD · JFK 1961</div><div class="value" id="worldTime"></div></div>
+  </div>
+  <div class="row"><button id="loadAudio">Load audio contexts</button><button id="refineHello">AI refine HELLO</button><button id="refineWorld">AI refine WORLD</button><button id="refineBoth" class="primary">AI refine BOTH</button><button id="resetWindows">Reset manual anchors</button></div>
+  <div class="status" id="criticStatus">Waiting for audio contexts.</div>
+  <div class="passes" id="passes"></div>
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h2>4 · Audition the proposed cuts</h2>
+  <div class="note">The visible preview is also same-origin rendered Hearframe media, so it does not depend on archival WebM seeking.</div>
+  <div class="stage">
+    <video id="previewHello" playsinline preload="auto" src="./ask/media/answer-greeting.mp4"></video>
+    <video id="previewWorld" playsinline preload="auto" src="./ask/media/answer-world.mp4"></video>
+    <span class="chip" id="previewChip">AI PRECISION PREVIEW</span>
+    <div class="overlay" id="previewWord"></div>
+  </div>
+  <div class="row"><button id="playHello">▶ AI HELLO</button><button id="playWorld">▶ AI WORLD</button><button id="playBoth" class="primary">▶ AI HELLO WORLD</button></div>
+  <div class="status" id="previewStatus">Nothing playing.</div>
+</section>
+
+<div class="warning">Precision note: Gemini is a perceptual critic over rendered candidates, not the source of truth for timestamps. The human-confirmed windows remain the benchmark. A larger manually labeled test set is still required before claiming universal millisecond-level accuracy.</div>
+</main>
+<script src="./ai-refine-core.js?v=2"></script>
+<script>
+(()=>{
+'use strict';
+const Core=window.HearframeAICore,$=id=>document.getElementById(id);
+const BACKEND='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai';
+const APIKEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx';
+const BASE={h:{start:1.308,end:1.500},w:{start:122.440,end:122.700}};
+const clips={h:{...BASE.h},w:{...BASE.w}};
+const MEDIA={
+ h:{word:'HELLO',url:'./ask/media/answer-greeting.mp4?v=2',absoluteBase:1.283,coarse:[-10,0,10],fine:[-5,0,5],micro:[-2,0,2],preview:$('previewHello')},
+ w:{word:'WORLD',url:'./ask/media/answer-world.mp4?v=2',absoluteBase:122.161,coarse:[-40,0,40],fine:[-10,0,10],micro:[-5,0,5],preview:$('previewWorld')}
+};
+let audioCtx=null,busy=false;const decoded={};
+const setStatus=(el,text,kind='')=>{el.textContent=text;el.className='status'+(kind?' '+kind:'')};
+function fmt(t){const m=Math.floor(t/60),s=t-m*60;return `${String(m).padStart(2,'0')}:${s.toFixed(3).padStart(6,'0')}`}
+function refresh(){ $('helloTime').textContent=`${fmt(clips.h.start)} → ${fmt(clips.h.end)} · ${Math.round((clips.h.end-clips.h.start)*1000)} ms`; $('worldTime').textContent=`${fmt(clips.w.start)} → ${fmt(clips.w.end)} · ${Math.round((clips.w.end-clips.w.start)*1000)} ms`; }
+refresh();
+async function api(path,body){const r=await fetch(BACKEND+path,{method:body?'POST':'GET',headers:{'content-type':'application/json','apikey':APIKEY},body:body?JSON.stringify(body):undefined});const t=await r.text();let j;try{j=JSON.parse(t)}catch{j={error:t||`HTTP ${r.status}`}}if(!r.ok)throw new Error(`${j.error||'request_failed'} (${r.status})`);return j}
+async function testBackend(){try{setStatus($('backendStatus'),'Testing shared backend…');const j=await api('/health');if(!j.configured)throw new Error('Gemini key is not configured.');setStatus($('backendStatus'),`Connected · ${j.provider} · ${j.model} · audio=${j.audioInput} · store=${j.geminiStore}`,'good')}catch(e){setStatus($('backendStatus'),e.message,'bad')}}
+$('testBackend').onclick=testBackend;testBackend();
+fetch('./ask/corpus-vocabulary.json?v=reference-100-v1',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(`HTTP ${r.status}`);return r.json()}).then(v=>{if(!Array.isArray(v.availableWords)||v.availableWords.length<1000)throw Error('indexed vocabulary incomplete');$('words').value=v.availableWords.join(' ');$('phrases').value=(v.preferredPhrases||[]).join('\n');$('runDirector').disabled=false;setStatus($('corpusStatus'),`Real corpus loaded · ${v.availableWords.length} indexed words · ${v.sourceCount} speech-bearing references.`,'good')}).catch(e=>setStatus($('corpusStatus'),e.message,'bad'));
+$('runDirector').onclick=async()=>{try{setStatus($('directorStatus'),'Gemini is planning a constructible answer…');const words=$('words').value.split(/\s+/).filter(Boolean),phrases=$('phrases').value.split(/\n+/).map(x=>x.trim()).filter(Boolean);const j=await api('/director',{question:$('question').value,availableWords:words,availablePhrases:phrases});setStatus($('directorStatus'),`ANSWER: ${j.answer}\n\n${j.rationale||''}`,'good')}catch(e){setStatus($('directorStatus'),e.message,'bad')}};
+async function ensureAudio(){if(!audioCtx){const C=window.AudioContext||window.webkitAudioContext;if(!C)throw Error('Web Audio API unavailable.');audioCtx=new C({latencyHint:'interactive'})}await audioCtx.resume();return audioCtx}
+async function loadOne(key){if(decoded[key])return decoded[key];await ensureAudio();const def=MEDIA[key],r=await fetch(def.url,{cache:'no-store'});if(!r.ok)throw Error(`${def.word}: media HTTP ${r.status}`);const ab=await r.arrayBuffer();const b=await audioCtx.decodeAudioData(ab.slice(0));const mono=new Float32Array(b.length);for(let c=0;c<b.numberOfChannels;c++){const d=b.getChannelData(c);for(let i=0;i<d.length;i++)mono[i]+=d[i]/b.numberOfChannels}if(Core.rms(mono)<.00002)throw Error(`${def.word}: decoded audio is silent`);decoded[key]={blocks:[{mediaStart:def.absoluteBase,mediaEnd:def.absoluteBase+b.duration,data:mono}],sampleRate:b.sampleRate,duration:b.duration};return decoded[key]}
+async function loadAudio(){try{setStatus($('criticStatus'),'Decoding same-origin Hearframe audio tracks…');await Promise.all([loadOne('h'),loadOne('w')]);setStatus($('criticStatus'),`Audio contexts ready · HELLO ${decoded.h.duration.toFixed(3)} s · WORLD ${decoded.w.duration.toFixed(3)} s.`,'good')}catch(e){setStatus($('criticStatus'),e.message,'bad');throw e}}
+$('loadAudio').onclick=()=>loadAudio();
+function toBase64(buffer){const bytes=new Uint8Array(buffer);let binary='';for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(bytes.length,i+0x8000)));return btoa(binary)}
+function candidatePayload(grid,ctx){return grid.map(c=>{const pcm=Core.sliceCapturedBlocks(ctx.blocks,c.start,c.end,ctx.sampleRate);return{id:c.id,audioBase64:toBase64(Core.encodeMonoWav(pcm,ctx.sampleRate)),mimeType:'audio/wav',startMs:Math.round(c.start*1000),endMs:Math.round(c.end*1000)}})}
+async function judge(word,grid,ctx){return api('/audio-critic',{targetWord:word,candidates:candidatePayload(grid,ctx)})}
+function line(pass,r,w){return `${pass.padEnd(7)} ${r.bestCandidateId} → ${w.start.toFixed(3)}–${w.end.toFixed(3)} s · confidence ${r.confidence ?? 'n/a'}\n  ${r.reason||''}`}
+async function refine(key){const def=MEDIA[key],anchor={...clips[key]},ctx=await loadOne(key);$('passes').textContent='';setStatus($('criticStatus'),`${def.word}: Gemini judging coarse candidates…`);const g1=Core.makeCandidateGrid(anchor,def.coarse,.06,`${key}-coarse`),r1=await judge(def.word,g1,ctx),w1=Core.candidateById(g1,r1.bestCandidateId);if(!w1)throw Error('Invalid coarse winner');$('passes').textContent=line('COARSE',r1,w1);setStatus($('criticStatus'),`${def.word}: Gemini judging fine candidates…`);const g2=Core.makeCandidateGrid(w1,def.fine,.06,`${key}-fine`),r2=await judge(def.word,g2,ctx),w2=Core.candidateById(g2,r2.bestCandidateId);if(!w2)throw Error('Invalid fine winner');$('passes').textContent+='\n'+line('FINE',r2,w2);setStatus($('criticStatus'),`${def.word}: Gemini judging micro candidates…`);const g3=Core.makeCandidateGrid(w2,def.micro,.06,`${key}-micro`),r3=await judge(def.word,g3,ctx),w3=Core.candidateById(g3,r3.bestCandidateId);if(!w3)throw Error('Invalid micro winner');$('passes').textContent+='\n'+line('MICRO',r3,w3);clips[key]={start:w3.start,end:w3.end};refresh();setStatus($('criticStatus'),`${def.word} AI proposal applied: ${w3.start.toFixed(3)}–${w3.end.toFixed(3)} s.`,'good');return $('passes').textContent}
+async function run(fn){if(busy)return;busy=true;['refineHello','refineWorld','refineBoth'].forEach(id=>$(id).disabled=true);try{await fn()}catch(e){console.error(e);setStatus($('criticStatus'),e.message,'bad')}finally{busy=false;['refineHello','refineWorld','refineBoth'].forEach(id=>$(id).disabled=false)}}
+$('refineHello').onclick=()=>run(()=>refine('h'));$('refineWorld').onclick=()=>run(()=>refine('w'));$('refineBoth').onclick=()=>run(async()=>{const h=await refine('h');const w=await refine('w');$('passes').textContent=`HELLO\n${h}\n\nWORLD\n${w}`});$('resetWindows').onclick=()=>{clips.h={...BASE.h};clips.w={...BASE.w};refresh();$('passes').textContent='';setStatus($('criticStatus'),'Reset to human-confirmed anchors.','good')};
+function waitEvent(el,name,timeout=10000){return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error(`${name} timed out`)),timeout);el.addEventListener(name,()=>{clearTimeout(timer);resolve()},{once:true});el.addEventListener('error',()=>{clearTimeout(timer);reject(Error(`media error ${el.error?.code||''}`))},{once:true})})}
+async function preview(key){const def=MEDIA[key],v=def.preview,relative=Math.max(0,clips[key].start-def.absoluteBase),end=Math.max(relative,clips[key].end-def.absoluteBase);for(const other of Object.keys(MEDIA))MEDIA[other].preview.classList.toggle('active',other===key);$('previewWord').textContent=def.word;$('previewChip').textContent=key==='h'?'BARACK OBAMA · 2017':'JOHN F. KENNEDY · 1961';if(v.readyState<1)await waitEvent(v,'loadedmetadata');v.pause();v.currentTime=relative;if(v.seeking)await waitEvent(v,'seeked');await v.play();const t0=performance.now();while(v.currentTime<end&&performance.now()-t0<5000)await new Promise(r=>setTimeout(r,8));v.pause();}
+async function play(keys){try{setStatus($('previewStatus'),'Playing…');for(const k of keys)await preview(k);setStatus($('previewStatus'),`${keys.map(k=>MEDIA[k].word).join(' ')} preview complete.`,'good')}catch(e){setStatus($('previewStatus'),e.message,'bad')}}
+$('playHello').onclick=()=>play(['h']);$('playWorld').onclick=()=>play(['w']);$('playBoth').onclick=()=>play(['h','w']);
+})();
+</script>
+</body>
+</html>
