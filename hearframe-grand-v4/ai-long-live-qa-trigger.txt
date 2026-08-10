@@ -1,1 +1,1 @@
-run final v0.4 conclusion speed precision phrase-first public QA codec-aware
+run final v0.4 public QA after 10100-video bank deploy
