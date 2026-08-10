@@ -1,9 +1,9 @@
 {
-  "version": "reference-bank-v3.4-report",
+  "version": "reference-bank-v3.5-report",
   "legacyCount": 100,
-  "newCount": 10000,
-  "totalCount": 10100,
-  "targetNew": 10000,
+  "newCount": 10500,
+  "totalCount": 10600,
+  "targetNew": 10500,
   "directVideoUrlValidatedNew": 10000,
   "bucketCounts": {
     "interviews": 2600,
@@ -114,7 +114,8 @@
   },
   "uniqueTitles": 10100,
   "uniqueSourceUrls": 10100,
-  "alignmentStatus": "Original 100 reference sample is WhisperX/word indexed. New 10,000 are direct-video retrieval references and are speech-detected/forced-aligned lazily when selected. Any isolated word must then pass Gemini audio-boundary refinement before rendering.",
+  "alignmentStatus": "Original aligned sample plus lazy alignment for retrieval references; isolated words require hardened AI boundary refinement before render.",
   "licensePolicy": "Because the 10K bank is only discovery metadata, license/attribution is fetched and validated from the Commons file page at selection time before a clip is eligible for production rendering.",
-  "pass": true
+  "pass": true,
+  "plus500Report": "reference-bank-plus500-report.json"
 }
