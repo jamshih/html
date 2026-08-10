@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-08-10T09:57:42.690Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-refine-v2.html?v=qa-02e8aa20",
+  "steps": [
+    "real-corpus-loaded",
+    "gemini-backend-connected",
+    "long-director-passed",
+    "same-origin-audio-decoded",
+    "hello-refined",
+    "world-refined"
+  ],
+  "consoleErrors": [],
+  "director": "ANSWER: If we believe, together we can accomplish great things and shape a better future for everyone.\n\nConstructed an inspiring, natural 16-word message entirely from confirmed individual available words to satisfy the user's request for a longer, uplifting response.",
+  "hello": {
+    "status": "HELLO AI proposal applied: 1.298–1.500 s.",
+    "time": "00:01.298 → 00:01.500 · 202 ms",
+    "passes": "COARSE  h-coarse-s-10-e0 → 1.298–1.500 s · confidence 0.95\n  Candidate 'h-coarse-s-10-e0' captures the complete initial 'h' aspiration without clipping the onset and allows the trailing 'o' vowel to decay naturally without abrupt truncation or extra audio.\nFINE    h-fine-s0-e0 → 1.298–1.500 s · confidence 0.95\n  Candidate 'h-fine-s0-e0' provides the cleanest alignment for 'HELLO'. The initial /h/ aspiration is fully intact without unnecessary pre-breath noise, and the final /oʊ/ diphthong fades out naturally without being truncated or leaving excessive trailing sound.\nMICRO   h-micro-s0-e0 → 1.298–1.500 s · confidence 0.95\n  Candidate 'h-micro-s0-e0' provides the perfect cut for 'HELLO'. The initial 'h' aspiration is fully intact, the ending 'oh' vowel decays naturally without being clipped, and there is no unnecessary silence or extra speech on either boundary."
+  },
+  "world": {
+    "status": "WORLD AI proposal applied: 122.390–122.700 s.",
+    "time": "02:02.390 → 02:02.700 · 310 ms",
+    "passes": "COARSE  w-coarse-s-40-e0 → 122.400–122.700 s · confidence 0.95\n  Candidate 'w-coarse-s-40-e0' captures the full initial 'w' glide without cutting off the onset, and completes the final 'ld' consonant cluster cleanly with no trailing extra speech.\nFINE    w-fine-s-10-e0 → 122.390–122.700 s · confidence 0.95\n  Candidate 'w-fine-s-10-e0' captures the complete initial /w/ glide and the full final /d/ release cleanly, without clipping the onset or leaving trailing extra sound.\nMICRO   w-micro-s0-e0 → 122.390–122.700 s · confidence 0.95\n  Candidate 'w-micro-s0-e0' provides a perfectly balanced trim of 'world'. The initial 'w' glide is fully intact with no clipped onset, and the final 'd' burst/release is completely preserved without trailing extra speech or truncating the final phoneme."
+  },
+  "pass": true,
+  "httpStatus": 200
+}
