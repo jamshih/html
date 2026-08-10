@@ -28,28 +28,18 @@ def run(cmd,check=True):
     return p
 
 def round_ms(x): return round(float(x),3)
-def candidate_grid(center,start_deltas,end_deltas,prefix,max_dur):
+def axis_candidates(center,edge,deltas,prefix,max_dur):
     out=[]; seen=set()
-    for ds in start_deltas:
-        for de in end_deltas:
-            s=round_ms(center['start']+ds/1000); e=round_ms(center['end']+de/1000)
-            dur=e-s
-            if s<0 or dur<MIN_DUR or dur>max_dur: continue
-            key=(s,e)
-            if key in seen: continue
-            seen.add(key)
-            out.append({'id':f'{prefix}-s{ds:+d}-e{de:+d}','start':s,'end':e,'startDeltaMs':ds,'endDeltaMs':de})
-    return out
-
-def micro_candidates(center,prefix,max_dur):
-    # Last pass moves one edge at a time. This makes the critic distinguish onset
-    # clipping from offset leakage instead of comparing many almost-identical windows.
-    pairs=[(-5,0),(0,-5),(0,0),(0,5),(5,0)]
-    out=[]
-    for ds,de in pairs:
-        s=round_ms(center['start']+ds/1000); e=round_ms(center['end']+de/1000)
-        if s<0 or e-s<MIN_DUR or e-s>max_dur: continue
-        out.append({'id':f'{prefix}-s{ds:+d}-e{de:+d}','start':s,'end':e,'startDeltaMs':ds,'endDeltaMs':de})
+    for delta in deltas:
+        s=center['start']; e=center['end']
+        if edge=='start': s=round_ms(s+delta/1000)
+        else: e=round_ms(e+delta/1000)
+        dur=e-s
+        if s<0 or dur<MIN_DUR or dur>max_dur: continue
+        key=(s,e)
+        if key in seen: continue
+        seen.add(key)
+        out.append({'id':f'{prefix}-{edge}{delta:+d}','start':s,'end':e,'edge':edge,'deltaMs':delta})
     return out
 
 def read_wav(path):
@@ -75,7 +65,7 @@ def judge(target,cands,frames,sr,context_start,pass_name):
     body=json.dumps(payload,separators=(',',':')).encode()
     last=None
     for attempt in range(1,7):
-        req=urllib.request.Request(AI_ENDPOINT,data=body,headers={'content-type':'application/json','apikey':PUBLISHABLE_KEY,'user-agent':'HearframeWordPrecision/1.3'},method='POST')
+        req=urllib.request.Request(AI_ENDPOINT,data=body,headers={'content-type':'application/json','apikey':PUBLISHABLE_KEY,'user-agent':'HearframeWordPrecision/1.3.1'},method='POST')
         try:
             with urllib.request.urlopen(req,timeout=70) as r:
                 data=json.load(r)
@@ -124,8 +114,6 @@ for sid in segment_ids:
     forced_start=float(seg['alignedStart']); forced_end=float(seg['alignedEnd'])
     forced_dur=forced_end-forced_start
     if forced_dur<MIN_DUR: raise SystemExit(f'{sid}: forced word window is implausibly short: {forced_dur:.3f}s')
-    # Allow enough room to correct a forced-alignment miss, while preventing the critic
-    # from selecting a long neighboring phrase as a supposedly cleaner single word.
     max_dur=max(.22,min(1.15,forced_dur+.20))
     center={'start':forced_start,'end':forced_end}
     margin=.28
@@ -134,25 +122,26 @@ for sid in segment_ids:
     run(['ffmpeg','-y','-hide_banner','-nostdin','-loglevel','error','-ss',f'{context_start:.3f}','-i',source_url,'-t',f'{context_end-context_start:.3f}','-vn','-ac','1','-ar','16000','-c:a','pcm_s16le',str(context)])
     sr,frames=read_wav(context)
 
+    # Keep every critic call small. Start and end are optimized independently so a
+    # clean onset cannot hide a leaking offset (or vice versa). Wide -> fine -> micro.
     passes=[]
-    pass_specs=[
-      ('coarse',[-80,-40,0,40,80],[-80,-40,0,40,80]),
-      ('fine',[-20,-10,0,10,20],[-20,-10,0,10,20]),
+    schedule=[
+      ('coarse-start','start',[-80,-40,0,40,80]),
+      ('coarse-end','end',[-80,-40,0,40,80]),
+      ('fine-start','start',[-20,-10,0,10,20]),
+      ('fine-end','end',[-20,-10,0,10,20]),
+      ('micro-start','start',[-5,0,5]),
+      ('micro-end','end',[-5,0,5]),
     ]
-    for name,start_deltas,end_deltas in pass_specs:
-        grid=candidate_grid(center,start_deltas,end_deltas,f'{sid}-{name}',max_dur)
-        if len(grid)<5: raise RuntimeError(f'{sid} {name}: too few legal candidate windows ({len(grid)})')
-        print(f'{sid} {name}: sending {len(grid)} independently-adjusted real WAV candidates to Gemini',flush=True)
+    for idx,(name,edge,deltas) in enumerate(schedule):
+        grid=axis_candidates(center,edge,deltas,f'{sid}-{name}',max_dur)
+        if len(grid)<3: raise RuntimeError(f'{sid} {name}: too few legal candidate windows ({len(grid)})')
+        print(f'{sid} {name}: sending {len(grid)} real WAV candidates to Gemini',flush=True)
         result,winner=judge(toks[0],grid,frames,sr,context_start,name)
-        passes.append({'pass':name,'candidateCount':len(grid),'winnerId':winner['id'],'start':winner['start'],'end':winner['end'],'confidence':result.get('confidence'),'reason':result.get('reason'),'ranking':result.get('ranking')})
+        passes.append({'pass':name,'edge':edge,'candidateCount':len(grid),'winnerId':winner['id'],'start':winner['start'],'end':winner['end'],'confidence':result.get('confidence'),'reason':result.get('reason'),'ranking':result.get('ranking')})
         center={'start':winner['start'],'end':winner['end']}
-        time.sleep(2.0 if name=='coarse' else 20.0)
-
-    grid=micro_candidates(center,f'{sid}-micro',max_dur)
-    print(f'{sid} micro: sending {len(grid)} single-edge ±5 ms WAV candidates to Gemini after cooldown',flush=True)
-    result,winner=judge(toks[0],grid,frames,sr,context_start,'micro')
-    passes.append({'pass':'micro','candidateCount':len(grid),'winnerId':winner['id'],'start':winner['start'],'end':winner['end'],'confidence':result.get('confidence'),'reason':result.get('reason'),'ranking':result.get('ranking')})
-    center={'start':winner['start'],'end':winner['end']}
+        if idx==3: time.sleep(18.0)
+        elif idx<len(schedule)-1: time.sleep(2.5)
 
     confidences=[float(p.get('confidence') or 0) for p in passes]
     if min(confidences)<MIN_CONFIDENCE: raise RuntimeError(f'{sid}: precision confidence gate failed')
@@ -162,15 +151,15 @@ for sid in segment_ids:
       'aiRefinedStart':center['start'],'aiRefinedEnd':center['end'],
       'startDeltaMs':round((center['start']-forced_start)*1000,1),'endDeltaMs':round((center['end']-forced_end)*1000,1),
       'forcedDurationMs':round(forced_dur*1000,1),'refinedDurationMs':round((center['end']-center['start'])*1000,1),
-      'method':'gemini-audio-critic independent-edge wide/fine search + five-candidate micro',
+      'method':'gemini-audio-critic independent start/end wide→fine→micro search',
       'precisionStatus':'ai-refined','qualityGate':'passed','minimumPassConfidence':round(min(confidences),3),
       'media':media,'passes':passes
     }
 
 if not refinements: raise SystemExit('No single-word segments found; refinement gate did not run')
 report={
- 'version':'long-answer-word-refinement-v1.3','answerId':'long-demo',
- 'policy':'Forced alignment is only the seed. Single-word cuts search start/end independently at ±80/40 ms, then ±20/10 ms, then ±5 ms; uncertain boundaries fail closed.',
+ 'version':'long-answer-word-refinement-v1.3.1','answerId':'long-demo',
+ 'policy':'Forced alignment is only the seed. Start and end are optimized independently at ±80/40 ms, then ±20/10 ms, then ±5 ms. Each critic batch stays small; uncertain boundaries fail closed.',
  'minimumConfidence':MIN_CONFIDENCE,'singleWordSegmentsRequired':len(refinements),'singleWordSegmentsRefined':len(refinements),
  'allSingleWordsRefined':True,'allQualityGatesPassed':all(v.get('qualityGate')=='passed' for v in refinements.values()),'refinements':refinements
 }
