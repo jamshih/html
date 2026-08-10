@@ -1,5 +1,5 @@
 from __future__ import annotations
-import collections, html, json, re, time, urllib.parse, urllib.request
+import collections, html, json, random, re, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 ROOT=Path('hearframe-grand-v4/ask')
@@ -7,12 +7,12 @@ BASE=json.loads((ROOT/'reference-videos.json').read_text())
 OUT=ROOT/'reference-bank-v3.json'
 REPORT=ROOT/'reference-bank-v3-report.json'
 API='https://commons.wikimedia.org/w/api.php'
-UA='HearframePrototype/3.0 (speech-video corpus research; github.com/jamshih/html)'
+UA='HearframePrototype/3.1 (licensed speech-video corpus research; github.com/jamshih/html)'
 TARGET_NEW=10_000
 TARGET_TOTAL=len(BASE.get('videos',[]))+TARGET_NEW
+REQUEST_GAP=.38
+_last_request=0.0
 
-# The bank is intentionally diverse. "Interview" is the highest-priority pool,
-# followed by sport/entertainment personalities, then experts and general speech.
 BUCKETS=[
  ('interviews',2600,[
    'filetype:video interview','filetype:video "press conference"','filetype:video "post-match"',
@@ -33,17 +33,41 @@ BUCKETS=[
 ]
 PRIORITY={'interviews':1.0,'sports':.96,'entertainment':.96,'experts-public-figures':.9,'general-speech':.7,'fallback':.5}
 
-def api(params,retries=4):
-    params={**params,'format':'json','formatversion':'2'}
+def api(params,retries=8):
+    global _last_request
+    params={**params,'format':'json','formatversion':'2','maxlag':'5'}
     url=API+'?'+urllib.parse.urlencode(params)
     last=None
-    for attempt in range(retries):
+    for attempt in range(1,retries+1):
+        gap=REQUEST_GAP-(time.monotonic()-_last_request)
+        if gap>0: time.sleep(gap)
         try:
-            req=urllib.request.Request(url,headers={'User-Agent':UA})
-            with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'application/json'})
+            _last_request=time.monotonic()
+            with urllib.request.urlopen(req,timeout=75) as r:
+                data=json.load(r)
+            if isinstance(data,dict) and data.get('error',{}).get('code')=='maxlag':
+                raise RuntimeError('mediawiki-maxlag')
+            return data
+        except urllib.error.HTTPError as e:
+            last=e
+            retry=e.headers.get('Retry-After') if e.headers else None
+            if e.code==429:
+                wait=float(retry) if retry and retry.replace('.','',1).isdigit() else min(75,4*(2**(attempt-1)))
+            elif e.code in (500,502,503,504):
+                wait=min(45,2*(2**(attempt-1)))
+            else:
+                raise
+            print(f'Commons HTTP {e.code}; retry {attempt}/{retries} in {wait:.1f}s',flush=True)
+            if attempt==retries: break
+            time.sleep(wait+random.uniform(.1,.8))
         except Exception as e:
-            last=e; time.sleep(min(2.0,.35*(2**attempt)))
-    raise last
+            last=e
+            wait=min(45,2*(2**(attempt-1)))
+            print(f'Commons API transient {type(e).__name__}: {e}; retry {attempt}/{retries} in {wait:.1f}s',flush=True)
+            if attempt==retries: break
+            time.sleep(wait+random.uniform(.1,.8))
+    raise last or RuntimeError('Commons API failed')
 
 def strip_html(s):
     if not s:return ''
@@ -70,33 +94,32 @@ base_titles={v.get('title') for v in BASE.get('videos',[]) if v.get('title')}
 all_titles=set(base_titles); discovered=[]; provenance={}
 for bucket,quota,queries in BUCKETS:
     bucket_titles=[]
-    # Cycle queries so a single broad query cannot consume the whole personality bucket.
     per_query=max(250,(quota+len(queries)-1)//len(queries)+120)
     for q in queries:
         for title in search(q,per_query,all_titles):
             provenance[title]={'bucket':bucket,'query':q};bucket_titles.append(title)
             if len(bucket_titles)>=quota:break
         if len(bucket_titles)>=quota:break
-    # If overlap/short searches left the bucket under quota, allow its first broad query
-    # to continue filling before moving on.
     if len(bucket_titles)<quota:
-        q=queries[0]
-        for title in search(q,quota-len(bucket_titles),all_titles):
-            provenance[title]={'bucket':bucket,'query':q};bucket_titles.append(title)
+        # Use multiple broad bucket synonyms rather than hammering the first query again.
+        for q in queries:
+            if len(bucket_titles)>=quota:break
+            for title in search(q,quota-len(bucket_titles),all_titles):
+                provenance[title]={'bucket':bucket,'query':q};bucket_titles.append(title)
     discovered.extend(bucket_titles[:quota])
     print(bucket,len(bucket_titles[:quota]),flush=True)
 
-# Fill any remaining capacity with general Commons video results. The discovery tag
-# remains explicit so retrieval can prefer interview/sport/entertainment material.
-if len(discovered)<TARGET_NEW+1200:
-    need=TARGET_NEW+1200-len(discovered)
+# Keep a metadata-validation reserve. This also fills bucket shortfalls without changing
+# the fact that high-priority interview/sport/entertainment results appear first.
+reserve_target=TARGET_NEW+2500
+if len(discovered)<reserve_target:
+    need=reserve_target-len(discovered)
     for title in search('filetype:video',need,all_titles):
         provenance[title]={'bucket':'fallback','query':'filetype:video'};discovered.append(title)
 
-# Enrich more titles than we need because malformed/non-video/missing-license records are rejected.
-# Preserve bucket order so the target quotas remain dominant in the final 10K.
 candidate_titles=discovered
 new=[]; rejected=[]
+seen_urls={v.get('sourceUrl') for v in BASE.get('videos',[]) if v.get('sourceUrl')}
 for off in range(0,len(candidate_titles),50):
     if len(new)>=TARGET_NEW:break
     chunk=candidate_titles[off:off+50]
@@ -114,6 +137,9 @@ for off in range(0,len(candidate_titles),50):
         source_url=ii.get('url')
         if not license_name or not source_url:
             rejected.append({'title':title,'reason':'missing-license-or-url'});continue
+        if source_url in seen_urls:
+            rejected.append({'title':title,'reason':'duplicate-media-url'});continue
+        seen_urls.add(source_url)
         prov=provenance.get(title,{'bucket':'fallback','query':'filetype:video'})
         new.append({
           'referenceId':f'ref-{len(BASE.get("videos",[]))+len(new)+1:05d}',
@@ -124,7 +150,7 @@ for off in range(0,len(candidate_titles),50):
           'description':strip_html(mv('ImageDescription')),'discoveryBucket':prov['bucket'],'discoveryQuery':prov['query'],
           'speechPriority':PRIORITY.get(prov['bucket'],.5),'catalogStatus':'metadata-validated','originPreflight':'deferred-to-indexer'
         })
-    if off%500==0: print('enriched',off,'valid',len(new),flush=True)
+    if off%500==0: print('enriched',off,'valid',len(new),'rejected',len(rejected),flush=True)
 
 if len(new)!=TARGET_NEW:
     raise SystemExit(f'Only {len(new)} new metadata-valid videos; need {TARGET_NEW}. Candidate titles={len(candidate_titles)} rejected={len(rejected)}')
