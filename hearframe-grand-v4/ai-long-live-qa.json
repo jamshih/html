@@ -1,41 +1,65 @@
 {
-  "checkedAt": "2026-08-10T10:24:00.141Z",
-  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-2",
+  "checkedAt": "2026-08-10T11:27:02.505Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
   "pass": false,
+  "requirements": {
+    "minimumWords": 12,
+    "explicitConclusion": "You can begin.",
+    "phraseFirst": true,
+    "singleWordPrecision": "passed",
+    "tempoAdjustment": true,
+    "sentencePhraseWordMix": true,
+    "webkitFullPlayback": true
+  },
   "results": [
     {
       "browser": "chromium-logic-and-media-http",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-2",
-      "pass": true,
-      "steps": [
-        "plans-ready",
-        "long-answer",
-        "media-http-200"
-      ],
-      "consoleErrors": [
-        "NotSupportedError: Failed to load because no supported source was found."
-      ],
-      "httpStatus": 200,
-      "answer": "You can begin. Ask what you can do. Change only happens when ordinary people get involved. The world is very different now.",
-      "wordCount": 22,
-      "mediaSrc": "./ask/media/answer-long-demo.mp4",
-      "mediaHttpStatus": 200,
-      "mediaContentType": "video/mp4"
-    },
-    {
-      "browser": "webkit-ipad-full-playback",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=live-2",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
       "pass": false,
       "steps": [
         "plans-ready"
       ],
       "consoleErrors": [
-        "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
-        "Error: shared_ai_provider_error (502)"
+        "Failed to load resource: the server responded with a status of 502 ()",
+        "Error: shared_ai_provider_error (502)\n    at HTMLButtonElement.run (https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4:1:5104)"
       ],
       "httpStatus": 200,
-      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at run (/home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:5:713)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:7:14"
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at run (/home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:6:713)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:7:14"
+    },
+    {
+      "browser": "webkit-ipad-full-playback",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
+      "pass": true,
+      "steps": [
+        "plans-ready",
+        "long-answer-v04-metadata",
+        "media-http-200",
+        "video-complete"
+      ],
+      "consoleErrors": [],
+      "httpStatus": 200,
+      "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring. The 'long-demo' plan provides a complete, inspiring multi-sentence message ('The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.') that meets the length and quality criteria.",
+      "wordCount": 22,
+      "tempoFactors": [
+        1.08,
+        1.08,
+        0.92,
+        0.95,
+        1.005
+      ],
+      "mediaSrc": "./ask/media/answer-long-demo.mp4",
+      "mediaHttpStatus": 200,
+      "mediaContentType": "video/mp4",
+      "media": {
+        "t": 7.934,
+        "d": 7.934,
+        "rs": 4,
+        "error": null,
+        "ended": true,
+        "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-long-demo.mp4"
+      }
     }
   ],
-  "note": "Playwright bundled Chromium does not ship proprietary H.264 decoding; Chromium validates director logic and live MP4 HTTP response, while WebKit performs full H.264/AAC playback."
+  "note": "Playwright bundled Chromium does not ship proprietary H.264 decoding; Chromium validates director logic/metadata and the live MP4 HTTP response, while WebKit performs full H.264/AAC playback."
 }
