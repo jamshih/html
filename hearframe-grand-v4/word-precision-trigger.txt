@@ -1,1 +1,1 @@
-refine long-answer single words with Gemini 3.5 Flash-Lite audio critic v5
+refine long-answer single words with independent-edge ±80/40 ms → ±20/10 ms → ±5 ms Gemini audio boundary search; confidence gate v1.3
