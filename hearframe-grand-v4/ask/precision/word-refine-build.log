@@ -1,16 +1,20 @@
 + ffmpeg -y -hide_banner -nostdin -loglevel error -ss 679.355 -i https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm -t 0.864 -vn -ac 1 -ar 16000 -c:a pcm_s16le /tmp/hearframe-begin-precision.wav
 begin coarse: sending 9 real WAV candidates to Gemini
+critic attempt 1/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 2/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 3/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 4/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 5/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
 begin fine: sending 9 real WAV candidates to Gemini
-critic attempt 1/5 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
-begin micro: sending 9 real WAV candidates to Gemini
-critic attempt 1/5 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
-critic attempt 2/5 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
-critic attempt 3/5 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
-critic attempt 4/5 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
-critic attempt 5/5 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 1/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 2/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 3/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 4/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 5/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
+critic attempt 6/6 failed: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
 Traceback (most recent call last):
-  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 68, in judge
-    with urllib.request.urlopen(req,timeout=65) as r:
+  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 79, in judge
+    with urllib.request.urlopen(req,timeout=70) as r:
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
     return opener.open(url, data, timeout)
@@ -34,10 +38,10 @@ urllib.error.HTTPError: HTTP Error 502: Bad Gateway
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 118, in <module>
+  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 129, in <module>
     result,winner=judge(toks[0],grid,frames,sr,context_start)
                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 77, in judge
-    if e.code not in TRANSIENT or attempt==5: raise last
+  File "/home/runner/work/html/html/.github/scripts/refine-hearframe-long-answer-words.py", line 88, in judge
+    if e.code not in TRANSIENT or attempt==6: raise last
                                               ^^^^^^^^^^
 RuntimeError: Gemini audio critic HTTP 502: {"error":"shared_ai_provider_error"}
