@@ -1,14 +1,35 @@
+Commons HTTP 429; retry 1/8 in 16.0s
+interviews 2600
+Commons HTTP 429; retry 1/8 in 52.0s
+sports 2200
+entertainment 2000
+Commons HTTP 429; retry 1/8 in 50.0s
+experts-public-figures 1500
+general-speech 1700
+Commons HTTP 429; retry 1/8 in 52.0s
+enriched 0 valid 46 rejected 4
+Commons HTTP 429; retry 1/8 in 53.0s
+enriched 500 valid 466 rejected 84
+Commons HTTP 429; retry 1/8 in 51.0s
+enriched 1000 valid 930 rejected 120
+Commons HTTP 429; retry 1/8 in 52.0s
+enriched 1500 valid 1407 rejected 143
+Commons HTTP 429; retry 1/8 in 50.0s
+enriched 2000 valid 1895 rejected 155
+Commons HTTP 429; retry 1/8 in 46.0s
+enriched 2500 valid 2339 rejected 211
+Commons HTTP 429; retry 1/8 in 45.0s
+enriched 3000 valid 2712 rejected 338
+Commons HTTP 429; retry 1/8 in 51.0s
+enriched 3500 valid 3091 rejected 459
+Commons HTTP 429; retry 1/8 in 51.0s
+enriched 4000 valid 3478 rejected 572
 Traceback (most recent call last):
-  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 84, in <module>
-    for title in search(q,quota-len(bucket_titles),all_titles):
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 57, in search
-    data=api(p)
-         ^^^^^^
-  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 46, in api
-    raise last
-  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 43, in api
-    with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 126, in <module>
+    data=api({'action':'query','prop':'imageinfo','titles':'|'.join(chunk),'iiprop':'url|size|mime|mediatype|extmetadata'})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/html/html/.github/scripts/discover-hearframe-bank-v3.py", line 47, in api
+    with urllib.request.urlopen(req,timeout=75) as r:
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
     return opener.open(url, data, timeout)
@@ -27,4 +48,4 @@ Traceback (most recent call last):
              ^^^^^^^^^^^
   File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
     raise HTTPError(req.full_url, code, msg, hdrs, fp)
-urllib.error.HTTPError: HTTP Error 429: Too Many Requests
+urllib.error.HTTPError: HTTP Error 414: URI Too Long
