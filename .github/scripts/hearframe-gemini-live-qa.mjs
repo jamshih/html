@@ -11,9 +11,10 @@ const corpus=JSON.parse(fs.readFileSync('hearframe-grand-v4/ask/corpus.json','ut
 let words=[];
 if(Array.isArray(index.uniqueWords)) words=index.uniqueWords;
 else if(index.uniqueWords && typeof index.uniqueWords==='object') words=Object.keys(index.uniqueWords);
-else words=Object.keys(index.byToken||{});
+else if(index.tokens && typeof index.tokens==='object') words=Object.keys(index.tokens);
+else if(index.byToken && typeof index.byToken==='object') words=Object.keys(index.byToken);
 words=[...new Set(words.map(x=>String(x).trim().toLowerCase()).filter(Boolean))].sort();
-if(words.length<1000) throw new Error(`Real corpus vocabulary unexpectedly small: ${words.length}`);
+if(words.length<1000) throw new Error(`Real corpus vocabulary unexpectedly small: ${words.length}; top-level keys=${Object.keys(index).join(',')}`);
 const phrases=[];
 for(const seg of Object.values(corpus.segments||{})){
   const p=String(seg?.target||'').trim().toLowerCase(); if(p&&!phrases.includes(p)) phrases.push(p);
@@ -22,7 +23,7 @@ for(const ans of corpus.answers||[]){
   const p=String(ans?.text||'').trim().toLowerCase().replace(/[.!?]+$/,''); if(p&&!phrases.includes(p)) phrases.push(p);
 }
 const stats=index.stats||{};
-const vocabulary={version:'reference-100-vocab-v1',sourceCount:stats.speechBearingSources||stats.indexedSources||87,processedSources:stats.processedSources||100,uniqueWordCount:words.length,availableWords:words,preferredPhrases:phrases};
+const vocabulary={version:'reference-100-vocab-v1',sourceCount:index.indexedSpeechReferences||stats.speechBearingSources||stats.indexedSources||87,processedSources:index.referenceCount||stats.processedSources||100,uniqueWordCount:words.length,availableWords:words,preferredPhrases:phrases};
 fs.writeFileSync('hearframe-grand-v4/ask/corpus-vocabulary.json',JSON.stringify(vocabulary,null,2)+'\n');
 
 // Upgrade the visible lab from the two-word demo to the actual indexed vocabulary.
@@ -34,7 +35,7 @@ if(!html.includes('id="corpusStatus"')){
   html=html.replace('<textarea id="words">hello world</textarea>','<textarea id="words">Loading real corpus…</textarea>');
   html=html.replace('<textarea id="phrases">hello world</textarea>','<textarea id="phrases">Loading intact phrases…</textarea>');
   const marker="backendInput.value=localStorage.getItem('hearframeInterviewBackend')||DEFAULT_BACKEND;";
-  const loader=`\nconst corpusStatus=$('corpusStatus'),runDirectorBtn=$('runDirector');\nrunDirectorBtn.disabled=true;\nconst corpusVocabularyPromise=fetch('./ask/corpus-vocabulary.json?v=reference-100-v1',{cache:'no-store'})\n .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})\n .then(v=>{\n   if(!Array.isArray(v.availableWords)||v.availableWords.length<1000)throw new Error('indexed vocabulary is incomplete');\n   $('words').value=v.availableWords.join(' ');\n   $('phrases').value=(v.preferredPhrases||[]).join('\\n');\n   runDirectorBtn.disabled=false;\n   setStatus(corpusStatus,\\`Real corpus loaded · \\${v.uniqueWordCount||v.availableWords.length} indexed words · \\${v.sourceCount||'?'} speech-bearing references.\\`,'good');\n   return v;\n })\n .catch(e=>{\n   $('words').value='hello world';$('phrases').value='hello world';runDirectorBtn.disabled=false;\n   setStatus(corpusStatus,'Real corpus failed to load: '+e.message,'bad');\n   return null;\n });`;
+  const loader=`\nconst corpusStatus=$('corpusStatus'),runDirectorBtn=$('runDirector');\nrunDirectorBtn.disabled=true;\nconst corpusVocabularyPromise=fetch('./ask/corpus-vocabulary.json?v=reference-100-v1',{cache:'no-store'})\n .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})\n .then(v=>{\n   if(!Array.isArray(v.availableWords)||v.availableWords.length<1000)throw new Error('indexed vocabulary is incomplete');\n   $('words').value=v.availableWords.join(' ');\n   $('phrases').value=(v.preferredPhrases||[]).join('\\n');\n   runDirectorBtn.disabled=false;\n   setStatus(corpusStatus,\`Real corpus loaded · \${v.uniqueWordCount||v.availableWords.length} indexed words · \${v.sourceCount||'?'} speech-bearing references.\`,'good');\n   return v;\n })\n .catch(e=>{\n   $('words').value='hello world';$('phrases').value='hello world';runDirectorBtn.disabled=false;\n   setStatus(corpusStatus,'Real corpus failed to load: '+e.message,'bad');\n   return null;\n });`;
   if(!html.includes(marker)) throw new Error('Could not find lab backend initialization marker');
   html=html.replace(marker,marker+loader);
   fs.writeFileSync(htmlPath,html);
