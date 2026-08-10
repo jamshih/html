@@ -1,1 +1,1 @@
-render v0.4 phrase-first speed-matched conclusion answer with AI-refined word gate
+render v0.4 phrase-first speed-matched conclusion answer with AI-refined word gate diagnostics
