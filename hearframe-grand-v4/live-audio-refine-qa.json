@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-08-10T09:40:33.265Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-refine.html?v=live-speech-qa",
+  "steps": [
+    "real-corpus-loaded",
+    "gemini-backend-connected",
+    "speech-sources-loaded"
+  ],
+  "consoleErrors": [
+    "Error: HELLO: captured audio is silent. The media host/browser may be blocking cross-origin Web Audio. The working v4.6 player is unchanged."
+  ],
+  "hello": null,
+  "world": null,
+  "pass": false,
+  "httpStatus": 200,
+  "error": "Error: #criticStatus: HELLO: captured audio is silent. The media host/browser may be blocking cross-origin Web Audio. The working v4.6 player is unchanged.\n    at waitContains (file:///home/runner/work/html/html/.github/scripts/hearframe-live-audio-refine-qa.mjs:7:180)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-live-audio-refine-qa.mjs:22:12"
+}
