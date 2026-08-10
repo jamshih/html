@@ -1,7 +1,26 @@
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  if (root) root.HearframeAICore = api;
+  if (root) {
+    root.HearframeAICore = api;
+    if (root.document) {
+      setTimeout(() => {
+        try {
+          const q = root.document.getElementById('question');
+          if (q && /shortest greeting/i.test(q.value || '')) q.value = 'Say something longer and inspiring.';
+          const run = root.document.getElementById('runDirector');
+          if (run && !root.document.getElementById('longVideoTestLink')) {
+            const a = root.document.createElement('a');
+            a.id = 'longVideoTestLink';
+            a.href = './ai-long-test.html?v=1';
+            a.textContent = '▶ Open real long-video test';
+            a.style.cssText = 'display:inline-block;margin-left:9px;padding:11px 13px;border-radius:11px;background:#cfc7ff;color:#090b10;font-weight:800;text-decoration:none;border:1px solid #cfc7ff';
+            run.insertAdjacentElement('afterend', a);
+          }
+        } catch (_) {}
+      }, 0);
+    }
+  }
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
@@ -48,8 +67,6 @@
     return out;
   }
 
-  // Each block is timestamped against media currentTime at the moment the WebAudio block is delivered.
-  // We slice only the samples whose estimated media time overlaps [startSec, endSec].
   function sliceCapturedBlocks(blocks, startSec, endSec, sampleRate) {
     if (!(endSec > startSec) || !(sampleRate > 0)) return new Float32Array();
     const pieces = [];
