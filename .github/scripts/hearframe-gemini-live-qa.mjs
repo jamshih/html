@@ -5,12 +5,37 @@ const backend = html.match(/const DEFAULT_BACKEND='([^']+)'/)?.[1];
 const apikey = html.match(/const INTERVIEW_PUBLISHABLE_KEY='([^']+)'/)?.[1];
 if (!backend || !apikey) throw new Error('Could not resolve live Interview AIBot backend configuration');
 
+const index=JSON.parse(fs.readFileSync('hearframe-grand-v4/ask/reference-word-index.json','utf8'));
+const corpus=JSON.parse(fs.readFileSync('hearframe-grand-v4/ask/corpus.json','utf8'));
+let words=[];
+if(Array.isArray(index.uniqueWords)) words=index.uniqueWords;
+else if(index.uniqueWords && typeof index.uniqueWords==='object') words=Object.keys(index.uniqueWords);
+else words=Object.keys(index.byToken||{});
+words=[...new Set(words.map(x=>String(x).trim().toLowerCase()).filter(Boolean))].sort();
+if(words.length<1000) throw new Error(`Real corpus vocabulary unexpectedly small: ${words.length}`);
+const phrases=[];
+for(const seg of Object.values(corpus.segments||{})){
+  const p=String(seg?.target||'').trim().toLowerCase(); if(p&&!phrases.includes(p)) phrases.push(p);
+}
+for(const ans of corpus.answers||[]){
+  const p=String(ans?.text||'').trim().toLowerCase().replace(/[.!?]+$/,''); if(p&&!phrases.includes(p)) phrases.push(p);
+}
+const stats=index.stats||{};
+const vocabulary={version:'reference-100-vocab-v1',sourceCount:stats.speechBearingSources||stats.indexedSources||87,processedSources:stats.processedSources||100,uniqueWordCount:words.length,availableWords:words,preferredPhrases:phrases};
+fs.writeFileSync('hearframe-grand-v4/ask/corpus-vocabulary.json',JSON.stringify(vocabulary,null,2)+'\n');
+
 const origin='https://hearframe-grand-hello-world-v4.onrender.com';
-const result={checkedAt:new Date().toISOString(),backend,origin,director:null,audioCritic:null,pass:false};
+const result={checkedAt:new Date().toISOString(),backend,origin,vocabulary:{uniqueWordCount:words.length,sourceCount:vocabulary.sourceCount,processedSources:vocabulary.processedSources,preferredPhraseCount:phrases.length},shortDirector:null,longDirector:null,audioCritic:null,pass:false};
 async function post(path,body){
   const r=await fetch(backend+path,{method:'POST',headers:{'content-type':'application/json','apikey':apikey,'origin':origin},body:JSON.stringify(body)});
   const text=await r.text();let json;try{json=JSON.parse(text)}catch{json={raw:text.slice(0,1000)}}
   return {status:r.status,json};
+}
+function normalizeTokens(text){return String(text||'').toLowerCase().match(/[a-z0-9']+/g)||[]}
+function assertConstructible(response,allowed,label){
+  if(response.status!==200||!response.json?.constructible||!String(response.json.answer||'').trim()) throw new Error(`${label} failed `+JSON.stringify(response));
+  const bad=normalizeTokens(response.json.answer).filter(t=>!allowed.has(t));
+  if(bad.length) throw new Error(`${label} returned unavailable tokens: ${[...new Set(bad)].join(', ')}`);
 }
 function wavBase64(freq=440,seconds=.28,amp=.2){
   const sr=16000,n=Math.round(sr*seconds),buf=Buffer.alloc(44+n*2);
@@ -19,12 +44,15 @@ function wavBase64(freq=440,seconds=.28,amp=.2){
   return buf.toString('base64');
 }
 try{
+  const shortAllowed=new Set(['hello','world']);
   const d=await post('/director',{question:'Give me the shortest greeting.',availableWords:['hello','world'],availablePhrases:['hello world']});
-  result.director=d;
-  if(d.status!==200||!d.json?.constructible||!String(d.json.answer||'').trim()) throw new Error('director failed '+JSON.stringify(d));
-  const allowed=new Set(['hello','world']);
-  const tokens=String(d.json.answer).toLowerCase().match(/[a-z']+/g)||[];
-  if(tokens.some(t=>!allowed.has(t))) throw new Error('director returned unavailable token '+JSON.stringify(d.json));
+  result.shortDirector=d;assertConstructible(d,shortAllowed,'short director');
+
+  const allowed=new Set(words);
+  const long=await post('/director',{question:'can you say something longer and inspiring',availableWords:words,availablePhrases:phrases});
+  result.longDirector=long;assertConstructible(long,allowed,'real-corpus long director');
+  const longTokens=normalizeTokens(long.json.answer);
+  if(longTokens.length<8) throw new Error(`long director answer is still too short (${longTokens.length} words): ${long.json.answer}`);
 
   const a=await post('/audio-critic',{targetWord:'beep',candidates:[
     {id:'tone-low',audioBase64:wavBase64(440),mimeType:'audio/wav',startMs:100,endMs:380},
