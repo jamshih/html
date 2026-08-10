@@ -1,0 +1,63 @@
+name: Hearframe Corpus Vocabulary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/corpus-vocabulary-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Export searchable vocabulary and intact phrases
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('hearframe-grand-v4/ask')
+          idx=json.loads((base/'reference-word-index.json').read_text())
+          corpus=json.loads((base/'corpus.json').read_text())
+          raw=idx.get('uniqueWords')
+          if isinstance(raw,list):
+              words=[str(x).strip().lower() for x in raw if str(x).strip()]
+          elif isinstance(raw,dict):
+              words=[str(x).strip().lower() for x in raw.keys() if str(x).strip()]
+          else:
+              words=[str(x).strip().lower() for x in (idx.get('byToken') or {}).keys() if str(x).strip()]
+          words=sorted(set(words))
+          phrases=[]
+          for s in (corpus.get('segments') or {}).values():
+              t=str(s.get('target') or '').strip().lower()
+              if t and t not in phrases: phrases.append(t)
+          for a in corpus.get('answers') or []:
+              t=str(a.get('text') or '').strip().lower().rstrip('.!?')
+              if t and t not in phrases: phrases.append(t)
+          stats=idx.get('stats') or {}
+          out={
+              'version':'reference-100-vocab-v1',
+              'sourceCount': stats.get('speechBearingSources') or stats.get('indexedSources') or 87,
+              'processedSources': stats.get('processedSources') or 100,
+              'uniqueWordCount':len(words),
+              'availableWords':words,
+              'preferredPhrases':phrases,
+          }
+          (base/'corpus-vocabulary.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({k:out[k] for k in ('version','sourceCount','processedSources','uniqueWordCount')},indent=2))
+          if len(words)<1000: raise SystemExit(f'Vocabulary unexpectedly small: {len(words)}')
+          PY
+      - name: Commit export
+        run: |
+          git config user.name 'hearframe-corpus-export'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/corpus-vocabulary.json
+          git commit -m 'Export Hearframe 100-video vocabulary [skip ci]' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
