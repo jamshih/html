@@ -25,10 +25,10 @@
 
 <section class="card">
   <h2>2 · Video content director</h2>
-  <div class="note">The director may only answer with words we say exist in the indexed video corpus. The backend verifies the answer after Gemini responds.</div>
+  <div class="note">The director is automatically loaded with the real 100-reference Hearframe vocabulary. It may only answer with indexed words, and the backend verifies every output token after Gemini responds.</div><div class="status" id="corpusStatus">Loading real Hearframe corpus…</div>
   <div class="field"><label for="question">QUESTION / INTENT</label><input id="question" value="Give me the shortest greeting." /></div>
-  <div class="field"><label for="words">AVAILABLE CORPUS WORDS</label><textarea id="words">hello world</textarea></div>
-  <div class="field"><label for="phrases">PREFERRED INTACT PHRASES</label><textarea id="phrases">hello world</textarea></div>
+  <div class="field"><label for="words">AVAILABLE CORPUS WORDS</label><textarea id="words">Loading real corpus…</textarea></div>
+  <div class="field"><label for="phrases">PREFERRED INTACT PHRASES</label><textarea id="phrases">Loading intact phrases…</textarea></div>
   <div class="row"><button id="runDirector" class="primary">Ask Gemini video director</button></div>
   <div class="status" id="directorStatus">Waiting.</div>
 </section>
@@ -93,6 +93,23 @@ let sourcesLoaded=false,busy=false;
 
 const backendInput=$('backend'),backendStatus=$('backendStatus'),criticStatus=$('criticStatus'),directorStatus=$('directorStatus'),passes=$('passes'),previewStatus=$('previewStatus');
 backendInput.value=localStorage.getItem('hearframeInterviewBackend')||DEFAULT_BACKEND;
+const corpusStatus=$('corpusStatus'),runDirectorBtn=$('runDirector');
+runDirectorBtn.disabled=true;
+const corpusVocabularyPromise=fetch('./ask/corpus-vocabulary.json?v=reference-100-v1',{cache:'no-store'})
+ .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+ .then(v=>{
+   if(!Array.isArray(v.availableWords)||v.availableWords.length<1000)throw new Error('indexed vocabulary is incomplete');
+   $('words').value=v.availableWords.join(' ');
+   $('phrases').value=(v.preferredPhrases||[]).join('\n');
+   runDirectorBtn.disabled=false;
+   setStatus(corpusStatus,`Real corpus loaded · ${v.uniqueWordCount||v.availableWords.length} indexed words · ${v.sourceCount||'?'} speech-bearing references.`,'good');
+   return v;
+ })
+ .catch(e=>{
+   $('words').value='hello world';$('phrases').value='hello world';runDirectorBtn.disabled=false;
+   setStatus(corpusStatus,'Real corpus failed to load: '+e.message,'bad');
+   return null;
+ });
 
 function setStatus(el,text,kind=''){el.textContent=text;el.className='status'+(kind?' '+kind:'')}
 function fmt(t){const m=Math.floor(t/60),s=t-m*60;return `${String(m).padStart(2,'0')}:${s.toFixed(3).padStart(6,'0')}`}

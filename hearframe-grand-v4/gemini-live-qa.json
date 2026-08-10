@@ -1,19 +1,53 @@
 {
-  "checkedAt": "2026-08-10T09:24:35.341Z",
+  "checkedAt": "2026-08-10T09:34:19.247Z",
   "backend": "https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai",
   "origin": "https://hearframe-grand-hello-world-v4.onrender.com",
-  "director": {
+  "vocabulary": {
+    "uniqueWordCount": 1635,
+    "sourceCount": 87,
+    "processedSources": 100,
+    "preferredPhraseCount": 11
+  },
+  "shortDirector": {
     "status": 200,
     "json": {
       "ok": true,
       "provider": "gemini",
       "model": "gemini-3.6-flash",
-      "answer": "Hello world.",
+      "answer": "hello world",
       "tokens": [
         "hello",
         "world"
       ],
-      "rationale": "Uses the available intact phrase verbatim to deliver a natural, seamless greeting within the requested 2–8 word length, avoiding unnecessary edits.",
+      "rationale": "Using the preferred intact phrase \"hello world\" provides a natural greeting that fits within the target length of 2 to 8 words while requiring no cuts.",
+      "constructible": true
+    }
+  },
+  "longDirector": {
+    "status": 200,
+    "json": {
+      "ok": true,
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "answer": "You can begin. Ask what you can do, because the world is very different now.",
+      "tokens": [
+        "you",
+        "can",
+        "begin",
+        "ask",
+        "what",
+        "you",
+        "can",
+        "do",
+        "because",
+        "the",
+        "world",
+        "is",
+        "very",
+        "different",
+        "now"
+      ],
+      "rationale": "This response combines three preferred intact phrases ('you can begin', 'ask what you can do', and 'the world is very different now') connected smoothly with an available transition word ('because'). It delivers an inspiring tone, stays strictly within the available vocabulary, and falls right into the requested length range at 15 words.",
       "constructible": true
     }
   },
@@ -25,7 +59,7 @@
       "model": "gemini-3.6-flash",
       "bestCandidateId": "tone-high",
       "confidence": 0.95,
-      "reason": "'tone-high' provides a clean, clear electronic tone that perfectly matches the canonical high-pitched audio cue for 'beep' with smooth onset and fade-out.",
+      "reason": "Both candidates contain clean, isolated tone beeps with complete onsets and endings and no extra speech or clicks. 'tone-high' is selected as the top candidate as its higher frequency aligns more standardly with a clear electronic beep signal.",
       "ranking": [
         {
           "id": "tone-high",
@@ -34,16 +68,16 @@
           "endingComplete": true,
           "extraSpeech": false,
           "cleanBoundary": true,
-          "notes": "Clean high-pitched tone with smooth attack and decay, highly recognizable as a standard beep."
+          "notes": "Clear, standard high-pitched tone beep with clean boundaries and full onset and offset."
         },
         {
           "id": "tone-low",
-          "score": 88,
+          "score": 90,
           "onsetComplete": true,
           "endingComplete": true,
           "extraSpeech": false,
           "cleanBoundary": true,
-          "notes": "Clean tone with no clipping or truncation, but noticeably lower in pitch than a standard beep cue."
+          "notes": "Clean lower-pitched tone beep, fully complete with smooth boundaries."
         }
       ],
       "selectedWindow": {
