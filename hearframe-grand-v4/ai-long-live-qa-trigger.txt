@@ -1,1 +1,1 @@
-run final v0.5 live QA after 10600-reference sports-rebalanced bank, word-boundary v1.3.1, phrase/sentence-first render, tempo smoothing and source-independent conclusion
+re-run final v0.5 live QA now that Render serves the 10600-reference sports-rebalanced bank and word-boundary v1.3.1 media
