@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-08-10T11:29:42.445Z",
+  "checkedAt": "2026-08-10T11:32:47.394Z",
   "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
-  "pass": false,
+  "pass": true,
   "requirements": {
     "minimumWords": 12,
     "explicitConclusion": "You can begin.",
@@ -15,18 +15,19 @@
     {
       "browser": "chromium-logic-and-media-http",
       "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.4",
-      "pass": false,
+      "pass": true,
       "steps": [
         "plans-ready",
         "long-answer-v04-metadata",
-        "media-http-200"
+        "media-http-200",
+        "expected-chromium-codec-warning-only"
       ],
       "consoleErrors": [
         "NotSupportedError: Failed to load because no supported source was found."
       ],
       "httpStatus": 200,
       "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring, and the 'long-demo' plan provides a complete, multi-sentence inspirational speech that fits the criteria.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe 'long-demo' plan provides an inspiring, multi-sentence message ('Change only happens when ordinary people get involved...') that concludes with a clear final thought ('You can begin.'), meeting the user's request for a longer and inspiring statement while satisfying all precision and tempo criteria.",
       "wordCount": 22,
       "tempoFactors": [
         1.08,
@@ -38,7 +39,7 @@
       "mediaSrc": "./ask/media/answer-long-demo.mp4",
       "mediaHttpStatus": 200,
       "mediaContentType": "video/mp4",
-      "error": "Error: console errors: [\"NotSupportedError: Failed to load because no supported source was found.\"]\n    at run (file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:6:3242)\n    at async file:///home/runner/work/html/html/.github/scripts/hearframe-long-video-live-qa.mjs:7:14"
+      "unexpectedConsoleErrors": []
     },
     {
       "browser": "webkit-ipad-full-playback",
@@ -53,7 +54,7 @@
       "consoleErrors": [],
       "httpStatus": 200,
       "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe 'long-demo' plan provides a longer, inspiring message that matches the user's request for an extended and motivating statement, featuring a strong concluding thought ('You can begin.') and passing all audio precision gates.",
+      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe user requested something longer and inspiring. The 'long-demo' plan provides a complete, inspiring multi-sentence message with strong pacing and a clear concluding thought that meets all quality and length criteria.",
       "wordCount": 22,
       "tempoFactors": [
         1.08,
@@ -72,8 +73,9 @@
         "error": null,
         "ended": true,
         "src": "https://hearframe-grand-hello-world-v4.onrender.com/ask/media/answer-long-demo.mp4"
-      }
+      },
+      "unexpectedConsoleErrors": []
     }
   ],
-  "note": "Playwright bundled Chromium does not ship proprietary H.264 decoding; Chromium validates director logic/metadata and the live MP4 HTTP response, while WebKit performs full H.264/AAC playback."
+  "note": "Playwright bundled Chromium lacks proprietary H.264 decoding, so only its specific expected codec warning is ignored on the logic/media-HTTP leg. Any other Chromium console error still fails. WebKit performs full H.264/AAC playback."
 }
