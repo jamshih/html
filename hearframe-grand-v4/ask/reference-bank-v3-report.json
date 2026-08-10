@@ -4,7 +4,7 @@
   "newCount": 10500,
   "totalCount": 10600,
   "targetNew": 10500,
-  "directVideoUrlValidatedNew": 10000,
+  "directVideoUrlValidatedNew": 10500,
   "bucketCounts": {
     "interviews": 2600,
     "sports": 2200,
@@ -112,12 +112,19 @@
   "rejectionReasons": {
     "not-direct-video": 1974
   },
-  "uniqueTitles": 10100,
-  "uniqueSourceUrls": 10100,
+  "uniqueTitles": 10600,
+  "uniqueSourceUrls": 10600,
   "alignmentStatus": "Original aligned sample plus lazy alignment for retrieval references; isolated words require hardened AI boundary refinement before render.",
-  "licensePolicy": "Because the 10K bank is only discovery metadata, license/attribution is fetched and validated from the Commons file page at selection time before a clip is eligible for production rendering.",
+  "licensePolicy": "The retrieval bank stores direct-video references. License/attribution is fetched and validated from the Commons file page at selection time before a clip is eligible for production rendering.",
   "pass": true,
   "plus500Report": "reference-bank-plus500-report.json",
+  "plus500BucketCounts": {
+    "celebrity-interviews": 180,
+    "entertainment-talk": 100,
+    "sports-stars": 80,
+    "experts-public-figures": 45,
+    "general-speech": 95
+  },
   "plus500SportsMinimum": 80,
   "plus500SportsActual": 80
 }
