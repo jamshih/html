@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hearframe — 10.6K Reference Bank Explorer</title>
+<style>
+:root{color-scheme:dark;--bg:#080a0f;--panel:#11151d;--line:#252b35;--text:#f7f7fb;--muted:#9aa3b5;--good:#86efb7;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}main{width:min(1180px,calc(100% - 28px));margin:auto;padding:32px 0 60px}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--muted);font-weight:850}h1{font-size:clamp(38px,7vw,78px);letter-spacing:-.055em;line-height:.95;margin:16px 0}.lead{color:#bbc2d0;line-height:1.6;max-width:880px}.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin-top:20px}.toolbar input,.toolbar select{border:1px solid var(--line);background:#0a0d12;color:var(--text);border-radius:12px;padding:12px;font:inherit}.toolbar button{border:1px solid var(--line);background:#f6f6f8;color:#090b10;border-radius:12px;padding:12px 15px;font-weight:800;cursor:pointer}.status{margin:14px 0;color:var(--muted);font-size:13px;line-height:1.5}.status strong{color:var(--good)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{border:1px solid var(--line);background:var(--panel);border-radius:16px;overflow:hidden}.media{background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}.media video{width:100%;height:100%;object-fit:contain;background:#000}.body{padding:14px}.title{font-weight:850;line-height:1.25}.meta{font-size:11px;color:var(--muted);line-height:1.55;margin-top:8px;overflow-wrap:anywhere}.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}.links a{color:#d9d4ff;font-size:12px}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 8px;margin:8px 6px 0 0;font-size:10px;color:#c7cedb}.notice{border:1px solid var(--line);background:#0d1118;border-radius:14px;padding:12px 14px;color:#aeb7c5;font-size:12px;line-height:1.55;margin:14px 0 18px}
+@media(max-width:760px){.toolbar{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">HEARFRAME / REAL REFERENCE BANK</div>
+<h1>Explore the 10,600<br>source videos.</h1>
+<p class="lead">This page reads the actual Hearframe reference bank and plays the original source video URLs. Use Random 12 to jump around the bank, filter by discovery bucket, or search titles.</p>
+<div class="notice"><strong>Important:</strong> these are retrieval references, not 10,600 fully aligned production clips. Each selected reference still needs speech, license, and alignment validation before Hearframe uses it in a rendered answer.</div>
+<div class="toolbar">
+<input id="search" placeholder="Search titles…" />
+<select id="bucket"><option value="">All buckets</option></select>
+<button id="random">Random 12</button>
+</div>
+<div id="status" class="status">Loading the real bank…</div>
+<div id="grid" class="grid"></div>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);let videos=[],view=[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function sample(arr,n){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n)}
+function filtered(){const q=$('search').value.trim().toLowerCase(),b=$('bucket').value;return videos.filter(v=>(!b||v.discoveryBucket===b)&&(!q||String(v.title||'').toLowerCase().includes(q)))}
+function render(items){view=items;$('grid').innerHTML=items.map(v=>`<article class="card"><div class="media"><video controls playsinline preload="none" src="${esc(v.sourceUrl)}"></video></div><div class="body"><div class="title">${esc(v.title||v.referenceId)}</div><span class="tag">${esc(v.referenceId||'')}</span><span class="tag">${esc(v.discoveryBucket||'legacy')}</span><div class="meta">speech: ${esc(v.speechValidationStatus||'unknown')} · license: ${esc(v.licenseStatus||'unknown')} · alignment: ${esc(v.alignmentStatus||'unknown')}<br>${esc(v.mime||'')} ${v.width&&v.height?`· ${v.width}×${v.height}`:''}</div><div class="links">${v.pageUrl?`<a href="${esc(v.pageUrl)}" target="_blank" rel="noopener">Source page</a>`:''}${v.sourceUrl?`<a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener">Direct video</a>`:''}</div></div></article>`).join('');$('status').innerHTML=`Showing <strong>${items.length}</strong> of ${filtered().length.toLocaleString()} matching references · bank total <strong>${videos.length.toLocaleString()}</strong>`}
+function randomize(){render(sample(filtered(),12))}
+async function load(){try{const r=await fetch('./ask/reference-bank-v3.json?v=3.5.1',{cache:'no-store'});if(!r.ok)throw Error('bank HTTP '+r.status);const bank=await r.json();videos=Array.isArray(bank.videos)?bank.videos:[];if(!videos.length)throw Error('No videos in bank');const buckets=[...new Set(videos.map(v=>v.discoveryBucket).filter(Boolean))].sort();$('bucket').innerHTML='<option value="">All buckets</option>'+buckets.map(b=>`<option value="${esc(b)}">${esc(b)}</option>`).join('');$('status').innerHTML=`Loaded <strong>${videos.length.toLocaleString()}</strong> references from ${esc(bank.version||'bank')}.`;randomize()}catch(e){$('status').textContent='Failed to load bank: '+e.message}}
+$('random').onclick=randomize;$('bucket').onchange=randomize;$('search').oninput=()=>{const f=filtered();render(f.slice(0,12))};load();
+})();
+</script>
+</body>
+</html>
