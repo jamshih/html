@@ -1,124 +1,302 @@
 {
-  "version": "long-answer-qa-v0.5",
-  "text": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-  "wordCount": 22,
-  "segments": [
-    "world_different",
-    "change_people",
-    "ask_what_you_can_do",
-    "you_can",
-    "begin"
-  ],
-  "roles": [
-    "body",
-    "body",
-    "body",
-    "conclusion",
-    "conclusion"
-  ],
-  "chunkTypes": [
-    "sentence",
-    "sentence",
-    "sentence",
-    "phrase",
-    "word"
-  ],
-  "segmentCount": 5,
-  "retrievalOrder": [
-    "sentence",
-    "phrase",
-    "ai-refined-word"
-  ],
-  "sentenceClipPresent": true,
-  "conclusion": "You can begin.",
-  "hasConclusion": true,
-  "sourceOrderIndependent": true,
-  "conclusionSourcePositionIndependent": true,
-  "singleWordSegments": [
-    "begin"
-  ],
-  "singleWordPrecisionGate": "passed",
-  "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
-  "precisionOverlay": "precision/long-answer-word-refinements.json",
-  "rawDurations": [
-    1.871,
-    4.233333,
-    1.268,
-    0.333333,
-    0.533333
-  ],
-  "rawWordsPerSecond": [
-    3.207,
-    1.89,
-    3.943,
-    6.0,
-    1.875
-  ],
-  "targetWordsPerSecond": 3.575,
-  "speedFactors": [
-    1.08,
-    1.08,
-    0.92,
-    0.95,
-    1.0047
-  ],
-  "speedAdjusted": true,
-  "adjustedDurations": [
-    1.7324,
-    3.9198,
-    1.3783,
-    0.3509,
-    0.5308
-  ],
-  "adjustedWordsPerSecond": [
-    3.463,
-    2.041,
-    3.628,
-    5.7,
-    1.884
-  ],
-  "sourceMeansDbFS": [
-    -16.9,
-    -31.2,
-    -23.1,
-    -32.5,
-    -24.6
-  ],
-  "appliedGainDb": [
-    -6.0,
-    6.0,
-    -1.5,
-    6.0,
-    0.0
-  ],
-  "crossfadeMs": [
-    25.0,
-    25.0,
-    25.0,
-    25.0
-  ],
-  "duration": 7.933,
-  "fullDecode": "pass",
-  "normalizedVideo": "1280x720",
-  "corpusVersionAfterBuild": "ask-v0.5",
-  "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
-  "probe": {
-    "programs": [],
-    "streams": [
-      {
-        "codec_name": "h264",
-        "codec_type": "video",
-        "width": 1280,
-        "height": 720
-      },
-      {
-        "codec_name": "aac",
-        "codec_type": "audio"
+  "version": "long-answer-qa-v0.6",
+  "planCount": 5,
+  "allLong": true,
+  "allConcluded": true,
+  "uniqueTexts": 5,
+  "uniqueMedia": 5,
+  "precisionVersion": "long-answer-word-refinement-v1.3.1",
+  "plans": [
+    {
+      "id": "long-demo",
+      "text": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
+      "wordCount": 22,
+      "conclusion": "You can begin.",
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "phrase",
+        "word"
+      ],
+      "speedFactors": [
+        1.08,
+        1.08,
+        0.92,
+        0.95,
+        1.0047
+      ],
+      "duration": 7.933,
+      "rawWordsPerSecond": [
+        3.207,
+        1.89,
+        3.943,
+        6.0,
+        1.875
+      ],
+      "targetWordsPerSecond": 3.575,
+      "appliedGainDb": [
+        -6.0,
+        6.0,
+        -1.5,
+        6.0,
+        0.0
+      ],
+      "crossfadeMs": [
+        25.0,
+        25.0,
+        25.0,
+        25.0
+      ],
+      "fullDecode": "pass",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "7.933000"
+        }
       }
-    ],
-    "format": {
-      "duration": "7.933000"
+    },
+    {
+      "id": "long-progress",
+      "text": "Yes, our progress has been uneven. The world is very different now. Change only happens when ordinary people get involved. You can begin.",
+      "wordCount": 23,
+      "conclusion": "You can begin.",
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "phrase",
+        "word"
+      ],
+      "speedFactors": [
+        1.08,
+        0.92,
+        1.08,
+        0.95,
+        1.0047
+      ],
+      "duration": 9.1,
+      "rawWordsPerSecond": [
+        2.5,
+        3.207,
+        1.89,
+        6.0,
+        1.875
+      ],
+      "targetWordsPerSecond": 2.853,
+      "appliedGainDb": [
+        5.1,
+        -6.0,
+        0.0,
+        1.3,
+        -6.0
+      ],
+      "crossfadeMs": [
+        25.0,
+        25.0,
+        25.0,
+        25.0
+      ],
+      "fullDecode": "pass",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "9.100000"
+        }
+      }
+    },
+    {
+      "id": "long-action",
+      "text": "The world is very different now. Ask what you can do. Change only happens when ordinary people get involved. We need to do so.",
+      "wordCount": 24,
+      "conclusion": "We need to do so.",
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "sentence"
+      ],
+      "speedFactors": [
+        1.08,
+        0.92,
+        1.08,
+        0.92
+      ],
+      "duration": 7.933333,
+      "rawWordsPerSecond": [
+        3.207,
+        3.943,
+        1.89,
+        6.0
+      ],
+      "targetWordsPerSecond": 3.575,
+      "appliedGainDb": [
+        -6.0,
+        -4.05,
+        4.05,
+        6.0
+      ],
+      "crossfadeMs": [
+        25.0,
+        25.0,
+        25.0
+      ],
+      "fullDecode": "pass",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "7.933333"
+        }
+      }
+    },
+    {
+      "id": "long-resolve",
+      "text": "Change only happens when ordinary people get involved. Yes, our progress has been uneven. The world is very different now. We need to do so.",
+      "wordCount": 25,
+      "conclusion": "We need to do so.",
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "sentence"
+      ],
+      "speedFactors": [
+        1.08,
+        1.08,
+        0.92,
+        0.92
+      ],
+      "duration": 9.1,
+      "rawWordsPerSecond": [
+        1.89,
+        2.5,
+        3.207,
+        6.0
+      ],
+      "targetWordsPerSecond": 2.853,
+      "appliedGainDb": [
+        -2.55,
+        2.55,
+        -6.0,
+        2.85
+      ],
+      "crossfadeMs": [
+        25.0,
+        25.0,
+        25.0
+      ],
+      "fullDecode": "pass",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "9.100000"
+        }
+      }
+    },
+    {
+      "id": "long-question",
+      "text": "The world is very different now. Yes, our progress has been uneven. Change only happens when ordinary people get involved. Ask what you can do.",
+      "wordCount": 25,
+      "conclusion": "Ask what you can do.",
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "sentence"
+      ],
+      "speedFactors": [
+        0.92,
+        1.08,
+        1.08,
+        0.92
+      ],
+      "duration": 9.566,
+      "rawWordsPerSecond": [
+        3.207,
+        2.5,
+        1.89,
+        3.943
+      ],
+      "targetWordsPerSecond": 2.853,
+      "appliedGainDb": [
+        -6.0,
+        6.0,
+        4.05,
+        -4.05
+      ],
+      "crossfadeMs": [
+        25.0,
+        25.0,
+        25.0
+      ],
+      "fullDecode": "pass",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio"
+          }
+        ],
+        "format": {
+          "duration": "9.566000"
+        }
+      }
     }
-  },
+  ],
   "pass": true
 }

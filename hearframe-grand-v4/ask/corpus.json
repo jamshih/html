@@ -1,5 +1,5 @@
 {
-  "version": "ask-v0.5",
+  "version": "ask-v0.6",
   "alignment": "WhisperX phoneme/CTC forced alignment (WAV2VEC2_ASR_LARGE_LV60K_960H); known human-gold overrides preserved",
   "sources": {
     "obama": {
@@ -536,11 +536,11 @@
         "long answer",
         "longer answer",
         "long sentence",
-        "longer sentence",
-        "say something longer",
-        "say something inspiring",
-        "give me a longer answer",
-        "test long sentence"
+        "inspiring",
+        "life decision",
+        "change",
+        "progress",
+        "action"
       ],
       "segments": [
         "world_different",
@@ -591,10 +591,241 @@
       "singleWordSegments": [
         "begin"
       ]
+    },
+    {
+      "id": "long-progress",
+      "text": "Yes, our progress has been uneven. The world is very different now. Change only happens when ordinary people get involved. You can begin.",
+      "keywords": [
+        "long answer",
+        "longer answer",
+        "long sentence",
+        "inspiring",
+        "life decision",
+        "change",
+        "progress",
+        "action"
+      ],
+      "segments": [
+        "progress_uneven",
+        "world_different",
+        "change_people",
+        "you_can",
+        "begin"
+      ],
+      "roles": [
+        "body",
+        "body",
+        "body",
+        "conclusion",
+        "conclusion"
+      ],
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "phrase",
+        "word"
+      ],
+      "media": "media/answer-long-progress.mp4",
+      "wordCount": 23,
+      "hasConclusion": true,
+      "conclusionText": "You can begin.",
+      "conclusionSegmentIds": [
+        "you_can",
+        "begin"
+      ],
+      "conclusionSourcePositionIndependent": true,
+      "speedAdjusted": true,
+      "speedFactors": [
+        1.08,
+        0.92,
+        1.08,
+        0.95,
+        1.0047
+      ],
+      "retrievalOrder": [
+        "sentence",
+        "phrase",
+        "ai-refined-word"
+      ],
+      "phraseFirst": true,
+      "singleWordPrecisionGate": "passed",
+      "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
+      "singleWordSegments": [
+        "begin"
+      ]
+    },
+    {
+      "id": "long-action",
+      "text": "The world is very different now. Ask what you can do. Change only happens when ordinary people get involved. We need to do so.",
+      "keywords": [
+        "long answer",
+        "longer answer",
+        "long sentence",
+        "inspiring",
+        "life decision",
+        "change",
+        "progress",
+        "action"
+      ],
+      "segments": [
+        "world_different",
+        "ask_what_you_can_do",
+        "change_people",
+        "we_have_what_we_need"
+      ],
+      "roles": [
+        "body",
+        "body",
+        "body",
+        "conclusion"
+      ],
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "sentence"
+      ],
+      "media": "media/answer-long-action.mp4",
+      "wordCount": 24,
+      "hasConclusion": true,
+      "conclusionText": "We need to do so.",
+      "conclusionSegmentIds": [
+        "we_have_what_we_need"
+      ],
+      "conclusionSourcePositionIndependent": true,
+      "speedAdjusted": true,
+      "speedFactors": [
+        1.08,
+        0.92,
+        1.08,
+        0.92
+      ],
+      "retrievalOrder": [
+        "sentence",
+        "phrase",
+        "ai-refined-word"
+      ],
+      "phraseFirst": true,
+      "singleWordPrecisionGate": "passed",
+      "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
+      "singleWordSegments": []
+    },
+    {
+      "id": "long-resolve",
+      "text": "Change only happens when ordinary people get involved. Yes, our progress has been uneven. The world is very different now. We need to do so.",
+      "keywords": [
+        "long answer",
+        "longer answer",
+        "long sentence",
+        "inspiring",
+        "life decision",
+        "change",
+        "progress",
+        "action"
+      ],
+      "segments": [
+        "change_people",
+        "progress_uneven",
+        "world_different",
+        "we_have_what_we_need"
+      ],
+      "roles": [
+        "body",
+        "body",
+        "body",
+        "conclusion"
+      ],
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "sentence"
+      ],
+      "media": "media/answer-long-resolve.mp4",
+      "wordCount": 25,
+      "hasConclusion": true,
+      "conclusionText": "We need to do so.",
+      "conclusionSegmentIds": [
+        "we_have_what_we_need"
+      ],
+      "conclusionSourcePositionIndependent": true,
+      "speedAdjusted": true,
+      "speedFactors": [
+        1.08,
+        1.08,
+        0.92,
+        0.92
+      ],
+      "retrievalOrder": [
+        "sentence",
+        "phrase",
+        "ai-refined-word"
+      ],
+      "phraseFirst": true,
+      "singleWordPrecisionGate": "passed",
+      "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
+      "singleWordSegments": []
+    },
+    {
+      "id": "long-question",
+      "text": "The world is very different now. Yes, our progress has been uneven. Change only happens when ordinary people get involved. Ask what you can do.",
+      "keywords": [
+        "long answer",
+        "longer answer",
+        "long sentence",
+        "inspiring",
+        "life decision",
+        "change",
+        "progress",
+        "action"
+      ],
+      "segments": [
+        "world_different",
+        "progress_uneven",
+        "change_people",
+        "ask_what_you_can_do"
+      ],
+      "roles": [
+        "body",
+        "body",
+        "body",
+        "conclusion"
+      ],
+      "chunkTypes": [
+        "sentence",
+        "sentence",
+        "sentence",
+        "sentence"
+      ],
+      "media": "media/answer-long-question.mp4",
+      "wordCount": 25,
+      "hasConclusion": true,
+      "conclusionText": "Ask what you can do.",
+      "conclusionSegmentIds": [
+        "ask_what_you_can_do"
+      ],
+      "conclusionSourcePositionIndependent": true,
+      "speedAdjusted": true,
+      "speedFactors": [
+        0.92,
+        1.08,
+        1.08,
+        0.92
+      ],
+      "retrievalOrder": [
+        "sentence",
+        "phrase",
+        "ai-refined-word"
+      ],
+      "phraseFirst": true,
+      "singleWordPrecisionGate": "passed",
+      "singleWordPrecisionVersion": "long-answer-word-refinement-v1.3.1",
+      "singleWordSegments": []
     }
   ],
   "fallback": {
     "text": "I do not have enough indexed speech to answer that yet. Try a question about starting, change, progress, what you need, the world, or what you can do."
   },
-  "notes": "Sentence/phrase-first corpus. Isolated words are fallback-only and must pass independent-edge AI boundary refinement first. Long answers end with an explicit conclusion chosen independently of source timeline position and use conservative per-clip tempo matching."
+  "notes": "Sentence/phrase-first corpus with five independently rendered long-answer variations. Repeated long requests can rotate across real rendered plans. Isolated words remain fallback-only and precision-gated."
 }
