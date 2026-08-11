@@ -1,0 +1,25 @@
+{
+  "version": "stitch-index-v1-report",
+  "selectedNewReferences": 200,
+  "newIndexedSpeechReferences": 183,
+  "legacyIndexedSpeechReferences": 86,
+  "enabledSpeechReferencesTotal": 269,
+  "newAcceptedWordOccurrences": 13474,
+  "acceptedWordOccurrencesTotal": 19701,
+  "availableUniqueWords": 3213,
+  "phraseHints": 2000,
+  "phraseCandidateKeys": 39156,
+  "newMedianAlignmentScore": 0.752,
+  "newStatusCounts": {
+    "indexed": 183,
+    "no-speech": 6,
+    "low-speech": 5,
+    "error": 6
+  },
+  "selectedBucketCounts": {
+    "celebrity-interviews": 180,
+    "sports-stars": 20
+  },
+  "pass": true,
+  "note": "These are testing-enabled references from the 10,600-reference retrieval bank. Licensing remains validate-on-use; promotion to production still requires manual/source-license review."
+}
