@@ -1,24 +1,23 @@
 {
   "version": "stitch-index-v1-report",
   "selectedNewReferences": 200,
-  "newIndexedSpeechReferences": 183,
+  "newIndexedSpeechReferences": 189,
   "legacyIndexedSpeechReferences": 86,
-  "enabledSpeechReferencesTotal": 269,
-  "newAcceptedWordOccurrences": 13474,
-  "acceptedWordOccurrencesTotal": 19701,
-  "availableUniqueWords": 3213,
+  "enabledSpeechReferencesTotal": 275,
+  "newAcceptedWordOccurrences": 13124,
+  "acceptedWordOccurrencesTotal": 19351,
+  "availableUniqueWords": 3055,
   "phraseHints": 2000,
-  "phraseCandidateKeys": 39156,
-  "newMedianAlignmentScore": 0.752,
+  "phraseCandidateKeys": 35922,
+  "newMedianAlignmentScore": 0.75,
   "newStatusCounts": {
-    "indexed": 183,
-    "no-speech": 6,
-    "low-speech": 5,
-    "error": 6
+    "indexed": 189,
+    "no-speech": 3,
+    "low-speech": 3,
+    "error": 5
   },
   "selectedBucketCounts": {
-    "celebrity-interviews": 180,
-    "sports-stars": 20
+    "interviews": 200
   },
   "pass": true,
   "note": "These are testing-enabled references from the 10,600-reference retrieval bank. Licensing remains validate-on-use; promotion to production still requires manual/source-license review."
