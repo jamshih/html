@@ -1,1 +1,1 @@
-render v0.5 sentence/phrase-first speed-smoothed conclusion answer using hardened word-boundary v1.3.1 gate; preserve source-independent conclusion selection
+render v0.6 five distinct sentence/phrase-first long video answers with explicit conclusions, per-clip tempo smoothing, source-independent conclusion order, and hardened word-boundary v1.3.1 gate
