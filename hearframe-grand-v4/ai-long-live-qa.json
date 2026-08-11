@@ -1,33 +1,35 @@
 {
-  "checkedAt": "2026-08-10T12:38:02.800Z",
-  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.5",
+  "checkedAt": "2026-08-11T00:49:17.136Z",
+  "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.6",
   "pass": true,
   "requirements": {
     "referenceBankTotal": 10600,
     "wordBoundaryRefinement": "v1.3+",
-    "minimumWords": 12,
-    "explicitConclusion": "You can begin.",
-    "conclusionSourceTimelineIndependent": true,
+    "minimumDistinctLongPlans": 5,
+    "noImmediateRepeat": true,
+    "explicitConclusion": true,
     "retrievalOrder": "sentence > phrase > AI-refined word",
     "singleWordPrecision": "passed",
     "tempoAdjustment": true,
-    "sentencePhraseWordMix": true,
     "webkitFullPlayback": true
   },
   "results": [
     {
-      "browser": "chromium-logic-and-media-http",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.5",
+      "browser": "chromium-variation-logic-and-media-http",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.6",
       "pass": true,
       "steps": [
         "bank-10600",
         "word-boundary-v13",
+        "five-long-variations",
         "plans-ready",
-        "long-answer-v05-metadata",
-        "media-http-200",
+        "first-variation-media-200",
+        "second-variation-different",
+        "second-variation-media-200",
         "expected-chromium-codec-warning-only"
       ],
       "consoleErrors": [
+        "NotSupportedError: Failed to load because no supported source was found.",
         "NotSupportedError: Failed to load because no supported source was found."
       ],
       "httpStatus": 200,
@@ -41,31 +43,60 @@
         "allQualityGatesPassed": true,
         "minimumConfidence": 0.82
       },
-      "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe 'long-demo' plan delivers a 22-word inspiring message about making a difference that ends with a clear concluding thought ('You can begin.'), perfectly matching the request for a longer, uplifting response.",
-      "wordCount": 22,
-      "tempoFactors": [
-        1.08,
-        1.08,
-        0.92,
-        0.95,
-        1.005
-      ],
-      "mediaSrc": "./ask/media/answer-long-demo.mp4",
-      "mediaHttpStatus": 200,
-      "mediaContentType": "video/mp4",
+      "longCatalog": {
+        "version": "ask-v0.6",
+        "count": 5,
+        "ids": [
+          "long-demo",
+          "long-progress",
+          "long-action",
+          "long-resolve",
+          "long-question"
+        ],
+        "uniqueTexts": 5,
+        "uniqueMedia": 5
+      },
+      "first": {
+        "id": "long-demo",
+        "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
+        "meta": "Gemini selected long-demo · variation 1/5 · 22 words · 5 eligible unused plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nIt provides a clear, strong opening ('The world is very different now') and flows naturally into an uplifting call to action ending with the inspiring concluding thought 'You can begin.'",
+        "wordCount": 22,
+        "conclusion": "You can begin.",
+        "tempoFactors": [
+          1.08,
+          1.08,
+          0.92,
+          0.95,
+          1.005
+        ]
+      },
+      "second": {
+        "id": "long-question",
+        "answer": "The world is very different now. Yes, our progress has been uneven. Change only happens when ordinary people get involved. Ask what you can do.",
+        "meta": "Gemini selected long-question · variation 2/5 · 25 words · 4 eligible unused plan(s)\nConclusion: Ask what you can do. · conclusionRequired=true\nChunks: sentence → sentence → sentence → sentence · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 0.920 · 1.080 · 1.080 · 0.920\nThe user asked for something longer and inspiring. 'long-question' provides a complete, 25-word inspiring message ending with a powerful concluding call to action ('Ask what you can do.') and successfully passed all audio precision checks.",
+        "wordCount": 25,
+        "conclusion": "Ask what you can do.",
+        "tempoFactors": [
+          0.92,
+          1.08,
+          1.08,
+          0.92
+        ]
+      },
       "unexpectedConsoleErrors": []
     },
     {
-      "browser": "webkit-ipad-full-playback",
-      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.5",
+      "browser": "webkit-ipad-variation-full-playback",
+      "url": "https://hearframe-grand-hello-world-v4.onrender.com/ai-long-test.html?v=0.6",
       "pass": true,
       "steps": [
         "bank-10600",
         "word-boundary-v13",
+        "five-long-variations",
         "plans-ready",
-        "long-answer-v05-metadata",
-        "media-http-200",
+        "first-variation-media-200",
+        "second-variation-different",
+        "second-variation-media-200",
         "video-complete"
       ],
       "consoleErrors": [],
@@ -80,21 +111,48 @@
         "allQualityGatesPassed": true,
         "minimumConfidence": 0.82
       },
-      "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
-      "meta": "Gemini selected long-demo · 22 words · 1 eligible plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nThe 'long-demo' plan provides a complete, inspiring 22-word message ('The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.') that ends with a clear concluding thought, uses complete phrase chunks, and passed all precision and tempo adjustments.",
-      "wordCount": 22,
-      "tempoFactors": [
-        1.08,
-        1.08,
-        0.92,
-        0.95,
-        1.005
-      ],
-      "mediaSrc": "./ask/media/answer-long-demo.mp4",
-      "mediaHttpStatus": 200,
-      "mediaContentType": "video/mp4",
+      "longCatalog": {
+        "version": "ask-v0.6",
+        "count": 5,
+        "ids": [
+          "long-demo",
+          "long-progress",
+          "long-action",
+          "long-resolve",
+          "long-question"
+        ],
+        "uniqueTexts": 5,
+        "uniqueMedia": 5
+      },
+      "first": {
+        "id": "long-question",
+        "answer": "The world is very different now. Yes, our progress has been uneven. Change only happens when ordinary people get involved. Ask what you can do.",
+        "meta": "Gemini selected long-question · variation 1/5 · 25 words · 5 eligible unused plan(s)\nConclusion: Ask what you can do. · conclusionRequired=true\nChunks: sentence → sentence → sentence → sentence · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 0.920 · 1.080 · 1.080 · 0.920\nThe user asked for something longer and inspiring. 'long-question' contains 25 words, includes multiple inspiring thoughts about progress and change, and finishes with an inspiring call to action concluding phrase ('Ask what you can do.').",
+        "wordCount": 25,
+        "conclusion": "Ask what you can do.",
+        "tempoFactors": [
+          0.92,
+          1.08,
+          1.08,
+          0.92
+        ]
+      },
+      "second": {
+        "id": "long-demo",
+        "answer": "The world is very different now. Change only happens when ordinary people get involved. Ask what you can do. You can begin.",
+        "meta": "Gemini selected long-demo · variation 2/5 · 22 words · 4 eligible unused plan(s)\nConclusion: You can begin. · conclusionRequired=true\nChunks: sentence → sentence → sentence → phrase → word · phraseFirst=true\nSingle-word precision: passed\nTempo factors: 1.080 · 1.080 · 0.920 · 0.950 · 1.005\nIt delivers a strong, inspiring narrative flow that builds directly to an empowering concluding thought ('You can begin.') while passing all precision and timing audio gates.",
+        "wordCount": 22,
+        "conclusion": "You can begin.",
+        "tempoFactors": [
+          1.08,
+          1.08,
+          0.92,
+          0.95,
+          1.005
+        ]
+      },
       "media": {
-        "t": 7.859522057,
+        "t": 7.902656047,
         "d": 7.934,
         "rs": 4,
         "error": null,
@@ -104,5 +162,5 @@
       "unexpectedConsoleErrors": []
     }
   ],
-  "note": "Playwright bundled Chromium lacks proprietary H.264 decoding, so only its specific expected codec warning is ignored on the logic/media-HTTP leg. Any other Chromium console error still fails. WebKit performs full H.264/AAC playback."
+  "note": "QA generates the same long request twice and requires a different rendered plan/media on the second generation. Chromium ignores only its known H.264 decoder warning; WebKit performs full playback."
 }
