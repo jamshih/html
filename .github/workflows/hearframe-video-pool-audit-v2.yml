@@ -1,0 +1,52 @@
+name: Audit Hearframe Public Speech Interview Pool v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/video-pool-audit-v2-trigger.txt'
+      - '.github/scripts/audit-hearframe-video-pool-v2.py'
+      - '.github/workflows/hearframe-video-pool-audit-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run strict title/explicit-description audit
+        run: python .github/scripts/audit-hearframe-video-pool-v2.py
+      - name: Assert zero remote/random-media leaks
+        run: |
+          python - <<'PY'
+          import json,re
+          p='hearframe-grand-v4/ask/public-speech-interview-bank.json'
+          j=json.load(open(p))
+          bad=re.compile(r'\b(zoom(?:\.us)?|microsoft teams|teams meeting|webex|google meet|webinar|virtual meeting|remote interview|remote conversation|video call|conference call|screen recording|webcam|telephone interview|phone interview|radio interview|podcast|news clip|news package|b[- ]?roll|raw footage|stock footage|promo|trailer|commercial|advertisement|documentary|training film|panel discussion|roundtable)\b',re.I)
+          leaks=[]
+          for v in j['videos']:
+              s=' '.join(str(v.get(k) or '') for k in ['title','description','credit','artist','pageUrl'])
+              if bad.search(s): leaks.append((v.get('referenceId'),v.get('title')))
+          if leaks: raise SystemExit(f'prohibited source leaked: {leaks[:30]}')
+          print('strict curated count',j['count'],'leaks',len(leaks))
+          PY
+      - name: Commit hardened audit outputs
+        run: |
+          git config user.name 'hearframe-video-pool-audit-v2'
+          git config user.email 'actions@users.noreply.github.com'
+          git add \
+            hearframe-grand-v4/ask/public-speech-interview-bank.json \
+            hearframe-grand-v4/ask/video-pool-audit-report.json \
+            hearframe-grand-v4/ask/video-pool-audit-review.json \
+            hearframe-grand-v4/ask/video-pool-audit-rejected-sample.json
+          git commit -m 'Harden Hearframe public speech interview audit [skip ci]' || exit 0
+          git pull --rebase origin main
+          git push origin HEAD:main
