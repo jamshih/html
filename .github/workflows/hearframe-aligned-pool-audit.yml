@@ -1,0 +1,34 @@
+name: Audit Hearframe Already-Aligned Pool
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/aligned-pool-audit-trigger.txt'
+      - '.github/scripts/audit-hearframe-aligned-pool.py'
+      - 'hearframe-grand-v4/ask/public-speech-interview-bank.json'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Audit already-aligned candidates against production source policy
+        run: python .github/scripts/audit-hearframe-aligned-pool.py
+      - name: Commit aligned-pool audit
+        run: |
+          git config user.name 'hearframe-aligned-pool-audit'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/aligned-pool-audit-report.json
+          git commit -m 'Audit Hearframe already-aligned source pool [skip ci]' || exit 0
+          git pull --rebase origin main
+          git push origin HEAD:main
