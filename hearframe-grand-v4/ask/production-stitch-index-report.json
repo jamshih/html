@@ -1,0 +1,52 @@
+{
+  "version": "production-stitch-index-v1-report",
+  "auditedBankVersion": "public-speech-interview-bank-v2",
+  "selectedNewReferences": 200,
+  "newReadyReferences": 125,
+  "auditedLegacyReadyReferences": 6,
+  "readyReferencesTotal": 131,
+  "removedLegacyReferences": 82,
+  "newStatusCounts": {
+    "indexed": 125,
+    "non-english": 61,
+    "low-quality-speech": 9,
+    "error": 4,
+    "no-speech": 1
+  },
+  "newLanguageCounts": {
+    "en": 135,
+    "hi": 3,
+    "nn": 3,
+    "la": 3,
+    "fr": 6,
+    "kn": 2,
+    "de": 5,
+    "fi": 1,
+    "nl": 4,
+    "ta": 2,
+    "es": 2,
+    "pa": 2,
+    "gu": 1,
+    "ar": 10,
+    "fa": 2,
+    "cy": 4,
+    "ru": 1,
+    "hu": 1,
+    "unknown": 4,
+    "et": 7,
+    "pt": 1,
+    "bn": 1
+  },
+  "newReadyKindCounts": {
+    "public-interview": 60,
+    "public-speech": 65
+  },
+  "legacySafeWordOccurrences": 174,
+  "newAcceptedWordOccurrences": 15729,
+  "availableUniqueWords": 3115,
+  "phraseHints": 2000,
+  "phraseCandidateKeys": 55285,
+  "newMedianAlignmentScore": 0.917,
+  "pass": true,
+  "note": "Only audited public speeches/interviews with detected English speech and successful alignment are counted ready. Source licensing remains validate-on-use before external production distribution."
+}
