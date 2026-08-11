@@ -1,0 +1,67 @@
+name: Enable Hearframe Bank Clips for Stitch Lab
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/enabled-bank-index-trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  shard:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install ffmpeg + WhisperX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          pip install 'whisperx>=3.3,<4'
+      - name: Align +200 bank references
+        env:
+          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_COUNT: '20'
+          ENABLE_LIMIT: '200'
+          SAMPLE_SECONDS: '45'
+          SHARD_OUTPUT: hearframe-grand-v4/ask/enabled-bank-index/shard-${{ matrix.shard }}.json
+        run: python .github/scripts/index-hearframe-enabled-bank-shard.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hearframe-enabled-bank-${{ matrix.shard }}
+          path: hearframe-grand-v4/ask/enabled-bank-index/shard-${{ matrix.shard }}.json
+          if-no-files-found: error
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: hearframe-enabled-bank-*
+          path: hearframe-grand-v4/ask/enabled-bank-index
+          merge-multiple: true
+      - name: Merge word + sentence/phrase stitch index
+        run: python .github/scripts/merge-hearframe-enabled-bank-index.py
+      - name: Commit enabled stitch index
+        run: |
+          git config user.name 'hearframe-stitch-index'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hearframe-grand-v4/ask/stitch-index.json hearframe-grand-v4/ask/stitch-index-report.json
+          git commit -m 'Enable 200 more Hearframe bank references for Stitch Lab [skip ci]' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
