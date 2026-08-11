@@ -1,1 +1,1 @@
-audit existing aligned word index against hardened public-speech/public-interview production bank v2; title or explicit recording-description evidence only; exclude all remote/random/unproven legacy sources
+force rerun 2026-08-11: audit existing aligned word index against public-speech-interview-bank-v2 only; require accepted-production kind and strong title/explicit-description evidence; exclude every other legacy source
