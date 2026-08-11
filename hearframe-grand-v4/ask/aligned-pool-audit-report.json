@@ -1,0 +1,488 @@
+{
+  "version": "aligned-pool-audit-v1",
+  "sourcePolicy": "public-speech-interview-v1",
+  "legacyCatalogCount": 100,
+  "legacyAlignedReferenceCount": 88,
+  "approvedAlignedReferenceCount": 8,
+  "rejectedOrUnprovenAlignedReferenceCount": 80,
+  "approvedAlignedPublicSpeechCount": 5,
+  "approvedAlignedPublicInterviewCount": 3,
+  "legacyIndexUniqueWordCountBeforeAudit": 1634,
+  "safeUniqueWordCountAfterAudit": 232,
+  "candidateOccurrencesBeforeAudit": 3639,
+  "safeCandidateOccurrencesAfterAudit": 291,
+  "approvedAlignedReferences": [
+    {
+      "referenceId": "ref-016",
+      "title": "File:\"Federal Employees- A Conversation with President Carter,\" WHCA C752.webm",
+      "sourceKind": "public-interview",
+      "auditReasons": [
+        "conversation"
+      ]
+    },
+    {
+      "referenceId": "ref-021",
+      "title": "File:-OpenEd20 Keynote- Jessie Loyer.webm",
+      "sourceKind": "public-speech",
+      "auditReasons": [
+        "keynote"
+      ]
+    },
+    {
+      "referenceId": "ref-039",
+      "title": "File:\"SIT UP STRAIGHT AND LOOK AT ME\" - SDI Speeches on MCRD Parris Island.webm",
+      "sourceKind": "public-speech",
+      "auditReasons": [
+        "speech"
+      ]
+    },
+    {
+      "referenceId": "ref-055",
+      "title": "File:2018 AUSA Annual Meeting & Exposition Opening Ceremony.webm",
+      "sourceKind": "public-speech",
+      "auditReasons": [
+        "remarks"
+      ]
+    },
+    {
+      "referenceId": "ref-063",
+      "title": "File:2018 West Virginia State of the State Address.webm",
+      "sourceKind": "public-speech",
+      "auditReasons": [
+        "address"
+      ]
+    },
+    {
+      "referenceId": "ref-066",
+      "title": "File:12-46 Escaping the Great Recession With Public Banking.webm",
+      "sourceKind": "public-speech",
+      "auditReasons": [
+        "address"
+      ]
+    },
+    {
+      "referenceId": "ref-071",
+      "title": "File:2009 G20 Summit protests in Pittsburgh.webm",
+      "sourceKind": "public-interview",
+      "auditReasons": [
+        "interview"
+      ]
+    },
+    {
+      "referenceId": "ref-098",
+      "title": "File:1.6.8 Norman Finkelstein on Gandhi and the Occupy Movement and end credits - Episode 6.webm",
+      "sourceKind": "public-interview",
+      "auditReasons": [
+        "interview"
+      ]
+    }
+  ],
+  "removedAlignedReferences": [
+    {
+      "referenceId": "ref-001",
+      "title": "File:'The Meaning of July Fourth for the Negro' by Frederick Douglass (Navigating The Journey).webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-002",
+      "title": "File:(AV07352) WOI- News Clip 417.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-003",
+      "title": "File:\"Is Islam Globally Waxing or Waning\" with Robert Spencer - MEF Podcast Ep. 10.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-004",
+      "title": "File:\"Why would a Muslim hold a cross..\"! - ft. Dr Jay Smith, Robert Spencer, Kay.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-005",
+      "title": "File:\"Where Europe Went Wrong\" with Sam Westrop.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-006",
+      "title": "File:\"Jamaat-e-Islami - A Threat at Home and Abroad?\" with Sam Westrop and Cliff Smith - Ep. 09.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-007",
+      "title": "File:\"Why The Left In America, and Around The World, Turned On Israel\" with Asaf Romirowsky - Ep. 08.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-008",
+      "title": "File:'The Cause of the Middle East's Next War' with Jonathan Schanzer - MEF Podcast Ep. 11.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-009",
+      "title": "File:\"The Muslim Brotherhood's Successful Infiltration of America\" with Cynthia Farahat - Ep. 07.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-010",
+      "title": "File:\"Uncovering Terror Funding in Foreign Aid - Islamic Relief Agency Scandal\" Cliff Smith & Sam Westrop.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-012",
+      "title": "File:\"Upgrading Washington- Government Technology & Innovation in the Next Administration\".webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-013",
+      "title": "File:\"There is no planet B\" - Fascinating exchange between Naomi Klein and Stephanie Kelton -.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-014",
+      "title": "File:\"Cover crop Nutrient Cycling in South Dakota\" by SDSU Extension Anthony Bly.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-015",
+      "title": "File:'Pizza call' to 911 saves assault victim.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-017",
+      "title": "File:\"Rise of the Drones- Unmanned Systems and the Future of War\" Panel 1 Part 1.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-018",
+      "title": "File:\"Rise of the Drones- Unmanned Systems and the Future of War\" Panel 1 Part 2.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-019",
+      "title": "File:\"Bring home the gold for the Red, White, and Blue.\".webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-020",
+      "title": "File:'In defense of tribal sovereignty'- Cherokee Nation at U.S. Supreme Court.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-022",
+      "title": "File:\"Yours is the First,\" UNCG promotional video from the mid-1970s.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-023",
+      "title": "File:\"Jonas Gahr Støre is here, who is the Prime Minister of Norway... - President Donald J. Trump.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-024",
+      "title": "File:\"It feels like a part of you is being ripped out. You can't even describe the pain...\" - Patty Morin.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-025",
+      "title": "File:-WHEasterEggRoll Preparation.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-026",
+      "title": "File:\"My fellow Americans, this is Liberation Day. April 2, 2025...\" –President Donald J. Trump.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-027",
+      "title": "File:\"This is the beginning of Liberation Day in America.\" –President Trump.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-028",
+      "title": "File:01-30-25- President Trump Signs Executive Orders.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-029",
+      "title": "File:\"It turned out that all we really needed was a new President.\".webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-030",
+      "title": "File:\"I love our country and I am so happy to be back.\" - Marc Fogel.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-031",
+      "title": "File:\"Our meeting was excellent... we have made a lot of progress on ending that war.\" – President Donald Trump.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-032",
+      "title": "File:'Don't Ask, Don't Tell' Veteran Becomes First Stonewall Monument Park Ranger - NBC Left Field.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-033",
+      "title": "File:\"The Ticket Stub\" United States Marine Corps Documentary 1996.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-034",
+      "title": "File:\"Literally, he’s going to go down as maybe the best President ever\" - Rick Harrison.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-035",
+      "title": "File:\" SOLDIERS OF THE SEA \" 1939 U.S. MARINE CORPS PROMO FILM USMC RECRUIT DEPOT SAN DIEGO.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-036",
+      "title": "File:\" THE HERITAGE OF THE CORPS \" 1963 U.S. MARINE CORPS FILM 8TH & I USMC BARRACKS WASHINGTON.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-037",
+      "title": "File:\"JAP LANGUAGE USEFUL PHRASES\" USMC MARINE CORPS WWII TRAINING FILM 64734.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-040",
+      "title": "File:\"KNOW YOUR ENEMY JAPAN!\" WWII TRAINING & PROPAGANDA FILM.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-042",
+      "title": "File:\" LEATHERNECKS ON PARADE \" 1942 UNITED STATES MARINE CORPS & JOE E. BROWN PROMO GG13165.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-043",
+      "title": "File:(Talk Gnosis) Matt Christman- Love & Solidarity in the Black Iron Prison.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-044",
+      "title": "File:(Talk Gnosis) Rosicrucian Myths & the 30 Years War w-Matt Christman.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-045",
+      "title": "File:\"As the President has said ad nauseam... Iran CANNOT have a nuclear weapon.\" - VP JD Vance.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-046",
+      "title": "File:\"Earning the Title\" - 2008 Marines Recruiting Video.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-047",
+      "title": "File:\"Recruiting the Navy's Future\" (September 2015).webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-048",
+      "title": "File:\"Never\" - U.S. Navy recruitment advertisement (October 2022).webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-049",
+      "title": "File:\"Most importantly, we have a deal that Iran will never have a nuclear weapon.\" - President Trump.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-050",
+      "title": "File:\"American greatness has been forged by people of faith.\".webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-051",
+      "title": "File:10-16696, 10-16751 - Perry v. Schwarzenegger - Part 1 - Standing.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-053",
+      "title": "File:2018 AUSA SMA Professional Development Forum.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-054",
+      "title": "File:2018 AUSA SMA Awards Luncheon.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-056",
+      "title": "File:2 - OIS in Hollenbeck with gang suspect.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-058",
+      "title": "File:2018 Governor Lieutenant Race.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-059",
+      "title": "File:15 of the Most UNDERRATED Episodes from Victorious! - NickRewind.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-060",
+      "title": "File:1997 Po Bronson reads Upton Sinclair for Banned Books Week at the San Francisco Public Library.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-061",
+      "title": "File:1938 Thanksgiving Proclamation.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-062",
+      "title": "File:2020 Fall Campus Assembly - The University of Alabama.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-065",
+      "title": "File:11-year-old arrested for school threat.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-067",
+      "title": "File:20 Minutes of Oscar-Worthy Performances in Victorious - NickRewind.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-068",
+      "title": "File:20 Minutes of the Biggest Fights from Victorious! - NickRewind.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-069",
+      "title": "File:100 DAYS- There Is No Better Time To Invest In America.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-070",
+      "title": "File:1996 USMC 221st Birthday Message VHS.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-072",
+      "title": "File:1 deputy, 5 questions. Meet Deputy Ashley Espinosa of our Hammocks District! Learn more about our -MDSO deputies during question Friday. Miami Dade Sheriff’s Office.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-075",
+      "title": "File:1998 The Navy 'Let the Journey Begin' Commercial.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-076",
+      "title": "File:11-35517 Organized Village of Kake v. AGRI (2014-12-16).webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-077",
+      "title": "File:09-30033 U.S. v. Alfaro.wmv.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-078",
+      "title": "File:09-35780 Community House Inc. v. Bieter.wmv.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-079",
+      "title": "File:07-16326 Chapman v. Pier 1 Imports.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-080",
+      "title": "File:06-56325, 06-56406 Cassirer v. Kingdom of Spain.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-081",
+      "title": "File:07-15814 Norse v. Santa Cruz.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-082",
+      "title": "File:06-56306 Guggenheim v. City of Goleta.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-083",
+      "title": "File:07-30241 United States v. Lopez-Velasquez.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-085",
+      "title": "File:06-35669 Farrakhan v. Gregoire.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-086",
+      "title": "File:08-16602 Harrison v. Gillespie.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-087",
+      "title": "File:09-35003 Rosas v. Catholic Archbishop of Seattle.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-088",
+      "title": "File:08-56423 Khatib v. County of Orange.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-089",
+      "title": "File:09-35200 The Wilderness Society v. USFS.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-090",
+      "title": "File:05-74350 Nunez-Reyes v. Holder.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-091",
+      "title": "File:07-35115 Payne v. Peninsula School District.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-092",
+      "title": "File:08-70434 Singh v. Holder.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-093",
+      "title": "File:08-15567, 08-35526 Mattos v. Agarano.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-095",
+      "title": "File:05-50170 United States v. Aguila-Montes De Oca.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-099",
+      "title": "File:1949 Crusade in Europe Ep22 number tattoo.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-100",
+      "title": "File:President Biden and Vice President Harris Participate in a Wreath Laying Ceremony.webm",
+      "reason": "not in audited production bank"
+    }
+  ],
+  "qualityGates": {
+    "allSafeCandidatesApproved": true,
+    "countsReconcile": true,
+    "safePoolNonEmpty": true
+  },
+  "pass": true
+}
