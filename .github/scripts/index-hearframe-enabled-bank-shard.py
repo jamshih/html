@@ -21,27 +21,61 @@ OUT.parent.mkdir(parents=True, exist_ok=True)
 
 legacy_ids = {x.get('referenceId') for x in LEGACY.get('videos', [])}
 legacy_urls = {x.get('sourceUrl') for x in LEGACY.get('videos', [])}
-preferred = {'celebrity-interviews': 0, 'sports-stars': 1, 'entertainment-talk': 2, 'experts-public-figures': 3, 'general-speech': 4, 'fallback': 5}
+
+# Stitch Lab is intentionally strict: only source files whose own metadata identifies
+# them as a speech/address/remarks or an interview/Q&A/conversation may be promoted.
+# Discovery buckets and search queries alone are NOT sufficient because they can contain
+# B-roll, news packages, event footage, or other random video.
+SPEECH_RE = re.compile(
+    r"\b(speech|address|remarks|keynote|inaugural|farewell|commencement|statement|testimony)\b",
+    re.I,
+)
+INTERVIEW_RE = re.compile(
+    r"\b(interview|q\s*&\s*a|questions?\s+and\s+answers?|conversation\s+with|in\s+conversation|press\s+conference|press\s+briefing)\b",
+    re.I,
+)
+
+
+def source_kind(ref):
+    # Only trust source-owned title/description metadata. Do not classify from
+    # discoveryBucket/discoveryQuery because those are retrieval intent, not content proof.
+    own_text = ' '.join(str(ref.get(k) or '') for k in ('title', 'description', 'credit'))
+    if INTERVIEW_RE.search(own_text):
+        return 'interview'
+    if SPEECH_RE.search(own_text):
+        return 'speech'
+    return None
+
 
 candidates = []
+rejected_non_speech_interview = 0
 for ref in BANK.get('videos', []):
     if ref.get('referenceId') in legacy_ids or ref.get('sourceUrl') in legacy_urls:
         continue
     if not ref.get('sourceUrl'):
         continue
-    bucket = ref.get('discoveryBucket') or 'other'
+    kind = source_kind(ref)
+    if not kind:
+        rejected_non_speech_interview += 1
+        continue
     priority = float(ref.get('speechPriority') or 0)
-    targeted = 0 if bucket in preferred else 1
-    candidates.append((targeted, preferred.get(bucket, 99), -priority, str(ref.get('referenceId') or ''), ref))
+    kind_priority = 0 if kind == 'interview' else 1
+    candidates.append((kind_priority, -priority, str(ref.get('referenceId') or ''), kind, ref))
 
-# Favor the newest interview/sports/entertainment additions first, then fill from the wider bank.
-candidates.sort(key=lambda x: x[:4])
-selected = [x[-1] for x in candidates[:LIMIT]]
+# Favor explicit interviews first, then explicit speeches. Never fill from generic video.
+candidates.sort(key=lambda x: x[:3])
+selected_rows = candidates[:LIMIT]
+selected = [x[-1] for x in selected_rows]
+kind_by_id = {x[-1].get('referenceId'): x[3] for x in selected_rows}
 refs = [v for i, v in enumerate(selected) if i % COUNT == SHARD]
 
 import whisperx
 DEVICE = 'cpu'
-print(f'loading ASR/alignment models for enabled-bank shard {SHARD}; refs={len(refs)}', flush=True)
+print(
+    f'loading ASR/alignment models for enabled-bank shard {SHARD}; '
+    f'refs={len(refs)} strictEligible={len(candidates)} rejectedRandom={rejected_non_speech_interview}',
+    flush=True,
+)
 asr = whisperx.load_model('small.en', DEVICE, compute_type='int8', language='en')
 align_model, align_meta = whisperx.load_align_model(
     language_code='en',
@@ -49,20 +83,23 @@ align_model, align_meta = whisperx.load_align_model(
     model_name='WAV2VEC2_ASR_LARGE_LV60K_960H'
 )
 
+
 def run(cmd, check=True):
     p = subprocess.run(cmd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if check and p.returncode:
         raise RuntimeError(p.stderr[-3500:])
     return p
 
+
 def norm(s):
     return re.sub(r"[^a-z0-9']+", '', str(s).lower().replace('’', "'"))
+
 
 def extract(ref):
     out = TMP / f"{ref['referenceId']}.wav"
     cmd = [
         'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error',
-        '-user_agent', 'HearframePrototype/4.0',
+        '-user_agent', 'HearframePrototype/4.1',
         '-i', ref['sourceUrl'],
         '-t', f'{SAMPLE_SECONDS:.1f}',
         '-vn', '-ac', '1', '-ar', '16000', '-c:a', 'pcm_s16le', str(out)
@@ -71,6 +108,7 @@ def extract(ref):
     if not out.exists() or out.stat().st_size < 32000:
         raise RuntimeError('audio sample too small')
     return out
+
 
 def process(ref):
     wav = extract(ref)
@@ -123,6 +161,7 @@ def process(ref):
         'segments': segments
     }
 
+
 results = []
 for n, ref in enumerate(refs, 1):
     print(f"[{n}/{len(refs)}] {ref['referenceId']} {ref.get('title')}", flush=True)
@@ -142,6 +181,7 @@ for n, ref in enumerate(refs, 1):
         'pageUrl': ref.get('pageUrl'),
         'sourceUrl': ref.get('sourceUrl'),
         'mime': ref.get('mime'),
+        'sourceKind': kind_by_id.get(ref.get('referenceId')),
         'discoveryBucket': ref.get('discoveryBucket'),
         'speechPriority': ref.get('speechPriority'),
         'licenseStatus': ref.get('licenseStatus', 'validate-on-use')
@@ -150,18 +190,23 @@ for n, ref in enumerate(refs, 1):
     print(r['status'], len(r.get('words', [])), flush=True)
 
 payload = {
-    'version': 'enabled-bank-index-shard-v1',
+    'version': 'enabled-bank-index-shard-v1.1-speech-interview-only',
     'shard': SHARD,
     'shardCount': COUNT,
     'enableLimit': LIMIT,
     'sampleSeconds': SAMPLE_SECONDS,
+    'strictEligibleReferenceCount': len(candidates),
+    'rejectedNonSpeechInterviewCount': rejected_non_speech_interview,
     'selectedReferenceCount': len(selected),
     'referenceCount': len(refs),
+    'sourcePolicy': 'explicit speech/address/remarks or interview/Q&A/conversation metadata only; no generic discovery-bucket fallback',
     'results': results
 }
 OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
 print(json.dumps({
     'shard': SHARD,
+    'strictEligible': len(candidates),
+    'selected': len(selected),
     'indexed': sum(r['status'] == 'indexed' for r in results),
     'total': len(results),
     'words': sum(len(r.get('words', [])) for r in results)
