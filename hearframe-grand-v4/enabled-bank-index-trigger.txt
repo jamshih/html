@@ -1,0 +1,1 @@
+enable +200 real bank references for Stitch Lab v1; WhisperX 45s sample, sentence/phrase preservation, word fallback, manual cut tuning
