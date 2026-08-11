@@ -1,1 +1,1 @@
-audit the existing aligned word index against the strict public-speech/public-interview production bank; remove all unproven legacy sources from readiness counts
+audit existing aligned word index against hardened public-speech/public-interview production bank v2; title or explicit recording-description evidence only; exclude all remote/random/unproven legacy sources
