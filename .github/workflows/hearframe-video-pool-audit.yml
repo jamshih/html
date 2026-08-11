@@ -1,0 +1,57 @@
+name: Audit Hearframe Public Speech Interview Pool
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hearframe-grand-v4/video-pool-audit-trigger.txt'
+      - '.github/scripts/audit-hearframe-video-pool.py'
+      - '.github/workflows/hearframe-video-pool-audit.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Audit all 10,600 reference-bank videos
+        run: python .github/scripts/audit-hearframe-video-pool.py
+      - name: Verify curated pool excludes prohibited source types
+        run: |
+          python - <<'PY'
+          import json,re
+          p='hearframe-grand-v4/ask/public-speech-interview-bank.json'
+          j=json.load(open(p))
+          bad=re.compile(r'\b(zoom(?:\.us)?|microsoft teams|teams meeting|webex|google meet|webinar|virtual meeting|remote interview|video call|conference call|screen recording|webcam|podcast|news clip|news package|b[- ]?roll|raw footage|stock footage|promo|trailer|commercial|advertisement)\b',re.I)
+          hits=[]
+          for v in j['videos']:
+              text=' '.join(str(v.get(k) or '') for k in ['title','description','credit','artist','pageUrl'])
+              if bad.search(text): hits.append((v.get('referenceId'),v.get('title')))
+          if hits:
+              raise SystemExit(f'prohibited source leaked into curated pool: {hits[:20]}')
+          print('curated count',j['count'],'prohibited leaks',len(hits))
+          PY
+      - name: Commit audit results
+        run: |
+          git config user.name 'hearframe-video-pool-audit'
+          git config user.email 'actions@users.noreply.github.com'
+          git add \
+            hearframe-grand-v4/ask/public-speech-interview-bank.json \
+            hearframe-grand-v4/ask/video-pool-audit-report.json \
+            hearframe-grand-v4/ask/video-pool-audit-review.json \
+            hearframe-grand-v4/ask/video-pool-audit-rejected-sample.json
+          if git diff --cached --quiet; then
+            echo 'Audit outputs unchanged.'
+            exit 0
+          fi
+          git commit -m 'Audit Hearframe public speech and interview pool [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
