@@ -1,1 +1,1 @@
-enable +200 real bank references for Stitch Lab v1; WhisperX 45s sample, sentence/phrase preservation, word fallback, manual cut tuning
+re-run +200 Hearframe Stitch Lab enablement with strict speech/interview-only metadata gate; reject generic video, news clips, B-roll, footage and promos
