@@ -3,21 +3,21 @@
   "sourcePolicy": "public-speech-interview-v1",
   "legacyCatalogCount": 100,
   "legacyAlignedReferenceCount": 88,
-  "approvedAlignedReferenceCount": 8,
-  "rejectedOrUnprovenAlignedReferenceCount": 80,
-  "approvedAlignedPublicSpeechCount": 5,
-  "approvedAlignedPublicInterviewCount": 3,
+  "approvedAlignedReferenceCount": 6,
+  "rejectedOrUnprovenAlignedReferenceCount": 82,
+  "approvedAlignedPublicSpeechCount": 4,
+  "approvedAlignedPublicInterviewCount": 2,
   "legacyIndexUniqueWordCountBeforeAudit": 1634,
-  "safeUniqueWordCountAfterAudit": 232,
+  "safeUniqueWordCountAfterAudit": 138,
   "candidateOccurrencesBeforeAudit": 3639,
-  "safeCandidateOccurrencesAfterAudit": 291,
+  "safeCandidateOccurrencesAfterAudit": 174,
   "approvedAlignedReferences": [
     {
       "referenceId": "ref-016",
       "title": "File:\"Federal Employees- A Conversation with President Carter,\" WHCA C752.webm",
       "sourceKind": "public-interview",
       "auditReasons": [
-        "conversation"
+        "conversation_title"
       ]
     },
     {
@@ -25,7 +25,7 @@
       "title": "File:-OpenEd20 Keynote- Jessie Loyer.webm",
       "sourceKind": "public-speech",
       "auditReasons": [
-        "keynote"
+        "keynote_title"
       ]
     },
     {
@@ -33,7 +33,7 @@
       "title": "File:\"SIT UP STRAIGHT AND LOOK AT ME\" - SDI Speeches on MCRD Parris Island.webm",
       "sourceKind": "public-speech",
       "auditReasons": [
-        "speech"
+        "speech_by"
       ]
     },
     {
@@ -41,7 +41,7 @@
       "title": "File:2018 AUSA Annual Meeting & Exposition Opening Ceremony.webm",
       "sourceKind": "public-speech",
       "auditReasons": [
-        "remarks"
+        "speech_by"
       ]
     },
     {
@@ -49,15 +49,7 @@
       "title": "File:2018 West Virginia State of the State Address.webm",
       "sourceKind": "public-speech",
       "auditReasons": [
-        "address"
-      ]
-    },
-    {
-      "referenceId": "ref-066",
-      "title": "File:12-46 Escaping the Great Recession With Public Banking.webm",
-      "sourceKind": "public-speech",
-      "auditReasons": [
-        "address"
+        "address_title"
       ]
     },
     {
@@ -65,15 +57,7 @@
       "title": "File:2009 G20 Summit protests in Pittsburgh.webm",
       "sourceKind": "public-interview",
       "auditReasons": [
-        "interview"
-      ]
-    },
-    {
-      "referenceId": "ref-098",
-      "title": "File:1.6.8 Norman Finkelstein on Gandhi and the Occupy Movement and end credits - Episode 6.webm",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "interview"
+        "interviewed_by"
       ]
     }
   ],
@@ -349,6 +333,11 @@
       "reason": "not in audited production bank"
     },
     {
+      "referenceId": "ref-066",
+      "title": "File:12-46 Escaping the Great Recession With Public Banking.webm",
+      "reason": "not in audited production bank"
+    },
+    {
       "referenceId": "ref-067",
       "title": "File:20 Minutes of Oscar-Worthy Performances in Victorious - NickRewind.webm",
       "reason": "not in audited production bank"
@@ -466,6 +455,11 @@
     {
       "referenceId": "ref-095",
       "title": "File:05-50170 United States v. Aguila-Montes De Oca.webm",
+      "reason": "not in audited production bank"
+    },
+    {
+      "referenceId": "ref-098",
+      "title": "File:1.6.8 Norman Finkelstein on Gandhi and the Occupy Movement and end credits - Episode 6.webm",
       "reason": "not in audited production bank"
     },
     {
