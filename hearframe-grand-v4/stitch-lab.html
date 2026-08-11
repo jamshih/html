@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hearframe — Stitch Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#080a0f;--panel:#11151d;--panel2:#0c1016;--line:#252b35;--text:#f7f7fb;--muted:#9aa3b5;--good:#86efb7;--bad:#ffaaa8;--accent:#cfc7ff;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}main{width:min(1120px,calc(100% - 28px));margin:auto;padding:30px 0 70px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center}.brand{font-weight:900;letter-spacing:-.04em}.badge{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--accent);font-size:11px;font-weight:800}.hero{padding:34px 0 18px}.eyebrow{font-size:11px;letter-spacing:.17em;color:var(--muted);font-weight:850}.hero h1{font-size:clamp(44px,7vw,78px);line-height:.95;letter-spacing:-.06em;margin:15px 0}.hero p{max-width:820px;color:#bbc2d0;line-height:1.6}.stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.stat{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 11px;font-size:11px;color:var(--muted)}.stat b{color:var(--text)}.panel{border:1px solid var(--line);background:var(--panel2);border-radius:20px;overflow:hidden;margin-top:16px}.prompt{padding:18px}.prompt label{font-size:11px;font-weight:850;color:var(--muted);display:block;margin-bottom:8px}.prompt textarea{width:100%;min-height:92px;resize:vertical;border:1px solid var(--line);border-radius:13px;background:#0a0d12;color:var(--text);font:inherit;padding:13px;outline:none}.prompt textarea:focus{border-color:#696586}.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}button{border:1px solid var(--line);border-radius:12px;background:#f5f5f7;color:#090b10;padding:11px 14px;font:inherit;font-weight:850;cursor:pointer}button.secondary{background:#151a23;color:var(--text)}button.danger{background:#241416;color:#ffb5b2}button:disabled{opacity:.45;cursor:not-allowed}.status{padding:0 18px 16px;color:var(--muted);font-size:12px}.status.good{color:var(--good)}.status.bad{color:var(--bad)}.answerBlock{padding:18px;border-top:1px solid var(--line)}.answer{font-size:clamp(24px,4vw,38px);font-weight:850;line-height:1.12;letter-spacing:-.035em}.answerMeta{margin-top:9px;color:var(--muted);font-size:12px;line-height:1.55}.previewWrap{padding:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}.previewWrap video{width:100%;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:15px;object-fit:contain}.previewInfo{font-size:12px;color:var(--muted);line-height:1.55}.previewInfo b{color:var(--text)}.units{display:grid;gap:12px;margin-top:16px}.unit{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:15px}.unitTop{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.unitTitle{display:flex;align-items:center;gap:9px;min-width:0}.unitNo{font:700 11px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}.unitText{font-size:19px;font-weight:850;overflow-wrap:anywhere}.type{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;border:1px solid var(--line);border-radius:999px;padding:5px 7px;color:var(--accent);white-space:nowrap}.source{margin-top:11px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(105px,.45fr));gap:8px}.source label{display:block;font-size:9px;font-weight:900;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em}.source select,.source input{width:100%;border:1px solid var(--line);background:#0b0e14;color:var(--text);border-radius:10px;padding:9px;font:inherit;font-size:12px}.smallrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.smallrow button{padding:8px 10px;font-size:11px}.trace{margin-top:10px;color:var(--muted);font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.trace a{color:#cfc7ff}.empty{border-color:#633;color:#ffb5b2}.note{margin-top:14px;color:var(--muted);font-size:11px;line-height:1.55}.hidden{display:none!important}
+@media(max-width:820px){.previewWrap{grid-template-columns:1fr}.source{grid-template-columns:1fr 1fr}.source .sourceSelect{grid-column:1/-1}.unitTop{align-items:flex-start}.row button{flex:1}.top{align-items:flex-start}}
+@media(max-width:540px){.source{grid-template-columns:1fr}.source .sourceSelect{grid-column:auto}.row{display:grid}.row button{width:100%}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><div class="brand">Hearframe</div><div class="badge">STITCH LAB v1 · MANUAL CUT QA</div></div>
+  <section class="hero">
+    <div class="eyebrow">PROMPT → 20–30 WORD CONSTRUCTIBLE ANSWER → REAL CLIP UNITS → YOUR FINAL CUT</div>
+    <h1>Generate it.<br>Then tune every cut.</h1>
+    <p>The 10,600-item bank is the discovery pool. This lab only uses references that have actually been speech-indexed and timestamp-aligned. It prefers intact sentence/phrase clips and falls back to individual aligned words.</p>
+    <div class="stats">
+      <div class="stat">bank <b id="bankCount">…</b></div>
+      <div class="stat">speech-enabled <b id="enabledCount">…</b></div>
+      <div class="stat">newly enabled <b id="newEnabled">…</b></div>
+      <div class="stat">unique words <b id="wordCount">…</b></div>
+      <div class="stat">phrase hints <b id="phraseCount">…</b></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="prompt">
+      <label>PROMPT</label>
+      <textarea id="prompt">Give me advice about starting something difficult even when progress feels uncertain.</textarea>
+      <div class="row">
+        <button id="generate">Generate 20–30 word answer + clip plan</button>
+        <button id="preview" class="secondary" disabled>Preview stitch</button>
+        <button id="stop" class="danger" disabled>Stop</button>
+        <button id="copy" class="secondary" disabled>Copy cut plan JSON</button>
+      </div>
+    </div>
+    <div id="status" class="status">Loading aligned stitch index…</div>
+    <div id="answerBlock" class="answerBlock hidden">
+      <div id="answer" class="answer"></div>
+      <div id="answerMeta" class="answerMeta"></div>
+    </div>
+    <div id="previewWrap" class="previewWrap hidden">
+      <video id="player" playsinline controls preload="metadata"></video>
+      <div class="previewInfo">
+        <b id="nowPlaying">Ready for preview.</b>
+        <div id="previewMeta">Each unit is played from its selected real source window. This browser sequence is for cut QA; it is not yet a final encoded MP4.</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="units" class="units"></div>
+  <div class="note">Fine-tune controls change the edit window only; they do not rewrite the underlying WhisperX alignment annotation. “Split to words” lets you override a phrase/sentence choice when you want tighter manual control.</div>
+</main>
+
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const API='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-stitch-director';
+const KEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx';
+let index=null,report=null,units=[],generated=null,stopRequested=false,playing=false;
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const norm=s=>String(s||'').toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/g,'');
+const setStatus=(t,k='')=>{const e=$('status');e.textContent=t;e.className='status'+(k?' '+k:'')};
+const num=v=>Number.isFinite(Number(v))?Number(v):0;
+function candidateWindow(c,type){const padStart=type==='word'?.025:.015,padEnd=type==='word'?.035:.02;return{start:Math.max(0,num(c.start)-padStart),end:num(c.end)+padEnd,speed:1}}
+function typeFor(key,c){const n=key.split(' ').length;if(n===1)return'word';if(String(c?.sourceType||'').includes('sentence')&&n>=4)return'sentence';return'phrase'}
+function makeUnit(text,cands){const candidates=(cands||[]).filter(c=>c&&c.sourceUrl&&Number.isFinite(Number(c.start))&&Number.isFinite(Number(c.end))&&Number(c.end)>Number(c.start));const type=typeFor(text,candidates[0]);const w=candidates[0]?candidateWindow(candidates[0],type):{start:0,end:0,speed:1};return{text,type,candidates,selected:0,start:w.start,end:w.end,speed:w.speed}}
+function buildUnits(tokens){
+  const out=[];let i=0;
+  while(i<tokens.length){
+    let found=null;
+    for(let n=Math.min(12,tokens.length-i);n>=2;n--){
+      const key=tokens.slice(i,i+n).join(' ');
+      const c=index.phrases?.[key];
+      if(c&&c.length){found={key,n,c};break}
+    }
+    if(found){out.push(makeUnit(found.key,found.c));i+=found.n;continue}
+    const token=tokens[i],c=index.tokens?.[token]||[];
+    out.push(makeUnit(token,c));i++;
+  }
+  return out;
+}
+function resetWindow(u){
+  const c=u.candidates[u.selected];if(!c)return;
+  const w=candidateWindow(c,u.type);u.start=w.start;u.end=w.end;u.speed=1;
+}
+function adjust(i,field,delta){const u=units[i];u[field]=Math.max(0,Math.round((num(u[field])+delta)*1000)/1000);if(u.end<=u.start+.015)u.end=u.start+.015;renderUnits()}
+function selectCandidate(i,value){const u=units[i];u.selected=Math.max(0,Math.min(u.candidates.length-1,Number(value)||0));resetWindow(u);renderUnits()}
+function splitUnit(i){
+  const u=units[i];const words=u.text.split(' ');if(words.length<2)return;
+  const replacements=words.map(w=>makeUnit(w,index.tokens?.[w]||[]));
+  units.splice(i,1,...replacements);renderUnits();updateButtons();
+}
+function candidateLabel(c,j){const title=c.title||c.referenceId||'source';const score=Math.round(num(c.score)*100);return`${j+1}. ${title} · ${score}%`}
+function renderUnits(){
+  const root=$('units');root.innerHTML='';
+  units.forEach((u,i)=>{
+    const c=u.candidates[u.selected];
+    const el=document.createElement('section');el.className='unit'+(c?'':' empty');
+    const options=u.candidates.map((x,j)=>`<option value="${j}" ${j===u.selected?'selected':''}>${esc(candidateLabel(x,j))}</option>`).join('');
+    const sourceLink=c?.pageUrl||c?.sourceUrl||'#';
+    el.innerHTML=`<div class="unitTop"><div class="unitTitle"><span class="unitNo">#${String(i+1).padStart(2,'0')}</span><span class="unitText">${esc(u.text)}</span></div><span class="type">${esc(u.type)}</span></div>
+      ${c?`<div class="source">
+        <div class="sourceSelect"><label>source candidate</label><select data-candidate="${i}">${options}</select></div>
+        <div><label>start sec</label><input data-start="${i}" type="number" min="0" step="0.005" value="${u.start.toFixed(3)}"></div>
+        <div><label>end sec</label><input data-end="${i}" type="number" min="0" step="0.005" value="${u.end.toFixed(3)}"></div>
+        <div><label>speed</label><input data-speed="${i}" type="number" min="0.85" max="1.15" step="0.005" value="${u.speed.toFixed(3)}"></div>
+      </div>
+      <div class="smallrow">
+        <button class="secondary" data-play="${i}">Play cut</button>
+        <button class="secondary" data-adj="${i}:start:-0.01">Start −10 ms</button><button class="secondary" data-adj="${i}:start:0.01">Start +10 ms</button>
+        <button class="secondary" data-adj="${i}:end:-0.01">End −10 ms</button><button class="secondary" data-adj="${i}:end:0.01">End +10 ms</button>
+        ${u.type!=='word'?`<button class="secondary" data-split="${i}">Split to words</button>`:''}
+      </div>
+      <div class="trace">${esc(c.referenceId||'')} · ${esc(c.discoveryBucket||c.sourceType||'aligned source')} · score ${(num(c.score)*100).toFixed(1)}% · <a href="${esc(sourceLink)}" target="_blank" rel="noopener">open source</a></div>`:
+      `<div class="trace">No aligned candidate found. This should not happen for a director-approved answer; regenerate or inspect the stitch index.</div>`}`;
+    root.appendChild(el);
+  });
+  root.querySelectorAll('[data-candidate]').forEach(e=>e.onchange=()=>selectCandidate(Number(e.dataset.candidate),e.value));
+  root.querySelectorAll('[data-start]').forEach(e=>e.onchange=()=>{const i=Number(e.dataset.start);units[i].start=num(e.value);renderUnits()});
+  root.querySelectorAll('[data-end]').forEach(e=>e.onchange=()=>{const i=Number(e.dataset.end);units[i].end=num(e.value);renderUnits()});
+  root.querySelectorAll('[data-speed]').forEach(e=>e.onchange=()=>{const i=Number(e.dataset.speed);units[i].speed=Math.max(.85,Math.min(1.15,num(e.value)||1));renderUnits()});
+  root.querySelectorAll('[data-play]').forEach(e=>e.onclick=()=>playOne(Number(e.dataset.play)));
+  root.querySelectorAll('[data-split]').forEach(e=>e.onclick=()=>splitUnit(Number(e.dataset.split)));
+  root.querySelectorAll('[data-adj]').forEach(e=>e.onclick=()=>{const [i,f,d]=e.dataset.adj.split(':');adjust(Number(i),f,Number(d))});
+}
+function updateButtons(){const ready=units.length>0&&units.every(u=>u.candidates.length);$('preview').disabled=!ready||playing;$('copy').disabled=!ready;$('stop').disabled=!playing}
+function waitEvent(el,name,timeout=12000){return new Promise((resolve,reject)=>{let timer;const done=()=>{clearTimeout(timer);cleanup();resolve()};const fail=()=>{clearTimeout(timer);cleanup();reject(Error(`media ${name} timeout/error`))};const cleanup=()=>{el.removeEventListener(name,done);el.removeEventListener('error',fail)};el.addEventListener(name,done,{once:true});el.addEventListener('error',fail,{once:true});timer=setTimeout(fail,timeout)})}
+async function loadAndSeek(u){
+  const c=u.candidates[u.selected],v=$('player');if(!c)throw Error('missing candidate');
+  v.pause();v.src=c.sourceUrl;v.load();$('previewWrap').classList.remove('hidden');
+  if(v.readyState<1)await waitEvent(v,'loadedmetadata',15000);
+  v.currentTime=Math.max(0,u.start);
+  await waitEvent(v,'seeked',10000).catch(()=>{});
+  v.playbackRate=Math.max(.85,Math.min(1.15,u.speed||1));
+  return{v,c};
+}
+async function playWindow(u,label){
+  const {v,c}=await loadAndSeek(u);$('nowPlaying').textContent=label;$('previewMeta').textContent=`${c.title||c.referenceId||'source'} · ${u.start.toFixed(3)}–${u.end.toFixed(3)} s · ${u.speed.toFixed(3)}×`;
+  await v.play();
+  return new Promise((resolve,reject)=>{
+    const start=performance.now();
+    const tick=()=>{if(stopRequested){v.pause();return resolve()}if(v.error)return reject(Error(`media error ${v.error.code}`));if(v.currentTime>=u.end-.012||performance.now()-start>20000){v.pause();return resolve()}requestAnimationFrame(tick)};tick();
+  });
+}
+async function playOne(i){try{stopRequested=false;await playWindow(units[i],`Unit ${i+1}/${units.length} · ${units[i].text}`)}catch(e){setStatus(e.message,'bad')}}
+async function previewAll(){
+  if(playing)return;playing=true;stopRequested=false;updateButtons();setStatus('Playing your tuned stitch sequence…');
+  try{for(let i=0;i<units.length&&!stopRequested;i++)await playWindow(units[i],`Stitch ${i+1}/${units.length} · ${units[i].text}`);setStatus(stopRequested?'Preview stopped.':'Stitch preview completed.','good')}
+  catch(e){console.error(e);setStatus(`Preview failed: ${e.message}`,'bad')}
+  finally{playing=false;updateButtons()}
+}
+function planJson(){
+  return{version:'hearframe-stitch-cut-plan-v1',prompt:$('prompt').value.trim(),answer:generated?.answer||'',wordCount:generated?.wordCount||0,units:units.map((u,i)=>{const c=u.candidates[u.selected]||{};return{order:i+1,text:u.text,type:u.type,referenceId:c.referenceId||null,title:c.title||null,pageUrl:c.pageUrl||null,sourceUrl:c.sourceUrl||null,start:Number(u.start.toFixed(3)),end:Number(u.end.toFixed(3)),speed:Number(u.speed.toFixed(3)),alignmentScore:num(c.score)}})}
+}
+async function copyPlan(){try{await navigator.clipboard.writeText(JSON.stringify(planJson(),null,2));setStatus('Cut plan copied to clipboard.','good')}catch{setStatus('Clipboard permission failed.','bad')}}
+async function generate(){
+  const q=$('prompt').value.trim();if(!q||!index)return;
+  $('generate').disabled=true;units=[];generated=null;renderUnits();updateButtons();$('answerBlock').classList.add('hidden');setStatus('Gemini is writing a constructible 20–30 word answer from the enabled vocabulary…');
+  try{
+    const body={question:q,availableWords:Object.keys(index.tokens||{}),availablePhrases:(index.phraseHints||[]).slice(0,2000)};
+    const r=await fetch(API,{method:'POST',headers:{'content-type':'application/json','apikey':KEY},body:JSON.stringify(body)});
+    const text=await r.text();let data;try{data=JSON.parse(text)}catch{throw Error(text||`HTTP ${r.status}`)}if(!r.ok)throw Error(`${data.error||'director failed'} (${r.status})`);
+    if(data.wordCount<20||data.wordCount>30)throw Error(`director returned ${data.wordCount} words`);
+    generated=data;units=buildUnits(data.tokens||[]);
+    if(!units.length||units.some(u=>!u.candidates.length))throw Error('generated answer contains an unresolvable cut unit');
+    $('answer').textContent=data.answer;$('answerMeta').textContent=`${data.wordCount} words · ${units.length} cut unit(s) · ${units.filter(u=>u.type==='sentence').length} sentence · ${units.filter(u=>u.type==='phrase').length} phrase · ${units.filter(u=>u.type==='word').length} word · Gemini attempt ${data.attempt}${data.usedFallback?' · fallback used':''}. ${data.rationale||''}`;
+    $('answerBlock').classList.remove('hidden');renderUnits();updateButtons();setStatus('Clip plan ready. Tune any source, boundary, or speed below, then Preview stitch.','good');
+  }catch(e){console.error(e);setStatus(e.message,'bad')}finally{$('generate').disabled=false}
+}
+async function load(){
+  try{
+    const [ir,rr,br]=await Promise.all([
+      fetch('./ask/stitch-index.json?v=1',{cache:'no-store'}),
+      fetch('./ask/stitch-index-report.json?v=1',{cache:'no-store'}),
+      fetch('./ask/reference-bank-v3-report.json?v=3.5.1',{cache:'no-store'})
+    ]);
+    if(!ir.ok)throw Error(`stitch index HTTP ${ir.status}`);if(!rr.ok)throw Error(`stitch report HTTP ${rr.status}`);
+    index=await ir.json();report=await rr.json();const bank=br.ok?await br.json():{};
+    if(report.pass!==true)throw Error('stitch index quality gate is not green');
+    $('bankCount').textContent=Number(bank.totalCount||10600).toLocaleString();
+    $('enabledCount').textContent=Number(report.enabledSpeechReferencesTotal||index.enabledReferences||0).toLocaleString();
+    $('newEnabled').textContent=`+${Number(report.newIndexedSpeechReferences||index.newIndexedSpeechReferences||0).toLocaleString()}`;
+    $('wordCount').textContent=Number(report.availableUniqueWords||index.availableWordCount||0).toLocaleString();
+    $('phraseCount').textContent=Number(report.phraseHints||index.phraseHintCount||0).toLocaleString();
+    setStatus(`Ready · ${report.enabledSpeechReferencesTotal} speech-enabled references · ${report.availableUniqueWords} unique aligned words · ${report.phraseHints} phrase hints.`,'good');
+  }catch(e){console.error(e);setStatus(`Stitch Lab index unavailable: ${e.message}`,'bad');$('generate').disabled=true}
+}
+$('generate').onclick=generate;$('preview').onclick=previewAll;$('stop').onclick=()=>{stopRequested=true;$('player').pause()};$('copy').onclick=copyPlan;load();
+})();
+</script>
+</body>
+</html>
