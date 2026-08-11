@@ -1,1 +1,1 @@
-re-run final v0.5 live QA now that Render serves the 10600-reference sports-rebalanced bank and word-boundary v1.3.1 media
+run final v0.6 live QA: require five distinct long rendered plans and generate the same long request twice without immediate plan/media repetition
