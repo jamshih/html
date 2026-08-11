@@ -1,54 +1,65 @@
 {
-  "version": "video-pool-audit-v1",
+  "version": "video-pool-audit-v2",
   "sourceBankVersion": "reference-bank-v3.5.1",
   "sourceBankCount": 10600,
-  "acceptedProductionCount": 1882,
-  "publicSpeechCount": 222,
-  "publicInterviewCount": 1660,
-  "reviewCount": 3205,
-  "rejectedCount": 5513,
-  "acceptedPercent": 17.75,
+  "acceptedProductionCount": 1866,
+  "publicSpeechCount": 216,
+  "publicInterviewCount": 1650,
+  "reviewCount": 4202,
+  "rejectedCount": 4532,
+  "acceptedPercent": 17.6,
+  "evidenceCounts": {
+    "none": 4153,
+    "hard-reject": 379,
+    "title": 1863,
+    "explicit-description": 3,
+    "ambiguous": 13,
+    "discovery-only": 4189
+  },
   "topAuditReasons": {
-    "no_public_speech_or_interview_evidence": 5249,
-    "discovery_label_without_source_proof": 3190,
-    "general-speech": 1591,
-    "experts-public-figures": 1367,
-    "interview": 929,
-    "press_conference": 487,
-    "speech": 113,
-    "qa": 102,
-    "entertainment-talk": 95,
-    "press_briefing": 80,
-    "conversation": 75,
+    "discovery_label_without_source_proof": 4189,
+    "no_strong_public_speech_or_interview_evidence": 4153,
+    "general-speech": 1558,
+    "experts-public-figures": 1324,
+    "interviews": 1078,
+    "interview_title": 918,
+    "press_conference_title": 487,
+    "speech_title": 111,
+    "qa_title": 102,
+    "entertainment-talk": 93,
+    "press_briefing_title": 80,
+    "conversation_title": 75,
+    "promo_ad": 75,
     "sports-stars": 75,
-    "promo_ad": 72,
-    "celebrity-interviews": 62,
-    "address": 60,
+    "celebrity-interviews": 61,
+    "address_title": 59,
+    "documentary_training": 58,
     "non_speech_media": 56,
     "broll_footage": 55,
-    "remarks": 30,
+    "panel_roundtable": 54,
     "tutorial_demo": 29,
+    "remarks_title": 27,
     "podcast": 21,
-    "keynote": 19,
-    "ambiguous_primary_recording": 15,
+    "keynote_title": 19,
+    "ambiguous_primary_recording": 13,
     "remote_zoom": 11,
-    "virtual_meeting": 10,
+    "virtual_remote": 10,
     "excerpt": 9,
-    "inaugural": 7,
-    "acceptance": 6,
+    "phone_radio": 7,
     "screen_webcam": 4,
     "remote_meet": 4,
-    "compilation": 3,
-    "town_hall": 3,
-    "fireside": 3,
+    "fireside_title": 3,
     "webinar": 3,
-    "testimony": 3,
-    "panel": 3,
-    "farewell": 3,
+    "testimony_title": 3,
     "news_package": 2,
-    "lecture": 2,
-    "commencement": 2,
-    "rally": 1
+    "speech_by": 2,
+    "compilation": 2,
+    "lecture_title": 2,
+    "interviewed_by": 1,
+    "generic_episode": 1,
+    "interview_with": 1,
+    "self_interview": 1,
+    "highlights": 1
   },
   "hardRejectReasonCounts": {
     "remote_zoom": 11,
@@ -56,19 +67,24 @@
     "remote_webex": 0,
     "remote_meet": 4,
     "webinar": 3,
-    "virtual_meeting": 10,
+    "virtual_remote": 10,
     "screen_webcam": 4,
+    "phone_radio": 7,
+    "self_interview": 1,
     "podcast": 21,
     "news_package": 2,
     "broll_footage": 55,
-    "promo_ad": 72,
+    "promo_ad": 75,
     "non_speech_media": 56,
-    "tutorial_demo": 29
+    "documentary_training": 58,
+    "tutorial_demo": 29,
+    "panel_roundtable": 54
   },
   "qualityGates": {
     "inputCountMatches10600": true,
     "countsReconcile": true,
     "acceptedHaveKind": true,
+    "acceptedHaveStrongEvidence": true,
     "acceptedHaveNoHardRejectReason": true
   },
   "acceptedSample": [
@@ -76,240 +92,360 @@
       "referenceId": "ref-00101",
       "title": "File:Marriage Equality in New York- Interview with Lt. Dan Choi.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00102",
       "title": "File:Interview with Belarus gay activist.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00103",
       "title": "File:Rekha Chauhan (Secretary MSS) Interview at NREGA Site.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00104",
       "title": "File:Babita Sinha - Interview for the Millennium Village Project (Jharkhand).webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00105",
       "title": "File:Bernhard Hoeper - Interview for Millennium Village Project.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00106",
       "title": "File:Interview of Amlan Das Gupta at Digital Humanities Consultation 2013.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00107",
       "title": "File:Interview with the developers of Gopher.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
-      ]
-    },
-    {
-      "referenceId": "ref-00108",
-      "title": "File:Auto-Interview de Dominique Gisin.webm",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00109",
       "title": "File:WikiCon - WikiTV-Interview - Dreisam.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00110",
       "title": "File:George Monbiot interview with The Green Interview.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00111",
       "title": "File:WikiCon - WikiTV-Interview - Geiserich77.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00112",
       "title": "File:WikiCon - WikiTV-Interview - Nicole Ebber.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00113",
       "title": "File:WikiCon - WikiTV-Interview - Rebecca Cotton WMDE.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00114",
       "title": "File:WikiCon - WikiTV-Interview - Tobias und Beni.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00115",
       "title": "File:Uni coach interview.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00116",
       "title": "File:Interview Romaine.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00117",
       "title": "File:Interview Wikivoyage ohne Abspann.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00118",
       "title": "File:Mitic Wikipedia Interview 2014.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00119",
       "title": "File:Jane Goodall, The Green Interview.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00120",
       "title": "File:Kartikeya Sarabhai, The Green Interview.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00121",
       "title": "File:Interview With an Ebola Survivor.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00122",
       "title": "File:PRISM - Snowden Interview - Laura Poitras HQ.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00123",
       "title": "File:Video Interview with Sayeed Naseer Ahamed.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00124",
       "title": "File:Interview with Sayeed Naseer Ahamed.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00125",
       "title": "File:Interview mit dem Verhaltensforscher Eibl-Eibesfeldt.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00126",
       "title": "File:Interview with Rita Niineste.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00127",
       "title": "File:Interview with Janno Loide.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00128",
       "title": "File:Interview with Helen Bickham.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00129",
       "title": "File:Mahatma Gandhi first film interview (30 April 1931).webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
       ]
     },
     {
       "referenceId": "ref-00130",
       "title": "File:Totale interview Chris Dagradi - Delftse meesters van nu. Het Prinsenhof inspireert.webm",
       "sourceKind": "public-interview",
+      "auditEvidence": "title",
       "auditReasons": [
-        "interview"
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00131",
+      "title": "File:Exclusive interview with Paul Smith.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00133",
+      "title": "File:Burnie Burns interview with TSTV.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00134",
+      "title": "File:David Suzuki interview at Occupy Montreal.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00135",
+      "title": "File:Prof-C-R-Selvakumars-Interview.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00136",
+      "title": "File:Parvathi-Interview.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00137",
+      "title": "File:Sound Futures- Balinese Gamelan Case Study - Interview with Dalang.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00140",
+      "title": "File:Interview Bureau Europa ENCI.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00141",
+      "title": "File:Archie Shepp interview 1978.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00142",
+      "title": "File:Vorsten TV- Interview met prinses Margarita.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00143",
+      "title": "File:Interview Martha Gomez.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00144",
+      "title": "File:Interview with Prime Minister of Bhutan at Rio-20.webm",
+      "sourceKind": "public-interview",
+      "auditEvidence": "title",
+      "auditReasons": [
+        "interview_title"
       ]
     }
   ],
@@ -322,10 +458,529 @@
       "discoveryBucket": "interviews",
       "auditStatus": "review",
       "sourceKind": "public-interview",
+      "auditEvidence": "ambiguous",
       "auditReasons": [
         "ambiguous_primary_recording",
         "compilation",
-        "interview"
+        "interview_title"
+      ]
+    },
+    {
+      "referenceId": "ref-00138",
+      "title": "File:RinaLazoInterviewSemanai.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:RinaLazoInterviewSemanai.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/RinaLazoInterviewSemanai.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00139",
+      "title": "File:KadettenInterviewEss1.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:KadettenInterviewEss1.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/78/KadettenInterviewEss1.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00190",
+      "title": "File:Video of the Yaoundé strategy salon 01.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_of_the_Yaound%C3%A9_strategy_salon_01.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Video_of_the_Yaound%C3%A9_strategy_salon_01.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00191",
+      "title": "File:Video of the Yaounde Youth salon 01.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_of_the_Yaounde_Youth_salon_01.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Video_of_the_Yaounde_Youth_salon_01.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00199",
+      "title": "File:TUF 18 Finale Media Day with Raquel Pennington.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:TUF_18_Finale_Media_Day_with_Raquel_Pennington.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/TUF_18_Finale_Media_Day_with_Raquel_Pennington.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00204",
+      "title": "File:Nanjala Nyabola We need to bring the human back into the digital conversation.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Nanjala_Nyabola_We_need_to_bring_the_human_back_into_the_digital_conversation.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Nanjala_Nyabola_We_need_to_bring_the_human_back_into_the_digital_conversation.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00205",
+      "title": "File:John Malkovich - Les Liaisons dangereuses.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:John_Malkovich_-_Les_Liaisons_dangereuses.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/John_Malkovich_-_Les_Liaisons_dangereuses.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00219",
+      "title": "File:Wa Lamborele recitaedjes I.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Wa_Lamborele_recitaedjes_I.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Wa_Lamborele_recitaedjes_I.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00220",
+      "title": "File:Le fate sulle Apuane di Massa (MS) - Antonia Cerboncini.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Le_fate_sulle_Apuane_di_Massa_(MS)_-_Antonia_Cerboncini.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Le_fate_sulle_Apuane_di_Massa_%28MS%29_-_Antonia_Cerboncini.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00223",
+      "title": "File:Evrard Snaps Longuès Penes2.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Evrard_Snaps_Longu%C3%A8s_Penes2.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Evrard_Snaps_Longu%C3%A8s_Penes2.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00225",
+      "title": "File:Maroochydore RL prop Bart Hold after his sides win over Stanley River July 25, 2021.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Maroochydore_RL_prop_Bart_Hold_after_his_sides_win_over_Stanley_River_July_25%2C_2021.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Maroochydore_RL_prop_Bart_Hold_after_his_sides_win_over_Stanley_River_July_25%2C_2021.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00226",
+      "title": "File:Maroochydore rugby union coach Ben Radmall – September 4, 2021.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Maroochydore_rugby_union_coach_Ben_Radmall_%E2%80%93_September_4%2C_2021.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Maroochydore_rugby_union_coach_Ben_Radmall_%E2%80%93_September_4%2C_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00227",
+      "title": "File:Caloundra rugby union coach Geoff Ingram – September 4, 2021.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Caloundra_rugby_union_coach_Geoff_Ingram_%E2%80%93_September_4%2C_2021.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Caloundra_rugby_union_coach_Geoff_Ingram_%E2%80%93_September_4%2C_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00228",
+      "title": "File:Matt Buckland, Noosa head coach, September 14 2021.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Matt_Buckland%2C_Noosa_head_coach%2C_September_14_2021.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Matt_Buckland%2C_Noosa_head_coach%2C_September_14_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00229",
+      "title": "File:Jordan Meads, University of the Sunshine Coast number 10 and Greece RL player, September 14 2021.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jordan_Meads%2C_University_of_the_Sunshine_Coast_number_10_and_Greece_RL_player%2C_September_14_2021.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Jordan_Meads%2C_University_of_the_Sunshine_Coast_number_10_and_Greece_RL_player%2C_September_14_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00241",
+      "title": "File:Mr Ha Yerntang.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Mr_Ha_Yerntang.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Mr_Ha_Yerntang.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00258",
+      "title": "File:Astronaut Jessica Watkins Talks with AccuWeather, KMGH-TV in Colorado.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Astronaut_Jessica_Watkins_Talks_with_AccuWeather%2C_KMGH-TV_in_Colorado.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Astronaut_Jessica_Watkins_Talks_with_AccuWeather%2C_KMGH-TV_in_Colorado.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00259",
+      "title": "File:ITIS \"Enrico Mattei\", Urbino, tra passato e presente.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:ITIS_%22Enrico_Mattei%22%2C_Urbino%2C_tra_passato_e_presente.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/ITIS_%22Enrico_Mattei%22%2C_Urbino%2C_tra_passato_e_presente.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00262",
+      "title": "File:Discussion in Kythnos.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Discussion_in_Kythnos.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/Discussion_in_Kythnos.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00263",
+      "title": "File:Oral story about traditional food in Kythnos.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Oral_story_about_traditional_food_in_Kythnos.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Oral_story_about_traditional_food_in_Kythnos.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00298",
+      "title": "File:羅毓儀（Yuki）演員、歌手、作家成長路｜-PCM 1510 期封面人物.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%E7%BE%85%E6%AF%93%E5%84%80%EF%BC%88Yuki%EF%BC%89%E6%BC%94%E5%93%A1%E3%80%81%E6%AD%8C%E6%89%8B%E3%80%81%E4%BD%9C%E5%AE%B6%E6%88%90%E9%95%B7%E8%B7%AF%EF%BD%9C-PCM_1510_%E6%9C%9F%E5%B0%81%E9%9D%A2%E4%BA%BA%E7%89%A9.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/%E7%BE%85%E6%AF%93%E5%84%80%EF%BC%88Yuki%EF%BC%89%E6%BC%94%E5%93%A1%E3%80%81%E6%AD%8C%E6%89%8B%E3%80%81%E4%BD%9C%E5%AE%B6%E6%88%90%E9%95%B7%E8%B7%AF%EF%BD%9C-PCM_1510_%E6%9C%9F%E5%B0%81%E9%9D%A2%E4%BA%BA%E7%89%A9.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00301",
+      "title": "File:Entrevista a una no miembro de la comunidad- opinion.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_una_no_miembro_de_la_comunidad-_opinion.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Entrevista_a_una_no_miembro_de_la_comunidad-_opinion.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00302",
+      "title": "File:Rwicinterview3.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Rwicinterview3.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Rwicinterview3.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00303",
+      "title": "File:RWICINTERVIEW4.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:RWICINTERVIEW4.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8f/RWICINTERVIEW4.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00309",
+      "title": "File:Entrevista a Israel Martínez.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_Israel_Mart%C3%ADnez.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Entrevista_a_Israel_Mart%C3%ADnez.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00313",
+      "title": "File:Ramkuiwangbe Jeme Newme.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Ramkuiwangbe_Jeme_Newme.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Ramkuiwangbe_Jeme_Newme.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00314",
+      "title": "File:Entrevista a Daniel Guillermo Machuca Torres sobre la feria en Quirio.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_Daniel_Guillermo_Machuca_Torres_sobre_la_feria_en_Quirio.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Entrevista_a_Daniel_Guillermo_Machuca_Torres_sobre_la_feria_en_Quirio.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00377",
+      "title": "File:Video de Dennise Frech.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_de_Dennise_Frech.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/69/Video_de_Dennise_Frech.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00378",
+      "title": "File:Entrevista Maria Espinosa, arquitecta exatec de éxito.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_Maria_Espinosa%2C_arquitecta_exatec_de_%C3%A9xito.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Entrevista_Maria_Espinosa%2C_arquitecta_exatec_de_%C3%A9xito.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00379",
+      "title": "File:Entrevista a Sara Cansino.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_Sara_Cansino.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Entrevista_a_Sara_Cansino.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00380",
+      "title": "File:Rocío Hernández Video.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Roc%C3%ADo_Hern%C3%A1ndez_Video.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Roc%C3%ADo_Hern%C3%A1ndez_Video.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00381",
+      "title": "File:Entrevista a Lele Iturrioz.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_Lele_Iturrioz.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/81/Entrevista_a_Lele_Iturrioz.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00382",
+      "title": "File:Samantha Vidal Video.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Samantha_Vidal_Video.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Samantha_Vidal_Video.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00383",
+      "title": "File:Entrevista Nadia Garza.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_Nadia_Garza.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/84/Entrevista_Nadia_Garza.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00386",
+      "title": "File:Entrevista a Esmeralda García Ambientalista.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_Esmeralda_Garc%C3%ADa_Ambientalista.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/07/Entrevista_a_Esmeralda_Garc%C3%ADa_Ambientalista.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00387",
+      "title": "File:Entrevista a un estudiante.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_un_estudiante.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Entrevista_a_un_estudiante.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
+      ]
+    },
+    {
+      "referenceId": "ref-00388",
+      "title": "File:Entrevista a un compañero.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_un_compa%C3%B1ero.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/39/Entrevista_a_un_compa%C3%B1ero.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "review",
+      "sourceKind": null,
+      "auditEvidence": "discovery-only",
+      "auditReasons": [
+        "discovery_label_without_source_proof",
+        "interviews"
       ]
     },
     {
@@ -336,379 +991,25 @@
       "discoveryBucket": "interviews",
       "auditStatus": "review",
       "sourceKind": "public-interview",
+      "auditEvidence": "ambiguous",
       "auditReasons": [
         "ambiguous_primary_recording",
         "excerpt",
-        "interview"
+        "interview_title"
       ]
     },
     {
-      "referenceId": "ref-00831",
-      "title": "File:People's 409D (Video Clip from Trump Tower Press Conference 1.11.2017).webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:People%27s_409D_(Video_Clip_from_Trump_Tower_Press_Conference_1.11.2017).webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d5/People%27s_409D_%28Video_Clip_from_Trump_Tower_Press_Conference_1.11.2017%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "referenceId": "ref-00391",
+      "title": "File:-VariaHistória 103 - Sônia Meneses.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:-VariaHist%C3%B3ria_103_-_S%C3%B4nia_Meneses.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/-VariaHist%C3%B3ria_103_-_S%C3%B4nia_Meneses.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "discoveryBucket": "interviews",
       "auditStatus": "review",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "ambiguous_primary_recording",
-        "excerpt",
-        "press_conference"
-      ]
-    },
-    {
-      "referenceId": "ref-01265",
-      "title": "File:The Wizard Reunion Q&A (short excerpt).webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:The_Wizard_Reunion_Q%26A_(short_excerpt).webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/The_Wizard_Reunion_Q%26A_%28short_excerpt%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "review",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "ambiguous_primary_recording",
-        "excerpt",
-        "qa"
-      ]
-    },
-    {
-      "referenceId": "ref-02016",
-      "title": "File:Bernie Sanders interview compilation - The Laura Flanders Show - Part 2.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Bernie_Sanders_interview_compilation_-_The_Laura_Flanders_Show_-_Part_2.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/60/Bernie_Sanders_interview_compilation_-_The_Laura_Flanders_Show_-_Part_2.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "review",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "ambiguous_primary_recording",
-        "compilation",
-        "interview"
-      ]
-    },
-    {
-      "referenceId": "ref-02073",
-      "title": "File:Wikipedia in the Classroom - Excerpt from interview with Aine Kavanagh.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikipedia_in_the_Classroom_-_Excerpt_from_interview_with_Aine_Kavanagh.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Wikipedia_in_the_Classroom_-_Excerpt_from_interview_with_Aine_Kavanagh.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "review",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "ambiguous_primary_recording",
-        "excerpt",
-        "interview"
-      ]
-    },
-    {
-      "referenceId": "ref-02111",
-      "title": "File:Highlights From Greta Van Susteren's Interview With President Trump.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Highlights_From_Greta_Van_Susteren%27s_Interview_With_President_Trump.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Highlights_From_Greta_Van_Susteren%27s_Interview_With_President_Trump.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "review",
-      "sourceKind": "public-interview",
-      "auditReasons": [
-        "ambiguous_primary_recording",
-        "compilation",
-        "interview"
-      ]
-    },
-    {
-      "referenceId": "ref-06901",
-      "title": "File:Jyoti Sapru - Should Coltures Dialogue more or Less?-- TVP.webmsd.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jyoti_Sapru_-_Should_Coltures_Dialogue_more_or_Less%3F--_TVP.webmsd.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/47/Jyoti_Sapru_-_Should_Coltures_Dialogue_more_or_Less%3F--_TVP.webmsd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
       "sourceKind": null,
+      "auditEvidence": "discovery-only",
       "auditReasons": [
         "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06902",
-      "title": "File:Jyoti Sapru - Knowledge and Social Harmony as Resources-- TVP.webmsd.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jyoti_Sapru_-_Knowledge_and_Social_Harmony_as_Resources--_TVP.webmsd.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/Jyoti_Sapru_-_Knowledge_and_Social_Harmony_as_Resources--_TVP.webmsd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06903",
-      "title": "File:Jyoti Sapru - Global Citizenship-- TVP.webmsd.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jyoti_Sapru_-_Global_Citizenship--_TVP.webmsd.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Jyoti_Sapru_-_Global_Citizenship--_TVP.webmsd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06904",
-      "title": "File:Jyoti Sapru - Can You, as an Individiual, make a Difference to the Poorest in the World-- TVP.webmsd.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jyoti_Sapru_-_Can_You%2C_as_an_Individiual%2C_make_a_Difference_to_the_Poorest_in_the_World--_TVP.webmsd.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Jyoti_Sapru_-_Can_You%2C_as_an_Individiual%2C_make_a_Difference_to_the_Poorest_in_the_World--_TVP.webmsd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06905",
-      "title": "File:Jyoti Sapru - Challanges facing Gender Discrimination and Empowerment-- TVP.webmsd.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jyoti_Sapru_-_Challanges_facing_Gender_Discrimination_and_Empowerment--_TVP.webmsd.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Jyoti_Sapru_-_Challanges_facing_Gender_Discrimination_and_Empowerment--_TVP.webmsd.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06906",
-      "title": "File:Army Scientists Make Ebola Vaccine Advances 141103-A-AB123-007.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Army_Scientists_Make_Ebola_Vaccine_Advances_141103-A-AB123-007.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Army_Scientists_Make_Ebola_Vaccine_Advances_141103-A-AB123-007.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06907",
-      "title": "File:Emily Temple-Wood (2minutes27seconds).webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Emily_Temple-Wood_(2minutes27seconds).webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/14/Emily_Temple-Wood_%282minutes27seconds%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06908",
-      "title": "File:President Obama and Bill Nye Talk Earth Day in the Everglades.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Obama_and_Bill_Nye_Talk_Earth_Day_in_the_Everglades.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/66/President_Obama_and_Bill_Nye_Talk_Earth_Day_in_the_Everglades.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06909",
-      "title": "File:Neil deGrasse Tyson Thanks Teachers.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Neil_deGrasse_Tyson_Thanks_Teachers.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/38/Neil_deGrasse_Tyson_Thanks_Teachers.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06910",
-      "title": "File:Bill Nye visits Goddard Space Flight Center.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Bill_Nye_visits_Goddard_Space_Flight_Center.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Bill_Nye_visits_Goddard_Space_Flight_Center.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06911",
-      "title": "File:Station Astronauts Do Experiment for 'Cosmos'.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Station_Astronauts_Do_Experiment_for_%27Cosmos%27.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Station_Astronauts_Do_Experiment_for_%27Cosmos%27.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06912",
-      "title": "File:Mayim Bialik Thanks Teachers.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Mayim_Bialik_Thanks_Teachers.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/57/Mayim_Bialik_Thanks_Teachers.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06913",
-      "title": "File:Hubble Maps Jupiter in 4k Ultra HD.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Hubble_Maps_Jupiter_in_4k_Ultra_HD.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Hubble_Maps_Jupiter_in_4k_Ultra_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06914",
-      "title": "File:2015 White House Astronomy Night.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:2015_White_House_Astronomy_Night.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6e/2015_White_House_Astronomy_Night.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06915",
-      "title": "File:2015 Astronomy Night at the White House.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:2015_Astronomy_Night_at_the_White_House.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a3/2015_Astronomy_Night_at_the_White_House.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06916",
-      "title": "File:VideoCervantino2015 12.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:VideoCervantino2015_12.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/VideoCervantino2015_12.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06917",
-      "title": "File:Visions of Digital Creativity Organic Design Paola Antonelli.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Visions_of_Digital_Creativity_Organic_Design_Paola_Antonelli.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Visions_of_Digital_Creativity_Organic_Design_Paola_Antonelli.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06918",
-      "title": "File:Entrevista a Adolfo Garcé del 19 de enero de 2016.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_Adolfo_Garc%C3%A9_del_19_de_enero_de_2016.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Entrevista_a_Adolfo_Garc%C3%A9_del_19_de_enero_de_2016.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06919",
-      "title": "File:Вадим Карасев назвал Донбасс миной замедленного действия.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%B0%D0%B4%D0%B8%D0%BC_%D0%9A%D0%B0%D1%80%D0%B0%D1%81%D0%B5%D0%B2_%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BB_%D0%94%D0%BE%D0%BD%D0%B1%D0%B0%D1%81%D1%81_%D0%BC%D0%B8%D0%BD%D0%BE%D0%B9_%D0%B7%D0%B0%D0%BC%D0%B5%D0%B4%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/%D0%92%D0%B0%D0%B4%D0%B8%D0%BC_%D0%9A%D0%B0%D1%80%D0%B0%D1%81%D0%B5%D0%B2_%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BB_%D0%94%D0%BE%D0%BD%D0%B1%D0%B0%D1%81%D1%81_%D0%BC%D0%B8%D0%BD%D0%BE%D0%B9_%D0%B7%D0%B0%D0%BC%D0%B5%D0%B4%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06920",
-      "title": "File:Jack Andraka - Citizen Scientist - Wikimania 2014.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jack_Andraka_-_Citizen_Scientist_-_Wikimania_2014.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Jack_Andraka_-_Citizen_Scientist_-_Wikimania_2014.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06921",
-      "title": "File:Trump Is Not a Scientist. Climate Change is Real.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Trump_Is_Not_a_Scientist._Climate_Change_is_Real.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Trump_Is_Not_a_Scientist._Climate_Change_is_Real.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06922",
-      "title": "File:NIOSH Scientists Investigating Pollution From Office Equipment.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:NIOSH_Scientists_Investigating_Pollution_From_Office_Equipment.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/NIOSH_Scientists_Investigating_Pollution_From_Office_Equipment.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
-      ]
-    },
-    {
-      "referenceId": "ref-06923",
-      "title": "File:Research to Inform the Prevention of Asthma in Health Care – Research Study.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Research_to_Inform_the_Prevention_of_Asthma_in_Health_Care_%E2%80%93_Research_Study.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/04/Research_to_Inform_the_Prevention_of_Asthma_in_Health_Care_%E2%80%93_Research_Study.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "experts-public-figures",
-      "auditStatus": "review",
-      "sourceKind": null,
-      "auditReasons": [
-        "discovery_label_without_source_proof",
-        "experts-public-figures"
+        "interviews"
       ]
     }
   ],
@@ -721,32 +1022,22 @@
       "discoveryBucket": null,
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "none",
       "auditReasons": [
-        "no_public_speech_or_interview_evidence"
+        "no_strong_public_speech_or_interview_evidence"
       ]
     },
     {
-      "referenceId": "ref-00138",
-      "title": "File:RinaLazoInterviewSemanai.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:RinaLazoInterviewSemanai.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/RinaLazoInterviewSemanai.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "referenceId": "ref-00108",
+      "title": "File:Auto-Interview de Dominique Gisin.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Auto-Interview_de_Dominique_Gisin.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Auto-Interview_de_Dominique_Gisin.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "discoveryBucket": "interviews",
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00139",
-      "title": "File:KadettenInterviewEss1.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:KadettenInterviewEss1.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/78/KadettenInterviewEss1.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
+        "self_interview"
       ]
     },
     {
@@ -757,6 +1048,7 @@
       "discoveryBucket": "interviews",
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
         "screen_webcam"
       ]
@@ -769,6 +1061,7 @@
       "discoveryBucket": "interviews",
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
         "screen_webcam"
       ]
@@ -781,44 +1074,9 @@
       "discoveryBucket": "interviews",
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
         "broll_footage"
-      ]
-    },
-    {
-      "referenceId": "ref-00190",
-      "title": "File:Video of the Yaoundé strategy salon 01.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_of_the_Yaound%C3%A9_strategy_salon_01.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Video_of_the_Yaound%C3%A9_strategy_salon_01.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00191",
-      "title": "File:Video of the Yaounde Youth salon 01.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_of_the_Yaounde_Youth_salon_01.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Video_of_the_Yaounde_Youth_salon_01.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00199",
-      "title": "File:TUF 18 Finale Media Day with Raquel Pennington.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:TUF_18_Finale_Media_Day_with_Raquel_Pennington.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/TUF_18_Finale_Media_Day_with_Raquel_Pennington.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
       ]
     },
     {
@@ -829,200 +1087,9 @@
       "discoveryBucket": null,
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
         "news_package"
-      ]
-    },
-    {
-      "referenceId": "ref-00204",
-      "title": "File:Nanjala Nyabola We need to bring the human back into the digital conversation.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Nanjala_Nyabola_We_need_to_bring_the_human_back_into_the_digital_conversation.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Nanjala_Nyabola_We_need_to_bring_the_human_back_into_the_digital_conversation.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00205",
-      "title": "File:John Malkovich - Les Liaisons dangereuses.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:John_Malkovich_-_Les_Liaisons_dangereuses.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/John_Malkovich_-_Les_Liaisons_dangereuses.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00219",
-      "title": "File:Wa Lamborele recitaedjes I.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Wa_Lamborele_recitaedjes_I.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Wa_Lamborele_recitaedjes_I.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00220",
-      "title": "File:Le fate sulle Apuane di Massa (MS) - Antonia Cerboncini.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Le_fate_sulle_Apuane_di_Massa_(MS)_-_Antonia_Cerboncini.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Le_fate_sulle_Apuane_di_Massa_%28MS%29_-_Antonia_Cerboncini.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00223",
-      "title": "File:Evrard Snaps Longuès Penes2.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Evrard_Snaps_Longu%C3%A8s_Penes2.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Evrard_Snaps_Longu%C3%A8s_Penes2.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00225",
-      "title": "File:Maroochydore RL prop Bart Hold after his sides win over Stanley River July 25, 2021.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Maroochydore_RL_prop_Bart_Hold_after_his_sides_win_over_Stanley_River_July_25%2C_2021.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Maroochydore_RL_prop_Bart_Hold_after_his_sides_win_over_Stanley_River_July_25%2C_2021.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00226",
-      "title": "File:Maroochydore rugby union coach Ben Radmall – September 4, 2021.mpg",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Maroochydore_rugby_union_coach_Ben_Radmall_%E2%80%93_September_4%2C_2021.mpg",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Maroochydore_rugby_union_coach_Ben_Radmall_%E2%80%93_September_4%2C_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00227",
-      "title": "File:Caloundra rugby union coach Geoff Ingram – September 4, 2021.mpg",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Caloundra_rugby_union_coach_Geoff_Ingram_%E2%80%93_September_4%2C_2021.mpg",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Caloundra_rugby_union_coach_Geoff_Ingram_%E2%80%93_September_4%2C_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00228",
-      "title": "File:Matt Buckland, Noosa head coach, September 14 2021.mpg",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Matt_Buckland%2C_Noosa_head_coach%2C_September_14_2021.mpg",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Matt_Buckland%2C_Noosa_head_coach%2C_September_14_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00229",
-      "title": "File:Jordan Meads, University of the Sunshine Coast number 10 and Greece RL player, September 14 2021.mpg",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jordan_Meads%2C_University_of_the_Sunshine_Coast_number_10_and_Greece_RL_player%2C_September_14_2021.mpg",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Jordan_Meads%2C_University_of_the_Sunshine_Coast_number_10_and_Greece_RL_player%2C_September_14_2021.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00241",
-      "title": "File:Mr Ha Yerntang.mpg",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Mr_Ha_Yerntang.mpg",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Mr_Ha_Yerntang.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00258",
-      "title": "File:Astronaut Jessica Watkins Talks with AccuWeather, KMGH-TV in Colorado.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Astronaut_Jessica_Watkins_Talks_with_AccuWeather%2C_KMGH-TV_in_Colorado.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Astronaut_Jessica_Watkins_Talks_with_AccuWeather%2C_KMGH-TV_in_Colorado.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00259",
-      "title": "File:ITIS \"Enrico Mattei\", Urbino, tra passato e presente.mpg",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:ITIS_%22Enrico_Mattei%22%2C_Urbino%2C_tra_passato_e_presente.mpg",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/ITIS_%22Enrico_Mattei%22%2C_Urbino%2C_tra_passato_e_presente.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00262",
-      "title": "File:Discussion in Kythnos.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Discussion_in_Kythnos.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/01/Discussion_in_Kythnos.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00263",
-      "title": "File:Oral story about traditional food in Kythnos.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Oral_story_about_traditional_food_in_Kythnos.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Oral_story_about_traditional_food_in_Kythnos.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
-      ]
-    },
-    {
-      "referenceId": "ref-00298",
-      "title": "File:羅毓儀（Yuki）演員、歌手、作家成長路｜-PCM 1510 期封面人物.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:%E7%BE%85%E6%AF%93%E5%84%80%EF%BC%88Yuki%EF%BC%89%E6%BC%94%E5%93%A1%E3%80%81%E6%AD%8C%E6%89%8B%E3%80%81%E4%BD%9C%E5%AE%B6%E6%88%90%E9%95%B7%E8%B7%AF%EF%BD%9C-PCM_1510_%E6%9C%9F%E5%B0%81%E9%9D%A2%E4%BA%BA%E7%89%A9.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/%E7%BE%85%E6%AF%93%E5%84%80%EF%BC%88Yuki%EF%BC%89%E6%BC%94%E5%93%A1%E3%80%81%E6%AD%8C%E6%89%8B%E3%80%81%E4%BD%9C%E5%AE%B6%E6%88%90%E9%95%B7%E8%B7%AF%EF%BD%9C-PCM_1510_%E6%9C%9F%E5%B0%81%E9%9D%A2%E4%BA%BA%E7%89%A9.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
-      "auditStatus": "reject",
-      "sourceKind": null,
-      "auditReasons": [
-        "no_public_speech_or_interview_evidence"
       ]
     },
     {
@@ -1033,44 +1100,438 @@
       "discoveryBucket": null,
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
         "podcast"
       ]
     },
     {
-      "referenceId": "ref-00301",
-      "title": "File:Entrevista a una no miembro de la comunidad- opinion.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Entrevista_a_una_no_miembro_de_la_comunidad-_opinion.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Entrevista_a_una_no_miembro_de_la_comunidad-_opinion.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "referenceId": "ref-00307",
+      "title": "File:NASA Interview Opportunity- Summer Solstice Leads to an Exciting Year for Our Sun Live Shots (SVS14348 - 14348 SummerSolsticeLiveShot Broll-HQ).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:NASA_Interview_Opportunity-_Summer_Solstice_Leads_to_an_Exciting_Year_for_Our_Sun_Live_Shots_(SVS14348_-_14348_SummerSolsticeLiveShot_Broll-HQ).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/de/NASA_Interview_Opportunity-_Summer_Solstice_Leads_to_an_Exciting_Year_for_Our_Sun_Live_Shots_%28SVS14348_-_14348_SummerSolsticeLiveShot_Broll-HQ%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "discoveryBucket": "interviews",
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
-        "no_public_speech_or_interview_evidence"
+        "broll_footage"
       ]
     },
     {
-      "referenceId": "ref-00302",
-      "title": "File:Rwicinterview3.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:Rwicinterview3.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Rwicinterview3.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "discoveryBucket": "interviews",
+      "referenceId": "ref-004",
+      "title": "File:\"Why would a Muslim hold a cross..\"! - ft. Dr Jay Smith, Robert Spencer, Kay.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Why_would_a_Muslim_hold_a_cross..%22%21_-_ft._Dr_Jay_Smith%2C_Robert_Spencer%2C_Kay.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/%22Why_would_a_Muslim_hold_a_cross..%22%21_-_ft._Dr_Jay_Smith%2C_Robert_Spencer%2C_Kay.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "none",
       "auditReasons": [
-        "no_public_speech_or_interview_evidence"
+        "no_strong_public_speech_or_interview_evidence"
       ]
     },
     {
-      "referenceId": "ref-00303",
-      "title": "File:RWICINTERVIEW4.webm",
-      "pageUrl": "https://commons.wikimedia.org/wiki/File:RWICINTERVIEW4.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8f/RWICINTERVIEW4.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "referenceId": "ref-00401",
+      "title": "File:NASA Confirms July 2023 is Warmest Month on Record (SVS14396 - DrGavinA Schmidt Remote Interview GTR 2023).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:NASA_Confirms_July_2023_is_Warmest_Month_on_Record_(SVS14396_-_DrGavinA_Schmidt_Remote_Interview_GTR_2023).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/92/NASA_Confirms_July_2023_is_Warmest_Month_on_Record_%28SVS14396_-_DrGavinA_Schmidt_Remote_Interview_GTR_2023%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "discoveryBucket": "interviews",
       "auditStatus": "reject",
       "sourceKind": null,
+      "auditEvidence": "hard-reject",
       "auditReasons": [
-        "no_public_speech_or_interview_evidence"
+        "virtual_remote"
+      ]
+    },
+    {
+      "referenceId": "ref-00412",
+      "title": "File:Luis 'Lue' Elizondo Interview about UAP at Max Moszkowicz Podcast (former AATIP leader on UFOs).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Luis_%27Lue%27_Elizondo_Interview_about_UAP_at_Max_Moszkowicz_Podcast_(former_AATIP_leader_on_UFOs).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Luis_%27Lue%27_Elizondo_Interview_about_UAP_at_Max_Moszkowicz_Podcast_%28former_AATIP_leader_on_UFOs%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "podcast"
+      ]
+    },
+    {
+      "referenceId": "ref-00414",
+      "title": "File:N1 FITNESS PODCAST 131- Becoming A Critical Thinker - Interview with Dr. Mike Israetel.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:N1_FITNESS_PODCAST_131-_Becoming_A_Critical_Thinker_-_Interview_with_Dr._Mike_Israetel.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/N1_FITNESS_PODCAST_131-_Becoming_A_Critical_Thinker_-_Interview_with_Dr._Mike_Israetel.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "podcast"
+      ]
+    },
+    {
+      "referenceId": "ref-00456",
+      "title": "File:Condor Game Interview B-roll small (1) (30322673955).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Condor_Game_Interview_B-roll_small_(1)_(30322673955).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Condor_Game_Interview_B-roll_small_%281%29_%2830322673955%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "broll_footage"
+      ]
+    },
+    {
+      "referenceId": "ref-005",
+      "title": "File:\"Where Europe Went Wrong\" with Sam Westrop.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Where_Europe_Went_Wrong%22_with_Sam_Westrop.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/50/%22Where_Europe_Went_Wrong%22_with_Sam_Westrop.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-00512",
+      "title": "File:Angel Tree Radio Interview (988155).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Angel_Tree_Radio_Interview_(988155).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Angel_Tree_Radio_Interview_%28988155%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "phone_radio"
+      ]
+    },
+    {
+      "referenceId": "ref-006",
+      "title": "File:\"Jamaat-e-Islami - A Threat at Home and Abroad?\" with Sam Westrop and Cliff Smith - Ep. 09.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Jamaat-e-Islami_-_A_Threat_at_Home_and_Abroad%3F%22_with_Sam_Westrop_and_Cliff_Smith_-_Ep._09.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/%22Jamaat-e-Islami_-_A_Threat_at_Home_and_Abroad%3F%22_with_Sam_Westrop_and_Cliff_Smith_-_Ep._09.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-007",
+      "title": "File:\"Why The Left In America, and Around The World, Turned On Israel\" with Asaf Romirowsky - Ep. 08.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Why_The_Left_In_America%2C_and_Around_The_World%2C_Turned_On_Israel%22_with_Asaf_Romirowsky_-_Ep._08.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7b/%22Why_The_Left_In_America%2C_and_Around_The_World%2C_Turned_On_Israel%22_with_Asaf_Romirowsky_-_Ep._08.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-008",
+      "title": "File:'The Cause of the Middle East's Next War' with Jonathan Schanzer - MEF Podcast Ep. 11.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%27The_Cause_of_the_Middle_East%27s_Next_War%27_with_Jonathan_Schanzer_-_MEF_Podcast_Ep._11.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d8/%27The_Cause_of_the_Middle_East%27s_Next_War%27_with_Jonathan_Schanzer_-_MEF_Podcast_Ep._11.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "podcast"
+      ]
+    },
+    {
+      "referenceId": "ref-00873",
+      "title": "File:Discoveries from Asteroid Bennu- Media Briefing Graphics (SVS14772 - BENNU SAMPLE BROLL NASA GSFC 07 19 2024 1080).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Discoveries_from_Asteroid_Bennu-_Media_Briefing_Graphics_(SVS14772_-_BENNU_SAMPLE_BROLL_NASA_GSFC_07_19_2024_1080).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/Discoveries_from_Asteroid_Bennu-_Media_Briefing_Graphics_%28SVS14772_-_BENNU_SAMPLE_BROLL_NASA_GSFC_07_19_2024_1080%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "broll_footage"
+      ]
+    },
+    {
+      "referenceId": "ref-009",
+      "title": "File:\"The Muslim Brotherhood's Successful Infiltration of America\" with Cynthia Farahat - Ep. 07.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22The_Muslim_Brotherhood%27s_Successful_Infiltration_of_America%22_with_Cynthia_Farahat_-_Ep._07.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/%22The_Muslim_Brotherhood%27s_Successful_Infiltration_of_America%22_with_Cynthia_Farahat_-_Ep._07.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-010",
+      "title": "File:\"Uncovering Terror Funding in Foreign Aid - Islamic Relief Agency Scandal\" Cliff Smith & Sam Westrop.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Uncovering_Terror_Funding_in_Foreign_Aid_-_Islamic_Relief_Agency_Scandal%22_Cliff_Smith_%26_Sam_Westrop.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/%22Uncovering_Terror_Funding_in_Foreign_Aid_-_Islamic_Relief_Agency_Scandal%22_Cliff_Smith_%26_Sam_Westrop.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-011",
+      "title": "File:\"Economic Sanctions of Iran,\" NPC-0M-0209.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Economic_Sanctions_of_Iran%2C%22_NPC-0M-0209.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d3/%22Economic_Sanctions_of_Iran%2C%22_NPC-0M-0209.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-01106",
+      "title": "File:Extrasolar planet animation.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Extrasolar_planet_animation.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Extrasolar_planet_animation.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "non_speech_media"
+      ]
+    },
+    {
+      "referenceId": "ref-01127",
+      "title": "File:HD 189733b passing in front of its star with zoom (artist's impression).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:HD_189733b_passing_in_front_of_its_star_with_zoom_(artist%27s_impression).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/52/HD_189733b_passing_in_front_of_its_star_with_zoom_%28artist%27s_impression%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "remote_zoom"
+      ]
+    },
+    {
+      "referenceId": "ref-01132",
+      "title": "File:A zoom to the star HD 189733.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:A_zoom_to_the_star_HD_189733.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/A_zoom_to_the_star_HD_189733.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "remote_zoom"
+      ]
+    },
+    {
+      "referenceId": "ref-012",
+      "title": "File:\"Upgrading Washington- Government Technology & Innovation in the Next Administration\".webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Upgrading_Washington-_Government_Technology_%26_Innovation_in_the_Next_Administration%22.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/39/%22Upgrading_Washington-_Government_Technology_%26_Innovation_in_the_Next_Administration%22.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-01227",
+      "title": "File:Animation of cosmic distance ladder (heic1611a).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Animation_of_cosmic_distance_ladder_(heic1611a).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Animation_of_cosmic_distance_ladder_%28heic1611a%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "non_speech_media"
+      ]
+    },
+    {
+      "referenceId": "ref-01228",
+      "title": "File:Animation of the planets orbiting TRAPPIST-1 (heic1713a).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Animation_of_the_planets_orbiting_TRAPPIST-1_(heic1713a).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Animation_of_the_planets_orbiting_TRAPPIST-1_%28heic1713a%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "non_speech_media"
+      ]
+    },
+    {
+      "referenceId": "ref-01233",
+      "title": "File:Zoom-in on Abell 370 (heic1711a).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Zoom-in_on_Abell_370_(heic1711a).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Zoom-in_on_Abell_370_%28heic1711a%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "remote_zoom"
+      ]
+    },
+    {
+      "referenceId": "ref-013",
+      "title": "File:\"There is no planet B\" - Fascinating exchange between Naomi Klein and Stephanie Kelton -.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22There_is_no_planet_B%22_-_Fascinating_exchange_between_Naomi_Klein_and_Stephanie_Kelton_-.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3b/%22There_is_no_planet_B%22_-_Fascinating_exchange_between_Naomi_Klein_and_Stephanie_Kelton_-.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-01360",
+      "title": "File:Wiki Indaba 2023 - How to use Creative Commons Licenses for Better Sharing - Q&A Session.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Wiki_Indaba_2023_-_How_to_use_Creative_Commons_Licenses_for_Better_Sharing_-_Q%26A_Session.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Wiki_Indaba_2023_-_How_to_use_Creative_Commons_Licenses_for_Better_Sharing_-_Q%26A_Session.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "tutorial_demo"
+      ]
+    },
+    {
+      "referenceId": "ref-014",
+      "title": "File:\"Cover crop Nutrient Cycling in South Dakota\" by SDSU Extension Anthony Bly.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Cover_crop_Nutrient_Cycling_in_South_Dakota%22_by_SDSU_Extension_Anthony_Bly.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3b/%22Cover_crop_Nutrient_Cycling_in_South_Dakota%22_by_SDSU_Extension_Anthony_Bly.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
+      ]
+    },
+    {
+      "referenceId": "ref-01415",
+      "title": "File:Zoom into the Horsehead Nebula ESA496748.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Zoom_into_the_Horsehead_Nebula_ESA496748.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/03/Zoom_into_the_Horsehead_Nebula_ESA496748.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "remote_zoom"
+      ]
+    },
+    {
+      "referenceId": "ref-01416",
+      "title": "File:Zoom into Webb’s view of the Serpens Nebula ESA498455.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Zoom_into_Webb%E2%80%99s_view_of_the_Serpens_Nebula_ESA498455.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Zoom_into_Webb%E2%80%99s_view_of_the_Serpens_Nebula_ESA498455.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "remote_zoom"
+      ]
+    },
+    {
+      "referenceId": "ref-01426",
+      "title": "File:CDC Medetomidine Webinar for Clinicians.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:CDC_Medetomidine_Webinar_for_Clinicians.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a6/CDC_Medetomidine_Webinar_for_Clinicians.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "webinar"
+      ]
+    },
+    {
+      "referenceId": "ref-01428",
+      "title": "File:Fomalhaut cs2 (artist’s concept animation) ESA516452.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Fomalhaut_cs2_(artist%E2%80%99s_concept_animation)_ESA516452.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Fomalhaut_cs2_%28artist%E2%80%99s_concept_animation%29_ESA516452.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "non_speech_media"
+      ]
+    },
+    {
+      "referenceId": "ref-01473",
+      "title": "File:Islam's Non-Believers Panel Discussion.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Islam%27s_Non-Believers_Panel_Discussion.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Islam%27s_Non-Believers_Panel_Discussion.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "panel_roundtable"
+      ]
+    },
+    {
+      "referenceId": "ref-01474",
+      "title": "File:-PreteenVaxScene Webinar -11 NIAM Edition- Vaccine Convos That Work.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:-PreteenVaxScene_Webinar_-11_NIAM_Edition-_Vaccine_Convos_That_Work.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/-PreteenVaxScene_Webinar_-11_NIAM_Edition-_Vaccine_Convos_That_Work.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "webinar"
+      ]
+    },
+    {
+      "referenceId": "ref-01481",
+      "title": "File:08.21.20 Tom and Shane Daily Podcast - TOP STORY; Postmaster says USPS can handle mail-in voting.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:08.21.20_Tom_and_Shane_Daily_Podcast_-_TOP_STORY%3B_Postmaster_says_USPS_can_handle_mail-in_voting.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/08.21.20_Tom_and_Shane_Daily_Podcast_-_TOP_STORY%3B_Postmaster_says_USPS_can_handle_mail-in_voting.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": "interviews",
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "hard-reject",
+      "auditReasons": [
+        "podcast"
+      ]
+    },
+    {
+      "referenceId": "ref-015",
+      "title": "File:'Pizza call' to 911 saves assault victim.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%27Pizza_call%27_to_911_saves_assault_victim.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/%27Pizza_call%27_to_911_saves_assault_victim.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "discoveryBucket": null,
+      "auditStatus": "reject",
+      "sourceKind": null,
+      "auditEvidence": "none",
+      "auditReasons": [
+        "no_strong_public_speech_or_interview_evidence"
       ]
     }
   ],
