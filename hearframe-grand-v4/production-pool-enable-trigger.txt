@@ -1,0 +1,1 @@
+enable 200 sources from hardened public-speech-interview-bank-v2 only; balance speeches/interviews; auto-detect English; reject non-English; require WhisperX alignment quality before production-stitch-index promotion
