@@ -1,0 +1,28 @@
+{
+  "version": "production-visual-audit-v1",
+  "sourcePolicy": "public-speech-interview-bank-v2",
+  "audioAlignedCandidateCount": 131,
+  "visualApprovedCount": 0,
+  "finalProductionReadyCount": 0,
+  "status": "visual-audit-required",
+  "hardVisualRejects": [
+    "Zoom recording or Zoom UI",
+    "Microsoft Teams / Webex / Google Meet / other conferencing UI",
+    "webcam-grid or remote-call layout",
+    "screen recording or screen-share presentation",
+    "news package or reporter package rather than a clean interview",
+    "B-roll, generic footage, promotional footage, trailers or montage",
+    "podcast / audio-first recording with static or remote-call visuals",
+    "non-English primary speech",
+    "no clear visible human speaker for the selected cut"
+  ],
+  "approvalRequirements": [
+    "source passed public-speech-interview-bank-v2 metadata audit",
+    "English speech was detected",
+    "WhisperX timestamp alignment passed quality gates",
+    "sampled source frames were visually reviewed and contain clean public-speech or public-interview footage",
+    "selected clip window was downloaded and locally decoded before render"
+  ],
+  "approvedReferenceIds": [],
+  "note": "131 sources are audio/timestamp-ready candidates, not final production-ready clips. A source cannot enter the smooth single-MP4 renderer until it is listed in approvedReferenceIds."
+}
