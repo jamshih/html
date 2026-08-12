@@ -44,6 +44,11 @@
     await navigatePage('analytics');
     check('real concept analytics',document.body.innerText.includes('最需要處理的概念'));
 
+    await navigatePage('settings');
+    check('authenticated cloud sync UI',document.body.innerText.includes('帳號與跨裝置同步'));
+    check('junior high is not falsely enabled',document.body.innerText.includes('國中（課綱資料建置中）'));
+    check('full backup includes image/ink promise',document.body.innerText.includes('完整資料備份'));
+
     const failed=results.filter(x=>!x.ok);
     const box=document.createElement('pre');box.id='e2e-results';box.dataset.status=failed.length?'FAIL':'PASS';box.textContent=JSON.stringify({status:failed.length?'FAIL':'PASS',viewport:{w:innerWidth,h:innerHeight},results},null,2);document.body.appendChild(box);
   }catch(err){const box=document.createElement('pre');box.id='e2e-results';box.dataset.status='FAIL';box.textContent=JSON.stringify({status:'FAIL',viewport:{w:innerWidth,h:innerHeight},error:String(err),results},null,2);document.body.appendChild(box)}
