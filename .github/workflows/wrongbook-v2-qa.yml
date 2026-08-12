@@ -21,28 +21,29 @@ jobs:
           for f in wrongbook-v2/*.js; do echo "checking $f"; node --check "$f"; done
       - name: Taiwan terminology guard
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          files=[p for p in Path('wrongbook-v2').glob('*') if p.suffix in {'.js','.html'}]
-          banned=['線粒體','高爾基體','溶酶體','概率','種群','群落','生境','質粒','數據','視頻','信息','矢量','算法','網絡','軟件','硬件','激活能']
-          failures=[]
-          for p in files:
-              text=p.read_text(encoding='utf-8')
-              if p.name=='curriculum-tw.js':
-                  marker='const CURRICULUM_TW='
-                  text=text.split(marker,1)[1] if marker in text else text
-              for term in banned:
-                  if term in text:
-                      failures.append(f'{p}: contains non-Taiwan preferred term {term}')
-          if failures:
-              raise SystemExit('\n'.join(failures))
-          print('Taiwan terminology guard passed')
-          PY
+          node - <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const curriculumFiles=['curriculum-tw.js','curriculum-more-tw.js','curriculum-tw-fixes.js'];
+          const src=curriculumFiles.map(f=>fs.readFileSync('wrongbook-v2/'+f,'utf8')).join('\n')+'\n;globalThis.__C=CURRICULUM_TW;';
+          const ctx={};vm.createContext(ctx);vm.runInContext(src,ctx);
+          const C=ctx.__C;
+          const text=JSON.stringify(C);
+          const banned=['線粒體','高爾基體','溶酶體','概率','種群','群落','生境','質粒','數據','視頻','信息','矢量','網絡','軟件','硬件','激活能'];
+          for(const term of banned)if(text.includes(term))throw new Error(`normalized curriculum contains non-Taiwan preferred term: ${term}`);
+          if(/(^|[^演])算法/.test(text))throw new Error('normalized curriculum contains 算法 instead of 演算法');
+          const otherFiles=fs.readdirSync('wrongbook-v2').filter(f=>/\.(js|html)$/.test(f)&&!curriculumFiles.includes(f)&&f!=='tw-ui-guard.js');
+          for(const f of otherFiles){
+            const t=fs.readFileSync('wrongbook-v2/'+f,'utf8');
+            for(const term of banned)if(t.includes(term))throw new Error(`${f} contains non-Taiwan preferred term: ${term}`);
+            if(/(^|[^演])算法/.test(t))throw new Error(`${f} contains 算法 instead of 演算法`);
+          }
+          console.log('Taiwan terminology guard passed after normalization');
+          NODE
       - name: Required curriculum coverage
         run: |
           node - <<'NODE'
           const fs=require('fs'),vm=require('vm');
-          const src=fs.readFileSync('wrongbook-v2/curriculum-tw.js','utf8')+'\n'+fs.readFileSync('wrongbook-v2/curriculum-more-tw.js','utf8')+'\n;globalThis.__C=CURRICULUM_TW;';
+          const src=['curriculum-tw.js','curriculum-more-tw.js','curriculum-tw-fixes.js'].map(f=>fs.readFileSync('wrongbook-v2/'+f,'utf8')).join('\n')+'\n;globalThis.__C=CURRICULUM_TW;';
           const ctx={};vm.createContext(ctx);vm.runInContext(src,ctx);
           const C=ctx.__C;
           const required=['chinese','english','math','physics','chemistry','biology','earth','history','geography','civics'];
@@ -54,8 +55,8 @@ jobs:
             }
           }
           const minChapters={physics:12,earth:10,chinese:8,english:8,history:10,geography:10,civics:10};
-          for(const [s,n] of Object.entries(minChapters))if(C[s].chapters.length<n)throw new Error(`${s} only has ${C[s].chapters.length} chapters; expected at least ${n}`);
           const pointCount=s=>C[s].chapters.flatMap(ch=>ch.sections).flatMap(sec=>sec.points).length;
+          for(const [s,n] of Object.entries(minChapters))if(C[s].chapters.length<n)throw new Error(`${s} only has ${C[s].chapters.length} chapters; expected at least ${n}`);
           for(const s of Object.keys(minChapters))if(pointCount(s)<45)throw new Error(`${s} only has ${pointCount(s)} recall points; expected at least 45`);
           console.log('subjects',required.length,'chapters',required.reduce((n,s)=>n+C[s].chapters.length,0),'expanded points',Object.fromEntries(Object.keys(minChapters).map(s=>[s,pointCount(s)])));
           NODE
