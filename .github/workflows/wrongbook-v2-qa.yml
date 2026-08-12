@@ -24,8 +24,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           files=[p for p in Path('wrongbook-v2').glob('*') if p.suffix in {'.js','.html'}]
-          banned=['線粒體','高爾基體','溶酶體','概率','種群','群落','生境','質粒','數據','視頻','信息']
-          # curriculum-tw.js intentionally contains banned terms only inside the replacement policy itself.
+          banned=['線粒體','高爾基體','溶酶體','概率','種群','群落','生境','質粒','數據','視頻','信息','矢量','算法','網絡','軟件','硬件','激活能']
           failures=[]
           for p in files:
               text=p.read_text(encoding='utf-8')
@@ -43,7 +42,7 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('fs'),vm=require('vm');
-          const src=fs.readFileSync('wrongbook-v2/curriculum-tw.js','utf8')+'\n;globalThis.__C=CURRICULUM_TW;';
+          const src=fs.readFileSync('wrongbook-v2/curriculum-tw.js','utf8')+'\n'+fs.readFileSync('wrongbook-v2/curriculum-more-tw.js','utf8')+'\n;globalThis.__C=CURRICULUM_TW;';
           const ctx={};vm.createContext(ctx);vm.runInContext(src,ctx);
           const C=ctx.__C;
           const required=['chinese','english','math','physics','chemistry','biology','earth','history','geography','civics'];
@@ -54,5 +53,9 @@ jobs:
               for(const sec of ch.sections)if(!sec.points?.length)throw new Error(`${s}/${ch.title}/${sec.title} has no points`);
             }
           }
-          console.log('subjects',required.length,'chapters',required.reduce((n,s)=>n+C[s].chapters.length,0));
+          const minChapters={physics:12,earth:10,chinese:8,english:8,history:10,geography:10,civics:10};
+          for(const [s,n] of Object.entries(minChapters))if(C[s].chapters.length<n)throw new Error(`${s} only has ${C[s].chapters.length} chapters; expected at least ${n}`);
+          const pointCount=s=>C[s].chapters.flatMap(ch=>ch.sections).flatMap(sec=>sec.points).length;
+          for(const s of Object.keys(minChapters))if(pointCount(s)<45)throw new Error(`${s} only has ${pointCount(s)} recall points; expected at least 45`);
+          console.log('subjects',required.length,'chapters',required.reduce((n,s)=>n+C[s].chapters.length,0),'expanded points',Object.fromEntries(Object.keys(minChapters).map(s=>[s,pointCount(s)])));
           NODE
