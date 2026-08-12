@@ -68,11 +68,13 @@ jobs:
           const index=fs.readFileSync('wrongbook-v2/index.html','utf8');
           const engine=fs.readFileSync('wrongbook-v2/product-engine-v3.js','utf8');
           const hotfix=fs.readFileSync('wrongbook-v2/product-engine-v3-hotfix.js','utf8');
+          const guide=fs.readFileSync('wrongbook-v2/guide-v3.js','utf8');
           if(index.includes('app-1.js')) throw new Error('index still references missing app-1.js');
-          for(const asset of ['product-engine-v3.css','product-engine-v3.js','product-engine-v3-hotfix.js','e2e-v3.js']) if(!index.includes(asset)) throw new Error(`index missing ${asset}`);
+          for(const asset of ['product-engine-v3.css','product-engine-v3.js','product-engine-v3-hotfix.js','guide-v3.css','guide-v3.js','e2e-v3.js']) if(!index.includes(asset)) throw new Error(`index missing ${asset}`);
           const required=[['per-problem image store','v3PutImage'],['first-class truths','v3CreateTruth'],['spaced review scheduler','v3Schedule'],['Chinese correction cloze','v3ChangedSegment'],['multi-concept storage','concepts'],['progressive mind hints','mindHintLevels'],['real concept analytics','最需要處理的概念'],['OCR correction UI','data-scan-problem-text'],['actual annotation SVG','v3-ai-svg']];
           for(const [name,needle] of required) if(!engine.includes(needle)) throw new Error(`missing ${name}`);
           for(const needle of ['v3WorkspaceImage','v3ThreadCode']) if(!hotfix.includes(needle)) throw new Error(`hotfix missing ${needle}`);
+          for(const [name,needle] of [['guide generation/cache','v3GuidePrepare'],['handwriting animation','v3DrawWrite'],['circle animation','v3DrawCircle'],['guide replay','v3GuideReplay'],['background pre-generation','v3GuideBaseConfirmScan']]) if(!guide.includes(needle))throw new Error(`missing ${name}`);
           console.log('V3 product implementation guard passed');
           NODE
       - name: Rendered Chromium smoke test
@@ -88,7 +90,7 @@ jobs:
             NAME="${SPEC%%:*}"
             SIZE="${SPEC#*:}"
             PROFILE="/tmp/wrongbook-chrome-$NAME"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --window-size="$SIZE" --virtual-time-budget=6000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?e2e=1" > "/tmp/wrongbook-$NAME.html"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --window-size="$SIZE" --virtual-time-budget=7000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?e2e=1" > "/tmp/wrongbook-$NAME.html"
             python3 - "/tmp/wrongbook-$NAME.html" <<'PY'
           from pathlib import Path
           import html,re,sys
@@ -101,7 +103,7 @@ jobs:
           print(html.unescape(m.group(2)))
           if status!='PASS': raise SystemExit(1)
           PY
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="${PROFILE}-shot" --window-size="$SIZE" --virtual-time-budget=2500 --screenshot="/tmp/wrongbook-$NAME.png" "http://127.0.0.1:4173/wrongbook-v2/"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="${PROFILE}-shot" --window-size="$SIZE" --virtual-time-budget=3000 --screenshot="/tmp/wrongbook-$NAME.png" "http://127.0.0.1:4173/wrongbook-v2/"
           done
       - name: Upload rendered QA screenshots
         uses: actions/upload-artifact@v4
