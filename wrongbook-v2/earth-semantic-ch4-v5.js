@@ -1,0 +1,46 @@
+// ---- Chapter 4: 固體地球 248–249 ----
+{
+ const c=v5Chapter(4,'固體地球',[248,249]);
+ v5Node(c,'seismic-terms',248,'地震相關名詞',95,130,155,38,'#c96b56','hub',{questionArea:{x:55,y:175,w:265,h:160},blankPattern:'figure-sides'});
+ v5Node(c,'seismic-waves',248,'地震波種類',365,130,145,38,'#c96b56','hub',{questionArea:{x:325,y:175,w:250,h:170},blankPattern:'figure-sides'});
+ v5Node(c,'crust-lithosphere',248,'地殼／岩石圈／軟流圈',95,480,230,38,'#d09a37','hub',{questionArea:{x:55,y:525,w:350,h:190},blankPattern:'figure-sides'});
+ v5Node(c,'deep-earth',248,'地函／外核／內核',465,515,190,38,'#d09a37','hub',{questionArea:{x:430,y:560,w:400,h:260},blankPattern:'figure-sides'});
+ v5Node(c,'earthquake-location',249,'震央定位',95,120,130,38,'#5b83b6','hub',{questionArea:{x:55,y:165,w:320,h:210},blankPattern:'figure-sides'});
+ v5Node(c,'earthquake-hazards',249,'地震災害',390,130,125,38,'#8b71a8','result',{questionArea:{x:360,y:175,w:215,h:125},blankPattern:'stack'});
+ v5Node(c,'continental-drift',249,'大陸漂移',95,500,130,38,'#5b9d6b','theory',{questionArea:{x:55,y:545,w:220,h:150},blankPattern:'stack'});
+ v5Node(c,'seafloor-spreading',249,'海底擴張',335,500,130,38,'#5b9d6b','theory',{questionArea:{x:300,y:545,w:220,h:150},blankPattern:'stack'});
+ v5Node(c,'plate-tectonics',249,'板塊構造學說',575,500,160,38,'#5b9d6b','hub',{questionArea:{x:545,y:545,w:260,h:145},blankPattern:'branch'});
+ v5Node(c,'plate-boundaries',249,'板塊邊界',90,830,130,38,'#5b9d6b','classification',{questionArea:{x:55,y:875,w:250,h:160},blankPattern:'figure-sides'});
+ v5Node(c,'subduction',249,'隱沒帶',350,830,110,38,'#5b9d6b','process',{questionArea:{x:320,y:875,w:240,h:165},blankPattern:'figure-sides'});
+ v5Node(c,'taiwan-plates',249,'臺灣板塊環境',620,820,160,38,'#5b9d6b','map',{questionArea:{x:585,y:865,w:270,h:180},blankPattern:'figure-sides'});
+ v5Edge(c,'c4-e1',248,'seismic-terms','seismic-waves','measured-by','震源、震央與測站的幾何關係透過P、S波到時被觀測。','#c96b56');
+ v5Edge(c,'c4-e2',248,'seismic-waves','crust-lithosphere','measured-by','地震波速度隨深度變化用來辨識地殼、岩石圈與軟流圈。','#d09a37');
+ v5Edge(c,'c4-e3',248,'seismic-waves','deep-earth','measured-by','P、S波速度與密度曲線揭示地函、外核與內核狀態。','#d09a37');
+ v5Edge(c,'c4-e4',249,'earthquake-location','seismic-terms','derived-from','震央定位先由每個測站的P-S到時差估算震央距離。','#5b83b6');
+ v5Edge(c,'c4-e5',249,'continental-drift','seafloor-spreading','chronology','海底擴張提供新機制與證據，延伸大陸漂移思想。','#5b9d6b');
+ v5Edge(c,'c4-e6',249,'seafloor-spreading','plate-tectonics','chronology','海底擴張與全球地震火山資料共同發展成板塊構造學說。','#5b9d6b');
+ v5Edge(c,'c4-e7',249,'plate-tectonics','plate-boundaries','classified-into','板塊相對運動可分為張裂、聚合與錯動邊界。','#5b9d6b');
+ v5Edge(c,'c4-e8',249,'plate-boundaries','subduction','example-of','海洋板塊聚合時可形成隱沒、海溝與火山弧。','#5b9d6b');
+ v5Edge(c,'c4-e9',249,'subduction','taiwan-plates','located-in','臺灣附近同時受歐亞板塊與菲律賓海板塊及兩套隱沒系統影響。','#5b9d6b');
+ v5Figure(c,'p248-ray',248,['seismic-terms'],'地球剖面把震源、震央、兩測站與P/S波路徑放在同一幾何圖上。','cross-section',['震源','震央','測站1','測站2','P波路徑','S波路徑'],55,75,310,250,'earthquake-rays');
+ v5Figure(c,'p248-seismogram',248,['seismic-waves'],'地震儀波形顯示P波先到、S波後到以及P-S時間差。','graph',['P到時','S到時','P波較早','S波較晚','P-S間隔','表面波區'],350,75,300,240,'seismogram');
+ v5Figure(c,'p248-crustgraph',248,['crust-lithosphere'],'S波速度—深度圖用速度變化辨識地殼與低速帶。','graph',['速度軸','深度軸','地殼轉折','低速帶'],55,430,260,220,'crust-velocity');
+ v5Figure(c,'p248-crustsection',248,['crust-lithosphere'],'大陸／海洋地殼剖面同時比較厚度、密度、莫氏面、岩石圈與軟流圈。','cross-section',['大陸地殼','海洋地殼','厚度','密度','莫氏面','岩石圈','軟流圈'],315,430,330,230,'crust-section');
+ v5Figure(c,'p248-deepgraph',248,['deep-earth'],'深部地球圖把P波、S波、密度與主要不連續面放在同一深度座標。','graph',['深度','P波速度','S波速度','密度','地函','外核','內核','不連續面'],430,660,310,330,'deep-earth-graph');
+ v5Figure(c,'p248-layertable',248,['deep-earth'],'層圈表與深部曲線一起提供組成、狀態與不連續面的對照。','comparison',['層','組成','狀態','不連續面'],740,660,145,330,'layer-table');
+ v5Figure(c,'p249-location',249,['earthquake-location'],'P/S到時曲線與三測站波形共同顯示P-S差隨距離增加。','graph',['測站距離','P/S到時','測站1','測站2','測站3','P曲線','S曲線'],55,75,360,260,'travel-time');
+ v5Figure(c,'p249-triangulation',249,['earthquake-location'],'三個震央距離圓的交點直接定位震央。','map',['測站1圓','測站2圓','測站3圓','震央交點'],430,85,210,180,'triangulation');
+ v5Figure(c,'p249-boundary',249,['plate-boundaries'],'板塊邊界塊體圖用箭頭區分張裂、聚合、錯動與海嶺／海溝。','cross-section',['張裂','聚合','錯動','運動箭頭','海嶺','海溝'],55,780,300,220,'plate-boundaries');
+ v5Figure(c,'p249-subduction',249,['subduction'],'隱沒剖面把海洋板塊、海溝、火山弧與淺中深源地震連成一個過程。','cross-section',['海洋板塊','隱沒板片','海溝','火山弧','淺源','中源','深源地震'],340,770,310,230,'subduction');
+ v5Figure(c,'p249-taiwan',249,['taiwan-plates'],'臺灣區域圖必須標出兩板塊、琉球與馬尼拉海溝、島弧及移動方向。','map',['歐亞板塊','菲律賓海板塊','琉球海溝','琉球島弧','馬尼拉海溝','呂宋島弧','移動方向'],625,735,260,300,'taiwan-plates');
+ v5Rule(c,'c4-r-taiwan','taiwan-plates','diagram-reading','臺灣、歐亞、菲律賓海、琉球、馬尼拉或呂宋相關題目必須直接掛在臺灣板塊圖。',{match:/臺灣|歐亞|菲律賓|琉球|馬尼拉|呂宋/i,priority:10});
+ v5Rule(c,'c4-r-subduct','subduction','diagram-reading','隱沒、海溝、火山弧與深度地震題直接由隱沒剖面判讀。',{match:/隱沒|海溝|火山弧|深源|中源/i,priority:9});
+ v5Rule(c,'c4-r-bound','plate-boundaries','classification','張裂、聚合、錯動與板塊邊界分類題放在邊界塊體圖旁。',{match:/張裂|聚合|錯動|板塊邊界|板塊運動/i,priority:8});
+ v5Rule(c,'c4-r-theory','plate-tectonics','evidence-for','大陸漂移、海底擴張、磁帶與板塊構造證據題必須沿理論發展鏈排列。',{match:/大陸漂移|海底擴張|磁帶|海床|板塊構造|古氣候|化石/i,priority:7});
+ v5Rule(c,'c4-r-hazard','earthquake-hazards','effect','海嘯、土壤液化等屬於地震後果，不可掛在P/S波機制支線。',{match:/海嘯|液化|災害/i,priority:7});
+ v5Rule(c,'c4-r-locate','earthquake-location','calculation','震央距離、P-S到時差、多測站定位題必須貼著行時曲線與三圓定位圖。',{match:/震央距|到時差|測站|定位|三個|圓/i,priority:8});
+ v5Rule(c,'c4-r-deep','deep-earth','diagram-reading','地函、外核、內核、密度與深部速度題由深度曲線和層圈表支援。',{match:/地函|外核|內核|古氏|雷曼|密度/i,priority:7});
+ v5Rule(c,'c4-r-crust','crust-lithosphere','comparison','地殼、岩石圈、軟流圈、莫氏面及大陸／海洋地殼比較留在剖面與速度圖旁。',{match:/地殼|岩石圈|軟流圈|莫氏|大陸地殼|海洋地殼/i,priority:7});
+ v5Rule(c,'c4-r-wave','seismic-waves','diagram-reading','P波、S波、地震波型態與速度題必須和地震儀波形及波性質成一個教學單元。',{match:/P波|S波|地震波|縱波|橫波|液體/i,priority:8});
+ v5Rule(c,'c4-r-terms','seismic-terms','label','震源、震央、震度與距離名詞直接標在地球剖面相對位置。',{match:/震源|震央|震度|規模/i,priority:6});
+}
