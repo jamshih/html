@@ -1,0 +1,202 @@
+name: Build Hearframe production proof v1
+
+on:
+  push:
+    paths:
+      - '.github/workflows/hearframe-production-v1.yml'
+      - 'hearframe-grand-v4/production-v1-manifest.json'
+      - 'hearframe-grand-v4/production-build-trigger.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hearframe-production-v1
+  cancel-in-progress: true
+
+jobs:
+  build-production-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify media toolchain
+        run: |
+          set -euxo pipefail
+          ffmpeg -version | head -n 2
+          ffprobe -version | head -n 2
+          test -f /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
+
+      - name: Fetch audited public-domain source media
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p /tmp/hearframe-production-v1
+          cd /tmp/hearframe-production-v1
+          curl --fail --location --retry 5 --retry-delay 3 --connect-timeout 30 \
+            'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm' \
+            --output obama.webm
+          curl --fail --location --retry 5 --retry-delay 3 --connect-timeout 30 \
+            'https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm' \
+            --output jfk.webm
+          ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 obama.webm
+          ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 jfk.webm
+
+      - name: Build exact truthful caption files
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cat > /tmp/hearframe-production-v1/clip1.srt <<'EOF'
+          1
+          00:00:00,142 --> 00:00:02,282
+          This is where I learned that
+
+          2
+          00:00:02,278 --> 00:00:05,718
+          change only happens when
+          ordinary people get
+
+          3
+          00:00:05,714 --> 00:00:08,854
+          involved and they get engaged,
+          and they come
+
+          4
+          00:00:08,851 --> 00:00:13,661
+          together to demand it.
+          EOF
+
+          cat > /tmp/hearframe-production-v1/clip2.srt <<'EOF'
+          1
+          00:00:00,203 --> 00:00:03,673
+          I'm asking you to believe.
+
+          2
+          00:00:03,673 --> 00:00:06,113
+          Not in my ability to bring
+          about change
+
+          3
+          00:00:06,109 --> 00:00:08,209
+          — but in yours.
+          EOF
+
+          cat > /tmp/hearframe-production-v1/clip3.srt <<'EOF'
+          1
+          00:00:00,232 --> 00:00:08,605
+          And so, my fellow Americans:
+          ask not what your country can do for you—
+
+          2
+          00:00:08,605 --> 00:00:11,935
+          ask what you can do for your country.
+          EOF
+
+      - name: Cut complete thoughts and burn premium captions
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cd /tmp/hearframe-production-v1
+          BASE_VF="scale=640:360:force_original_aspect_ratio=decrease,pad=640:360:(ow-iw)/2:(oh-ih)/2:black,setsar=1"
+          STYLE="FontName=DejaVu Sans,FontSize=22,Bold=1,PrimaryColour=&H00FFFFFF,OutlineColour=&HCC000000,BackColour=&H66000000,BorderStyle=3,Outline=1,Shadow=0,Alignment=2,MarginV=30"
+
+          ffmpeg -hide_banner -loglevel warning -y -ss 226.05 -i obama.webm -t 14.00 \
+            -vf "${BASE_VF},subtitles=clip1.srt:force_style='${STYLE}',drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text='BARACK OBAMA / 2017':x=24:y=22:fontsize=16:fontcolor=white@0.78:box=1:boxcolor=black@0.32:boxborderw=8" \
+            -af "loudnorm=I=-18:LRA=7:TP=-2" \
+            -c:v libx264 -preset medium -crf 20 -profile:v high -level 3.1 -pix_fmt yuv420p \
+            -c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart clip1.mp4
+
+          ffmpeg -hide_banner -loglevel warning -y -ss 3023.25 -i obama.webm -t 8.45 \
+            -vf "${BASE_VF},subtitles=clip2.srt:force_style='${STYLE}',drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text='BARACK OBAMA / 2017':x=24:y=22:fontsize=16:fontcolor=white@0.78:box=1:boxcolor=black@0.32:boxborderw=8" \
+            -af "loudnorm=I=-18:LRA=7:TP=-2" \
+            -c:v libx264 -preset medium -crf 20 -profile:v high -level 3.1 -pix_fmt yuv420p \
+            -c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart clip2.mp4
+
+          ffmpeg -hide_banner -loglevel warning -y -ss 833.05 -i jfk.webm -t 12.20 \
+            -vf "${BASE_VF},subtitles=clip3.srt:force_style='${STYLE}',drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text='JOHN F. KENNEDY / 1961':x=24:y=22:fontsize=16:fontcolor=white@0.78:box=1:boxcolor=black@0.32:boxborderw=8" \
+            -af "loudnorm=I=-18:LRA=7:TP=-2" \
+            -c:v libx264 -preset medium -crf 20 -profile:v high -level 3.1 -pix_fmt yuv420p \
+            -c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart clip3.mp4
+
+      - name: Assemble one film and mix continuous original ambient bed
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cd /tmp/hearframe-production-v1
+          printf "file 'clip1.mp4'\nfile 'clip2.mp4'\nfile 'clip3.mp4'\n" > concat.txt
+          ffmpeg -hide_banner -loglevel warning -y -f concat -safe 0 -i concat.txt -c copy -movflags +faststart speech.mp4
+          DUR="$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 speech.mp4)"
+
+          ffmpeg -hide_banner -loglevel warning -y \
+            -f lavfi -i "aevalsrc=0.022*sin(2*PI*110*t)+0.013*sin(2*PI*164.81*t)+0.009*sin(2*PI*220*t):s=48000:d=${DUR}" \
+            -af "lowpass=f=1200,aecho=0.8:0.82:420|760:0.12|0.07,tremolo=f=0.09:d=0.22,afade=t=in:st=0:d=2,afade=t=out:st=$(python -c \"print(max(0,float('${DUR}')-3))\"):d=3" \
+            -c:a pcm_s16le ambient.wav
+
+          ffmpeg -hide_banner -loglevel warning -y -i speech.mp4 -i ambient.wav \
+            -filter_complex "[1:a]volume=0.48[music];[music][0:a]sidechaincompress=threshold=0.025:ratio=8:attack=25:release=420[ducked];[0:a][ducked]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95[aout]" \
+            -map 0:v:0 -map '[aout]' -c:v copy -c:a aac -b:a 192k -ar 48000 -ac 2 \
+            -movflags +faststart hearframe-production-v1.mp4
+
+          mkdir -p "$GITHUB_WORKSPACE/hearframe-grand-v4"
+          cp hearframe-production-v1.mp4 "$GITHUB_WORKSPACE/hearframe-grand-v4/production-v1.mp4"
+
+      - name: Strict full-decode and codec QA
+        shell: bash
+        run: |
+          set -euxo pipefail
+          OUT="hearframe-grand-v4/production-v1.mp4"
+          ffmpeg -v error -i "$OUT" -f null -
+          ffprobe -v error -show_entries format=duration,size,format_name -show_entries stream=index,codec_name,codec_type,pix_fmt,width,height,sample_rate,channels -of json "$OUT" > /tmp/hearframe-production-v1/probe.json
+          ffmpeg -hide_banner -i "$OUT" -vf "blackdetect=d=0.5:pic_th=0.98" -af "silencedetect=n=-45dB:d=1.5" -f null - 2> /tmp/hearframe-production-v1/detect.log || true
+          python - <<'PY'
+          import json, pathlib, sys
+          probe=json.load(open('/tmp/hearframe-production-v1/probe.json'))
+          duration=float(probe['format']['duration'])
+          streams=probe['streams']
+          video=next((s for s in streams if s.get('codec_type')=='video'),None)
+          audio=next((s for s in streams if s.get('codec_type')=='audio'),None)
+          failures=[]
+          if not (30 <= duration <= 45): failures.append(f'duration {duration:.3f}s outside 30-45s')
+          if not video: failures.append('missing video stream')
+          if not audio: failures.append('missing audio stream')
+          if video and video.get('codec_name')!='h264': failures.append('video is not H.264')
+          if video and video.get('pix_fmt')!='yuv420p': failures.append('pixel format is not yuv420p')
+          if video and (video.get('width'),video.get('height'))!=(640,360): failures.append('unexpected dimensions')
+          if audio and audio.get('codec_name')!='aac': failures.append('audio is not AAC')
+          if audio and str(audio.get('sample_rate'))!='48000': failures.append('audio sample rate is not 48 kHz')
+          detect=pathlib.Path('/tmp/hearframe-production-v1/detect.log').read_text(errors='replace')
+          qa={
+            'version':'production-v1',
+            'passed':not failures,
+            'fullDecodePassed':True,
+            'durationSeconds':round(duration,3),
+            'expectedDurationRangeSeconds':[30,45],
+            'video':video,
+            'audio':audio,
+            'blackAndSilenceScanExecuted':True,
+            'blackdetectEvents':detect.count('black_start:'),
+            'silencedetectEvents':detect.count('silence_start:'),
+            'failures':failures
+          }
+          pathlib.Path('hearframe-grand-v4/production-v1-qa.json').write_text(json.dumps(qa,indent=2)+'\n')
+          print(json.dumps(qa,indent=2))
+          if failures: sys.exit(1)
+          PY
+
+      - name: Commit only QA-passed generated media
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.name "hearframe-production-builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add hearframe-grand-v4/production-v1.mp4 hearframe-grand-v4/production-v1-qa.json
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "Render Hearframe production proof v1"
+          git push
