@@ -15,10 +15,17 @@ function v4tbSectionVisual(subjectId,chapter,section){
 function v4tbPointState(subjectId,chapter,p){
   const key=v4PointKey(subjectId,chapter,p);
   const val=state.mindAnswers?.[key]||'';
-  return {key,val,ok:v4MindCorrect(subjectId,chapter,p),hint:state.mindHints?.[key]||'',attempted:Boolean(String(val).trim())};
+  const level=state.mindHintLevels?.[key]||0;
+  return {key,val,ok:v4MindCorrect(subjectId,chapter,p),level,attempted:Boolean(String(val).trim())};
+}
+function v4tbHint(p,level){
+  if(typeof v3MindHint==='function')return v3MindHint(p,level);
+  if(level<=1)return p.h||'先找圖上的位置、方向或前後關係。';
+  if(level===2)return `把範圍縮小：答案是在描述這個圖中最關鍵的概念或關係。`;
+  return `最後提示：關鍵答案是「${v4Short(p.a,7)}」。`;
 }
 function v4tbRecall(subjectId,chapter,section,p,i,mode='diagram'){
-  const {key,val,ok,hint,attempted}=v4tbPointState(subjectId,chapter,p);
+  const {key,val,ok,level,attempted}=v4tbPointState(subjectId,chapter,p);
   const related=(state.problems||[]).filter(x=>x.subject===subjectId&&(x.chapter===chapter.title||String(x.concept||'').includes(section.title))).length;
   return `<div class="v4tb-recall ${mode==='diagram'?'v4tb-recall-diagram':'v4tb-recall-flow'} ${ok?'is-correct':attempted?'is-attempted':''}" data-v4tb-point="${v4EscapeAttr(p.id)}">
     <div class="v4tb-recall-head"><span>${i+1}</span><b>${esc(p.kind||'核心觀念')}</b>${related?`<em>${related} 題相關錯題</em>`:''}</div>
@@ -26,9 +33,9 @@ function v4tbRecall(subjectId,chapter,section,p,i,mode='diagram'){
     <div class="v4tb-answer-line">
       <input class="mind-answer-v2 v4tb-answer" data-mind-key="${v4EscapeAttr(key)}" data-answer="${v4EscapeAttr(p.a)}" value="${esc(val)}" placeholder="＿＿＿＿" autocomplete="off" aria-label="${v4EscapeAttr(p.q)}">
       <span class="mind-status ${ok?'good':attempted?'bad':''}" id="status-${v4EscapeAttr(key)}">${ok?'✓':attempted?'再想一次':''}</span>
-      <button class="v4tb-hint-link" data-mind-hint="${v4EscapeAttr(key)}" data-hint="${v4EscapeAttr(p.h||'提示')}">提示</button>
+      <button class="v4tb-hint-link" data-mind-hint="${v4EscapeAttr(key)}" data-hint="${v4EscapeAttr(p.h||'提示')}">${level>=3?'提示已滿':level?`提示 ${level}/3`:'提示'}</button>
     </div>
-    ${hint?`<div class="v4tb-hint">${esc(hint)}</div>`:''}
+    ${level?`<div class="v4tb-hint"><strong>提示 ${level}/3</strong><span>${esc(v4tbHint(p,level))}</span></div>`:''}
     ${ok?`<div class="v4tb-truth"><span>✓</span><strong>${esc(p.truth||p.a)}</strong></div>`:''}
   </div>`;
 }
@@ -80,7 +87,6 @@ const v4tbBaseBind=bind;
 bind=function(){
   v4tbBaseBind();
   document.querySelectorAll('[data-v4tb-section]').forEach(el=>el.onclick=()=>document.getElementById(`v4tb-sec-${el.dataset.v4tbSection}`)?.scrollIntoView({behavior:'smooth',block:'center'}));
-  document.querySelectorAll('.v4tb-answer').forEach(el=>{const previous=el.onchange;el.onchange=()=>{if(previous)previous();render()}});
 };
 
 render();
