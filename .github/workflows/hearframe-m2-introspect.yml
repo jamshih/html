@@ -24,7 +24,7 @@ jobs:
         with:
           ref: agent/hearframe-m2
           fetch-depth: 0
-      - name: Inspect bank schema
+      - name: Inspect bank and final production index
         run: python .github/scripts/hearframe-m2-introspect-bank.py
       - name: Commit reports
         shell: bash
@@ -32,7 +32,10 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add hearframe-grand-v4/ask/m2-bank-introspection.json hearframe-grand-v4/ask/m2-aligned-candidates.json
+          git add \
+            hearframe-grand-v4/ask/m2-bank-introspection.json \
+            hearframe-grand-v4/ask/m2-aligned-candidates.json \
+            hearframe-grand-v4/ask/m2-ready-references.json
           if git diff --cached --quiet; then
             echo "No report changes"
             exit 0
