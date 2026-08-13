@@ -113,7 +113,7 @@ function mindmapPage(){
   return `<div class="page-head v4tb-page-head"><div><div class="tw-badge">${esc(TW_TERM_POLICY.label)}</div><h2>心智圖學習 · ${esc(s.name)}</h2><p>依你提供的「脈絡整合」頁面重製：分支、圖表與空格直接長在同一條知識脈絡上。</p></div><div class="v4-head-progress"><span>本章 ${chapterStats.pct}%</span><i><b style="width:${chapterStats.pct}%"></b></i></div></div>
     ${subjectTabs()}
     <div class="v4tb-layout">
-      <nav class="v4tb-chapters" aria-label="章節">${curriculum.chapters.map((ch,i)=>{const st=v4ChapterStats(s.id,ch);return `<button class="mind-chapter-btn ${chosen.id===ch.id?'active':''}" data-concept-chapter="${v4EscapeAttr(ch.title)}"><span>${i+1}</span><strong>${esc(ch.title)}</strong><small>${st.done}/${st.total}</small></button>`}).join('')}</nav>
+      <nav class="v4tb-chapters" aria-label="章節"><span class="v4tb-chapter-summary">${curriculum.chapters.length} 個核心章節</span>${curriculum.chapters.map((ch,i)=>{const st=v4ChapterStats(s.id,ch);return `<button class="mind-chapter-btn ${chosen.id===ch.id?'active':''}" data-concept-chapter="${v4EscapeAttr(ch.title)}"><span>${i+1}</span><strong>${esc(ch.title)}</strong><small>${st.done}/${st.total}</small></button>`}).join('')}</nav>
       ${v4tbChapterRoute(s.id,chosen)}
       <main class="v4tb-main"><div class="v4tb-book-stack">${pages.map((sections,i)=>v4tbPage(s.id,s.name,chosen,chapterIndex,sections,i,pages.length,numMap,chapterStats)).join('')}</div>
       <div class="v4tb-sheet-footer"><button class="soft-btn" data-v4-chapter="${v4EscapeAttr(prevChapter.title)}">← 上一章</button><span>${esc(chosen.title)}</span><button class="primary-btn" data-v4-chapter="${v4EscapeAttr(nextChapter.title)}">下一章 →</button></div></main>
