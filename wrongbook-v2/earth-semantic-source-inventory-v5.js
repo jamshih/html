@@ -1,9 +1,9 @@
 // Independent source-figure inventory for photographed Earth Science pages 242–253.
 const V5_SOURCE_FIGURE_INVENTORY={
 242:['p242-bigbang','p242-singularity','p242-nebula','p242-planets','p242-atmosphere1','p242-hot-earth','p242-diff','p242-guide'],
-243:['p243-decay','p243-strata','p243-fossils','p243-environment'],
-244:['p244-color','p244-brightness','p244-constellation','p244-parallax'],
-245:['p245-blackbody','p245-wavelength','p245-stairs','p245-solarsystem','p245-comet'],
+243:['p243-decay','p243-strata','p243-fossils','p243-env'],
+244:['p244-starbar','p244-brightness','p244-constellation','p244-parallax','p244-guide'],
+245:['p245-blackbody','p245-wavelength','p245-hierarchy','p245-solar','p245-comet'],
 246:['p246-celestial','p246-daily','p246-daycompare','p246-zodiac'],
 247:['p247-dome','p247-sunrise','p247-south','p247-orbit','p247-milan','p247-insolation'],
 248:['p248-ray','p248-seismogram','p248-crustgraph','p248-crustsection','p248-deepgraph','p248-layertable'],
