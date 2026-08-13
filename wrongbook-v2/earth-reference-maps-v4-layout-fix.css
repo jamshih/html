@@ -1,0 +1,3 @@
+/* Keep dense workbook rows flowing inside each fixed source zone. */
+.v4ref-zone-items{grid-auto-flow:row!important;grid-template-rows:none!important}
+.v4ref-zone-items>.v4ref-blank-item{break-inside:avoid}
