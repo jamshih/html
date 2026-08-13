@@ -1,5 +1,5 @@
 {
-  "version": "hearframe-m2-bank-introspection-v1",
+  "version": "hearframe-m2-bank-introspection-v2",
   "source": "hearframe-grand-v4/ask/public-speech-interview-bank.json",
   "topLevelType": "dict",
   "topLevelKeys": [
@@ -141,6 +141,7 @@
     ]
   ],
   "capabilities": [],
+  "alignedCandidateRows": 122,
   "samples": [
     {
       "title": "File:Marriage Equality in New York- Interview with Lt. Dan Choi.webm",
