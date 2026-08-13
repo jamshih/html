@@ -69,7 +69,7 @@ function v4RefSkeleton(ch){
    p.push(v4RefSkArrow(1750,1070,'#5a9d68'));
    [[140,240],[485,240],[140,660],[420,900],[1040,230],[1380,560],[1040,760],[1335,1070]].forEach(([x,y])=>p.push(v4RefSkNode(x,y)));
   }
- return `<svg class="v4ref-source-skeleton" viewBox="0 0 ${V4REF_W} ${V4REF_H}" aria-hidden="true">${p.join('')}</svg>`;
+ return `<svg class="v4ref-source-skeleton v4ref-global-lines" viewBox="0 0 ${V4REF_W} ${V4REF_H}" aria-hidden="true">${p.join('')}</svg>`;
 }
 
 v4RefZoneHtml=function(ch,z,mode){
