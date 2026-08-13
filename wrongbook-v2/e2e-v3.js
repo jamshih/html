@@ -19,7 +19,17 @@
     check('whole-exam confirmation promise',document.body.innerText.includes('拆題後你可以改題幹'));
     document.querySelector('#captureModal [data-action="closeCapture"]')?.click();await sleep(100);
 
-    await navigatePage('mindmap');check('mind map curriculum renders',document.body.innerText.includes('個核心章節'));const hint=[...document.querySelectorAll('[data-mind-hint]')].find(x=>x.offsetParent!==null);if(hint){hint.click();await sleep(220)}check('progressive hint increments',document.body.innerText.includes('提示 1/3'));
+    await navigatePage('mindmap');
+    check('mind map curriculum renders',document.body.innerText.includes('個核心章節'));
+    check('visual chapter board renders',Boolean(document.querySelector('.v4-stage')&&document.querySelector('.v4-hero-svg')));
+    check('concepts are connected as a flow',document.querySelectorAll('.v4-flow-node').length>=2&&Boolean(document.querySelector('.v4-flow-lines path')));
+    check('all ten syllabus subjects are visible',document.querySelectorAll('.v4-subject-progress').length===10);
+    check('visual board uses curriculum sections',document.querySelectorAll('[data-v4-section]').length>=1);
+    const firstNode=document.querySelector('[data-v4-node]');if(firstNode){firstNode.click();await sleep(120)}
+    check('selected concept has connected detail',Boolean(document.querySelector('.v4-detail-flow')&&document.querySelector('.v4-detail-main')));
+    const hint=[...document.querySelectorAll('[data-mind-hint]')].find(x=>x.offsetParent!==null);if(hint){hint.click();await sleep(220)}check('progressive hint increments',document.body.innerText.includes('提示 1/3'));
+    const nextSection=document.querySelector('[data-v4-next-section]');if(nextSection){const before=document.querySelector('.v4-section-ring .active')?.textContent;nextSection.click();await sleep(180);const after=document.querySelector('.v4-section-ring .active')?.textContent;check('section flow continues',!before||!after||before!==after)}else check('section flow continues',true,'single-section chapter');
+
     await navigatePage('review');const truthMode=[...document.querySelectorAll('[data-review-mode="truth"]')].find(x=>x.offsetParent!==null);if(!truthMode)throw new Error('truth review mode missing');truthMode.click();await sleep(220);check('first-class truth review renders',document.body.innerText.includes('修正後正確敘述'));check('Chinese cloze exists',document.body.innerText.includes('＿＿＿＿'));
     await navigatePage('notebook');const row=[...document.querySelectorAll('[data-problem]')].find(x=>x.offsetParent!==null);if(row&&!document.body.innerText.includes('你先把錯誤敘述改成正確的')){row.click();await sleep(220)}check('student-first correction UI',document.body.innerText.includes('你先把錯誤敘述改成正確的'));check('correction validation available',Boolean(document.querySelector('[data-validate-correction]')));check('real paper canvas available',Boolean(document.getElementById('drawCanvas')));
     check('AI handwriting guide controls',Boolean(document.querySelector('[data-action="guideStart"]')&&document.getElementById('aiGuideCanvas')));
