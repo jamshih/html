@@ -1,3301 +1,1471 @@
 {
-  "version": "hearframe-m2-aligned-candidates-v1",
+  "version": "hearframe-m2-stale-bank-alignment-fields-v2",
   "count": 122,
-  "definition": "Rows in public-speech-interview-bank carrying speech validation or word-boundary evidence. This is a candidate set, not visual approval.",
-  "candidates": [
+  "definition": "Diagnostic only. These source-bank fields may be pending/stale and MUST NOT be treated as the 131 ready references.",
+  "rows": [
     {
       "referenceId": "ref-10102",
       "title": "File:Wikimedia Foundation Interview with Chief of Finance and Administration Garfield Byrd October 7, 2011.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikimedia_Foundation_Interview_with_Chief_of_Finance_and_Administration_Garfield_Byrd_October_7%2C_2011.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/69/Wikimedia_Foundation_Interview_with_Chief_of_Finance_and_Administration_Garfield_Byrd_October_7%2C_2011.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 27824400,
       "width": 1077,
       "height": 606,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10105",
       "title": "File:Reflections on the interview with Mukti Datta Those who really work for development they care about conservation.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Reflections_on_the_interview_with_Mukti_Datta_Those_who_really_work_for_development_they_care_about_conservation.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Reflections_on_the_interview_with_Mukti_Datta_Those_who_really_work_for_development_they_care_about_conservation.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 2688234,
       "width": 298,
       "height": 168,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10106",
       "title": "File:Reflections on the interview with Mukti Datta - Projects tare sustaiable only when the main stakeholders own them.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Reflections_on_the_interview_with_Mukti_Datta_-_Projects_tare_sustaiable_only_when_the_main_stakeholders_own_them.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Reflections_on_the_interview_with_Mukti_Datta_-_Projects_tare_sustaiable_only_when_the_main_stakeholders_own_them.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 4344125,
       "width": 298,
       "height": 168,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10107",
       "title": "File:Reflections on the interview with Mukti Datta - persons not organizations are the protagonists of real change.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Reflections_on_the_interview_with_Mukti_Datta_-_persons_not_organizations_are_the_protagonists_of_real_change.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/04/Reflections_on_the_interview_with_Mukti_Datta_-_persons_not_organizations_are_the_protagonists_of_real_change.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 8926901,
       "width": 298,
       "height": 168,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10117",
       "title": "File:Interview with Doris Mansary (Ministry of Social Welfare, Gender and Children Affairs in Sierra Leone).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Doris_Mansary_(Ministry_of_Social_Welfare%2C_Gender_and_Children_Affairs_in_Sierra_Leone).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Interview_with_Doris_Mansary_%28Ministry_of_Social_Welfare%2C_Gender_and_Children_Affairs_in_Sierra_Leone%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 42150431,
       "width": 768,
       "height": 576,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10118",
       "title": "File:Interview with Commit & Act by Welthungerhilfe about the Sierra Leone Ebola Response.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Commit_%26_Act_by_Welthungerhilfe_about_the_Sierra_Leone_Ebola_Response.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Interview_with_Commit_%26_Act_by_Welthungerhilfe_about_the_Sierra_Leone_Ebola_Response.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 80606051,
       "width": 800,
       "height": 450,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10120",
       "title": "File:Part 1 of interview with Sgt. Kirstie Ennis at the 2013 Warrior Games 130501-M-SE196-001.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Part_1_of_interview_with_Sgt._Kirstie_Ennis_at_the_2013_Warrior_Games_130501-M-SE196-001.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/43/Part_1_of_interview_with_Sgt._Kirstie_Ennis_at_the_2013_Warrior_Games_130501-M-SE196-001.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 38837180,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10122",
       "title": "File:Ebola Response Training Interview, Lieutenant Commander Schutt 111814-F-AF915-005.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Ebola_Response_Training_Interview%2C_Lieutenant_Commander_Schutt_111814-F-AF915-005.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Ebola_Response_Training_Interview%2C_Lieutenant_Commander_Schutt_111814-F-AF915-005.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 36733782,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10123",
       "title": "File:Ebola Response Training Interview, Captain Radike 111814-F-AF915-004.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Ebola_Response_Training_Interview%2C_Captain_Radike_111814-F-AF915-004.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Ebola_Response_Training_Interview%2C_Captain_Radike_111814-F-AF915-004.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 67185330,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10124",
       "title": "File:Ebola Response Training Interview, Major Callanan 111814-F-AF915-006.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Ebola_Response_Training_Interview%2C_Major_Callanan_111814-F-AF915-006.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/63/Ebola_Response_Training_Interview%2C_Major_Callanan_111814-F-AF915-006.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 28953450,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10128",
       "title": "File:ICT4ID Information and Communication Technologies for Intercultural Dialogue, DVD 3 San Heritage Management Project, Interview with Dr Megan Biesele.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:ICT4ID_Information_and_Communication_Technologies_for_Intercultural_Dialogue%2C_DVD_3_San_Heritage_Management_Project%2C_Interview_with_Dr_Megan_Biesele.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b5/ICT4ID_Information_and_Communication_Technologies_for_Intercultural_Dialogue%2C_DVD_3_San_Heritage_Management_Project%2C_Interview_with_Dr_Megan_Biesele.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 53898695,
       "width": 480,
       "height": 360,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10129",
       "title": "File:You're illegal, that's all - interview met afdelingshoofd Hans van der Weiden.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:You%27re_illegal%2C_that%27s_all_-_interview_met_afdelingshoofd_Hans_van_der_Weiden.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/You%27re_illegal%2C_that%27s_all_-_interview_met_afdelingshoofd_Hans_van_der_Weiden.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 33028969,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10130",
       "title": "File:Totale interview - Delftse meesters van nu. Het Prinsenhof inspireert Cor Dam.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Totale_interview_-_Delftse_meesters_van_nu._Het_Prinsenhof_inspireert_Cor_Dam.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Totale_interview_-_Delftse_meesters_van_nu._Het_Prinsenhof_inspireert_Cor_Dam.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 60089554,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10131",
       "title": "File:Интервью с иностранными добровольцами; Interview with foreign volunteers from France and Finland.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D1%8C%D1%8E_%D1%81_%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8_%D0%B4%D0%BE%D0%B1%D1%80%D0%BE%D0%B2%D0%BE%D0%BB%D1%8C%D1%86%D0%B0%D0%BC%D0%B8%3B_Interview_with_foreign_volunteers_from_France_and_Finland.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D1%8C%D1%8E_%D1%81_%D0%B8%D0%BD%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8_%D0%B4%D0%BE%D0%B1%D1%80%D0%BE%D0%B2%D0%BE%D0%BB%D1%8C%D1%86%D0%B0%D0%BC%D0%B8%3B_Interview_with_foreign_volunteers_from_France_and_Finland.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 96613058,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10133",
       "title": "File:President Reagan's Interview with the Wall Street Journal in the Oval Office on February 7, 1985.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Interview_with_the_Wall_Street_Journal_in_the_Oval_Office_on_February_7%2C_1985.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/President_Reagan%27s_Interview_with_the_Wall_Street_Journal_in_the_Oval_Office_on_February_7%2C_1985.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 120813785,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10134",
       "title": "File:President Reagan's Interview With Ann Devroy and Johanna Neuman of USA Today on January 17, 1985.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Interview_With_Ann_Devroy_and_Johanna_Neuman_of_USA_Today_on_January_17%2C_1985.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/39/President_Reagan%27s_Interview_With_Ann_Devroy_and_Johanna_Neuman_of_USA_Today_on_January_17%2C_1985.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 87477342,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10135",
       "title": "File:President Reagan's Interview with the Dallas Morning News in the Oval Office on January 8, 1985.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Interview_with_the_Dallas_Morning_News_in_the_Oval_Office_on_January_8%2C_1985.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/President_Reagan%27s_Interview_with_the_Dallas_Morning_News_in_the_Oval_Office_on_January_8%2C_1985.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 91599953,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10136",
       "title": "File:President Reagan's Interview with Editors of the Scripps-Howard News Service on October 25, 1984.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Interview_with_Editors_of_the_Scripps-Howard_News_Service_on_October_25%2C_1984.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/President_Reagan%27s_Interview_with_Editors_of_the_Scripps-Howard_News_Service_on_October_25%2C_1984.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 119580759,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10140",
       "title": "File:Interview- Frederic Mazella (BlaBlaCar) & Paulin Dementhon (Drivy) - OuiShare Fest 2015 - (Eng).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview-_Frederic_Mazella_(BlaBlaCar)_%26_Paulin_Dementhon_(Drivy)_-_OuiShare_Fest_2015_-_(Eng).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Interview-_Frederic_Mazella_%28BlaBlaCar%29_%26_Paulin_Dementhon_%28Drivy%29_-_OuiShare_Fest_2015_-_%28Eng%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 224629817,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10141",
       "title": "File:CSIS Special Book Discussion- \"On China,\" with Henry Kissinger (Interview with Henry Kissinger).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:CSIS_Special_Book_Discussion-_%22On_China%2C%22_with_Henry_Kissinger_(Interview_with_Henry_Kissinger).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/25/CSIS_Special_Book_Discussion-_%22On_China%2C%22_with_Henry_Kissinger_%28Interview_with_Henry_Kissinger%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 181879616,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10142",
       "title": "File:President Clinton in Interview with Israeli Media (1995) (FOIA-2016-0242-F).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Clinton_in_Interview_with_Israeli_Media_(1995)_(FOIA-2016-0242-F).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/President_Clinton_in_Interview_with_Israeli_Media_%281995%29_%28FOIA-2016-0242-F%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 99932188,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10144",
       "title": "File:Interview met minister-president Balkenende over het nieuwe verdrag voor de Europese Unie.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_met_minister-president_Balkenende_over_het_nieuwe_verdrag_voor_de_Europese_Unie.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Interview_met_minister-president_Balkenende_over_het_nieuwe_verdrag_voor_de_Europese_Unie.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 6778608,
       "width": 398,
       "height": 224,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10145",
       "title": "File:Voyage à Venise -04 Interview avec Daniel Buren autour de la 55e Biennale de Venise.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Voyage_%C3%A0_Venise_-04_Interview_avec_Daniel_Buren_autour_de_la_55e_Biennale_de_Venise.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/04/Voyage_%C3%A0_Venise_-04_Interview_avec_Daniel_Buren_autour_de_la_55e_Biennale_de_Venise.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 43732235,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10147",
       "title": "File:Wikipedia in the Classroom - Interview with Dr. Alex Chow (World Christianity MTh-MSc programme) - abridged.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikipedia_in_the_Classroom_-_Interview_with_Dr._Alex_Chow_(World_Christianity_MTh-MSc_programme)_-_abridged.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Wikipedia_in_the_Classroom_-_Interview_with_Dr._Alex_Chow_%28World_Christianity_MTh-MSc_programme%29_-_abridged.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 104880341,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10148",
       "title": "File:Wikipedia in the Classroom - full interview with Aine Kavanagh (Reproductive Biology Hons. student).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikipedia_in_the_Classroom_-_full_interview_with_Aine_Kavanagh_(Reproductive_Biology_Hons._student).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Wikipedia_in_the_Classroom_-_full_interview_with_Aine_Kavanagh_%28Reproductive_Biology_Hons._student%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 193134606,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10150",
       "title": "File:Wikipedia in the Classroom - Interview with Edinburgh University's Translation Studies MSc students.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikipedia_in_the_Classroom_-_Interview_with_Edinburgh_University%27s_Translation_Studies_MSc_students.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Wikipedia_in_the_Classroom_-_Interview_with_Edinburgh_University%27s_Translation_Studies_MSc_students.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 242870972,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10151",
       "title": "File:Carolyn Hennesy \"General Hospital\" interview at Red Carpet Events LA Grammy Lounge.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Carolyn_Hennesy_%22General_Hospital%22_interview_at_Red_Carpet_Events_LA_Grammy_Lounge.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Carolyn_Hennesy_%22General_Hospital%22_interview_at_Red_Carpet_Events_LA_Grammy_Lounge.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 55912566,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10152",
       "title": "File:Interview with baritone Daniel Belcher at Houston Grand Opera, for 'The Italian Girl in Algiers'.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_baritone_Daniel_Belcher_at_Houston_Grand_Opera%2C_for_%27The_Italian_Girl_in_Algiers%27.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/32/Interview_with_baritone_Daniel_Belcher_at_Houston_Grand_Opera%2C_for_%27The_Italian_Girl_in_Algiers%27.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 221167952,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10153",
       "title": "File:President Reagan’s Interview with the Soviet Union’s Newspaper TASS on October 31, 1985.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%E2%80%99s_Interview_with_the_Soviet_Union%E2%80%99s_Newspaper_TASS_on_October_31%2C_1985.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/President_Reagan%E2%80%99s_Interview_with_the_Soviet_Union%E2%80%99s_Newspaper_TASS_on_October_31%2C_1985.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 118413654,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10156",
       "title": "File:In an interview with VOA contributor Greta Van Susteren, Vice President Mike ....webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:In_an_interview_with_VOA_contributor_Greta_Van_Susteren%2C_Vice_President_Mike_....webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/In_an_interview_with_VOA_contributor_Greta_Van_Susteren%2C_Vice_President_Mike_....webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 6529195,
       "width": 1080,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10165",
       "title": "File:Faia Younan sings during interview with Al Aan Arabic Television - Mar 15, 2017.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Faia_Younan_sings_during_interview_with_Al_Aan_Arabic_Television_-_Mar_15%2C_2017.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/Faia_Younan_sings_during_interview_with_Al_Aan_Arabic_Television_-_Mar_15%2C_2017.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 3471306,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10168",
       "title": "File:CBP Non-Intrusive Inspection Operations at Super Bowl LII and Interview footage of Supervisory Customs Officer Lee Takaki.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:CBP_Non-Intrusive_Inspection_Operations_at_Super_Bowl_LII_and_Interview_footage_of_Supervisory_Customs_Officer_Lee_Takaki.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/CBP_Non-Intrusive_Inspection_Operations_at_Super_Bowl_LII_and_Interview_footage_of_Supervisory_Customs_Officer_Lee_Takaki.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 63445241,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10173",
       "title": "File:What do we want the modern graduate to be - interview with Dr. Jenni Garden and Dr. Michael Seery on Wikipedia in education.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:What_do_we_want_the_modern_graduate_to_be_-_interview_with_Dr._Jenni_Garden_and_Dr._Michael_Seery_on_Wikipedia_in_education.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/24/What_do_we_want_the_modern_graduate_to_be_-_interview_with_Dr._Jenni_Garden_and_Dr._Michael_Seery_on_Wikipedia_in_education.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 66129830,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10175",
       "title": "File:Wikipedia and Law - Interview with 4th year Law undergraduate student, Jemima John.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikipedia_and_Law_-_Interview_with_4th_year_Law_undergraduate_student%2C_Jemima_John.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Wikipedia_and_Law_-_Interview_with_4th_year_Law_undergraduate_student%2C_Jemima_John.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 102140219,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10177",
       "title": "File:Interview with LIBERTEAM 2012 - Gov. Gary Johnson, Judge Jim Gray, CPA Steve Collett.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_LIBERTEAM_2012_-_Gov._Gary_Johnson%2C_Judge_Jim_Gray%2C_CPA_Steve_Collett.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/Interview_with_LIBERTEAM_2012_-_Gov._Gary_Johnson%2C_Judge_Jim_Gray%2C_CPA_Steve_Collett.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 29896070,
       "width": 424,
       "height": 240,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10178",
       "title": "File:Interview met de beoogde nieuwe wethouder in Almelo Arjen Maathuis (VVD).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_met_de_beoogde_nieuwe_wethouder_in_Almelo_Arjen_Maathuis_(VVD).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Interview_met_de_beoogde_nieuwe_wethouder_in_Almelo_Arjen_Maathuis_%28VVD%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 60918187,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10179",
       "title": "File:Interview Corey Lewandowski at Steve Bannon Event in NH 11 9 17.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_Corey_Lewandowski_at_Steve_Bannon_Event_in_NH_11_9_17.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/36/Interview_Corey_Lewandowski_at_Steve_Bannon_Event_in_NH_11_9_17.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 105684643,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10180",
       "title": "File:Janet Aldrich of CNS News & I interview each other on Ted Cruz's Andover Speech 5-30-15.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Janet_Aldrich_of_CNS_News_%26_I_interview_each_other_on_Ted_Cruz%27s_Andover_Speech_5-30-15.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Janet_Aldrich_of_CNS_News_%26_I_interview_each_other_on_Ted_Cruz%27s_Andover_Speech_5-30-15.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 53332370,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10181",
       "title": "File:DaTechguy arrives t the 603 alliance caucus quick interview Al Baldasaro.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:DaTechguy_arrives_t_the_603_alliance_caucus_quick_interview_Al_Baldasaro.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a4/DaTechguy_arrives_t_the_603_alliance_caucus_quick_interview_Al_Baldasaro.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 112379502,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10182",
       "title": "File:DaTechGuy Interview Ted Cruz in Hollis NH 8-30-2015.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:DaTechGuy_Interview_Ted_Cruz_in_Hollis_NH_8-30-2015.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/DaTechGuy_Interview_Ted_Cruz_in_Hollis_NH_8-30-2015.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 456470339,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10183",
       "title": "File:Interview with Lisa Lockwood, Iowa Director of Communications for the Herman Cain Campaign.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Lisa_Lockwood%2C_Iowa_Director_of_Communications_for_the_Herman_Cain_Campaign.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Interview_with_Lisa_Lockwood%2C_Iowa_Director_of_Communications_for_the_Herman_Cain_Campaign.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 4996564,
       "width": 854,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10184",
       "title": "File:Interview of Vice President Bush on World War II Naval career on June 19, 1986.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_of_Vice_President_Bush_on_World_War_II_Naval_career_on_June_19%2C_1986.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Interview_of_Vice_President_Bush_on_World_War_II_Naval_career_on_June_19%2C_1986.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 46529807,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10185",
       "title": "File:President Reagan's Interview with US News and World Report on October 9, 1984.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Interview_with_US_News_and_World_Report_on_October_9%2C_1984.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/President_Reagan%27s_Interview_with_US_News_and_World_Report_on_October_9%2C_1984.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 148162835,
       "width": 654,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10186",
       "title": "File:Kanna Asakura Rizin Post Fight Interview Part 3 - MMA PLUS - Gazeta Esportiva.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Kanna_Asakura_Rizin_Post_Fight_Interview_Part_3_-_MMA_PLUS_-_Gazeta_Esportiva.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Kanna_Asakura_Rizin_Post_Fight_Interview_Part_3_-_MMA_PLUS_-_Gazeta_Esportiva.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 56937979,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10187",
       "title": "File:Shinju Nozawa-Auclair - Rizin FF Post Fight Interview - MMA PLUS - Gazeta Esportiva.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Shinju_Nozawa-Auclair_-_Rizin_FF_Post_Fight_Interview_-_MMA_PLUS_-_Gazeta_Esportiva.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Shinju_Nozawa-Auclair_-_Rizin_FF_Post_Fight_Interview_-_MMA_PLUS_-_Gazeta_Esportiva.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 45671545,
       "width": 1906,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10188",
       "title": "File:Takanori Gomi Rizin Post Fight Interview Dec 31th Part 2 - MMA PLUS Gazeta Esportiva.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Takanori_Gomi_Rizin_Post_Fight_Interview_Dec_31th_Part_2_-_MMA_PLUS_Gazeta_Esportiva.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/86/Takanori_Gomi_Rizin_Post_Fight_Interview_Dec_31th_Part_2_-_MMA_PLUS_Gazeta_Esportiva.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 45582274,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10189",
       "title": "File:Kanako Murata Rizin FF Pre Fight Interview - Part 2 - Gazeta Esportiva.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Kanako_Murata_Rizin_FF_Pre_Fight_Interview_-_Part_2_-_Gazeta_Esportiva.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/21/Kanako_Murata_Rizin_FF_Pre_Fight_Interview_-_Part_2_-_Gazeta_Esportiva.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 77927896,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10190",
       "title": "File:Nobuyuki Sakakibara - Rizin FF Post fights Interview - Part 1 - Gazeta Esportiva.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Nobuyuki_Sakakibara_-_Rizin_FF_Post_fights_Interview_-_Part_1_-_Gazeta_Esportiva.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/de/Nobuyuki_Sakakibara_-_Rizin_FF_Post_fights_Interview_-_Part_1_-_Gazeta_Esportiva.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 174425062,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10191",
       "title": "File:Yumiko Hotta - Rizin Post Fight Interview - 31-12-2016 - Gazeta Esportiva.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Yumiko_Hotta_-_Rizin_Post_Fight_Interview_-_31-12-2016_-_Gazeta_Esportiva.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Yumiko_Hotta_-_Rizin_Post_Fight_Interview_-_31-12-2016_-_Gazeta_Esportiva.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 157322082,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10192",
       "title": "File:Special Interview with TX State Senator & Candidate to Lt. Governor Leticia Van De Putte.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Special_Interview_with_TX_State_Senator_%26_Candidate_to_Lt._Governor_Leticia_Van_De_Putte.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Special_Interview_with_TX_State_Senator_%26_Candidate_to_Lt._Governor_Leticia_Van_De_Putte.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 183309087,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10193",
       "title": "File:Interview met Emiel Plegt van Too Many Outs op Hobnob 2018.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_met_Emiel_Plegt_van_Too_Many_Outs_op_Hobnob_2018.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/60/Interview_met_Emiel_Plegt_van_Too_Many_Outs_op_Hobnob_2018.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 76608121,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10194",
       "title": "File:Interview Jean Hofman en John Scholing van de band Stranger tijdens hobnob 2018.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_Jean_Hofman_en_John_Scholing_van_de_band_Stranger_tijdens_hobnob_2018.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Interview_Jean_Hofman_en_John_Scholing_van_de_band_Stranger_tijdens_hobnob_2018.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 148307548,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10195",
       "title": "File:Interview met Wouter Pols van Magic Moon bij Hobnob 2018.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_met_Wouter_Pols_van_Magic_Moon_bij_Hobnob_2018.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Interview_met_Wouter_Pols_van_Magic_Moon_bij_Hobnob_2018.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 111427945,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10196",
       "title": "File:Interview met Joey Vos en Noah Ralph van AUFGLAUFT bij Hobnob 2018.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_met_Joey_Vos_en_Noah_Ralph_van_AUFGLAUFT_bij_Hobnob_2018.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/24/Interview_met_Joey_Vos_en_Noah_Ralph_van_AUFGLAUFT_bij_Hobnob_2018.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 154311242,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10197",
       "title": "File:An Interview with Brian Ellison - Libertarian for U.S. Senate (HD) - 11-08-2017 (HD).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:An_Interview_with_Brian_Ellison_-_Libertarian_for_U.S._Senate_(HD)_-_11-08-2017_(HD).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b6/An_Interview_with_Brian_Ellison_-_Libertarian_for_U.S._Senate_%28HD%29_-_11-08-2017_%28HD%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 555340617,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10198",
       "title": "File:Full Lanny Davis Interview- Michael Cohen Was 'Never, Ever' In Prague - MTP Daily - MSNBC.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Full_Lanny_Davis_Interview-_Michael_Cohen_Was_%27Never%2C_Ever%27_In_Prague_-_MTP_Daily_-_MSNBC.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Full_Lanny_Davis_Interview-_Michael_Cohen_Was_%27Never%2C_Ever%27_In_Prague_-_MTP_Daily_-_MSNBC.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 182449602,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10200",
       "title": "File:WI Senator Jennifer Shilling interview after Labor Day Parade 2011 La Crosse WI.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:WI_Senator_Jennifer_Shilling_interview_after_Labor_Day_Parade_2011_La_Crosse_WI.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/WI_Senator_Jennifer_Shilling_interview_after_Labor_Day_Parade_2011_La_Crosse_WI.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 14637527,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10201",
       "title": "File:Das ABC des Freien Wissens - S=Sprachgewalt. Interview mit Anatol Stefanowitsch.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Das_ABC_des_Freien_Wissens_-_S%3DSprachgewalt._Interview_mit_Anatol_Stefanowitsch.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Das_ABC_des_Freien_Wissens_-_S%3DSprachgewalt._Interview_mit_Anatol_Stefanowitsch.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 25929582,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10202",
       "title": "File:Gayle McLaughlin for Lt. Governor 2018- an interview, part 1 of 2.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Gayle_McLaughlin_for_Lt._Governor_2018-_an_interview%2C_part_1_of_2.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Gayle_McLaughlin_for_Lt._Governor_2018-_an_interview%2C_part_1_of_2.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 94829551,
       "width": 850,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10207",
       "title": "File:Beehive Classic- Christian McCaffrey (Valor Christian Eagles) post-game interview 09-01-12.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Beehive_Classic-_Christian_McCaffrey_(Valor_Christian_Eagles)_post-game_interview_09-01-12.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Beehive_Classic-_Christian_McCaffrey_%28Valor_Christian_Eagles%29_post-game_interview_09-01-12.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 20700786,
       "width": 854,
       "height": 478,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10209",
       "title": "File:Zondag met Lubach houdt de wereld voor de gek, interview met Arjen Lubach.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Zondag_met_Lubach_houdt_de_wereld_voor_de_gek%2C_interview_met_Arjen_Lubach.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/81/Zondag_met_Lubach_houdt_de_wereld_voor_de_gek%2C_interview_met_Arjen_Lubach.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 35362608,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10211",
       "title": "File:Een OER-Hollands landschap - video-interview Bert van der Zwaan, rector magnificus UU.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Een_OER-Hollands_landschap_-_video-interview_Bert_van_der_Zwaan%2C_rector_magnificus_UU.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Een_OER-Hollands_landschap_-_video-interview_Bert_van_der_Zwaan%2C_rector_magnificus_UU.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 30984665,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10213",
       "title": "File:Siman Tov Abraham Testimony on the Identity of Assyrian Jews.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Siman_Tov_Abraham_Testimony_on_the_Identity_of_Assyrian_Jews.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/Siman_Tov_Abraham_Testimony_on_the_Identity_of_Assyrian_Jews.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 72165045,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-speech",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "testimony_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10215",
       "title": "File:Interview by Rupika Sharma with Abhinava Srivastava (Partnerships Working Group member).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_by_Rupika_Sharma_with_Abhinava_Srivastava_(Partnerships_Working_Group_member).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/Interview_by_Rupika_Sharma_with_Abhinava_Srivastava_%28Partnerships_Working_Group_member%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 156599785,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10216",
       "title": "File:Interview with a Witchfinder General - Emma Carroll on the Map of Accused Witches in Scotland Wikidata project.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_a_Witchfinder_General_-_Emma_Carroll_on_the_Map_of_Accused_Witches_in_Scotland_Wikidata_project.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/97/Interview_with_a_Witchfinder_General_-_Emma_Carroll_on_the_Map_of_Accused_Witches_in_Scotland_Wikidata_project.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 68297555,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10218",
       "title": "File:Das ABC des Freien Wissens - S=Sprachgewalt. Interview mit Anke Domscheit-Berg - YouTube.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Das_ABC_des_Freien_Wissens_-_S%3DSprachgewalt._Interview_mit_Anke_Domscheit-Berg_-_YouTube.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Das_ABC_des_Freien_Wissens_-_S%3DSprachgewalt._Interview_mit_Anke_Domscheit-Berg_-_YouTube.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 26001146,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10223",
       "title": "File:Raisha and Rima interview for Wikidata Week (2020-10-26 at 02 07 GMT-7).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Raisha_and_Rima_interview_for_Wikidata_Week_(2020-10-26_at_02_07_GMT-7).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Raisha_and_Rima_interview_for_Wikidata_Week_%282020-10-26_at_02_07_GMT-7%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 328834631,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10224",
       "title": "File:Interview with family members of Public Safety Act detainees in Jammu and Kashmir (union territory).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_family_members_of_Public_Safety_Act_detainees_in_Jammu_and_Kashmir_(union_territory).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Interview_with_family_members_of_Public_Safety_Act_detainees_in_Jammu_and_Kashmir_%28union_territory%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 64812831,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10226",
       "title": "File:How Andrew Yang Will Save America (INTERVIEW) 2020 Presidential Candidate - Fung Bros.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:How_Andrew_Yang_Will_Save_America_(INTERVIEW)_2020_Presidential_Candidate_-_Fung_Bros.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/How_Andrew_Yang_Will_Save_America_%28INTERVIEW%29_2020_Presidential_Candidate_-_Fung_Bros.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 269216078,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10233",
       "title": "File:Video clips of interview of a beneficiary with free monthly ration distribution for jobless blind persons-Kolkata-West Bengal-August 2021 VID 20210801 130719.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_clips_of_interview_of_a_beneficiary_with_free_monthly_ration_distribution_for_jobless_blind_persons-Kolkata-West_Bengal-August_2021_VID_20210801_130719.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Video_clips_of_interview_of_a_beneficiary_with_free_monthly_ration_distribution_for_jobless_blind_persons-Kolkata-West_Bengal-August_2021_VID_20210801_130719.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 112792375,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10234",
       "title": "File:Video clips of interview of a beneficiary with free monthly ration distribution for jobless blind persons-Kolkata-West Bengal-August 2021 VID 20210801 130916.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_clips_of_interview_of_a_beneficiary_with_free_monthly_ration_distribution_for_jobless_blind_persons-Kolkata-West_Bengal-August_2021_VID_20210801_130916.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Video_clips_of_interview_of_a_beneficiary_with_free_monthly_ration_distribution_for_jobless_blind_persons-Kolkata-West_Bengal-August_2021_VID_20210801_130916.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 230905160,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10235",
       "title": "File:Video clips of interview of a beneficiary with free monthly ration distribution for blind persons VID 20210829 122915.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_clips_of_interview_of_a_beneficiary_with_free_monthly_ration_distribution_for_blind_persons_VID_20210829_122915.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Video_clips_of_interview_of_a_beneficiary_with_free_monthly_ration_distribution_for_blind_persons_VID_20210829_122915.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 78466476,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10236",
       "title": "File:Getting to know Tito Jackson an interview by Juan Perfetti for the Dorchester Post.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Getting_to_know_Tito_Jackson_an_interview_by_Juan_Perfetti_for_the_Dorchester_Post.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/93/Getting_to_know_Tito_Jackson_an_interview_by_Juan_Perfetti_for_the_Dorchester_Post.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 305640280,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10237",
       "title": "File:Interview in English of visually challenged individual about losing job due to COVID-19 pandemic-outstation issue-Kolkata-West Bengal-September 2021-VID 20210905 143847.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_in_English_of_visually_challenged_individual_about_losing_job_due_to_COVID-19_pandemic-outstation_issue-Kolkata-West_Bengal-September_2021-VID_20210905_143847.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Interview_in_English_of_visually_challenged_individual_about_losing_job_due_to_COVID-19_pandemic-outstation_issue-Kolkata-West_Bengal-September_2021-VID_20210905_143847.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 40057329,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10239",
       "title": "File:Mathematical Neuroscience and Applications - An interview with Olivier Faugeras (long version)-fvfQ0laS4m8.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Mathematical_Neuroscience_and_Applications_-_An_interview_with_Olivier_Faugeras_(long_version)-fvfQ0laS4m8.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/22/Mathematical_Neuroscience_and_Applications_-_An_interview_with_Olivier_Faugeras_%28long_version%29-fvfQ0laS4m8.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 34817499,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10240",
       "title": "File:Mathematical Neuroscience and Applications - An interview with Olivier Faugeras (short version)-zEWxG1LtYBA.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Mathematical_Neuroscience_and_Applications_-_An_interview_with_Olivier_Faugeras_(short_version)-zEWxG1LtYBA.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/58/Mathematical_Neuroscience_and_Applications_-_An_interview_with_Olivier_Faugeras_%28short_version%29-zEWxG1LtYBA.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 18231394,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10241",
       "title": "File:Attardi CMM Interview.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Attardi_CMM_Interview.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Attardi_CMM_Interview.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 306517596,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10242",
       "title": "File:INTERVIEW - Laura Daydie de la fondation 30 Millions d’Amis - JGame4Animals - Jean Massiet.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:INTERVIEW_-_Laura_Daydie_de_la_fondation_30_Millions_d%E2%80%99Amis_-_JGame4Animals_-_Jean_Massiet.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/57/INTERVIEW_-_Laura_Daydie_de_la_fondation_30_Millions_d%E2%80%99Amis_-_JGame4Animals_-_Jean_Massiet.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 303788848,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10243",
       "title": "File:Interview de la Ministre de la Culture, des Arts et du tourisme, Mme Thiombiano Elise.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_de_la_Ministre_de_la_Culture%2C_des_Arts_et_du_tourisme%2C_Mme_Thiombiano_Elise.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Interview_de_la_Ministre_de_la_Culture%2C_des_Arts_et_du_tourisme%2C_Mme_Thiombiano_Elise.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 31503712,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10244",
       "title": "File:Arctic Art+Feminism Liisa-Rávná Finbog interview.mpg",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Arctic_Art%2BFeminism_Liisa-R%C3%A1vn%C3%A1_Finbog_interview.mpg",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Arctic_Art%2BFeminism_Liisa-R%C3%A1vn%C3%A1_Finbog_interview.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/mpeg",
-      "bytes": 4058335236,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10245",
       "title": "File:Women's History Month 2021 - Interview with Victoria Leonard from the Women's Classics Committee.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Women%27s_History_Month_2021_-_Interview_with_Victoria_Leonard_from_the_Women%27s_Classics_Committee.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/Women%27s_History_Month_2021_-_Interview_with_Victoria_Leonard_from_the_Women%27s_Classics_Committee.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 57842929,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10246",
       "title": "File:Fars News Agency interview with Majid Noury about arrest of his father.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Fars_News_Agency_interview_with_Majid_Noury_about_arrest_of_his_father.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Fars_News_Agency_interview_with_Majid_Noury_about_arrest_of_his_father.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 36443077,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10247",
       "title": "File:Fars News Agency interview with Majid Noury about treatment with his father.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Fars_News_Agency_interview_with_Majid_Noury_about_treatment_with_his_father.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Fars_News_Agency_interview_with_Majid_Noury_about_treatment_with_his_father.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 53968000,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10248",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Iraj Mesdaghi (2021-08-10).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_(2021-08-10).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_%282021-08-10%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 23072875,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10249",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Ghita Hadding Wiberg (2021-08-12).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Ghita_Hadding_Wiberg_(2021-08-12).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Ghita_Hadding_Wiberg_%282021-08-12%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 8380920,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10250",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Mokhtar Shalalvand (2021-11-23).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Mokhtar_Shalalvand_(2021-11-23).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Mokhtar_Shalalvand_%282021-11-23%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 30246008,
       "width": 848,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10251",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Hossein Maleki (2022-05-04).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Hossein_Maleki_(2022-05-04).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Hossein_Maleki_%282022-05-04%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 50060735,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10252",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Mokhtar Shalalvand (2021-11-25).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Mokhtar_Shalalvand_(2021-11-25).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Mokhtar_Shalalvand_%282021-11-25%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 53128614,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10253",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Iraj Mesdaghi (2022-05-02).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_(2022-05-02).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_%282022-05-02%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 79707043,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10254",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Roum Afsham (2022-05-02).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Roum_Afsham_(2022-05-02).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Roum_Afsham_%282022-05-02%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 54358487,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10255",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Esmat Talebi (2021-11-23).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Esmat_Talebi_(2021-11-23).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Esmat_Talebi_%282021-11-23%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 19798004,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10256",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Siamak Naderi (2021-11-26).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Siamak_Naderi_(2021-11-26).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/93/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Siamak_Naderi_%282021-11-26%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 22980424,
       "width": 848,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10257",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Vida Rostamalipour (2022-03-09).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Vida_Rostamalipour_(2022-03-09).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Vida_Rostamalipour_%282022-03-09%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 17830284,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10258",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Iraj Mesdaghi (2022-03-09).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_(2022-03-09).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_%282022-03-09%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 30293727,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10259",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Kenneth Lewis (2021-11-25).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Kenneth_Lewis_(2021-11-25).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Kenneth_Lewis_%282021-11-25%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 13926798,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10260",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Esmat Talebi (2022-03-09).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Esmat_Talebi_(2022-03-09).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Esmat_Talebi_%282022-03-09%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 27080548,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10261",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Laleh Bazargan (2022-03-10).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Laleh_Bazargan_(2022-03-10).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Laleh_Bazargan_%282022-03-10%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 34036693,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10262",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Laleh Bazargan (2021-11-25).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Laleh_Bazargan_(2021-11-25).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Laleh_Bazargan_%282021-11-25%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 235604317,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10263",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Bengt Hesselberg (2022-05-05).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Bengt_Hesselberg_(2022-05-05).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Bengt_Hesselberg_%282022-05-05%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 15427709,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10264",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Göran Hjalmarsson (2021-11-25).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_G%C3%B6ran_Hjalmarsson_(2021-11-25).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_G%C3%B6ran_Hjalmarsson_%282021-11-25%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 9502971,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10265",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Göran Hjalmarsson (2021-11-23).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_G%C3%B6ran_Hjalmarsson_(2021-11-23).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/60/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_G%C3%B6ran_Hjalmarsson_%282021-11-23%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 4289592,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10266",
       "title": "File:Trial of Hamid Noury - Radio Zamaneh interview with Iraj Mesdaghi (2021-08-25).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_(2021-08-25).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/Trial_of_Hamid_Noury_-_Radio_Zamaneh_interview_with_Iraj_Mesdaghi_%282021-08-25%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 29382884,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10267",
       "title": "File:Esmaeil Omidi speaking about repeated mentions of Mahmoud Eskandari by Ali-Akbar Zamani in IRIB's interview - Mehr News Agency.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Esmaeil_Omidi_speaking_about_repeated_mentions_of_Mahmoud_Eskandari_by_Ali-Akbar_Zamani_in_IRIB%27s_interview_-_Mehr_News_Agency.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Esmaeil_Omidi_speaking_about_repeated_mentions_of_Mahmoud_Eskandari_by_Ali-Akbar_Zamani_in_IRIB%27s_interview_-_Mehr_News_Agency.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 122415628,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10268",
       "title": "File:PART 1 - The political economy of food price policy - an interview with Per Pinstrup-Andersen.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:PART_1_-_The_political_economy_of_food_price_policy_-_an_interview_with_Per_Pinstrup-Andersen.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/PART_1_-_The_political_economy_of_food_price_policy_-_an_interview_with_Per_Pinstrup-Andersen.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 164888087,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10269",
       "title": "File:Tasnim News Agency - Interview with General Ali Kouhestani about IRGC Ground Force new equipment.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Interview_with_General_Ali_Kouhestani_about_IRGC_Ground_Force_new_equipment.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Tasnim_News_Agency_-_Interview_with_General_Ali_Kouhestani_about_IRGC_Ground_Force_new_equipment.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 854362166,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10270",
       "title": "File:Tasnim News Agency - Interview with Admiral Bagheri about missile boat Separ.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Interview_with_Admiral_Bagheri_about_missile_boat_Separ.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Tasnim_News_Agency_-_Interview_with_Admiral_Bagheri_about_missile_boat_Separ.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 14111700,
       "width": 854,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10271",
       "title": "File:Tasnim News Agency - Interview with judiciary spokesman about Mahsa Amini's legal case.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Interview_with_judiciary_spokesman_about_Mahsa_Amini%27s_legal_case.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Tasnim_News_Agency_-_Interview_with_judiciary_spokesman_about_Mahsa_Amini%27s_legal_case.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 471861989,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10272",
       "title": "File:Tasnim News Agency - Report from location of Ahvaz terrorist attack and interview with a witness.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Report_from_location_of_Ahvaz_terrorist_attack_and_interview_with_a_witness.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Tasnim_News_Agency_-_Report_from_location_of_Ahvaz_terrorist_attack_and_interview_with_a_witness.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 173194074,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10273",
       "title": "File:Tasnim News Agency - Interview with General Sadegh Hosseini about 2020 military exercise in Kurdistan.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Interview_with_General_Sadegh_Hosseini_about_2020_military_exercise_in_Kurdistan.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Tasnim_News_Agency_-_Interview_with_General_Sadegh_Hosseini_about_2020_military_exercise_in_Kurdistan.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 80180207,
       "width": 1080,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10274",
       "title": "File:Tasnim News Agency - Interview with General Mohammad-Taghi Osanlu about 2020 military exercise in Kurdistan.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Interview_with_General_Mohammad-Taghi_Osanlu_about_2020_military_exercise_in_Kurdistan.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Tasnim_News_Agency_-_Interview_with_General_Mohammad-Taghi_Osanlu_about_2020_military_exercise_in_Kurdistan.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 119968290,
       "width": 1080,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10275",
       "title": "File:Iranian national TV interview with Morteza Motahari about the notion of \"Islamic Republic\" (part one).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Iranian_national_TV_interview_with_Morteza_Motahari_about_the_notion_of_%22Islamic_Republic%22_(part_one).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Iranian_national_TV_interview_with_Morteza_Motahari_about_the_notion_of_%22Islamic_Republic%22_%28part_one%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 128962529,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10276",
       "title": "File:Iranian national TV interview with Morteza Motahari about the notion of \"Islamic Republic\" (part two).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Iranian_national_TV_interview_with_Morteza_Motahari_about_the_notion_of_%22Islamic_Republic%22_(part_two).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Iranian_national_TV_interview_with_Morteza_Motahari_about_the_notion_of_%22Islamic_Republic%22_%28part_two%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 101573023,
       "width": 640,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10278",
       "title": "File:Tasnim News Agency - Interview with Hassan Sadeghi, Deputy Secretary-General of the Worker House.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Tasnim_News_Agency_-_Interview_with_Hassan_Sadeghi%2C_Deputy_Secretary-General_of_the_Worker_House.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Tasnim_News_Agency_-_Interview_with_Hassan_Sadeghi%2C_Deputy_Secretary-General_of_the_Worker_House.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 31192807,
       "width": 854,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 1.0,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10345",
       "title": "File:WikidataCon 2017 - Keynote 2 Michael Kreil datajournalist at Data Sciences and Stories.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:WikidataCon_2017_-_Keynote_2_Michael_Kreil_datajournalist_at_Data_Sciences_and_Stories.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/WikidataCon_2017_-_Keynote_2_Michael_Kreil_datajournalist_at_Data_Sciences_and_Stories.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 80353571,
       "width": 1024,
       "height": 576,
       "sourceKind": "public-speech",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "keynote_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.98,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10391",
       "title": "File:Mauritius President Gurib-Fakim Interview.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Mauritius_President_Gurib-Fakim_Interview.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Mauritius_President_Gurib-Fakim_Interview.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 17240539,
       "width": 854,
       "height": 480,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.92,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10403",
       "title": "File:NASA Interview Opportunity- Ready for Takeoff - Trailblazing Satellite Will Kick Off New Era Of Earth Observations (SVS14844 - Karen St Germain).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:NASA_Interview_Opportunity-_Ready_for_Takeoff_-_Trailblazing_Satellite_Will_Kick_Off_New_Era_Of_Earth_Observations_(SVS14844_-_Karen_St_Germain).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/NASA_Interview_Opportunity-_Ready_for_Takeoff_-_Trailblazing_Satellite_Will_Kick_Off_New_Era_Of_Earth_Observations_%28SVS14844_-_Karen_St_Germain%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 70331548,
       "width": 1280,
       "height": 720,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.92,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10405",
       "title": "File:NASA Interview Opportunity- Two Missions, One Rocket- One Shared Goal (SVS14783 - SPHEREX MISSION EXTENDED QUESTIONS BROLL22125 copy).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:NASA_Interview_Opportunity-_Two_Missions%2C_One_Rocket-_One_Shared_Goal_(SVS14783_-_SPHEREX_MISSION_EXTENDED_QUESTIONS_BROLL22125_copy).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/NASA_Interview_Opportunity-_Two_Missions%2C_One_Rocket-_One_Shared_Goal_%28SVS14783_-_SPHEREX_MISSION_EXTENDED_QUESTIONS_BROLL22125_copy%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 19562405,
       "width": 1920,
       "height": 540,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.92,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10407",
       "title": "File:NASA Interview Opportunity- Ready for Takeoff - Trailblazing Satellite Will Kick Off New Era Of Earth Observations (SVS14844 - Karen St Germain 2).webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:NASA_Interview_Opportunity-_Ready_for_Takeoff_-_Trailblazing_Satellite_Will_Kick_Off_New_Era_Of_Earth_Observations_(SVS14844_-_Karen_St_Germain_2).webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2d/NASA_Interview_Opportunity-_Ready_for_Takeoff_-_Trailblazing_Satellite_Will_Kick_Off_New_Era_Of_Earth_Observations_%28SVS14844_-_Karen_St_Germain_2%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 102674135,
       "width": 1920,
       "height": 1080,
       "sourceKind": "public-interview",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "interview_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.92,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10477",
       "title": "File:Sumana-Harihareswara-wikicon-2014-keynote.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Sumana-Harihareswara-wikicon-2014-keynote.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Sumana-Harihareswara-wikicon-2014-keynote.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 186865339,
       "width": 640,
       "height": 480,
       "sourceKind": "public-speech",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "keynote_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.72,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10479",
       "title": "File:Keynote Speakers IV - Applications - ContentMine and WikiData.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Keynote_Speakers_IV_-_Applications_-_ContentMine_and_WikiData.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/23/Keynote_Speakers_IV_-_Applications_-_ContentMine_and_WikiData.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 51088560,
       "width": 480,
       "height": 270,
       "sourceKind": "public-speech",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "keynote_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.72,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10481",
       "title": "File:Keynote Speakers IV - Applications - Creating an Open Knowledge Society.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Keynote_Speakers_IV_-_Applications_-_Creating_an_Open_Knowledge_Society.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/24/Keynote_Speakers_IV_-_Applications_-_Creating_an_Open_Knowledge_Society.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 42724561,
       "width": 480,
       "height": 270,
       "sourceKind": "public-speech",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "keynote_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.72,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     },
     {
       "referenceId": "ref-10507",
       "title": "File:Wikimania 2023 - Archival Speech Data For The Win.webm",
       "pageUrl": "https://commons.wikimedia.org/wiki/File:Wikimania_2023_-_Archival_Speech_Data_For_The_Win.webm",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Wikimania_2023_-_Archival_Speech_Data_For_The_Win.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "mime": "video/webm",
-      "bytes": 187617864,
       "width": 1077,
       "height": 606,
       "sourceKind": "public-speech",
-      "metadataAuditStatus": "accepted-production",
-      "auditEvidence": "title",
-      "auditReasons": [
-        "speech_title"
-      ],
       "speechValidationStatus": "pending-lazy-index",
       "wordBoundaryStatus": "not-applicable-until-selected",
-      "englishSpeechStatus": null,
-      "speechValidationReason": null,
-      "wordBoundaryReason": null,
-      "allAlignmentFields": {
-        "speechPriority": 0.72,
-        "speechValidationStatus": "pending-lazy-index",
-        "alignmentStatus": "pending-lazy-index",
-        "wordBoundaryStatus": "not-applicable-until-selected"
-      }
+      "alignmentStatus": "pending-lazy-index"
     }
   ]
 }
