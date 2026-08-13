@@ -35,7 +35,7 @@
     const earthTab=document.querySelector('[data-subject="earth"]');if(!earthTab)throw new Error('earth subject tab missing');earthTab.click();await sleep(280);
     const refQA=typeof window.v4RefValidateData==='function'?window.v4RefValidateData():null;
     check('reference map data validates to 276 numbered items',Boolean(refQA?.ok&&refQA.total===276),JSON.stringify(refQA));
-    check('six photographed chapter maps exist',document.querySelectorAll('[data-v4ref-chapter]').length===6);
+    check('six photographed chapter maps exist',document.querySelectorAll('.v4ref-chapter-nav [data-v4ref-chapter]').length===6);
     check('chapter one reproduces exactly 48 numbered recall items',document.querySelectorAll('.v4ref-blank-item').length===48);
     check('source spread uses two fixed paper pages',document.querySelectorAll('.v4ref-paper').length===2&&Boolean(document.querySelector('.v4ref-gutter')));
     check('source spread uses scalable fixed canvas',Boolean(document.querySelector('[data-v4ref-canvas]')&&document.querySelector('[data-v4ref-viewport]')));
@@ -46,7 +46,7 @@
     check('pan zoom controls exist',document.querySelectorAll('[data-v4ref-zoom]').length===4);
     const learn=document.querySelector('[data-v4ref-mode="learn"]');learn?.click();await sleep(220);check('learn mode reveals completed concepts in place',Boolean(document.querySelector('.v4ref-learn-answer')));
     document.querySelector('[data-v4ref-mode="recall"]')?.click();await sleep(220);
-    document.querySelector('[data-v4ref-chapter="5"]')?.click();await sleep(240);
+    document.querySelector('.v4ref-chapter-nav [data-v4ref-chapter="5"]')?.click();await sleep(240);
     check('chapter five has exactly 60 numbered recall items',document.querySelectorAll('.v4ref-blank-item').length===60);
     check('chapter five preserves cross-page source order',Boolean(window.v4RefValidateData?.().ch5OrderOk));
     const ch5Nums=[...document.querySelectorAll('.v4ref-blank-item')].map(x=>Number(x.dataset.v4refItem));check('chapter five contains every number 1 through 60',Array.from({length:60},(_,i)=>i+1).every(n=>ch5Nums.includes(n)));
