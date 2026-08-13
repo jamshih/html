@@ -21,14 +21,16 @@
 
     await navigatePage('mindmap');
     check('mind map curriculum renders',document.body.innerText.includes('個核心章節'));
-    check('visual chapter board renders',Boolean(document.querySelector('.v4-stage')&&document.querySelector('.v4-hero-svg')));
-    check('concepts are connected as a flow',document.querySelectorAll('.v4-flow-node').length>=2&&Boolean(document.querySelector('.v4-flow-lines path')));
-    check('all ten syllabus subjects are visible',document.querySelectorAll('.v4-subject-progress').length===10);
-    check('visual board uses curriculum sections',document.querySelectorAll('[data-v4-section]').length>=1);
-    const firstNode=document.querySelector('[data-v4-node]');if(firstNode){firstNode.click();await sleep(120)}
-    check('selected concept has connected detail',Boolean(document.querySelector('.v4-detail-flow')&&document.querySelector('.v4-detail-main')));
+    check('textbook chapter sheet renders',Boolean(document.querySelector('.v4tb-sheet')&&document.querySelector('.v4tb-book-header')&&document.querySelector('.v4-hero-svg')));
+    check('whole chapter concepts share one connected sheet',document.querySelectorAll('.v4tb-branch').length>=1&&document.querySelectorAll('.v4tb-recall').length>=2&&Boolean(document.querySelector('.v4tb-route')));
+    check('all ten syllabus subjects are available',new Set([...document.querySelectorAll('[data-subject]')].map(x=>x.dataset.subject).filter(Boolean)).size===10);
+    check('chapter route uses curriculum sections',document.querySelectorAll('[data-v4tb-section]').length>=1);
+    const integratedBlank=document.querySelector('.v4tb-slot .v4tb-answer,.v4tb-flow-points .v4tb-answer');
+    check('answer blank is integrated into the concept visual',Boolean(integratedBlank&&integratedBlank.closest('.v4tb-branch')));
+    const svgText=[...document.querySelectorAll('.v4tb-center-visual svg text,.v4tb-flow-visual svg text')];
+    check('visual does not reveal labels before recall',svgText.length===0);
     const hint=[...document.querySelectorAll('[data-mind-hint]')].find(x=>x.offsetParent!==null);if(hint){hint.click();await sleep(220)}check('progressive hint increments',document.body.innerText.includes('提示 1/3'));
-    const nextSection=document.querySelector('[data-v4-next-section]');if(nextSection){const before=document.querySelector('.v4-section-ring .active')?.textContent;nextSection.click();await sleep(180);const after=document.querySelector('.v4-section-ring .active')?.textContent;check('section flow continues',!before||!after||before!==after)}else check('section flow continues',true,'single-section chapter');
+    check('all chapter sections remain visible together',document.querySelectorAll('.v4tb-branch').length===document.querySelectorAll('[data-v4tb-section]').length);
 
     await navigatePage('review');const truthMode=[...document.querySelectorAll('[data-review-mode="truth"]')].find(x=>x.offsetParent!==null);if(!truthMode)throw new Error('truth review mode missing');truthMode.click();await sleep(220);check('first-class truth review renders',document.body.innerText.includes('修正後正確敘述'));check('Chinese cloze exists',document.body.innerText.includes('＿＿＿＿'));
     await navigatePage('notebook');const row=[...document.querySelectorAll('[data-problem]')].find(x=>x.offsetParent!==null);if(row&&!document.body.innerText.includes('你先把錯誤敘述改成正確的')){row.click();await sleep(220)}check('student-first correction UI',document.body.innerText.includes('你先把錯誤敘述改成正確的'));check('correction validation available',Boolean(document.querySelector('[data-validate-correction]')));check('real paper canvas available',Boolean(document.getElementById('drawCanvas')));
