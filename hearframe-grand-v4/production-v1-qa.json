@@ -1,0 +1,41 @@
+{
+  "version": "production-v1",
+  "passed": true,
+  "fullDecodePassed": true,
+  "durationSeconds": 34.68,
+  "expectedDurationRangeSeconds": [
+    30,
+    45
+  ],
+  "video": {
+    "index": 0,
+    "codec_name": "h264",
+    "codec_type": "video",
+    "width": 640,
+    "height": 360,
+    "pix_fmt": "yuv420p"
+  },
+  "audio": {
+    "index": 1,
+    "codec_name": "aac",
+    "codec_type": "audio",
+    "sample_rate": "48000",
+    "channels": 2
+  },
+  "blackAndSilenceScanExecuted": true,
+  "blackdetectEvents": 0,
+  "silencedetectEvents": 0,
+  "finalMixLoudness": {
+    "input_i": "-18.18",
+    "input_tp": "-1.49",
+    "input_lra": "5.00",
+    "input_thresh": "-30.01",
+    "output_i": "-16.33",
+    "output_tp": "-1.50",
+    "output_lra": "4.50",
+    "output_thresh": "-28.23",
+    "normalization_type": "dynamic",
+    "target_offset": "0.33"
+  },
+  "failures": []
+}
