@@ -117,7 +117,6 @@ jobs:
         run: |
           set -euxo pipefail
           cd /tmp/hfprod
-          # Rebuilding PTS here is intentional; stream-copy concatenation exposed non-monotonic timestamps.
           ffmpeg -hide_banner -loglevel warning -y -i clip1.mp4 -i clip2.mp4 -i clip3.mp4 \
             -filter_complex "[0:v]setpts=PTS-STARTPTS[v0];[0:a]asetpts=PTS-STARTPTS[a0];[1:v]setpts=PTS-STARTPTS[v1];[1:a]asetpts=PTS-STARTPTS[a1];[2:v]setpts=PTS-STARTPTS[v2];[2:a]asetpts=PTS-STARTPTS[a2];[v0][a0][v1][a1][v2][a2]concat=n=3:v=1:a=1[v][a]" \
             -map '[v]' -map '[a]' -r 25 -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p \
@@ -182,6 +181,7 @@ jobs:
           set -euxo pipefail
           git config user.name "hearframe-production-builder"
           git config user.email "actions@users.noreply.github.com"
+          git pull --rebase origin main
           git add hearframe-grand-v4/production-v1.mp4 hearframe-grand-v4/production-v1-qa.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Render Hearframe production proof v1"
