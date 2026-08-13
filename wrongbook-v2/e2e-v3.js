@@ -32,6 +32,26 @@
     const hint=[...document.querySelectorAll('[data-mind-hint]')].find(x=>x.offsetParent!==null);if(hint){hint.click();await sleep(220)}check('progressive hint increments',document.body.innerText.includes('提示 1/3'));
     check('all chapter sections remain visible together',document.querySelectorAll('.v4tb-branch').length===document.querySelectorAll('[data-v4tb-section]').length);
 
+    const earthTab=document.querySelector('[data-subject="earth"]');if(!earthTab)throw new Error('earth subject tab missing');earthTab.click();await sleep(280);
+    const refQA=typeof window.v4RefValidateData==='function'?window.v4RefValidateData():null;
+    check('reference map data validates to 276 numbered items',Boolean(refQA?.ok&&refQA.total===276),JSON.stringify(refQA));
+    check('six photographed chapter maps exist',document.querySelectorAll('[data-v4ref-chapter]').length===6);
+    check('chapter one reproduces exactly 48 numbered recall items',document.querySelectorAll('.v4ref-blank-item').length===48);
+    check('source spread uses two fixed paper pages',document.querySelectorAll('.v4ref-paper').length===2&&Boolean(document.querySelector('.v4ref-gutter')));
+    check('source spread uses scalable fixed canvas',Boolean(document.querySelector('[data-v4ref-canvas]')&&document.querySelector('[data-v4ref-viewport]')));
+    check('source spread has code-native scientific diagrams',document.querySelectorAll('.v4ref-diagram-svg').length>=3);
+    check('source spread has branch connectors and junction dots',Boolean(document.querySelector('.v4ref-global-lines path'))&&document.querySelectorAll('.v4ref-junction').length===48);
+    check('recall mode hides source answers behind inline inputs',document.querySelectorAll('[data-v4ref-input]').length>=48&&!document.querySelector('.v4ref-learn-answer'));
+    check('reference UI does not use photographed pages as background',![...document.querySelectorAll('img')].some(x=>/IMG_15\d\d/i.test(x.src||'')));
+    check('pan zoom controls exist',document.querySelectorAll('[data-v4ref-zoom]').length===4);
+    const learn=document.querySelector('[data-v4ref-mode="learn"]');learn?.click();await sleep(220);check('learn mode reveals completed concepts in place',Boolean(document.querySelector('.v4ref-learn-answer')));
+    document.querySelector('[data-v4ref-mode="recall"]')?.click();await sleep(220);
+    document.querySelector('[data-v4ref-chapter="5"]')?.click();await sleep(240);
+    check('chapter five has exactly 60 numbered recall items',document.querySelectorAll('.v4ref-blank-item').length===60);
+    check('chapter five preserves cross-page source order',Boolean(window.v4RefValidateData?.().ch5OrderOk));
+    const ch5Nums=[...document.querySelectorAll('.v4ref-blank-item')].map(x=>Number(x.dataset.v4refItem));check('chapter five contains every number 1 through 60',Array.from({length:60},(_,i)=>i+1).every(n=>ch5Nums.includes(n)));
+    document.querySelector('[data-v4ref-source="curriculum"]')?.click();await sleep(240);check('canonical 108 curriculum map remains available',Boolean(document.querySelector('.v4tb-sheet')));
+
     await navigatePage('review');const truthMode=[...document.querySelectorAll('[data-review-mode="truth"]')].find(x=>x.offsetParent!==null);if(!truthMode)throw new Error('truth review mode missing');truthMode.click();await sleep(220);check('first-class truth review renders',document.body.innerText.includes('修正後正確敘述'));check('Chinese cloze exists',document.body.innerText.includes('＿＿＿＿'));
     await navigatePage('notebook');const row=[...document.querySelectorAll('[data-problem]')].find(x=>x.offsetParent!==null);if(row&&!document.body.innerText.includes('你先把錯誤敘述改成正確的')){row.click();await sleep(220)}check('student-first correction UI',document.body.innerText.includes('你先把錯誤敘述改成正確的'));check('correction validation available',Boolean(document.querySelector('[data-validate-correction]')));check('real paper canvas available',Boolean(document.getElementById('drawCanvas')));
     check('AI handwriting guide controls',Boolean(document.querySelector('[data-action="guideStart"]')&&document.getElementById('aiGuideCanvas')));
