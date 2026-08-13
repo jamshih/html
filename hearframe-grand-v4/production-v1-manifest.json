@@ -1,0 +1,103 @@
+{
+  "version": "production-v1",
+  "mode": "cinematic_render",
+  "status": "milestone_1",
+  "editorialTheme": "Courage to stop waiting and act",
+  "compositionRule": "contiguous natural thoughts only",
+  "wordSpliceAllowed": false,
+  "expectedDurationSeconds": {"min": 30, "max": 45},
+  "sourcePolicy": {
+    "youtube_streamable": false,
+    "locally_renderable": true,
+    "reason": "This proof uses Wikimedia-hosted U.S. federal-government public-domain speech footage so the output can be locally cut, captioned, mixed and rendered into one MP4."
+  },
+  "sources": [
+    {
+      "id": "obama-farewell-2017",
+      "speaker": "Barack Obama",
+      "kind": "public_speech",
+      "title": "President Obama Farewell Speech",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:20170110_President_Obama_Farewell_Speech_HD.webm",
+      "mediaUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
+      "license": "public_domain_us_federal_government",
+      "youtube_streamable": false,
+      "locally_renderable": true
+    },
+    {
+      "id": "jfk-inaugural-1961",
+      "speaker": "John F. Kennedy",
+      "kind": "public_speech",
+      "title": "John F. Kennedy Inauguration Speech",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:John_F._Kennedy_Inauguration_Speech.ogv",
+      "mediaUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
+      "license": "public_domain_us_federal_government",
+      "youtube_streamable": false,
+      "locally_renderable": true
+    }
+  ],
+  "segments": [
+    {
+      "id": "recognition-change-needs-people",
+      "storyPhase": "recognition",
+      "speaker": "Barack Obama",
+      "sourceId": "obama-farewell-2017",
+      "sourceStart": 226.05,
+      "sourceEnd": 240.05,
+      "editorialReason": "A complete contiguous thought reframing change as participation rather than permission.",
+      "captions": [
+        {"start": 0.142, "end": 2.282, "text": "This is where I learned that"},
+        {"start": 2.278, "end": 5.718, "text": "change only happens when ordinary people get"},
+        {"start": 5.714, "end": 8.854, "text": "involved and they get engaged, and they come"},
+        {"start": 8.851, "end": 13.661, "text": "together to demand it."}
+      ]
+    },
+    {
+      "id": "possibility-believe-in-yours",
+      "storyPhase": "possibility",
+      "speaker": "Barack Obama",
+      "sourceId": "obama-farewell-2017",
+      "sourceStart": 3023.25,
+      "sourceEnd": 3031.7,
+      "editorialReason": "A complete contiguous thought shifts agency from the speaker to the listener.",
+      "captions": [
+        {"start": 0.203, "end": 3.673, "text": "I'm asking you to believe."},
+        {"start": 3.673, "end": 6.113, "text": "Not in my ability to bring about change"},
+        {"start": 6.109, "end": 8.209, "text": "— but in yours."}
+      ]
+    },
+    {
+      "id": "resolution-ask-what-you-can-do",
+      "storyPhase": "resolution",
+      "speaker": "John F. Kennedy",
+      "sourceId": "jfk-inaugural-1961",
+      "sourceStart": 833.05,
+      "sourceEnd": 845.25,
+      "editorialReason": "A complete contiguous closing thought turns motivation into action.",
+      "captions": [
+        {"start": 0.232, "end": 8.605, "text": "And so, my fellow Americans: ask not what your country can do for you—"},
+        {"start": 8.605, "end": 11.935, "text": "ask what you can do for your country."}
+      ]
+    }
+  ],
+  "render": {
+    "container": "mp4",
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "pixelFormat": "yuv420p",
+    "resolution": "640x360",
+    "audioSampleRate": 48000,
+    "fastStart": true,
+    "continuousBgm": "procedurally generated original ambient bed",
+    "dialoguePriority": "music sidechain-ducked beneath speech"
+  },
+  "qa": {
+    "fullDecodeRequired": true,
+    "durationRangeRequired": [30, 45],
+    "videoStreamRequired": true,
+    "audioStreamRequired": true,
+    "h264Required": true,
+    "aacRequired": true,
+    "yuv420pRequired": true,
+    "failClosed": true
+  }
+}
