@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Milestone 2 builder bootstrap with real sentence-semantic retrieval.
+"""Milestone 2 builder bootstrap with authentic thought-first semantic retrieval.
 
 The frozen core keeps the media/render/QA implementation reproducible. We load it
 as a module (so its main() does not auto-run), apply the Python 3.11 ASS syntax
-repair, then replace only the retrieval embedding/planner functions with a real
-sentence-transformer implementation before calling the core main().
+repair, then replace only the retrieval embedding/planner functions with an
+in-run TF-IDF + latent-semantic-analysis encoder using the already-approved
+scikit-learn dependency. The spoken material remains authentic corpus thoughts.
 """
 from __future__ import annotations
-import re, urllib.request
+import urllib.request
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import TruncatedSVD
+from sklearn.preprocessing import Normalizer
 
 CORE_COMMIT="f010624602d72f267ee3c6ba5086080d5cd7e0e4"
 CORE_URL=f"https://raw.githubusercontent.com/jamshih/html/{CORE_COMMIT}/.github/scripts/hearframe-m2-build.py"
@@ -28,14 +31,45 @@ code='\n'.join(patched)+'\n';compile(code,__file__,'exec')
 ns={'__name__':'hearframe_m2_core','__file__':__file__}
 exec(compile(code,__file__,'exec'),ns,ns)
 
-MODEL_NAME='sentence-transformers/all-MiniLM-L6-v2'
+MODEL_NAME='tfidf-lsa-v1'
+
+class SemanticEncoder:
+    def __init__(self,texts):
+        self.vectorizer=TfidfVectorizer(
+            lowercase=True,strip_accents='unicode',stop_words='english',
+            ngram_range=(1,2),sublinear_tf=True,max_features=24000,
+            token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z'’-]+\b"
+        )
+        sparse=self.vectorizer.fit_transform(texts)
+        limit=min(sparse.shape)
+        self.svd=None
+        if limit>=4:
+            n_components=min(128,limit-1)
+            self.svd=TruncatedSVD(n_components=n_components,algorithm='randomized',n_iter=7,random_state=17)
+            dense=self.svd.fit_transform(sparse)
+        else:
+            dense=sparse.toarray()
+        self.normalizer=Normalizer(copy=False)
+        self.normalizer.fit(dense)
+        self.dimensions=int(dense.shape[1])
+
+    def encode(self,texts,normalize_embeddings=True,batch_size=None,show_progress_bar=False,convert_to_numpy=True):
+        sparse=self.vectorizer.transform(texts)
+        dense=self.svd.transform(sparse) if self.svd is not None else sparse.toarray()
+        if normalize_embeddings:
+            dense=self.normalizer.transform(dense)
+        return np.asarray(dense,dtype=np.float32)
 
 def add_embeddings(thoughts):
-    model=SentenceTransformer(MODEL_NAME,device='cpu')
     texts=[t['transcript'] for t in thoughts]
-    X=model.encode(texts,normalize_embeddings=True,batch_size=64,show_progress_bar=True,convert_to_numpy=True)
+    model=SemanticEncoder(texts)
+    X=model.encode(texts,normalize_embeddings=True,convert_to_numpy=True)
     for i,t in enumerate(thoughts):
-        t['topic_embedding']={'model':MODEL_NAME,'dimensions':int(X.shape[1]),'values':[round(float(x),5) for x in X[i].tolist()]}
+        t['topic_embedding']={
+            'model':MODEL_NAME,
+            'dimensions':int(X.shape[1]),
+            'values':[round(float(x),5) for x in X[i].tolist()]
+        }
     return model,X
 
 def story_plan(prompt,thoughts,sources,model,X):
@@ -68,7 +102,7 @@ def story_plan(prompt,thoughts,sources,model,X):
         if best:
             score,src,t,parts=best;used.add(src['source_id'])
             selected.append({'stage':stage,'thought':t,'score':round(score,4),'scoreParts':{k:round(v,4) for k,v in parts.items()},
-              'semantic_reason':f"Semantic retrieval for {stage}: authentic complete {t['level']} matched the prompt/stage while adding a distinct speaker; alignment/quality/duration gates also passed."})
+              'semantic_reason':f"Latent semantic retrieval for {stage}: authentic complete {t['level']} matched the prompt/stage while adding a distinct speaker; alignment/quality/duration gates also passed."})
     for src in sources:
         if not src.get('pinned_thoughts'):continue
         candidates=[t for _,t in by_source.get(src['source_id'],[]) if t.get('pinned_stage')]
