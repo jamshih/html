@@ -2,32 +2,32 @@
 {
  const ch=EARTH_SEMANTIC_MAPS.find(x=>x.number===1);
  const node=id=>ch.nodes.find(n=>n.id===id),edge=id=>ch.relations.find(e=>e.id===id),fig=id=>ch.figures.find(f=>f.id===id);
- Object.assign(node('big-bang-theory'),{renderInMap:true,x:280,y:177,w:225,h:42,kind:'source-header',color:'#7666a8'});
+ Object.assign(node('big-bang-theory'),{renderInMap:true,x:280,y:174,w:225,h:42,kind:'source-header',color:'#7666a8'});
  Object.assign(node('hubble-evidence'),{renderInMap:true,x:74,y:236,w:293,h:114,kind:'source-plain',color:'#7568a5'});
  Object.assign(node('cmb-evidence'),{renderInMap:true,x:476,y:236,w:258,h:112,kind:'source-plain',color:'#7568a5'});
- Object.assign(node('singularity'),{renderInMap:true,x:247,y:553,w:84,h:84,kind:'source-plain',color:'#565653'});
- Object.assign(node('solar-nebula'),{renderInMap:true,label:'太陽系的形成',x:178,y:1188,w:235,h:46,kind:'source-header',color:'#5f7fae'});
+ Object.assign(node('singularity'),{renderInMap:true,x:248,y:557,w:82,h:82,kind:'source-plain',color:'#565653'});
+ Object.assign(node('solar-nebula'),{renderInMap:true,label:'太陽系的形成',x:178,y:1178,w:235,h:46,kind:'source-header',color:'#5f7fae'});
  const traces={
-  'c1-e1':['M392 388 H448','#7666a8',6,true],
-  'c1-e2':['M275 450 C262 430 250 412 250 392','#7666a8',6,true],
-  'c1-e3':['M328 593 H473','#55534f',18,false],
-  'c1-e4':['M473 593 H640','#657fae',18,false],
-  'c1-e5':['M640 593 H794','#657fae',18,false],
-  'c1-e6':['M794 593 H910','#67a16e',18,false],
-  'c1-e7':['M487 583 L552 510','#657fae',7,false],
-  'c1-e8':['M688 610 L262 674','#657fae',7,false],
-  'c1-e9':['M793 604 L723 670','#67a16e',7,false],
-  'c1-e11':['M607 892 L718 1037','#67a16e',7,false]
+  'c1-e1':['M397 388H447','#7666a8',6,true],
+  'c1-e2':['M276 449C263 430 252 411 251 391','#7666a8',6,true],
+  'c1-e3':['M329 592H473','#55534f',18,false],
+  'c1-e4':['M473 592H640','#657fae',18,false],
+  'c1-e5':['M640 592H794','#657fae',18,false],
+  'c1-e6':['M794 592H910','#67a16e',18,false],
+  'c1-e7':['M488 582L551 511','#657fae',7,false],
+  'c1-e8':['M690 610L264 674','#657fae',7,false],
+  'c1-e9':['M793 604L724 669','#67a16e',7,false],
+  'c1-e11':['M606 892L719 1036','#67a16e',7,false]
  };
  for(const [id,v] of Object.entries(traces)){const e=edge(id);Object.assign(e,{renderInMap:true,sourcePath:v[0],sourceColor:v[1],sourceWidth:v[2],sourceArrow:v[3],sourcePage:242})}
  const rects={
-  'p242-bigbang':[214,438,100,66],
-  'p242-guide':[65,405,115,98],
-  'p242-nebula':[128,760,270,112],
-  'p242-planets':[108,1015,345,105],
-  'p242-atmosphere1':[420,790,210,92],
-  'p242-hot-earth':[666,665,62,62],
-  'p242-diff':[718,1028,190,155]
+  'p242-bigbang':[220,446,100,70],
+  'p242-guide':[88,405,105,105],
+  'p242-nebula':[132,750,275,110],
+  'p242-planets':[108,1014,345,106],
+  'p242-atmosphere1':[420,786,210,94],
+  'p242-hot-earth':[662,658,60,60],
+  'p242-diff':[716,1016,190,166]
  };
  for(const [id,r] of Object.entries(rects)){const f=fig(id);Object.assign(f.sourceRect,{x:r[0],y:r[1],width:r[2],height:r[3]})}
 }
@@ -35,11 +35,11 @@
 // The strict photographed-page scaffold owns production p242. Patch only its local geometry;
 // semantic relations above remain data and are not used for automatic production routing.
 const v6P242StrictBase=window.v4Strict242;
-function v6P242MoveQuestion(html,n,x,y,w){
- const re=new RegExp(`(data-question="${n}" style="left:)[^;]+(;top:)[^;]+(;width:)[^%]+(%)`);
- return html.replace(re,`$1${x}%$2${y}%$3${w}$4`);
+function v6P242MoveQuestionPx(html,n,x,y,w){
+ const re=new RegExp(`(data-question="${n}" style=")[^"]+("?)`);
+ return html.replace(re,`$1left:${x}px;top:${y}px;width:${w}px$2`);
 }
-const V6_P242_SOURCE_LINES=`<svg class="v4strict-svg v6-p242-lines" viewBox="0 0 910 1270" aria-hidden="true"><defs><marker id="v6p242arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
+const V6_P242_SOURCE_LINES=`<svg class="v4strict-svg v6-p242-lines" viewBox="0 0 910 1270" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="v6p242arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
 <path class="purple" d="M397 388H447" marker-end="url(#v6p242arr)"/>
 <path class="purple" d="M276 449C263 430 252 411 251 391" marker-end="url(#v6p242arr)"/>
 <path class="spine dark" d="M329 592H473"/><circle class="node" cx="473" cy="592" r="8"/>
@@ -68,11 +68,15 @@ const V6_P242_EXTRA=`
 <div class="v6-p242-diff-label">形成地球分層結構</div>`;
 window.v4Strict242=function(ch,mode){
  let html=v6P242StrictBase(ch,mode);
- const pos={1:[11.4,44.1,21],2:[11.4,46.7,21],3:[11.4,49.2,21],4:[25.4,41.6,24],5:[36.3,35.7,20],6:[9.0,29.7,34],8:[8.1,18.6,31],9:[52.3,18.6,26],10:[60.8,39.7,29],11:[10.6,55.4,58],12:[11.4,74.7,28],13:[10.2,78.9,43],14:[11.0,88.1,38],15:[49.0,87.9,41],16:[46.2,62.1,23],17:[74.0,58.3,20],18:[55.2,69.0,31],19:[77.0,72.7,21],20:[77.0,77.7,21]};
- for(const [n,p] of Object.entries(pos))html=v6P242MoveQuestion(html,n,p[0],p[1],p[2]);
+ const pos={
+  1:[105,558,195],2:[105,590,195],3:[105,622,195],4:[230,526,225],5:[330,454,185],6:[82,377,330],
+  8:[74,236,293],9:[476,236,258],10:[550,503,255],11:[95,706,520],12:[108,946,245],13:[95,1000,390],
+  14:[102,1114,345],15:[448,1114,370],16:[420,790,210],17:[676,742,180],18:[555,868,290],19:[704,920,190],20:[704,980,190]
+ };
+ for(const [n,p] of Object.entries(pos))html=v6P242MoveQuestionPx(html,n,p[0],p[1],p[2]);
  html=html.replace(/<svg class="v4strict-svg"[\s\S]*?<\/svg>/,V6_P242_SOURCE_LINES);
- html=html.replace('left:34%;top:14.2%;width:25%','left:30.8%;top:13.9%;width:22%');
- html=html.replace('left:20%;top:93%;width:30%','left:19.5%;top:93.7%;width:23%');
+ html=html.replace(/style="--rc:#8170a6;left:[^"]+"/, 'style="--rc:#8170a6;left:280px;top:174px;width:198px"');
+ html=html.replace(/style="--rc:#667fae;left:[^"]+"/, 'style="--rc:#667fae;left:178px;top:1178px;width:207px"');
  html=html.replace('<div class="v4strict-footer">242</div>',`${V6_P242_EXTRA}<div class="v4strict-footer">242</div>`);
  return html;
 };
