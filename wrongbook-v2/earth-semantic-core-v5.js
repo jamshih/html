@@ -10,7 +10,9 @@ const EARTH_SEMANTIC_MAPS=[];
 
 function v5Chapter(number,title,pages){const ch={number,title,pages,nodes:[],relations:[],figures:[],rules:[],figureInventory:{}};EARTH_SEMANTIC_MAPS.push(ch);return ch}
 function v5Node(ch,id,page,label,x,y,w,h,color='#627fa6',kind='concept',opts={}){const n={id,page,label,x,y,w,h,color,kind,questionArea:opts.questionArea||{x,y:y+h+8,w,h:Math.max(70,opts.qh||120)},blankPattern:opts.blankPattern||'stack',purpose:opts.purpose||''};ch.nodes.push(n);return n}
-function v5Edge(ch,id,page,fromNodeId,toNodeId,relation,reason,color='#777',direction='forward',via=[]){ch.relations.push({id,page,fromNodeId,toNodeId,relation,direction,sourcePage:page,reason,color,via});}
+// Scientific relationship data is NOT a production drawing instruction. Source-trace pass defaults every semantic edge to data-only.
+// A later source-trace layer may explicitly set renderInMap=true and provide the traced printed path/appearance.
+function v5Edge(ch,id,page,fromNodeId,toNodeId,relation,reason,color='#777',direction='forward',via=[]){ch.relations.push({id,page,fromNodeId,toNodeId,relation,direction,sourcePage:page,reason,color,via,renderInMap:false,sourcePath:null,sourceColor:null,sourceWidth:null,sourceArrow:null,fromAnchor:null,toAnchor:null});}
 function v5Figure(ch,id,page,conceptIds,purpose,type,requiredParts,x,y,w,h,renderer){const f={id,sourcePage:page,conceptIds,purpose,type,requiredParts,sourceRect:{x,y,width:w,height:h},renderer};ch.figures.push(f);ch.figureInventory[page]=(ch.figureInventory[page]||0)+1;return f}
 function v5Rule(ch,id,conceptId,relationToConcept,placementReason,opts={}){ch.rules.push({id,conceptId,relationToConcept,placementReason,numbers:opts.numbers||null,page:opts.page||null,match:opts.match||null,priority:opts.priority||0});}
 function v5Nums(a,b){return Array.from({length:b-a+1},(_,i)=>a+i)}
