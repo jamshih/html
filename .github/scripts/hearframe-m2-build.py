@@ -10,7 +10,7 @@ three tightly scoped M2 corrections before executing it:
    loudness QA remains unchanged and fail-closed.
 """
 from __future__ import annotations
-import math, urllib.request
+import re, urllib.request
 import numpy as np
 from scipy.sparse import csr_matrix
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -111,16 +111,39 @@ def story_plan(prompt,thoughts,sources,model,X):
     if len(out)<5:raise RuntimeError(f"story_speaker_gate:{len(out)}")
     return out
 
+AUDIO_AUDITS=[]
 def production_audio_audit(proxy):
+    """Source eligibility: real audio stream must decode and contain non-silent signal.
+
+    Raw LUFS is deliberately not an eligibility threshold. Selected dialogue clips are
+    normalized/compressed downstream, and final-film LUFS/true-peak/silence QA remains
+    fail-closed. This gate only answers whether usable source audio exists.
+    """
     pr=ns['probe'](proxy);aud=[s for s in pr.get('streams',[]) if s.get('codec_type')=='audio']
-    if not aud:return {'status':'REJECT','reasons':['no_audio_stream']}
-    l=ns['loudness'](proxy,45)
-    try:ii=float(l.get('input_i','nan'));tp=float(l.get('input_tp','nan'))
-    except Exception:return {'status':'REVIEW','reasons':['loudness_measurement_failed']}
-    finite=math.isfinite(ii) and math.isfinite(tp);non_silent=finite and ii>-65;peak_safe=finite and tp<=2.5
-    status='APPROVE' if non_silent and peak_safe else 'REVIEW';reasons=[] if status=='APPROVE' else ['source_audio_requires_manual_review']
-    if status=='APPROVE' and (ii<=-45 or ii>=-3):reasons=['raw_loudness_outside_nominal_but_safe_for_downstream_dialogue_normalization']
-    return {'status':status,'integratedLufs':ii,'truePeakDbtp':tp,'sampleRate':aud[0].get('sample_rate'),'channels':aud[0].get('channels'),'reasons':reasons}
+    if not aud:
+        result={'status':'REJECT','reasons':['no_audio_stream']};AUDIO_AUDITS.append(result);return result
+    p=ns['run'](['ffmpeg','-hide_banner','-nostats','-t','120','-i',str(proxy),'-map','0:a:0','-af','volumedetect','-f','null','-'],check=False,capture=True,timeout=180)
+    stderr=p.stderr or ''
+    mean_match=re.search(r'mean_volume:\s*(-?inf|-?\d+(?:\.\d+)?)\s*dB',stderr,re.I)
+    max_match=re.search(r'max_volume:\s*(-?inf|-?\d+(?:\.\d+)?)\s*dB',stderr,re.I)
+    if p.returncode!=0:
+        result={'status':'REJECT','reasons':['audio_decode_failed'],'decodeReturnCode':p.returncode}
+    elif not max_match:
+        result={'status':'REVIEW','reasons':['audio_level_measurement_missing']}
+    else:
+        raw=max_match.group(1).lower();max_db=float('-inf') if raw=='-inf' else float(raw)
+        raw_mean=mean_match.group(1).lower() if mean_match else None
+        mean_db=(float('-inf') if raw_mean=='-inf' else float(raw_mean)) if raw_mean is not None else None
+        non_silent=max_db>-55.0
+        # Source peaks near 0 dBFS are common in archived/broadcast material; downstream
+        # dialogue processing and final true-peak QA are the clipping authority.
+        status='APPROVE' if non_silent else 'REVIEW'
+        result={'status':status,'maxVolumeDbfs':max_db,'meanVolumeDbfs':mean_db,
+                'sampleRate':aud[0].get('sample_rate'),'channels':aud[0].get('channels'),
+                'reasons':[] if status=='APPROVE' else ['source_audio_near_silent_requires_review']}
+    AUDIO_AUDITS.append(result)
+    print('M2_AUDIO_AUDIT',proxy,result,flush=True)
+    return result
 
 _core_visual_audit=ns['visual_audit']
 def production_visual_audit(proxy,source):
@@ -130,5 +153,5 @@ def production_visual_audit(proxy,source):
     return result
 
 ns['add_embeddings']=add_embeddings;ns['story_plan']=story_plan;ns['audio_audit']=production_audio_audit;ns['visual_audit']=production_visual_audit
-print(f'Hearframe M2 core {CORE_COMMIT}; semantic retrieval={MODEL_NAME}; duration fallback compatible; source audio gate corrected; ASS syntax repaired.',flush=True)
+print(f'Hearframe M2 core {CORE_COMMIT}; semantic retrieval={MODEL_NAME}; direct-decode/non-silence source audio gate; duration fallback compatible; ASS syntax repaired.',flush=True)
 ns['main']()
