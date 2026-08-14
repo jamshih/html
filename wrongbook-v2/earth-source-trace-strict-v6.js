@@ -22,5 +22,7 @@ v5EdgeLayer=function(sem){
   return v6SemanticEdgeLayer(sem);
 };
 window.V6_STRICT_SOURCE_PAGES=[242,243,244,245];
-document.write('<script src="./earth-source-trace-tail-loader-v6.js"><\/script>');
+// Pages 250–253 are loaded once, explicitly, by index.html after pages 246–249.
+// Do not inject earth-source-trace-tail-loader-v6.js here: doing so executes those
+// page scripts twice and causes duplicate top-level declarations without adding content.
 render();
