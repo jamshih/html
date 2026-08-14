@@ -3,20 +3,17 @@
  const M=window.SOURCE_PROMPTS_V7||{};
  const q=(page,n)=>M[page]?.find(x=>x.number===n);
  let r=q(243,35); if(r){r.sourceAnswers=['母元素衰變為原來二分之一所需時間'];r.answerAliases=[['母元素數量衰變為原來一半所需時間']];}
- // Source 36/37 are daughter/mother respectively; the old normalized dataset had them reversed.
  r=q(243,36); if(r)r.dropOldAlias=true;
  r=q(243,37); if(r)r.dropOldAlias=true;
- // p245 source q31/q32 each use one composition blank; q50 carries source labels (50)+(51) in two blanks.
  r=q(245,31); if(r){r.replaceFields=true;r.keepOldAsAliases=false;}
  r=q(245,32); if(r){r.replaceFields=true;r.keepOldAsAliases=false;}
  r=q(245,50); if(r){r.replaceFields=true;r.keepOldAsAliases=false;}
- // Source q13 has two blanks (冬至點 / 夏季); old normalized q13 only stored the season field.
+ // Annual-motion source panel carries two/three/two blanks; normalized data had one each.
+ for(const n of [10,11,12]){r=q(246,n);if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;}}
  r=q(246,13); if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;r.answerAliases=[[],['夏季']];}
- // Source p247 q18/q19 were reversed in the old normalized mapping; q20 has three seasonal-altitude blanks.
  r=q(247,18); if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;}
  r=q(247,19); if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;}
  r=q(247,20); if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;}
- // Source q10/q11 have four blanks each; normalized data omitted the 大陸/海洋 first blank and shifted the rest.
  r=q(248,10); if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;}
  r=q(248,11); if(r){r.replaceFields=true;r.keepOldAsAliases=false;r.ensureFields=false;}
 })();
