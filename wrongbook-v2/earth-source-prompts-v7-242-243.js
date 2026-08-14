@@ -1,0 +1,57 @@
+// Exact printed prompt manifest transcribed from IMG_1523 (p242) and IMG_1524 (p243). Handwriting is excluded.
+(function(){
+ const M=window.SOURCE_PROMPTS_V7=window.SOURCE_PROMPTS_V7||{};
+ const E=(number,template,blanks,sourceAnswers=[],opts={})=>({number,template,blanks,sourceAnswers,verifiedFromPhoto:true,...opts});
+ M[242]=[
+  E(1,'體積極 <b class="v4strict-num">(1)</b> {{0}}',1,['小']),
+  E(2,'壓力極 <b class="v4strict-num">(2)</b> {{0}}',1,['大']),
+  E(3,'密度極 <b class="v4strict-num">(3)</b> {{0}}',1,['大']),
+  E(4,'時間：<b class="v4strict-num">(4)</b> {{0}}',1,['約138億年前']),
+  E(5,'溫度極 <b class="v4strict-num">(5)</b> {{0}}',1,['高']),
+  E(6,'宇宙開始 <b class="v4strict-num">(6)</b> {{0}}，溫度隨之 <b class="v4strict-num">(7)</b> {{1}}',2,['膨脹','下降'],{sourceNumbers:[6,7]}),
+  E(7,'',1,['下降'],{renderTarget:6,fieldIndex:1,standalone:false,sourceNumbers:[7]}),
+  E(8,'證據一　<b class="v4strict-num">(8)</b> {{0}} 定律<br>遙遠星系的光譜有 {{1}} 的現象<br>星系距離愈遠，遠離速度愈 {{2}}<br>公式：{{3}}',4,['哈伯','紅移','快','v=H₀d']),
+  E(9,'證據二　<b class="v4strict-num">(9)</b> {{0}}<br>隨著宇宙膨脹，爆炸的餘溫到現今約等於絕對溫度 {{1}} 的物體所放出來的熱輻射',2,['3K背景輻射','3K']),
+  E(10,'大爆炸後約 <b class="v4strict-num">(10)</b> {{0}} 億年<br>開始有 {{1}} 誕生',2,['4','恆星']),
+  E(11,'最初原始太陽星雲呈 <b class="v4strict-num">(11)</b> {{0}} 溫狀態，後因 {{1}} 作用，<br>塌縮成 {{2}}（扁平形），雲氣中心溫度逐漸 {{3}}',4,['低','重力','扁平圓盤','上升']),
+  E(12,'太陽系形成<br>時間：約 <b class="v4strict-num">(12)</b> {{0}}',1,['46億年前']),
+  E(13,'<b class="v4strict-num">(13)</b> 當內部溫度可以將氫 {{0}} 成氦，太陽誕生',1,['核融合']),
+  E(14,'<b class="v4strict-num">(14)</b> 愈靠近太陽，環境溫度愈 {{0}}，<br>岩石金屬可留在內側形成類 {{1}} 行星',2,['高','地']),
+  E(15,'<b class="v4strict-num">(15)</b> {{0}} 將密度小的氣體帶到外側，形成類 {{1}} 行星',2,['太陽風','木']),
+  E(16,'<b class="v4strict-num">(16)</b> 第一階段大氣<br>{{0}}　{{1}}<br>{{2}}　{{3}}',4,['H₂','He','CH₄','NH₃']),
+  E(17,'初期地球呈 <b class="v4strict-num">(17)</b> {{0}} 溫狀態',1,['高']),
+  E(18,'<b class="v4strict-num">(18)</b> 3大主因<br>1. {{0}}<br>2. {{1}}<br>3. {{2}}',3,['隕石撞擊','質量增加、重力收縮','放射性元素衰變']),
+  E(19,'<b class="v4strict-num">(19)</b> 密度較 {{0}} 的 {{1}}（填組成）下沉',2,['大','Fe、Ni']),
+  E(20,'<b class="v4strict-num">(20)</b> 密度較 {{0}} 的 {{1}}（填組成）上升',2,['小','SiO₂'])
+ ];
+ M[243]=[
+  E(21,'第二階段大氣<br>主要：<b class="v4strict-num">(21)</b> {{0}}',1,['H₂O']),
+  E(22,'<b class="v4strict-num">(22)</b> {{0}}',1,['CO₂']),
+  E(23,'極少：<b class="v4strict-num">(23)</b> {{0}}',1,['N₂']),
+  E(24,'冷卻凝結　時間：約 <b class="v4strict-num">(24)</b> {{0}} 年前',1,['40億']),
+  E(25,'海洋形成　證據　古老的 <b class="v4strict-num">(25)</b> {{0}} 岩',1,['沉積']),
+  E(26,'<b class="v4strict-num">(26)</b> {{0}} 等生物行光合作用',1,['藍綠菌']),
+  E(27,'化石：<b class="v4strict-num">(27)</b> {{0}}',1,['疊層石']),
+  E(28,'放出 <b class="v4strict-num">(28)</b> {{0}}',1,['O₂']),
+  E(29,'35億年前－18億年前<br>淺海環境形成 <b class="v4strict-num">(29)</b> {{0}}<br>淺海氧氣大幅增加的證據',1,['縞狀鐵層']),
+  E(30,'<b class="v4strict-num">(30)</b> {{0}} 逐漸形成',1,['O₃層']),
+  E(31,'時間：約 <b class="v4strict-num">(31)</b> {{0}} 年前<br>有更多的氧氣可釋放至大氣 → 生物上陸',1,['4億']),
+  E(32,'第三階段大氣（現今）<br><b class="v4strict-num">(32)</b> {{0}}：占約78%<br>{{1}}：占約21%',2,['N₂','O₂']),
+  E(33,'利用 <b class="v4strict-num">(33)</b> {{0}}<br>得知岩礦形成時間',1,['放射性定年法']),
+  E(34,'主要為 <b class="v4strict-num">(34)</b> {{0}} 岩類',1,['火成']),
+  E(35,'半衰期定義：<b class="v4strict-num">(35)</b> {{0}}',1,['經七半母元素衰變為原來二分之一'],{answerAliases:[['母元素數量衰變為原來一半所需時間']]}),
+  E(36,'<b class="v4strict-num">(36)</b> {{0}} 元素',1,['子']),
+  E(37,'<b class="v4strict-num">(37)</b> {{0}} 元素',1,['母']),
+  E(38,'任一個時刻，母＋子元素含量百分比＝<b class="v4strict-num">(38)</b> {{0}} %',1,['100']),
+  E(39,'…… <b class="v4strict-num">(39)</b> {{0}} 個半衰期',1,['10']),
+  E(40,'<b class="v4strict-num">(40)</b> 疊置定律：（參考右圖填代碼）<br>沉積地層老至年輕 {{0}}',1,['A→C→D']),
+  E(41,'<b class="v4strict-num">(41)</b> 截切定律：<br>E斷層發生在A、B、C之 {{0}}',1,['後']),
+  E(42,'<b class="v4strict-num">(42)</b> 包裹體定律：<br>C {{0}} 於B',1,['老']),
+  E(43,'可用化石等比對不同地區地層，指示沉積年代的化石稱為<br><b class="v4strict-num">(43)</b> {{0}}',1,['標準化石']),
+  E(44,'各時期代表化石　<b class="v4strict-num">(44)</b> {{0}}',1,['三葉蟲']),
+  E(45,'<b class="v4strict-num">(45)</b> {{0}}',1,['菊石']),
+  E(46,'<b class="v4strict-num">(46)</b> {{0}}',1,['大型哺乳類']),
+  E(47,'<b class="v4strict-num">(47)</b> {{0}}<br>生物演化出硬組織',1,['寒武紀大爆發']),
+  E(48,'分界依據　<b class="v4strict-num">(48)</b> {{0}}　　分界依據　<b class="v4strict-num">(49)</b> {{1}}',2,['二疊紀末大滅絕','白堊紀末大滅絕'],{sourceNumbers:[48,49]})
+ ];
+})();
