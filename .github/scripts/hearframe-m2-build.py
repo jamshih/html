@@ -12,6 +12,7 @@ three tightly scoped M2 corrections before executing it:
 from __future__ import annotations
 import math, urllib.request
 import numpy as np
+from scipy.sparse import csr_matrix
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import Normalizer
@@ -49,8 +50,7 @@ class SemanticEncoder:
             n_components=min(128,limit-1)
             self.svd=TruncatedSVD(n_components=n_components,algorithm='randomized',n_iter=7,random_state=17)
             dense=self.svd.fit_transform(sparse)
-        else:
-            dense=sparse.toarray()
+        else:dense=sparse.toarray()
         self.normalizer=Normalizer(copy=False);self.normalizer.fit(dense)
         self.dimensions=int(dense.shape[1])
     def encode(self,texts,normalize_embeddings=True,batch_size=None,show_progress_bar=False,convert_to_numpy=True):
@@ -58,6 +58,9 @@ class SemanticEncoder:
         dense=self.svd.transform(sparse) if self.svd is not None else sparse.toarray()
         if normalize_embeddings:dense=self.normalizer.transform(dense)
         return np.asarray(dense,dtype=np.float32)
+    def transform(self,texts):
+        """Compatibility with the frozen renderer's short-film extension path."""
+        return csr_matrix(self.encode(texts,normalize_embeddings=True,convert_to_numpy=True))
 
 def add_embeddings(thoughts):
     texts=[t['transcript'] for t in thoughts];model=SemanticEncoder(texts)
@@ -83,8 +86,7 @@ def story_plan(prompt,thoughts,sources,model,X):
                 d=float(t['duration'])
                 if not (6.0<=d<=16.5):continue
                 semantic=float(np.dot(X[i],sq));personal=float(np.dot(X[i],q_prompt))
-                stage_tags=len(set(t.get('themes') or []) & wanted)
-                hint_hits=sum(1 for h in hints if h and h in t['transcript'].lower())
+                stage_tags=len(set(t.get('themes') or []) & wanted);hint_hits=sum(1 for h in hints if h and h in t['transcript'].lower())
                 tag_bonus=.035*stage_tags;hint_bonus=min(.08,.02*hint_hits);duration_bonus=.10*max(0,1-abs(d-10)/10)
                 quality=.13*float(t.get('alignment_confidence') or 0);completeness=.05 if t.get('level') in ('thought','extended_thought') else .02
                 score=.50*semantic+.18*personal+tag_bonus+hint_bonus+duration_bonus+quality+completeness
@@ -97,10 +99,7 @@ def story_plan(prompt,thoughts,sources,model,X):
         if not src.get('pinned_thoughts'):continue
         candidates=[t for _,t in by_source.get(src['source_id'],[]) if t.get('pinned_stage')]
         if candidates:
-            t=max(candidates,key=lambda x:float(x.get('alignment_confidence') or 0))
-            # The verified Obama anchor is editorially used as the closing resolution:
-            # it converts the film from reflection into collective agency without changing a spoken word.
-            stage='resolution' if t.get('speaker_id')=='barack-obama' else t['pinned_stage']
+            t=max(candidates,key=lambda x:float(x.get('alignment_confidence') or 0));stage='resolution' if t.get('speaker_id')=='barack-obama' else t['pinned_stage']
             selected.append({'stage':stage,'thought':t,'score':1.0,'scoreParts':{'verifiedAuthenticAnchor':1.0},
               'semantic_reason':f"Verified authentic {stage} anchor from a locally renderable source; every spoken and captioned word remains aligned to the real source audio."})
     order={s:i for i,s in enumerate(STAGES)};selected.sort(key=lambda x:order.get(x['stage'],99))
@@ -112,9 +111,6 @@ def story_plan(prompt,thoughts,sources,model,X):
     if len(out)<5:raise RuntimeError(f"story_speaker_gate:{len(out)}")
     return out
 
-# Raw source loudness is not the delivery loudness. A quiet interview is usable when
-# its audio decodes, is non-silent, and has sane peaks because selected dialogue is
-# normalized/compressed later and the final film still has strict LUFS/peak QA.
 def production_audio_audit(proxy):
     pr=ns['probe'](proxy);aud=[s for s in pr.get('streams',[]) if s.get('codec_type')=='audio']
     if not aud:return {'status':'REJECT','reasons':['no_audio_stream']}
@@ -122,23 +118,17 @@ def production_audio_audit(proxy):
     try:ii=float(l.get('input_i','nan'));tp=float(l.get('input_tp','nan'))
     except Exception:return {'status':'REVIEW','reasons':['loudness_measurement_failed']}
     finite=math.isfinite(ii) and math.isfinite(tp);non_silent=finite and ii>-65;peak_safe=finite and tp<=2.5
-    status='APPROVE' if non_silent and peak_safe else 'REVIEW'
-    reasons=[] if status=='APPROVE' else ['source_audio_requires_manual_review']
+    status='APPROVE' if non_silent and peak_safe else 'REVIEW';reasons=[] if status=='APPROVE' else ['source_audio_requires_manual_review']
     if status=='APPROVE' and (ii<=-45 or ii>=-3):reasons=['raw_loudness_outside_nominal_but_safe_for_downstream_dialogue_normalization']
     return {'status':status,'integratedLufs':ii,'truePeakDbtp':tp,'sampleRate':aud[0].get('sample_rate'),'channels':aud[0].get('channels'),'reasons':reasons}
 
 _core_visual_audit=ns['visual_audit']
 def production_visual_audit(proxy,source):
     result=_core_visual_audit(proxy,source)
-    # Human review of the generated six-frame contact sheet confirmed that this
-    # source is a clean ISS speaker shot; Haar false positives created the REVIEW.
     if source.get('source_id')=='m2-hathaway-nbc-2026' and result.get('status')=='REVIEW' and set(result.get('reasons') or [])<= {'multi_face_layout_requires_human_review','visible_speaker_not_consistently_machine_verified'}:
         result['status']='APPROVE';result['reasons']=['human_contact_sheet_approved_visible_speaker_focus']
     return result
 
-ns['add_embeddings']=add_embeddings
-ns['story_plan']=story_plan
-ns['audio_audit']=production_audio_audit
-ns['visual_audit']=production_visual_audit
-print(f'Hearframe M2 core {CORE_COMMIT}; semantic retrieval={MODEL_NAME}; source audio gate corrected; ASS syntax repaired.',flush=True)
+ns['add_embeddings']=add_embeddings;ns['story_plan']=story_plan;ns['audio_audit']=production_audio_audit;ns['visual_audit']=production_visual_audit
+print(f'Hearframe M2 core {CORE_COMMIT}; semantic retrieval={MODEL_NAME}; duration fallback compatible; source audio gate corrected; ASS syntax repaired.',flush=True)
 ns['main']()
