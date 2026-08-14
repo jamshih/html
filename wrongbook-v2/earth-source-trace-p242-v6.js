@@ -32,19 +32,21 @@
  for(const [id,r] of Object.entries(rects)){const f=fig(id);Object.assign(f.sourceRect,{x:r[0],y:r[1],width:r[2],height:r[3]})}
 }
 
-// The strict photographed-page scaffold owns production p242. Patch only its local geometry;
-// semantic relations above remain data and are not used for automatic production routing.
+// The strict photographed-page scaffold owns production p242. Its legacy spread applies a
+// measured ~1.18 position scale to ordinary absolute children; compensate only on this page.
 const v6P242StrictBase=window.v4Strict242;
+const V6_P242_POS_SCALE=.845;
+const v6P242Px=n=>Math.round(n*V6_P242_POS_SCALE*10)/10;
 function v6P242MoveQuestionPx(html,n,x,y,w){
  const re=new RegExp(`(data-question="${n}" style=")[^"]+("?)`);
- return html.replace(re,`$1left:${x}px;top:${y}px;width:${w}px$2`);
+ return html.replace(re,`$1left:${v6P242Px(x)}px;top:${v6P242Px(y)}px;width:${v6P242Px(w)}px$2`);
 }
 const V6_P242_SOURCE_LINES=`<svg class="v4strict-svg v6-p242-lines" viewBox="0 0 910 1270" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="v6p242arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
 <path class="purple" d="M397 388H447" marker-end="url(#v6p242arr)"/>
 <path class="purple" d="M276 449C263 430 252 411 251 391" marker-end="url(#v6p242arr)"/>
 <path class="spine dark" d="M329 592H473"/><circle class="node" cx="473" cy="592" r="8"/>
-<path class="spine blue" d="M473 592H794"/><circle class="node" cx="794" cy="592" r="8"/>
-<path class="spine green" d="M794 592H910"/>
+<path class="spine blue" d="M473 592H640"/><path class="spine blue" d="M640 592H794"/><circle class="node" cx="794" cy="592" r="8"/>
+<path class="spine green" d="M794 592H960"/>
 <path class="blue" d="M488 582L551 511"/>
 <path class="blue" d="M690 610L264 674"/>
 <path class="green" d="M793 604L724 669"/>
@@ -75,8 +77,8 @@ window.v4Strict242=function(ch,mode){
  };
  for(const [n,p] of Object.entries(pos))html=v6P242MoveQuestionPx(html,n,p[0],p[1],p[2]);
  html=html.replace(/<svg class="v4strict-svg"[\s\S]*?<\/svg>/,V6_P242_SOURCE_LINES);
- html=html.replace(/style="--rc:#8170a6;left:[^"]+"/, 'style="--rc:#8170a6;left:280px;top:174px;width:198px"');
- html=html.replace(/style="--rc:#667fae;left:[^"]+"/, 'style="--rc:#667fae;left:178px;top:1178px;width:207px"');
+ html=html.replace(/style="--rc:#8170a6;left:[^"]+"/, `style="--rc:#8170a6;left:${v6P242Px(280)}px;top:${v6P242Px(174)}px;width:${v6P242Px(198)}px"`);
+ html=html.replace(/style="--rc:#667fae;left:[^"]+"/, `style="--rc:#667fae;left:${v6P242Px(178)}px;top:${v6P242Px(1178)}px;width:${v6P242Px(207)}px"`);
  html=html.replace('<div class="v4strict-footer">242</div>',`${V6_P242_EXTRA}<div class="v4strict-footer">242</div>`);
  return html;
 };
