@@ -5,3 +5,5 @@ document.write('<link rel="stylesheet" href="./earth-source-trace-p251-v6.css"/>
 document.write('<script src="./earth-source-trace-p251-v6.js"><\/script>');
 document.write('<link rel="stylesheet" href="./earth-source-trace-p252-v6.css"/>');
 document.write('<script src="./earth-source-trace-p252-v6.js"><\/script>');
+document.write('<link rel="stylesheet" href="./earth-source-trace-p252-detail-v6.css"/>');
+document.write('<script src="./earth-source-trace-p252-detail-v6.js"><\/script>');
