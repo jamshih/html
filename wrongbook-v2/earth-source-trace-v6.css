@@ -6,21 +6,21 @@
 .v4strict-242 .v4strict-header .v4strict-mini{margin-left:-22px!important;font-size:10px!important}
 .v4strict-242 .v4strict-header>b{width:64px!important;height:64px!important;font-size:30px!important;margin-left:2px!important}
 .v4strict-242 .v4strict-header h3{font-size:31px!important;margin-left:19px!important}
-.v4strict-242 .v4strict-ribbon{font-size:20px!important;padding:6px 10px!important;border-radius:6px!important;box-shadow:none!important}
+.v4strict-242 .v4strict-ribbon{font-size:20px!important;padding:8px 10px!important;border-radius:6px!important;box-shadow:none!important}
 .v4strict-242 .v4strict-bigbang-burst{left:186px!important;top:377px!important;width:85px!important;height:59px!important;padding:0!important;display:grid!important;place-items:center!important;font-size:15px!important;clip-path:polygon(10% 28%,25% 25%,31% 10%,42% 25%,55% 9%,64% 25%,82% 15%,84% 34%,98% 42%,86% 56%,92% 76%,72% 73%,62% 92%,51% 78%,35% 92%,30% 73%,10% 80%,15% 58%,2% 50%,16% 39%)!important}
 .v4strict-242 .v4strict-singularity{left:210px!important;top:471px!important;width:69px!important;height:69px!important;font-size:14px!important;background:#55534f!important}
-.v4strict-242 .v4strict-nebula{left:112px!important;top:634px!important;width:232px!important;height:93px!important}
-.v4strict-242 .v4strict-earth-hot{left:559px!important;top:556px!important;width:51px!important;height:51px!important}
-.v4strict-242 .v4strict-earth-hot:after{top:56px!important;left:-5px!important;width:90px!important;font-size:13px!important}
-.v4strict-242 .v4strict-earth-wedge{left:605px!important;right:auto!important;top:859px!important;bottom:auto!important;width:161px!important;height:140px!important}
+.v4strict-242 .v4strict-nebula{left:93px!important;top:619px!important;width:263px!important;height:116px!important}
+.v4strict-242 .v4strict-earth-hot{left:566px!important;top:565px!important;width:42px!important;height:42px!important}
+.v4strict-242 .v4strict-earth-hot:after{top:47px!important;left:-5px!important;width:90px!important;font-size:13px!important}
+.v4strict-242 .v4strict-earth-wedge{left:500px!important;right:auto!important;top:859px!important;bottom:auto!important;width:140px!important;height:140px!important}
 .v4strict-242 .v4strict-source-motif.rocket242{left:74px!important;top:342px!important;width:89px!important;height:89px!important}
 .v4strict-242 .v4strict-box{background:transparent!important;padding:6px 8px!important}
 .v4strict-242 .v4strict-q{line-height:1.34!important}
-.v4strict-242 .v6-p242-lines{transform:translate(-45px,38px);transform-origin:0 0}
+.v4strict-242 .v6-p242-lines{transform:translate(-45px,88px);transform-origin:0 0}
 .v6-p242-nebula-title,.v6-p242-melt,.v6-p242-escape,.v6-p242-diff-label{position:absolute;z-index:5;color:#3d3b37;font-weight:800}
 .v6-p242-nebula-title{left:232px;top:573px;font-size:15px}
 .v6-p242-melt{left:597px;top:693px;font-size:14px}
 .v6-p242-escape{left:341px;top:786px;font-size:13px}
-.v6-p242-diff-label{left:627px;top:989px;font-size:12px;border:1px solid #77736d;border-radius:999px;padding:3px 7px;background:#fffdf7}
+.v6-p242-diff-label{left:524px;top:989px;font-size:12px;border:1px solid #77736d;border-radius:999px;padding:3px 7px;background:#fffdf7}
 .v6-p242-planets{position:absolute;left:91px;top:857px;width:292px;height:90px;z-index:2;overflow:visible}
 .v4strict-242 .v4strict-footer{left:91px!important;right:auto!important;bottom:15px!important;font-size:22px!important}
