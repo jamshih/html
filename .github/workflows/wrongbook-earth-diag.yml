@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Locate duplicate Earth globals and QA assertions
+      - name: Locate duplicate Earth globals and loaders
         run: |
           echo '=== DUPLICATE SYMBOL LOCATIONS ==='
           grep -R -n -E 'V6_P250_SAT|P251_POS|P252_POS|V6_P253_ENERGY|V6_P253_CORRECT' wrongbook-v2 || true
+          echo '=== TAIL LOADER / PAGE SCRIPT REFERENCES ==='
+          grep -R -n -E 'earth-source-trace-tail-loader-v6|earth-source-trace-p250-v6|earth-source-trace-p251-v6|earth-source-trace-p252-v6|earth-source-trace-p253-v6|earth-source-trace-p253-correct-v6' wrongbook-v2 || true
           echo '=== EARTH QA COUNT ASSERTIONS ==='
           grep -R -n -E 'question parents|chapter 1 count|chapter 3 figures|chapter 4 figures|chapter 5 figures|chapter 6 figures|Semantic Earth' wrongbook-v2 || true
