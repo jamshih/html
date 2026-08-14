@@ -42,8 +42,6 @@
    const t=document.createElement('template');t.innerHTML=html;
    for(const r of recs){
      if(r.standalone===false){
-       // A single printed source sentence can contain two numbered grading blanks.
-       // Keep one visible source prompt, but preserve the secondary logical item for product/count compatibility.
        if(!t.content.querySelector(`[data-question="${r.number}"]`)){
          const marker=document.createElement('span');
          marker.className='v7-logical-question-marker';
@@ -72,6 +70,14 @@
      el.dataset.v7PromptStatus='verified';
      el.dataset.v7SourcePrompt='true';
      el.dataset.v7SourceBlankCount=String(r.blanks);
+   }
+   if(page===242&&typeof window.v4StrictField==='function'){
+     const el=t.content.querySelector('[data-question="18"]');
+     if(el){
+       const f=i=>window.v4StrictField(ch,18,i,mode,150);
+       el.innerHTML=`<b class="v4strict-num">(18)</b> 3大主因<div style="display:grid;grid-template-columns:18px 1fr;gap:5px 7px;margin-top:4px;align-items:center"><span>1.</span>${f(0)}<span>2.</span>${f(1)}<span>3.</span>${f(2)}</div>`;
+       el.style.width='270px';el.style.lineHeight='1.25';el.dataset.v7PromptStatus='verified';el.dataset.v7SourcePrompt='true';el.dataset.v7SourceBlankCount='3';
+     }
    }
    return t.innerHTML;
  };
