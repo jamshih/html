@@ -32,10 +32,8 @@
  for(const [id,r] of Object.entries(rects)){const f=fig(id);Object.assign(f.sourceRect,{x:r[0],y:r[1],width:r[2],height:r[3]})}
 }
 
-// The strict photographed-page scaffold owns production p242. Its legacy spread applies a
-// measured ~1.18 position scale to ordinary absolute children; compensate only on this page.
 const v6P242StrictBase=window.v4Strict242;
-const V6_P242_POS_SCALE=.845;
+const V6_P242_POS_SCALE=1;
 const v6P242Px=n=>Math.round(n*V6_P242_POS_SCALE*10)/10;
 function v6P242MoveQuestionPx(html,n,x,y,w){
  const re=new RegExp(`(data-question="${n}" style=")[^"]+("?)`);
@@ -77,8 +75,8 @@ window.v4Strict242=function(ch,mode){
  };
  for(const [n,p] of Object.entries(pos))html=v6P242MoveQuestionPx(html,n,p[0],p[1],p[2]);
  html=html.replace(/<svg class="v4strict-svg"[\s\S]*?<\/svg>/,V6_P242_SOURCE_LINES);
- html=html.replace(/style="--rc:#8170a6;left:[^"]+"/, `style="--rc:#8170a6;left:${v6P242Px(280)}px;top:${v6P242Px(174)}px;width:${v6P242Px(222)}px"`);
- html=html.replace(/style="--rc:#667fae;left:[^"]+"/, `style="--rc:#667fae;left:${v6P242Px(178)}px;top:${v6P242Px(1195)}px;width:${v6P242Px(232)}px"`);
+ html=html.replace(/style="--rc:#8170a6;left:[^"]+"/,`style="--rc:#8170a6;left:${v6P242Px(280)}px;top:${v6P242Px(174)}px;width:${v6P242Px(222)}px"`);
+ html=html.replace(/style="--rc:#667fae;left:[^"]+"/,`style="--rc:#667fae;left:${v6P242Px(178)}px;top:${v6P242Px(1195)}px;width:${v6P242Px(232)}px"`);
  html=html.replace('<div class="v4strict-footer">242</div>',`${V6_P242_EXTRA}<div class="v4strict-footer">242</div>`);
  return html;
 };
