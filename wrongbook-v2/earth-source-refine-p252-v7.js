@@ -13,13 +13,12 @@
   window.v5PageHtml=function(ch,sem,page,mode){
     let html=prev(ch,sem,page,mode);
     if(page!==252)return html;
-    html=html
-      .replace(/<svg class="v6-p252-enso"[\s\S]*?<\/svg>/,ENSO)
-      .replace(/<svg class="v6-p252-pac"[\s\S]*?<\/svg>/,PAC)
-      .replace(/<svg class="v6-p252-pac-detail"[\s\S]*?<\/svg>/g,'')
-      .replace(/<svg class="v6-p252-enso-detail"[\s\S]*?<\/svg>/g,'')
-      .replace('class="v6-p252-lines"','class="v6-p252-lines" data-v7-line-manifest="252"');
-    return html;
+    const t=document.createElement('template');t.innerHTML=html;
+    const swap=(sel,markup)=>{const old=t.content.querySelector(sel);if(!old)return;const x=document.createElement('template');x.innerHTML=markup;old.replaceWith(x.content.firstElementChild)};
+    swap('.v6-p252-enso',ENSO);swap('.v6-p252-pac',PAC);
+    t.content.querySelectorAll('.v6-p252-pac-detail,.v6-p252-enso-detail').forEach(x=>x.remove());
+    const lines=t.content.querySelector('.v6-p252-lines');if(lines)lines.dataset.v7LineManifest='252';
+    return t.innerHTML;
   };
   if(typeof window.render==='function')window.render();
 })();
