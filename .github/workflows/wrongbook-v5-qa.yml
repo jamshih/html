@@ -1,0 +1,66 @@
+name: Wrongbook V5 rendered QA
+on:
+  push:
+    branches:
+      - agent/wrongbook-concepts-tutor-v5-20260814
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rendered-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 8000 --directory . > /tmp/wrongbook-http.log 2>&1 &
+          echo $! > /tmp/wrongbook-http.pid
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8000/wrongbook-v2/ >/dev/null && break; sleep 1; done
+      - name: Render and test all viewports
+        run: |
+          mkdir -p .qa-artifacts/wrongbook-v5
+          cat > /tmp/wrongbook-v5-qa.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const viewports=[['desktop',1440,900],['tablet-landscape',1366,1024],['ipad-portrait',1024,1366],['phone',390,844],['small-phone',375,667]];
+          const browser=await chromium.launch({headless:true});
+          let failed=false;
+          for(const [name,width,height] of viewports){
+            const page=await browser.newPage({viewport:{width,height}});const errors=[];const badResponses=[];
+            page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('pageerror',e=>errors.push('pageerror: '+e.message));
+            page.on('response',r=>{if(r.status()>=400)badResponses.push(`${r.status()} ${r.url()}`)});
+            await page.goto('http://127.0.0.1:8000/wrongbook-v2/?e2eproduct=1',{waitUntil:'networkidle'});
+            await page.waitForSelector('#e2e-product-v5-results',{timeout:20000});
+            const status=await page.locator('#e2e-product-v5-results').getAttribute('data-status');
+            const result=await page.locator('#e2e-product-v5-results').textContent();
+            await page.screenshot({path:`.qa-artifacts/wrongbook-v5/${name}.png`,fullPage:true});
+            fs.writeFileSync(`.qa-artifacts/wrongbook-v5/${name}.json`,JSON.stringify({status,result:JSON.parse(result),errors,badResponses},null,2));
+            if(status!=='PASS'||errors.length||badResponses.some(x=>!x.includes('favicon'))){failed=true;console.error(name,{status,errors,badResponses,result})}
+            await page.close();
+          }
+          // Historical suite must still pass at a desktop viewport, including Earth source-fidelity checks.
+          const legacy=await browser.newPage({viewport:{width:1440,height:900}});const legacyErrors=[];
+          legacy.on('console',m=>{if(m.type()==='error')legacyErrors.push(m.text())});legacy.on('pageerror',e=>legacyErrors.push('pageerror: '+e.message));
+          await legacy.goto('http://127.0.0.1:8000/wrongbook-v2/?e2e=1',{waitUntil:'networkidle'});
+          await legacy.waitForSelector('#e2e-results',{timeout:25000});await legacy.waitForTimeout(5000);
+          const legacyStatus=await legacy.locator('#e2e-results').getAttribute('data-status');const legacyText=await legacy.locator('#e2e-results').textContent();
+          fs.writeFileSync('.qa-artifacts/wrongbook-v5/legacy.json',JSON.stringify({status:legacyStatus,result:JSON.parse(legacyText),errors:legacyErrors},null,2));
+          await legacy.screenshot({path:'.qa-artifacts/wrongbook-v5/legacy.png',fullPage:true});
+          if(legacyStatus!=='PASS'||legacyErrors.length){failed=true;console.error('legacy',{legacyStatus,legacyErrors,legacyText})}
+          await browser.close();if(failed)process.exit(1);
+          EOF
+          node /tmp/wrongbook-v5-qa.mjs
+      - name: Upload QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-v5-rendered-qa
+          path: .qa-artifacts/wrongbook-v5
