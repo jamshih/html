@@ -1,0 +1,35 @@
+name: Wrongbook V5 stable QA
+on:
+  push:
+    branches:
+      - agent/wrongbook-concepts-tutor-v5-20260814
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start Wrongbook
+        run: |
+          python3 -m http.server 8000 --directory . > /tmp/wrongbook-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8000/wrongbook-v2/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/wrongbook-http.log
+          exit 1
+      - name: Rendered product and live backend QA
+        run: node .github/scripts/wrongbook-v5-qa.mjs
+      - name: Upload QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-v5-stable-qa
+          path: .qa-artifacts/wrongbook-v5
