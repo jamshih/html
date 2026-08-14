@@ -77,7 +77,7 @@ jobs:
           for(const [name,needle] of [['guide generation/cache','v3GuidePrepare'],['handwriting animation','v3DrawWrite'],['circle animation','v3DrawCircle'],['guide replay','v3GuideReplay'],['background pre-generation','v3GuideBaseConfirmScan']]) if(!guide.includes(needle))throw new Error(`missing ${name}`);
           console.log('V3 product implementation guard passed');
           NODE
-      - name: Rendered Chromium smoke test
+      - name: Rendered Chromium smoke and source-refinement tests
         run: |
           python3 -m http.server 4173 >/tmp/wrongbook-http.log 2>&1 &
           SERVER_PID=$!
@@ -86,12 +86,8 @@ jobs:
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           "$CHROME" --version
-          for SPEC in desktop:1440,1000 mobile:390,844; do
-            NAME="${SPEC%%:*}"
-            SIZE="${SPEC#*:}"
-            PROFILE="/tmp/wrongbook-source-$NAME"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --window-size="$SIZE" --virtual-time-budget=7000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?sourcee2e=1" > "/tmp/wrongbook-$NAME.html"
-            python3 - "/tmp/wrongbook-$NAME.html" <<'PY'
+          parse_result() {
+            python3 - "$1" <<'PY'
           from pathlib import Path
           import html,re,sys
           text=Path(sys.argv[1]).read_text(errors='replace')
@@ -103,6 +99,15 @@ jobs:
           print(html.unescape(m.group(2)))
           if status!='PASS': raise SystemExit(1)
           PY
+          }
+          for SPEC in desktop:1440,1000 mobile:390,844; do
+            NAME="${SPEC%%:*}"
+            SIZE="${SPEC#*:}"
+            PROFILE="/tmp/wrongbook-source-$NAME"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --window-size="$SIZE" --virtual-time-budget=7000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?sourcee2e=1" > "/tmp/wrongbook-$NAME.html"
+            parse_result "/tmp/wrongbook-$NAME.html"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="${PROFILE}-refine" --window-size="$SIZE" --virtual-time-budget=8000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?refinee2e=1" > "/tmp/wrongbook-refine-$NAME.html"
+            parse_result "/tmp/wrongbook-refine-$NAME.html"
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="${PROFILE}-shot" --window-size="$SIZE" --virtual-time-budget=3000 --screenshot="/tmp/wrongbook-$NAME.png" "http://127.0.0.1:4173/wrongbook-v2/"
           done
           for CH in 1 2 3 4 5 6; do
