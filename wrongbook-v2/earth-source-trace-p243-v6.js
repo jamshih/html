@@ -1,6 +1,6 @@
 // Page 243 source trace. Fixed page-local geometry follows IMG_1524.
 const v6P243StrictBase=window.v4Strict243;
-const V6_P243_SCALE=.845;
+const V6_P243_SCALE=1;
 const v6P243Px=n=>Math.round(n*V6_P243_SCALE*10)/10;
 function v6P243MoveQuestion(html,n,x,y,w){
  const re=new RegExp(`(data-question="${n}" style=")[^"]+("?)`);
