@@ -1,6 +1,6 @@
-// Source-trace QA owns ?e2e=1 and prevents obsolete graph-density assertions.
+// Source-trace QA runs only with ?sourcee2e=1, isolated from obsolete semantic-graph suites.
 (async()=>{
- const run=Boolean(window.__v4StrictRunE2E);if(!run)return;window.__v4StrictRunE2E=false;
+ const run=new URLSearchParams(location.search).has('sourcee2e');if(!run)return;
  const sleep=ms=>new Promise(r=>setTimeout(r,ms)),results=[],check=(name,ok,detail='')=>results.push({name,ok:Boolean(ok),detail});
  const mobile=()=>innerWidth<=860;
  const nav=async page=>{let target;if(mobile()){document.querySelector('.mobile-nav [data-action="toggleMenu"]')?.click();await sleep(80);target=document.querySelector(`.mobile-drawer [data-page="${page}"]`)}else target=document.querySelector(`.sidebar [data-page="${page}"]`);if(!target)throw Error(`missing nav ${page}`);target.click();await sleep(220)};
