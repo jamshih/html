@@ -13,11 +13,13 @@ READY=json.loads((ASK/'m2-ready-references.json').read_text())
 OVERRIDES_PATH=ASK/'m2-visual-review-overrides.json'
 OUT=ASK/'m2-full-visual-audit.json'
 SHEETS=ASK/'m2-visual-sheets'; SHEETS.mkdir(exist_ok=True)
-FRAME_CACHE=ROOT/'.hearframe-m2-visual-frames-v3'; FRAME_CACHE.mkdir(exist_ok=True)
+CACHE=ROOT/'.hearframe-m2-visual-cache-v4'; CACHE.mkdir(exist_ok=True)
+FRAME_CACHE=CACHE/'frames'; FRAME_CACHE.mkdir(exist_ok=True)
+SPAN_CACHE=CACHE/'spans'; SPAN_CACHE.mkdir(exist_ok=True)
 HARD_TITLE=re.compile(r'\b(zoom|teams|webex|google meet|webinar|screen.?share|screen recording|podcast|trailer|commercial|promo(?:tional)?|gameplay|animation)\b',re.I)
 NEWS_TITLE=re.compile(r'\b(news package|reporter package|newscast|news report)\b',re.I)
 TLS=threading.local()
-UA='Hearframe-M2-VisualAudit/3.0 (+https://github.com/jamshih/html; research QA)'
+UA='Hearframe-M2-VisualAudit/4.0 (+https://github.com/jamshih/html; research QA)'
 API='https://commons.wikimedia.org/w/api.php'
 _RESOLVE_CACHE={}; RESOLVE_LOCK=threading.Lock()
 
@@ -26,7 +28,7 @@ def face_detector():
         TLS.face=cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
     return TLS.face
 
-def run(cmd,timeout=55):
+def run(cmd,timeout=120):
     return subprocess.run([str(x) for x in cmd],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=timeout)
 
 def clean_url(url):
@@ -39,12 +41,12 @@ def resolve_commons(ref):
     with RESOLVE_LOCK:
         if rid in _RESOLVE_CACHE:return _RESOLVE_CACHE[rid]
     title=ref.get('title') or ''
+    resolved=None
     if not title.startswith('File:'):
         resolved=clean_url(ref.get('sourceUrl'))
     else:
         params=urllib.parse.urlencode({'action':'query','format':'json','formatversion':'2','prop':'videoinfo','titles':title,'viprop':'url|mime|size|derivatives'})
         req=urllib.request.Request(API+'?'+params,headers={'User-Agent':UA,'Accept':'application/json'})
-        resolved=None
         try:
             with urllib.request.urlopen(req,timeout=25) as r:data=json.load(r)
             vi=(data.get('query',{}).get('pages',[{}])[0].get('videoinfo') or [{}])[0]
@@ -52,16 +54,13 @@ def resolve_commons(ref):
             for d in vi.get('derivatives') or []:
                 url=d.get('src') or d.get('url')
                 if not url:continue
-                mime=(d.get('type') or d.get('mime') or '').lower()
-                key=(d.get('transcodekey') or d.get('shorttitle') or '').lower()
+                mime=(d.get('type') or d.get('mime') or '').lower(); key=(d.get('transcodekey') or d.get('shorttitle') or '').lower()
                 h=int(d.get('height') or 0)
                 if not h:
                     m=re.search(r'(\d{3,4})p',key);h=int(m.group(1)) if m else 0
                 if 'video' not in mime and not re.search(r'\.(webm|mp4|ogv)(?:\?|$)',url,re.I):continue
-                # Prefer a modest 360–480p derivative for frame QA; it is enough to
-                # inspect layout/speaker visibility and avoids hammering huge originals.
-                target=480
-                penalty=abs((h or target)-target)+(500 if h>720 else 0)
+                # 360–480p is sufficient for layout/speaker/subtitle QA and much cheaper to fetch.
+                target=360; penalty=abs((h or target)-target)+(500 if h>720 else 0)
                 choices.append((penalty,-h,clean_url(url)))
             if choices:
                 choices.sort();resolved=choices[0][2]
@@ -78,30 +77,53 @@ def windows(ref):
     idx=[0,round((len(ws)-1)*.33),round((len(ws)-1)*.67),len(ws)-1]
     return [ws[i] for i in sorted(set(idx))]
 
-def extract_pair(ref,win,slot):
-    rid=ref['referenceId'];t=max(0,float(win.get('start') or 0)-.22)
+def prepare_span(ref):
+    rid=ref['referenceId']; ws=windows(ref); url=resolve_commons(ref)
+    if not ws:return None,None,None,'no_sample_windows'
+    if not url:return None,None,None,'media_url_resolution_failed'
+    t0=max(0,min(float(w.get('start') or 0) for w in ws)-0.8)
+    t1=max(float(w.get('end') or w.get('start') or 0) for w in ws)+1.2
+    duration=max(2.5,min(100.0,t1-t0))
+    out=SPAN_CACHE/f'{rid}.mp4'; meta=SPAN_CACHE/f'{rid}.json'
+    if out.exists() and out.stat().st_size>12000 and meta.exists():
+        try:
+            m=json.loads(meta.read_text())
+            return out,float(m['sourceStart']),url,None
+        except Exception:pass
+    last=''
+    for backoff in (0,2,5,10):
+        if backoff:time.sleep(backoff)
+        try:out.unlink()
+        except FileNotFoundError:pass
+        # One sequential remote decode per source; every aligned-region sample after this is local.
+        cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-user_agent',UA,'-referer','https://commons.wikimedia.org/',
+             '-rw_timeout','45000000','-i',url,'-ss',f'{t0:.3f}','-t',f'{duration:.3f}',
+             '-vf','scale=640:-2:force_original_aspect_ratio=decrease,fps=8','-an','-c:v','libx264','-preset','ultrafast','-crf','30','-pix_fmt','yuv420p',str(out)]
+        try:p=run(cmd,150)
+        except subprocess.TimeoutExpired:
+            last='span_prepare_timeout';continue
+        if out.exists() and out.stat().st_size>12000:
+            meta.write_text(json.dumps({'referenceId':rid,'sourceStart':t0,'duration':duration,'resolvedMediaUrl':url},indent=2)+'\n')
+            return out,t0,url,None
+        last=(p.stderr or '')[-300:]
+        if not re.search(r'429|too many|4XX Client Error|timed out|connection',last,re.I):break
+    return None,None,url,'span_prepare_failed:'+last
+
+def extract_pair(ref,win,slot,span,source_start):
+    rid=ref['referenceId']; local_t=max(0,float(win.get('start') or 0)-source_start-.22)
     stem=FRAME_CACHE/f'{rid}-{slot}';a=Path(str(stem)+'-01.jpg');b=Path(str(stem)+'-02.jpg')
-    if a.exists() and b.exists():return [a,b],None,resolve_commons(ref)
+    if a.exists() and b.exists():return [a,b],None
     for old in (a,b):
         try:old.unlink()
         except FileNotFoundError:pass
-    url=resolve_commons(ref);pat=str(stem)+'-%02d.jpg'
-    if not url:return [],'media_url_resolution_failed',None
-    last=''
-    for attempt,backoff in enumerate((0,2,5,10),1):
-        if backoff:time.sleep(backoff)
-        cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-user_agent',UA,'-referer','https://commons.wikimedia.org/',
-             '-rw_timeout','30000000','-ss',f'{t:.3f}','-i',url,'-t','0.85','-vf','fps=2,scale=640:-2:force_original_aspect_ratio=decrease',
-             '-frames:v','2','-q:v','4',pat]
-        try:p=run(cmd,65)
-        except subprocess.TimeoutExpired:
-            last='frame_seek_timeout';continue
-        got=[x for x in (a,b) if x.exists()]
-        if got:return got,None if len(got)>1 else 'only_one_frame',url
-        last=(p.stderr or '')[-280:]
-        throttled=bool(re.search(r'429|too many|4XX Client Error',last,re.I))
-        if not throttled:break
-    return [],'frame_decode_failed:'+last,url
+    pat=str(stem)+'-%02d.jpg'
+    cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-ss',f'{local_t:.3f}','-i',str(span),'-t','0.85',
+         '-vf','fps=2,scale=640:-2:force_original_aspect_ratio=decrease','-frames:v','2','-q:v','4',pat]
+    try:p=run(cmd,25)
+    except subprocess.TimeoutExpired:return [],'local_frame_seek_timeout'
+    got=[x for x in (a,b) if x.exists()]
+    if not got:return [],'local_frame_decode_failed:'+(p.stderr or '')[-180:]
+    return got,None if len(got)>1 else 'only_one_frame'
 
 def metrics(path):
     im=cv2.imread(str(path))
@@ -117,9 +139,14 @@ def audit(ref):
     if HARD_TITLE.search(title) or NEWS_TITLE.search(title):
         return {'referenceId':ref['referenceId'],'title':title,'pageUrl':ref.get('pageUrl'),'sourceUrl':ref.get('sourceUrl'),'resolvedMediaUrl':None,
                 'sourceKind':ref.get('sourceKind'),'machineStatus':'REJECT','machineReasons':['hard_metadata_reject_before_positive_visual_review'],'samples':[],'sampleErrors':[]}
-    samples=[];decoded=[];errs=[];resolved=None
+    span,source_start,resolved,prep_err=prepare_span(ref)
+    if prep_err:
+        return {'referenceId':ref['referenceId'],'title':title,'pageUrl':ref.get('pageUrl'),'sourceUrl':ref.get('sourceUrl'),'resolvedMediaUrl':resolved,
+                'sourceKind':ref.get('sourceKind'),'machineStatus':'REJECT','machineReasons':['aligned_region_media_span_not_prepared'],
+                'samples':[],'sampleErrors':[{'error':prep_err}]}
+    samples=[];decoded=[];errs=[]
     for i,w in enumerate(windows(ref)):
-        paths,err,url=extract_pair(ref,w,i);resolved=resolved or url
+        paths,err=extract_pair(ref,w,i,span,source_start)
         if err and err!='only_one_frame':errs.append({'slot':i,'error':err})
         ms=[metrics(p) for p in paths];ms=[m for m in ms if m]
         if ms:
@@ -130,7 +157,6 @@ def audit(ref):
                             'faceCount':m['faceCount'],'largestFaceArea':round(m['largestFaceArea'],4),'brightness':round(m['brightness'],1),
                             'sharpness':round(m['sharpness'],1),'motion':round(motion,3) if motion is not None else None,
                             'bottomEdgeRatio':round(m['bottomEdge'],4),'centerEdgeRatio':round(m['centerEdge'],4)})
-        time.sleep(.22)
     reasons=[];status='REVIEW'
     if len(decoded)<3:
         status='REJECT';reasons.append('fewer_than_3_aligned_region_frames_decoded')
@@ -169,9 +195,9 @@ def main():
     refs=READY['references']
     if not READY.get('traceComplete') or len(refs)!=131:raise SystemExit(f'exact_131_gate_failed:{len(refs)}')
     rows=[]
-    # Wikimedia explicitly throttled the earlier 8-way remote seek pass. Two workers
-    # plus derivative resolution/retries keeps the audit respectful and reproducible.
-    with ThreadPoolExecutor(max_workers=2) as ex:
+    # One remote span fetch per source, then all frame sampling is local. Four workers
+    # remain polite to Commons while avoiding the prior repeated-range-request bottleneck.
+    with ThreadPoolExecutor(max_workers=4) as ex:
         fut={ex.submit(audit,r):r['referenceId'] for r in refs}
         for n,f in enumerate(as_completed(fut),1):
             try:r=f.result()
@@ -189,8 +215,8 @@ def main():
         if ov:r['status']=ov['status'];r['manualReview']=ov
         else:r['status']='REJECT' if r['machineStatus']=='REJECT' else 'REVIEW';r['manualReview']=None
         counts[r['status']]+=1
-    out={'version':'hearframe-m2-full-visual-audit-v3','sourceSet':'exact 131 counted English/alignment-ready refs from production-stitch-index-report',
-         'policy':'Actual aligned-region frames are decoded from resolved Commons derivatives. Machine QA may reject or nominate REVIEW, but never auto-APPROVE. APPROVE requires a persisted manual frame-review override.',
+    out={'version':'hearframe-m2-full-visual-audit-v4','sourceSet':'exact 131 counted English/alignment-ready refs from production-stitch-index-report',
+         'policy':'Each candidate is inspected from a throttled local proxy spanning its aligned speech regions. Machine QA may reject or nominate REVIEW, but never auto-APPROVE. APPROVE requires persisted manual frame-review evidence.',
          'reviewedCount':len(rows),'mediaDecodedReferenceCount':decoded_refs,'counts':counts,'approvedReferenceIds':[r['referenceId'] for r in rows if r['status']=='APPROVE'],
          'target':50,'targetMet':counts['APPROVE']>=50,'rows':rows}
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
