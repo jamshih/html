@@ -10,6 +10,11 @@
      for(const r of recs){
        if(!Array.isArray(r.sourceAnswers)||!r.sourceAnswers.length)continue;
        const item=items(ch).find(x=>x.number===r.number); if(!item)continue;
+       if(r.replaceFields){
+         const old=(item.fields||[]).map(f=>String(f.answer||'')).filter(Boolean);
+         item.fields=Array.from({length:r.blanks},(_,i)=>({answer:String(r.sourceAnswers[i]??''),aliases:Array.from(new Set([...(r.answerAliases?.[i]||[]),...(r.keepOldAsAliases===false?[]:old)].filter(Boolean)))}));
+         continue;
+       }
        if(r.ensureFields){
          while((item.fields?.length||0)<r.blanks){
            item.fields=item.fields||[];
@@ -41,7 +46,7 @@
      const el=t.content.querySelector(`[data-question="${target}"]`);
      if(!el){r.runtimeMissing=true;continue;}
      let fills=[...el.querySelectorAll('.v4strict-fill')].map(x=>x.outerHTML);
-     if(r.ensureFields&&typeof window.v4StrictField==='function'){
+     if((r.ensureFields||r.replaceFields)&&typeof window.v4StrictField==='function'){
        fills=Array.from({length:r.blanks},(_,i)=>window.v4StrictField(ch,r.number,i,mode,(r.blankWidths?.[i]||68)));
      }
      if(fills.length!==r.blanks){el.dataset.v7PromptStatus=`blank-count-${fills.length}-expected-${r.blanks}`;continue;}
