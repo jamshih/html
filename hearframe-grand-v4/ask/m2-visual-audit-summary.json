@@ -1,8 +1,8 @@
 {
-  "version": "hearframe-m2-visual-audit-summary-v1",
+  "version": "hearframe-m2-visual-audit-summary-v2",
   "sourceSet": "exact 131 English/alignment-ready references traced from production-stitch-index",
   "reviewed": 131,
-  "mediaDecodedOnFinalRerun": 116,
+  "mediaDecodedInPersistedFinalAudit": 128,
   "counts": {
     "APPROVE": 57,
     "REVIEW": 15,
@@ -24,10 +24,11 @@
     "manual_visual_reject": 1
   },
   "evidence": {
-    "workflowRunId": 31758390640,
-    "artifactId": 9203756189,
-    "artifactDigest": "sha256:75dc01b09ae88ed86ca4f252b122eb7ef6579c9f105c9799ed6a09a768c82305",
-    "fullAuditVersion": "hearframe-m2-full-visual-audit-v4"
+    "persistedFullAudit": "ask/m2-full-visual-audit.json",
+    "fullAuditVersion": "hearframe-m2-full-visual-audit-v4",
+    "supportingWorkflowRunId": 31758390640,
+    "supportingArtifactId": 9203756189,
+    "supportingArtifactDigest": "sha256:75dc01b09ae88ed86ca4f252b122eb7ef6579c9f105c9799ed6a09a768c82305"
   },
   "truthfulness": "APPROVE was assigned only by persisted human contact-sheet review. Machine QA never auto-approved. Rows without reliable visual evidence were kept REVIEW or REJECT; no threshold was lowered to reach 50."
 }
