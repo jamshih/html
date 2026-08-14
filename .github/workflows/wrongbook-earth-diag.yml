@@ -1,0 +1,19 @@
+name: Wrongbook Earth declaration diagnostics
+on:
+  push:
+    branches:
+      - agent/wrongbook-concepts-tutor-v5-20260814
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  grep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Locate duplicate Earth globals and QA assertions
+        run: |
+          echo '=== DUPLICATE SYMBOL LOCATIONS ==='
+          grep -R -n -E 'V6_P250_SAT|P251_POS|P252_POS|V6_P253_ENERGY|V6_P253_CORRECT' wrongbook-v2 || true
+          echo '=== EARTH QA COUNT ASSERTIONS ==='
+          grep -R -n -E 'question parents|chapter 1 count|chapter 3 figures|chapter 4 figures|chapter 5 figures|chapter 6 figures|Semantic Earth' wrongbook-v2 || true
