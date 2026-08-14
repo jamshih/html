@@ -1,5 +1,5 @@
 {
-  "version": "hearframe-m2-curated-sources-v3",
+  "version": "hearframe-m2-curated-sources-v4",
   "proofPrompt": "I'm scared everyone is moving ahead of me and I don't know whether I'm making the right choices.",
   "policy": {
     "compositionUnit": "complete authentic sentence/thought",
@@ -8,7 +8,7 @@
     "preferredDistinctSpeakers": 6,
     "targetDurationSeconds": [60, 90],
     "maxSpeakerShare": 0.30,
-    "ingestWindowPolicy": "Index bounded reflective/advice-rich windows from human-visual-approved, locally renderable Commons sources. The story planner must retrieve real thought IDs; it may not write replacement dialogue."
+    "ingestWindowPolicy": "Index bounded reflective/advice-rich windows from human-visual-approved, locally renderable Commons sources. Resolve current media URLs through Commons API by exact file title instead of persisting guessed upload paths. The story planner must retrieve real thought IDs; it may not write replacement dialogue."
   },
   "sources": [
     {
@@ -38,7 +38,6 @@
       "reference_id": "ref-00119",
       "page_title": "File:Jane Goodall, The Green Interview.webm",
       "page_url": "https://commons.wikimedia.org/wiki/File:Jane_Goodall,_The_Green_Interview.webm",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Jane_Goodall%2C_The_Green_Interview.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_reviewed",
@@ -53,7 +52,6 @@
       "reference_id": "ref-00164",
       "page_title": "File:Interview with Steve Wozniak.webm",
       "page_url": "https://commons.wikimedia.org/wiki/File:Interview_with_Steve_Wozniak.webm",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Interview_with_Steve_Wozniak.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_reviewed",
@@ -68,7 +66,6 @@
       "reference_id": "ref-00169",
       "page_title": "File:Greta Gerwig interview - Fade In.webm",
       "page_url": "https://commons.wikimedia.org/wiki/File:Greta_Gerwig_interview_-_Fade_In.webm",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Greta_Gerwig_interview_-_Fade_In.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_reviewed",
@@ -83,7 +80,6 @@
       "reference_id": "ref-00133",
       "page_title": "File:Burnie Burns interview with TSTV.webm",
       "page_url": "https://commons.wikimedia.org/wiki/File:Burnie_Burns_interview_with_TSTV.webm",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Burnie_Burns_interview_with_TSTV.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_human_reviewed",
@@ -98,7 +94,6 @@
       "reference_id": "ref-00182",
       "page_title": "File:Jimmy Wales interview for WikipediaDay 2019.webm",
       "page_url": "https://commons.wikimedia.org/wiki/File:Jimmy_Wales_interview_for_WikipediaDay_2019.webm",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Jimmy_Wales_interview_for_WikipediaDay_2019.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_sa_4_self_published",
@@ -113,7 +108,6 @@
       "reference_id": "ref-00217",
       "page_title": "File:Andrew Yang (Full Interview).webm",
       "page_url": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_(Full_Interview).webm",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Andrew_Yang_%28Full_Interview%29.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_reviewed",
