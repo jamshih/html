@@ -4,6 +4,8 @@
    const s=document.createElement('style');s.id='v7-p246-annual-layout';s.textContent=`
    .v6-p246-q[data-question="9"]{left:510px!important;top:808px!important;width:112px!important}
    .v6-p246-q[data-question="8"]{left:510px!important;top:850px!important;width:112px!important}
+   .v6-p246-q[data-question="13"]{width:340px!important}
+   .v6-p246-q[data-question="14"]{width:335px!important}
    .v7-p246-annual{left:625px!important;top:725px!important;width:240px!important;height:372px!important;min-height:372px!important;padding:0!important;font-size:12px!important;line-height:1.22!important;position:absolute!important;overflow:visible!important}
    .v7-p246-annual .row{position:absolute!important;left:10px!important;margin:0!important;padding-left:10px!important;height:20px!important;line-height:20px!important}
    .v7-p246-annual .row-ab{top:10px!important}.v7-p246-annual .row-ac{top:112px!important}.v7-p246-annual .row-star{top:250px!important}
