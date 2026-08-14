@@ -1,5 +1,5 @@
 {
-  "version": "hearframe-m2-bank-introspection-v3",
+  "version": "hearframe-m2-bank-introspection-v4",
   "source": "hearframe-grand-v4/ask/public-speech-interview-bank.json",
   "rowCount": 1866,
   "rowContainerKey": "videos",
@@ -133,7 +133,8 @@
   ],
   "capabilities": [],
   "staleAlignmentFieldRows": 122,
-  "productionReadyReferenceCountFromReport": 131,
-  "traceableReadyReferenceIdsFromFinalIndex": 133,
-  "readyReferenceTraceComplete": false
+  "expectedCountedReadyReferences": 131,
+  "traceableCountedReadyReferences": 131,
+  "phraseOnlyCuratedStarters": 2,
+  "readyReferenceTraceComplete": true
 }

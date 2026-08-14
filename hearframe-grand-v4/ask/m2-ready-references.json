@@ -1,78 +1,11 @@
 {
-  "version": "hearframe-m2-ready-references-v1",
+  "version": "hearframe-m2-ready-references-v2",
   "sourceOfTruth": "production-stitch-index.json + production-stitch-index-report.json",
-  "definition": "English/alignment-ready references from the final production-pool index. Still NOT visual-approved or production_ready for cinematic rendering.",
+  "definition": "The exact word-indexed English/alignment-ready references counted by production-stitch-index-report. These are still NOT visual_approved or production_ready for cinematic rendering.",
   "expectedReadyCount": 131,
-  "traceableReadyCount": 133,
+  "traceableReadyCount": 131,
+  "traceComplete": true,
   "references": [
-    {
-      "referenceId": "curated-starter:jfk",
-      "title": "John F. Kennedy · public speech · 1961",
-      "pageUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
-      "sourceKind": "public-speech",
-      "auditPolicyVersion": "curated-starter-public-speech-v1",
-      "enabledBatch": null,
-      "tokenOccurrenceCount": 0,
-      "sampleWindows": [
-        {
-          "start": 122.186,
-          "end": 123.997,
-          "label": "the world is very different now",
-          "score": 1.0
-        },
-        {
-          "start": 842.299,
-          "end": 843.507,
-          "label": "ask what you can do",
-          "score": 1.0
-        }
-      ],
-      "alignmentTimeRange": [
-        122.186,
-        843.507
-      ]
-    },
-    {
-      "referenceId": "curated-starter:obama",
-      "title": "Barack Obama · public speech · 2017",
-      "pageUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
-      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
-      "sourceKind": "public-speech",
-      "auditPolicyVersion": "curated-starter-public-speech-v1",
-      "enabledBatch": null,
-      "tokenOccurrenceCount": 0,
-      "sampleWindows": [
-        {
-          "start": 80.891,
-          "end": 81.132,
-          "label": "you can",
-          "score": 1.0
-        },
-        {
-          "start": 228.039,
-          "end": 232.196,
-          "label": "change only happens when ordinary people get involved",
-          "score": 1.0
-        },
-        {
-          "start": 401.271,
-          "end": 403.606,
-          "label": "yes our progress has been uneven",
-          "score": 1.0
-        },
-        {
-          "start": 598.131,
-          "end": 598.898,
-          "label": "we need to do so",
-          "score": 1.0
-        }
-      ],
-      "alignmentTimeRange": [
-        80.891,
-        598.898
-      ]
-    },
     {
       "referenceId": "ref-00101",
       "title": "File:Marriage Equality in New York- Interview with Lt. Dan Choi.webm",
@@ -82,30 +15,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 439,
       "sampleWindows": [
         {
           "start": 10.023,
           "end": 11.565,
           "label": "out City Hall today?",
-          "score": 0.7057
+          "score": 0.7057,
+          "kind": "phrase"
         },
         {
           "start": 27.402,
           "end": 28.343,
           "label": "already wife because they",
-          "score": 0.8662
+          "score": 0.8662,
+          "kind": "phrase"
         },
         {
           "start": 36.949,
           "end": 37.789,
           "label": "and I was here",
-          "score": 0.8752
+          "score": 0.8752,
+          "kind": "phrase"
         },
         {
           "start": 52.781,
           "end": 53.722,
           "label": "the only ingredient needed",
-          "score": 0.7555
+          "score": 0.7555,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -122,30 +60,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 491,
       "sampleWindows": [
         {
           "start": 13.965,
           "end": 14.626,
           "label": "the big screen",
-          "score": 0.9833
+          "score": 0.9833,
+          "kind": "phrase"
         },
         {
           "start": 28.433,
           "end": 29.754,
           "label": "biting my nails all the",
-          "score": 0.9452
+          "score": 0.9452,
+          "kind": "phrase"
         },
         {
           "start": 41.621,
           "end": 42.841,
           "label": "recalled some feelings I've",
-          "score": 0.8788
+          "score": 0.8788,
+          "kind": "phrase"
         },
         {
           "start": 51.646,
           "end": 53.587,
           "label": "Belarus saying, well, we hope we",
-          "score": 0.9225
+          "score": 0.9225,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -162,30 +105,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 561,
       "sampleWindows": [
         {
           "start": 4.035,
           "end": 5.677,
           "label": "this project and the initiative we",
-          "score": 0.8945
+          "score": 0.8945,
+          "kind": "phrase"
         },
         {
           "start": 19.83,
           "end": 21.51,
           "label": "the goals and",
-          "score": 0.8127
+          "score": 0.8127,
+          "kind": "phrase"
         },
         {
           "start": 30.054,
           "end": 31.194,
           "label": "mortality and",
-          "score": 0.8995
+          "score": 0.8995,
+          "kind": "phrase"
         },
         {
           "start": 46.306,
           "end": 47.007,
           "label": "priority,",
-          "score": 0.714
+          "score": 0.714,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -202,30 +150,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 615,
       "sampleWindows": [
         {
           "start": 4.133,
           "end": 4.854,
           "label": "looking into",
-          "score": 0.9655
+          "score": 0.9655,
+          "kind": "phrase"
         },
         {
           "start": 17.241,
           "end": 18.942,
           "label": "in 15 different locations all",
-          "score": 0.95
+          "score": 0.95,
+          "kind": "phrase"
         },
         {
           "start": 31.53,
           "end": 32.451,
           "label": "are very much into",
-          "score": 0.9695
+          "score": 0.9695,
+          "kind": "phrase"
         },
         {
           "start": 48.634,
           "end": 49.537,
           "label": "the situation right",
-          "score": 0.94
+          "score": 0.94,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -242,30 +195,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 311,
       "sampleWindows": [
         {
           "start": 14.843,
           "end": 17.344,
           "label": "up from 2000 to",
-          "score": 0.7288
+          "score": 0.7288,
+          "kind": "phrase"
         },
         {
           "start": 22.647,
           "end": 25.668,
           "label": "of Ahmed about, the doing part.",
-          "score": 0.78
+          "score": 0.78,
+          "kind": "phrase"
         },
         {
           "start": 33.672,
           "end": 34.973,
           "label": "the digital for",
-          "score": 0.7087
+          "score": 0.7087,
+          "kind": "phrase"
         },
         {
           "start": 48.271,
           "end": 48.511,
           "label": "history",
-          "score": 0.385
+          "score": 0.385,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -282,30 +240,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 65,
+      "phraseOccurrenceCount": 529,
       "sampleWindows": [
         {
           "start": 8.944,
           "end": 9.444,
           "label": "I can't believe",
-          "score": 0.8007
+          "score": 0.8007,
+          "kind": "phrase"
         },
         {
           "start": 21.689,
           "end": 22.49,
           "label": "to think about",
-          "score": 0.946
+          "score": 0.946,
+          "kind": "phrase"
         },
         {
           "start": 40.856,
           "end": 43.738,
           "label": "make a campus-wide information system, but",
-          "score": 0.9025
+          "score": 0.9025,
+          "kind": "phrase"
         },
         {
           "start": 52.165,
           "end": 52.645,
           "label": "but it",
-          "score": 0.93
+          "score": 0.93,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -322,30 +285,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 66,
+      "phraseOccurrenceCount": 415,
       "sampleWindows": [
         {
           "start": 23.632,
           "end": 24.533,
           "label": "original, and",
-          "score": 0.9965
+          "score": 0.9965,
+          "kind": "phrase"
         },
         {
           "start": 33.399,
           "end": 33.639,
           "label": "author",
-          "score": 0.942
+          "score": 0.942,
+          "kind": "token"
         },
         {
           "start": 43.646,
           "end": 44.747,
           "label": "movement that aims to",
-          "score": 0.9735
+          "score": 0.9735,
+          "kind": "phrase"
         },
         {
           "start": 55.703,
           "end": 56.144,
           "label": "I'm driven",
-          "score": 0.91
+          "score": 0.91,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -362,30 +330,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 496,
       "sampleWindows": [
         {
           "start": 24.502,
           "end": 26.983,
           "label": "Goodall set out to study chimpanzees",
-          "score": 0.939
+          "score": 0.939,
+          "kind": "phrase"
         },
         {
           "start": 33.445,
           "end": 34.845,
           "label": "opened a whole new window into",
-          "score": 0.968
+          "score": 0.968,
+          "kind": "phrase"
         },
         {
           "start": 43.517,
           "end": 44.898,
           "label": "Alarmed at what human beings were",
-          "score": 0.936
+          "score": 0.936,
+          "kind": "phrase"
         },
         {
           "start": 52.044,
           "end": 52.565,
           "label": "protecting",
-          "score": 0.954
+          "score": 0.954,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -402,30 +375,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 49,
+      "phraseOccurrenceCount": 361,
       "sampleWindows": [
         {
           "start": 23.225,
           "end": 24.266,
           "label": "environmental crisis",
-          "score": 0.9875
+          "score": 0.9875,
+          "kind": "phrase"
         },
         {
           "start": 28.93,
           "end": 29.111,
           "label": "of his",
-          "score": 0.92
+          "score": 0.92,
+          "kind": "phrase"
         },
         {
           "start": 40.601,
           "end": 41.321,
           "label": "we started it",
-          "score": 0.9713
+          "score": 0.9713,
+          "kind": "phrase"
         },
         {
           "start": 51.419,
           "end": 51.74,
           "label": "instance,",
-          "score": 0.905
+          "score": 0.905,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -442,30 +420,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 54,
+      "phraseOccurrenceCount": 425,
       "sampleWindows": [
         {
           "start": 15.226,
           "end": 17.487,
           "label": "Allen Hamilton as an infrastructure analyst",
-          "score": 0.8383
+          "score": 0.8383,
+          "kind": "phrase"
         },
         {
           "start": 28.405,
           "end": 31.908,
           "label": "systems administrator, senior",
-          "score": 0.9567
+          "score": 0.9567,
+          "kind": "phrase"
         },
         {
           "start": 44.199,
           "end": 46.801,
           "label": "interested in in trying to understand",
-          "score": 0.9192
+          "score": 0.9192,
+          "kind": "phrase"
         },
         {
           "start": 52.445,
           "end": 52.986,
           "label": "crossed this",
-          "score": 0.929
+          "score": 0.929,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -482,30 +465,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 43,
+      "phraseOccurrenceCount": 311,
       "sampleWindows": [
         {
           "start": 8.916,
           "end": 10.498,
           "label": "and I'm Estonian and",
-          "score": 0.9138
+          "score": 0.9138,
+          "kind": "phrase"
         },
         {
           "start": 26.713,
           "end": 28.154,
           "label": "a bit more than five",
-          "score": 0.9534
+          "score": 0.9534,
+          "kind": "phrase"
         },
         {
           "start": 34.78,
           "end": 36.542,
           "label": "work at the European",
-          "score": 0.9275
+          "score": 0.9275,
+          "kind": "phrase"
         },
         {
           "start": 49.212,
           "end": 51.634,
           "label": "linguistic and translation related events.",
-          "score": 0.9094
+          "score": 0.9094,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -522,30 +510,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 63,
+      "phraseOccurrenceCount": 601,
       "sampleWindows": [
         {
           "start": 6.954,
           "end": 7.274,
           "label": "living",
-          "score": 0.937
+          "score": 0.937,
+          "kind": "token"
         },
         {
           "start": 24.708,
           "end": 25.629,
           "label": "by someone at the",
-          "score": 0.9617
+          "score": 0.9617,
+          "kind": "phrase"
         },
         {
           "start": 36.895,
           "end": 38.357,
           "label": "trying to get your residence",
-          "score": 0.9448
+          "score": 0.9448,
+          "kind": "phrase"
         },
         {
           "start": 53.314,
           "end": 54.396,
           "label": "phone call and they said",
-          "score": 0.918
+          "score": 0.918,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -562,30 +555,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 35,
+      "phraseOccurrenceCount": 271,
       "sampleWindows": [
         {
           "start": 30.694,
           "end": 30.854,
           "label": "Yes,",
-          "score": 0.631
+          "score": 0.631,
+          "kind": "token"
         },
         {
           "start": 39.299,
           "end": 39.659,
           "label": "can get all",
-          "score": 0.7193
+          "score": 0.7193,
+          "kind": "phrase"
         },
         {
           "start": 46.203,
           "end": 46.823,
           "label": "talkie of him.",
-          "score": 0.6753
+          "score": 0.6753,
+          "kind": "phrase"
         },
         {
           "start": 54.819,
           "end": 59.198,
           "label": "Moreover, he has a very deep prejudice against being photographed at all.",
-          "score": 0.9417
+          "score": 0.9417,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -602,30 +600,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 615,
       "sampleWindows": [
         {
           "start": 7.724,
           "end": 8.844,
           "label": "we are is at",
-          "score": 0.881
+          "score": 0.881,
+          "kind": "phrase"
         },
         {
           "start": 21.968,
           "end": 24.408,
           "label": "box, 12 feet square.",
-          "score": 0.8872
+          "score": 0.8872,
+          "kind": "phrase"
         },
         {
           "start": 38.023,
           "end": 38.283,
           "label": "Covent",
-          "score": 0.879
+          "score": 0.879,
+          "kind": "token"
         },
         {
           "start": 50.648,
           "end": 51.508,
           "label": "made it out of wood.",
-          "score": 0.962
+          "score": 0.962,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -642,30 +645,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 660,
       "sampleWindows": [
         {
           "start": 10.214,
           "end": 12.479,
           "label": "of 1993 1996 when",
-          "score": 0.791
+          "score": 0.791,
+          "kind": "phrase"
         },
         {
           "start": 27.938,
           "end": 30.098,
           "label": "internet was just getting big, and",
-          "score": 0.8972
+          "score": 0.8972,
+          "kind": "phrase"
         },
         {
           "start": 38.881,
           "end": 40.341,
           "label": "take only computer science courses",
-          "score": 0.9658
+          "score": 0.9658,
+          "kind": "phrase"
         },
         {
           "start": 51.813,
           "end": 52.355,
           "label": "I'm get my",
-          "score": 0.807
+          "score": 0.807,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -682,30 +690,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 62,
+      "phraseOccurrenceCount": 444,
       "sampleWindows": [
         {
           "start": 16.121,
           "end": 16.582,
           "label": "think a lot of",
-          "score": 0.9243
+          "score": 0.9243,
+          "kind": "phrase"
         },
         {
           "start": 32.563,
           "end": 33.343,
           "label": "are rising up and",
-          "score": 0.9643
+          "score": 0.9643,
+          "kind": "phrase"
         },
         {
           "start": 38.968,
           "end": 40.469,
           "label": "and stop serving",
-          "score": 0.911
+          "score": 0.911,
+          "kind": "phrase"
         },
         {
           "start": 51.038,
           "end": 52.099,
           "label": "The economy by itself",
-          "score": 0.929
+          "score": 0.929,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -722,30 +735,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 35,
+      "phraseOccurrenceCount": 376,
       "sampleWindows": [
         {
           "start": 10.026,
           "end": 11.566,
           "label": "just few people learn",
-          "score": 0.833
+          "score": 0.833,
+          "kind": "phrase"
         },
         {
           "start": 22.829,
           "end": 24.63,
           "label": "choice from their",
-          "score": 0.7397
+          "score": 0.7397,
+          "kind": "phrase"
         },
         {
           "start": 35.834,
           "end": 39.438,
           "label": "from vayang or drama, just",
-          "score": 0.8018
+          "score": 0.8018,
+          "kind": "phrase"
         },
         {
           "start": 47.628,
           "end": 48.489,
           "label": "is tater.",
-          "score": 0.878
+          "score": 0.878,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -762,30 +780,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 74,
+      "phraseOccurrenceCount": 769,
       "sampleWindows": [
         {
           "start": 6.235,
           "end": 8.296,
           "label": "Norman Connors are getting into now?",
-          "score": 0.7242
+          "score": 0.7242,
+          "kind": "phrase"
         },
         {
           "start": 22.906,
           "end": 24.547,
           "label": "20s to that syndrome and",
-          "score": 0.8298
+          "score": 0.8298,
+          "kind": "phrase"
         },
         {
           "start": 35.9,
           "end": 36.581,
           "label": "metamorphosed",
-          "score": 0.95
+          "score": 0.95,
+          "kind": "token"
         },
         {
           "start": 48.727,
           "end": 49.947,
           "label": "soul music, if you like, in",
-          "score": 0.8932
+          "score": 0.8932,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -802,30 +825,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 46,
+      "phraseOccurrenceCount": 332,
       "sampleWindows": [
         {
           "start": 21.305,
           "end": 21.865,
           "label": "We should",
-          "score": 0.768
+          "score": 0.768,
+          "kind": "phrase"
         },
         {
           "start": 33.353,
           "end": 35.275,
           "label": "happened and difficult negotiations are going",
-          "score": 0.9388
+          "score": 0.9388,
+          "kind": "phrase"
         },
         {
           "start": 43.147,
           "end": 44.107,
           "label": "Brazil has done an",
-          "score": 0.8662
+          "score": 0.8662,
+          "kind": "phrase"
         },
         {
           "start": 53.109,
           "end": 55.25,
           "label": "with which Bhutan will not",
-          "score": 0.9368
+          "score": 0.9368,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -842,30 +870,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 377,
       "sampleWindows": [
         {
           "start": 8.204,
           "end": 9.244,
           "label": "National Archivist.",
-          "score": 0.8505
+          "score": 0.8505,
+          "kind": "phrase"
         },
         {
           "start": 23.507,
           "end": 23.967,
           "label": "Pacific",
-          "score": 0.887
+          "score": 0.887,
+          "kind": "token"
         },
         {
           "start": 37.033,
           "end": 38.394,
           "label": "a very active member of",
-          "score": 0.9148
+          "score": 0.9148,
+          "kind": "phrase"
         },
         {
           "start": 48.682,
           "end": 49.723,
           "label": "on simple ways of",
-          "score": 0.8097
+          "score": 0.8097,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -882,30 +915,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 398,
       "sampleWindows": [
         {
           "start": 8.451,
           "end": 9.031,
           "label": "My job",
-          "score": 0.9225
+          "score": 0.9225,
+          "kind": "phrase"
         },
         {
           "start": 23.564,
           "end": 24.784,
           "label": "advice government",
-          "score": 0.928
+          "score": 0.928,
+          "kind": "phrase"
         },
         {
           "start": 34.207,
           "end": 35.288,
           "label": "I do arrangements and",
-          "score": 0.7435
+          "score": 0.7435,
+          "kind": "phrase"
         },
         {
           "start": 49.651,
           "end": 50.852,
           "label": "of challenges that we're",
-          "score": 0.766
+          "score": 0.766,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -922,30 +960,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 416,
       "sampleWindows": [
         {
           "start": 5.166,
           "end": 6.107,
           "label": "of areas where",
-          "score": 0.9343
+          "score": 0.9343,
+          "kind": "phrase"
         },
         {
           "start": 17.215,
           "end": 18.436,
           "label": "of us who work on that",
-          "score": 0.8522
+          "score": 0.8522,
+          "kind": "phrase"
         },
         {
           "start": 27.351,
           "end": 28.051,
           "label": "decided to",
-          "score": 0.999
+          "score": 0.999,
+          "kind": "phrase"
         },
         {
           "start": 49.478,
           "end": 50.198,
           "label": "this is what our",
-          "score": 0.9325
+          "score": 0.9325,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -962,30 +1005,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 563,
       "sampleWindows": [
         {
           "start": 23.23,
           "end": 24.411,
           "label": "something light-hearted.",
-          "score": 0.9515
+          "score": 0.9515,
+          "kind": "phrase"
         },
         {
           "start": 30.455,
           "end": 30.855,
           "label": "said, I want",
-          "score": 0.87
+          "score": 0.87,
+          "kind": "phrase"
         },
         {
           "start": 38.956,
           "end": 40.938,
           "label": "usually from operas or operetta",
-          "score": 0.911
+          "score": 0.911,
+          "kind": "phrase"
         },
         {
           "start": 51.485,
           "end": 52.326,
           "label": "my favorite American",
-          "score": 0.9573
+          "score": 0.9573,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1002,30 +1050,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 307,
       "sampleWindows": [
         {
           "start": 24.173,
           "end": 25.874,
           "label": "Karishma Singhani, owner of",
-          "score": 0.8622
+          "score": 0.8622,
+          "kind": "phrase"
         },
         {
           "start": 30.718,
           "end": 33.3,
           "label": "to interview Douglas J. Kimo.",
-          "score": 0.9302
+          "score": 0.9302,
+          "kind": "phrase"
         },
         {
           "start": 40.904,
           "end": 41.724,
           "label": "for concerts,",
-          "score": 0.9445
+          "score": 0.9445,
+          "kind": "phrase"
         },
         {
           "start": 49.827,
           "end": 51.488,
           "label": "world music, classical,",
-          "score": 0.949
+          "score": 0.949,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1042,30 +1095,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 449,
       "sampleWindows": [
         {
           "start": 17.529,
           "end": 18.569,
           "label": "it, of the",
-          "score": 0.916
+          "score": 0.916,
+          "kind": "phrase"
         },
         {
           "start": 29.873,
           "end": 32.614,
           "label": "of a collection of our scope,",
-          "score": 0.8472
+          "score": 0.8472,
+          "kind": "phrase"
         },
         {
           "start": 39.832,
           "end": 41.474,
           "label": "care of it on behalf of",
-          "score": 0.9007
+          "score": 0.9007,
+          "kind": "phrase"
         },
         {
           "start": 51.723,
           "end": 52.804,
           "label": "can to make it",
-          "score": 0.9503
+          "score": 0.9503,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1082,30 +1140,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 65,
+      "phraseOccurrenceCount": 619,
       "sampleWindows": [
         {
           "start": 13.536,
           "end": 14.897,
           "label": "as a kid,",
-          "score": 0.8197
+          "score": 0.8197,
+          "kind": "phrase"
         },
         {
           "start": 30.343,
           "end": 31.123,
           "label": "afterlife and",
-          "score": 0.911
+          "score": 0.911,
+          "kind": "phrase"
         },
         {
           "start": 40.546,
           "end": 43.647,
           "label": "Iran most people didn't seem to",
-          "score": 0.9313
+          "score": 0.9313,
+          "kind": "phrase"
         },
         {
           "start": 52.209,
           "end": 54.03,
           "label": "to me it seemed like if",
-          "score": 0.9568
+          "score": 0.9568,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1122,30 +1185,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 78,
+      "phraseOccurrenceCount": 688,
       "sampleWindows": [
         {
           "start": 6.653,
           "end": 7.873,
           "label": "communicating with a",
-          "score": 0.967
+          "score": 0.967,
+          "kind": "phrase"
         },
         {
           "start": 23.177,
           "end": 24.798,
           "label": "was 97, so I",
-          "score": 0.9278
+          "score": 0.9278,
+          "kind": "phrase"
         },
         {
           "start": 37.747,
           "end": 39.128,
           "label": "close and he said",
-          "score": 0.8448
+          "score": 0.8448,
+          "kind": "phrase"
         },
         {
           "start": 47.835,
           "end": 48.696,
           "label": "it by half a pound.",
-          "score": 0.9158
+          "score": 0.9158,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1162,30 +1230,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 72,
+      "phraseOccurrenceCount": 471,
       "sampleWindows": [
         {
           "start": 10.378,
           "end": 11.258,
           "label": "I'm very excited about",
-          "score": 0.9045
+          "score": 0.9045,
+          "kind": "phrase"
         },
         {
           "start": 24.846,
           "end": 25.106,
           "label": "this was",
-          "score": 0.926
+          "score": 0.926,
+          "kind": "phrase"
         },
         {
           "start": 39.695,
           "end": 41.796,
           "label": "to you about education first.",
-          "score": 0.9428
+          "score": 0.9428,
+          "kind": "phrase"
         },
         {
           "start": 55.567,
           "end": 56.288,
           "label": "name was well known",
-          "score": 0.9487
+          "score": 0.9487,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1202,30 +1275,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 73,
+      "phraseOccurrenceCount": 587,
       "sampleWindows": [
         {
           "start": 12.091,
           "end": 13.754,
           "label": "i'm telling and uh... joining us",
-          "score": 0.848
+          "score": 0.848,
+          "kind": "phrase"
         },
         {
           "start": 27.531,
           "end": 28.151,
           "label": "Yeah, few",
-          "score": 0.7295
+          "score": 0.7295,
+          "kind": "phrase"
         },
         {
           "start": 38.274,
           "end": 39.334,
           "label": "so nice to have",
-          "score": 0.9185
+          "score": 0.9185,
+          "kind": "phrase"
         },
         {
           "start": 51.24,
           "end": 51.44,
           "label": "home",
-          "score": 0.954
+          "score": 0.954,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -1242,30 +1320,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 596,
       "sampleWindows": [
         {
           "start": 10.444,
           "end": 11.085,
           "label": "before you actually",
-          "score": 0.8253
+          "score": 0.8253,
+          "kind": "phrase"
         },
         {
           "start": 21.419,
           "end": 22.34,
           "label": "it because",
-          "score": 0.8135
+          "score": 0.8135,
+          "kind": "phrase"
         },
         {
           "start": 35.609,
           "end": 36.489,
           "label": "much about you or",
-          "score": 0.9647
+          "score": 0.9647,
+          "kind": "phrase"
         },
         {
           "start": 51.159,
           "end": 51.499,
           "label": "dressed",
-          "score": 0.991
+          "score": 0.991,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -1282,30 +1365,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 49,
+      "phraseOccurrenceCount": 536,
       "sampleWindows": [
         {
           "start": 3.635,
           "end": 7.939,
           "label": "of all this training and with",
-          "score": 0.5142
+          "score": 0.5142,
+          "kind": "phrase"
         },
         {
           "start": 18.37,
           "end": 19.471,
           "label": "July so I",
-          "score": 0.7017
+          "score": 0.7017,
+          "kind": "phrase"
         },
         {
           "start": 34.803,
           "end": 35.363,
           "label": "waiting for me",
-          "score": 0.892
+          "score": 0.892,
+          "kind": "phrase"
         },
         {
           "start": 50.31,
           "end": 51.693,
           "label": "want to get hurt, but that's",
-          "score": 0.7877
+          "score": 0.7877,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1322,30 +1410,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 595,
       "sampleWindows": [
         {
           "start": 7.71,
           "end": 9.311,
           "label": "a very important NATO",
-          "score": 0.9968
+          "score": 0.9968,
+          "kind": "phrase"
         },
         {
           "start": 25.355,
           "end": 27.155,
           "label": "military missions in that part",
-          "score": 0.9664
+          "score": 0.9664,
+          "kind": "phrase"
         },
         {
           "start": 38.635,
           "end": 40.357,
           "label": "later, but if Turkey",
-          "score": 0.9325
+          "score": 0.9325,
+          "kind": "phrase"
         },
         {
           "start": 50.984,
           "end": 51.545,
           "label": "system from",
-          "score": 0.9365
+          "score": 0.9365,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1362,30 +1455,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 555,
       "sampleWindows": [
         {
           "start": 5.196,
           "end": 6.196,
           "label": "We've been talking about him",
-          "score": 0.932
+          "score": 0.932,
+          "kind": "phrase"
         },
         {
           "start": 18.727,
           "end": 19.128,
           "label": "you just",
-          "score": 0.9605
+          "score": 0.9605,
+          "kind": "phrase"
         },
         {
           "start": 32.029,
           "end": 33.509,
           "label": "interesting things which",
-          "score": 0.939
+          "score": 0.939,
+          "kind": "phrase"
         },
         {
           "start": 45.731,
           "end": 47.292,
           "label": "be fascinating",
-          "score": 0.941
+          "score": 0.941,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1402,30 +1500,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 55,
+      "phraseOccurrenceCount": 492,
       "sampleWindows": [
         {
           "start": 4.823,
           "end": 5.544,
           "label": "work you've done on",
-          "score": 0.918
+          "score": 0.918,
+          "kind": "phrase"
         },
         {
           "start": 18.206,
           "end": 19.047,
           "label": "the subjugation of",
-          "score": 0.9033
+          "score": 0.9033,
+          "kind": "phrase"
         },
         {
           "start": 33.99,
           "end": 34.37,
           "label": "role of the",
-          "score": 0.8327
+          "score": 0.8327,
+          "kind": "phrase"
         },
         {
           "start": 47.921,
           "end": 48.542,
           "label": "are inferior",
-          "score": 0.91
+          "score": 0.91,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1442,30 +1545,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 627,
       "sampleWindows": [
         {
           "start": 6.217,
           "end": 6.457,
           "label": "votes?",
-          "score": 0.452
+          "score": 0.452,
+          "kind": "token"
         },
         {
           "start": 17.087,
           "end": 17.448,
           "label": "but initial",
-          "score": 0.4735
+          "score": 0.4735,
+          "kind": "phrase"
         },
         {
           "start": 35.463,
           "end": 36.884,
           "label": "you as Milwaukee's",
-          "score": 0.5677
+          "score": 0.5677,
+          "kind": "phrase"
         },
         {
           "start": 48.737,
           "end": 49.398,
           "label": "who understood",
-          "score": 0.574
+          "score": 0.574,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1482,30 +1590,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 64,
+      "phraseOccurrenceCount": 597,
       "sampleWindows": [
         {
           "start": 7.857,
           "end": 8.458,
           "label": "I also write",
-          "score": 0.9587
+          "score": 0.9587,
+          "kind": "phrase"
         },
         {
           "start": 20.727,
           "end": 22.689,
           "label": "book about prostitution and surrogacy.",
-          "score": 0.927
+          "score": 0.927,
+          "kind": "phrase"
         },
         {
           "start": 34.32,
           "end": 35.861,
           "label": "completely legal to",
-          "score": 0.8897
+          "score": 0.8897,
+          "kind": "phrase"
         },
         {
           "start": 49.29,
           "end": 50.571,
           "label": "only of patriarchy but of",
-          "score": 0.8284
+          "score": 0.8284,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1522,30 +1635,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 13,
+      "phraseOccurrenceCount": 94,
       "sampleWindows": [
         {
           "start": 1.135,
           "end": 1.677,
           "label": "working",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         },
         {
           "start": 4.285,
           "end": 5.148,
           "label": "the biological",
-          "score": 0.8995
+          "score": 0.8995,
+          "kind": "phrase"
         },
         {
           "start": 6.132,
           "end": 9.242,
           "label": "literature more machine readable and",
-          "score": 0.8922
+          "score": 0.8922,
+          "kind": "phrase"
         },
         {
           "start": 9.322,
           "end": 11.108,
           "label": "more standard compliant in",
-          "score": 0.9245
+          "score": 0.9245,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1562,30 +1680,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 72,
+      "phraseOccurrenceCount": 521,
       "sampleWindows": [
         {
           "start": 8.291,
           "end": 10.292,
           "label": "celebrity music and art",
-          "score": 0.9177
+          "score": 0.9177,
+          "kind": "phrase"
         },
         {
           "start": 25.038,
           "end": 25.278,
           "label": "Since",
-          "score": 0.863
+          "score": 0.863,
+          "kind": "token"
         },
         {
           "start": 36.545,
           "end": 36.785,
           "label": "Bus",
-          "score": 0.747
+          "score": 0.747,
+          "kind": "token"
         },
         {
           "start": 52.336,
           "end": 54.7,
           "label": "grandfather are former presidents of the",
-          "score": 0.8793
+          "score": 0.8793,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1602,30 +1725,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 56,
+      "phraseOccurrenceCount": 427,
       "sampleWindows": [
         {
           "start": 5.376,
           "end": 8.218,
           "label": "our modern life depends on",
-          "score": 0.9418
+          "score": 0.9418,
+          "kind": "phrase"
         },
         {
           "start": 20.769,
           "end": 22.05,
           "label": "we wouldn't have cell",
-          "score": 0.8313
+          "score": 0.8313,
+          "kind": "phrase"
         },
         {
           "start": 36.708,
           "end": 37.909,
           "label": "no idea how I",
-          "score": 0.9207
+          "score": 0.9207,
+          "kind": "phrase"
         },
         {
           "start": 48.895,
           "end": 49.495,
           "label": "to know what",
-          "score": 0.9027
+          "score": 0.9027,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1642,30 +1770,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 649,
       "sampleWindows": [
         {
           "start": 9.247,
           "end": 9.587,
           "label": "the questions",
-          "score": 0.8465
+          "score": 0.8465,
+          "kind": "phrase"
         },
         {
           "start": 23.981,
           "end": 24.482,
           "label": "of people.",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "phrase"
         },
         {
           "start": 36.772,
           "end": 38.554,
           "label": "of the top 100 websites back",
-          "score": 0.8648
+          "score": 0.8648,
+          "kind": "phrase"
         },
         {
           "start": 44.559,
           "end": 46.561,
           "label": "job we might be top 100",
-          "score": 0.8307
+          "score": 0.8307,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1682,30 +1815,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 599,
       "sampleWindows": [
         {
           "start": 7.698,
           "end": 8.119,
           "label": "council",
-          "score": 0.838
+          "score": 0.838,
+          "kind": "token"
         },
         {
           "start": 20.85,
           "end": 21.771,
           "label": "LGBT and",
-          "score": 0.845
+          "score": 0.845,
+          "kind": "phrase"
         },
         {
           "start": 32.813,
           "end": 34.454,
           "label": "In those meetings, we had",
-          "score": 0.9412
+          "score": 0.9412,
+          "kind": "phrase"
         },
         {
           "start": 49.542,
           "end": 50.383,
           "label": "coverage of",
-          "score": 0.845
+          "score": 0.845,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1722,30 +1860,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 626,
       "sampleWindows": [
         {
           "start": 3.913,
           "end": 4.334,
           "label": "Everybody",
-          "score": 0.996
+          "score": 0.996,
+          "kind": "token"
         },
         {
           "start": 18.423,
           "end": 19.363,
           "label": "reflection at",
-          "score": 0.9745
+          "score": 0.9745,
+          "kind": "phrase"
         },
         {
           "start": 37.036,
           "end": 38.476,
           "label": "my active participation.",
-          "score": 0.9167
+          "score": 0.9167,
+          "kind": "phrase"
         },
         {
           "start": 51.149,
           "end": 51.811,
           "label": "hard for you to",
-          "score": 0.9183
+          "score": 0.9183,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1762,30 +1905,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 58,
+      "phraseOccurrenceCount": 486,
       "sampleWindows": [
         {
           "start": 3.833,
           "end": 4.853,
           "label": "visiting Australia.",
-          "score": 0.914
+          "score": 0.914,
+          "kind": "phrase"
         },
         {
           "start": 21.681,
           "end": 24.103,
           "label": "raising awareness among the",
-          "score": 0.9032
+          "score": 0.9032,
+          "kind": "phrase"
         },
         {
           "start": 36.067,
           "end": 38.97,
           "label": "the occupation because of importing Moroccans",
-          "score": 0.888
+          "score": 0.888,
+          "kind": "phrase"
         },
         {
           "start": 47.916,
           "end": 48.697,
           "label": "would you like to talk about",
-          "score": 0.9283
+          "score": 0.9283,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1802,30 +1950,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 74,
+      "phraseOccurrenceCount": 525,
       "sampleWindows": [
         {
           "start": 10.96,
           "end": 11.801,
           "label": "William Vulpas.",
-          "score": 0.8555
+          "score": 0.8555,
+          "kind": "phrase"
         },
         {
           "start": 24.674,
           "end": 26.676,
           "label": "Rolling Stone, Matt Tybee said",
-          "score": 0.8924
+          "score": 0.8924,
+          "kind": "phrase"
         },
         {
           "start": 37.307,
           "end": 37.707,
           "label": "the face",
-          "score": 0.918
+          "score": 0.918,
+          "kind": "phrase"
         },
         {
           "start": 50.572,
           "end": 53.473,
           "label": "statement because we don't currently have",
-          "score": 0.9245
+          "score": 0.9245,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1842,30 +1995,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 37,
+      "phraseOccurrenceCount": 207,
       "sampleWindows": [
         {
           "start": 16.809,
           "end": 17.55,
           "label": "And you want to",
-          "score": 0.8563
+          "score": 0.8563,
+          "kind": "phrase"
         },
         {
           "start": 24.574,
           "end": 25.134,
           "label": "beautiful woman",
-          "score": 0.414
+          "score": 0.414,
+          "kind": "phrase"
         },
         {
           "start": 35.201,
           "end": 38.463,
           "label": "foot rest, a seat cushion,",
-          "score": 0.8346
+          "score": 0.8346,
+          "kind": "phrase"
         },
         {
           "start": 52.116,
           "end": 52.356,
           "label": "Do you",
-          "score": 0.879
+          "score": 0.879,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1882,30 +2040,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 42,
+      "phraseOccurrenceCount": 332,
       "sampleWindows": [
         {
           "start": 14.99,
           "end": 17.311,
           "label": "teacher assistant of linguistics at the",
-          "score": 0.84
+          "score": 0.84,
+          "kind": "phrase"
         },
         {
           "start": 26.836,
           "end": 27.516,
           "label": "journalist",
-          "score": 0.704
+          "score": 0.704,
+          "kind": "token"
         },
         {
           "start": 40.559,
           "end": 43.561,
           "label": "about the revolution of",
-          "score": 0.8892
+          "score": 0.8892,
+          "kind": "phrase"
         },
         {
           "start": 50.565,
           "end": 50.986,
           "label": "Tunisian",
-          "score": 0.932
+          "score": 0.932,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -1922,30 +2085,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 88,
+      "phraseOccurrenceCount": 628,
       "sampleWindows": [
         {
           "start": 3.936,
           "end": 4.556,
           "label": "FCC,",
-          "score": 0.799
+          "score": 0.799,
+          "kind": "token"
         },
         {
           "start": 16.811,
           "end": 18.513,
           "label": "at MCI, WorldCom,",
-          "score": 0.7597
+          "score": 0.7597,
+          "kind": "phrase"
         },
         {
           "start": 33.646,
           "end": 34.687,
           "label": "still true today, is",
-          "score": 0.8867
+          "score": 0.8867,
+          "kind": "phrase"
         },
         {
           "start": 49.159,
           "end": 50.4,
           "label": "make sure it stayed that way",
-          "score": 0.9023
+          "score": 0.9023,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -1962,30 +2130,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 418,
       "sampleWindows": [
         {
           "start": 10.663,
           "end": 12.544,
           "label": "Since I'm right now,",
-          "score": 0.8698
+          "score": 0.8698,
+          "kind": "phrase"
         },
         {
           "start": 20.17,
           "end": 20.61,
           "label": "because I'm",
-          "score": 0.8355
+          "score": 0.8355,
+          "kind": "phrase"
         },
         {
           "start": 35.305,
           "end": 35.605,
           "label": "agreeing",
-          "score": 0.932
+          "score": 0.932,
+          "kind": "token"
         },
         {
           "start": 46.148,
           "end": 47.168,
           "label": "to be discovered in this",
-          "score": 0.9698
+          "score": 0.9698,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2002,30 +2175,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 451,
       "sampleWindows": [
         {
           "start": 7.911,
           "end": 8.491,
           "label": "for the recent",
-          "score": 0.8977
+          "score": 0.8977,
+          "kind": "phrase"
         },
         {
           "start": 24.635,
           "end": 24.815,
           "label": "Well,",
-          "score": 0.997
+          "score": 0.997,
+          "kind": "token"
         },
         {
           "start": 33.498,
           "end": 36.339,
           "label": "and we will probably",
-          "score": 0.9305
+          "score": 0.9305,
+          "kind": "phrase"
         },
         {
           "start": 46.383,
           "end": 47.984,
           "label": "sequence of images that looks",
-          "score": 0.8998
+          "score": 0.8998,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2042,30 +2220,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 48,
+      "phraseOccurrenceCount": 338,
       "sampleWindows": [
         {
           "start": 6.536,
           "end": 7.076,
           "label": "that correct",
-          "score": 0.912
+          "score": 0.912,
+          "kind": "phrase"
         },
         {
           "start": 25.68,
           "end": 26.8,
           "label": "time zone and because",
-          "score": 0.794
+          "score": 0.794,
+          "kind": "phrase"
         },
         {
           "start": 36.213,
           "end": 37.054,
           "label": "discovery, its",
-          "score": 0.912
+          "score": 0.912,
+          "kind": "phrase"
         },
         {
           "start": 52.467,
           "end": 53.908,
           "label": "Yeah, anything first that",
-          "score": 0.8385
+          "score": 0.8385,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2082,30 +2265,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 341,
       "sampleWindows": [
         {
           "start": 3.224,
           "end": 4.664,
           "label": "findings on formation of",
-          "score": 0.8545
+          "score": 0.8545,
+          "kind": "phrase"
         },
         {
           "start": 11.966,
           "end": 12.466,
           "label": "be studied.",
-          "score": 0.937
+          "score": 0.937,
+          "kind": "phrase"
         },
         {
           "start": 36.176,
           "end": 37.938,
           "label": "study, the inferences and",
-          "score": 0.9572
+          "score": 0.9572,
+          "kind": "phrase"
         },
         {
           "start": 53.808,
           "end": 55.429,
           "label": "about objects that",
-          "score": 0.932
+          "score": 0.932,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2122,30 +2310,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 776,
       "sampleWindows": [
         {
           "start": 12.911,
           "end": 13.091,
           "label": "couldn't",
-          "score": 0.935
+          "score": 0.935,
+          "kind": "token"
         },
         {
           "start": 24.406,
           "end": 25.728,
           "label": "effort get underway and",
-          "score": 0.8748
+          "score": 0.8748,
+          "kind": "phrase"
         },
         {
           "start": 38.555,
           "end": 39.716,
           "label": "better structured, so",
-          "score": 0.9787
+          "score": 0.9787,
+          "kind": "phrase"
         },
         {
           "start": 51.39,
           "end": 52.672,
           "label": "can contribute without being",
-          "score": 0.9227
+          "score": 0.9227,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2162,30 +2355,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 336,
       "sampleWindows": [
         {
           "start": 24.736,
           "end": 24.996,
           "label": "third",
-          "score": 0.998
+          "score": 0.998,
+          "kind": "token"
         },
         {
           "start": 31.559,
           "end": 33.179,
           "label": "member of Wikimediants of",
-          "score": 0.883
+          "score": 0.883,
+          "kind": "phrase"
         },
         {
           "start": 42.043,
           "end": 43.083,
           "label": "let us know more about",
-          "score": 0.9174
+          "score": 0.9174,
+          "kind": "phrase"
         },
         {
           "start": 53.401,
           "end": 53.842,
           "label": "actually",
-          "score": 0.954
+          "score": 0.954,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -2202,30 +2400,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 51,
+      "phraseOccurrenceCount": 373,
       "sampleWindows": [
         {
           "start": 2.072,
           "end": 5.532,
           "label": "passed as yet,",
-          "score": 0.9823
+          "score": 0.9823,
+          "kind": "phrase"
         },
         {
           "start": 15.275,
           "end": 17.855,
           "label": "passed and the Iranian Chess",
-          "score": 0.8634
+          "score": 0.8634,
+          "kind": "phrase"
         },
         {
           "start": 29.496,
           "end": 31.837,
           "label": "get some guarantees that this thing",
-          "score": 0.9157
+          "score": 0.9157,
+          "kind": "phrase"
         },
         {
           "start": 52.096,
           "end": 52.898,
           "label": "your players or",
-          "score": 0.9213
+          "score": 0.9213,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2242,30 +2445,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 482,
       "sampleWindows": [
         {
           "start": 19.437,
           "end": 19.858,
           "label": "Yang.",
-          "score": 0.976
+          "score": 0.976,
+          "kind": "token"
         },
         {
           "start": 28.508,
           "end": 29.449,
           "label": "but before people were sitting",
-          "score": 0.8096
+          "score": 0.8096,
+          "kind": "phrase"
         },
         {
           "start": 39.418,
           "end": 39.999,
           "label": "entrepreneur, I have",
-          "score": 0.6337
+          "score": 0.6337,
+          "kind": "phrase"
         },
         {
           "start": 51.546,
           "end": 52.566,
           "label": "there's there's a lot of",
-          "score": 0.8606
+          "score": 0.8606,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2282,30 +2490,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 56,
+      "phraseOccurrenceCount": 393,
       "sampleWindows": [
         {
           "start": 8.571,
           "end": 9.913,
           "label": "Islands based in St. Croix.",
-          "score": 0.8042
+          "score": 0.8042,
+          "kind": "phrase"
         },
         {
           "start": 18.303,
           "end": 20.025,
           "label": "of my material, I work",
-          "score": 0.9228
+          "score": 0.9228,
+          "kind": "phrase"
         },
         {
           "start": 31.955,
           "end": 32.235,
           "label": "And my",
-          "score": 0.9085
+          "score": 0.9085,
+          "kind": "phrase"
         },
         {
           "start": 45.741,
           "end": 48.182,
           "label": "mainly within the fields of performance,",
-          "score": 0.929
+          "score": 0.929,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2322,30 +2535,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 64,
+      "phraseOccurrenceCount": 541,
       "sampleWindows": [
         {
           "start": 12.523,
           "end": 13.924,
           "label": "difference you've noticed just",
-          "score": 0.9315
+          "score": 0.9315,
+          "kind": "phrase"
         },
         {
           "start": 26.111,
           "end": 27.092,
           "label": "and Mike Rizzo,",
-          "score": 0.8343
+          "score": 0.8343,
+          "kind": "phrase"
         },
         {
           "start": 39.307,
           "end": 41.507,
           "label": "Philly, very excited.",
-          "score": 0.9357
+          "score": 0.9357,
+          "kind": "phrase"
         },
         {
           "start": 53.05,
           "end": 53.99,
           "label": "you come to a new team",
-          "score": 0.9212
+          "score": 0.9212,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2362,30 +2580,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 615,
       "sampleWindows": [
         {
           "start": 13.113,
           "end": 13.713,
           "label": "easily versus",
-          "score": 0.7375
+          "score": 0.7375,
+          "kind": "phrase"
         },
         {
           "start": 28.99,
           "end": 30.871,
           "label": "for quite a long time and",
-          "score": 0.8953
+          "score": 0.8953,
+          "kind": "phrase"
         },
         {
           "start": 42.456,
           "end": 44.378,
           "label": "like some of us",
-          "score": 0.8722
+          "score": 0.8722,
+          "kind": "phrase"
         },
         {
           "start": 54.066,
           "end": 55.347,
           "label": "of was away I had",
-          "score": 0.8966
+          "score": 0.8966,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2402,30 +2625,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 691,
       "sampleWindows": [
         {
           "start": 6.335,
           "end": 7.676,
           "label": "in 2018 I decided",
-          "score": 0.6875
+          "score": 0.6875,
+          "kind": "phrase"
         },
         {
           "start": 19.104,
           "end": 19.784,
           "label": "board to help me with",
-          "score": 0.9376
+          "score": 0.9376,
+          "kind": "phrase"
         },
         {
           "start": 36.615,
           "end": 37.295,
           "label": "people for minor",
-          "score": 0.8547
+          "score": 0.8547,
+          "kind": "phrase"
         },
         {
           "start": 52.766,
           "end": 53.126,
           "label": "that's sort",
-          "score": 0.8115
+          "score": 0.8115,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2442,30 +2670,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 77,
+      "phraseOccurrenceCount": 604,
       "sampleWindows": [
         {
           "start": 10.211,
           "end": 10.591,
           "label": "so happy",
-          "score": 0.9445
+          "score": 0.9445,
+          "kind": "phrase"
         },
         {
           "start": 23.504,
           "end": 24.805,
           "label": "Yeah, it was really fun to",
-          "score": 0.7983
+          "score": 0.7983,
+          "kind": "phrase"
         },
         {
           "start": 36.659,
           "end": 37.739,
           "label": "journey did you finally",
-          "score": 0.9167
+          "score": 0.9167,
+          "kind": "phrase"
         },
         {
           "start": 47.961,
           "end": 48.341,
           "label": "first time I",
-          "score": 0.812
+          "score": 0.812,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2482,30 +2715,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 51,
+      "phraseOccurrenceCount": 354,
       "sampleWindows": [
         {
           "start": 22.503,
           "end": 22.903,
           "label": "Hillary and",
-          "score": 0.87
+          "score": 0.87,
+          "kind": "phrase"
         },
         {
           "start": 30.526,
           "end": 31.787,
           "label": "fire on their classmates",
-          "score": 0.9637
+          "score": 0.9637,
+          "kind": "phrase"
         },
         {
           "start": 40.371,
           "end": 44.093,
           "label": "Commission Chair Patricia Holloway and expressed",
-          "score": 0.8787
+          "score": 0.8787,
+          "kind": "phrase"
         },
         {
           "start": 50.103,
           "end": 50.644,
           "label": "Eric Holder",
-          "score": 0.668
+          "score": 0.668,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2522,30 +2760,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 83,
+      "phraseOccurrenceCount": 592,
       "sampleWindows": [
         {
           "start": 7.748,
           "end": 8.749,
           "label": "Department of Justice",
-          "score": 0.9697
+          "score": 0.9697,
+          "kind": "phrase"
         },
         {
           "start": 20.257,
           "end": 21.117,
           "label": "property receipt",
-          "score": 0.917
+          "score": 0.917,
+          "kind": "phrase"
         },
         {
           "start": 35.824,
           "end": 36.984,
           "label": "on the day of the search.",
-          "score": 0.9147
+          "score": 0.9147,
+          "kind": "phrase"
         },
         {
           "start": 49.728,
           "end": 51.108,
           "label": "to the former president's counsel",
-          "score": 0.9138
+          "score": 0.9138,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2562,30 +2805,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 29,
+      "phraseOccurrenceCount": 249,
       "sampleWindows": [
         {
           "start": 33.249,
           "end": 33.429,
           "label": "and I",
-          "score": 0.995
+          "score": 0.995,
+          "kind": "phrase"
         },
         {
           "start": 39.431,
           "end": 39.931,
           "label": "pleasure to",
-          "score": 0.98
+          "score": 0.98,
+          "kind": "phrase"
         },
         {
           "start": 44.113,
           "end": 44.773,
           "label": "all for turning",
-          "score": 0.92
+          "score": 0.92,
+          "kind": "phrase"
         },
         {
           "start": 49.755,
           "end": 50.655,
           "label": "taking your final",
-          "score": 0.9377
+          "score": 0.9377,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2602,30 +2850,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 88,
+      "phraseOccurrenceCount": 620,
       "sampleWindows": [
         {
           "start": 6.632,
           "end": 6.952,
           "label": "pleasure",
-          "score": 0.873
+          "score": 0.873,
+          "kind": "token"
         },
         {
           "start": 17.755,
           "end": 19.595,
           "label": "like to welcome the Shadow",
-          "score": 0.7808
+          "score": 0.7808,
+          "kind": "phrase"
         },
         {
           "start": 31.718,
           "end": 32.018,
           "label": "I know",
-          "score": 0.8945
+          "score": 0.8945,
+          "kind": "phrase"
         },
         {
           "start": 48.126,
           "end": 48.987,
           "label": "pay my respects",
-          "score": 0.9583
+          "score": 0.9583,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2642,30 +2895,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 84,
+      "phraseOccurrenceCount": 841,
       "sampleWindows": [
         {
           "start": 7.994,
           "end": 8.434,
           "label": "you gave a little",
-          "score": 0.8077
+          "score": 0.8077,
+          "kind": "phrase"
         },
         {
           "start": 22.843,
           "end": 23.864,
           "label": "as I started to see sort",
-          "score": 0.9195
+          "score": 0.9195,
+          "kind": "phrase"
         },
         {
           "start": 37.445,
           "end": 37.965,
           "label": "what blockchains",
-          "score": 0.8565
+          "score": 0.8565,
+          "kind": "phrase"
         },
         {
           "start": 48.394,
           "end": 50.635,
           "label": "or permission blockchains and",
-          "score": 0.827
+          "score": 0.827,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2682,30 +2940,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 51,
+      "phraseOccurrenceCount": 366,
       "sampleWindows": [
         {
           "start": 10.874,
           "end": 14.155,
           "label": "And I must say, hugely privileged.",
-          "score": 0.9565
+          "score": 0.9565,
+          "kind": "phrase"
         },
         {
           "start": 23.279,
           "end": 24.719,
           "label": "was speaking to did not",
-          "score": 0.9714
+          "score": 0.9714,
+          "kind": "phrase"
         },
         {
           "start": 38.113,
           "end": 38.933,
           "label": "solidarities",
-          "score": 0.976
+          "score": 0.976,
+          "kind": "token"
         },
         {
           "start": 50.283,
           "end": 50.583,
           "label": "ways",
-          "score": 0.834
+          "score": 0.834,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -2722,30 +2985,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 407,
       "sampleWindows": [
         {
           "start": 5.337,
           "end": 5.657,
           "label": "I'm not",
-          "score": 0.9325
+          "score": 0.9325,
+          "kind": "phrase"
         },
         {
           "start": 16.529,
           "end": 18.931,
           "label": "But I wanted to start by",
-          "score": 0.9452
+          "score": 0.9452,
+          "kind": "phrase"
         },
         {
           "start": 32.571,
           "end": 33.031,
           "label": "one is",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "phrase"
         },
         {
           "start": 47.856,
           "end": 51.38,
           "label": "custodians of public knowledge and I",
-          "score": 0.9047
+          "score": 0.9047,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2762,30 +3030,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "legacy-audited-v2",
       "tokenOccurrenceCount": 29,
+      "phraseOccurrenceCount": 0,
       "sampleWindows": [
         {
           "start": 29.077,
           "end": 29.657,
           "label": "1979,",
-          "score": 0.933
+          "score": 0.933,
+          "kind": "token"
         },
         {
           "start": 33.88,
           "end": 34.04,
           "label": "meet",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         },
         {
           "start": 37.083,
           "end": 37.303,
           "label": "group",
-          "score": 0.974
+          "score": 0.974,
+          "kind": "token"
         },
         {
           "start": 40.445,
           "end": 40.966,
           "label": "employees,",
-          "score": 0.891
+          "score": 0.891,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -2802,30 +3075,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 64,
+      "phraseOccurrenceCount": 549,
       "sampleWindows": [
         {
           "start": 7.116,
           "end": 8.016,
           "label": "the Board of Trustees, to",
-          "score": 0.9202
+          "score": 0.9202,
+          "kind": "phrase"
         },
         {
           "start": 20.705,
           "end": 22.466,
           "label": "Trustees, welcome everyone.",
-          "score": 0.89
+          "score": 0.89,
+          "kind": "phrase"
         },
         {
           "start": 34.928,
           "end": 35.369,
           "label": "want you to know",
-          "score": 0.9377
+          "score": 0.9377,
+          "kind": "phrase"
         },
         {
           "start": 46.514,
           "end": 47.514,
           "label": "one of the greatest of this",
-          "score": 0.993
+          "score": 0.993,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2842,30 +3120,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 84,
+      "phraseOccurrenceCount": 603,
       "sampleWindows": [
         {
           "start": 5.396,
           "end": 7.859,
           "label": "thank you appreciation and",
-          "score": 0.93
+          "score": 0.93,
+          "kind": "phrase"
         },
         {
           "start": 23.775,
           "end": 25.618,
           "label": "out what we'll start with in",
-          "score": 0.9372
+          "score": 0.9372,
+          "kind": "phrase"
         },
         {
           "start": 37.469,
           "end": 37.649,
           "label": "we'll",
-          "score": 0.877
+          "score": 0.877,
+          "kind": "token"
         },
         {
           "start": 49.701,
           "end": 51.683,
           "label": "of registration for December 5th and",
-          "score": 0.8603
+          "score": 0.8603,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2882,30 +3165,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 61,
+      "phraseOccurrenceCount": 489,
       "sampleWindows": [
         {
           "start": 13.363,
           "end": 14.923,
           "label": "I am the chief of staff",
-          "score": 0.9057
+          "score": 0.9057,
+          "kind": "phrase"
         },
         {
           "start": 23.907,
           "end": 25.548,
           "label": "this point.",
-          "score": 0.985
+          "score": 0.985,
+          "kind": "phrase"
         },
         {
           "start": 35.98,
           "end": 37.14,
           "label": "folks to think about",
-          "score": 0.958
+          "score": 0.958,
+          "kind": "phrase"
         },
         {
           "start": 49.826,
           "end": 52.567,
           "label": "large institutions and even large movements",
-          "score": 0.9227
+          "score": 0.9227,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2922,30 +3210,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 472,
       "sampleWindows": [
         {
           "start": 3.959,
           "end": 4.319,
           "label": "the next",
-          "score": 0.9435
+          "score": 0.9435,
+          "kind": "phrase"
         },
         {
           "start": 17.342,
           "end": 18.262,
           "label": "on the line right now?",
-          "score": 0.7972
+          "score": 0.7972,
+          "kind": "phrase"
         },
         {
           "start": 37.229,
           "end": 38.51,
           "label": "say good afternoon first",
-          "score": 0.9657
+          "score": 0.9657,
+          "kind": "phrase"
         },
         {
           "start": 49.057,
           "end": 51.119,
           "label": "named the Wikimedia off the year.",
-          "score": 0.8447
+          "score": 0.8447,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -2962,30 +3255,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 69,
+      "phraseOccurrenceCount": 690,
       "sampleWindows": [
         {
           "start": 4.114,
           "end": 4.334,
           "label": "getting",
-          "score": 0.928
+          "score": 0.928,
+          "kind": "token"
         },
         {
           "start": 20.826,
           "end": 21.886,
           "label": "almost hopping in my",
-          "score": 0.957
+          "score": 0.957,
+          "kind": "phrase"
         },
         {
           "start": 37.622,
           "end": 39.985,
           "label": "couldn't possibly work this idea",
-          "score": 0.9356
+          "score": 0.9356,
+          "kind": "phrase"
         },
         {
           "start": 51.347,
           "end": 52.247,
           "label": "our values and we",
-          "score": 0.919
+          "score": 0.919,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3002,30 +3300,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 74,
+      "phraseOccurrenceCount": 599,
       "sampleWindows": [
         {
           "start": 5.739,
           "end": 7.339,
           "label": "for almost 20 years",
-          "score": 0.9267
+          "score": 0.9267,
+          "kind": "phrase"
         },
         {
           "start": 20.441,
           "end": 21.122,
           "label": "of this movement,",
-          "score": 0.9463
+          "score": 0.9463,
+          "kind": "phrase"
         },
         {
           "start": 32.774,
           "end": 34.254,
           "label": "we want our collective future to",
-          "score": 0.9572
+          "score": 0.9572,
+          "kind": "phrase"
         },
         {
           "start": 51.838,
           "end": 52.398,
           "label": "moment has the",
-          "score": 0.875
+          "score": 0.875,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3042,30 +3345,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 573,
       "sampleWindows": [
         {
           "start": 4.914,
           "end": 5.494,
           "label": "we need to have",
-          "score": 0.9357
+          "score": 0.9357,
+          "kind": "phrase"
         },
         {
           "start": 20.382,
           "end": 21.003,
           "label": "to affiliates.",
-          "score": 0.767
+          "score": 0.767,
+          "kind": "phrase"
         },
         {
           "start": 32.366,
           "end": 32.926,
           "label": "since 2017.",
-          "score": 0.9145
+          "score": 0.9145,
+          "kind": "phrase"
         },
         {
           "start": 50.665,
           "end": 51.786,
           "label": "here and other",
-          "score": 0.853
+          "score": 0.853,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3082,30 +3390,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 57,
+      "phraseOccurrenceCount": 626,
       "sampleWindows": [
         {
           "start": 5.768,
           "end": 7.209,
           "label": "delight to",
-          "score": 0.9625
+          "score": 0.9625,
+          "kind": "phrase"
         },
         {
           "start": 20.498,
           "end": 21.639,
           "label": "we have today on",
-          "score": 0.9027
+          "score": 0.9027,
+          "kind": "phrase"
         },
         {
           "start": 34.344,
           "end": 36.025,
           "label": "movement strategy, I'm",
-          "score": 0.9027
+          "score": 0.9027,
+          "kind": "phrase"
         },
         {
           "start": 51.879,
           "end": 53.862,
           "label": "the opportunity to go out",
-          "score": 0.9872
+          "score": 0.9872,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3122,30 +3435,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "legacy-audited-v2",
       "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 0,
       "sampleWindows": [
         {
           "start": 14.567,
           "end": 14.807,
           "label": "believe",
-          "score": 0.858
+          "score": 0.858,
+          "kind": "token"
         },
         {
           "start": 22.632,
           "end": 22.812,
           "label": "has",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         },
         {
           "start": 29.996,
           "end": 30.136,
           "label": "kind",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         },
         {
           "start": 37.079,
           "end": 37.6,
           "label": "companies,",
-          "score": 0.987
+          "score": 0.987,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -3162,30 +3480,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 574,
       "sampleWindows": [
         {
           "start": 9.022,
           "end": 9.823,
           "label": "I'll take your questions.",
-          "score": 0.9432
+          "score": 0.9432,
+          "kind": "phrase"
         },
         {
           "start": 21.947,
           "end": 23.808,
           "label": "imprisonments of the last few days.",
-          "score": 0.9237
+          "score": 0.9237,
+          "kind": "phrase"
         },
         {
           "start": 35.629,
           "end": 36.569,
           "label": "States respects the",
-          "score": 0.924
+          "score": 0.924,
+          "kind": "phrase"
         },
         {
           "start": 49.141,
           "end": 49.842,
           "label": "to a remarkable",
-          "score": 0.9703
+          "score": 0.9703,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3202,30 +3525,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 620,
       "sampleWindows": [
         {
           "start": 7.734,
           "end": 9.375,
           "label": "am a researcher and",
-          "score": 0.9042
+          "score": 0.9042,
+          "kind": "phrase"
         },
         {
           "start": 26.204,
           "end": 26.585,
           "label": "Web3",
-          "score": 0.772
+          "score": 0.772,
+          "kind": "token"
         },
         {
           "start": 37.736,
           "end": 38.857,
           "label": "Web3 and crypto.",
-          "score": 0.8777
+          "score": 0.8777,
+          "kind": "phrase"
         },
         {
           "start": 53.927,
           "end": 55.028,
           "label": "before we get started, let's",
-          "score": 0.9006
+          "score": 0.9006,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3242,30 +3570,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 86,
+      "phraseOccurrenceCount": 534,
       "sampleWindows": [
         {
           "start": 14.967,
           "end": 15.828,
           "label": "as heated as it",
-          "score": 0.9178
+          "score": 0.9178,
+          "kind": "phrase"
         },
         {
           "start": 29.074,
           "end": 29.214,
           "label": "all,",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         },
         {
           "start": 42.602,
           "end": 43.443,
           "label": "to root on Team",
-          "score": 0.9313
+          "score": 0.9313,
+          "kind": "phrase"
         },
         {
           "start": 52.927,
           "end": 53.188,
           "label": "jump.",
-          "score": 0.997
+          "score": 0.997,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -3282,30 +3615,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 30,
+      "phraseOccurrenceCount": 373,
       "sampleWindows": [
         {
           "start": 37.514,
           "end": 39.215,
           "label": "you while we wait for",
-          "score": 0.9392
+          "score": 0.9392,
+          "kind": "phrase"
         },
         {
           "start": 44.98,
           "end": 45.24,
           "label": "West",
-          "score": 0.973
+          "score": 0.973,
+          "kind": "token"
         },
         {
           "start": 48.763,
           "end": 50.084,
           "label": "how pleased I am",
-          "score": 0.871
+          "score": 0.871,
+          "kind": "phrase"
         },
         {
           "start": 55.928,
           "end": 56.248,
           "label": "to start",
-          "score": 0.9725
+          "score": 0.9725,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3322,30 +3660,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 61,
+      "phraseOccurrenceCount": 354,
       "sampleWindows": [
         {
           "start": 5.075,
           "end": 5.695,
           "label": "is the Sierra",
-          "score": 0.9393
+          "score": 0.9393,
+          "kind": "phrase"
         },
         {
           "start": 24.73,
           "end": 26.291,
           "label": "former chair of the",
-          "score": 0.953
+          "score": 0.953,
+          "kind": "phrase"
         },
         {
           "start": 34.245,
           "end": 35.065,
           "label": "200 years, 85%.",
-          "score": 0.7917
+          "score": 0.7917,
+          "kind": "phrase"
         },
         {
           "start": 45.676,
           "end": 46.116,
           "label": "live in",
-          "score": 0.908
+          "score": 0.908,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3362,30 +3705,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 44,
+      "phraseOccurrenceCount": 339,
       "sampleWindows": [
         {
           "start": 8.533,
           "end": 10.075,
           "label": "privilege to present to you",
-          "score": 0.9616
+          "score": 0.9616,
+          "kind": "phrase"
         },
         {
           "start": 37.575,
           "end": 38.475,
           "label": "members of the crew",
-          "score": 0.9395
+          "score": 0.9395,
+          "kind": "phrase"
         },
         {
           "start": 44.86,
           "end": 45.36,
           "label": "of us here,",
-          "score": 0.9163
+          "score": 0.9163,
+          "kind": "phrase"
         },
         {
           "start": 52.986,
           "end": 53.806,
           "label": "navy blue and",
-          "score": 0.9463
+          "score": 0.9463,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3402,30 +3750,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "legacy-audited-v2",
       "tokenOccurrenceCount": 43,
+      "phraseOccurrenceCount": 0,
       "sampleWindows": [
         {
           "start": 6.141,
           "end": 6.421,
           "label": "senior",
-          "score": 0.867
+          "score": 0.867,
+          "kind": "token"
         },
         {
           "start": 13.184,
           "end": 13.544,
           "label": "house.",
-          "score": 0.597
+          "score": 0.597,
+          "kind": "token"
         },
         {
           "start": 26.029,
           "end": 26.469,
           "label": "seniors,",
-          "score": 0.789
+          "score": 0.789,
+          "kind": "token"
         },
         {
           "start": 39.504,
           "end": 39.844,
           "label": "spirit.",
-          "score": 0.999
+          "score": 0.999,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -3442,30 +3795,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 66,
+      "phraseOccurrenceCount": 466,
       "sampleWindows": [
         {
           "start": 4.587,
           "end": 5.627,
           "label": "CDC for having us",
-          "score": 0.9635
+          "score": 0.9635,
+          "kind": "phrase"
         },
         {
           "start": 18.891,
           "end": 19.251,
           "label": "we live in",
-          "score": 0.8777
+          "score": 0.8777,
+          "kind": "phrase"
         },
         {
           "start": 33.581,
           "end": 33.821,
           "label": "water",
-          "score": 0.882
+          "score": 0.882,
+          "kind": "token"
         },
         {
           "start": 53.369,
           "end": 53.629,
           "label": "of years",
-          "score": 0.7855
+          "score": 0.7855,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3482,30 +3840,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "legacy-audited-v2",
       "tokenOccurrenceCount": 19,
+      "phraseOccurrenceCount": 0,
       "sampleWindows": [
         {
           "start": 27.97,
           "end": 28.11,
           "label": "good",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         },
         {
           "start": 30.371,
           "end": 30.511,
           "label": "ask",
-          "score": 0.999
+          "score": 0.999,
+          "kind": "token"
         },
         {
           "start": 33.213,
           "end": 33.533,
           "label": "begin",
-          "score": 0.983
+          "score": 0.983,
+          "kind": "token"
         },
         {
           "start": 35.934,
           "end": 36.194,
           "label": "find",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -3522,30 +3885,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "legacy-audited-v2",
       "tokenOccurrenceCount": 16,
+      "phraseOccurrenceCount": 0,
       "sampleWindows": [
         {
           "start": 2.964,
           "end": 3.264,
           "label": "House",
-          "score": 0.99
+          "score": 0.99,
+          "kind": "token"
         },
         {
           "start": 4.587,
           "end": 5.769,
           "label": "Virginia's",
-          "score": 0.882
+          "score": 0.882,
+          "kind": "token"
         },
         {
           "start": 8.714,
           "end": 8.934,
           "label": "Ready",
-          "score": 0.821
+          "score": 0.821,
+          "kind": "token"
         },
         {
           "start": 11.338,
           "end": 11.498,
           "label": "been",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -3562,30 +3930,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 583,
       "sampleWindows": [
         {
           "start": 5.595,
           "end": 8.378,
           "label": "hip-hop legend, MC for one of",
-          "score": 0.8605
+          "score": 0.8605,
+          "kind": "phrase"
         },
         {
           "start": 19.287,
           "end": 19.627,
           "label": "feature",
-          "score": 0.861
+          "score": 0.861,
+          "kind": "token"
         },
         {
           "start": 34.608,
           "end": 35.809,
           "label": "never remember this, but",
-          "score": 0.991
+          "score": 0.991,
+          "kind": "phrase"
         },
         {
           "start": 44.254,
           "end": 44.694,
           "label": "in your life",
-          "score": 0.9753
+          "score": 0.9753,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3602,30 +3975,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 75,
+      "phraseOccurrenceCount": 551,
       "sampleWindows": [
         {
           "start": 3.988,
           "end": 4.388,
           "label": "to our",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "phrase"
         },
         {
           "start": 27.655,
           "end": 30.356,
           "label": "windows of electronic stores and from",
-          "score": 0.9408
+          "score": 0.9408,
+          "kind": "phrase"
         },
         {
           "start": 39.421,
           "end": 41.822,
           "label": "signal flickers, alongside",
-          "score": 0.9167
+          "score": 0.9167,
+          "kind": "phrase"
         },
         {
           "start": 53.314,
           "end": 53.975,
           "label": "as the memory",
-          "score": 0.928
+          "score": 0.928,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3642,30 +4020,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 573,
       "sampleWindows": [
         {
           "start": 3.856,
           "end": 5.118,
           "label": "chief oppositions",
-          "score": 0.872
+          "score": 0.872,
+          "kind": "phrase"
         },
         {
           "start": 18.355,
           "end": 20.197,
           "label": "children, especially to be denied",
-          "score": 0.9096
+          "score": 0.9096,
+          "kind": "phrase"
         },
         {
           "start": 35.437,
           "end": 36.017,
           "label": "I have",
-          "score": 0.9315
+          "score": 0.9315,
+          "kind": "phrase"
         },
         {
           "start": 51.986,
           "end": 54.428,
           "label": "that KPFA, KPFA is a",
-          "score": 0.8852
+          "score": 0.8852,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3682,30 +4065,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 48,
+      "phraseOccurrenceCount": 382,
       "sampleWindows": [
         {
           "start": 5.957,
           "end": 8.199,
           "label": "congratulate all of",
-          "score": 0.821
+          "score": 0.821,
+          "kind": "phrase"
         },
         {
           "start": 18.125,
           "end": 18.945,
           "label": "going on 20",
-          "score": 0.921
+          "score": 0.921,
+          "kind": "phrase"
         },
         {
           "start": 34.606,
           "end": 35.046,
           "label": "That's been",
-          "score": 0.8865
+          "score": 0.8865,
+          "kind": "phrase"
         },
         {
           "start": 52.174,
           "end": 52.735,
           "label": "of the great,",
-          "score": 0.8997
+          "score": 0.8997,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3722,30 +4110,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "legacy-audited-v2",
       "tokenOccurrenceCount": 4,
+      "phraseOccurrenceCount": 0,
       "sampleWindows": [
         {
           "start": 0.771,
           "end": 1.011,
           "label": "got",
-          "score": 0.606
+          "score": 0.606,
+          "kind": "token"
         },
         {
           "start": 2.812,
           "end": 3.072,
           "label": "again",
-          "score": 0.42
+          "score": 0.42,
+          "kind": "token"
         },
         {
           "start": 3.092,
           "end": 3.332,
           "label": "never",
-          "score": 0.53
+          "score": 0.53,
+          "kind": "token"
         },
         {
           "start": 3.392,
           "end": 3.692,
           "label": "allows",
-          "score": 0.398
+          "score": 0.398,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -3762,30 +4155,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 42,
+      "phraseOccurrenceCount": 341,
       "sampleWindows": [
         {
           "start": 33.884,
           "end": 35.285,
           "label": "Anderson, the men and women of",
-          "score": 0.9077
+          "score": 0.9077,
+          "kind": "phrase"
         },
         {
           "start": 41.728,
           "end": 42.509,
           "label": "all of you who have",
-          "score": 0.9724
+          "score": 0.9724,
+          "kind": "phrase"
         },
         {
           "start": 46.031,
           "end": 46.891,
           "label": "to welcome you to the White",
-          "score": 0.9218
+          "score": 0.9218,
+          "kind": "phrase"
         },
         {
           "start": 54.857,
           "end": 56.602,
           "label": "Program, as you know, an",
-          "score": 0.9132
+          "score": 0.9132,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3802,30 +4200,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 85,
+      "phraseOccurrenceCount": 487,
       "sampleWindows": [
         {
           "start": 9.595,
           "end": 10.696,
           "label": "It is my great honor",
-          "score": 0.905
+          "score": 0.905,
+          "kind": "phrase"
         },
         {
           "start": 22.199,
           "end": 23.26,
           "label": "board specialties in",
-          "score": 0.841
+          "score": 0.841,
+          "kind": "phrase"
         },
         {
           "start": 35.288,
           "end": 35.608,
           "label": "joining",
-          "score": 0.955
+          "score": 0.955,
+          "kind": "token"
         },
         {
           "start": 49.571,
           "end": 50.473,
           "label": "the transition from",
-          "score": 0.9777
+          "score": 0.9777,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3842,30 +4245,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 52,
+      "phraseOccurrenceCount": 562,
       "sampleWindows": [
         {
           "start": 15.884,
           "end": 17.184,
           "label": "is a really nostalgic experience",
-          "score": 0.7024
+          "score": 0.7024,
+          "kind": "phrase"
         },
         {
           "start": 31.433,
           "end": 32.634,
           "label": "the corporate library British",
-          "score": 0.6733
+          "score": 0.6733,
+          "kind": "phrase"
         },
         {
           "start": 42.92,
           "end": 43.281,
           "label": "consider",
-          "score": 0.915
+          "score": 0.915,
+          "kind": "token"
         },
         {
           "start": 51.125,
           "end": 52.786,
           "label": "and that's not so easy all",
-          "score": 0.8955
+          "score": 0.8955,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3882,30 +4290,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 85,
+      "phraseOccurrenceCount": 558,
       "sampleWindows": [
         {
           "start": 16.985,
           "end": 17.965,
           "label": "to Havana next month,",
-          "score": 0.896
+          "score": 0.896,
+          "kind": "phrase"
         },
         {
           "start": 25.248,
           "end": 26.149,
           "label": "ago, to begin",
-          "score": 0.9997
+          "score": 0.9997,
+          "kind": "phrase"
         },
         {
           "start": 35.918,
           "end": 36.258,
           "label": "help the",
-          "score": 0.9465
+          "score": 0.9465,
+          "kind": "phrase"
         },
         {
           "start": 49.765,
           "end": 50.106,
           "label": "as Cuba",
-          "score": 0.927
+          "score": 0.927,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3922,30 +4335,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 76,
+      "phraseOccurrenceCount": 576,
       "sampleWindows": [
         {
           "start": 15.162,
           "end": 15.803,
           "label": "of innovation,",
-          "score": 0.995
+          "score": 0.995,
+          "kind": "phrase"
         },
         {
           "start": 27.128,
           "end": 28.129,
           "label": "moon and",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "phrase"
         },
         {
           "start": 40.105,
           "end": 41.545,
           "label": "the future through our ideas",
-          "score": 0.851
+          "score": 0.851,
+          "kind": "phrase"
         },
         {
           "start": 52.049,
           "end": 53.149,
           "label": "getting a ride to",
-          "score": 0.921
+          "score": 0.921,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -3962,30 +4380,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 616,
       "sampleWindows": [
         {
           "start": 10.415,
           "end": 10.635,
           "label": "filled",
-          "score": 0.958
+          "score": 0.958,
+          "kind": "token"
         },
         {
           "start": 22.941,
           "end": 24.022,
           "label": "Independence Day is all",
-          "score": 0.9143
+          "score": 0.9143,
+          "kind": "phrase"
         },
         {
           "start": 37.046,
           "end": 38.506,
           "label": "free to think and worship and",
-          "score": 0.9742
+          "score": 0.9742,
+          "kind": "phrase"
         },
         {
           "start": 49.289,
           "end": 49.809,
           "label": "us, it",
-          "score": 0.998
+          "score": 0.998,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4002,30 +4425,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 925,
       "sampleWindows": [
         {
           "start": 4.532,
           "end": 4.893,
           "label": "been with",
-          "score": 0.8905
+          "score": 0.8905,
+          "kind": "phrase"
         },
         {
           "start": 19.317,
           "end": 19.698,
           "label": "some of you",
-          "score": 0.9283
+          "score": 0.9283,
+          "kind": "phrase"
         },
         {
           "start": 34.266,
           "end": 35.487,
           "label": "family over the last number of",
-          "score": 0.9022
+          "score": 0.9022,
+          "kind": "phrase"
         },
         {
           "start": 46.843,
           "end": 47.184,
           "label": "vision",
-          "score": 0.958
+          "score": 0.958,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -4042,30 +4470,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 57,
+      "phraseOccurrenceCount": 503,
       "sampleWindows": [
         {
           "start": 13.324,
           "end": 13.725,
           "label": "to thank",
-          "score": 0.903
+          "score": 0.903,
+          "kind": "phrase"
         },
         {
           "start": 24.91,
           "end": 26.531,
           "label": "we're going through the greatest economic",
-          "score": 0.866
+          "score": 0.866,
+          "kind": "phrase"
         },
         {
           "start": 35.496,
           "end": 37.097,
           "label": "this realization over a period",
-          "score": 0.7876
+          "score": 0.7876,
+          "kind": "phrase"
         },
         {
           "start": 51.826,
           "end": 52.846,
           "label": "69 US patents",
-          "score": 0.696
+          "score": 0.696,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4082,30 +4515,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 73,
+      "phraseOccurrenceCount": 539,
       "sampleWindows": [
         {
           "start": 15.125,
           "end": 15.865,
           "label": "at UC Berkeley.",
-          "score": 0.8967
+          "score": 0.8967,
+          "kind": "phrase"
         },
         {
           "start": 29.288,
           "end": 30.749,
           "label": "was born in Schenectady, New",
-          "score": 0.9014
+          "score": 0.9014,
+          "kind": "phrase"
         },
         {
           "start": 39.677,
           "end": 40.578,
           "label": "the West Coast, I take",
-          "score": 0.9032
+          "score": 0.9032,
+          "kind": "phrase"
         },
         {
           "start": 52.946,
           "end": 53.807,
           "label": "community for years.",
-          "score": 0.9387
+          "score": 0.9387,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4122,30 +4560,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 443,
       "sampleWindows": [
         {
           "start": 22.009,
           "end": 22.449,
           "label": "music for",
-          "score": 0.8765
+          "score": 0.8765,
+          "kind": "phrase"
         },
         {
           "start": 35.331,
           "end": 35.571,
           "label": "it's like",
-          "score": 0.767
+          "score": 0.767,
+          "kind": "phrase"
         },
         {
           "start": 43.118,
           "end": 44.139,
           "label": "there, but I'm sure they didn't.",
-          "score": 0.8975
+          "score": 0.8975,
+          "kind": "phrase"
         },
         {
           "start": 53.946,
           "end": 54.887,
           "label": "impact of technology on",
-          "score": 0.9533
+          "score": 0.9533,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4162,30 +4605,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 46,
+      "phraseOccurrenceCount": 316,
       "sampleWindows": [
         {
           "start": 19.199,
           "end": 21.56,
           "label": "of Congress, distinguished",
-          "score": 0.9237
+          "score": 0.9237,
+          "kind": "phrase"
         },
         {
           "start": 31.348,
           "end": 33.57,
           "label": "Congress information about",
-          "score": 0.907
+          "score": 0.907,
+          "kind": "phrase"
         },
         {
           "start": 46.601,
           "end": 47.922,
           "label": "And they've done so in",
-          "score": 0.9306
+          "score": 0.9306,
+          "kind": "phrase"
         },
         {
           "start": 56.548,
           "end": 56.929,
           "label": "tempting",
-          "score": 0.896
+          "score": 0.896,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -4202,30 +4650,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 23,
+      "phraseOccurrenceCount": 115,
       "sampleWindows": [
         {
           "start": 22.425,
           "end": 25.666,
           "label": "Madam Speaker, Mr. Vice President,",
-          "score": 0.9424
+          "score": 0.9424,
+          "kind": "phrase"
         },
         {
           "start": 27.227,
           "end": 29.787,
           "label": "of Congress, the First",
-          "score": 0.9718
+          "score": 0.9718,
+          "kind": "phrase"
         },
         {
           "start": 33.529,
           "end": 34.109,
           "label": "here, someone.",
-          "score": 0.4925
+          "score": 0.4925,
+          "kind": "phrase"
         },
         {
           "start": 56.117,
           "end": 57.28,
           "label": "not only to address",
-          "score": 0.961
+          "score": 0.961,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4242,30 +4695,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 588,
       "sampleWindows": [
         {
           "start": 12.992,
           "end": 13.913,
           "label": "B-612 Foundation",
-          "score": 0.8675
+          "score": 0.8675,
+          "kind": "phrase"
         },
         {
           "start": 25.236,
           "end": 25.396,
           "label": "city",
-          "score": 0.877
+          "score": 0.877,
+          "kind": "token"
         },
         {
           "start": 37.316,
           "end": 39.777,
           "label": "the bomb used in Hiroshima, or",
-          "score": 0.9318
+          "score": 0.9318,
+          "kind": "phrase"
         },
         {
           "start": 52.146,
           "end": 52.766,
           "label": "impact before that",
-          "score": 0.807
+          "score": 0.807,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4282,30 +4740,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 83,
+      "phraseOccurrenceCount": 562,
       "sampleWindows": [
         {
           "start": 14.516,
           "end": 15.096,
           "label": "live in a time",
-          "score": 0.7515
+          "score": 0.7515,
+          "kind": "phrase"
         },
         {
           "start": 27.966,
           "end": 29.227,
           "label": "changes aren't new, and",
-          "score": 0.887
+          "score": 0.887,
+          "kind": "phrase"
         },
         {
           "start": 38.746,
           "end": 39.326,
           "label": "answer to that",
-          "score": 0.9647
+          "score": 0.9647,
+          "kind": "phrase"
         },
         {
           "start": 52.829,
           "end": 53.009,
           "label": "set",
-          "score": 0.856
+          "score": 0.856,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -4322,30 +4785,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 433,
       "sampleWindows": [
         {
           "start": 3.173,
           "end": 4.795,
           "label": "for coming and certainly",
-          "score": 0.8628
+          "score": 0.8628,
+          "kind": "phrase"
         },
         {
           "start": 18.185,
           "end": 19.246,
           "label": "Yesterday was a bad day.",
-          "score": 0.9464
+          "score": 0.9464,
+          "kind": "phrase"
         },
         {
           "start": 36.287,
           "end": 39.249,
           "label": "are families and communities and",
-          "score": 0.9122
+          "score": 0.9122,
+          "kind": "phrase"
         },
         {
           "start": 54.225,
           "end": 55.929,
           "label": "to watch this region be torn",
-          "score": 0.911
+          "score": 0.911,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4362,30 +4830,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 55,
+      "phraseOccurrenceCount": 504,
       "sampleWindows": [
         {
           "start": 3.249,
           "end": 5.171,
           "label": "the Internet Caucus Advisory",
-          "score": 0.9035
+          "score": 0.9035,
+          "kind": "phrase"
         },
         {
           "start": 20.383,
           "end": 20.723,
           "label": "I think",
-          "score": 0.975
+          "score": 0.975,
+          "kind": "phrase"
         },
         {
           "start": 37.526,
           "end": 38.966,
           "label": "importance as a",
-          "score": 0.8933
+          "score": 0.8933,
+          "kind": "phrase"
         },
         {
           "start": 49.509,
           "end": 50.769,
           "label": "a networking of",
-          "score": 0.8737
+          "score": 0.8737,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4402,30 +4875,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 57,
+      "phraseOccurrenceCount": 424,
       "sampleWindows": [
         {
           "start": 9.494,
           "end": 10.014,
           "label": "Commerce",
-          "score": 0.932
+          "score": 0.932,
+          "kind": "token"
         },
         {
           "start": 22.586,
           "end": 23.047,
           "label": "a shared",
-          "score": 0.7225
+          "score": 0.7225,
+          "kind": "phrase"
         },
         {
           "start": 36.626,
           "end": 38.167,
           "label": "a priority I know that everyone",
-          "score": 0.9607
+          "score": 0.9607,
+          "kind": "phrase"
         },
         {
           "start": 48.07,
           "end": 50.591,
           "label": "ties directly impacts the",
-          "score": 0.976
+          "score": 0.976,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4442,30 +4920,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 59,
+      "phraseOccurrenceCount": 512,
       "sampleWindows": [
         {
           "start": 12.918,
           "end": 13.538,
           "label": "year and a half,",
-          "score": 0.9393
+          "score": 0.9393,
+          "kind": "phrase"
         },
         {
           "start": 27.611,
           "end": 27.791,
           "label": "really",
-          "score": 0.957
+          "score": 0.957,
+          "kind": "token"
         },
         {
           "start": 37.017,
           "end": 38.818,
           "label": "for a simple reason, because",
-          "score": 0.8054
+          "score": 0.8054,
+          "kind": "phrase"
         },
         {
           "start": 54.111,
           "end": 54.593,
           "label": "are ready to",
-          "score": 0.917
+          "score": 0.917,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4482,30 +4965,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 84,
+      "phraseOccurrenceCount": 667,
       "sampleWindows": [
         {
           "start": 5.066,
           "end": 6.486,
           "label": "I was here last for the",
-          "score": 0.9618
+          "score": 0.9618,
+          "kind": "phrase"
         },
         {
           "start": 15.469,
           "end": 16.849,
           "label": "this time around, Peru has a",
-          "score": 0.9292
+          "score": 0.9292,
+          "kind": "phrase"
         },
         {
           "start": 29.608,
           "end": 30.408,
           "label": "that he will be an",
-          "score": 0.956
+          "score": 0.956,
+          "kind": "phrase"
         },
         {
           "start": 46.955,
           "end": 47.556,
           "label": "society.",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -4522,30 +5010,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 39,
+      "phraseOccurrenceCount": 280,
       "sampleWindows": [
         {
           "start": 2.171,
           "end": 4.092,
           "label": "the United States, Kamala Harris.",
-          "score": 0.9022
+          "score": 0.9022,
+          "kind": "phrase"
         },
         {
           "start": 33.492,
           "end": 34.334,
           "label": "And I know that it's been",
-          "score": 0.895
+          "score": 0.895,
+          "kind": "phrase"
         },
         {
           "start": 48.501,
           "end": 50.463,
           "label": "you all for the warm welcome.",
-          "score": 0.9393
+          "score": 0.9393,
+          "kind": "phrase"
         },
         {
           "start": 55.427,
           "end": 56.788,
           "label": "the exceptional leadership that",
-          "score": 0.9738
+          "score": 0.9738,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4562,30 +5055,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 482,
       "sampleWindows": [
         {
           "start": 9.257,
           "end": 10.438,
           "label": "name is Wales,",
-          "score": 0.8373
+          "score": 0.8373,
+          "kind": "phrase"
         },
         {
           "start": 20.727,
           "end": 22.068,
           "label": "celebration of the",
-          "score": 0.9387
+          "score": 0.9387,
+          "kind": "phrase"
         },
         {
           "start": 41.24,
           "end": 42.561,
           "label": "added nearly 800",
-          "score": 0.8233
+          "score": 0.8233,
+          "kind": "phrase"
         },
         {
           "start": 54.188,
           "end": 55.989,
           "label": "we created more than 40,000 new",
-          "score": 0.7183
+          "score": 0.7183,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4602,30 +5100,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 387,
       "sampleWindows": [
         {
           "start": 7.511,
           "end": 9.234,
           "label": "New York with a warning on",
-          "score": 0.9257
+          "score": 0.9257,
+          "kind": "phrase"
         },
         {
           "start": 19.415,
           "end": 21.637,
           "label": "the week-long event, what does",
-          "score": 0.919
+          "score": 0.919,
+          "kind": "phrase"
         },
         {
           "start": 28.842,
           "end": 29.503,
           "label": "seem to ask",
-          "score": 0.9783
+          "score": 0.9783,
+          "kind": "phrase"
         },
         {
           "start": 53.806,
           "end": 54.246,
           "label": "to Straight",
-          "score": 0.9125
+          "score": 0.9125,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4642,30 +5145,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 62,
+      "phraseOccurrenceCount": 440,
       "sampleWindows": [
         {
           "start": 14.297,
           "end": 16.418,
           "label": "in America, a",
-          "score": 0.8187
+          "score": 0.8187,
+          "kind": "phrase"
         },
         {
           "start": 24.081,
           "end": 24.781,
           "label": "to its highest",
-          "score": 0.9147
+          "score": 0.9147,
+          "kind": "phrase"
         },
         {
           "start": 36.387,
           "end": 36.748,
           "label": "the more",
-          "score": 0.7055
+          "score": 0.7055,
+          "kind": "phrase"
         },
         {
           "start": 51.755,
           "end": 52.835,
           "label": "fuel-efficient cars in",
-          "score": 0.959
+          "score": 0.959,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4682,30 +5190,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 67,
+      "phraseOccurrenceCount": 632,
       "sampleWindows": [
         {
           "start": 13.373,
           "end": 14.574,
           "label": "anyway, thanks for",
-          "score": 0.908
+          "score": 0.908,
+          "kind": "phrase"
         },
         {
           "start": 28.442,
           "end": 29.702,
           "label": "people in the room know me,",
-          "score": 0.9232
+          "score": 0.9232,
+          "kind": "phrase"
         },
         {
           "start": 41.554,
           "end": 42.535,
           "label": "and then found myself in a",
-          "score": 0.9428
+          "score": 0.9428,
+          "kind": "phrase"
         },
         {
           "start": 52.965,
           "end": 53.445,
           "label": "what you see",
-          "score": 0.8923
+          "score": 0.8923,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4722,30 +5235,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 573,
       "sampleWindows": [
         {
           "start": 14.824,
           "end": 16.185,
           "label": "the most influential figures of",
-          "score": 0.8884
+          "score": 0.8884,
+          "kind": "phrase"
         },
         {
           "start": 29.573,
           "end": 29.993,
           "label": "in 11",
-          "score": 0.8195
+          "score": 0.8195,
+          "kind": "phrase"
         },
         {
           "start": 42.802,
           "end": 43.522,
           "label": "to have a strong",
-          "score": 0.9327
+          "score": 0.9327,
+          "kind": "phrase"
         },
         {
           "start": 53.748,
           "end": 55.309,
           "label": "her husband and an elegant",
-          "score": 0.9676
+          "score": 0.9676,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4762,30 +5280,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 530,
       "sampleWindows": [
         {
           "start": 16.237,
           "end": 16.857,
           "label": "is appointing a",
-          "score": 0.7327
+          "score": 0.7327,
+          "kind": "phrase"
         },
         {
           "start": 27.122,
           "end": 27.963,
           "label": "essential task",
-          "score": 0.914
+          "score": 0.914,
+          "kind": "phrase"
         },
         {
           "start": 38.159,
           "end": 39.7,
           "label": "short-term politics in",
-          "score": 0.869
+          "score": 0.869,
+          "kind": "phrase"
         },
         {
           "start": 50.606,
           "end": 51.126,
           "label": "unmatched",
-          "score": 0.945
+          "score": 0.945,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -4802,30 +5325,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 232,
       "sampleWindows": [
         {
           "start": 10.698,
           "end": 13.399,
           "label": "Lok Shinwatra, Prime Minister",
-          "score": 0.8932
+          "score": 0.8932,
+          "kind": "phrase"
         },
         {
           "start": 28.607,
           "end": 29.988,
           "label": "who have spoken before me,",
-          "score": 0.9898
+          "score": 0.9898,
+          "kind": "phrase"
         },
         {
           "start": 37.637,
           "end": 38.358,
           "label": "those affected",
-          "score": 0.9775
+          "score": 0.9775,
+          "kind": "phrase"
         },
         {
           "start": 48.304,
           "end": 52.847,
           "label": "God will guide them and wish",
-          "score": 0.9133
+          "score": 0.9133,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4842,30 +5370,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 32,
+      "phraseOccurrenceCount": 193,
       "sampleWindows": [
         {
           "start": 3.562,
           "end": 4.423,
           "label": "be so",
-          "score": 0.985
+          "score": 0.985,
+          "kind": "phrase"
         },
         {
           "start": 29.411,
           "end": 32.893,
           "label": "carefully crafted lies, and the media",
-          "score": 0.9208
+          "score": 0.9208,
+          "kind": "phrase"
         },
         {
           "start": 45.558,
           "end": 46.939,
           "label": "But here, at",
-          "score": 0.8833
+          "score": 0.8833,
+          "kind": "phrase"
         },
         {
           "start": 52.261,
           "end": 55.042,
           "label": "honor the American people with the",
-          "score": 0.9322
+          "score": 0.9322,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4882,30 +5415,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 48,
+      "phraseOccurrenceCount": 520,
       "sampleWindows": [
         {
           "start": 5.716,
           "end": 7.438,
           "label": "values that you work",
-          "score": 0.962
+          "score": 0.962,
+          "kind": "phrase"
         },
         {
           "start": 19.087,
           "end": 20.308,
           "label": "word is your bond,",
-          "score": 0.8522
+          "score": 0.8522,
+          "kind": "phrase"
         },
         {
           "start": 29.779,
           "end": 31.601,
           "label": "people with respect that",
-          "score": 0.9303
+          "score": 0.9303,
+          "kind": "phrase"
         },
         {
           "start": 43.094,
           "end": 44.976,
           "label": "many generations to follow",
-          "score": 0.982
+          "score": 0.982,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4922,30 +5460,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 497,
       "sampleWindows": [
         {
           "start": 21.123,
           "end": 22.564,
           "label": "for our citizens of Jewish faith.",
-          "score": 0.925
+          "score": 0.925,
+          "kind": "phrase"
         },
         {
           "start": 35.717,
           "end": 36.818,
           "label": "speaking for all Americans,",
-          "score": 0.9577
+          "score": 0.9577,
+          "kind": "phrase"
         },
         {
           "start": 45.703,
           "end": 45.943,
           "label": "blessed",
-          "score": 0.977
+          "score": 0.977,
+          "kind": "token"
         },
         {
           "start": 55.568,
           "end": 56.069,
           "label": "of origin",
-          "score": 0.854
+          "score": 0.854,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -4962,30 +5505,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 5,
+      "phraseOccurrenceCount": 20,
       "sampleWindows": [
         {
           "start": 12.724,
           "end": 13.784,
           "label": "for using up prime",
-          "score": 0.7372
+          "score": 0.7372,
+          "kind": "phrase"
         },
         {
           "start": 12.964,
           "end": 14.285,
           "label": "using up prime time.",
-          "score": 0.8815
+          "score": 0.8815,
+          "kind": "phrase"
         },
         {
           "start": 18.866,
           "end": 19.587,
           "label": "Thank you very",
-          "score": 0.9787
+          "score": 0.9787,
+          "kind": "phrase"
         },
         {
           "start": 19.647,
           "end": 19.967,
           "label": "much.",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
@@ -5002,30 +5550,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 221,
       "sampleWindows": [
         {
           "start": 37.201,
           "end": 37.961,
           "label": "Mayor Deepkin,",
-          "score": 0.9235
+          "score": 0.9235,
+          "kind": "phrase"
         },
         {
           "start": 43.246,
           "end": 44.127,
           "label": "visited Berlin.",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "phrase"
         },
         {
           "start": 51.525,
           "end": 53.086,
           "label": "since then, two other presidents",
-          "score": 0.9506
+          "score": 0.9506,
+          "kind": "phrase"
         },
         {
           "start": 55.988,
           "end": 56.569,
           "label": "today, I",
-          "score": 0.856
+          "score": 0.856,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5042,30 +5595,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 380,
       "sampleWindows": [
         {
           "start": 9.661,
           "end": 10.501,
           "label": "the West Front of the",
-          "score": 0.966
+          "score": 0.966,
+          "kind": "phrase"
         },
         {
           "start": 19.966,
           "end": 21.126,
           "label": "as 40th President",
-          "score": 0.845
+          "score": 0.845,
+          "kind": "phrase"
         },
         {
           "start": 32.732,
           "end": 33.873,
           "label": "Front, facing",
-          "score": 1.0
+          "score": 1.0,
+          "kind": "phrase"
         },
         {
           "start": 42.54,
           "end": 46.062,
           "label": "the participants, including",
-          "score": 0.9083
+          "score": 0.9083,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5082,30 +5640,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 16,
+      "phraseOccurrenceCount": 104,
       "sampleWindows": [
         {
           "start": 43.639,
           "end": 47.502,
           "label": "Mr. Vice President delegates to",
-          "score": 0.9042
+          "score": 0.9042,
+          "kind": "phrase"
         },
         {
           "start": 50.084,
           "end": 50.384,
           "label": "fellow",
-          "score": 0.948
+          "score": 0.948,
+          "kind": "token"
         },
         {
           "start": 56.208,
           "end": 56.609,
           "label": "enjoy",
-          "score": 0.95
+          "score": 0.95,
+          "kind": "token"
         },
         {
           "start": 58.39,
           "end": 59.611,
           "label": "the size of the heart of",
-          "score": 0.9798
+          "score": 0.9798,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5122,30 +5685,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 565,
       "sampleWindows": [
         {
           "start": 16.47,
           "end": 17.09,
           "label": "to move children",
-          "score": 0.8457
+          "score": 0.8457,
+          "kind": "phrase"
         },
         {
           "start": 29.897,
           "end": 30.798,
           "label": "a remarkable group",
-          "score": 0.9013
+          "score": 0.9013,
+          "kind": "phrase"
         },
         {
           "start": 43.032,
           "end": 43.973,
           "label": "I am especially pleased",
-          "score": 0.9755
+          "score": 0.9755,
+          "kind": "phrase"
         },
         {
           "start": 52.623,
           "end": 54.745,
           "label": "love we can truly repair the",
-          "score": 0.9175
+          "score": 0.9175,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5162,30 +5730,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 73,
+      "phraseOccurrenceCount": 545,
       "sampleWindows": [
         {
           "start": 14.514,
           "end": 15.034,
           "label": "the seven who",
-          "score": 0.8093
+          "score": 0.8093,
+          "kind": "phrase"
         },
         {
           "start": 26.577,
           "end": 27.137,
           "label": "and the generous",
-          "score": 0.7987
+          "score": 0.7987,
+          "kind": "phrase"
         },
         {
           "start": 36.28,
           "end": 37.56,
           "label": "on, the guy always had",
-          "score": 0.9222
+          "score": 0.9222,
+          "kind": "phrase"
         },
         {
           "start": 50.501,
           "end": 52.243,
           "label": "think they could help, that",
-          "score": 0.915
+          "score": 0.915,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5202,30 +5775,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 78,
+      "phraseOccurrenceCount": 497,
       "sampleWindows": [
         {
           "start": 14.8,
           "end": 16.101,
           "label": "of what would become the worst",
-          "score": 0.9105
+          "score": 0.9105,
+          "kind": "phrase"
         },
         {
           "start": 26.643,
           "end": 27.704,
           "label": "some smart decisions we",
-          "score": 0.941
+          "score": 0.941,
+          "kind": "phrase"
         },
         {
           "start": 36.406,
           "end": 38.007,
           "label": "sector jobs and cutting the",
-          "score": 0.9148
+          "score": 0.9148,
+          "kind": "phrase"
         },
         {
           "start": 50.163,
           "end": 51.725,
           "label": "2007, real",
-          "score": 0.809
+          "score": 0.809,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5242,30 +5820,35 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 63,
+      "phraseOccurrenceCount": 516,
       "sampleWindows": [
         {
           "start": 10.268,
           "end": 12.009,
           "label": "so many people are coming here.",
-          "score": 0.9203
+          "score": 0.9203,
+          "kind": "phrase"
         },
         {
           "start": 27.56,
           "end": 29.861,
           "label": "worlds, currently between data and",
-          "score": 0.8876
+          "score": 0.8876,
+          "kind": "phrase"
         },
         {
           "start": 40.245,
           "end": 41.766,
           "label": "and stories for other companies.",
-          "score": 0.8122
+          "score": 0.8122,
+          "kind": "phrase"
         },
         {
           "start": 51.068,
           "end": 52.209,
           "label": "show you what we are actually",
-          "score": 0.9078
+          "score": 0.9078,
+          "kind": "phrase"
         }
       ],
       "alignmentTimeRange": [
@@ -5282,35 +5865,118 @@
       "auditPolicyVersion": "public-speech-interview-v2",
       "enabledBatch": "production-audited-english-v1",
       "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 526,
       "sampleWindows": [
         {
           "start": 8.695,
           "end": 9.856,
           "label": "No, that's okay.",
-          "score": 0.453
+          "score": 0.453,
+          "kind": "phrase"
         },
         {
           "start": 25.143,
           "end": 27.764,
           "label": "Sumina has worked for Calabra, GNOME,",
-          "score": 0.8732
+          "score": 0.8732,
+          "kind": "phrase"
         },
         {
           "start": 41.311,
           "end": 42.071,
           "label": "Feminism and",
-          "score": 0.8925
+          "score": 0.8925,
+          "kind": "phrase"
         },
         {
           "start": 54.946,
           "end": 55.026,
           "label": "who",
-          "score": 0.986
+          "score": 0.986,
+          "kind": "token"
         }
       ],
       "alignmentTimeRange": [
         0.831,
         59.951
+      ]
+    }
+  ],
+  "phraseOnlyCuratedStarters": [
+    {
+      "referenceId": "curated-starter:jfk",
+      "title": "John F. Kennedy · public speech · 1961",
+      "pageUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "curated-starter-public-speech-v1",
+      "enabledBatch": null,
+      "tokenOccurrenceCount": 0,
+      "phraseOccurrenceCount": 2,
+      "sampleWindows": [
+        {
+          "start": 122.186,
+          "end": 123.997,
+          "label": "the world is very different now",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 842.299,
+          "end": 843.507,
+          "label": "ask what you can do",
+          "score": 1.0,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        122.186,
+        843.507
+      ]
+    },
+    {
+      "referenceId": "curated-starter:obama",
+      "title": "Barack Obama · public speech · 2017",
+      "pageUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "curated-starter-public-speech-v1",
+      "enabledBatch": null,
+      "tokenOccurrenceCount": 0,
+      "phraseOccurrenceCount": 4,
+      "sampleWindows": [
+        {
+          "start": 80.891,
+          "end": 81.132,
+          "label": "you can",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 228.039,
+          "end": 232.196,
+          "label": "change only happens when ordinary people get involved",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 401.271,
+          "end": 403.606,
+          "label": "yes our progress has been uneven",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 598.131,
+          "end": 598.898,
+          "label": "we need to do so",
+          "score": 1.0,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        80.891,
+        598.898
       ]
     }
   ]

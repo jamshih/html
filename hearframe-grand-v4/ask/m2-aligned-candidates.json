@@ -1,7 +1,7 @@
 {
   "version": "hearframe-m2-stale-bank-alignment-fields-v2",
   "count": 122,
-  "definition": "Diagnostic only. These source-bank fields may be pending/stale and MUST NOT be treated as the 131 ready references.",
+  "definition": "Diagnostic only. These source-bank fields may be pending/stale and MUST NOT be treated as the ready reference set.",
   "rows": [
     {
       "referenceId": "ref-10102",
