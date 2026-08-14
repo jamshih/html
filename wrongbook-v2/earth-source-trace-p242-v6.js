@@ -6,7 +6,7 @@
  Object.assign(node('hubble-evidence'),{renderInMap:true,x:74,y:236,w:293,h:114,kind:'source-plain',color:'#7568a5'});
  Object.assign(node('cmb-evidence'),{renderInMap:true,x:476,y:236,w:258,h:112,kind:'source-plain',color:'#7568a5'});
  Object.assign(node('singularity'),{renderInMap:true,x:248,y:557,w:82,h:82,kind:'source-plain',color:'#565653'});
- Object.assign(node('solar-nebula'),{renderInMap:true,label:'太陽系的形成',x:178,y:1178,w:235,h:46,kind:'source-header',color:'#5f7fae'});
+ Object.assign(node('solar-nebula'),{renderInMap:true,label:'太陽系的形成',x:178,y:1195,w:235,h:46,kind:'source-header',color:'#5f7fae'});
  const traces={
   'c1-e1':['M397 388H447','#7666a8',6,true],
   'c1-e2':['M276 449C263 430 252 411 251 391','#7666a8',6,true],
@@ -26,8 +26,8 @@
   'p242-nebula':[132,750,275,110],
   'p242-planets':[108,1014,345,106],
   'p242-atmosphere1':[420,786,210,94],
-  'p242-hot-earth':[662,658,60,60],
-  'p242-diff':[716,1016,190,166]
+  'p242-hot-earth':[668,666,49,46],
+  'p242-diff':[560,1016,166,166]
  };
  for(const [id,r] of Object.entries(rects)){const f=fig(id);Object.assign(f.sourceRect,{x:r[0],y:r[1],width:r[2],height:r[3]})}
 }
@@ -73,12 +73,12 @@ window.v4Strict242=function(ch,mode){
  const pos={
   1:[105,558,195],2:[105,590,195],3:[105,622,195],4:[230,526,225],5:[330,454,185],6:[82,377,330],
   8:[74,236,293],9:[476,236,258],10:[550,503,255],11:[95,706,520],12:[108,946,245],13:[95,1000,390],
-  14:[102,1114,345],15:[448,1114,370],16:[420,790,210],17:[676,742,180],18:[555,868,290],19:[704,920,190],20:[704,980,190]
+  14:[102,1114,345],15:[448,1114,370],16:[420,790,210],17:[676,742,180],18:[455,868,290],19:[570,920,205],20:[570,980,205]
  };
  for(const [n,p] of Object.entries(pos))html=v6P242MoveQuestionPx(html,n,p[0],p[1],p[2]);
  html=html.replace(/<svg class="v4strict-svg"[\s\S]*?<\/svg>/,V6_P242_SOURCE_LINES);
- html=html.replace(/style="--rc:#8170a6;left:[^"]+"/, `style="--rc:#8170a6;left:${v6P242Px(280)}px;top:${v6P242Px(174)}px;width:${v6P242Px(198)}px"`);
- html=html.replace(/style="--rc:#667fae;left:[^"]+"/, `style="--rc:#667fae;left:${v6P242Px(178)}px;top:${v6P242Px(1178)}px;width:${v6P242Px(207)}px"`);
+ html=html.replace(/style="--rc:#8170a6;left:[^"]+"/, `style="--rc:#8170a6;left:${v6P242Px(280)}px;top:${v6P242Px(174)}px;width:${v6P242Px(222)}px"`);
+ html=html.replace(/style="--rc:#667fae;left:[^"]+"/, `style="--rc:#667fae;left:${v6P242Px(178)}px;top:${v6P242Px(1195)}px;width:${v6P242Px(232)}px"`);
  html=html.replace('<div class="v4strict-footer">242</div>',`${V6_P242_EXTRA}<div class="v4strict-footer">242</div>`);
  return html;
 };
