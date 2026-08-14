@@ -2,10 +2,11 @@
 """Hearframe Milestone 2 authentic-thought production builder.
 
 The frozen core preserves the proven media/render/QA path. This bootstrap applies
-three tightly scoped M2 corrections before executing it:
+four tightly scoped M2 corrections before executing it:
 1) Python 3.11-safe ASS path escaping;
-2) latent semantic retrieval over REAL aligned thought units;
-3) source gating that treats raw loudness as a processing input, not a reason to
+2) FFmpeg duration syntax compatibility for the 40 ms output fade;
+3) latent semantic retrieval over REAL aligned thought units;
+4) source gating that treats raw loudness as a processing input, not a reason to
    discard decodable dialogue that will be normalized later. Final clip/final-film
    loudness QA remains unchanged and fail-closed.
 """
@@ -21,6 +22,9 @@ CORE_COMMIT="f010624602d72f267ee3c6ba5086080d5cd7e0e4"
 CORE_URL=f"https://raw.githubusercontent.com/jamshih/html/{CORE_COMMIT}/.github/scripts/hearframe-m2-build.py"
 with urllib.request.urlopen(CORE_URL,timeout=30) as response:
     source=response.read().decode('utf-8')
+fade_fix_count=source.count(':d=.04"')
+if fade_fix_count!=1:raise RuntimeError(f'm2_bootstrap_expected_one_fade_fix_got_{fade_fix_count}')
+source=source.replace(':d=.04"',':d=0.04"')
 lines=source.splitlines();patched=[];fix_count=0
 for line in lines:
     if line.strip().startswith('vf=f"ass={str(ass).replace'):
@@ -59,7 +63,6 @@ class SemanticEncoder:
         if normalize_embeddings:dense=self.normalizer.transform(dense)
         return np.asarray(dense,dtype=np.float32)
     def transform(self,texts):
-        """Compatibility with the frozen renderer's short-film extension path."""
         return csr_matrix(self.encode(texts,normalize_embeddings=True,convert_to_numpy=True))
 
 def add_embeddings(thoughts):
@@ -113,12 +116,6 @@ def story_plan(prompt,thoughts,sources,model,X):
 
 AUDIO_AUDITS=[]
 def production_audio_audit(proxy):
-    """Source eligibility: real audio stream must decode and contain non-silent signal.
-
-    Raw LUFS is deliberately not an eligibility threshold. Selected dialogue clips are
-    normalized/compressed downstream, and final-film LUFS/true-peak/silence QA remains
-    fail-closed. This gate only answers whether usable source audio exists.
-    """
     pr=ns['probe'](proxy);aud=[s for s in pr.get('streams',[]) if s.get('codec_type')=='audio']
     if not aud:
         result={'status':'REJECT','reasons':['no_audio_stream']};AUDIO_AUDITS.append(result);return result
@@ -126,24 +123,15 @@ def production_audio_audit(proxy):
     stderr=p.stderr or ''
     mean_match=re.search(r'mean_volume:\s*(-?inf|-?\d+(?:\.\d+)?)\s*dB',stderr,re.I)
     max_match=re.search(r'max_volume:\s*(-?inf|-?\d+(?:\.\d+)?)\s*dB',stderr,re.I)
-    if p.returncode!=0:
-        result={'status':'REJECT','reasons':['audio_decode_failed'],'decodeReturnCode':p.returncode}
-    elif not max_match:
-        result={'status':'REVIEW','reasons':['audio_level_measurement_missing']}
+    if p.returncode!=0:result={'status':'REJECT','reasons':['audio_decode_failed'],'decodeReturnCode':p.returncode}
+    elif not max_match:result={'status':'REVIEW','reasons':['audio_level_measurement_missing']}
     else:
         raw=max_match.group(1).lower();max_db=float('-inf') if raw=='-inf' else float(raw)
         raw_mean=mean_match.group(1).lower() if mean_match else None
         mean_db=(float('-inf') if raw_mean=='-inf' else float(raw_mean)) if raw_mean is not None else None
-        non_silent=max_db>-55.0
-        # Source peaks near 0 dBFS are common in archived/broadcast material; downstream
-        # dialogue processing and final true-peak QA are the clipping authority.
-        status='APPROVE' if non_silent else 'REVIEW'
-        result={'status':status,'maxVolumeDbfs':max_db,'meanVolumeDbfs':mean_db,
-                'sampleRate':aud[0].get('sample_rate'),'channels':aud[0].get('channels'),
-                'reasons':[] if status=='APPROVE' else ['source_audio_near_silent_requires_review']}
-    AUDIO_AUDITS.append(result)
-    print('M2_AUDIO_AUDIT',proxy,result,flush=True)
-    return result
+        status='APPROVE' if max_db>-55.0 else 'REVIEW'
+        result={'status':status,'maxVolumeDbfs':max_db,'meanVolumeDbfs':mean_db,'sampleRate':aud[0].get('sample_rate'),'channels':aud[0].get('channels'),'reasons':[] if status=='APPROVE' else ['source_audio_near_silent_requires_review']}
+    AUDIO_AUDITS.append(result);print('M2_AUDIO_AUDIT',proxy,result,flush=True);return result
 
 _core_visual_audit=ns['visual_audit']
 def production_visual_audit(proxy,source):
@@ -153,5 +141,5 @@ def production_visual_audit(proxy,source):
     return result
 
 ns['add_embeddings']=add_embeddings;ns['story_plan']=story_plan;ns['audio_audit']=production_audio_audit;ns['visual_audit']=production_visual_audit
-print(f'Hearframe M2 core {CORE_COMMIT}; semantic retrieval={MODEL_NAME}; direct-decode/non-silence source audio gate; duration fallback compatible; ASS syntax repaired.',flush=True)
+print(f'Hearframe M2 core {CORE_COMMIT}; semantic retrieval={MODEL_NAME}; FFmpeg fade duration repaired; direct-decode/non-silence source audio gate; duration fallback compatible; ASS syntax repaired.',flush=True)
 ns['main']()
