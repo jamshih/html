@@ -22,4 +22,5 @@ v5EdgeLayer=function(sem){
   return v6SemanticEdgeLayer(sem);
 };
 window.V6_STRICT_SOURCE_PAGES=[242,243,244,245];
+document.write('<script src="./earth-source-trace-tail-loader-v6.js"><\/script>');
 render();
