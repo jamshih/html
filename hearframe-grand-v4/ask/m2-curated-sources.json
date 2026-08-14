@@ -1,13 +1,14 @@
 {
-  "version": "hearframe-m2-curated-sources-v1",
+  "version": "hearframe-m2-curated-sources-v2",
   "proofPrompt": "I'm scared everyone is moving ahead of me and I don't know whether I'm making the right choices.",
   "policy": {
     "compositionUnit": "complete authentic sentence/thought",
     "wordSpliceAllowed": false,
     "requiredDistinctSpeakers": 5,
-    "preferredDistinctSpeakers": 7,
+    "preferredDistinctSpeakers": 6,
     "targetDurationSeconds": [60, 90],
-    "maxSpeakerShare": 0.30
+    "maxSpeakerShare": 0.30,
+    "ingestWindowPolicy": "Index a bounded high-value speech window per source for this milestone; expand approved sources incrementally after the film/story system passes."
   },
   "sources": [
     {
@@ -20,7 +21,7 @@
       "source_kind": "public-speech",
       "source_capability": "locally_renderable",
       "license_capability_status": "approved_m1_public_domain",
-      "max_ingest_seconds": 1200,
+      "max_ingest_seconds": 300,
       "pinned_thoughts": [
         {
           "stage": "action",
@@ -40,15 +41,8 @@
       "source_kind": "public-speech",
       "source_capability": "locally_renderable",
       "license_capability_status": "approved_m1_public_domain",
-      "max_ingest_seconds": 900,
-      "pinned_thoughts": [
-        {
-          "stage": "resolution",
-          "start": 841.9,
-          "end": 844.75,
-          "transcript": "Ask what you can do for your country."
-        }
-      ]
+      "max_ingest_seconds": 300,
+      "retrieval_hints": ["generation", "begin", "responsibility", "freedom", "future", "commitment", "courage"]
     },
     {
       "source_id": "m2-reagan-inaugural-1981",
@@ -59,7 +53,7 @@
       "source_kind": "public-speech",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_reviewed",
-      "max_ingest_seconds": 1200,
+      "max_ingest_seconds": 360,
       "retrieval_hints": ["dream", "heroic dreams", "begin", "courage", "future"]
     },
     {
@@ -71,7 +65,7 @@
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 1200,
+      "max_ingest_seconds": 360,
       "retrieval_hints": ["dream", "path", "career", "challenge", "advice", "keep going", "work hard"]
     },
     {
@@ -83,7 +77,7 @@
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 1200,
+      "max_ingest_seconds": 360,
       "retrieval_hints": ["failure", "uncertainty", "learn", "choice", "path", "challenge", "advice"]
     },
     {
@@ -95,7 +89,7 @@
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 900,
+      "max_ingest_seconds": 360,
       "retrieval_hints": ["dream", "future", "advice", "young", "goal", "work", "opportunity"]
     },
     {
@@ -107,7 +101,7 @@
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 1200,
+      "max_ingest_seconds": 360,
       "retrieval_hints": ["advice", "students", "dream", "learn", "future", "mistake", "challenge"]
     }
   ]
