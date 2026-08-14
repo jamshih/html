@@ -1,5 +1,5 @@
 {
-  "version": "hearframe-m2-curated-sources-v2",
+  "version": "hearframe-m2-curated-sources-v3",
   "proofPrompt": "I'm scared everyone is moving ahead of me and I don't know whether I'm making the right choices.",
   "policy": {
     "compositionUnit": "complete authentic sentence/thought",
@@ -8,7 +8,7 @@
     "preferredDistinctSpeakers": 6,
     "targetDurationSeconds": [60, 90],
     "maxSpeakerShare": 0.30,
-    "ingestWindowPolicy": "Index a bounded high-value speech window per source for this milestone; expand approved sources incrementally after the film/story system passes."
+    "ingestWindowPolicy": "Index bounded reflective/advice-rich windows from human-visual-approved, locally renderable Commons sources. The story planner must retrieve real thought IDs; it may not write replacement dialogue."
   },
   "sources": [
     {
@@ -24,7 +24,7 @@
       "max_ingest_seconds": 300,
       "pinned_thoughts": [
         {
-          "stage": "action",
+          "stage": "resolution",
           "start": 227.75,
           "end": 232.25,
           "transcript": "Change only happens when ordinary people get involved, and they get engaged, and they come together to demand it."
@@ -32,77 +32,94 @@
       ]
     },
     {
-      "source_id": "m2-jfk-inaugural-1961",
-      "speaker_id": "john-f-kennedy",
-      "speaker": "John F. Kennedy",
-      "page_title": "File:John F. Kennedy Inauguration Speech.ogv",
-      "page_url": "https://commons.wikimedia.org/wiki/File:John_F._Kennedy_Inauguration_Speech.ogv",
-      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/John_F._Kennedy_Inauguration_Speech.ogv",
-      "source_kind": "public-speech",
-      "source_capability": "locally_renderable",
-      "license_capability_status": "approved_m1_public_domain",
-      "max_ingest_seconds": 300,
-      "retrieval_hints": ["generation", "begin", "responsibility", "freedom", "future", "commitment", "courage"]
-    },
-    {
-      "source_id": "m2-reagan-inaugural-1981",
-      "speaker_id": "ronald-reagan",
-      "speaker": "Ronald Reagan",
-      "page_title": "File:Ronald Reagan's Inaugural Address, January 20, 1981.webm",
-      "page_url": "https://commons.wikimedia.org/wiki/File:Ronald_Reagan%27s_Inaugural_Address%2C_January_20%2C_1981.webm",
-      "source_kind": "public-speech",
+      "source_id": "m2-jane-goodall-green-interview",
+      "speaker_id": "jane-goodall",
+      "speaker": "Jane Goodall",
+      "reference_id": "ref-00119",
+      "page_title": "File:Jane Goodall, The Green Interview.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Jane_Goodall,_The_Green_Interview.webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Jane_Goodall%2C_The_Green_Interview.webm",
+      "source_kind": "public-interview",
       "source_capability": "locally_renderable",
       "license_capability_status": "commons_cc_by_3_reviewed",
-      "max_ingest_seconds": 360,
-      "retrieval_hints": ["dream", "heroic dreams", "begin", "courage", "future"]
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 374,
+      "retrieval_hints": ["hope", "future", "change", "people", "difference", "choice", "young people", "responsibility", "believe", "action"]
     },
     {
-      "source_id": "m2-ayers-kktv-2025",
-      "speaker_id": "nichole-ayers",
-      "speaker": "Nichole Ayers",
-      "page_title": "File:NASA Astronaut Discusses Life In Space With KKTV-TV – July 8, 2025 (iss073m261891714).webm",
-      "page_url": "https://commons.wikimedia.org/wiki/File:NASA_Astronaut_Discusses_Life_In_Space_With_KKTV-TV_%E2%80%93_July_8%2C_2025_%28iss073m261891714%29.webm",
+      "source_id": "m2-steve-wozniak-interview",
+      "speaker_id": "steve-wozniak",
+      "speaker": "Steve Wozniak",
+      "reference_id": "ref-00164",
+      "page_title": "File:Interview with Steve Wozniak.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Interview_with_Steve_Wozniak.webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Interview_with_Steve_Wozniak.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
-      "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 360,
-      "retrieval_hints": ["dream", "path", "career", "challenge", "advice", "keep going", "work hard"]
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["learn", "create", "passion", "curiosity", "failure", "choice", "work", "invent", "education", "life"]
     },
     {
-      "source_id": "m2-kim-isu-2025",
-      "speaker_id": "jonny-kim",
-      "speaker": "Jonny Kim",
-      "page_title": "File:NASA Astronaut Discusses Life In Space With International Space University Space Studies Program (iss073m262051058).webm",
-      "page_url": "https://commons.wikimedia.org/wiki/File:NASA_Astronaut_Discusses_Life_In_Space_With_International_Space_University_Space_Studies_Program_%28iss073m262051058%29.webm",
+      "source_id": "m2-greta-gerwig-fade-in",
+      "speaker_id": "greta-gerwig",
+      "speaker": "Greta Gerwig",
+      "reference_id": "ref-00169",
+      "page_title": "File:Greta Gerwig interview - Fade In.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Greta_Gerwig_interview_-_Fade_In.webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Greta_Gerwig_interview_-_Fade_In.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
-      "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 360,
-      "retrieval_hints": ["failure", "uncertainty", "learn", "choice", "path", "challenge", "advice"]
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 159,
+      "retrieval_hints": ["fear", "confidence", "work", "creative", "try", "learn", "choice", "mistake", "career", "life"]
     },
     {
-      "source_id": "m2-hathaway-nbc-2026",
-      "speaker_id": "jack-hathaway",
-      "speaker": "Jack Hathaway",
-      "page_title": "File:NASA Astronaut Discusses Life In Space With NBC Connecticut – Wednesday, March 4, 2026 (iss074m260631038 NASA Astronaut Discusses Life In Space With NBC Connecticut 250304).webm",
-      "page_url": "https://commons.wikimedia.org/wiki/File:NASA_Astronaut_Discusses_Life_In_Space_With_NBC_Connecticut_%E2%80%93_Wednesday%2C_March_4%2C_2026_%28iss074m260631038_NASA_Astronaut_Discusses_Life_In_Space_With_NBC_Connecticut_250304%29.webm",
+      "source_id": "m2-burnie-burns-tstv",
+      "speaker_id": "burnie-burns",
+      "speaker": "Burnie Burns",
+      "reference_id": "ref-00133",
+      "page_title": "File:Burnie Burns interview with TSTV.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Burnie_Burns_interview_with_TSTV.webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Burnie_Burns_interview_with_TSTV.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
-      "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 360,
-      "retrieval_hints": ["dream", "future", "advice", "young", "goal", "work", "opportunity"]
+      "license_capability_status": "commons_cc_by_3_human_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["career", "start", "success", "failure", "learn", "work", "opportunity", "student", "choice", "keep going"]
     },
     {
-      "source_id": "m2-williams-students-2026",
-      "speaker_id": "chris-williams",
-      "speaker": "Chris Williams",
-      "page_title": "File:NASA Astronaut Discusses Life in Space with Pennsylvania students – February 5, 2026 (iss074m260361718).webm",
-      "page_url": "https://commons.wikimedia.org/wiki/File:NASA_Astronaut_Discusses_Life_in_Space_with_Pennsylvania_students_%E2%80%93_February_5%2C_2026_%28iss074m260361718%29.webm",
+      "source_id": "m2-jimmy-wales-wikipediaday",
+      "speaker_id": "jimmy-wales",
+      "speaker": "Jimmy Wales",
+      "reference_id": "ref-00182",
+      "page_title": "File:Jimmy Wales interview for WikipediaDay 2019.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Jimmy_Wales_interview_for_WikipediaDay_2019.webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Jimmy_Wales_interview_for_WikipediaDay_2019.webm",
       "source_kind": "public-interview",
       "source_capability": "locally_renderable",
-      "license_capability_status": "nasa_public_domain",
-      "max_ingest_seconds": 360,
-      "retrieval_hints": ["advice", "students", "dream", "learn", "future", "mistake", "challenge"]
+      "license_capability_status": "commons_cc_by_sa_4_self_published",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["learn", "community", "build", "future", "change", "people", "trust", "idea", "mistake", "responsibility"]
+    },
+    {
+      "source_id": "m2-andrew-yang-growth-minds",
+      "speaker_id": "andrew-yang",
+      "speaker": "Andrew Yang",
+      "reference_id": "ref-00217",
+      "page_title": "File:Andrew Yang (Full Interview).webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_(Full_Interview).webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Andrew_Yang_%28Full_Interview%29.webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["childhood", "failure", "future", "choice", "career", "risk", "fear", "work", "opportunity", "change", "believe"]
     }
   ]
 }
