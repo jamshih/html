@@ -41,7 +41,23 @@
    if(!Array.isArray(recs)||!recs.length)return html;
    const t=document.createElement('template');t.innerHTML=html;
    for(const r of recs){
-     if(r.standalone===false||r.skipRender)continue;
+     if(r.standalone===false){
+       // A single printed source sentence can contain two numbered grading blanks.
+       // Keep one visible source prompt, but preserve the secondary logical item for product/count compatibility.
+       if(!t.content.querySelector(`[data-question="${r.number}"]`)){
+         const marker=document.createElement('span');
+         marker.className='v7-logical-question-marker';
+         marker.dataset.question=String(r.number);
+         marker.dataset.page=String(page);
+         marker.dataset.v7CompositeSource='true';
+         marker.hidden=true;
+         marker.setAttribute('aria-hidden','true');
+         const section=t.content.querySelector('section')||t.content.firstElementChild;
+         if(section)section.appendChild(marker);
+       }
+       continue;
+     }
+     if(r.skipRender)continue;
      const target=r.renderTarget||r.number;
      const el=t.content.querySelector(`[data-question="${target}"]`);
      if(!el){r.runtimeMissing=true;continue;}
