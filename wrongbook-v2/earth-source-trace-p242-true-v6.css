@@ -8,6 +8,7 @@
 .v4strict-242 .v4strict-earth-hot{left:668px!important;top:666px!important;width:49px!important;height:46px!important}.v4strict-242 .v4strict-earth-hot:after{top:54px!important;left:-6px!important;width:105px!important;font-size:15px!important}
 .v4strict-242 .v4strict-earth-wedge{left:560px!important;right:auto!important;top:1016px!important;bottom:auto!important;width:166px!important;height:166px!important}
 .v4strict-242 .v4strict-source-motif.rocket242{left:88px!important;top:405px!important;width:105px!important;height:105px!important}
-.v4strict-242 .v6-p242-lines{transform:none!important}
+/* The strict scaffold still owns the line SVG in production; move that single direct child to the photographed spine. */
+.v4strict-242 > .v4strict-svg{transform:translate(-20px,127px)!important;transform-origin:0 0!important}
 .v6-p242-nebula-title{left:274px!important;top:678px!important;font-size:17px!important}.v6-p242-melt{left:706px!important;top:820px!important;font-size:16px!important}.v6-p242-escape{left:404px!important;top:930px!important;font-size:15px!important}.v6-p242-diff-label{left:582px!important;top:1170px!important;font-size:14px!important}
 .v6-p242-planets{left:108px!important;top:1014px!important;width:345px!important;height:106px!important}.v4strict-242 .v4strict-footer{left:108px!important;bottom:18px!important;font-size:24px!important}
