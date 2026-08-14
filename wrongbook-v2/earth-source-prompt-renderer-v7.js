@@ -10,10 +10,18 @@
      for(const r of recs){
        if(!Array.isArray(r.sourceAnswers)||!r.sourceAnswers.length)continue;
        const item=items(ch).find(x=>x.number===r.number); if(!item)continue;
+       if(r.ensureFields){
+         while((item.fields?.length||0)<r.blanks){
+           item.fields=item.fields||[];
+           item.fields.push({answer:'',aliases:[]});
+         }
+       }
        r.sourceAnswers.forEach((answer,i)=>{
          const f=item.fields?.[i]; if(!f||answer==null)return;
          const old=String(f.answer||'');
-         f.aliases=Array.from(new Set([...(f.aliases||[]),old,...((r.answerAliases?.[i])||[])].filter(Boolean)));
+         const aliases=[...(f.aliases||[]),...((r.answerAliases?.[i])||[])];
+         if(!r.dropOldAlias&&old)aliases.push(old);
+         f.aliases=Array.from(new Set(aliases.filter(Boolean)));
          f.answer=String(answer);
        });
      }
@@ -32,7 +40,10 @@
      const target=r.renderTarget||r.number;
      const el=t.content.querySelector(`[data-question="${target}"]`);
      if(!el){r.runtimeMissing=true;continue;}
-     const fills=[...el.querySelectorAll('.v4strict-fill')].map(x=>x.outerHTML);
+     let fills=[...el.querySelectorAll('.v4strict-fill')].map(x=>x.outerHTML);
+     if(r.ensureFields&&typeof window.v4StrictField==='function'){
+       fills=Array.from({length:r.blanks},(_,i)=>window.v4StrictField(ch,r.number,i,mode,(r.blankWidths?.[i]||68)));
+     }
      if(fills.length!==r.blanks){el.dataset.v7PromptStatus=`blank-count-${fills.length}-expected-${r.blanks}`;continue;}
      let out=String(r.template||'');
      for(let i=0;i<r.blanks;i++)out=out.split(`{{${i}}}`).join(fills[i]||'');
