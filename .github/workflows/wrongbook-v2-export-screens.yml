@@ -6,14 +6,17 @@ on:
     paths:
       - '.github/workflows/wrongbook-v2-export-screens.yml'
 
-permissions:
-  contents: write
-
 jobs:
   export:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Traditional Chinese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+          fc-match 'Noto Sans CJK TC'
       - name: Render six Earth Science chapter spreads
         run: |
           python3 -m http.server 4173 >/tmp/wrongbook-export-http.log 2>&1 &
@@ -22,20 +25,16 @@ jobs:
           sleep 1
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
-          mkdir -p .qa-artifacts/refinement-v7
+          mkdir -p /tmp/wrongbook-v7-cjk
           for CH in 1 2 3 4 5 6; do
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
               --user-data-dir="/tmp/wrongbook-export-$CH" \
               --window-size=1800,1200 --virtual-time-budget=5000 \
-              --screenshot="/tmp/ch${CH}.png" \
+              --screenshot="/tmp/wrongbook-v7-cjk/ch${CH}.png" \
               "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
-            base64 -w0 "/tmp/ch${CH}.png" > ".qa-artifacts/refinement-v7/ch${CH}.png.b64"
           done
-          printf '%s\n' "$(git rev-parse HEAD)" > .qa-artifacts/refinement-v7/source-sha.txt
-      - name: Commit temporary QA export
-        run: |
-          git config user.name "wrongbook-qa-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add .qa-artifacts/refinement-v7
-          git commit -m "Export wrongbook v7 visual QA screenshots [skip ci]"
-          git push
+          git rev-parse HEAD > /tmp/wrongbook-v7-cjk/source-sha.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-v7-cjk-visual
+          path: /tmp/wrongbook-v7-cjk
