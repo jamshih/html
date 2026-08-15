@@ -5,8 +5,8 @@ const OUT='.qa-artifacts/wrongbook-provider-gate';
 fs.mkdirSync(OUT,{recursive:true});
 const ROOT='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1';
 const EXPECT_MODEL='gemini-3.1-flash-lite';
-const existingQa=fs.readFileSync('.github/scripts/wrongbook-v5-qa-v2.mjs','utf8');
-const key=existingQa.match(/sb_publishable_[A-Za-z0-9_-]+/)?.[0];
+const appConfig=fs.readFileSync('wrongbook-v2/mod-01.js','utf8');
+const key=appConfig.match(/SUPABASE_PUBLISHABLE_KEY='([^']+)'/)?.[1];
 if(!key) throw new Error('publishable key unavailable to provider gate');
 const browser=await chromium.launch({headless:true});
 const report={startedAt:new Date().toISOString(),health:{},raw:{},ai:{},sheet:{},guide:{},negative:{},acceptance:{},errors:[]};
@@ -37,7 +37,6 @@ for(const [slug,path,transport] of [['wrongbook-ai','/wrongbook-ai/health','gene
   if(!r.ok||!j?.ok||j?.configured!==true||j?.model!==EXPECT_MODEL||j?.transport!==transport)fail('HEALTH_'+slug,{status:r.status,body:j});else pass('HEALTH_'+slug);
 }
 
-// Fresh single-question real-provider tests.
 const genericImage=await htmlImage('<b>生物問答題</b><p>粒線體的主要功能是什麼？</p><p style="color:#2346c7">學生作答：進行細胞呼吸並產生 ATP。</p>');
 const generic=await rawCall('ai_generic',ROOT+'/wrongbook-ai/analyze',{imageBase64:genericImage,mimeType:'image/png',syllabus:{level:'高中'}}),gr=generic.json?.result,gf=gr?.genericFacts||[];native('AI_GENERIC',generic.json);
 if(!generic.ok||gr?.learningObjectType!=='generic_fact'||!Array.isArray(gr?.concepts)||!gr.concepts.length||!Array.isArray(gr?.regions)||!gr.regions.length||!Array.isArray(gr?.tutorSteps)||!gf.length||gf.some(f=>!f?.standalone||!f?.question||!f?.answer||!f?.sourceEvidence||!f?.conceptNameZh||!f?.dedupeKey||bannedFact.test(f.question))||mainland.test(JSON.stringify(gr)))fail('AI_GENERIC_QUALITY',generic.json);else pass('AI_GENERIC_QUALITY');
@@ -53,7 +52,6 @@ const mixed=await rawCall('ai_mixed',ROOT+'/wrongbook-ai/analyze',{imageBase64:m
 if(!mixed.ok||mr?.learningObjectType!=='mixed'||!Array.isArray(mr?.options)||mr.options.length<2||!Array.isArray(mr?.regions)||!mr.regions.length||!mf.length||mf.some(f=>!f?.standalone||!f?.sourceEvidence||bannedFact.test(f.question||'')))fail('AI_MIXED_QUALITY',mixed.json);else pass('AI_MIXED_QUALITY');
 report.ai.mixed={status:mixed.status,type:mr?.learningObjectType,factCount:mf.length};
 
-// Fresh whole-sheet test, including native source geometry.
 const sheetHtml=`<h1 style="font-size:34px">高中錯題整理 — 三題測試</h1><section style="border:2px solid #bbb;padding:22px;margin:24px 0"><b>1. 生物概念題</b><p>粒線體的主要功能是什麼？</p><p style="color:#2346c7">學生作答：進行細胞呼吸並產生 ATP。</p></section><section style="border:2px solid #bbb;padding:22px;margin:24px 0"><b>2. 圖形依賴題</b><p>完全依右圖資訊回答：A 點所標示的 y 數值是多少？離開此圖無法知道答案。</p><svg width="720" height="260"><line x1="70" y1="220" x2="660" y2="220" stroke="black" stroke-width="3"/><line x1="90" y1="235" x2="90" y2="25" stroke="black" stroke-width="3"/><polyline points="90,205 250,160 410,75 620,120" fill="none" stroke="#222" stroke-width="5"/><circle cx="410" cy="75" r="9"/><text x="428" y="70" font-size="26">A = 12</text></svg><p style="color:#2346c7">學生作答：7</p></section><section style="border:2px solid #bbb;padding:22px;margin:24px 0"><b>3. 物理混合題</b><p>依下圖，水平外力 F = 6 N 時方塊仍靜止。求此刻靜摩擦力大小，並判斷「靜摩擦力永遠等於最大靜摩擦力」是否正確。</p><svg width="720" height="180"><rect x="260" y="65" width="180" height="85" fill="none" stroke="black" stroke-width="4"/><line x1="440" y1="105" x2="610" y2="105" stroke="#111" stroke-width="5"/><polygon points="610,105 585,92 585,118" fill="#111"/><text x="515" y="88" font-size="26">F=6N</text></svg><p>A. 此刻靜摩擦力一定等於最大靜摩擦力</p><p>B. 靜摩擦力會依維持靜止所需調整</p><p style="color:#2346c7">學生圈選：A</p></section>`;
 const sheetImage=await htmlImage(sheetHtml,1100,1400),sheet=await rawCall('sheet_current',ROOT+'/wrongbook-sheet-ai',{imageBase64:sheetImage,mimeType:'image/png'}),sj=sheet.json,qs=sj?.result?.questions;native('SHEET',sj);
 report.sheet={status:sheet.status,model:sj?.model,schemaVersion:sj?.schemaVersion,questionCount:Array.isArray(qs)?qs.length:null};
@@ -61,7 +59,6 @@ if(!sheet.ok||!sj?.result||typeof sj.result!=='object'||Array.isArray(sj.result)
 if(Array.isArray(qs)){const cropKeys=new Set();for(const [i,q] of qs.entries()){if(!q||typeof q!=='object'||Array.isArray(q)||!['options','recognizedUserAnswer','correctAnswer','concepts','corrections','genericFacts','regions'].every(k=>Array.isArray(q[k])))fail('SHEET_NATIVE_FIELDS',{i,q});if(!bboxOk(q.crop))fail('SHEET_BAD_CROP',{i,crop:q.crop});else cropKeys.add(JSON.stringify(q.crop));if(q.regions.some(r=>!bboxOk(r?.bbox)))fail('SHEET_BAD_REGION',{i,regions:q.regions});if(!q.concepts.length||q.concepts.some(c=>!c?.nameZh))fail('SHEET_CONCEPT_QUALITY',{i,concepts:q.concepts});if(q.learningObjectType==='problem_dependent'&&q.genericFacts.length)fail('SHEET_DEPENDENT_HAS_GENERIC_FACT',{i});if(q.genericFacts.some(f=>!f?.standalone||!f?.question||!f?.answer||!f?.sourceEvidence||!f?.conceptNameZh||!f?.dedupeKey||bannedFact.test(f.question)))fail('SHEET_FACT_QUALITY',{i,facts:q.genericFacts})}if(cropKeys.size!==3)fail('SHEET_CROPS_NOT_DISTINCT',[...cropKeys]);const ys=qs.map(q=>q.crop.y);report.sheet.cropY=ys;if(!(ys[0]<ys[1]&&ys[1]<ys[2]))fail('SHEET_SOURCE_ORDER_GEOMETRY',{ys});for(let i=0;i<3;i++)for(let j=i+1;j<3;j++)if(overlapRatio(qs[i].crop,qs[j].crop)>.35)fail('SHEET_CROP_OVERLAP',{i,j,a:qs[i].crop,b:qs[j].crop});const types=qs.map(q=>q.learningObjectType);report.sheet.types=types;if(!types.includes('generic_fact')||!types.includes('problem_dependent')||!types.includes('mixed'))fail('SHEET_PER_QUESTION_TYPES',types);const q3=qs.find(q=>String(q.number)==='3');if(q3?.questionType!=='single_choice'||q3?.options?.length<2||q3.options[0]?.label!=='A'||q3.options[1]?.label!=='B')fail('SHEET_OPTION_STRUCTURE',q3)}
 if(!report.errors.some(e=>e.gate.startsWith('SHEET_')))pass('SHEET_SEMANTIC_AND_GEOMETRY');
 
-// Fresh staged tutor requests.
 const base={problemText:'物體在水平面上受水平外力 6 N 且保持靜止。A 選項說靜摩擦力一定等於最大靜摩擦力。',studentAnswer:['A'],correctAnswer:['B'],subject:'物理',concepts:[{nameZh:'靜摩擦力'}],regions:[{id:'low-handwriting',kind:'student_handwriting',text:'模糊字跡',bbox:{x:20,y:55,width:25,height:8},confidence:.35},{id:'stem',kind:'key_phrase',text:'保持靜止',bbox:{x:20,y:18,width:20,height:7},confidence:.98}]};
 const gs=await rawCall('guide_start',ROOT+'/wrongbook-guide-ai',{...base,mode:'instructive',requestType:'start',question:'請先看我錯在哪裡，再只提示下一步。'}),g=gs.json?.result;native('GUIDE_START',gs.json);
 if(!gs.ok||!g?.diagnosis||!g.diagnosis.blindSpot||g.mode!=='instructive'||g.stages?.length!==1||g.stages[0]?.revealFinalAnswer!==false||g.stages[0]?.waitForStudent!==true)fail('GUIDE_INSTRUCTIVE_GATE',gs.json);else pass('GUIDE_INSTRUCTIVE_GATE');
@@ -74,7 +71,6 @@ const right=await rawCall('guide_right_track',ROOT+'/wrongbook-guide-ai',{...bas
 const gd=await rawCall('guide_direct',ROOT+'/wrongbook-guide-ai',{...base,imageBase64:mixedImage,mimeType:'image/png',mode:'direct',requestType:'direct',question:'直接給我逐步詳解。'}),dir=gd.json?.result;native('GUIDE_DIRECT',gd.json);if(!gd.ok||dir?.mode!=='direct'||!Array.isArray(dir?.stages)||dir.stages.length<2||dir.stages.slice(0,-1).some(s=>s.revealFinalAnswer===true)||dir.stages.at(-1)?.revealFinalAnswer!==true||dir.stages.some(s=>!s.goal||!s.successCriteria))fail('GUIDE_DIRECT_SOLUTION',gd.json);else pass('GUIDE_DIRECT_SOLUTION');
 report.guide={start:gs.status,hint:gh.status,evaluate:ge.status,rightTrack:right.status,direct:gd.status};
 
-// Validation-first error paths.
 const negatives=[
  ['ai_missing_image',ROOT+'/wrongbook-ai/analyze',{},400],
  ['ai_bad_mime',ROOT+'/wrongbook-ai/analyze',{imageBase64:'AAAA',mimeType:'text/plain'},400],
