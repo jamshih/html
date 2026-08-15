@@ -1,6 +1,6 @@
-// Runs only with ?e2e=1. Normal users never execute this flow.
+// Historical V3 regression runs only with ?e2ev3=1 so it cannot race the final V4 runner.
 (async()=>{
-  if(!new URLSearchParams(location.search).has('e2e'))return;
+  if(!new URLSearchParams(location.search).has('e2ev3'))return;
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const results=[];const check=(name,ok,detail='')=>results.push({name,ok:Boolean(ok),detail});
   const mobile=()=>innerWidth<=860;
