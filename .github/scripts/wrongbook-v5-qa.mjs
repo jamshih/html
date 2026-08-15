@@ -41,16 +41,31 @@ async function productViewport(name,width,height){
 }
 for(const v of viewports)await productViewport(...v);
 
-// Historical suite: Earth source fidelity plus existing product regressions. Exactly one runner owns #e2e-results.
+async function isolatedSuite(label,query,waitAfter=900){
+  const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[],badResponses=[];
+  page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('response',r=>{if(r.status()>=400)badResponses.push(`${r.status()} ${r.url()}`)});
+  await page.goto(local+query,{waitUntil:'domcontentloaded',timeout:20000});await page.waitForSelector('#e2e-results',{timeout:45000});await page.waitForTimeout(waitAfter);
+  const markerCount=await page.locator('#e2e-results').count(),status=await page.locator('#e2e-results').first().getAttribute('data-status'),text=await page.locator('#e2e-results').first().textContent(),result=JSON.parse(text);
+  const badNetwork=badResponses.filter(x=>!x.includes('favicon'));
+  await page.screenshot({path:`${OUT}/${label}.png`,fullPage:true});fs.writeFileSync(`${OUT}/${label}.json`,JSON.stringify({status,markerCount,result,errors,badResponses,badNetwork},null,2));
+  if(markerCount!==1||status!=='PASS'||errors.length||badNetwork.length)fail(`${label.toUpperCase()}_FAIL`,{status,markerCount,errors,badNetwork,result});
+  await page.close();return result;
+}
+
+// Final V4 historical suite owns ?e2e=1 and performs the structural Earth source-integrity audit.
 {
   const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[],badResponses=[];page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('response',r=>{if(r.status()>=400)badResponses.push(`${r.status()} ${r.url()}`)});
-  await page.goto(local+'?e2e=1',{waitUntil:'domcontentloaded',timeout:20000});await page.waitForSelector('#e2e-results',{timeout:40000});await page.waitForTimeout(5500);
+  await page.goto(local+'?e2e=1',{waitUntil:'domcontentloaded',timeout:20000});await page.waitForSelector('#e2e-results',{timeout:45000});await page.waitForTimeout(5500);
   const markerCount=await page.locator('#e2e-results').count(),status=await page.locator('#e2e-results').first().getAttribute('data-status'),text=await page.locator('#e2e-results').first().textContent(),result=JSON.parse(text);
   const finalEarth=await page.evaluate(()=>({source:window.v8EarthSourceIntegrity?.(),semantic:window.v5StrictAcceptanceReport?.()}));
-  await page.screenshot({path:`${OUT}/legacy.png`,fullPage:true});fs.writeFileSync(`${OUT}/legacy.json`,JSON.stringify({status,markerCount,result,finalEarth,errors,badResponses},null,2));
+  await page.screenshot({path:`${OUT}/legacy-v4.png`,fullPage:true});fs.writeFileSync(`${OUT}/legacy-v4.json`,JSON.stringify({status,markerCount,result,finalEarth,errors,badResponses},null,2));
   const badNetwork=badResponses.filter(x=>!x.includes('favicon'));
-  if(markerCount!==1||status!=='PASS'||errors.length||badNetwork.length||!finalEarth.source?.ok||!finalEarth.semantic?.ok)fail('LEGACY_FAIL',{status,markerCount,errors,badNetwork,result,finalEarth});await page.close();
+  if(markerCount!==1||status!=='PASS'||errors.length||badNetwork.length||!finalEarth.source?.ok||!finalEarth.semantic?.ok)fail('LEGACY_V4_FAIL',{status,markerCount,errors,badNetwork,result,finalEarth});await page.close();
 }
+// Preserve every older/source-specific regression suite as a separate page so result markers cannot race.
+await isolatedSuite('legacy-v3','?e2ev3=1',5200);
+await isolatedSuite('source-trace-v6','?sourcee2e=1',1800);
+await isolatedSuite('source-refinement-v7','?refinee2e=1',1800);
 
 // Live deployed backend QA: versions, auth/client errors, and real Gemini structured-output behavior.
 {
