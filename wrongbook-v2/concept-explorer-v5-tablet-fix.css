@@ -1,0 +1,55 @@
+/* V5 concept explorer tablet readability fix.
+   Portrait tablets do not have enough usable width for three readable panes beside the app sidebar.
+   Use the same explicit outline / graph / review tabs as phones instead of collapsing the outline into a dot-only rail. */
+@media (min-width:701px) and (max-width:1180px){
+  .v5-mobile-pane-tabs{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:5px;
+    margin:9px 0 11px;
+    padding:4px;
+    border-radius:11px;
+    background:#eef0f4;
+    position:sticky;
+    top:72px;
+    z-index:22;
+  }
+  .v5-mobile-pane-tabs button{
+    border:0;
+    background:transparent;
+    border-radius:8px;
+    min-height:38px;
+    padding:8px 10px;
+    font-weight:750;
+    color:#737985;
+  }
+  .v5-mobile-pane-tabs button.active{
+    background:#fff;
+    color:#5549cb;
+    box-shadow:0 1px 5px rgba(31,35,50,.09);
+  }
+  .v5-concept-grid{display:block;min-width:0}
+  .v5-concept-grid>[data-ce-pane]{display:none!important;position:static;max-height:none;width:100%;min-width:0}
+  .v5-concept-grid.is-mobile-outline>[data-ce-pane="outline"],
+  .v5-concept-grid.is-mobile-graph>[data-ce-pane="graph"],
+  .v5-concept-grid.is-mobile-detail>[data-ce-pane="detail"]{display:block!important}
+
+  /* Undo the old dot-only rail used by the obsolete 3-column tablet layout. */
+  .v5-concept-outline{overflow:hidden;display:flex;flex-direction:column}
+  .v5-concept-outline .v5-pane-head{display:flex}
+  .v5-concept-outline .v5-outline-toggle{display:block;flex:0 0 26px;width:26px;height:30px}
+  .v5-concept-outline .v5-outline-spacer{display:block;flex:0 0 26px;width:26px;height:30px}
+  .v5-concept-outline .v5-outline-row{padding-left:calc(var(--depth)*12px);justify-content:flex-start}
+  .v5-concept-outline .v5-outline-node{flex:1;width:auto;height:auto;display:grid;grid-template-columns:10px minmax(0,1fr);place-items:initial;padding:7px}
+  .v5-concept-outline .v5-outline-node>span:nth-child(2),
+  .v5-concept-outline .v5-outline-node small{display:block}
+  .v5-concept-outline .v5-outline-node .v5-node-state-dot{margin-top:4px}
+  .v5-outline-children{display:block}
+  .v5-outline-scroll{padding:8px 5px 14px;max-height:calc(100vh - 190px)}
+
+  .v5-concept-graph{overflow:hidden}
+  .v5-local-stage{min-height:600px}
+  .v5-graph-node{width:118px;max-width:28%}
+  .v5-graph-node.role-current{width:145px;max-width:32%}
+  .v5-concept-detail{overflow:auto;padding-bottom:24px}
+}

@@ -27,8 +27,12 @@
     const hint=[...document.querySelectorAll('[data-mind-hint]')].find(x=>x.offsetParent!==null);if(hint){hint.click();await sleep(180)}check('progressive hint increments',document.body.innerText.includes('提示 1/3'));
 
     const earthTab=document.querySelector('[data-subject="earth"]');if(!earthTab)throw new Error('earth subject tab missing');earthTab.click();await sleep(280);
-    const refQA=window.v4RefValidateData?.();
-    check('photo-ground-truth reference data validates to 277 numbered items',Boolean(refQA?.ok&&refQA.total===277&&refQA.expectedTotal===277),JSON.stringify(refQA));
+    const refQA=window.v4RefValidateData?.(),sourceQA=window.v8EarthSourceIntegrity?.();
+    check('Earth canonical source integrity is structurally valid',Boolean(sourceQA?.ok),JSON.stringify(sourceQA));
+    check('Earth canonical and registered learning-item totals are independently 276',Boolean(sourceQA?.expectedQuestions===276&&sourceQA?.canonicalQuestionCount===276&&sourceQA?.uniqueQuestionCount===276&&sourceQA?.registeredQuestionCount===276&&sourceQA?.registeredUniqueQuestionCount===276),JSON.stringify(sourceQA));
+    check('Earth source question IDs have no missing duplicate orphan or page mismatch',Boolean(sourceQA&&sourceQA.missingQuestionIds.length===0&&sourceQA.duplicateQuestionIds.length===0&&sourceQA.orphanQuestionIds.length===0&&sourceQA.pageMismatchQuestionIds.length===0),JSON.stringify(sourceQA));
+    check('Earth source figures are exactly 56 with no missing or orphan figures',Boolean(sourceQA?.expectedFigures===56&&sourceQA?.actualFigures===56&&sourceQA?.missingFigures.length===0&&sourceQA?.orphanFigures.length===0),JSON.stringify(sourceQA));
+    check('reference registry independently validates 276 learning items',Boolean(refQA?.ok&&refQA.total===276&&refQA.expectedTotal===276),JSON.stringify(refQA));
     check('six photographed chapter maps remain available',document.querySelectorAll('.v4ref-chapter-nav [data-v4ref-chapter]').length===6);
     check('strict source spread uses two fixed pages',document.querySelectorAll('[data-strict-page]').length===2&&document.querySelectorAll('.v4ref-paper').length===2);
     check('source spread uses scalable fixed canvas',Boolean(document.querySelector('[data-v4ref-canvas]')&&document.querySelector('[data-v4ref-viewport]')));
@@ -48,18 +52,20 @@
     document.querySelector('[data-v4ref-mode="recall"]')?.click();await sleep(180);
 
     document.querySelector('.v4ref-chapter-nav [data-v4ref-chapter="2"]')?.click();await sleep(220);
-    check('chapter two photograph-ground-truth count is 51',document.querySelectorAll('.v4ref-blank-item').length===51);
-    check('page 244 contains photographed items 1 through 21',exactRange(nums(244),1,21),JSON.stringify(nums(244)));
-    check('page 245 contains photographed items 22 through 51',exactRange(nums(245),22,51),JSON.stringify(nums(245)));
-    check('page 245 visibly retains source item 51',Boolean(document.querySelector('[data-page="245"][data-question="51"]')));
-    check('chapter two contains 51 source items exactly once',new Set([...nums(244),...nums(245)]).size===51);
+    check('chapter two canonical learning-item count is 50',document.querySelectorAll('.v4ref-blank-item').length===50);
+    check('page 244 contains photographed learning items 1 through 21',exactRange(nums(244),1,21),JSON.stringify(nums(244)));
+    check('page 245 contains canonical learning items 22 through 50',exactRange(nums(245),22,50),JSON.stringify(nums(245)));
+    check('page 245 does not invent a standalone item 51',!document.querySelector('[data-page="245"][data-question="51"]'));
+    const composite50=sourceQA?.compositePromptLabels?.find(x=>x.chapter===2&&x.item===50);
+    check('page 245 composite item 50 preserves printed secondary label 51',Boolean(composite50?.labels?.includes(50)&&composite50?.labels?.includes(51)),JSON.stringify(composite50));
+    check('chapter two contains 50 canonical source items exactly once',new Set([...nums(244),...nums(245)]).size===50);
     check('page 244 has source-specific astronomy graphics',document.querySelector('[data-strict-page="244"]')?.querySelectorAll('.v4ref-diagram-svg').length>=4);
     check('page 245 has source-specific astronomy graphics',document.querySelector('[data-strict-page="245"]')?.querySelectorAll('.v4ref-diagram-svg').length>=5);
     check('strict layout does not reflow into cards on mobile',document.querySelectorAll('[data-strict-page]').length===2&&getComputedStyle(document.querySelector('[data-strict-page="244"]')).position==='absolute');
 
     document.querySelector('.v4ref-chapter-nav [data-v4ref-chapter="5"]')?.click();await sleep(220);
     check('chapter five remains 60 numbered recall items',document.querySelectorAll('.v4ref-blank-item').length===60);
-    check('chapter five preserves source cross-page order',Boolean(window.v4RefValidateData?.().ch5OrderOk));
+    check('chapter five preserves source cross-page order',Boolean(window.v4RefValidateData?.().ch5OrderOk&&sourceQA?.ch5OrderOk));
     const ch5=[...document.querySelectorAll('.v4ref-blank-item')].map(x=>Number(x.dataset.v4refItem));check('chapter five still contains every number 1 through 60',Array.from({length:60},(_,i)=>i+1).every(n=>ch5.includes(n)));
     document.querySelector('[data-v4ref-source="curriculum"]')?.click();await sleep(220);check('canonical 108 curriculum map remains available',Boolean(document.querySelector('.v4tb-sheet')));
 
@@ -70,6 +76,6 @@
     await navigatePage('analytics');check('real concept analytics',document.body.innerText.includes('最需要處理的概念'));
     await navigatePage('settings');check('authenticated cloud sync UI',document.body.innerText.includes('帳號與跨裝置同步'));check('junior high is not falsely enabled',document.body.innerText.includes('國中（課綱資料建置中）'));check('full backup includes image/ink promise',document.body.innerText.includes('完整資料備份'));
 
-    const failed=results.filter(x=>!x.ok),box=document.createElement('pre');box.id='e2e-results';box.dataset.status=failed.length?'FAIL':'PASS';box.textContent=JSON.stringify({status:failed.length?'FAIL':'PASS',viewport:{w:innerWidth,h:innerHeight},results},null,2);document.body.appendChild(box);
+    const failed=results.filter(x=>!x.ok),box=document.createElement('pre');box.id='e2e-results';box.dataset.status=failed.length?'FAIL':'PASS';box.textContent=JSON.stringify({status:failed.length?'FAIL':'PASS',viewport:{w:innerWidth,h:innerHeight},earth:sourceQA,results},null,2);document.body.appendChild(box);
   }catch(err){const box=document.createElement('pre');box.id='e2e-results';box.dataset.status='FAIL';box.textContent=JSON.stringify({status:'FAIL',viewport:{w:innerWidth,h:innerHeight},error:String(err),results},null,2);document.body.appendChild(box)}
 })();

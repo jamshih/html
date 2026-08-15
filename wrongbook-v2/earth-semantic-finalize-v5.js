@@ -84,4 +84,11 @@ function v5SemanticValidate(){
  return report;
 }
 window.EARTH_SEMANTIC_MAPS=EARTH_SEMANTIC_MAPS;window.v5SemanticValidate=v5SemanticValidate;window.V5_COUNTS=V5_COUNTS;window.V5_TOTAL=V5_TOTAL;
-const __v5qa=v5SemanticValidate();if(!__v5qa.ok)console.error('Semantic Earth map QA failed',__v5qa);
+
+// Validate only after every Earth patch, figure renderer, source refinement, and source manifest
+// has finished loading. The previous immediate check ran against a transient intermediate model
+// and emitted a false console.error even though the final acceptance report was valid.
+window.addEventListener('load',()=>{
+ const report=window.v5SemanticValidate?.();
+ if(report&&!report.ok)console.error('Semantic Earth map QA failed',report);
+},{once:true});
