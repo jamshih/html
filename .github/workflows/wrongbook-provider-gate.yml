@@ -1,0 +1,32 @@
+name: Wrongbook real-provider gate
+on:
+  push:
+    branches:
+      - agent/wrongbook-concepts-tutor-v5-20260814
+    paths:
+      - '.github/scripts/wrongbook-provider-gate.mjs'
+      - '.github/workflows/wrongbook-provider-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  provider-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Fresh real-provider acceptance
+        run: node .github/scripts/wrongbook-provider-gate.mjs
+      - name: Upload provider evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-provider-gate
+          path: .qa-artifacts/wrongbook-provider-gate
