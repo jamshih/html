@@ -1,0 +1,35 @@
+name: Wrongbook live Pages QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wrongbook-v2/**'
+      - '.github/scripts/wrongbook-live-qa.mjs'
+      - '.github/workflows/wrongbook-live-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      WB_LIVE_URL: https://jamshih.github.io/html/wrongbook-v2/
+      WB_EXPECT_BUILD: wrongbook-v5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Verify deployed Pages build and interactions
+        run: node .github/scripts/wrongbook-live-qa.mjs
+      - name: Upload live screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-live-pages-qa
+          path: .qa-artifacts/wrongbook-live
