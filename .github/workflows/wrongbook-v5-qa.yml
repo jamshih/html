@@ -10,6 +10,8 @@ jobs:
   rendered-qa:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      WB_REAL_PROVIDER: '0'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,11 +26,11 @@ jobs:
           python3 -m http.server 8000 --directory . > /tmp/wrongbook-http.log 2>&1 &
           echo $! > /tmp/wrongbook-http.pid
           for i in {1..30}; do curl -fsS http://127.0.0.1:8000/wrongbook-v2/ >/dev/null && break; sleep 1; done
-      - name: Render, regression, persistence, stress, and live backend QA
-        run: node .github/scripts/wrongbook-v5-qa.mjs
+      - name: Render, regression, persistence, stress, and backend contract QA
+        run: node .github/scripts/wrongbook-v5-qa-v2.mjs
       - name: Upload QA artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: wrongbook-v5-rendered-qa
-          path: .qa-artifacts/wrongbook-v5
+          name: wrongbook-v5-rendered-qa-v2
+          path: .qa-artifacts/wrongbook-v5-v2
