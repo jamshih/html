@@ -32,8 +32,8 @@
  add(p,N('p252-normal-pacific','protected-figure',R(15,20,320,150),{parentId:'p252-horizontal',containerKind:'source-figure-with-label-anchors'}));
  add(p,N('p252-upwelling-q16','source-box',R(254,282,145,74),{parentId:'p252-ocean',containerKind:'source-box',contentRect:R(6,6,133,62)}));
  add(p,N('p252-mixed-upwelling','source-box',R(410,282,280,74),{parentId:'p252-ocean',containerKind:'source-box',contentRect:R(8,6,264,62)}));
- add(p,N('p252-temp-depth','protected-figure',R(410,430,185,150),{parentId:'p252-ocean',containerKind:'source-figure-with-label-anchors',anchors:{q12:R(165,20,120,34),q13:R(70,50,120,38),q14:R(60,100,125,38)}}));
- add(p,N('p252-temp-explain','source-box',R(585,445,175,115),{parentId:'p252-ocean',containerKind:'source-box',contentRect:R(8,8,159,99)}));
+ add(p,N('p252-temp-depth','protected-figure',R(410,430,185,150),{parentId:'p252-ocean',containerKind:'source-figure-with-label-anchors',anchors:{q12:R(165,-5,120,34),q13:R(70,50,120,38),q14:R(60,100,125,38)}}));
+ add(p,N('p252-temp-explain','source-box',R(585,455,175,115),{parentId:'p252-ocean',containerKind:'source-box',contentRect:R(8,8,159,99)}));
  add(p,N('p252-salinity','group',R(0,285,385,420),{parentId:'p252-ocean'}));
  add(p,N('p252-salinity-graph','protected-figure',R(410,585,230,150),{parentId:'p252-ocean',containerKind:'source-figure-with-label-anchors'}));
  own(p,'p252-typhoon',[1,2,3,4,5,6,7]);own(p,'p252-horizontal',[8,9,10]);own(p,'p252-mixed-upwelling',[11]);own(p,'p252-upwelling-q16',[16]);own(p,'p252-temp-depth',[12,13,14]);own(p,'p252-temp-explain',[15]);own(p,'p252-enso-q17',[17]);own(p,'p252-enso-figure',[18]);own(p,'p252-enso-q19',[19]);own(p,'p252-salinity',[20,21,22,23,24,25,26]);
