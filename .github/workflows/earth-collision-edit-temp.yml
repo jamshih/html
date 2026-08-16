@@ -16,108 +16,55 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: earth-collision-zero-20260816
-      - name: Apply source-truth collision batch
+      - name: Apply p244 source-truth collision correction
         run: |
           python3 - <<'PY'
           from pathlib import Path
           root=Path('wrongbook-v2')
-          def replace(path, old, new):
+          def rep(path, old, new):
               p=root/path; s=p.read_text()
-              if old not in s: raise SystemExit(f'missing target in {path}: {old[:90]}')
+              if old not in s: raise SystemExit(f'missing target in {path}: {old[:120]}')
               p.write_text(s.replace(old,new,1))
 
-          replace('earth-collision-qa-v8.js',
-            "const list=[...section.querySelectorAll('[data-question],[data-source-figure],[data-source-label],.v4strict-ribbon,.v4strict-header')].filter(visible)",
-            "const list=[...section.querySelectorAll('[data-question],[data-source-figure],[data-source-label],.v4strict-ribbon,.v4strict-header')].filter(el=>visible(el)&&el.dataset.sourceContainerOnly!=='true')")
-
-          replace('earth-source-refine-figure-blanks-v7.js',
-            'data-v7-source-figure-blanks="11" style="position:absolute;inset:0;z-index:8;pointer-events:none"><span style="position:absolute;left:124px;top:790px;width:690px;font-size:12.5px;line-height:1.4"',
-            'data-v7-source-figure-blanks="11" data-source-container-only="true" style="position:absolute;inset:0;z-index:8;pointer-events:none"><span data-source-label="q15-instruction" data-source-object="q15-instruction" style="position:absolute;left:124px;top:790px;width:690px;font-size:12.5px;line-height:1.4"')
-          replace('earth-source-refine-figure-blanks-v7.js',
-            'data-v7-source-figure-blanks="4" style="position:absolute;left:400px;top:650px;width:490px;height:245px;z-index:8;pointer-events:none"><span style="position:absolute;left:4px;top:0;width:300px;font-size:13px"',
-            'data-v7-source-figure-blanks="4" data-source-container-only="true" style="position:absolute;left:400px;top:650px;width:490px;height:245px;z-index:8;pointer-events:none"><span data-source-label="q23-instruction" data-source-object="q23-instruction" style="position:absolute;left:4px;top:0;width:300px;font-size:13px"')
-
+          # Exact prompt wording and geometry stay synchronized.
+          manifest='earth-source-prompts-v7-244-245.js'
           for old,new in {
-            'left:235px!important;top:124px!important;width:270px!important':'left:330px!important;top:180px!important;width:180px!important',
-            'left:485px!important;top:150px!important;width:320px!important':'left:640px!important;top:180px!important;width:180px!important',
-            'left:595px!important;top:635px!important;width:190px!important':'left:560px!important;top:610px!important;width:170px!important',
-            'left:205px!important;top:918px!important;width:210px!important':'left:205px!important;top:918px!important;width:200px!important',
-            'left:205px!important;top:966px!important;width:230px!important':'left:205px!important;top:985px!important;width:230px!important',
-            'left:405px!important;top:810px!important;width:260px!important':'left:405px!important;top:810px!important;width:205px!important',
-            'left:620px!important;top:810px!important;width:230px!important':'left:650px!important;top:810px!important;width:200px!important',
-            'left:300px!important;top:1160px!important;width:200px!important':'left:300px!important;top:1160px!important;width:170px!important',
-            'left:492px!important;top:1160px!important;width:215px!important':'left:520px!important;top:1160px!important;width:190px!important'
-          }.items(): replace('earth-source-trace-p245-v6.css',old,new)
+            "sourceRect:R(397,488,225,36)":"sourceRect:R(397,500,225,32)",
+            "sourceRect:R(344,385,112,30)":"sourceRect:R(344,382,112,28)",
+            "sourceRect:R(418,416,136,42)":"sourceRect:R(420,435,136,42)",
+            "sourceRect:R(558,438,310,52)":"sourceRect:R(558,430,325,50)",
+            "sourceRect:R(385,928,400,55)":"sourceRect:R(385,938,400,55)",
+            "sourceRect:R(385,990,400,48)":"sourceRect:R(385,1000,400,48)",
+            "sourceRect:R(385,1042,155,30)":"sourceRect:R(385,1052,155,30)",
+            "sourceRect:R(555,1045,120,26)":"sourceRect:R(555,1055,120,26)"
+          }.items(): rep(manifest,old,new)
 
+          layout='earth-source-trace-p244-v6.js'
           for old,new in {
-            'v6P247Q(ch,mode,18,48,205,195':'v6P247Q(ch,mode,18,48,365,195',
-            'v6P247Q(ch,mode,19,45,300,145':'v6P247Q(ch,mode,19,45,255,145',
-            'v6P247Q(ch,mode,24,560,410,175':'v6P247Q(ch,mode,24,555,510,115',
-            'v6P247Q(ch,mode,25,690,410,175':'v6P247Q(ch,mode,25,710,510,115',
-            'v6P247Q(ch,mode,30,610,620,135':'v6P247Q(ch,mode,30,610,700,110',
-            'v6P247Q(ch,mode,31,742,620,135':'v6P247Q(ch,mode,31,750,700,110',
-            'v6P247Q(ch,mode,34,50,885,235':'v6P247Q(ch,mode,34,50,885,170',
-            'v6P247Q(ch,mode,35,235,885,235':'v6P247Q(ch,mode,35,250,885,170',
-            'v6P247Q(ch,mode,38,485,825,250':'v6P247Q(ch,mode,38,485,825,190',
-            'v6P247Q(ch,mode,39,690,825,195':'v6P247Q(ch,mode,39,700,825,185'
-          }.items(): replace('earth-source-trace-p247-v6.js',old,new)
+            "colorExamples:{role:'figure',rect:R(30,386,190,82),safeRect:R(30,386,190,82)}":"colorExamples:{role:'figure',rect:R(30,400,190,68),safeRect:R(30,400,190,68)}",
+            "planetLabel:{role:'source-label',rect:R(55,545,80,25)}":"planetLabel:{role:'source-label',rect:R(55,520,70,25)}",
+            "starLabel:{role:'source-label',rect:R(145,550,80,25)}":"starLabel:{role:'source-label',rect:R(145,520,70,25)}",
+            "astronaut:{role:'figure',rect:R(14,560,130,125),safeRect:R(14,560,130,125)}":"astronaut:{role:'figure',rect:R(14,570,100,120),safeRect:R(14,570,100,120)}",
+            "starNode:{role:'figure',rect:R(92,572,88,92),safeRect:R(92,572,88,92)}":"starNode:{role:'figure',rect:R(115,568,80,90),safeRect:R(115,568,80,90)}",
+            "zodiacCopy:{role:'source-label',rect:R(55,838,255,72)}":"zodiacCopy:{role:'source-label',rect:R(55,870,255,68)}",
+            "distanceBox:{role:'figure',rect:R(370,900,455,245),safeRect:R(370,900,455,245)":"distanceBox:{role:'figure',rect:R(370,910,455,245),safeRect:R(370,910,455,245)",
+            "distanceTitle:{role:'source-label',rect:R(382,904,205,24),inside:'distanceBox',localRect:R(12,4,205,24)}":"distanceTitle:{role:'source-label',rect:R(382,914,205,24),inside:'distanceBox',localRect:R(12,4,205,24)}",
+            "parallaxTriangle:{role:'figure',rect:R(500,1074,158,48),inside:'distanceBox',localRect:R(130,174,158,48),safeRect:R(500,1074,158,48)}":"parallaxTriangle:{role:'figure',rect:R(500,1084,158,40),inside:'distanceBox',localRect:R(130,174,158,40),safeRect:R(500,1084,158,40)}",
+            "distanceUse:{role:'source-label',rect:R(382,1118,390,23),inside:'distanceBox',localRect:R(12,218,390,23)}":"distanceUse:{role:'source-label',rect:R(382,1132,390,20),inside:'distanceBox',localRect:R(12,222,390,20)}",
+            "color2ToStar:{path:'M300 360L165 570'":"color2ToStar:{path:'M300 372L175 568'",
+            "q7ToBright:{path:'M398 416L337 548'":"q7ToBright:{path:'M344 414L238 445L238 540L278 568'",
+            "q6ToBright:{path:'M397 518L360 553'":"q6ToBright:{path:'M397 532L397 548L360 560'"
+          }.items(): rep(layout,old,new)
 
-          for old,new in {
-            'v6P248Q(ch,1,160,188,180':'v6P248Q(ch,1,160,230,180',
-            'v6P248Q(ch,2,76,265,100':'v6P248Q(ch,2,76,330,100',
-            'v6P248Q(ch,3,215,322,110':'v6P248Q(ch,3,215,390,110',
-            'v6P248Q(ch,5,530,315,300':'v6P248Q(ch,5,410,382,300',
-            'v6P248Q(ch,6,640,345,210':'v6P248Q(ch,6,410,430,300',
-            'v6P248Q(ch,7,735,245,150':'v6P248Q(ch,7,720,300,150'
-          }.items(): replace('earth-source-trace-p248-v6.js',old,new)
-          replace('earth-source-trace-p248-v6.css','.v6-p248-q[data-question="5"]{left:470px!important}', '.v6-p248-q[data-question="5"]{left:410px!important}')
-          replace('earth-source-trace-p248-v6.css','.v6-p248-q[data-question="6"]{left:545px!important}', '.v6-p248-q[data-question="6"]{left:410px!important}')
-
-          for old,new in {
-            'v6P249Q(ch,18,675,310,215':'v6P249Q(ch,18,555,310,235',
-            'v6P249Q(ch,19,675,366,205':'v6P249Q(ch,19,555,390,235',
-            'v6P249Q(ch,20,80,515,785':'v6P249Q(ch,20,80,500,785',
-            'v6P249Q(ch,21,80,575,785':'v6P249Q(ch,21,80,610,785',
-            'v6P249Q(ch,24,705,654,165':'v6P249Q(ch,24,730,654,145'
-          }.items(): replace('earth-source-trace-p249-v6.js',old,new)
-
-          for old,new in {
-            '2:[55,230,120]':'2:[55,360,90]', '5:[118,255,210]':'5:[160,410,180]',
-            '3:[55,320,130]':'3:[55,510,90]', '7:[120,302,210]':'7:[160,480,190]',
-            '6:[408,245,130]':'6:[390,395,100]', '8:[455,225,150]':'8:[500,370,150]',
-            '13:[605,275,200]':'13:[570,450,190]', '14:[610,320,210]':'14:[570,500,210]'
-          }.items(): replace('earth-source-trace-p250-v6.js',old,new)
-
-          for old,new in {
-            '26:[470,155,390]':'26:[470,175,390]', '29:[470,375,170]':'29:[470,400,170]',
-            '38:[500,915,340]':'38:[500,950,340]', '40:[90,1085,250]':'40:[90,1085,180]',
-            '41:[300,1085,250]':'41:[300,1085,190]', '42:[90,1140,330]':'42:[90,1170,330]',
-            '46:[560,765,150]':'46:[560,765,130]', '47:[700,765,150]':'47:[720,765,130]'
-          }.items(): replace('earth-source-trace-p251-v6.js',old,new)
-
-          replace('earth-source-trace-p252-v6.js','10:[530,700,260]','10:[530,700,240]')
-          replace('earth-source-trace-p252-v6.js','11:[530,745,300]','11:[530,790,300]')
-          replace('earth-source-trace-p252-v6.css','left:570px!important;top:930px!important','left:520px!important;top:930px!important;width:130px!important')
-          replace('earth-source-trace-p252-v6.css','left:515px!important;top:985px!important','left:500px!important;top:1005px!important;width:130px!important')
-          replace('earth-source-trace-p252-v6.css','left:690px!important;top:935px!important','left:680px!important;top:935px!important;width:185px!important')
-
-          p=root/'earth-source-trace-p253-correct-v6.css'
-          s=p.read_text()
-          block='''\n/* NEW_SOURCE_TRUTH row geometry: preserve photographed reading order and keep exact prompts disjoint. */\n.v6-p253-q[data-question="27"]{top:135px!important;width:300px!important}\n.v6-p253-q[data-question="30"]{top:300px!important}\n.v6-p253-q[data-question="38"]{left:450px!important;top:630px!important;width:390px!important}\n.v6-p253-q[data-question="39"]{left:430px!important;top:705px!important;width:420px!important}\n.v6-p253-q[data-question="40"]{left:430px!important;top:770px!important;width:420px!important}\n.v6-p253-q[data-question="42"]{left:570px!important;top:835px!important;width:290px!important}\n.v6-p253-q[data-question="43"]{left:430px!important;top:895px!important;width:420px!important}\n.v6-p253-q[data-question="44"]{left:430px!important;top:945px!important;width:420px!important}\n.v6-p253-q[data-question="45"]{left:420px!important;top:990px!important;width:450px!important}\n.v6-p253-q[data-question="46"]{left:300px!important;top:1050px!important;width:520px!important}\n.v6-p253-q[data-question="47"]{left:300px!important;top:1100px!important;width:520px!important}\n.v6-p253-q[data-question="48"]{left:195px!important;top:1140px!important;width:520px!important}\n.v6-p253-q[data-question="49"]{left:190px!important;top:1175px!important;width:650px!important}\n.v6-p253-q[data-question="50"]{left:190px!important;top:1230px!important;width:620px!important}\n'''
-          if 'NEW_SOURCE_TRUTH row geometry' in s: raise SystemExit('p253 batch already present')
-          p.write_text(s+block)
+          css='earth-source-trace-p244-v6.css'
+          rep(css,'.v8-p244-page .v8-p244-q[data-question="14"]{font-size:13.4px!important}', '.v8-p244-page .v8-p244-q[data-question="14"]{font-size:12.8px!important;line-height:1.25!important}')
+          rep(css,'.v8-p244-page .v8-p244-q[data-question="11"],.v8-p244-page .v8-p244-q[data-question="12"],.v8-p244-page .v8-p244-q[data-question="13"],.v8-p244-page .v8-p244-q[data-question="16"],.v8-p244-page .v8-p244-q[data-question="17"]{white-space:nowrap!important}', '.v8-p244-page .v8-p244-q[data-question="6"],.v8-p244-page .v8-p244-q[data-question="7"],.v8-p244-page .v8-p244-q[data-question="11"],.v8-p244-page .v8-p244-q[data-question="12"],.v8-p244-page .v8-p244-q[data-question="13"],.v8-p244-page .v8-p244-q[data-question="16"],.v8-p244-page .v8-p244-q[data-question="17"]{white-space:nowrap!important}')
           PY
-          node --check wrongbook-v2/earth-collision-qa-v8.js
-          node --check wrongbook-v2/earth-source-refine-figure-blanks-v7.js
-          node --check wrongbook-v2/earth-source-trace-p247-v6.js
-          node --check wrongbook-v2/earth-source-trace-p248-v6.js
-          node --check wrongbook-v2/earth-source-trace-p249-v6.js
-          node --check wrongbook-v2/earth-source-trace-p250-v6.js
-          node --check wrongbook-v2/earth-source-trace-p251-v6.js
-          node --check wrongbook-v2/earth-source-trace-p252-v6.js
+          node --check wrongbook-v2/earth-source-trace-p244-v6.js
+          node --check wrongbook-v2/earth-source-prompts-v7-244-245.js
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-collision-qa-v8.js wrongbook-v2/earth-source-refine-figure-blanks-v7.js wrongbook-v2/earth-source-trace-p245-v6.css wrongbook-v2/earth-source-trace-p247-v6.js wrongbook-v2/earth-source-trace-p248-v6.js wrongbook-v2/earth-source-trace-p248-v6.css wrongbook-v2/earth-source-trace-p249-v6.js wrongbook-v2/earth-source-trace-p250-v6.js wrongbook-v2/earth-source-trace-p251-v6.js wrongbook-v2/earth-source-trace-p252-v6.js wrongbook-v2/earth-source-trace-p252-v6.css wrongbook-v2/earth-source-trace-p253-correct-v6.css
+          git add wrongbook-v2/earth-source-trace-p244-v6.js wrongbook-v2/earth-source-trace-p244-v6.css wrongbook-v2/earth-source-prompts-v7-244-245.js
           git diff --cached --check
-          git commit -m 'Clear cross-page Earth source collisions'
+          git commit -m 'Clear p244 source-owned collisions'
           git push origin HEAD:earth-collision-zero-20260816
