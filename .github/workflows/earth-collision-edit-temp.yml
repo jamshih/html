@@ -1,0 +1,48 @@
+name: Earth Collision One-shot Edit
+
+on:
+  push:
+    branches: [earth-collision-zero-20260816]
+    paths:
+      - '.github/workflows/earth-collision-edit-temp.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: earth-collision-zero-20260816
+      - name: Apply final p243 source-gap correction
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('wrongbook-v2/earth-source-trace-p243-v6.js')
+          s=p.read_text()
+          old="q49:{role:'prompt',rect:R(570,495,80,28)}"
+          new="q49:{role:'prompt',rect:R(560,495,80,28)}"
+          if old not in s: raise SystemExit('p243 q49 layout target not found')
+          p.write_text(s.replace(old,new,1))
+          p=Path('wrongbook-v2/earth-source-prompts-v7-242-243.js')
+          s=p.read_text()
+          replacements={
+            "E(44,'<b class=\"v4strict-num\">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,540,105,32),sourceHeading:'各時期代表化石'})":"E(44,'<b class=\"v4strict-num\">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,505,105,32),sourceHeading:'各時期代表化石'})",
+            "E(45,'<b class=\"v4strict-num\">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,532,105,32)})":"E(45,'<b class=\"v4strict-num\">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,505,105,32)})",
+            "E(46,'<b class=\"v4strict-num\">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,532,155,32)})":"E(46,'<b class=\"v4strict-num\">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,505,155,32)})",
+            "E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,502,130,28),sourceLabel:'分界依據'})":"E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,495,90,28),sourceLabel:'分界依據'})",
+            "E(49,'<b class=\"v4strict-num\">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(545,502,130,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})":"E(49,'<b class=\"v4strict-num\">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(560,495,80,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})"
+          }
+          for old,new in replacements.items():
+            if old not in s: raise SystemExit('prompt sync target not found: '+old[:40])
+            s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add wrongbook-v2/earth-source-trace-p243-v6.js wrongbook-v2/earth-source-prompts-v7-242-243.js
+          git diff --cached --check
+          git commit -m 'Finish p243 source-gap ownership'
+          git push origin HEAD:earth-collision-zero-20260816
