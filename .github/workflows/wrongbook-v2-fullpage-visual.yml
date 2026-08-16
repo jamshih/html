@@ -1,0 +1,32 @@
+name: Wrongbook V2 Full-page Visual QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/wrongbook-v2-fullpage-visual.yml'
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Capture complete Earth chapter spreads
+        run: |
+          python3 -m http.server 4173 >/tmp/wrongbook-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          for CH in 1 2 3 4 5 6; do
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --user-data-dir="/tmp/wrongbook-full-$CH" \
+              --window-size=2400,1500 --virtual-time-budget=5000 \
+              --screenshot="/tmp/wrongbook-full-ch${CH}.png" \
+              "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-earth-fullpage-visual
+          path: /tmp/wrongbook-full-ch*.png
