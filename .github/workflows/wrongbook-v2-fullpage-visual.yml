@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Traditional Chinese QA font
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
       - name: Capture complete Earth chapter spreads
         run: |
           python3 -m http.server 4173 >/tmp/wrongbook-http.log 2>&1 &
