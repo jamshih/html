@@ -16,6 +16,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install Traditional Chinese rendering fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fc-cache -f
+          fc-match 'Noto Sans TC'
       - name: V9 syntax and architecture guard
         run: |
           node --check wrongbook-v2/earth-source-hierarchy-v9.js
