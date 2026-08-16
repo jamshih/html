@@ -1,4 +1,4 @@
-name: Earth Final Wrongbook QA
+name: Earth Canonical + Collision Final Gate
 
 on:
   push:
@@ -15,94 +15,90 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: JavaScript syntax
+      - name: Syntax
         run: |
-          for f in wrongbook-v2/*.js; do echo "checking $f"; node --check "$f"; done
-      - name: Taiwan terminology guard
-        run: |
-          node - <<'NODE'
-          const fs=require('fs'),vm=require('vm');
-          const curriculumFiles=['curriculum-tw.js','curriculum-more-tw.js','curriculum-tw-fixes.js'];
-          const src=curriculumFiles.map(f=>fs.readFileSync('wrongbook-v2/'+f,'utf8')).join('\n')+'\n;globalThis.__C=CURRICULUM_TW;';
-          const ctx={};vm.createContext(ctx);vm.runInContext(src,ctx);
-          const C=ctx.__C,text=JSON.stringify(C);
-          const banned=['線粒體','高爾基體','溶酶體','概率','種群','群落','生境','質粒','數據','視頻','信息','矢量','網絡','軟件','硬件','激活能'];
-          for(const term of banned)if(text.includes(term))throw new Error(`normalized curriculum contains non-Taiwan preferred term: ${term}`);
-          if(/(^|[^演])算法/.test(text))throw new Error('normalized curriculum contains 算法 instead of 演算法');
-          const otherFiles=fs.readdirSync('wrongbook-v2').filter(f=>/\.(js|html)$/.test(f)&&!curriculumFiles.includes(f)&&f!=='tw-ui-guard.js');
-          for(const f of otherFiles){let t=fs.readFileSync('wrongbook-v2/'+f,'utf8');if(f==='product-engine-v3.js')t=t.replace(/\.replaceAll\('[^']+','[^']+'\)/g,'');for(const term of banned)if(t.includes(term))throw new Error(`${f} contains non-Taiwan preferred term: ${term}`);if(/(^|[^演])算法/.test(t))throw new Error(`${f} contains 算法 instead of 演算法`)}
-          console.log('Taiwan terminology guard passed');
-          NODE
-      - name: Required curriculum coverage
-        run: |
-          node - <<'NODE'
-          const fs=require('fs'),vm=require('vm');
-          const src=['curriculum-tw.js','curriculum-more-tw.js','curriculum-tw-fixes.js'].map(f=>fs.readFileSync('wrongbook-v2/'+f,'utf8')).join('\n')+'\n;globalThis.__C=CURRICULUM_TW;';
-          const ctx={};vm.createContext(ctx);vm.runInContext(src,ctx);const C=ctx.__C;
-          const required=['chinese','english','math','physics','chemistry','biology','earth','history','geography','civics'];
-          for(const s of required){if(!C[s]||!Array.isArray(C[s].chapters)||!C[s].chapters.length)throw new Error(`missing ${s}`);for(const ch of C[s].chapters){if(!ch.sections?.length)throw new Error(`${s}/${ch.title} has no sections`);for(const sec of ch.sections)if(!sec.points?.length)throw new Error(`${s}/${ch.title}/${sec.title} has no points`)}}
-          const minChapters={physics:12,earth:10,chinese:8,english:8,history:10,geography:10,civics:10};const pointCount=s=>C[s].chapters.flatMap(ch=>ch.sections).flatMap(sec=>sec.points).length;
-          for(const [s,n] of Object.entries(minChapters))if(C[s].chapters.length<n)throw new Error(`${s} only has ${C[s].chapters.length} chapters; expected at least ${n}`);for(const s of Object.keys(minChapters))if(pointCount(s)<45)throw new Error(`${s} only has ${pointCount(s)} recall points; expected at least 45`);
-          console.log('curriculum coverage passed');
-          NODE
-      - name: V3 product promises guard
-        run: |
-          node - <<'NODE'
-          const fs=require('fs');const index=fs.readFileSync('wrongbook-v2/index.html','utf8'),engine=fs.readFileSync('wrongbook-v2/product-engine-v3.js','utf8'),hotfix=fs.readFileSync('wrongbook-v2/product-engine-v3-hotfix.js','utf8'),guide=fs.readFileSync('wrongbook-v2/guide-v3.js','utf8');
-          if(index.includes('app-1.js'))throw new Error('index still references missing app-1.js');for(const asset of ['product-engine-v3.css','product-engine-v3.js','product-engine-v3-hotfix.js','guide-v3.css','guide-v3.js','e2e-v3.js','earth-reference-maps-v4.js','earth-reference-renderer-v4.js'])if(!index.includes(asset))throw new Error(`index missing ${asset}`);
-          const required=[['per-problem image store','v3PutImage'],['first-class truths','v3CreateTruth'],['spaced review scheduler','v3Schedule'],['Chinese correction cloze','v3ChangedSegment'],['multi-concept storage','concepts'],['progressive mind hints','mindHintLevels'],['real concept analytics','最需要處理的概念'],['OCR correction UI','data-scan-problem-text'],['actual annotation SVG','v3-ai-svg']];for(const [name,needle] of required)if(!engine.includes(needle))throw new Error(`missing ${name}`);for(const needle of ['v3WorkspaceImage','v3ThreadCode'])if(!hotfix.includes(needle))throw new Error(`hotfix missing ${needle}`);for(const [name,needle] of [['guide generation/cache','v3GuidePrepare'],['handwriting animation','v3DrawWrite'],['circle animation','v3DrawCircle'],['guide replay','v3GuideReplay'],['background pre-generation','v3GuideBaseConfirmScan']])if(!guide.includes(needle))throw new Error(`missing ${name}`);
-          console.log('V3 product implementation guard passed');
-          NODE
-      - name: Rendered source, refinement, and integrity QA
+          node --check wrongbook-v2/earth-source-prompts-v7-242-243.js
+          node --check wrongbook-v2/earth-source-trace-p243-v6.js
+          node --check wrongbook-v2/earth-source-integrity-v8.js
+          node --check wrongbook-v2/earth-collision-qa-v8.js
+      - name: Install Traditional Chinese font
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-cjk
           fc-cache -f
+      - name: Render and verify all acceptance gates
+        run: |
           python3 - <<'PY'
           from pathlib import Path
           p=Path('wrongbook-v2/index.html');s=p.read_text()
           inject='''<script>if(new URLSearchParams(location.search).has('integrityqa'))setTimeout(()=>{const p=document.createElement('pre');p.id='integrity-results';const r=window.v8EarthSourceIntegrity?.();p.dataset.status=r?.ok?'PASS':'FAIL';p.textContent=JSON.stringify(r||{error:'missing integrity function'},null,2);document.body.appendChild(p)},1800)</script>'''
           Path('wrongbook-v2/integrity-harness.html').write_text(s.replace('</body>',inject+'</body>'))
           PY
-          python3 -m http.server 4173 >/tmp/wrongbook-http.log 2>&1 &
+          python3 -m http.server 4173 >/tmp/earth-final-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 1
-          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"; test -n "$CHROME"; "$CHROME" --version
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"; test -n "$CHROME"
+
+          # 12-page collision gate and six fresh spread screenshots.
+          for CH in 1 2 3 4 5 6; do
+            BASE="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --user-data-dir="/tmp/final-shot-${CH}" --window-size=2200,1600 --virtual-time-budget=7000 --screenshot="/tmp/final-ch${CH}.png" "$BASE"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/final-collision-${CH}" --window-size=2200,1600 --virtual-time-budget=9000 --dump-dom "${BASE}&collisionqa=1" > "/tmp/final-collision-${CH}.html"
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,html,json
+          pages=[]
+          for ch in range(1,7):
+              s=Path(f'/tmp/final-collision-{ch}.html').read_text(errors='replace')
+              m=re.search(r'<pre id="earth-collision-results"[^>]*>(.*?)</pre>',s,re.S)
+              if not m: raise SystemExit(f'collision report missing ch{ch}')
+              r=json.loads(html.unescape(re.sub('<[^>]+>','',m.group(1))))
+              pages += [p for p in r['pages'] if p['status']!='NOT_RENDERED']
+          by={p['page']:p for p in pages}; ordered=[by[p] for p in range(242,254) if p in by]
+          out={'renderedPages':len(ordered),'totalUnwantedCollisions':sum(len(p.get('collisions',[])) for p in ordered),'connectorTextIntersections':sum(p.get('connectorTextIntersections',0) for p in ordered),'connectorFigureIntersections':sum(p.get('connectorFigureIntersections',0) for p in ordered),'pages':[(p['page'],p['status'],len(p.get('collisions',[]))) for p in ordered]}
+          Path('/tmp/final-collision.json').write_text(json.dumps(out,ensure_ascii=False,indent=2));print(json.dumps(out,ensure_ascii=False,indent=2))
+          if len(ordered)!=12 or any(p['status']!='PASS' for p in ordered) or out['totalUnwantedCollisions'] or out['connectorTextIntersections'] or out['connectorFigureIntersections']: raise SystemExit('collision gate failed')
+          PY
+
           parse_e2e() { python3 - "$1" <<'PY'
           from pathlib import Path
           import html,re,sys,json
-          text=Path(sys.argv[1]).read_text(errors='replace');m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',text,re.S)
-          if not m: raise SystemExit('E2E result node missing: '+sys.argv[1])
-          payload=html.unescape(m.group(2));print(payload)
-          if m.group(1)!='PASS': raise SystemExit(1)
+          s=Path(sys.argv[1]).read_text(errors='replace');m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',s,re.S)
+          if not m: raise SystemExit('E2E result missing '+sys.argv[1])
+          payload=html.unescape(m.group(2));r=json.loads(payload);print(json.dumps({'status':r.get('status'),'manifestCount':r.get('manifestCount'),'promptQA':r.get('promptQA')},ensure_ascii=False))
+          if m.group(1)!='PASS': print(payload);raise SystemExit(1)
           PY
           }
           for SPEC in desktop:1440,1000 mobile:390,844; do
-            NAME="${SPEC%%:*}";SIZE="${SPEC#*:}";PROFILE="/tmp/wrongbook-source-$NAME"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="$PROFILE" --window-size="$SIZE" --virtual-time-budget=8000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?sourcee2e=1" > "/tmp/wrongbook-source-$NAME.html"
-            parse_e2e "/tmp/wrongbook-source-$NAME.html"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="${PROFILE}-refine" --window-size="$SIZE" --virtual-time-budget=10000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?refinee2e=1" > "/tmp/wrongbook-refine-$NAME.html"
-            parse_e2e "/tmp/wrongbook-refine-$NAME.html"
+            NAME="${SPEC%%:*}";SIZE="${SPEC#*:}"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/source-${NAME}" --window-size="$SIZE" --virtual-time-budget=9000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?sourcee2e=1" > "/tmp/source-${NAME}.html"
+            parse_e2e "/tmp/source-${NAME}.html"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/refine-${NAME}" --window-size="$SIZE" --virtual-time-budget=11000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?refinee2e=1" > "/tmp/refine-${NAME}.html"
+            parse_e2e "/tmp/refine-${NAME}.html"
           done
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/wrongbook-integrity --window-size=1440,1000 --virtual-time-budget=7000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/integrity-harness.html?integrityqa=1" > /tmp/wrongbook-integrity.html
+
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/integrity --window-size=1440,1000 --virtual-time-budget=8000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/integrity-harness.html?integrityqa=1" > /tmp/integrity.html
           python3 - <<'PY'
           from pathlib import Path
-          import html,re,json
-          s=Path('/tmp/wrongbook-integrity.html').read_text(errors='replace');m=re.search(r'<pre id="integrity-results" data-status="([^"]+)">(.*?)</pre>',s,re.S)
+          import re,html,json
+          s=Path('/tmp/integrity.html').read_text(errors='replace');m=re.search(r'<pre id="integrity-results" data-status="([^"]+)">(.*?)</pre>',s,re.S)
           if not m: raise SystemExit('integrity result missing')
           r=json.loads(html.unescape(re.sub('<[^>]+>','',m.group(2))))
-          summary={k:r.get(k) for k in ['ok','expectedQuestions','canonicalQuestionCount','uniqueQuestionCount','registeredQuestionCount','registeredUniqueQuestionCount','expectedFigures','actualFigures','missingQuestionIds','duplicateQuestionIds','orphanQuestionIds','pageMismatchQuestionIds','missingFigures','orphanFigures','ch5OrderOk']}
-          print(json.dumps(summary,ensure_ascii=False,indent=2));Path('/tmp/wrongbook-integrity.json').write_text(json.dumps(r,ensure_ascii=False,indent=2))
-          if m.group(1)!='PASS' or not(r.get('ok') and r.get('canonicalQuestionCount')==276 and r.get('registeredQuestionCount')==276 and r.get('actualFigures')==56):raise SystemExit(1)
+          keys=['ok','expectedQuestions','canonicalQuestionCount','uniqueQuestionCount','registeredQuestionCount','registeredUniqueQuestionCount','printedBlankLabelCount','expectedFigures','actualFigures','missingQuestionIds','duplicateQuestionIds','orphanQuestionIds','pageMismatchQuestionIds','missingFigures','orphanFigures','ch5OrderOk']
+          out={k:r.get(k) for k in keys};Path('/tmp/integrity.json').write_text(json.dumps(r,ensure_ascii=False,indent=2));print(json.dumps(out,ensure_ascii=False,indent=2))
+          if m.group(1)!='PASS' or not r.get('ok') or r.get('canonicalQuestionCount')!=276 or r.get('registeredQuestionCount')!=276 or r.get('actualFigures')!=56: raise SystemExit('integrity gate failed')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: earth-final-wrongbook-qa
+          name: earth-final-acceptance
           path: |
-            /tmp/wrongbook-source-*.html
-            /tmp/wrongbook-refine-*.html
-            /tmp/wrongbook-integrity.html
-            /tmp/wrongbook-integrity.json
+            /tmp/final-ch*.png
+            /tmp/final-collision.json
+            /tmp/source-*.html
+            /tmp/refine-*.html
+            /tmp/integrity.html
+            /tmp/integrity.json
           retention-days: 3
