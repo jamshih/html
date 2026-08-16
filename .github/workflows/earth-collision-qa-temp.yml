@@ -19,6 +19,7 @@ jobs:
         run: |
           node --check wrongbook-v2/earth-source-trace-p242-v6.js
           node --check wrongbook-v2/earth-source-trace-p243-v6.js
+          node --check wrongbook-v2/earth-source-trace-p244-v6.js
           node --check wrongbook-v2/earth-source-prompt-renderer-v7.js
           node --check wrongbook-v2/earth-collision-qa-v8.js
       - name: Install Traditional Chinese font
