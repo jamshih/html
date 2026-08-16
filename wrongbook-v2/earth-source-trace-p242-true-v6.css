@@ -19,7 +19,7 @@
 .v4strict-242 .v4strict-q[data-question="10"]{left:555px!important;top:487px!important;width:245px!important}
 .v4strict-242 .v4strict-q[data-question="11"]{left:115px!important;top:681px!important;width:520px!important;font-size:13.6px!important}
 .v4strict-242 .v4strict-q[data-question="16"]{left:410px!important;top:766px!important;width:215px!important}.v4strict-242 .v4strict-q[data-question="17"]{left:660px!important;top:719px!important;width:180px!important}
-.v4strict-242 .v4strict-q[data-question="18"]{left:482px!important;top:873px!important;width:225px!important}.v4strict-242 .v4strict-q[data-question="19"]{left:710px!important;top:923px!important;width:185px!important}.v4strict-242 .v4strict-q[data-question="20"]{left:710px!important;top:981px!important;width:185px!important}
+.v4strict-242 .v4strict-q[data-question="18"]{left:482px!important;top:909px!important;width:230px!important;line-height:1!important}.v4strict-242 .v4strict-q[data-question="19"]{left:710px!important;top:923px!important;width:185px!important}.v4strict-242 .v4strict-q[data-question="20"]{left:710px!important;top:981px!important;width:185px!important}
 .v4strict-242 .v4strict-q[data-question="12"]{left:112px!important;top:925px!important;width:245px!important}.v4strict-242 .v4strict-q[data-question="13"]{left:112px!important;top:982px!important;width:390px!important}.v4strict-242 .v4strict-q[data-question="14"]{left:112px!important;top:1088px!important;width:345px!important}.v4strict-242 .v4strict-q[data-question="15"]{left:454px!important;top:1088px!important;width:370px!important}
 
 .v4strict-242 .v4strict-bigbang-burst{left:238px!important;top:420px!important;width:96px!important;height:64px!important;font-size:16px!important}
@@ -34,8 +34,9 @@
 .v6-p242-dark-age{left:358px;top:546px;font-size:16px;font-weight:700;white-space:nowrap}
 .v6-p242-recombination{left:460px;top:357px;width:238px;font-size:13.5px;line-height:1.42;font-weight:600}
 .v6-p242-cooling{left:776px;top:538px;width:128px;font-size:16px;line-height:1.28;font-weight:900;text-align:left}
-/* Source circled (18) sits beside the 3大主因 heading, not as a floating card. */
-.v4strict-242 .v7-p242-circled-num{display:inline-grid;place-items:center;width:31px;height:31px;border:2px solid #555;border-radius:50%;vertical-align:middle;margin-right:3px;background:#fffdf7;box-sizing:border-box}.v4strict-242 .v7-p242-circled-num .v4strict-num{font-size:10px!important;vertical-align:baseline!important;margin:0!important}
+/* Source (18)+3大主因 is one outlined oval above the three source answer lines. */
+.v4strict-242 .v7-p242-cause-heading{position:absolute;left:64px;top:-61px;width:78px;height:59px;display:grid;grid-template-rows:18px 1fr;place-items:center;border:2.6px solid #555;border-radius:50%;background:#fffdf7;box-sizing:border-box;font-weight:900;font-size:20px;line-height:1}.v4strict-242 .v7-p242-cause-heading .v4strict-num{font-size:10px!important;vertical-align:baseline!important;margin:5px 0 0!important}.v4strict-242 .v7-p242-cause-heading strong{font-size:21px!important;white-space:nowrap}
+.v4strict-242 .v7-p242-cause-row{display:grid;grid-template-columns:22px 1fr;align-items:end;column-gap:6px;height:42px;font-size:14px}.v4strict-242 .v7-p242-cause-row>b{font-size:15px;font-weight:700;align-self:center}.v4strict-242 .v7-p242-cause-row .v4strict-fill{width:190px!important;min-width:190px!important;margin:0!important}.v4strict-242 .v7-p242-cause-row .v4strict-fill input{width:190px!important}
 /* One authored source connector layer; no auto-routing. */
 .v4strict-242 > .v4strict-svg{transform:translate(-20px,119px)!important;transform-origin:0 0!important}
 .v6-p242-nebula-title{left:283px!important;top:665px!important;font-size:17px!important}.v6-p242-melt{left:724px!important;top:810px!important;font-size:16px!important}.v6-p242-escape{left:392px!important;top:918px!important;font-size:15px!important}.v6-p242-diff-label{left:704px!important;top:1170px!important;font-size:14px!important}
