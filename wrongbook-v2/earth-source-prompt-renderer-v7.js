@@ -1,4 +1,4 @@
-// Source prompt renderer. It changes wording/blank answer shape only; source-traced geometry stays untouched.
+// Source prompt renderer. Exact printed wording and source geometry are applied together.
 (function(){
  const PAGE_CHAPTER={242:1,243:1,244:2,245:2,246:3,247:3,248:4,249:4,250:5,251:5,252:6,253:6};
  function chapterFor(page){return (window.EARTH_REFERENCE_MAPS||[]).find(c=>c.number===PAGE_CHAPTER[page]);}
@@ -27,6 +27,21 @@
      }
    }
  }
+ function applySourceRect(el,r,page){
+   const box=r?.sourceRect;if(!el||!box)return;
+   const x=Number(box.x),y=Number(box.y),w=Number(box.w),h=Number(box.h);
+   if(Number.isFinite(x))el.style.setProperty('left',`${x}px`,'important');
+   if(Number.isFinite(y))el.style.setProperty('top',`${y}px`,'important');
+   if(Number.isFinite(w))el.style.setProperty('width',`${w}px`,'important');
+   el.dataset.sourceRole='prompt';el.dataset.visualOwner='source-prompt-manifest';el.dataset.sourcePage=String(page);
+   el.dataset.sourceRect=[x,y,w,h].join(',');
+   if(Number.isFinite(h))el.dataset.sourceExpectedHeight=String(h);
+ }
+ function markBlanks(el,page,n){
+   [...el.querySelectorAll('.v4strict-fill')].forEach((blank,i)=>{
+     blank.dataset.sourceRole='blank';blank.dataset.visualOwner=`q${n}`;blank.dataset.sourcePage=String(page);blank.dataset.sourceBlank=String(i);
+   });
+ }
  window.v7NormalizePromptText=function(s){return String(s||'').replace(/[\s\u3000]+/g,'').replace(/[，,]/g,'，').replace(/[：:]/g,'：').replace(/[（(]/g,'(').replace(/[）)]/g,')');};
  patchSourceAnswers();
  const prev=window.v5PageHtml;if(typeof prev!=='function')return;
@@ -48,10 +63,11 @@
      if(fills.length!==r.blanks){el.dataset.v7PromptStatus=`blank-count-${fills.length}-expected-${r.blanks}`;continue;}
      let out=String(r.template||'');for(let i=0;i<r.blanks;i++)out=out.split(`{{${i}}}`).join(fills[i]||'');
      el.innerHTML=out;el.dataset.v7PromptStatus='verified';el.dataset.v7SourcePrompt='true';el.dataset.v7SourceBlankCount=String(r.blanks);
+     applySourceRect(el,r,page);markBlanks(el,page,r.number);
    }
    if(page===242&&!t.content.querySelector('.v7-p242-atmosphere-cloud')){
-     const cloud=document.createElement('div');cloud.className='v7-p242-atmosphere-cloud';cloud.setAttribute('aria-hidden','true');cloud.style.cssText='position:absolute;left:392px;top:758px;width:255px;height:125px;z-index:1;pointer-events:none';cloud.innerHTML='<svg viewBox="0 0 255 125" preserveAspectRatio="none"><path d="M35 108C11 105 5 84 19 68C9 45 28 25 50 30C62 8 94 7 108 27C132 11 161 22 166 45C190 30 220 41 224 65C246 68 252 93 236 107Z" fill="#cbdce1" opacity=".86"/></svg>';
-     const q16=t.content.querySelector('[data-question="16"]');if(q16){q16.style.zIndex='2';q16.before(cloud)}
+     const cloud=document.createElement('div');cloud.className='v7-p242-atmosphere-cloud';cloud.dataset.sourceFigure='p242-atmosphere1';cloud.dataset.sourceRole='figure';cloud.dataset.visualOwner='p242-source-layout';cloud.setAttribute('aria-hidden','true');cloud.style.cssText='position:absolute;left:362px;top:792px;width:198px;height:112px;z-index:3;pointer-events:none';cloud.innerHTML='<svg viewBox="0 0 255 125" preserveAspectRatio="none"><path d="M35 108C11 105 5 84 19 68C9 45 28 25 50 30C62 8 94 7 108 27C132 11 161 22 166 45C190 30 220 41 224 65C246 68 252 93 236 107Z" fill="#cbdce1" opacity=".86"/></svg>';
+     const q16=t.content.querySelector('[data-question="16"]');if(q16){q16.style.zIndex='5';q16.before(cloud)}
    }
    return t.innerHTML;
  };
