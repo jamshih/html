@@ -18,6 +18,7 @@
  }
  function applySourceRect(el,r,page){const box=r?.sourceRect;if(!el||!box)return;const x=Number(box.x),y=Number(box.y),w=Number(box.w),h=Number(box.h);if(Number.isFinite(x))el.style.setProperty('left',`${x}px`,'important');if(Number.isFinite(y))el.style.setProperty('top',`${y}px`,'important');if(Number.isFinite(w))el.style.setProperty('width',`${w}px`,'important');el.dataset.sourceRole='prompt';el.dataset.visualOwner='source-prompt-manifest';el.dataset.sourcePage=String(page);el.dataset.sourceRect=[x,y,w,h].join(',');if(Number.isFinite(h))el.dataset.sourceExpectedHeight=String(h);}
  function markBlanks(el,page,n){[...el.querySelectorAll('.v4strict-fill')].forEach((blank,i)=>{blank.dataset.sourceRole='blank';blank.dataset.visualOwner=`q${n}`;blank.dataset.sourcePage=String(page);blank.dataset.sourceBlank=String(i);});}
+ function applyOwnedLayout(t,page){const layout=window.EARTH_SOURCE_LAYOUT_V8?.[page];if(!layout?.objects)return;for(const [id,o] of Object.entries(layout.objects)){const el=t.content.querySelector(`[data-source-object="${id}"]`);if(!el)continue;const r=o.inside&&o.localRect?o.localRect:o.rect;if(!r)continue;for(const [prop,val] of [['left',r.x],['top',r.y],['width',r.width]])if(Number.isFinite(Number(val)))el.style.setProperty(prop,`${Number(val)}px`,'important');if(Number.isFinite(Number(r.height))){if(o.role==='figure'||o.role==='heading'||o.role==='source-label')el.style.setProperty('height',`${Number(r.height)}px`,'important');else el.style.setProperty('min-height',`${Number(r.height)}px`,'important')}el.dataset.visualOwner=`source-layout-${page}`;el.dataset.sourceRole=o.role||el.dataset.sourceRole||'';el.dataset.sourceRect=[r.x,r.y,r.width,r.height].join(',');}}
  window.v7NormalizePromptText=function(s){return String(s||'').replace(/[\s\u3000]+/g,'').replace(/[，,]/g,'，').replace(/[：:]/g,'：').replace(/[（(]/g,'(').replace(/[）)]/g,')');};
  patchSourceAnswers();
  const prev=window.v5PageHtml;if(typeof prev!=='function')return;
@@ -26,8 +27,9 @@
    const t=document.createElement('template');t.innerHTML=html;
    const sourceOwned=t.content.querySelector(`[data-source-owned-page="${page}"]`);
    if(sourceOwned){
-     // A source-owned page already solved exact wording, blanks, and geometry together.
-     for(const r of recs){if(r.standalone===false&&!t.content.querySelector(`[data-question="${r.number}"]`)){const marker=document.createElement('span');marker.className='v7-logical-question-marker';marker.dataset.question=String(r.number);marker.dataset.page=String(page);marker.dataset.v7CompositeSource='true';marker.hidden=true;marker.setAttribute('aria-hidden','true');sourceOwned.appendChild(marker);}}
+     // One source-owned renderer owns all final rectangles; this call only enforces that single model against legacy !important CSS.
+     applyOwnedLayout(t,page);
+     for(const r of recs){const el=t.content.querySelector(`[data-question="${r.renderTarget||r.number}"]`);if(el)markBlanks(el,page,r.number);if(r.standalone===false&&!t.content.querySelector(`[data-question="${r.number}"]`)){const marker=document.createElement('span');marker.className='v7-logical-question-marker';marker.dataset.question=String(r.number);marker.dataset.page=String(page);marker.dataset.v7CompositeSource='true';marker.hidden=true;marker.setAttribute('aria-hidden','true');sourceOwned.appendChild(marker);}}
      return t.innerHTML;
    }
    for(const r of recs){
