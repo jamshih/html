@@ -1,6 +1,6 @@
 name: Earth Collision QA Workspace
 
-# QA retrigger: pass-two all-pages measurement.
+# QA retrigger: final local all-pages measurement.
 on:
   push:
     branches: [earth-collision-zero-20260816]
