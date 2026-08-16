@@ -45,7 +45,7 @@
   E(36,'<b class="v4strict-num">(36)</b> {{0}} 元素',1,['子'],{sourceRect:R(650,142,160,26)}),
   E(37,'<b class="v4strict-num">(37)</b> {{0}} 元素',1,['母'],{sourceRect:R(600,88,160,26)}),
   E(38,'任一個時刻，母＋子元素含量百分比＝<b class="v4strict-num">(38)</b> {{0}} %',1,['100'],{sourceRect:R(575,43,285,34)}),
-  E(39,'…… <b class="v4strict-num">(39)</b> {{0}} 個半衰期',1,['10'],{sourceRect:R(785,205,110,28)}),
+  E(39,'…… <b class="v4strict-num">(39)</b> {{0}} 個半衰期',1,['10'],{sourceRect:R(740,205,155,28)}),
   E(40,'<b class="v4strict-num">(40)</b> 疊置定律：（參考右圖填代碼）<br>沉積地層老至年輕 {{0}}',1,['A→C→D'],{sourceRect:R(293,316,235,55)}),
   E(41,'<b class="v4strict-num">(41)</b> 截切定律：<br>E斷層發生在A、B、C之 {{0}}',1,['後'],{sourceRect:R(293,373,235,55)}),
   E(42,'<b class="v4strict-num">(42)</b> 包裹體定律：<br>C {{0}} 於B',1,['老'],{sourceRect:R(293,427,235,45)}),
