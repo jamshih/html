@@ -50,19 +50,22 @@
   }
   function collectBlanks(sec){return [...sec.querySelectorAll('.v4strict-fill')].filter(visible).map((el,i)=>{const raw=rect(el.getBoundingClientRect()),q=el.closest('[data-question]');return {...raw,raw,id:`blank:${i}`,role:'blank',block:q?`q${q.dataset.question}`:ids(el),question:q?.dataset.question||null,el,owner:ownerFor(sec,el,raw)}})}
 
-  // Figure collision regions are the actual rendered figure/graph boxes plus explicitly declared
-  // protected geometry. A hierarchy sourceRect may contain labels and prompts around a figure, so
-  // treating the whole topic rectangle as solid figure geometry produces false collisions.
+  // Figure collision regions are actual rendered figure/graph boxes unless the source hierarchy
+  // supplies smaller protectedGeometry for a compound/transparent SVG. In that case those explicit
+  // source-derived regions are authoritative, so transparent padding cannot create false collisions.
   function figureRegions(sec){
     const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page],out=[],seen=new Set();if(!h)return out;
     const add=(raw,owner,id)=>{if(!raw||raw.maxX-raw.minX<2||raw.maxY-raw.minY<2)return;const key=`${owner}|${Math.round(raw.minX)}|${Math.round(raw.minY)}|${Math.round(raw.maxX)}|${Math.round(raw.maxY)}`;if(seen.has(key))return;seen.add(key);out.push({...raw,raw,id,role:'figure',owner});};
     for(const el of sec.querySelectorAll('[data-source-role="figure"],[data-source-role="graph"],[data-figure-kind]')){
-      if(!visible(el))continue;const raw=rect(el.getBoundingClientRect()),owner=ownerFor(sec,el,raw);add(raw,owner,`figure:${ids(el)}`);
+      if(!visible(el))continue;const raw=rect(el.getBoundingClientRect()),owner=ownerFor(sec,el,raw),node=h.nodes?.[owner];
+      if(node?.protectedGeometry?.length)continue;
+      if(node?.containerKind==='source-strip')continue;
+      add(raw,owner,`figure:${ids(el)}`);
     }
     for(const n of Object.values(h.nodes)){
       if(n.id===h.rootId)continue;
       for(let i=0;i<(n.protectedGeometry||[]).length;i++){const g=n.protectedGeometry[i],raw=localRect(sec,n,g.rect);add(raw,n.id,`${n.id}:protected:${i}`);}
-      if(n.safeRect!==n.sourceRect&&(n.type==='protected-figure'||n.containerKind==='source-figure-with-label-anchors'))add(nodeRect(sec,n,'safeRect'),n.id,`${n.id}:safe`);
+      if(n.safeRect!==n.sourceRect&&!n.protectedGeometry?.length&&(n.type==='protected-figure'||n.containerKind==='source-figure-with-label-anchors'))add(nodeRect(sec,n,'safeRect'),n.id,`${n.id}:safe`);
     }
     return out;
   }
