@@ -27,6 +27,7 @@ jobs:
           fc-cache -f
       - name: Capture current Earth spreads and collision QA
         run: |
+          tar -czf /tmp/wrongbook-main-source.tgz wrongbook-v2
           python3 -m http.server 4173 >/tmp/earth-collision-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
@@ -60,7 +61,6 @@ jobs:
           print(json.dumps(p242,ensure_ascii=False,indent=2))
           if not p242 or p242['status']!='PASS': raise SystemExit('page 242 collision gate failed')
           PY
-          tar -czf /tmp/wrongbook-main-source.tgz wrongbook-v2
       - uses: actions/upload-artifact@v4
         if: always()
         with:
