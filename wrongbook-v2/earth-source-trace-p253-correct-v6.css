@@ -39,5 +39,6 @@
 .v6-p253-q[data-question="46"]{top:1045px!important}
 .v6-p253-q[data-question="49"]{top:1145px!important}
 
-/* Keep Q49 on the photographed row; compact only its typography to preserve Q48 and Q50 whitespace. */
+/* Keep Q49 on the photographed row and preserve the publisher's two explicit lines. */
 .v6-p253-q[data-question="49"]{top:1155px!important;font-size:10.6px!important;line-height:1.08!important}
+.v6-p253-q[data-question="49"] .v7-p253-source-line{display:block!important;white-space:nowrap!important}
