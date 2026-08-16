@@ -48,12 +48,12 @@
   E(41,'海流—<b class="v4strict-num">(41)</b> {{0}} 流：另有補償流、密度流、傾斜流，可攜帶物質與能量至遠處，影響氣候甚鉅',1,['風吹'],{replaceFields:true,answerAliases:[['風吹流','風成流']]}),
   E(42,'湧升流、溫鹽環流 → 兩者均有垂直流動，流速較風吹流 <b class="v4strict-num">(42)</b> {{0}}',1,['慢']),
   E(43,'波速因而變 <b class="v4strict-num">(43)</b> {{0}} → 波長變 {{1}} → 波高變 {{2}} → 碎浪',3,['慢','短','高'],{replaceFields:true,keepOldAsAliases:false}),
-  E(44,'波前進方向往 <b class="v4strict-num">(44)</b> {{0}} 速區偏折 → 浪往海岬匯聚 → 海岬處侵蝕作用較 {{1}}',2,['慢','強'],{replaceFields:true,keepOldAsAliases:false}),
-  E(45,'<b class="v4strict-num">(45)</b> 形成 {{0}}，其流向與突堤效應影響沉積物堆積位置<br>→ 兩沿岸流匯聚會形成 {{1}}，向外海流出',2,['沿岸流','離岸流'],{replaceFields:true,keepOldAsAliases:false}),
+  E(44,'波前進方向往 <b class="v4strict-num">(44)</b> {{0}} 速區偏折 → 浪往海岬匯聚 → 海岬處侵蝕作用較 {{1}}',2,['慢','強'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[55,55]}),
+  E(45,'<b class="v4strict-num">(45)</b> 形成 {{0}}，其流向與突堤效應影響沉積物堆積位置<br>→ 兩沿岸流匯聚會形成 {{1}}，向外海流出',2,['沿岸流','離岸流'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[58,58]}),
   E(46,'由於月球與太陽對地球的 <b class="v4strict-num">(46)</b> {{0}} 作用，再加上地球自轉，使得海水會有週期性漲退現象',1,['引力']),
   E(47,'因月球每日約公轉13度，導致隔日滿潮時刻會延遲約 <b class="v4strict-num">(47)</b> {{0}} 分鐘',1,['50'],{answerAliases:[['50分鐘']]}),
   E(48,'半日潮：每天漲退2次，潮汐週期約為 <b class="v4strict-num">(48)</b> {{0}}',1,['12小時25分']),
-  E(49,'大潮：日地月成一線（月相：<b class="v4strict-num">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false}),
-  E(50,'小潮：日地月成90度（月相：<b class="v4strict-num">(50)</b> {{0}} 與 {{1}}），當日潮差較 {{2}}',3,['上弦','下弦','小'],{replaceFields:true,keepOldAsAliases:false})
+  E(49,'<span class="v7-p253-source-line">大潮：日地月成一線（月相：<b class="v4strict-num">(49)</b> {{0}} 與 {{1}}），</span><span class="v7-p253-source-line">當日滿潮水位較 {{2}}，乾潮水位較 {{3}}，潮差較 {{4}}</span>',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[48,48,48,48,48]}),
+  E(50,'小潮：日地月成90度（月相：<b class="v4strict-num">(50)</b> {{0}} 與 {{1}}），當日潮差較 {{2}}',3,['上弦','下弦','小'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[52,52,52]})
  ];
 })();
