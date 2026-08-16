@@ -16,3 +16,9 @@
 /* NEW_SOURCE_TRUTH: exact prompt rectangles own their width/flow; legacy recall flex-wrap is forbidden. */
 .v4strict-243 .v4strict-q[data-v7-source-prompt="true"]{display:block!important;max-width:none!important;box-sizing:border-box!important;flex:none!important;gap:0!important}
 .v4strict-243 .v4strict-q[data-v7-source-prompt="true"] .v4strict-fill{display:inline-block!important;vertical-align:baseline!important}
+/* Source-object separation verified against IMG_1524. */
+.v4strict-243 .v4strict-q[data-question="44"],.v4strict-243 .v4strict-q[data-question="45"],.v4strict-243 .v4strict-q[data-question="46"]{display:flex!important;align-items:center!important;justify-content:center!important;border:1.8px solid #69655f!important;border-radius:999px!important;background:#fffdf7!important;padding:2px 6px!important;min-height:32px!important;line-height:1.1!important}
+.v4strict-243 .v4strict-q[data-question="48"]{display:grid!important;grid-template-columns:125px 125px!important;column-gap:35px!important;align-items:start!important;white-space:nowrap!important;font-size:12.6px!important;line-height:1.15!important;min-height:28px!important}
+.v4strict-243 .v4strict-q[data-question="48"] .v7-p243-boundary-part{display:block!important;min-width:0!important;white-space:nowrap!important}
+.v7-p243-era-fossil-heading{position:absolute;left:210px;top:500px;width:175px;height:28px;z-index:4;font-size:17px;font-weight:900;color:#4b4843;white-space:nowrap}
+.v7-p243-boundary-label{position:absolute;top:574px;height:24px;z-index:4;font-size:14px;color:#55524d;white-space:nowrap}.v7-p243-boundary-label.b1{left:330px;width:90px}.v7-p243-boundary-label.b2{left:535px;width:90px}
