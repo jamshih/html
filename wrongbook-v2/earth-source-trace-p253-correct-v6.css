@@ -16,3 +16,16 @@
 .v6-p253-q[data-question="48"]{left:195px!important;top:1140px!important;width:520px!important}
 .v6-p253-q[data-question="49"]{left:190px!important;top:1175px!important;width:650px!important}
 .v6-p253-q[data-question="50"]{left:190px!important;top:1230px!important;width:620px!important}
+
+/* NEW_SOURCE_TRUTH second collision pass: source-row density and disjoint active-recall fields. */
+.v6-p253-q[data-question="28"]{top:185px!important}
+.v6-p253-q[data-question="34"]{top:365px!important}
+.v6-p253-q[data-question="43"],.v6-p253-q[data-question="44"],.v6-p253-q[data-question="45"],.v6-p253-q[data-question="46"],.v6-p253-q[data-question="47"],.v6-p253-q[data-question="48"],.v6-p253-q[data-question="49"],.v6-p253-q[data-question="50"]{font-size:11.3px!important;line-height:1.16!important}
+.v6-p253-q[data-question="43"]{left:410px!important;top:890px!important;width:470px!important}
+.v6-p253-q[data-question="44"]{left:410px!important;top:930px!important;width:470px!important}
+.v6-p253-q[data-question="45"]{left:400px!important;top:970px!important;width:500px!important}
+.v6-p253-q[data-question="46"]{left:280px!important;top:1035px!important;width:600px!important}
+.v6-p253-q[data-question="47"]{left:280px!important;top:1080px!important;width:600px!important}
+.v6-p253-q[data-question="48"]{left:180px!important;top:1120px!important;width:680px!important}
+.v6-p253-q[data-question="49"]{left:180px!important;top:1155px!important;width:700px!important}
+.v6-p253-q[data-question="50"]{left:180px!important;top:1210px!important;width:700px!important}
