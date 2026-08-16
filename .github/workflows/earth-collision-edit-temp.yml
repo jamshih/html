@@ -3,8 +3,7 @@ name: Earth Collision One-shot Edit
 on:
   push:
     branches: [earth-collision-zero-20260816]
-    paths:
-      - '.github/workflows/earth-collision-edit-temp.yml'
+    paths: ['.github/workflows/earth-collision-edit-temp.yml']
 
 permissions:
   contents: write
@@ -16,45 +15,48 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: earth-collision-zero-20260816
-      - name: Apply final local source-truth collision fixes
+      - name: Apply final local source-truth collision fixes safely
         run: |
           python3 - <<'PY'
           from pathlib import Path
           root=Path('wrongbook-v2')
-          def rep(path, old, new):
+          def ensure(path, old, new):
               p=root/path; s=p.read_text()
-              if old not in s: raise SystemExit(f'missing target in {path}: {old[:120]}')
+              if new in s: return
+              if old not in s: raise SystemExit(f'neither old nor new found in {path}: {old[:100]}')
               p.write_text(s.replace(old,new,1))
-
-          # p245: source q39 sits to the right of q25 rather than on top of it.
-          rep('earth-source-trace-p245-v6.css','left:420px!important;top:610px!important;width:130px!important','left:455px!important;top:610px!important;width:120px!important')
-
-          # p247: q32 is the next source row below the sunset-direction row.
-          rep('earth-source-trace-p247-v6.js','v6P247Q(ch,mode,32,28,560,180','v6P247Q(ch,mode,32,28,575,180')
-
-          # p250: separate the layer labels horizontally and let the long aurora prompt use its source width.
-          p=root/'earth-source-trace-p250-v6.js'; s=p.read_text()
-          s=s.replace('6:[385,395,70]','6:[365,395,65]',1)
-          s=s.replace('9:[445,397,110]','9:[445,405,110]',1)
-          s=s.replace('13:[565,410,220]','13:[565,410,300]',1)
-          p.write_text(s)
-
-          # p253: q31 belongs to the centre column; compact exact source blanks in the dense lower rows.
+          # p245
+          ensure('earth-source-trace-p245-v6.css','left:420px!important;top:610px!important;width:125px!important','left:455px!important;top:610px!important;width:120px!important')
+          # p247
+          ensure('earth-source-trace-p247-v6.js','v6P247Q(ch,mode,32,28,560,180','v6P247Q(ch,mode,32,28,575,180')
+          # p250
+          ensure('earth-source-trace-p250-v6.js','6:[385,395,70]','6:[365,395,65]')
+          ensure('earth-source-trace-p250-v6.js','9:[445,397,110]','9:[445,405,110]')
+          ensure('earth-source-trace-p250-v6.js','13:[565,410,220]','13:[565,410,300]')
+          # p253 geometry
           p=root/'earth-source-trace-p253-correct-v6.css'; s=p.read_text()
-          block='''\n/* NEW_SOURCE_TRUTH final local separation. */\n.v6-p253-q[data-question="31"]{left:390px!important;top:228px!important;width:220px!important}\n.v6-p253-q[data-question="44"]{left:360px!important;top:930px!important;width:540px!important;font-size:10.8px!important}\n.v6-p253-q[data-question="45"]{left:360px!important;top:975px!important;width:540px!important;font-size:10.8px!important}\n'''
-          if 'NEW_SOURCE_TRUTH final local separation' in s: raise SystemExit('p253 final local block already present')
-          p.write_text(s+block)
-
-          manifest=root/'earth-source-prompts-v7-252-253.js'; m=manifest.read_text()
-          m=m.replace("E(44,'波前進方向往 <b class=\"v4strict-num\">(44)</b> {{0}} 速區偏折 → 浪往海岬匯聚 → 海岬處侵蝕作用較 {{1}}',2,['慢','強'],{replaceFields:true,keepOldAsAliases:false})",
-                      "E(44,'波前進方向往 <b class=\"v4strict-num\">(44)</b> {{0}} 速區偏折 → 浪往海岬匯聚 → 海岬處侵蝕作用較 {{1}}',2,['慢','強'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[55,55]})",1)
-          m=m.replace("E(45,'<b class=\"v4strict-num\">(45)</b> 形成 {{0}}，其流向與突堤效應影響沉積物堆積位置<br>→ 兩沿岸流匯聚會形成 {{1}}，向外海流出',2,['沿岸流','離岸流'],{replaceFields:true,keepOldAsAliases:false})",
-                      "E(45,'<b class=\"v4strict-num\">(45)</b> 形成 {{0}}，其流向與突堤效應影響沉積物堆積位置<br>→ 兩沿岸流匯聚會形成 {{1}}，向外海流出',2,['沿岸流','離岸流'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[58,58]})",1)
-          m=m.replace("E(49,'大潮：日地月成一線（月相：<b class=\"v4strict-num\">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false})",
-                      "E(49,'大潮：日地月成一線（月相：<b class=\"v4strict-num\">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[48,48,48,48,48]})",1)
-          m=m.replace("E(50,'小潮：日地月成90度（月相：<b class=\"v4strict-num\">(50)</b> {{0}} 與 {{1}}），當日潮差較 {{2}}',3,['上弦','下弦','小'],{replaceFields:true,keepOldAsAliases:false})",
-                      "E(50,'小潮：日地月成90度（月相：<b class=\"v4strict-num\">(50)</b> {{0}} 與 {{1}}），當日潮差較 {{2}}',3,['上弦','下弦','小'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[52,52,52]})",1)
-          manifest.write_text(m)
+          marker='/* NEW_SOURCE_TRUTH final local separation. */'
+          if marker not in s:
+              s += '''\n/* NEW_SOURCE_TRUTH final local separation. */\n.v6-p253-q[data-question="31"]{left:390px!important;top:228px!important;width:220px!important}\n.v6-p253-q[data-question="44"]{left:360px!important;top:930px!important;width:540px!important;font-size:10.8px!important}\n.v6-p253-q[data-question="45"]{left:360px!important;top:975px!important;width:540px!important;font-size:10.8px!important}\n'''
+              p.write_text(s)
+          # p253 blank widths
+          manifest='earth-source-prompts-v7-252-253.js'
+          ensure(manifest,"{replaceFields:true,keepOldAsAliases:false})\n  E(45,'<b class=\"v4strict-num\">(45)</b>","{replaceFields:true,keepOldAsAliases:false,blankWidths:[55,55]})\n  E(45,'<b class=\"v4strict-num\">(45)</b>")
+          ensure(manifest,"{replaceFields:true,keepOldAsAliases:false})\n  E(46,'<b class=\"v4strict-num\">(46)</b>","{replaceFields:true,keepOldAsAliases:false,blankWidths:[58,58]})\n  E(46,'<b class=\"v4strict-num\">(46)</b>")
+          # Do exact question-local substitutions for q49/q50 if not already present.
+          p=root/manifest; m=p.read_text()
+          for n,widths in [(49,'[48,48,48,48,48]'),(50,'[52,52,52]')]:
+              token=f"E({n},"
+              i=m.find(token)
+              if i<0: raise SystemExit(f'q{n} manifest missing')
+              j=m.find('),\n',i)
+              if j<0: j=m.find(')\n',i)
+              row=m[i:j+1]
+              if 'blankWidths:' not in row:
+                  row2=row.replace('{replaceFields:true,keepOldAsAliases:false}',f'{{replaceFields:true,keepOldAsAliases:false,blankWidths:{widths}}}')
+                  if row2==row: raise SystemExit(f'q{n} opts target missing')
+                  m=m[:i]+row2+m[i+len(row):]
+          p.write_text(m)
           PY
           node --check wrongbook-v2/earth-source-trace-p247-v6.js
           node --check wrongbook-v2/earth-source-trace-p250-v6.js
@@ -63,5 +65,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add wrongbook-v2/earth-source-trace-p245-v6.css wrongbook-v2/earth-source-trace-p247-v6.js wrongbook-v2/earth-source-trace-p250-v6.js wrongbook-v2/earth-source-trace-p253-correct-v6.css wrongbook-v2/earth-source-prompts-v7-252-253.js
           git diff --cached --check
+          if git diff --cached --quiet; then echo 'No production changes needed'; exit 0; fi
           git commit -m 'Clear final local Earth collisions'
           git push origin HEAD:earth-collision-zero-20260816
