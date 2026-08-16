@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Traditional Chinese rendering fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fc-cache -f
+          fc-match 'Noto Sans TC'
       - name: Start static server and capture all Earth pages
         run: |
           python3 -m http.server 4173 >/tmp/earth-v9-visual-http.log 2>&1 &
