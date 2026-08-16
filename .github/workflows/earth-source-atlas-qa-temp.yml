@@ -1,0 +1,39 @@
+name: Earth Source Atlas Branch QA
+
+on:
+  push:
+    branches: [earth-mindmap-source-atlas-20260816]
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Traditional Chinese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+      - name: Render Earth Science chapter spreads
+        run: |
+          python3 -m http.server 4173 >/tmp/earth-atlas-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          mkdir -p /tmp/earth-source-atlas
+          for CH in 1 2 3 4 5 6; do
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --hide-scrollbars \
+              --user-data-dir="/tmp/earth-atlas-$CH" \
+              --window-size=2200,1600 --virtual-time-budget=7000 \
+              --screenshot="/tmp/earth-source-atlas/ch${CH}.png" \
+              "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+          done
+          git rev-parse HEAD > /tmp/earth-source-atlas/source-sha.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: earth-source-atlas-visual
+          path: /tmp/earth-source-atlas
+          retention-days: 3
