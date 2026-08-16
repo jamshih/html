@@ -39,6 +39,7 @@ jobs:
           retention-days: 3
       - name: Bundle Wrongbook branch source
         run: |
+          echo "Bundling branch source for local QA iteration"
           tar -czf /tmp/wrongbook-branch-source.tgz wrongbook-v2 .github/workflows/wrongbook-v2-qa.yml .github/workflows/wrongbook-v2-export-screens.yml
       - uses: actions/upload-artifact@v4
         with:
