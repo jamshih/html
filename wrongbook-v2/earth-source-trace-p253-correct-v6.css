@@ -34,3 +34,7 @@
 .v6-p253-q[data-question="31"]{left:390px!important;top:228px!important;width:220px!important}
 .v6-p253-q[data-question="44"]{left:360px!important;top:930px!important;width:540px!important;font-size:10.8px!important}
 .v6-p253-q[data-question="45"]{left:360px!important;top:975px!important;width:540px!important;font-size:10.8px!important}
+
+/* NEW_SOURCE_TRUTH final row-boundary clearance: source row spacing only. */
+.v6-p253-q[data-question="46"]{top:1045px!important}
+.v6-p253-q[data-question="49"]{top:1145px!important}
