@@ -19,6 +19,11 @@
     while(p?.parentId&&p.parentId!==`p${page}`&&guard++<30){const par=h?.nodes?.[p.parentId];if(!par)break;x+=par.sourceRect.x;y+=par.sourceRect.y;p=par;}
     return {minX:rr.left+x*sx,minY:rr.top+y*sy,maxX:rr.left+(x+w)*sx,maxY:rr.top+(y+hgt)*sy};
   }
+  function localRect(sec,node,r){
+    const base=nodeRect(sec,node,'sourceRect');if(!base||!r)return null;
+    const sx=(base.maxX-base.minX)/(node.sourceRect.w||1),sy=(base.maxY-base.minY)/(node.sourceRect.h||1);
+    return {minX:base.minX+r.x*sx,minY:base.minY+r.y*sy,maxX:base.minX+(r.x+r.w)*sx,maxY:base.minY+(r.y+r.h)*sy};
+  }
   function isDesc(page,child,ancestor){
     if(!child||!ancestor)return false;if(child===ancestor)return true;
     const h=window.SOURCE_HIERARCHY_V9?.[page];let n=h?.nodes?.[child],guard=0;
@@ -44,9 +49,21 @@
     return out;
   }
   function collectBlanks(sec){return [...sec.querySelectorAll('.v4strict-fill')].filter(visible).map((el,i)=>{const raw=rect(el.getBoundingClientRect()),q=el.closest('[data-question]');return {...raw,raw,id:`blank:${i}`,role:'blank',block:q?`q${q.dataset.question}`:ids(el),question:q?.dataset.question||null,el,owner:ownerFor(sec,el,raw)}})}
+
+  // Figure collision regions are the actual rendered figure/graph boxes plus explicitly declared
+  // protected geometry. A hierarchy sourceRect may contain labels and prompts around a figure, so
+  // treating the whole topic rectangle as solid figure geometry produces false collisions.
   function figureRegions(sec){
-    const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page],out=[];if(!h)return out;
-    for(const n of Object.values(h.nodes)){if(n.id===h.rootId)continue;if(n.type!=='protected-figure'&&n.containerKind!=='source-figure-with-label-anchors')continue;const r=nodeRect(sec,n,'safeRect');if(r)out.push({...r,raw:r,id:n.id,role:'figure',owner:n.id});}
+    const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page],out=[],seen=new Set();if(!h)return out;
+    const add=(raw,owner,id)=>{if(!raw||raw.maxX-raw.minX<2||raw.maxY-raw.minY<2)return;const key=`${owner}|${Math.round(raw.minX)}|${Math.round(raw.minY)}|${Math.round(raw.maxX)}|${Math.round(raw.maxY)}`;if(seen.has(key))return;seen.add(key);out.push({...raw,raw,id,role:'figure',owner});};
+    for(const el of sec.querySelectorAll('[data-source-role="figure"],[data-source-role="graph"],[data-figure-kind]')){
+      if(!visible(el))continue;const raw=rect(el.getBoundingClientRect()),owner=ownerFor(sec,el,raw);add(raw,owner,`figure:${ids(el)}`);
+    }
+    for(const n of Object.values(h.nodes)){
+      if(n.id===h.rootId)continue;
+      for(let i=0;i<(n.protectedGeometry||[]).length;i++){const g=n.protectedGeometry[i],raw=localRect(sec,n,g.rect);add(raw,n.id,`${n.id}:protected:${i}`);}
+      if(n.safeRect!==n.sourceRect&&(n.type==='protected-figure'||n.containerKind==='source-figure-with-label-anchors'))add(nodeRect(sec,n,'safeRect'),n.id,`${n.id}:safe`);
+    }
     return out;
   }
   function pathKind(path){
@@ -106,7 +123,7 @@
     const byNum=new Map();for(const q of sec.querySelectorAll('[data-question]'))if(visible(q)){const n=q.dataset.question;if(!byNum.has(n))byNum.set(n,[]);byNum.get(n).push(q);}for(const [n,els] of byNum)if(els.length>1&&!(page===243&&n==='48'))uniq(bad.duplicateOwnership,n,[+n,els.length]);
     const sr=rect(sec.getBoundingClientRect());for(const l of lines)if(!contains(sr,l.raw,2))uniq(bad.clippedText,l.id,[l.question,l.text]);
     const counts=Object.fromEntries(Object.entries(bad).map(([k,v])=>[k,v.length])),ok=Object.values(counts).every(v=>v===0);
-    return {page,mode,ok,counts,textLines:lines.length,blanks:blanks.length,connectors:paths.connector.length,graphs:paths.graph.length,bad};
+    return {page,mode,ok,counts,textLines:lines.length,blanks:blanks.length,figures:figures.length,connectors:paths.connector.length,graphs:paths.graph.length,bad};
   }
 
   async function openMindmap(){await sleep(300);document.querySelector('.sidebar [data-page="mindmap"],.mobile-drawer [data-page="mindmap"]')?.click();await sleep(300);document.querySelector('[data-subject="earth"]')?.click();await sleep(350);}
