@@ -27,7 +27,15 @@
 .v4strict-242 .v4strict-nebula{left:127px!important;top:744px!important;width:275px!important;height:110px!important}
 .v4strict-242 .v4strict-earth-hot{left:657px!important;top:658px!important;width:49px!important;height:46px!important}.v4strict-242 .v4strict-earth-hot:after{top:54px!important;left:-6px!important;width:105px!important;font-size:15px!important}
 .v4strict-242 .v4strict-earth-wedge{left:723px!important;right:auto!important;top:1016px!important;bottom:auto!important;width:166px!important;height:166px!important}
-.v4strict-242 .v4strict-source-motif.rocket242{left:88px!important;top:383px!important;width:130px!important;height:116px!important}
+/* v6 owns a single dedicated astronaut-on-rocket figure; hide the older generic guide motif. */
+.v4strict-242 .v4strict-source-motif.rocket242{display:none!important}.v6-p242-astronaut{position:absolute;left:76px;top:382px;width:150px;height:125px;z-index:3;overflow:visible}
+.v6-p242-start-tag,.v6-p242-dark-age,.v6-p242-recombination,.v6-p242-cooling{position:absolute;z-index:5;color:#3d3b37}
+.v6-p242-start-tag{left:90px;top:501px;width:112px;height:24px;display:grid;place-items:center;background:#cf5d4e;color:#fff;font-size:15px;font-weight:900;line-height:1;transform:skewX(-2deg)}
+.v6-p242-dark-age{left:358px;top:546px;font-size:16px;font-weight:700;white-space:nowrap}
+.v6-p242-recombination{left:460px;top:357px;width:238px;font-size:13.5px;line-height:1.42;font-weight:600}
+.v6-p242-cooling{left:776px;top:538px;width:128px;font-size:16px;line-height:1.28;font-weight:900;text-align:left}
+/* Source circled (18) sits beside the 3大主因 heading, not as a floating card. */
+.v4strict-242 .v7-p242-circled-num{display:inline-grid;place-items:center;width:31px;height:31px;border:2px solid #555;border-radius:50%;vertical-align:middle;margin-right:3px;background:#fffdf7;box-sizing:border-box}.v4strict-242 .v7-p242-circled-num .v4strict-num{font-size:10px!important;vertical-align:baseline!important;margin:0!important}
 /* One authored source connector layer; no auto-routing. */
 .v4strict-242 > .v4strict-svg{transform:translate(-20px,119px)!important;transform-origin:0 0!important}
 .v6-p242-nebula-title{left:283px!important;top:665px!important;font-size:17px!important}.v6-p242-melt{left:724px!important;top:810px!important;font-size:16px!important}.v6-p242-escape{left:392px!important;top:918px!important;font-size:15px!important}.v6-p242-diff-label{left:704px!important;top:1170px!important;font-size:14px!important}
