@@ -27,12 +27,12 @@
   E(20,'<span class="v7-p242-source-line"><b class="v4strict-num">(20)</b> 密度較 {{0}} 的</span><span class="v7-p242-source-line">{{1}}（填組成）上升</span>',2,['小','SiO₂'],{sourceRect:R(627,1008,223,50)})
  ];
  M[243]=[
-  E(21,'第二階段大氣<br>主要：<b class="v4strict-num">(21)</b> {{0}}',1,['H₂O'],{sourceRect:R(62,787,160,35)}),
-  E(22,'<b class="v4strict-num">(22)</b> {{0}}',1,['CO₂'],{sourceRect:R(62,830,140,28)}),
-  E(23,'極少：<b class="v4strict-num">(23)</b> {{0}}',1,['N₂'],{sourceRect:R(62,865,140,28)}),
-  E(24,'冷卻凝結　時間：約 <b class="v4strict-num">(24)</b> {{0}} 年前',1,['40億'],{sourceRect:R(220,782,260,35)}),
+  E(21,'第二階段大氣<br>主要：<b class="v4strict-num">(21)</b> {{0}}',1,['H₂O'],{sourceRect:R(62,787,160,48)}),
+  E(22,'<b class="v4strict-num">(22)</b> {{0}}',1,['CO₂'],{sourceRect:R(62,850,140,28)}),
+  E(23,'極少：<b class="v4strict-num">(23)</b> {{0}}',1,['N₂'],{sourceRect:R(62,887,140,28)}),
+  E(24,'冷卻凝結　時間：約 <b class="v4strict-num">(24)</b> {{0}} 年前',1,['40億'],{sourceRect:R(230,782,250,35)}),
   E(25,'海洋形成　證據　古老的 <b class="v4strict-num">(25)</b> {{0}} 岩',1,['沉積'],{sourceRect:R(400,895,200,38)}),
-  E(26,'<b class="v4strict-num">(26)</b> {{0}} 等生物行光合作用',1,['藍綠菌'],{sourceRect:R(330,960,250,40)}),
+  E(26,'<b class="v4strict-num">(26)</b> {{0}} 等生物行光合作用',1,['藍綠菌'],{sourceRect:R(330,960,225,40)}),
   E(27,'化石：<b class="v4strict-num">(27)</b> {{0}}',1,['疊層石'],{sourceRect:R(345,1028,190,45)}),
   E(28,'放出 <b class="v4strict-num">(28)</b> {{0}}',1,['O₂'],{sourceRect:R(565,965,125,35)}),
   E(29,'35億年前－18億年前<br>淺海環境形成 <b class="v4strict-num">(29)</b> {{0}}<br>淺海氧氣大幅增加的證據',1,['縞狀鐵層'],{sourceRect:R(700,920,180,70)}),
@@ -50,10 +50,10 @@
   E(41,'<b class="v4strict-num">(41)</b> 截切定律：<br>E斷層發生在A、B、C之 {{0}}',1,['後'],{sourceRect:R(293,373,235,55)}),
   E(42,'<b class="v4strict-num">(42)</b> 包裹體定律：<br>C {{0}} 於B',1,['老'],{sourceRect:R(293,427,235,45)}),
   E(43,'可用化石等比對不同地區地層，指示沉積年代的化石稱為<br><b class="v4strict-num">(43)</b> {{0}}',1,['標準化石'],{sourceRect:R(70,310,205,135)}),
-  E(44,'各時期代表化石　<b class="v4strict-num">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,532,105,32)}),
+  E(44,'<b class="v4strict-num">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,540,105,32),sourceHeading:'各時期代表化石'}),
   E(45,'<b class="v4strict-num">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,532,105,32)}),
   E(46,'<b class="v4strict-num">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,532,155,32)}),
-  E(47,'<b class="v4strict-num">(47)</b> {{0}}<br>生物演化出硬組織',1,['寒武紀大爆發'],{sourceRect:R(84,497,170,55)}),
-  E(48,'分界依據　<b class="v4strict-num">(48)</b> {{0}}　　分界依據　<b class="v4strict-num">(49)</b> {{1}}',2,['二疊紀末大滅絕','白堊紀末大滅絕'],{sourceNumbers:[48,49],sourceRect:R(350,500,285,30)})
+  E(47,'<b class="v4strict-num">(47)</b> {{0}}<br>生物演化出硬組織',1,['寒武紀大爆發'],{sourceRect:R(84,497,160,55)}),
+  E(48,'<span class="v7-p243-boundary-part"><b class="v4strict-num">(48)</b> {{0}}</span><span class="v7-p243-boundary-part"><b class="v4strict-num">(49)</b> {{1}}</span>',2,['二疊紀末大滅絕','白堊紀末大滅絕'],{sourceNumbers:[48,49],sourceRect:R(350,500,285,30),sourceLabels:['分界依據','分界依據']})
  ];
 })();
