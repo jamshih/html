@@ -1,0 +1,20 @@
+/* Final source-grid geometry for the source-owned Earth V9 DOM. No duplicate renderer or hidden-answer workaround. */
+
+/* p243: keep half-life suffix inside the printed graph band and route the fossil connector below its label. */
+.v8-p243-decay .v8-p243-q[data-question="38"]{width:320px!important}
+.v8-p243-decay .v8-p243-q[data-question="39"]{left:242px!important;width:125px!important;font-size:12.5px!important}
+.v8-p243-decay .v8-p243-q[data-question="39"] .v4strict-fill{width:58px!important;min-width:58px!important}
+.v8-p243-connectors [data-source-connector="fossilToTimeline"]{d:path("M275 445V476H240V492")}
+
+/* p244: preserve the printed suffixes and keep the brightness branch clear of the factor label. */
+.v8-p244-page .v8-p244-q[data-question="6"]{width:255px!important}
+.v8-p244-distance .v8-p244-q[data-question="21"]{left:185px!important;width:145px!important}
+.v8-p244-connectors [data-source-connector="q7ToBright"]{d:path("M344 414H430V530L320 558")}
+
+/* p246: the third annual-motion band starts below the 24-hour row and has its own printed height. */
+.v7-p246-annual{height:375px!important;min-height:375px!important}
+.v7-p246-annual-q[data-question="11"]{height:78px!important}
+.v7-p246-annual-q[data-question="12"]{top:310px!important;height:62px!important;line-height:1.16!important}
+
+/* p253: q40 begins to the right of the fixed 季風 label rather than underneath it. */
+.v9-p253-large-wind .q40{left:155px!important;top:104px!important;width:395px!important;font-size:12.5px!important;line-height:1.12!important}
