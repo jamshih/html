@@ -45,14 +45,19 @@
   }
   function collectText(sec){
     const out=[],walker=document.createTreeWalker(sec,NodeFilter.SHOW_TEXT,{acceptNode(n){const t=n.nodeValue?.trim(),p=n.parentElement;if(!t||!p||['SCRIPT','STYLE','NOSCRIPT'].includes(p.tagName)||!visible(p)||p.closest('.v9-debug-layer'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
-    let n;while((n=walker.nextNode())){const range=document.createRange();range.selectNodeContents(n);for(const cr of range.getClientRects()){if(cr.width<.5||cr.height<.5)continue;const raw=rect(cr),el=n.parentElement,q=el.closest('[data-question]'),svg=el.closest('svg');out.push({...raw,raw,id:`text:${out.length}`,role:'text',block:q?`q${q.dataset.question}`:ids(el.closest('text')||el),question:q?.dataset.question||null,text:n.nodeValue.trim().slice(0,100),el,svg,owner:ownerFor(sec,el,raw)});}}
+    let n;while((n=walker.nextNode())){
+      const range=document.createRange();range.selectNodeContents(n);
+      for(const cr of range.getClientRects()){
+        if(cr.width<.5||cr.height<.5)continue;
+        const raw=rect(cr),el=n.parentElement,q=el.closest('[data-question]'),svg=el.closest('svg'),sourceObj=!svg?el.closest('[data-source-object]'):null;
+        const block=q?`q${q.dataset.question}`:(sourceObj?.dataset.sourceObject?`src:${sourceObj.dataset.sourceObject}`:ids(el.closest('text')||el));
+        out.push({...raw,raw,id:`text:${out.length}`,role:'text',block,question:q?.dataset.question||null,text:n.nodeValue.trim().slice(0,100),el,svg,owner:ownerFor(sec,el,raw)});
+      }
+    }
     return out;
   }
   function collectBlanks(sec){return [...sec.querySelectorAll('.v4strict-fill')].filter(visible).map((el,i)=>{const raw=rect(el.getBoundingClientRect()),q=el.closest('[data-question]');return {...raw,raw,id:`blank:${i}`,role:'blank',block:q?`q${q.dataset.question}`:ids(el),question:q?.dataset.question||null,el,owner:ownerFor(sec,el,raw)}})}
 
-  // Figure collision regions are actual rendered figure/graph boxes unless the source hierarchy
-  // supplies smaller protectedGeometry for a compound/transparent SVG. In that case those explicit
-  // source-derived regions are authoritative, so transparent padding cannot create false collisions.
   function figureRegions(sec){
     const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page],out=[],seen=new Set();if(!h)return out;
     const add=(raw,owner,id)=>{if(!raw||raw.maxX-raw.minX<2||raw.maxY-raw.minY<2)return;const key=`${owner}|${Math.round(raw.minX)}|${Math.round(raw.minY)}|${Math.round(raw.maxX)}|${Math.round(raw.maxY)}`;if(seen.has(key))return;seen.add(key);out.push({...raw,raw,id,role:'figure',owner});};
@@ -98,31 +103,25 @@
     const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page],lines=collectText(sec),blanks=collectBlanks(sec),figures=figureRegions(sec),paths=collectPaths(sec);
     const index=new RBushV9(12).load([...lines,...blanks,...figures]);
     const bad={textText:[],textConnector:[],textGraph:[],textFigure:[],blankConnector:[],blankGraph:[],figureFigure:[],containerChild:[],clippedText:[],overflowedText:[],microFont:[],duplicateOwnership:[],wrongParent:[]};
-
     for(const a of lines){for(const b of index.search(a)){
       if(b.role==='text'&&a.id<b.id&&a.block!==b.block&&overlaps(a.raw,b.raw,.5))uniq(bad.textText,`${a.id}|${b.id}`,[a.id,b.id,a.text,b.text]);
       if(b.role==='figure'&&!isDesc(page,a.owner,b.owner)&&overlaps(a.raw,b.raw,.5))uniq(bad.textFigure,`${a.id}|${b.id}`,[a.id,b.id,a.text,b.id,a.owner]);
     }}
     for(let i=0;i<figures.length;i++)for(let j=i+1;j<figures.length;j++){const a=figures[i],b=figures[j];if(!isDesc(page,a.owner,b.owner)&&!isDesc(page,b.owner,a.owner)&&overlaps(a.raw,b.raw,.5))uniq(bad.figureFigure,`${a.id}|${b.id}`,[a.id,b.id]);}
-
     function testPath(po,kind){
       const bucket=kind==='connector'?'textConnector':'textGraph',blankBucket=kind==='connector'?'blankConnector':'blankGraph';
       for(const p of po.pts){for(const hit of index.search({minX:p.x,minY:p.y,maxX:p.x,maxY:p.y})){
         if(hit.role==='figure')continue;
         if(hit.role==='text'){
-          if(!pointInside(hit.raw,p,.15))continue;
-          if(hit.svg===po.svg)continue;
-          if(kind==='connector'&&(p.d<4||po.len-p.d<4))continue;
+          if(!pointInside(hit.raw,p,.15))continue;if(hit.svg===po.svg)continue;if(kind==='connector'&&(p.d<4||po.len-p.d<4))continue;
           uniq(bad[bucket],`${hit.id}|${po.id}`,[hit.id,po.id,hit.text,hit.owner,po.owner]);
-        } else if(hit.role==='blank'){
-          if(!pointInside(hit.raw,p,.15))continue;
-          if(kind==='connector'&&(p.d<4||po.len-p.d<4))continue;
+        }else if(hit.role==='blank'){
+          if(!pointInside(hit.raw,p,.15))continue;if(kind==='connector'&&(p.d<4||po.len-p.d<4))continue;
           uniq(bad[blankBucket],`${hit.id}|${po.id}`,[hit.id,po.id,hit.question,hit.owner,po.owner]);
         }
       }}
     }
     paths.connector.forEach(p=>testPath(p,'connector'));paths.graph.forEach(p=>testPath(p,'graph'));
-
     for(const q of sec.querySelectorAll('[data-question]')){
       if(!visible(q))continue;const n=+q.dataset.question,expected=window.v9SourceParentFor?.(page,n),parent=q.dataset.parentId||expected;
       if(!expected||!h?.nodes?.[expected]||parent!==expected)uniq(bad.wrongParent,`${n}|${parent}|${expected}`,[n,parent,expected]);
@@ -130,13 +129,11 @@
       const qr=rect(q.getBoundingClientRect());for(const l of lines.filter(x=>x.block===`q${n}`))if(l.raw.minX<qr.minX-2||l.raw.maxX>qr.maxX+2)uniq(bad.overflowedText,`${n}|${l.id}`,[n,l.text]);
       const pn=h?.nodes?.[expected];if(pn){let allowed=null;if(['source-box','source-cloud','source-panel','source-strip'].includes(pn.containerKind))allowed=nodeRect(sec,pn,'contentRect');else if(pn.containerKind==='source-figure-with-label-anchors')allowed=anchorRect(sec,pn,n);if(allowed)for(const l of lines.filter(x=>x.block===`q${n}`))if(!contains(allowed,l.raw,3))uniq(bad.containerChild,`${n}|${l.id}`,[n,expected,l.text]);}
     }
-
     const byNum=new Map();for(const q of sec.querySelectorAll('[data-question]'))if(visible(q)){const n=q.dataset.question;if(!byNum.has(n))byNum.set(n,[]);byNum.get(n).push(q);}for(const [n,els] of byNum)if(els.length>1&&!(page===243&&n==='48'))uniq(bad.duplicateOwnership,n,[+n,els.length]);
     const sr=rect(sec.getBoundingClientRect());for(const l of lines)if(!contains(sr,l.raw,2))uniq(bad.clippedText,l.id,[l.question,l.text]);
     const counts=Object.fromEntries(Object.entries(bad).map(([k,v])=>[k,v.length])),ok=Object.values(counts).every(v=>v===0);
     return {page,mode,ok,counts,textLines:lines.length,blanks:blanks.length,figures:figures.length,connectors:paths.connector.length,graphs:paths.graph.length,bad};
   }
-
   async function openMindmap(){await sleep(300);document.querySelector('.sidebar [data-page="mindmap"],.mobile-drawer [data-page="mindmap"]')?.click();await sleep(300);document.querySelector('[data-subject="earth"]')?.click();await sleep(350);}
   const reports=[];
   try{
