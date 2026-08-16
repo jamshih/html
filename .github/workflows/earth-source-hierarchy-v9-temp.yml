@@ -1,0 +1,105 @@
+name: Earth Source Hierarchy V9 Temp Gate
+
+on:
+  push:
+    branches: [earth-source-hierarchy-v9-20260816]
+    paths:
+      - 'wrongbook-v2/**'
+      - '.github/workflows/earth-source-hierarchy-v9-temp.yml'
+  workflow_dispatch:
+
+jobs:
+  hierarchy-v9:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: V9 syntax and architecture guard
+        run: |
+          node --check wrongbook-v2/earth-source-hierarchy-v9.js
+          node --check wrongbook-v2/earth-rbush-v9.js
+          node --check wrongbook-v2/earth-source-hierarchy-v9-loader.js
+          node --check wrongbook-v2/earth-source-hierarchy-v9-renderer.js
+          node --check wrongbook-v2/earth-layout-qa-v9.js
+          node --check wrongbook-v2/earth-layout-debug-v9.js
+          node - <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const src=fs.readFileSync('wrongbook-v2/earth-source-hierarchy-v9.js','utf8');
+          const ctx={window:{}};vm.createContext(ctx);vm.runInContext(src,ctx);
+          const H=ctx.window.SOURCE_HIERARCHY_V9;
+          if(Object.keys(H).length!==12)throw Error('expected 12 hierarchy pages');
+          for(let p=242;p<=253;p++)if(!H[p])throw Error(`missing hierarchy page ${p}`);
+          const all=[];for(const p of Object.values(H))for(const [n,parent] of Object.entries(p.questionParents))all.push([p.page,+n,parent]);
+          for(const [page,n,parent] of all)if(!H[page].nodes[parent])throw Error(`bad parent p${page} q${n}: ${parent}`);
+          const loader=fs.readFileSync('wrongbook-v2/earth-source-trace-tail-loader-v6.js','utf8');
+          if(loader.includes('earth-source-trace-p253-correct-v6'))throw Error('old p253 correction overlay still loaded');
+          const css=fs.readFileSync('wrongbook-v2/earth-source-hierarchy-v9.css','utf8');
+          if(/\.v9-q[^{}]*\{[^}]*font-size\s*:\s*(?:10|11)(?:\.|px)/.test(css))throw Error('V9 question text uses micro-font workaround');
+          console.log('V9 hierarchy architecture guard PASS',all.length,'explicit question owners');
+          NODE
+      - name: Run rendered V9 collision gate
+        run: |
+          python3 -m http.server 4173 >/tmp/wrongbook-v9-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          "$CHROME" --version
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/v9qa --window-size=1800,1400 --virtual-time-budget=30000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?earthLayoutQA=1" > /tmp/earth-v9-qa.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,html,json
+          t=Path('/tmp/earth-v9-qa.html').read_text(errors='replace')
+          m=re.search(r'<pre id="earth-layout-qa-results" data-status="([^"]+)">(.*?)</pre>',t,re.S)
+          if not m:
+              print(t[-5000:])
+              raise SystemExit('earth-layout-qa-results missing')
+          status=m.group(1); payload=html.unescape(m.group(2)); print(payload)
+          data=json.loads(payload)
+          if status!='PASS' or data.get('status')!='PASS': raise SystemExit(1)
+          assert data['pages']==list(range(242,254))
+          assert data['modes']==['recall','learn']
+          assert len(data['reports'])==24
+          for k,v in data['totals'].items():
+              assert v==0,(k,v)
+          print('EARTH_V9_COLLISION_GATE_PASS')
+          PY
+      - name: Existing source and refinement regression gates
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          parse_result() {
+            python3 - "$1" <<'PY'
+          from pathlib import Path
+          import html,re,sys
+          text=Path(sys.argv[1]).read_text(errors='replace')
+          m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',text,re.S)
+          if not m: raise SystemExit('E2E result node missing')
+          print(html.unescape(m.group(2)))
+          if m.group(1)!='PASS': raise SystemExit(1)
+          PY
+          }
+          for Q in sourcee2e=1 refinee2e=1; do
+            NAME="${Q%%=*}"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/v9-$NAME" --window-size=1440,1000 --virtual-time-budget=12000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?$Q" > "/tmp/v9-$NAME.html"
+            parse_result "/tmp/v9-$NAME.html"
+          done
+      - name: Capture chapter 6 visual proof
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          for MODE in recall learn; do
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/v9-shot-$MODE" --window-size=1800,1400 --virtual-time-budget=9000 --screenshot="/tmp/earth-v9-ch6-$MODE.png" "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=6&mode=$MODE"
+          done
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/v9-debug --window-size=1800,1400 --virtual-time-budget=9000 --screenshot=/tmp/earth-v9-ch6-debug.png "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=6&mode=learn&earthLayoutDebug=1"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: earth-source-hierarchy-v9-proof
+          path: |
+            /tmp/earth-v9-qa.html
+            /tmp/earth-v9-ch6-recall.png
+            /tmp/earth-v9-ch6-learn.png
+            /tmp/earth-v9-ch6-debug.png
+            /tmp/v9-sourcee2e.html
+            /tmp/v9-refinee2e.html
