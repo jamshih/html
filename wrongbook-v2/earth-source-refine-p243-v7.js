@@ -1,4 +1,4 @@
-// Page 243 refinement: preserve v6 geometry, remove student-answer leakage, and document every visible source relationship.
+// Page 243 refinement: preserve source geometry, remove student-answer leakage, and restore printed lower-page teaching groups.
 (function(){
   window.SOURCE_LINE_MANIFEST_V7=window.SOURCE_LINE_MANIFEST_V7||{};
   window.SOURCE_LINE_MANIFEST_V7[243]=[
@@ -22,14 +22,33 @@
   window.v5PageHtml=function(ch,sem,page,mode){
     let html=prev(ch,sem,page,mode);
     if(page!==243)return html;
-    // These three values are student answers in the photograph. The numbered blank overlays already occupy the source locations.
-    html=html
-      .replace('<text x="25" y="34">100</text>','')
-      .replace('<text x="270" y="60">母元素</text>','')
-      .replace('<text x="270" y="126">子元素</text>','')
-      .replace('class="v6-p243-lines"','class="v6-p243-lines" data-v7-line-manifest="243"')
-      .replace('class="v6-p243-decay"','class="v6-p243-decay" data-v7-answer-leak-scrubbed="true"');
-    return html;
+    const t=document.createElement('template');t.innerHTML=html;
+    // These values are handwriting in the source photograph, not publisher-printed labels.
+    const decay=t.content.querySelector('.v6-p243-decay');
+    if(decay){
+      decay.innerHTML=decay.innerHTML
+        .replace('<text x="25" y="34">100</text>','')
+        .replace('<text x="270" y="60">母元素</text>','')
+        .replace('<text x="270" y="126">子元素</text>','');
+      decay.dataset.v7AnswerLeakScrubbed='true';
+    }
+    const lines=t.content.querySelector('.v6-p243-lines');if(lines)lines.dataset.v7LineManifest='243';
+    const section=t.content.querySelector('[data-strict-page="243"]')||t.content.querySelector('.v4strict-243');
+    if(section&&!section.querySelector('.v7-p243-second-cloud')){
+      const layer=document.createElement('div');layer.className='v7-p243-source-groups';layer.setAttribute('aria-hidden','true');
+      layer.innerHTML=`
+        <div class="v7-p243-second-cloud"></div>
+        <div class="v7-p243-carbon">除碳作用</div>
+        <div class="v7-p243-rock-frame"></div>
+        <div class="v7-p243-oxygen-oval"></div>
+        <div class="v7-p243-third-cloud"></div>
+        <div class="v7-p243-uv">被紫外線照射</div>
+        <div class="v7-p243-inert">化性不活潑，在大氣層中，比例逐漸上升</div>`;
+      section.appendChild(layer);
+    }
+    // Keep numbered source prompts on top of their printed grouping shapes.
+    for(const n of [21,22,23,25,29,32]){const q=t.content.querySelector(`[data-question="${n}"]`);if(q)q.style.zIndex='5';}
+    return t.innerHTML;
   };
   if(typeof window.render==='function')window.render();
 })();
