@@ -78,7 +78,15 @@
   }
   function collectPaths(sec){
     const out={connector:[],graph:[]};
-    for(const path of sec.querySelectorAll('svg path')){if(!visible(path))continue;const kind=pathKind(path);if(!kind)continue;let len=0;try{len=path.getTotalLength()}catch{}if(!Number.isFinite(len)||len<1)continue;const svg=path.ownerSVGElement,ctm=path.getScreenCTM();if(!ctm)continue;const sr=rect(svg.getBoundingClientRect()),pts=[];for(let d=0;d<=len;d+=1.75){const p=path.getPointAtLength(d),sp=new DOMPoint(p.x,p.y).matrixTransform(ctm);pts.push({x:sp.x,y:sp.y,d,len});}out[kind].push({id:`${kind}:${ids(path)}`,kind,path,svg,owner:ownerFor(sec,svg,sr),pts,len});}
+    for(const path of sec.querySelectorAll('svg path')){
+      if(!visible(path))continue;const kind=pathKind(path);if(!kind)continue;let len=0;try{len=path.getTotalLength()}catch{}if(!Number.isFinite(len)||len<1)continue;
+      const svg=path.ownerSVGElement,ctm=path.getScreenCTM();if(!ctm)continue;const sr=rect(svg.getBoundingClientRect()),pts=[];
+      for(let d=0;d<=len;d+=1.75){const p=path.getPointAtLength(d),sp=new DOMPoint(p.x,p.y).matrixTransform(ctm);pts.push({x:sp.x,y:sp.y,d,len});}
+      let owner=null;const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page];let obj=path.closest?.('[data-source-object]')||svg.closest?.('[data-source-object]');
+      while(obj&&sec.contains(obj)){const id=obj.dataset.sourceObject;if(id&&h?.nodes?.[id]){owner=id;break;}obj=obj.parentElement?.closest?.('[data-source-object]')||null;}
+      if(!owner){const mid=path.getPointAtLength(len/2),sp=new DOMPoint(mid.x,mid.y).matrixTransform(ctm);owner=smallestOwner(sec,sp.x,sp.y);}
+      out[kind].push({id:`${kind}:${ids(path)}`,kind,path,svg,owner:owner||ownerFor(sec,svg,sr),pts,len});
+    }
     return out;
   }
   function anchorRect(sec,node,qNum){
