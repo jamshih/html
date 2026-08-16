@@ -1,119 +1,95 @@
-name: Earth Final Production Integration
+name: Earth Live GitHub Pages Acceptance
 
 on:
   push:
     branches: [earth-collision-zero-20260816]
     paths: ['.github/workflows/earth-collision-edit-temp.yml']
 
-permissions:
-  contents: write
-
 jobs:
-  integrate:
+  live:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: earth-collision-zero-20260816
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Build and verify exact latest-main integration
+      - name: Install Traditional Chinese browser font
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/earth-final/wrongbook-v2
-          for f in earth-source-prompts-v7-242-243.js earth-source-trace-p243-v6.js earth-source-trace-p243-true-v6.css earth-collision-qa-v8.js; do cp "wrongbook-v2/$f" "/tmp/earth-final/wrongbook-v2/$f"; done
-          git fetch origin main
-          MAIN_SHA="$(git rev-parse origin/main)"
-          echo "$MAIN_SHA" > /tmp/integration-main-sha.txt
-          git checkout -B earth-collision-production-final-20260816 origin/main
-          cp /tmp/earth-final/wrongbook-v2/earth-source-prompts-v7-242-243.js wrongbook-v2/
-          cp /tmp/earth-final/wrongbook-v2/earth-source-trace-p243-v6.js wrongbook-v2/
-          cp /tmp/earth-final/wrongbook-v2/earth-source-trace-p243-true-v6.css wrongbook-v2/
-          node --check wrongbook-v2/earth-source-prompts-v7-242-243.js
-          node --check wrongbook-v2/earth-source-trace-p243-v6.js
-
-          # Test-only collision verifier; never stage it or the injected script.
-          cp wrongbook-v2/index.html /tmp/index-production.html
-          cp /tmp/earth-final/wrongbook-v2/earth-collision-qa-v8.js wrongbook-v2/earth-collision-qa-v8.js
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path('wrongbook-v2/index.html');s=p.read_text()
-          if 'earth-collision-qa-v8.js' not in s:s=s.replace('</body>','<script src="./earth-collision-qa-v8.js"></script></body>')
-          p.write_text(s)
-          inject='''<script>if(new URLSearchParams(location.search).has('integrityqa'))setTimeout(()=>{const p=document.createElement('pre');p.id='integrity-results';const r=window.v8EarthSourceIntegrity?.();p.dataset.status=r?.ok?'PASS':'FAIL';p.textContent=JSON.stringify(r||{error:'missing'},null,2);document.body.appendChild(p)},1800)</script>'''
-          Path('wrongbook-v2/integrity-harness.html').write_text(s.replace('</body>',inject+'</body>'))
-          PY
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-cjk
           fc-cache -f
-          python3 -m http.server 4173 >/tmp/earth-integration-http.log 2>&1 &
-          SERVER_PID=$!; trap 'kill $SERVER_PID || true' EXIT; sleep 1
-          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"; test -n "$CHROME"
+      - name: Verify public deployed bytes and rendered E2E
+        run: |
+          set -euo pipefail
+          BASE='https://jamshih.github.io/html/wrongbook-v2'
+          CB="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          curl -fsSL --retry 5 --retry-delay 2 "$BASE/earth-source-prompts-v7-242-243.js?cb=$CB" -o /tmp/live-prompts.js
+          curl -fsSL --retry 5 --retry-delay 2 "$BASE/earth-source-trace-p243-v6.js?cb=$CB" -o /tmp/live-p243.js
+          curl -fsSL --retry 5 --retry-delay 2 "$BASE/earth-source-trace-p243-true-v6.css?cb=$CB" -o /tmp/live-p243.css
+          curl -fsSL --retry 5 --retry-delay 2 "$BASE/?cb=$CB" -o /tmp/live-index.html
 
-          for CH in 1 2 3 4 5 6; do
-            BASE="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --user-data-dir="/tmp/int-shot-${CH}" --window-size=2200,1600 --virtual-time-budget=7000 --screenshot="/tmp/int-ch${CH}.png" "$BASE"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/int-col-${CH}" --window-size=2200,1600 --virtual-time-budget=9000 --dump-dom "${BASE}&collisionqa=1" > "/tmp/int-col-${CH}.html"
-          done
           python3 - <<'PY'
           from pathlib import Path
-          import re,html,json
-          pages=[]
-          for ch in range(1,7):
-              s=Path(f'/tmp/int-col-{ch}.html').read_text(errors='replace');m=re.search(r'<pre id="earth-collision-results"[^>]*>(.*?)</pre>',s,re.S)
-              if not m: raise SystemExit(f'missing collision report {ch}')
-              r=json.loads(html.unescape(re.sub('<[^>]+>','',m.group(1))));pages += [p for p in r['pages'] if p['status']!='NOT_RENDERED']
-          by={p['page']:p for p in pages};ordered=[by[p] for p in range(242,254) if p in by]
-          out={'renderedPages':len(ordered),'totalUnwantedCollisions':sum(len(p.get('collisions',[])) for p in ordered),'connectorTextIntersections':sum(p.get('connectorTextIntersections',0) for p in ordered),'connectorFigureIntersections':sum(p.get('connectorFigureIntersections',0) for p in ordered),'pages':[(p['page'],p['status']) for p in ordered]};print(json.dumps(out,indent=2));Path('/tmp/integration-collision.json').write_text(json.dumps(out,indent=2))
-          if len(ordered)!=12 or any(p['status']!='PASS' for p in ordered) or out['totalUnwantedCollisions'] or out['connectorTextIntersections'] or out['connectorFigureIntersections']:raise SystemExit(1)
+          m=Path('/tmp/live-prompts.js').read_text()
+          r=Path('/tmp/live-p243.js').read_text()
+          c=Path('/tmp/live-p243.css').read_text()
+          assert "E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}　<b class=\"v4strict-num\">(49)</b> {{1}}',2" in m, 'public manifest missing composite Q48/Q49'
+          assert "E(49," not in m, 'public manifest still has standalone Q49'
+          assert 'boundaryQ48' in r, 'public renderer missing boundaryQ48 owner'
+          assert 'data-question=\\"48\\"' in r or 'data-question=\"48\"' in r, 'public renderer missing canonical Q48 owner'
+          assert 'v8-p243-qgroup{display:contents!important}' in c, 'public CSS missing display:contents ownership group'
+          print('PUBLIC_BYTES_PASS')
           PY
 
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          "$CHROME" --version
           parse_e2e(){ python3 - "$1" <<'PY'
           from pathlib import Path
           import re,html,json,sys
-          s=Path(sys.argv[1]).read_text(errors='replace');m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',s,re.S)
-          if not m: raise SystemExit('missing '+sys.argv[1])
-          r=json.loads(html.unescape(m.group(2)));print(sys.argv[1],m.group(1),r.get('manifestCount'),r.get('promptQA'))
-          if m.group(1)!='PASS':print(json.dumps(r,ensure_ascii=False,indent=2));raise SystemExit(1)
+          s=Path(sys.argv[1]).read_text(errors='replace')
+          m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',s,re.S)
+          if not m: raise SystemExit('missing e2e result: '+sys.argv[1])
+          payload=html.unescape(m.group(2));r=json.loads(payload)
+          print(sys.argv[1],m.group(1),'manifestCount=',r.get('manifestCount'),'promptQA=',r.get('promptQA'))
+          if m.group(1)!='PASS': print(json.dumps(r,ensure_ascii=False,indent=2));raise SystemExit(1)
           PY
           }
           for SPEC in desktop:1440,1000 mobile:390,844; do
             NAME="${SPEC%%:*}";SIZE="${SPEC#*:}"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/int-source-${NAME}" --window-size="$SIZE" --virtual-time-budget=9000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?sourcee2e=1" > "/tmp/int-source-${NAME}.html"; parse_e2e "/tmp/int-source-${NAME}.html"
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/int-refine-${NAME}" --window-size="$SIZE" --virtual-time-budget=11000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?refinee2e=1" > "/tmp/int-refine-${NAME}.html"; parse_e2e "/tmp/int-refine-${NAME}.html"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+              --user-data-dir="/tmp/live-source-$NAME" --window-size="$SIZE" --virtual-time-budget=12000 \
+              --dump-dom "$BASE/?sourcee2e=1&cb=$CB-$NAME" > "/tmp/live-source-$NAME.html"
+            parse_e2e "/tmp/live-source-$NAME.html"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+              --user-data-dir="/tmp/live-refine-$NAME" --window-size="$SIZE" --virtual-time-budget=14000 \
+              --dump-dom "$BASE/?refinee2e=1&cb=$CB-$NAME" > "/tmp/live-refine-$NAME.html"
+            parse_e2e "/tmp/live-refine-$NAME.html"
           done
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/int-integrity --window-size=1440,1000 --virtual-time-budget=8000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/integrity-harness.html?integrityqa=1" > /tmp/int-integrity.html
+
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --user-data-dir=/tmp/live-ch1 --window-size=2200,1600 --virtual-time-budget=10000 \
+            --screenshot=/tmp/live-ch1.png "$BASE/?refpreview=1&chapter=1&mode=recall&cb=$CB"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --user-data-dir=/tmp/live-ch1-dom --window-size=2200,1600 --virtual-time-budget=10000 \
+            --dump-dom "$BASE/?refpreview=1&chapter=1&mode=recall&cb=$CB-dom" > /tmp/live-ch1.html
           python3 - <<'PY'
           from pathlib import Path
-          import re,html,json
-          s=Path('/tmp/int-integrity.html').read_text(errors='replace');m=re.search(r'<pre id="integrity-results" data-status="([^"]+)">(.*?)</pre>',s,re.S)
-          if not m:raise SystemExit('integrity missing')
-          r=json.loads(html.unescape(re.sub('<[^>]+>','',m.group(2))));out={k:r.get(k) for k in ['ok','canonicalQuestionCount','registeredQuestionCount','printedBlankLabelCount','actualFigures','missingQuestionIds','duplicateQuestionIds','missingFigures','orphanFigures','ch5OrderOk']};print(json.dumps(out,ensure_ascii=False,indent=2));Path('/tmp/integration-integrity.json').write_text(json.dumps(r,ensure_ascii=False,indent=2))
-          if m.group(1)!='PASS' or not r.get('ok') or r.get('canonicalQuestionCount')!=276 or r.get('registeredQuestionCount')!=276 or r.get('actualFigures')!=56:raise SystemExit(1)
+          import re
+          s=Path('/tmp/live-ch1.html').read_text(errors='replace')
+          qs=re.findall(r'\bdata-question="(\d+)"',s)
+          assert '49' not in qs, 'live DOM still has standalone canonical Q49'
+          assert '48' in qs, 'live DOM missing canonical Q48'
+          assert '(49)' in s or '&lpar;49&rpar;' in s or '>49<' in s, 'live DOM missing printed source label 49'
+          print('LIVE_CH1_OWNER_PASS',len(qs),sorted(set(qs),key=int))
           PY
-
-          # Restore exact production state before committing.
-          cp /tmp/index-production.html wrongbook-v2/index.html
-          rm -f wrongbook-v2/earth-collision-qa-v8.js wrongbook-v2/integrity-harness.html
-          git status --short
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-source-prompts-v7-242-243.js wrongbook-v2/earth-source-trace-p243-v6.js wrongbook-v2/earth-source-trace-p243-true-v6.css
-          git diff --cached --check
-          test "$(git diff --cached --name-only | wc -l)" -eq 3
-          git commit -m 'Consolidate Earth p243 boundary prompt ownership'
-          git push --force-with-lease origin HEAD:earth-collision-production-final-20260816
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: earth-production-integration-proof
+          name: earth-live-pages-acceptance
           path: |
-            /tmp/integration-main-sha.txt
-            /tmp/integration-collision.json
-            /tmp/integration-integrity.json
-            /tmp/int-ch*.png
-            /tmp/int-source-*.html
-            /tmp/int-refine-*.html
+            /tmp/live-prompts.js
+            /tmp/live-p243.js
+            /tmp/live-p243.css
+            /tmp/live-source-*.html
+            /tmp/live-refine-*.html
+            /tmp/live-ch1.html
+            /tmp/live-ch1.png
           retention-days: 3
