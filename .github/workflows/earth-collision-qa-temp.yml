@@ -1,5 +1,6 @@
 name: Earth Collision QA Workspace
 
+# QA retrigger: pass-two all-pages measurement.
 on:
   push:
     branches: [earth-collision-zero-20260816]
@@ -62,18 +63,10 @@ jobs:
               all_pages.extend(rendered)
           by_page={p['page']:p for p in all_pages}
           pages=[by_page[p] for p in range(242,254) if p in by_page]
-          final={
-              'pages':pages,
-              'renderedPages':len(pages),
-              'totalUnwantedCollisions':sum(len(p.get('collisions',[])) for p in pages),
-              'connectorTextIntersections':sum(p.get('connectorTextIntersections',0) for p in pages),
-              'connectorFigureIntersections':sum(p.get('connectorFigureIntersections',0) for p in pages),
-              'ok':len(pages)==12 and all(p['status']=='PASS' for p in pages)
-          }
+          final={'pages':pages,'renderedPages':len(pages),'totalUnwantedCollisions':sum(len(p.get('collisions',[])) for p in pages),'connectorTextIntersections':sum(p.get('connectorTextIntersections',0) for p in pages),'connectorFigureIntersections':sum(p.get('connectorFigureIntersections',0) for p in pages),'ok':len(pages)==12 and all(p['status']=='PASS' for p in pages)}
           Path('/tmp/earth-collision-report.json').write_text(json.dumps(final,ensure_ascii=False,indent=2))
           print(json.dumps({'pages':[(p['page'],p['status'],len(p.get('collisions',[]))) for p in pages],**{k:final[k] for k in ['renderedPages','totalUnwantedCollisions','connectorTextIntersections','connectorFigureIntersections','ok']}},ensure_ascii=False,indent=2))
-          if not final['ok']:
-              raise SystemExit('12-page Earth collision gate failed')
+          if not final['ok']: raise SystemExit('12-page Earth collision gate failed')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
