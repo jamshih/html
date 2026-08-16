@@ -50,11 +50,11 @@
   E(41,'<b class="v4strict-num">(41)</b> 截切定律：<br>E斷層發生在A、B、C之 {{0}}',1,['後'],{sourceRect:R(293,373,235,55)}),
   E(42,'<b class="v4strict-num">(42)</b> 包裹體定律：<br>C {{0}} 於B',1,['老'],{sourceRect:R(293,427,235,45)}),
   E(43,'可用化石等比對不同地區地層，指示沉積年代的化石稱為<br><b class="v4strict-num">(43)</b> {{0}}',1,['標準化石'],{sourceRect:R(70,310,205,135)}),
-  E(44,'<b class="v4strict-num">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,540,105,32),sourceHeading:'各時期代表化石'}),
-  E(45,'<b class="v4strict-num">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,532,105,32)}),
-  E(46,'<b class="v4strict-num">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,532,155,32)}),
+  E(44,'<b class="v4strict-num">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,505,105,32),sourceHeading:'各時期代表化石'}),
+  E(45,'<b class="v4strict-num">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,505,105,32)}),
+  E(46,'<b class="v4strict-num">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,505,155,32)}),
   E(47,'<b class="v4strict-num">(47)</b> {{0}}<br>生物演化出硬組織',1,['寒武紀大爆發'],{sourceRect:R(84,497,160,55)}),
-  E(48,'<b class="v4strict-num">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,502,130,28),sourceLabel:'分界依據'}),
-  E(49,'<b class="v4strict-num">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(545,502,130,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})
+  E(48,'<b class="v4strict-num">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,495,90,28),sourceLabel:'分界依據'}),
+  E(49,'<b class="v4strict-num">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(560,495,80,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})
  ];
 })();
