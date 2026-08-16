@@ -10,7 +10,7 @@
     objects:{
       header:{role:'heading',rect:R(8,20,827,109)},bigbangTitle:{role:'heading',rect:R(250,190,208,46)},
       q8:{role:'prompt',rect:PR(8)},q9:{role:'prompt',rect:PR(9)},q6:{role:'prompt',rect:PR(6),reflow:'single-source-line'},recombination:{role:'source-label',rect:R(397,392,225,70)},
-      astronaut:{role:'figure',rect:R(48,414,145,110),safeRect:R(48,414,145,110)},startTag:{role:'source-label',rect:R(76,526,107,26)},bigbang:{role:'figure',rect:R(185,445,88,68),safeRect:R(185,445,88,68)},q5:{role:'prompt',rect:PR(5)},q4:{role:'prompt',rect:PR(4)},
+      astronaut:{role:'figure',rect:R(48,414,145,110),safeRect:R(48,414,145,110)},startTag:{role:'source-label',rect:R(76,526,107,26)},bigbang:{role:'figure',rect:R(198,445,80,68),safeRect:R(198,445,80,68)},q5:{role:'prompt',rect:PR(5)},q4:{role:'prompt',rect:PR(4)},
       q1:{role:'prompt',rect:PR(1)},q2:{role:'prompt',rect:PR(2)},q3:{role:'prompt',rect:PR(3)},singularity:{role:'figure',rect:R(205,574,76,80),safeRect:R(205,574,76,80)},darkAge:{role:'source-label',rect:R(309,585,105,26)},
       q10:{role:'prompt',rect:PR(10)},cooling:{role:'source-label',rect:R(721,556,132,54)},q11:{role:'prompt',rect:PR(11)},nebulaTitle:{role:'source-label',rect:R(229,694,145,26)},nebula:{role:'figure',rect:R(91,786,250,100),safeRect:R(91,786,250,100)},
       hotEarth:{role:'figure',rect:R(600,685,56,56),safeRect:R(600,685,56,56)},q17:{role:'prompt',rect:PR(17)},atmosphere:{role:'figure',rect:R(356,792,198,112),safeRect:R(356,792,198,112),children:['q16']},q16:{role:'prompt',rect:PR(16),inside:'atmosphere',localRect:R(26,14,150,80)},melt:{role:'source-label',rect:R(636,850,142,28)},
