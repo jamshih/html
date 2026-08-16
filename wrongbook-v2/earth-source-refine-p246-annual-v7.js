@@ -4,15 +4,15 @@
    const s=document.createElement('style');s.id='v7-p246-annual-layout';s.textContent=`
    .v6-p246-q[data-question="9"]{left:510px!important;top:808px!important;width:112px!important}
    .v6-p246-q[data-question="8"]{left:510px!important;top:850px!important;width:112px!important}
-   .v6-p246-q[data-question="13"]{width:340px!important}
-   .v6-p246-q[data-question="14"]{width:335px!important}
-   .v7-p246-annual{left:625px!important;top:725px!important;width:240px!important;height:372px!important;min-height:372px!important;padding:0!important;font-size:12px!important;line-height:1.22!important;position:absolute!important;overflow:visible!important}
+   .v6-p246-q[data-question="13"]{left:440px!important;top:1140px!important;width:340px!important}
+   .v6-p246-q[data-question="14"]{left:90px!important;top:1140px!important;width:335px!important}
+   .v7-p246-annual{left:585px!important;top:665px!important;width:245px!important;height:355px!important;min-height:355px!important;padding:0!important;font-size:12.5px!important;line-height:1.22!important;position:absolute!important;overflow:visible!important}
    .v7-p246-annual .row{position:absolute!important;left:10px!important;margin:0!important;padding-left:10px!important;height:20px!important;line-height:20px!important}
-   .v7-p246-annual .row-ab{top:10px!important}.v7-p246-annual .row-ac{top:112px!important}.v7-p246-annual .row-star{top:250px!important}
+   .v7-p246-annual .row-ab{top:45px!important}.v7-p246-annual .row-ac{top:160px!important}.v7-p246-annual .row-star{top:275px!important}
    .v7-p246-annual-q{position:absolute!important;left:14px!important;width:205px!important;margin:0!important;line-height:1.24!important}
-   .v7-p246-annual-q[data-question="10"]{top:38px!important;height:67px!important}
-   .v7-p246-annual-q[data-question="11"]{top:140px!important;height:102px!important}
-   .v7-p246-annual-q[data-question="12"]{top:278px!important;height:82px!important}
+   .v7-p246-annual-q[data-question="10"]{top:65px!important;height:70px!important}
+   .v7-p246-annual-q[data-question="11"]{top:182px!important;height:82px!important}
+   .v7-p246-annual-q[data-question="12"]{top:292px!important;height:60px!important}
    .v7-p246-annual-q .v4strict-fill{height:17px!important;vertical-align:middle!important;margin:0 2px!important}
    `;document.head.appendChild(s);
  }
