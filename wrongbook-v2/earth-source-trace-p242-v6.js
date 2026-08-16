@@ -21,7 +21,7 @@
     },
     approvedOverlaps:[['atmosphere','q16'],['timeSpine','singularity'],['originRise','bigbang'],['earthBranch','hotEarth'],['atmosphereBranch','atmosphere'],['differentiation','wedge'],['planetUp','planets'],['planetLeft','planets'],['planetRight','planets']]
   };
-  const rectStyle=id=>{const r=page.objects[id].rect;return `left:${r.x}px;top:${r.y}px;width:${r.width}px;${r.height?`min-height:${r.height}px;`:''}`},figureStyle=id=>{const r=page.objects[id].rect;return `left:${r.x}px;top:${r.y}px;width:${r.width}px;height:${r.height}px`},rec=n=>(window.SOURCE_PROMPTS_V7?.[242]||[]).find(x=>Number(x.number)===Number(n));
+  const rectStyle=id=>{const r=page.objects[id].rect;return `left:${r.x}px!important;top:${r.y}px!important;width:${r.width}px!important;${r.height?`min-height:${r.height}px!important;`:''}`},figureStyle=id=>{const r=page.objects[id].rect;return `left:${r.x}px!important;top:${r.y}px!important;width:${r.width}px!important;height:${r.height}px!important`},rec=n=>(window.SOURCE_PROMPTS_V7?.[242]||[]).find(x=>Number(x.number)===Number(n));
   const widths={1:[54],2:[54],3:[54],4:[105],5:[54],6:[78,68],8:[80,58,48,94],9:[112,58],10:[54,70],11:[52,66,102,56],12:[82],13:[72],14:[50,52],15:[72,56],16:[54,54,54,54],17:[50],18:[150,150,150],19:[40,68],20:[40,68]};
   function fill(ch,mode,r,i){const nums=Array.isArray(r?.sourceNumbers)&&r.sourceNumbers.length===r.blanks?r.sourceNumbers:null,n=nums?nums[i]:r.number,fi=nums?0:i,w=widths[r.number]?.[i]||68;return v4StrictField(ch,n,fi,mode,w)}
   function exactPrompt(ch,mode,n){const r=rec(n);if(!r)return'';let out=String(r.template||'');for(let i=0;i<r.blanks;i++)out=out.split(`{{${i}}}`).join(fill(ch,mode,r,i));return out}
