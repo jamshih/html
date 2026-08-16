@@ -12,6 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Trace p242 layout rewrite source
+        run: |
+          echo '=== exact fingerprints ==='
+          grep -R -n -F 'grid-template-columns:18px 110px' wrongbook-v2 || true
+          grep -R -n -F 'v7P242Layout' wrongbook-v2 || true
+          grep -R -n -F 'data-v7-p242-layout' wrongbook-v2 || true
+          echo '=== coordinate fingerprints ==='
+          grep -R -n -E 'left[^\n]{0,20}455px|top[^\n]{0,20}868px|width[^\n]{0,20}190px' wrongbook-v2 || true
+          echo '=== q18 / 110px context ==='
+          grep -R -n -E 'question.?18|v4StrictField\(ch,18|110px' wrongbook-v2 | head -200 || true
       - name: Install Traditional Chinese QA font
         run: |
           sudo apt-get update -qq
