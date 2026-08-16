@@ -1,40 +1,57 @@
-name: Earth Production Q7 Repair
+name: Earth Chapter 1 Ownership Diagnostic
 
 on:
   push:
     branches: [earth-collision-zero-20260816]
     paths: ['.github/workflows/earth-collision-edit-temp.yml']
 
-permissions:
-  contents: write
-
 jobs:
-  repair:
+  diagnose:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: earth-collision-zero-20260816
-          fetch-depth: 0
-      - name: Restore verified p242 and apply metadata-only Q7 fix
+          ref: main
+      - name: Inspect rendered Chapter 1 question ownership
         run: |
           set -euo pipefail
-          git fetch origin main
-          git checkout -B main origin/main
-          git checkout 48ffadd21ae3f05fd9cb782578e3626b830e3e29 -- wrongbook-v2/earth-source-trace-p242-v6.js
+          python3 -m http.server 4173 >/tmp/earth-diag-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          URL='http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=1&mode=recall'
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --user-data-dir=/tmp/earth-ch1-diag --window-size=1800,1200 --virtual-time-budget=8000 \
+            --dump-dom "$URL" > /tmp/earth-ch1.html
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('wrongbook-v2/earth-source-trace-p242-v6.js')
-          s=p.read_text()
-          old='hidden7=\'<span class="v7-logical-question-marker" data-question="7" data-page="242" data-v7-composite-source="true" hidden aria-hidden="true"></span>\''
-          new='hidden7=\'<span class="v7-logical-question-marker" data-logical-question="7" data-page="242" data-v7-composite-source="true" hidden aria-hidden="true"></span>\''
-          if old not in s: raise SystemExit('verified Q7 marker target not found')
-          p.write_text(s.replace(old,new,1))
+          from collections import Counter
+          import re, html
+          s=Path('/tmp/earth-ch1.html').read_text(errors='ignore')
+          vals=re.findall(r'\bdata-question="([^"]+)"',s)
+          c=Counter(vals)
+          print('TOTAL',len(vals))
+          print('COUNTS',sorted(c.items(), key=lambda x:(int(x[0]) if x[0].isdigit() else 9999,x[0])))
+          dups={k:v for k,v in c.items() if v>1}
+          print('DUPLICATES',dups)
+          for q,n in dups.items():
+              print(f'--- QUESTION {q} ({n}) ---')
+              pat=re.compile(r'<[^>]*\bdata-question="'+re.escape(q)+r'"[^>]*>.*?</[^>]+>',re.S)
+              matches=pat.findall(s)
+              if not matches:
+                  # fallback: print opening tags plus nearby text
+                  for m in re.finditer(r'<[^>]*\bdata-question="'+re.escape(q)+r'"[^>]*>',s):
+                      a=max(0,m.start()-220); b=min(len(s),m.end()+500)
+                      print(html.unescape(re.sub(r'\s+',' ',s[a:b])))
+              else:
+                  for m in matches[:10]: print(html.unescape(re.sub(r'\s+',' ',m[:1200])))
+          if len(vals)!=49 or not dups:
+              print('NOTE unexpected total; still reporting rendered ownership')
           PY
-          node --check wrongbook-v2/earth-source-trace-p242-v6.js
-          git diff --check
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-source-trace-p242-v6.js
-          git commit -m 'Repair Q7 metadata on verified p242 source'
-          git push origin HEAD:main
+      - uses: actions/upload-artifact@v4
+        with:
+          name: earth-ch1-ownership-diagnostic
+          path: /tmp/earth-ch1.html
+          retention-days: 2
