@@ -47,12 +47,14 @@ jobs:
           if(qSize<12.5)throw Error(`V9 base question text too small: ${qSize}`);
           console.log('V9 hierarchy architecture guard PASS',all.length,'explicit question owners','qSize',qSize);
           NODE
+      - name: Start V9 test server
+        run: |
+          nohup python3 -m http.server 4173 >/tmp/wrongbook-v9-http.log 2>&1 &
+          echo $! >/tmp/wrongbook-v9-http.pid
+          sleep 1
+          curl -fsS http://127.0.0.1:4173/wrongbook-v2/ >/dev/null
       - name: Run rendered V9 collision gate
         run: |
-          python3 -m http.server 4173 >/tmp/wrongbook-v9-http.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill $SERVER_PID || true' EXIT
-          sleep 1
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           "$CHROME" --version
@@ -75,6 +77,7 @@ jobs:
           print('EARTH_V9_COLLISION_GATE_PASS')
           PY
       - name: Existing source and refinement regression gates
+        if: success()
         run: |
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           parse_result() {
@@ -93,21 +96,24 @@ jobs:
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/v9-$NAME" --window-size=1440,1000 --virtual-time-budget=12000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?$Q" > "/tmp/v9-$NAME.html"
             parse_result "/tmp/v9-$NAME.html"
           done
-      - name: Capture chapter 6 visual proof
+      - name: Capture all Earth visual proof
+        if: always()
         run: |
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
-          for MODE in recall learn; do
-            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/v9-shot-$MODE" --window-size=1800,1400 --virtual-time-budget=9000 --screenshot="/tmp/earth-v9-ch6-$MODE.png" "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=6&mode=$MODE"
+          for CH in 1 2 3 4 5 6; do
+            for MODE in recall learn; do
+              "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/v9-shot-$CH-$MODE" --window-size=1900,1600 --virtual-time-budget=9000 --screenshot="/tmp/earth-v9-ch${CH}-${MODE}.png" "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=$CH&mode=$MODE"
+            done
           done
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/v9-debug --window-size=1800,1400 --virtual-time-budget=9000 --screenshot=/tmp/earth-v9-ch6-debug.png "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=6&mode=learn&earthLayoutDebug=1"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/v9-debug --window-size=1900,1600 --virtual-time-budget=9000 --screenshot=/tmp/earth-v9-ch6-debug.png "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=6&mode=learn&earthLayoutDebug=1"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: earth-source-hierarchy-v9-proof
           path: |
             /tmp/earth-v9-qa.html
-            /tmp/earth-v9-ch6-recall.png
-            /tmp/earth-v9-ch6-learn.png
+            /tmp/earth-v9-ch*-recall.png
+            /tmp/earth-v9-ch*-learn.png
             /tmp/earth-v9-ch6-debug.png
             /tmp/v9-sourcee2e.html
             /tmp/v9-refinee2e.html
