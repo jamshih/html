@@ -16,33 +16,108 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: earth-collision-zero-20260816
-      - name: Apply final p243 source-gap correction
+      - name: Apply source-truth collision batch
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('wrongbook-v2/earth-source-trace-p243-v6.js')
+          root=Path('wrongbook-v2')
+          def replace(path, old, new):
+              p=root/path; s=p.read_text()
+              if old not in s: raise SystemExit(f'missing target in {path}: {old[:90]}')
+              p.write_text(s.replace(old,new,1))
+
+          replace('earth-collision-qa-v8.js',
+            "const list=[...section.querySelectorAll('[data-question],[data-source-figure],[data-source-label],.v4strict-ribbon,.v4strict-header')].filter(visible)",
+            "const list=[...section.querySelectorAll('[data-question],[data-source-figure],[data-source-label],.v4strict-ribbon,.v4strict-header')].filter(el=>visible(el)&&el.dataset.sourceContainerOnly!=='true')")
+
+          replace('earth-source-refine-figure-blanks-v7.js',
+            'data-v7-source-figure-blanks="11" style="position:absolute;inset:0;z-index:8;pointer-events:none"><span style="position:absolute;left:124px;top:790px;width:690px;font-size:12.5px;line-height:1.4"',
+            'data-v7-source-figure-blanks="11" data-source-container-only="true" style="position:absolute;inset:0;z-index:8;pointer-events:none"><span data-source-label="q15-instruction" data-source-object="q15-instruction" style="position:absolute;left:124px;top:790px;width:690px;font-size:12.5px;line-height:1.4"')
+          replace('earth-source-refine-figure-blanks-v7.js',
+            'data-v7-source-figure-blanks="4" style="position:absolute;left:400px;top:650px;width:490px;height:245px;z-index:8;pointer-events:none"><span style="position:absolute;left:4px;top:0;width:300px;font-size:13px"',
+            'data-v7-source-figure-blanks="4" data-source-container-only="true" style="position:absolute;left:400px;top:650px;width:490px;height:245px;z-index:8;pointer-events:none"><span data-source-label="q23-instruction" data-source-object="q23-instruction" style="position:absolute;left:4px;top:0;width:300px;font-size:13px"')
+
+          for old,new in {
+            'left:235px!important;top:124px!important;width:270px!important':'left:330px!important;top:180px!important;width:180px!important',
+            'left:485px!important;top:150px!important;width:320px!important':'left:640px!important;top:180px!important;width:180px!important',
+            'left:595px!important;top:635px!important;width:190px!important':'left:560px!important;top:610px!important;width:170px!important',
+            'left:205px!important;top:918px!important;width:210px!important':'left:205px!important;top:918px!important;width:200px!important',
+            'left:205px!important;top:966px!important;width:230px!important':'left:205px!important;top:985px!important;width:230px!important',
+            'left:405px!important;top:810px!important;width:260px!important':'left:405px!important;top:810px!important;width:205px!important',
+            'left:620px!important;top:810px!important;width:230px!important':'left:650px!important;top:810px!important;width:200px!important',
+            'left:300px!important;top:1160px!important;width:200px!important':'left:300px!important;top:1160px!important;width:170px!important',
+            'left:492px!important;top:1160px!important;width:215px!important':'left:520px!important;top:1160px!important;width:190px!important'
+          }.items(): replace('earth-source-trace-p245-v6.css',old,new)
+
+          for old,new in {
+            'v6P247Q(ch,mode,18,48,205,195':'v6P247Q(ch,mode,18,48,365,195',
+            'v6P247Q(ch,mode,19,45,300,145':'v6P247Q(ch,mode,19,45,255,145',
+            'v6P247Q(ch,mode,24,560,410,175':'v6P247Q(ch,mode,24,555,510,115',
+            'v6P247Q(ch,mode,25,690,410,175':'v6P247Q(ch,mode,25,710,510,115',
+            'v6P247Q(ch,mode,30,610,620,135':'v6P247Q(ch,mode,30,610,700,110',
+            'v6P247Q(ch,mode,31,742,620,135':'v6P247Q(ch,mode,31,750,700,110',
+            'v6P247Q(ch,mode,34,50,885,235':'v6P247Q(ch,mode,34,50,885,170',
+            'v6P247Q(ch,mode,35,235,885,235':'v6P247Q(ch,mode,35,250,885,170',
+            'v6P247Q(ch,mode,38,485,825,250':'v6P247Q(ch,mode,38,485,825,190',
+            'v6P247Q(ch,mode,39,690,825,195':'v6P247Q(ch,mode,39,700,825,185'
+          }.items(): replace('earth-source-trace-p247-v6.js',old,new)
+
+          for old,new in {
+            'v6P248Q(ch,1,160,188,180':'v6P248Q(ch,1,160,230,180',
+            'v6P248Q(ch,2,76,265,100':'v6P248Q(ch,2,76,330,100',
+            'v6P248Q(ch,3,215,322,110':'v6P248Q(ch,3,215,390,110',
+            'v6P248Q(ch,5,530,315,300':'v6P248Q(ch,5,410,382,300',
+            'v6P248Q(ch,6,640,345,210':'v6P248Q(ch,6,410,430,300',
+            'v6P248Q(ch,7,735,245,150':'v6P248Q(ch,7,720,300,150'
+          }.items(): replace('earth-source-trace-p248-v6.js',old,new)
+          replace('earth-source-trace-p248-v6.css','.v6-p248-q[data-question="5"]{left:470px!important}', '.v6-p248-q[data-question="5"]{left:410px!important}')
+          replace('earth-source-trace-p248-v6.css','.v6-p248-q[data-question="6"]{left:545px!important}', '.v6-p248-q[data-question="6"]{left:410px!important}')
+
+          for old,new in {
+            'v6P249Q(ch,18,675,310,215':'v6P249Q(ch,18,555,310,235',
+            'v6P249Q(ch,19,675,366,205':'v6P249Q(ch,19,555,390,235',
+            'v6P249Q(ch,20,80,515,785':'v6P249Q(ch,20,80,500,785',
+            'v6P249Q(ch,21,80,575,785':'v6P249Q(ch,21,80,610,785',
+            'v6P249Q(ch,24,705,654,165':'v6P249Q(ch,24,730,654,145'
+          }.items(): replace('earth-source-trace-p249-v6.js',old,new)
+
+          for old,new in {
+            '2:[55,230,120]':'2:[55,360,90]', '5:[118,255,210]':'5:[160,410,180]',
+            '3:[55,320,130]':'3:[55,510,90]', '7:[120,302,210]':'7:[160,480,190]',
+            '6:[408,245,130]':'6:[390,395,100]', '8:[455,225,150]':'8:[500,370,150]',
+            '13:[605,275,200]':'13:[570,450,190]', '14:[610,320,210]':'14:[570,500,210]'
+          }.items(): replace('earth-source-trace-p250-v6.js',old,new)
+
+          for old,new in {
+            '26:[470,155,390]':'26:[470,175,390]', '29:[470,375,170]':'29:[470,400,170]',
+            '38:[500,915,340]':'38:[500,950,340]', '40:[90,1085,250]':'40:[90,1085,180]',
+            '41:[300,1085,250]':'41:[300,1085,190]', '42:[90,1140,330]':'42:[90,1170,330]',
+            '46:[560,765,150]':'46:[560,765,130]', '47:[700,765,150]':'47:[720,765,130]'
+          }.items(): replace('earth-source-trace-p251-v6.js',old,new)
+
+          replace('earth-source-trace-p252-v6.js','10:[530,700,260]','10:[530,700,240]')
+          replace('earth-source-trace-p252-v6.js','11:[530,745,300]','11:[530,790,300]')
+          replace('earth-source-trace-p252-v6.css','left:570px!important;top:930px!important','left:520px!important;top:930px!important;width:130px!important')
+          replace('earth-source-trace-p252-v6.css','left:515px!important;top:985px!important','left:500px!important;top:1005px!important;width:130px!important')
+          replace('earth-source-trace-p252-v6.css','left:690px!important;top:935px!important','left:680px!important;top:935px!important;width:185px!important')
+
+          p=root/'earth-source-trace-p253-correct-v6.css'
           s=p.read_text()
-          old="q49:{role:'prompt',rect:R(570,495,80,28)}"
-          new="q49:{role:'prompt',rect:R(560,495,80,28)}"
-          if old not in s: raise SystemExit('p243 q49 layout target not found')
-          p.write_text(s.replace(old,new,1))
-          p=Path('wrongbook-v2/earth-source-prompts-v7-242-243.js')
-          s=p.read_text()
-          replacements={
-            "E(44,'<b class=\"v4strict-num\">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,540,105,32),sourceHeading:'各時期代表化石'})":"E(44,'<b class=\"v4strict-num\">(44)</b> {{0}}',1,['三葉蟲'],{sourceRect:R(250,505,105,32),sourceHeading:'各時期代表化石'})",
-            "E(45,'<b class=\"v4strict-num\">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,532,105,32)})":"E(45,'<b class=\"v4strict-num\">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,505,105,32)})",
-            "E(46,'<b class=\"v4strict-num\">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,532,155,32)})":"E(46,'<b class=\"v4strict-num\">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,505,155,32)})",
-            "E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,502,130,28),sourceLabel:'分界依據'})":"E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,495,90,28),sourceLabel:'分界依據'})",
-            "E(49,'<b class=\"v4strict-num\">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(545,502,130,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})":"E(49,'<b class=\"v4strict-num\">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(560,495,80,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})"
-          }
-          for old,new in replacements.items():
-            if old not in s: raise SystemExit('prompt sync target not found: '+old[:40])
-            s=s.replace(old,new,1)
-          p.write_text(s)
+          block='''\n/* NEW_SOURCE_TRUTH row geometry: preserve photographed reading order and keep exact prompts disjoint. */\n.v6-p253-q[data-question="27"]{top:135px!important;width:300px!important}\n.v6-p253-q[data-question="30"]{top:300px!important}\n.v6-p253-q[data-question="38"]{left:450px!important;top:630px!important;width:390px!important}\n.v6-p253-q[data-question="39"]{left:430px!important;top:705px!important;width:420px!important}\n.v6-p253-q[data-question="40"]{left:430px!important;top:770px!important;width:420px!important}\n.v6-p253-q[data-question="42"]{left:570px!important;top:835px!important;width:290px!important}\n.v6-p253-q[data-question="43"]{left:430px!important;top:895px!important;width:420px!important}\n.v6-p253-q[data-question="44"]{left:430px!important;top:945px!important;width:420px!important}\n.v6-p253-q[data-question="45"]{left:420px!important;top:990px!important;width:450px!important}\n.v6-p253-q[data-question="46"]{left:300px!important;top:1050px!important;width:520px!important}\n.v6-p253-q[data-question="47"]{left:300px!important;top:1100px!important;width:520px!important}\n.v6-p253-q[data-question="48"]{left:195px!important;top:1140px!important;width:520px!important}\n.v6-p253-q[data-question="49"]{left:190px!important;top:1175px!important;width:650px!important}\n.v6-p253-q[data-question="50"]{left:190px!important;top:1230px!important;width:620px!important}\n'''
+          if 'NEW_SOURCE_TRUTH row geometry' in s: raise SystemExit('p253 batch already present')
+          p.write_text(s+block)
           PY
+          node --check wrongbook-v2/earth-collision-qa-v8.js
+          node --check wrongbook-v2/earth-source-refine-figure-blanks-v7.js
+          node --check wrongbook-v2/earth-source-trace-p247-v6.js
+          node --check wrongbook-v2/earth-source-trace-p248-v6.js
+          node --check wrongbook-v2/earth-source-trace-p249-v6.js
+          node --check wrongbook-v2/earth-source-trace-p250-v6.js
+          node --check wrongbook-v2/earth-source-trace-p251-v6.js
+          node --check wrongbook-v2/earth-source-trace-p252-v6.js
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-source-trace-p243-v6.js wrongbook-v2/earth-source-prompts-v7-242-243.js
+          git add wrongbook-v2/earth-collision-qa-v8.js wrongbook-v2/earth-source-refine-figure-blanks-v7.js wrongbook-v2/earth-source-trace-p245-v6.css wrongbook-v2/earth-source-trace-p247-v6.js wrongbook-v2/earth-source-trace-p248-v6.js wrongbook-v2/earth-source-trace-p248-v6.css wrongbook-v2/earth-source-trace-p249-v6.js wrongbook-v2/earth-source-trace-p250-v6.js wrongbook-v2/earth-source-trace-p251-v6.js wrongbook-v2/earth-source-trace-p252-v6.js wrongbook-v2/earth-source-trace-p252-v6.css wrongbook-v2/earth-source-trace-p253-correct-v6.css
           git diff --cached --check
-          git commit -m 'Finish p243 source-gap ownership'
+          git commit -m 'Clear cross-page Earth source collisions'
           git push origin HEAD:earth-collision-zero-20260816
