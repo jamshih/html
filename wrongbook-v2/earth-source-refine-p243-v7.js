@@ -1,4 +1,4 @@
-// Page 243 refinement: preserve source geometry, remove student-answer leakage, and restore printed lower-page teaching groups.
+// Page 243 refinement: preserve source geometry, remove student-answer leakage, and restore printed teaching groups.
 (function(){
   window.SOURCE_LINE_MANIFEST_V7=window.SOURCE_LINE_MANIFEST_V7||{};
   window.SOURCE_LINE_MANIFEST_V7[243]=[
@@ -34,9 +34,12 @@
     }
     const lines=t.content.querySelector('.v6-p243-lines');if(lines)lines.dataset.v7LineManifest='243';
     const section=t.content.querySelector('[data-strict-page="243"]')||t.content.querySelector('.v4strict-243');
-    if(section&&!section.querySelector('.v7-p243-second-cloud')){
+    if(section&&!section.querySelector('.v7-p243-source-groups')){
       const layer=document.createElement('div');layer.className='v7-p243-source-groups';layer.setAttribute('aria-hidden','true');
       layer.innerHTML=`
+        <div class="v7-p243-laws-frame"><b>判斷先後順序</b></div>
+        <div class="v7-p243-strata-caption">▼ 未經倒轉的地層示意圖</div>
+        <div class="v7-p243-dating-limit">定年極限<span></span></div>
         <div class="v7-p243-second-cloud"></div>
         <div class="v7-p243-carbon">除碳作用</div>
         <div class="v7-p243-rock-frame"></div>
@@ -46,8 +49,9 @@
         <div class="v7-p243-inert">化性不活潑，在大氣層中，比例逐漸上升</div>`;
       section.appendChild(layer);
     }
-    // Keep numbered source prompts on top of their printed grouping shapes.
-    for(const n of [21,22,23,25,29,32]){const q=t.content.querySelector(`[data-question="${n}"]`);if(q)q.style.zIndex='5';}
+    const q43=t.content.querySelector('[data-question="43"]');if(q43)q43.classList.add('v7-p243-fossil-box');
+    // Keep numbered source prompts on top of their publisher grouping shapes.
+    for(const n of [21,22,23,25,29,32,40,41,42,43]){const q=t.content.querySelector(`[data-question="${n}"]`);if(q)q.style.zIndex='5';}
     return t.innerHTML;
   };
   if(typeof window.render==='function')window.render();
