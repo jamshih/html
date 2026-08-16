@@ -14,7 +14,8 @@
   function nodeRect(sec,node,key='safeRect'){
     const sr=node?.[key]||node?.sourceRect;if(!sr)return null;
     const page=+sec.dataset.strictPage,h=window.SOURCE_HIERARCHY_V9?.[page],rr=sec.getBoundingClientRect(),sx=rr.width/910,sy=rr.height/1270;
-    let x=sr.x,y=sr.y,w=sr.w??sr.width,hgt=sr.h??sr.height,p=node,guard=0;
+    const isLocal=sr!==node.sourceRect;
+    let x=sr.x+(isLocal?(node.sourceRect?.x||0):0),y=sr.y+(isLocal?(node.sourceRect?.y||0):0),w=sr.w??sr.width,hgt=sr.h??sr.height,p=node,guard=0;
     while(p?.parentId&&p.parentId!==`p${page}`&&guard++<30){const par=h?.nodes?.[p.parentId];if(!par)break;x+=par.sourceRect.x;y+=par.sourceRect.y;p=par;}
     return {minX:rr.left+x*sx,minY:rr.top+y*sy,maxX:rr.left+(x+w)*sx,maxY:rr.top+(y+hgt)*sy};
   }
@@ -39,7 +40,7 @@
   }
   function collectText(sec){
     const out=[],walker=document.createTreeWalker(sec,NodeFilter.SHOW_TEXT,{acceptNode(n){const t=n.nodeValue?.trim(),p=n.parentElement;if(!t||!p||['SCRIPT','STYLE','NOSCRIPT'].includes(p.tagName)||!visible(p)||p.closest('.v9-debug-layer'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
-    let n;while((n=walker.nextNode())){const range=document.createRange();range.selectNodeContents(n);for(const cr of range.getClientRects()){if(cr.width<.5||cr.height<.5)continue;const raw=rect(cr),el=n.parentElement,q=el.closest('[data-question]'),svg=el.closest('svg');out.push({...raw,raw,id:`text:${out.length}`,role:'text',block:q?`q${q.dataset.question}`:ids(svg?.querySelector('text')===el?el:(el.closest('text')||el)),question:q?.dataset.question||null,text:n.nodeValue.trim().slice(0,100),el,svg,owner:ownerFor(sec,el,raw)});}}
+    let n;while((n=walker.nextNode())){const range=document.createRange();range.selectNodeContents(n);for(const cr of range.getClientRects()){if(cr.width<.5||cr.height<.5)continue;const raw=rect(cr),el=n.parentElement,q=el.closest('[data-question]'),svg=el.closest('svg');out.push({...raw,raw,id:`text:${out.length}`,role:'text',block:q?`q${q.dataset.question}`:ids(el.closest('text')||el),question:q?.dataset.question||null,text:n.nodeValue.trim().slice(0,100),el,svg,owner:ownerFor(sec,el,raw)});}}
     return out;
   }
   function collectBlanks(sec){return [...sec.querySelectorAll('.v4strict-fill')].filter(visible).map((el,i)=>{const raw=rect(el.getBoundingClientRect()),q=el.closest('[data-question]');return {...raw,raw,id:`blank:${i}`,role:'blank',block:q?`q${q.dataset.question}`:ids(el),question:q?.dataset.question||null,el,owner:ownerFor(sec,el,raw)}})}
@@ -82,7 +83,7 @@
         if(hit.role==='figure')continue;
         if(hit.role==='text'){
           if(!pointInside(hit.raw,p,.15))continue;
-          if(hit.svg===po.svg)continue; // graph/connector's own printed SVG label, not a collision.
+          if(hit.svg===po.svg)continue;
           if(kind==='connector'&&(p.d<4||po.len-p.d<4))continue;
           uniq(bad[bucket],`${hit.id}|${po.id}`,[hit.id,po.id,hit.text,hit.owner,po.owner]);
         } else if(hit.role==='blank'){
