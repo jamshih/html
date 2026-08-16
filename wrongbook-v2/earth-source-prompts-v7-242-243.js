@@ -17,12 +17,12 @@
   E(10,'大爆炸後約 <b class="v4strict-num">(10)</b> {{0}} 億年<br>開始有 {{1}} 誕生',2,['4','恆星'],{sourceRect:R(500,518,220,65)}),
   E(11,'<span class="v7-p242-source-line">最初原始太陽星雲呈 <b class="v4strict-num">(11)</b> {{0}} 溫狀態，後因 {{1}} 作用，</span><span class="v7-p242-source-line">塌縮成 {{2}}（填形狀），雲氣中心溫度逐漸 {{3}}</span>',4,['低','重力','扁平圓盤','上升'],{sourceRect:R(64,724,505,52)}),
   E(12,'太陽系形成<br>時間：約 <b class="v4strict-num">(12)</b> {{0}}',1,['46億年前'],{sourceRect:R(65,946,245,54)}),
-  E(13,'<b class="v4strict-num">(13)</b> 當內部溫壓可以將氫 {{0}} 成氦，太陽誕生',1,['核融合'],{sourceRect:R(60,1002,525,30)}),
+  E(13,'<b class="v4strict-num">(13)</b> 當內部溫壓可以將氫 {{0}} 成氦，太陽誕生',1,['核融合'],{sourceRect:R(60,1002,360,30)}),
   E(14,'<span class="v7-p242-source-line"><b class="v4strict-num">(14)</b> 愈靠近太陽，環境溫度愈 {{0}}，</span><span class="v7-p242-source-line">岩石金屬可留在內側形成類 {{1}} 行星</span>',2,['高','地'],{sourceRect:R(61,1114,292,62)}),
   E(15,'<span class="v7-p242-source-line"><b class="v4strict-num">(15)</b> {{0}} 將密度小的氣體帶到</span><span class="v7-p242-source-line">外側，形成類 {{1}} 行星</span>',2,['太陽風','木'],{sourceRect:R(372,1112,245,66)}),
   E(16,'<b class="v4strict-num">(16)</b> 第一階段大氣<br>{{0}}　{{1}}<br>{{2}}　{{3}}',4,['H₂','He','CH₄','NH₃'],{sourceRect:R(382,806,150,80)}),
   E(17,'初期地球呈 <b class="v4strict-num">(17)</b> {{0}} 溫狀態',1,['高'],{sourceRect:R(604,755,150,44)}),
-  E(18,'<span class="v7-p242-circled-num"><b class="v4strict-num">(18)</b></span><strong>3大主因</strong><br>1. {{0}}<br>2. {{1}}<br>3. {{2}}',3,['隕石撞擊','質量增加、重力收縮','放射性元素衰變'],{sourceRect:R(430,900,190,150)}),
+  E(18,'<span class="v7-p242-circled-num"><b class="v4strict-num">(18)</b></span><strong>3大主因</strong><br>1. {{0}}<br>2. {{1}}<br>3. {{2}}',3,['隕石撞擊','質量增加、重力收縮','放射性元素衰變'],{sourceRect:R(430,908,190,142)}),
   E(19,'<span class="v7-p242-source-line"><b class="v4strict-num">(19)</b> 密度較 {{0}} 的</span><span class="v7-p242-source-line">{{1}}（填組成）下沉</span>',2,['大','Fe、Ni'],{sourceRect:R(627,942,223,58)}),
   E(20,'<span class="v7-p242-source-line"><b class="v4strict-num">(20)</b> 密度較 {{0}} 的</span><span class="v7-p242-source-line">{{1}}（填組成）上升</span>',2,['小','SiO₂'],{sourceRect:R(627,1008,223,50)})
  ];
