@@ -1,0 +1,25 @@
+name: Earth V9 Source Snapshot Temp
+
+on:
+  push:
+    branches: [earth-source-hierarchy-v9-20260816]
+    paths:
+      - '.github/workflows/earth-v9-source-snapshot-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: earth-v9-source-snapshot
+          path: |
+            wrongbook-v2/earth-*.js
+            wrongbook-v2/earth-*.css
+            wrongbook-v2/index.html
+            .github/workflows/earth-source-hierarchy-v9-temp.yml
