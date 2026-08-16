@@ -1,0 +1,37 @@
+name: Earth V9 Full Visual Diagnostic Temp
+
+on:
+  push:
+    branches: [earth-source-hierarchy-v9-20260816]
+    paths:
+      - 'wrongbook-v2/**'
+      - '.github/workflows/earth-v9-visual-diagnostic-temp.yml'
+  workflow_dispatch:
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start static server and capture all Earth pages
+        run: |
+          python3 -m http.server 4173 >/tmp/earth-v9-visual-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          mkdir -p /tmp/earth-v9-visual
+          for CH in 1 2 3 4 5 6; do
+            for MODE in recall learn; do
+              "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+                --user-data-dir="/tmp/earth-v9-shot-${CH}-${MODE}" \
+                --window-size=1900,1450 --virtual-time-budget=10000 \
+                --screenshot="/tmp/earth-v9-visual/ch${CH}-${MODE}.png" \
+                "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=${MODE}"
+            done
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: earth-v9-all-page-visuals
+          path: /tmp/earth-v9-visual/*.png
