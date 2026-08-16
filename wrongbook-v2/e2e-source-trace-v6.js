@@ -1,4 +1,5 @@
 // Source-trace QA runs only with ?sourcee2e=1, isolated from obsolete semantic-graph suites.
+// Production QA retrigger after composite Q7 metadata repair.
 (async()=>{
  const run=new URLSearchParams(location.search).has('sourcee2e');if(!run)return;
  const sleep=ms=>new Promise(r=>setTimeout(r,ms)),results=[],check=(name,ok,detail='')=>results.push({name,ok:Boolean(ok),detail});
