@@ -22,10 +22,10 @@
 
   function page252(ch,mode){
     const ty=[1,2,3,4,5,6,7].map(n=>prompt(ch,252,n,mode,`q${n}`)).join('');
-    const ensoVisual=group('p252-enso-figure','protected-figure',ENSO,'v9-p252-enso-visual');
+    const ensoVisual=group('p252-enso-figure','protected-figure',`${ENSO}${prompt(ch,252,18,mode,'q18')}`,'v9-p252-enso-visual');
     const q17=group('p252-enso-q17','source-box',prompt(ch,252,17,mode,'q17'),'v9-p252-enso-q17box');
     const q19=group('p252-enso-q19','source-box',prompt(ch,252,19,mode,'q19'),'v9-p252-enso-q19box');
-    const ens=group('p252-enso','graphic-container',`<div class="v9-ribbon purple small">聖嬰現象</div><div class="v9-pill purple">聖嬰年</div>${ensoVisual}${q17}${q19}${prompt(ch,252,18,mode,'q18')}`,'v9-p252-enso');
+    const ens=group('p252-enso','graphic-container',`<div class="v9-ribbon purple small">聖嬰現象</div><div class="v9-pill purple">聖嬰年</div>${ensoVisual}${q17}${q19}`,'v9-p252-enso');
     const pac=group('p252-normal-pacific','protected-figure',PAC,'v9-p252-normal-pacific');
     const horiz=group('p252-horizontal','group',`${pac}${prompt(ch,252,8,mode,'q8')}${prompt(ch,252,9,mode,'q9')}${prompt(ch,252,10,mode,'q10')}`,'v9-p252-horizontal');
     const q16=group('p252-upwelling-q16','source-box',prompt(ch,252,16,mode,'q16'),'v9-p252-q16box');
