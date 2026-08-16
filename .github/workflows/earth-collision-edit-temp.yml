@@ -1,4 +1,4 @@
-name: Earth Canonical Ownership Fix
+name: Earth Production Q7 Repair
 
 on:
   push:
@@ -9,50 +9,32 @@ permissions:
   contents: write
 
 jobs:
-  fix:
+  repair:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: earth-collision-zero-20260816
-      - name: Make p243 printed 48/49 one canonical learning item
+          fetch-depth: 0
+      - name: Restore verified p242 and apply metadata-only Q7 fix
         run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B main origin/main
+          git checkout 48ffadd21ae3f05fd9cb782578e3626b830e3e29 -- wrongbook-v2/earth-source-trace-p242-v6.js
           python3 - <<'PY'
           from pathlib import Path
-          root=Path('wrongbook-v2')
-
-          p=root/'earth-source-prompts-v7-242-243.js'; s=p.read_text()
-          old="""  E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,495,90,28),sourceLabel:'分界依據'}),\n  E(49,'<b class=\"v4strict-num\">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(560,495,80,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})\n"""
-          new="""  E(48,'<b class=\"v4strict-num\">(48)</b> {{0}}　<b class=\"v4strict-num\">(49)</b> {{1}}',2,['二疊紀末大滅絕','白堊紀末大滅絕'],{sourceNumbers:[48,49],visualParts:[{id:'q48',fieldIndex:0,sourceRect:R(360,495,90,28)},{id:'q49',fieldIndex:1,sourceRect:R(560,495,80,28)}],sourceLabel:'分界依據'})\n"""
-          if new not in s:
-              if old not in s: raise SystemExit('p243 manifest q48/q49 target missing')
-              p.write_text(s.replace(old,new,1))
-
-          p=root/'earth-source-trace-p243-v6.js'; s=p.read_text()
-          old=""" const widths={21:[65],22:[65],23:[65],24:[85],25:[80],26:[86],27:[82],28:[54],29:[96],30:[62],31:[70],32:[56,56],33:[110],34:[80],35:[285],36:[62],37:[62],38:[66],39:[58],40:[100],41:[58],42:[58],43:[105],44:[72],45:[72],46:[88],47:[100],48:[64],49:[58]};\n function field(ch,mode,n,i=0,w){let srcN=n,srcI=i;if(n===49){srcN=48;srcI=1}return v4StrictField(ch,srcN,srcI,mode,w||widths[n]?.[i]||68)}\n function promptHtml(ch,mode,n){if(n===48)return `${v4StrictN(48)}${field(ch,mode,48,0)}`;if(n===49)return `${v4StrictN(49)}${field(ch,mode,49,0)}`;const r=rec(n);if(!r)return'';let out=String(r.template||'');for(let i=0;i<r.blanks;i++)out=out.split(`{{${i}}}`).join(field(ch,mode,n,i));return out}\n function q(ch,mode,n,id=n===49?'q49':`q${n}`,cls=''){const blanks=n===49?1:(rec(n)?.blanks||0);return `<div class=\"v4strict-q v5-recall v8-p243-q ${cls}\" data-page=\"243\" data-question=\"${n}\" data-source-object=\"${id}\" data-source-role=\"prompt\" data-v8-source-owned=\"true\" data-v7-source-prompt=\"true\" data-v7-prompt-status=\"verified\" data-v7-source-blank-count=\"${blanks}\" style=\"${style(id)}\">${promptHtml(ch,mode,n)}</div>`}\n"""
-          new=""" const widths={21:[65],22:[65],23:[65],24:[85],25:[80],26:[86],27:[82],28:[54],29:[96],30:[62],31:[70],32:[56,56],33:[110],34:[80],35:[285],36:[62],37:[62],38:[66],39:[58],40:[100],41:[58],42:[58],43:[105],44:[72],45:[72],46:[88],47:[100],48:[64,58]};\n function field(ch,mode,n,i=0,w){return v4StrictField(ch,n,i,mode,w||widths[n]?.[i]||68)}\n function promptHtml(ch,mode,n){const r=rec(n);if(!r)return'';let out=String(r.template||'');for(let i=0;i<r.blanks;i++)out=out.split(`{{${i}}}`).join(field(ch,mode,n,i));return out}\n function q(ch,mode,n,id=`q${n}`,cls=''){const blanks=rec(n)?.blanks||0;return `<div class=\"v4strict-q v5-recall v8-p243-q ${cls}\" data-page=\"243\" data-question=\"${n}\" data-source-object=\"${id}\" data-source-role=\"prompt\" data-v8-source-owned=\"true\" data-v7-source-prompt=\"true\" data-v7-prompt-status=\"verified\" data-v7-source-blank-count=\"${blanks}\" style=\"${style(id)}\">${promptHtml(ch,mode,n)}</div>`}\n function boundaryQ48(ch,mode){const r=rec(48);if(!r)return'';const a=field(ch,mode,48,0,widths[48][0]),b=field(ch,mode,48,1,widths[48][1]);return `<div class=\"v8-p243-qgroup\" data-page=\"243\" data-question=\"48\" data-source-role=\"prompt\" data-v8-source-owned=\"true\" data-v7-source-prompt=\"true\" data-v7-prompt-status=\"verified\" data-v7-source-blank-count=\"2\"><div class=\"v4strict-q v5-recall v8-p243-q v8-p243-qpart\" data-source-label=\"q48\" data-source-object=\"q48\" style=\"${style('q48')}\">${v4StrictN(48)}${a}</div><div class=\"v4strict-q v5-recall v8-p243-q v8-p243-qpart\" data-source-label=\"q49\" data-source-object=\"q49\" style=\"${style('q49')}\">${v4StrictN(49)}${b}</div></div>`}\n"""
-          if new not in s:
-              if old not in s: raise SystemExit('p243 renderer ownership target missing')
-              s=s.replace(old,new,1)
-          old_outer="const outer=[33,34,35,47,48,49,44,45,46,30,24,31].map(n=>q(ch,mode,n));"
-          new_outer="const outer=[33,34,35,47,44,45,46,30,24,31].map(n=>q(ch,mode,n));outer.splice(4,0,boundaryQ48(ch,mode));"
-          if new_outer not in s:
-              if old_outer not in s: raise SystemExit('p243 outer prompt list target missing')
-              s=s.replace(old_outer,new_outer,1)
-          p.write_text(s)
-
-          p=root/'earth-source-trace-p243-true-v6.css'; s=p.read_text()
-          old='.v8-p243-page .v8-p243-q[data-question="48"],.v8-p243-page .v8-p243-q[data-question="49"]{white-space:nowrap!important;font-size:12.6px!important;line-height:1.1!important}'
-          new='.v8-p243-page .v8-p243-qgroup{display:contents!important}.v8-p243-page .v8-p243-qpart{white-space:nowrap!important;font-size:12.6px!important;line-height:1.1!important}'
-          if new not in s:
-              if old not in s: raise SystemExit('p243 q48/q49 CSS target missing')
-              p.write_text(s.replace(old,new,1))
+          p=Path('wrongbook-v2/earth-source-trace-p242-v6.js')
+          s=p.read_text()
+          old='hidden7=\'<span class="v7-logical-question-marker" data-question="7" data-page="242" data-v7-composite-source="true" hidden aria-hidden="true"></span>\''
+          new='hidden7=\'<span class="v7-logical-question-marker" data-logical-question="7" data-page="242" data-v7-composite-source="true" hidden aria-hidden="true"></span>\''
+          if old not in s: raise SystemExit('verified Q7 marker target not found')
+          p.write_text(s.replace(old,new,1))
           PY
-          node --check wrongbook-v2/earth-source-prompts-v7-242-243.js
-          node --check wrongbook-v2/earth-source-trace-p243-v6.js
+          node --check wrongbook-v2/earth-source-trace-p242-v6.js
+          git diff --check
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-source-prompts-v7-242-243.js wrongbook-v2/earth-source-trace-p243-v6.js wrongbook-v2/earth-source-trace-p243-true-v6.css
-          git diff --cached --check
-          git commit -m 'Consolidate p243 boundary blanks into canonical Q48'
-          git push origin HEAD:earth-collision-zero-20260816
+          git add wrongbook-v2/earth-source-trace-p242-v6.js
+          git commit -m 'Repair Q7 metadata on verified p242 source'
+          git push origin HEAD:main
