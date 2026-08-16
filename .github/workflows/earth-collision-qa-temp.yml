@@ -1,6 +1,6 @@
 name: Earth Collision QA Workspace
 
-# QA retrigger: final local all-pages measurement.
+# QA retrigger: source Q49 two-row measurement.
 on:
   push:
     branches: [earth-collision-zero-20260816]
