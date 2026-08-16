@@ -26,13 +26,19 @@ jobs:
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           for CH in 1 2 3 4 5 6; do
+            URL="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
               --user-data-dir="/tmp/wrongbook-full-$CH" \
               --window-size=2400,1500 --virtual-time-budget=5000 \
-              --screenshot="/tmp/wrongbook-full-ch${CH}.png" \
-              "http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+              --screenshot="/tmp/wrongbook-full-ch${CH}.png" "$URL"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --user-data-dir="/tmp/wrongbook-dom-$CH" \
+              --window-size=2400,1500 --virtual-time-budget=5000 \
+              --dump-dom "$URL" > "/tmp/wrongbook-full-ch${CH}.html"
           done
       - uses: actions/upload-artifact@v4
         with:
           name: wrongbook-earth-fullpage-visual
-          path: /tmp/wrongbook-full-ch*.png
+          path: |
+            /tmp/wrongbook-full-ch*.png
+            /tmp/wrongbook-full-ch*.html
