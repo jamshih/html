@@ -1,88 +1,71 @@
-// Page 242 source trace. Coordinates are page-local and follow IMG_1523.
-{
- const ch=EARTH_SEMANTIC_MAPS.find(x=>x.number===1);
- const node=id=>ch.nodes.find(n=>n.id===id),edge=id=>ch.relations.find(e=>e.id===id),fig=id=>ch.figures.find(f=>f.id===id);
- Object.assign(node('big-bang-theory'),{renderInMap:true,x:307,y:160,w:212,h:42,kind:'source-header',color:'#7666a8'});
- Object.assign(node('hubble-evidence'),{renderInMap:true,x:112,y:218,w:275,h:114,kind:'source-plain',color:'#7568a5'});
- Object.assign(node('cmb-evidence'),{renderInMap:true,x:489,y:221,w:247,h:116,kind:'source-plain',color:'#7568a5'});
- Object.assign(node('singularity'),{renderInMap:true,x:270,y:544,w:82,h:82,kind:'source-plain',color:'#565653'});
- Object.assign(node('solar-nebula'),{renderInMap:true,label:'太陽系的形成',x:172,y:1177,w:238,h:46,kind:'source-header',color:'#5f7fae'});
- const traces={
-  'c1-e1':['M397 380H447','#7666a8',6,true],
-  'c1-e2':['M276 441C263 422 252 403 251 383','#7666a8',6,true],
-  'c1-e3':['M329 584H481','#55534f',18,false],
-  'c1-e4':['M481 584H640','#657fae',18,false],
-  'c1-e5':['M640 584H815','#657fae',18,false],
-  'c1-e6':['M815 584H960','#67a16e',18,false],
-  'c1-e7':['M496 574L559 503','#657fae',7,false],
-  'c1-e8':['M698 602L272 666','#657fae',7,false],
-  'c1-e9':['M814 596L724 661','#67a16e',7,false],
-  'c1-e11':['M606 884L719 1028','#67a16e',7,false]
- };
- for(const [id,v] of Object.entries(traces)){const e=edge(id);Object.assign(e,{renderInMap:true,sourcePath:v[0],sourceColor:v[1],sourceWidth:v[2],sourceArrow:v[3],sourcePage:242})}
- const rects={
-  'p242-bigbang':[238,420,96,64],
-  'p242-guide':[88,383,130,116],
-  'p242-nebula':[127,744,275,110],
-  'p242-planets':[97,996,345,106],
-  'p242-atmosphere1':[410,766,215,125],
-  'p242-hot-earth':[657,658,49,46],
-  'p242-diff':[723,1016,166,166]
- };
- for(const [id,r] of Object.entries(rects)){const f=fig(id);Object.assign(f.sourceRect,{x:r[0],y:r[1],width:r[2],height:r[3]})}
-}
-
-const v6P242StrictBase=window.v4Strict242;
-const V6_P242_POS_SCALE=1;
-const v6P242Px=n=>Math.round(n*V6_P242_POS_SCALE*10)/10;
-function v6P242MoveQuestionPx(html,n,x,y,w){
- const re=new RegExp(`(data-question="${n}" style=")[^"]+("?)`);
- return html.replace(re,`$1left:${v6P242Px(x)}px;top:${v6P242Px(y)}px;width:${v6P242Px(w)}px$2`);
-}
-const V6_P242_SOURCE_LINES=`<svg class="v4strict-svg v6-p242-lines" viewBox="0 0 910 1270" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="v6p242arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
-<path class="purple" d="M397 380H447" marker-end="url(#v6p242arr)"/>
-<path class="purple" d="M276 441C263 422 252 403 251 383" marker-end="url(#v6p242arr)"/>
-<path class="spine dark" d="M329 584H481"/><circle class="node" cx="481" cy="584" r="8"/>
-<path class="spine blue" d="M481 584H640"/><path class="spine blue" d="M640 584H815"/><circle class="node" cx="815" cy="584" r="8"/>
-<path class="spine green" d="M815 584H960"/>
-<path class="blue" d="M496 574L559 503"/>
-<path class="blue" d="M698 602L272 666"/>
-<path class="green" d="M814 596L724 661"/>
-<path class="green" d="M693 713L622 780"/>
-<path class="green" d="M621 842L456 919" marker-end="url(#v6p242arr)"/>
-<path class="green" d="M606 884L719 1028"/>
-<path class="green" d="M748 721V790" marker-end="url(#v6p242arr)"/>
-<path class="green" d="M748 819V892" marker-end="url(#v6p242arr)"/>
-<path class="blue" d="M268 843L139 924" marker-end="url(#v6p242arr)"/>
-<path class="blue" d="M110 990V1016H140"/>
-<path class="blue" d="M111 1088V1113H226"/>
-<path class="blue" d="M452 1088V1113H402"/>
-</svg>`;
-const V6_P242_ASTRONAUT=`<svg class="v6-p242-astronaut" viewBox="0 0 150 125" preserveAspectRatio="xMidYMid meet" aria-label="太空人搭乘火箭導覽插圖"><g transform="translate(7 55) rotate(-12 70 30)"><path d="M10 37L112 13L130 28L104 47L22 55Z" fill="#eee9df" stroke="#575650" stroke-width="2.4"/><path d="M17 39L4 52L26 50M96 47L110 65L113 45" fill="#c95749" stroke="#575650" stroke-width="2.2"/><circle cx="91" cy="29" r="12" fill="#6f9ab7" stroke="#575650" stroke-width="2"/><path d="M9 51L0 61M18 55L7 69" stroke="#e28b39" stroke-width="5" stroke-linecap="round"/></g><g transform="translate(43 8)"><circle cx="30" cy="22" r="20" fill="#f0eee8" stroke="#4e4e4a" stroke-width="2.5"/><circle cx="30" cy="22" r="13" fill="#343a3d"/><path d="M17 20Q30 9 43 20" fill="#6f7f86"/><path d="M18 44L12 69L36 76L49 49Q41 39 30 39Q22 39 18 44Z" fill="#eee9df" stroke="#4e4e4a" stroke-width="2.5"/><path d="M16 50L1 66M45 51L57 68M17 68L9 83M34 75L42 88" stroke="#4e4e4a" stroke-width="5" stroke-linecap="round"/><rect x="22" y="49" width="16" height="13" rx="2" fill="#78a0b2" stroke="#4e4e4a" stroke-width="1.8"/></g></svg>`;
-const V6_P242_EXTRA=`
-${V6_P242_ASTRONAUT}
-<div class="v6-p242-start-tag">從這裡出發</div>
-<div class="v6-p242-dark-age">黑暗時期</div>
-<div class="v6-p242-recombination">大爆炸後約38萬年，離子得以<br>結合成原子，大爆炸的餘溫<br>可以傳遞出去</div>
-<div class="v6-p242-cooling">地球從高溫狀態<br>逐漸降溫</div>
-<div class="v6-p242-nebula-title">太陽星雲學說</div>
-<div class="v6-p242-melt">導致地球熔融</div>
-<div class="v6-p242-escape">均逸散了</div>
-<svg class="v6-p242-planets" viewBox="0 0 345 105" preserveAspectRatio="xMidYMid meet" aria-label="太陽與行星形成順序"><rect x="18" y="12" width="302" height="72" fill="#d9e6ea" stroke="#6f8290" stroke-width="1.5"/><rect x="19" y="13" width="17" height="70" fill="#f0b843"/><circle cx="142" cy="49" r="25" fill="#a88761" stroke="#6b5d50" stroke-width="1.5"/><path d="M124 42q18-9 35 0M122 50q20 8 39 0M126 58q17-7 31 0" fill="none" stroke="#6d5d50" stroke-width="2"/>
-<g transform="translate(214 48) rotate(-17)"><circle r="19" fill="#b79a60" stroke="#6b5d50" stroke-width="1.5"/><ellipse rx="35" ry="7" fill="none" stroke="#8d7954" stroke-width="5"/></g>
-<circle cx="268" cy="51" r="12" fill="#9aa9b0"/><circle cx="300" cy="51" r="10" fill="#8e9ca6"/><circle cx="325" cy="51" r="8" fill="#71879c"/></svg>
-<div class="v6-p242-diff-label">形成地球分層結構</div>`;
-window.v4Strict242=function(ch,mode){
- let html=v6P242StrictBase(ch,mode);
- const pos={
-  1:[105,558,195],2:[105,590,195],3:[105,622,195],4:[230,526,225],5:[330,454,185],6:[82,377,330],
-  8:[74,236,293],9:[476,236,258],10:[550,503,255],11:[95,706,520],12:[108,946,245],13:[95,1000,390],
-  14:[102,1114,345],15:[448,1114,370],16:[420,790,210],17:[676,742,180],18:[455,868,290],19:[570,920,205],20:[570,980,205]
- };
- for(const [n,p] of Object.entries(pos))html=v6P242MoveQuestionPx(html,n,p[0],p[1],p[2]);
- html=html.replace(/<svg class="v4strict-svg"[\s\S]*?<\/svg>/,V6_P242_SOURCE_LINES);
- html=html.replace(/style="--rc:#8170a6;left:[^"]+"/,`style="--rc:#8170a6;left:${v6P242Px(307)}px;top:${v6P242Px(160)}px;width:${v6P242Px(212)}px"`);
- html=html.replace(/style="--rc:#667fae;left:[^"]+"/,`style="--rc:#667fae;left:${v6P242Px(172)}px;top:${v6P242Px(1177)}px;width:${v6P242Px(238)}px"`);
- html=html.replace('<div class="v4strict-footer">242</div>',`${V6_P242_EXTRA}<div class="v4strict-footer">242</div>`);
- return html;
-};
+// Page 242 — one source-owned renderer and one occupancy model.
+// Authority: IMG_1523. Exact printed wording lives in SOURCE_PROMPTS_V7[242].
+(function(){
+  const ROOT=window.EARTH_SOURCE_LAYOUT_V8=window.EARTH_SOURCE_LAYOUT_V8||{};
+  const R=(x,y,width,height)=>({x,y,width,height});
+  const page=ROOT[242]={
+    page:242,canvas:{width:910,height:1270},sourcePhoto:'IMG_1523.HEIC',
+    objects:{
+      header:{role:'heading',rect:R(0,0,910,127)},
+      bigbangTitle:{role:'heading',rect:R(307,160,212,42)},
+      q8:{role:'prompt',rect:R(112,218,275,114)},q9:{role:'prompt',rect:R(489,221,247,116)},
+      q6:{role:'prompt',rect:R(114,354,302,34),reflow:'single-source-line'},
+      recombination:{role:'source-label',rect:R(460,357,238,70)},
+      astronaut:{role:'figure',rect:R(76,382,150,125),safeRect:R(76,382,150,125)},
+      startTag:{role:'source-label',rect:R(90,501,112,24)},bigbang:{role:'figure',rect:R(238,420,96,64),safeRect:R(238,420,96,64)},
+      q5:{role:'prompt',rect:R(338,443,180,30)},q4:{role:'prompt',rect:R(244,505,220,30)},
+      q1:{role:'prompt',rect:R(112,540,195,28)},q2:{role:'prompt',rect:R(112,572,195,28)},q3:{role:'prompt',rect:R(112,604,195,28)},
+      singularity:{role:'figure',rect:R(270,544,82,82),safeRect:R(270,544,82,82)},darkAge:{role:'source-label',rect:R(358,546,105,24)},
+      q10:{role:'prompt',rect:R(555,487,245,52)},cooling:{role:'source-label',rect:R(776,538,128,46)},
+      q11:{role:'prompt',rect:R(115,681,520,54)},nebulaTitle:{role:'source-label',rect:R(283,657,142,26)},
+      nebula:{role:'figure',rect:R(127,744,275,110),safeRect:R(127,744,275,110)},
+      hotEarth:{role:'figure',rect:R(657,658,49,46),safeRect:R(657,658,49,46)},q17:{role:'prompt',rect:R(660,719,180,38)},
+      atmosphere:{role:'figure',rect:R(410,766,215,112),safeRect:R(410,766,215,112),children:['q16']},
+      q16:{role:'prompt',rect:R(432,782,176,78),inside:'atmosphere'},melt:{role:'source-label',rect:R(712,806,146,28)},
+      q12:{role:'prompt',rect:R(108,925,245,34)},escape:{role:'source-label',rect:R(392,910,90,26)},
+      q18:{role:'prompt',rect:R(488,892,180,145)},q19:{role:'prompt',rect:R(690,923,205,52)},q20:{role:'prompt',rect:R(690,985,205,52)},
+      q13:{role:'prompt',rect:R(108,969,420,28)},planets:{role:'figure',rect:R(97,1002,345,96),safeRect:R(97,1002,345,96)},
+      q14:{role:'prompt',rect:R(108,1104,315,58)},q15:{role:'prompt',rect:R(430,1104,242,58)},
+      wedge:{role:'figure',rect:R(710,1043,175,158),safeRect:R(710,1043,175,158)},diffLabel:{role:'source-label',rect:R(701,1203,184,28)},
+      solarTitle:{role:'heading',rect:R(172,1182,238,46)},footer:{role:'source-label',rect:R(108,1231,48,28)}
+    },
+    connectors:{
+      evidenceExpansion:{path:'M420 377H451',role:'connector'},
+      originRise:{path:'M279 444C266 424 255 404 252 386',role:'connector',associatedFigureId:'bigbang'},
+      timeSpine:{path:'M329 584H481H640H815H910',role:'connector',associatedFigureId:'singularity'},
+      starsBranch:{path:'M496 574L555 526',role:'connector',associatedPrompt:'q10'},
+      nebulaBranch:{path:'M640 594C560 622 450 652 342 670',role:'connector'},
+      earthBranch:{path:'M815 596L705 658',role:'connector',associatedFigureId:'hotEarth'},
+      atmosphereBranch:{path:'M705 706L614 766',role:'connector',associatedFigureId:'atmosphere'},
+      escapeBranch:{path:'M522 878L485 909',role:'connector'},
+      differentiation:{path:'M704 850L680 900V1118H710',role:'connector',associatedFigureId:'wedge'},
+      meltTop:{path:'M730 770V798',role:'connector'},
+      meltBottom:{path:'M730 842L704 850',role:'connector'},
+      planetLead:{path:'M268 850L156 919',role:'connector'},
+      planetUp:{path:'M112 997V982H138',role:'connector',associatedFigureId:'planets',associatedPrompt:'q13'},
+      planetLeft:{path:'M112 1098V1127H142',role:'connector',associatedFigureId:'planets',associatedPrompt:'q14'},
+      planetRight:{path:'M442 1098V1127H425',role:'connector',associatedFigureId:'planets',associatedPrompt:'q15'}
+    },
+    approvedOverlaps:[['atmosphere','q16'],['timeSpine','singularity'],['originRise','bigbang'],['earthBranch','hotEarth'],['atmosphereBranch','atmosphere'],['differentiation','wedge'],['planetUp','planets'],['planetLeft','planets'],['planetRight','planets']]
+  };
+  const rectStyle=id=>{const r=page.objects[id].rect;return `left:${r.x}px;top:${r.y}px;width:${r.width}px;${r.height?`min-height:${r.height}px;`:''}`};
+  const figureStyle=id=>{const r=page.objects[id].rect;return `left:${r.x}px;top:${r.y}px;width:${r.width}px;height:${r.height}px`};
+  const rec=n=>(window.SOURCE_PROMPTS_V7?.[242]||[]).find(x=>Number(x.number)===Number(n));
+  const widths={1:[54],2:[54],3:[54],4:[105],5:[54],6:[78,68],8:[80,58,48,94],9:[112,58],10:[54,70],11:[52,66,102,56],12:[82],13:[72],14:[50,52],15:[72,56],16:[54,54,54,54],17:[50],18:[150,150,150],19:[40,68],20:[40,68]};
+  function fill(ch,mode,r,i){const nums=Array.isArray(r?.sourceNumbers)&&r.sourceNumbers.length===r.blanks?r.sourceNumbers:null;const n=nums?nums[i]:r.number,fi=nums?0:i,w=widths[r.number]?.[i]||68;return v4StrictField(ch,n,fi,mode,w)}
+  function exactPrompt(ch,mode,n){const r=rec(n);if(!r)return '';let out=String(r.template||'');for(let i=0;i<r.blanks;i++)out=out.split(`{{${i}}}`).join(fill(ch,mode,r,i));return out}
+  function q(ch,mode,n,id,cls=''){const r=rec(n);return `<div class="v4strict-q v5-recall v8-p242-q ${cls}" data-page="242" data-question="${n}" data-source-object="q${n}" data-source-role="prompt" data-v8-source-owned="true" data-v7-source-prompt="true" data-v7-prompt-status="verified" data-v7-source-blank-count="${r?.blanks||0}" style="${rectStyle(id||`q${n}`)}">${exactPrompt(ch,mode,n)}</div>`}
+  function sourceLabel(id,html,cls=''){return `<div class="v8-p242-label ${cls}" data-source-label="${id}" data-source-object="${id}" style="${figureStyle(id)}">${html}</div>`}
+  function sourceFigure(id,html,cls=''){return `<div class="v8-p242-figure ${cls}" data-source-figure="${id}" data-source-object="${id}" style="${figureStyle(id)}">${html}</div>`}
+  function connectors(){const c=page.connectors;const path=(id,klass,arrow=false)=>`<path data-source-connector="${id}" data-associated-figure="${c[id].associatedFigureId||''}" data-associated-prompt="${c[id].associatedPrompt||''}" class="${klass}" d="${c[id].path}"${arrow?' marker-end="url(#p242arr)"':''}/>`;return `<svg class="v4strict-svg v8-p242-connectors" data-source-connector-layer="242" viewBox="0 0 910 1270" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="p242arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#596f9d"/></marker></defs>${path('evidenceExpansion','purple',true)}${path('originRise','purple',true)}<path data-source-connector="timeSpine" data-associated-figure="singularity" class="spine dark" d="M329 584H481"/><circle class="node" cx="481" cy="584" r="8"/><path class="spine blue" d="M481 584H640H815"/><circle class="node" cx="815" cy="584" r="8"/><path class="spine green" d="M815 584H910"/>${['starsBranch','nebulaBranch','planetLead','planetUp','planetLeft','planetRight'].map(id=>path(id,'blue',id==='planetLead')).join('')}${['earthBranch','atmosphereBranch','escapeBranch','differentiation','meltTop','meltBottom'].map(id=>path(id,'green',id==='atmosphereBranch'||id==='escapeBranch'||id==='differentiation'||id==='meltTop')).join('')}</svg>`}
+  const astronaut=`<svg viewBox="0 0 150 125" preserveAspectRatio="xMidYMid meet" aria-label="太空人搭乘火箭導覽插圖"><g transform="translate(7 55) rotate(-12 70 30)"><path d="M10 37L112 13L130 28L104 47L22 55Z" fill="#eee9df" stroke="#575650" stroke-width="2.4"/><path d="M17 39L4 52L26 50M96 47L110 65L113 45" fill="#c95749" stroke="#575650" stroke-width="2.2"/><circle cx="91" cy="29" r="12" fill="#6f9ab7" stroke="#575650" stroke-width="2"/><path d="M9 51L0 61M18 55L7 69" stroke="#e28b39" stroke-width="5" stroke-linecap="round"/></g><g transform="translate(43 8)"><circle cx="30" cy="22" r="20" fill="#f0eee8" stroke="#4e4e4a" stroke-width="2.5"/><circle cx="30" cy="22" r="13" fill="#343a3d"/><path d="M17 20Q30 9 43 20" fill="#6f7f86"/><path d="M18 44L12 69L36 76L49 49Q41 39 30 39Q22 39 18 44Z" fill="#eee9df" stroke="#4e4e4a" stroke-width="2.5"/><path d="M16 50L1 66M45 51L57 68M17 68L9 83M34 75L42 88" stroke="#4e4e4a" stroke-width="5" stroke-linecap="round"/></g></svg>`;
+  const nebula=`<svg viewBox="0 0 330 150" aria-label="太陽星雲塌縮圓盤"><defs><radialGradient id="p242neb"><stop offset="0" stop-color="#ffd558"/><stop offset=".35" stop-color="#f39b45"/><stop offset="1" stop-color="#dcb56d" stop-opacity=".25"/></radialGradient><marker id="p242nebarr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#4f7fb9"/></marker></defs><ellipse cx="160" cy="75" rx="145" ry="54" fill="url(#p242neb)"/><ellipse cx="160" cy="75" rx="104" ry="34" fill="none" stroke="#e9b24b" stroke-width="3"/><circle cx="160" cy="75" r="20" fill="#ffd34e"/><path d="M45 72C100 112 220 108 284 72" fill="none" stroke="#4f7fb9" stroke-width="10" marker-end="url(#p242nebarr)"/></svg>`;
+  const planets=`<svg viewBox="0 0 345 96" preserveAspectRatio="none" aria-label="太陽與行星形成順序"><rect x="18" y="8" width="302" height="72" fill="#d9e6ea" stroke="#6f8290" stroke-width="1.5"/><rect x="19" y="9" width="17" height="70" fill="#f0b843"/><circle cx="142" cy="45" r="25" fill="#a88761" stroke="#6b5d50" stroke-width="1.5"/><path d="M124 38q18-9 35 0M122 46q20 8 39 0M126 54q17-7 31 0" fill="none" stroke="#6d5d50" stroke-width="2"/><g transform="translate(214 44) rotate(-17)"><circle r="19" fill="#b79a60" stroke="#6b5d50" stroke-width="1.5"/><ellipse rx="35" ry="7" fill="none" stroke="#8d7954" stroke-width="5"/></g><circle cx="268" cy="47" r="12" fill="#9aa9b0"/><circle cx="300" cy="47" r="10" fill="#8e9ca6"/><circle cx="325" cy="47" r="8" fill="#71879c"/></svg>`;
+  const wedge=`<svg viewBox="0 0 190 180" aria-label="地球分層"><path d="M15 15A160 160 0 0 1 175 175L15 175Z" fill="#bbb8b0"/><path d="M42 45A120 120 0 0 1 155 158L42 158Z" fill="#94928c"/><path d="M73 81A72 72 0 0 1 133 143L73 143Z" fill="#686865"/><circle cx="151" cy="51" r="17" fill="#fffdf5" stroke="#777"/><text x="151" y="57" text-anchor="middle">殼</text><circle cx="151" cy="108" r="17" fill="#fffdf5" stroke="#777"/><text x="151" y="114" text-anchor="middle">函</text><circle cx="128" cy="150" r="17" fill="#fffdf5" stroke="#777"/><text x="128" y="156" text-anchor="middle">核</text></svg>`;
+  function atmosphere(ch,mode){return `<div class="v8-p242-figure v8-p242-atmosphere" data-source-figure="atmosphere" data-source-object="atmosphere" style="${figureStyle('atmosphere')}"><svg viewBox="0 0 215 112" preserveAspectRatio="none" aria-hidden="true"><path d="M30 99C8 96 3 77 16 61C7 40 24 22 44 27C55 7 83 6 96 24C117 10 143 20 148 41C169 27 196 37 200 59C220 62 224 83 210 98Z" fill="#cbdce1" opacity=".88"/></svg>${q(ch,mode,16,'q16','v8-p242-q-inside')}</div>`}
+  function causes(ch,mode){const r=rec(18),fs=[0,1,2].map(i=>fill(ch,mode,r,i));return `<div class="v4strict-q v5-recall v8-p242-q v8-p242-causes" data-page="242" data-question="18" data-source-object="q18" data-source-role="prompt" data-v8-source-owned="true" data-v7-source-prompt="true" data-v7-prompt-status="verified" data-v7-source-blank-count="3" style="${rectStyle('q18')}"><div class="v8-p242-cause-heading"><b class="v4strict-num">(18)</b><strong>3大主因</strong></div><div class="v8-p242-cause-row"><b>1.</b>${fs[0]}</div><div class="v8-p242-cause-row"><b>2.</b>${fs[1]}</div><div class="v8-p242-cause-row"><b>3.</b>${fs[2]}</div></div>`}
+  function header(){return v4StrictHeader(1,'時間之箭').replace('class="v4strict-header"',`class="v4strict-header" data-source-label="header" data-source-object="header" style="${figureStyle('header')}"`)}
+  function ribbon(id,text,color){return `<div class="v4strict-ribbon" data-source-label="${id}" data-source-object="${id}" style="--rc:${color};${figureStyle(id)}">${text}</div>`}
+  window.v4Strict242=function(ch,mode){const prompts=[8,9,6,5,4,1,2,3,10,11,17,12,13,14,15,19,20].map(n=>q(ch,mode,n,`q${n}`,n===8||n===9?'v4strict-box':''));const hidden7='<span class="v7-logical-question-marker" data-question="7" data-page="242" data-v7-composite-source="true" hidden aria-hidden="true"></span>';const inner=`${header()}${ribbon('bigbangTitle','大霹靂學說','#8170a6')}${connectors()}${prompts.join('')}${hidden7}${sourceLabel('recombination','大爆炸後約38萬年，離子得以<br>結合成原子，大爆炸的餘溫<br>可以傳遞出去','v8-p242-recombination')}${sourceFigure('astronaut',astronaut,'v8-p242-astronaut')}${sourceLabel('startTag','從這裡出發','v8-p242-start-tag')}${sourceFigure('bigbang','大爆炸','v8-p242-bigbang')}${sourceFigure('singularity','奇異點','v8-p242-singularity')}${sourceLabel('darkAge','黑暗時期')}${sourceLabel('cooling','地球從高溫狀態<br>逐漸降溫','v8-p242-cooling')}${sourceLabel('nebulaTitle','太陽星雲學說')}${sourceFigure('nebula',nebula,'v8-p242-nebula')}${sourceFigure('hotEarth','<span></span>','v8-p242-hot-earth')}${atmosphere(ch,mode)}${sourceLabel('melt','導致地球熔融')}${sourceLabel('escape','均逸散了')}${causes(ch,mode)}${sourceFigure('planets',planets,'v8-p242-planets')}${sourceFigure('wedge',wedge,'v8-p242-wedge')}${sourceLabel('diffLabel','形成地球分層結構','v8-p242-diff-label')}${ribbon('solarTitle','太陽系的形成','#667fae')}`;let html=v4StrictPage(242,inner,'v4strict-242 v8-p242-page');html=html.replace('data-strict-page="242"','data-strict-page="242" data-source-owned-page="242" data-source-layout-version="8"');return html};
+  window.v8SourcePromptRecord=function(pageNo,n){const r=(window.SOURCE_PROMPTS_V7?.[pageNo]||[]).find(x=>Number(x.number)===Number(n));const layout=window.EARTH_SOURCE_LAYOUT_V8?.[pageNo];const o=layout?.objects?.[`q${n}`];if(!r||!o)return null;return {page:pageNo,question:Number(n),exactPrintedText:r.template,blanks:r.blanks,sourceRect:o.rect,textRect:o.rect,blankRects:o.blankRects||[],associatedFigureId:o.inside||null,associatedConnectorId:o.associatedConnectorId||null}};
+})();
