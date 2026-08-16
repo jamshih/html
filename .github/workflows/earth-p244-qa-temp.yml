@@ -1,4 +1,4 @@
-name: Earth P244 Branch QA
+name: Earth Source Atlas Branch QA
 
 on:
   push:
@@ -15,49 +15,52 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Syntax check page renderer
+      - name: JavaScript syntax
         run: |
-          node --check wrongbook-v2/earth-source-trace-p244-v6.js
-          node --check wrongbook-v2/earth-source-refine-p244-v7.js
+          for f in wrongbook-v2/*.js; do node --check "$f"; done
       - name: Install Traditional Chinese font
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-cjk
           fc-cache -f
-      - name: Render chapter 2 and source-refinement QA
+      - name: Render all Earth spreads and run source QA
         run: |
-          python3 -m http.server 4173 >/tmp/p244-http.log 2>&1 &
+          python3 -m http.server 4173 >/tmp/earth-atlas-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 1
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
-          URL='http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=2&mode=recall'
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
-            --user-data-dir=/tmp/p244-shot --window-size=2200,1600 --virtual-time-budget=6000 \
-            --screenshot=/tmp/p244-ch2.png "$URL"
+          mkdir -p /tmp/earth-atlas-final
+          for CH in 1 2 3 4 5 6; do
+            URL="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+              --user-data-dir="/tmp/earth-atlas-shot-${CH}" --window-size=2200,1600 --virtual-time-budget=6500 \
+              --screenshot="/tmp/earth-atlas-final/ch${CH}.png" "$URL"
+          done
           "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
-            --user-data-dir=/tmp/p244-qa --window-size=2200,1600 --virtual-time-budget=7000 \
-            --dump-dom 'http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=2&mode=recall&refinee2e=1' > /tmp/p244-qa.html
+            --user-data-dir=/tmp/earth-atlas-qa --window-size=2200,1600 --virtual-time-budget=8000 \
+            --dump-dom 'http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=2&mode=recall&refinee2e=1' > /tmp/earth-atlas-final/refinement.html
           python3 - <<'PY'
           from pathlib import Path
           import re, html
-          s=Path('/tmp/p244-qa.html').read_text(errors='ignore')
+          s=Path('/tmp/earth-atlas-final/refinement.html').read_text(errors='ignore')
           m=re.search(r'<pre id="e2e-results"[^>]*data-status="([^"]+)"[^>]*>(.*?)</pre>',s,re.S)
           if not m:
               raise SystemExit('missing e2e-results')
           status=m.group(1)
-          Path('/tmp/p244-qa-result.txt').write_text(html.unescape(re.sub('<[^>]+>','',m.group(2))))
+          result=html.unescape(re.sub('<[^>]+>','',m.group(2)))
+          Path('/tmp/earth-atlas-final/refinement-result.txt').write_text(result)
           print('refinement status',status)
           if status!='PASS':
               raise SystemExit('source refinement QA failed')
+          if '"total": 276' not in result or '"passed": 276' not in result:
+              raise SystemExit('276/276 source prompt gate missing')
           PY
+          git rev-parse HEAD > /tmp/earth-atlas-final/source-sha.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: earth-p244-qa
-          path: |
-            /tmp/p244-ch2.png
-            /tmp/p244-qa-result.txt
-            /tmp/p244-qa.html
+          name: earth-source-atlas-final-qa
+          path: /tmp/earth-atlas-final
           retention-days: 3
