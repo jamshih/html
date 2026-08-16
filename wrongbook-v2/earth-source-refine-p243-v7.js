@@ -1,4 +1,4 @@
-// Page 243 refinement: preserve source geometry, remove student-answer leakage, and restore printed teaching groups.
+// Page 243 legacy refinement metadata. Visual changes are skipped once the source-owned page renderer is active.
 (function(){
   window.SOURCE_LINE_MANIFEST_V7=window.SOURCE_LINE_MANIFEST_V7||{};
   window.SOURCE_LINE_MANIFEST_V7[243]=[
@@ -23,7 +23,9 @@
     let html=prev(ch,sem,page,mode);
     if(page!==243)return html;
     const t=document.createElement('template');t.innerHTML=html;
-    // These values are handwriting in the source photograph, not publisher-printed labels.
+    // One visual owner rule: the v8 source page already owns all p243 figures, labels and geometry.
+    if(t.content.querySelector('[data-source-owned-page="243"]'))return t.innerHTML;
+    // Legacy fallback only, retained for older/non-source-owned renders.
     const decay=t.content.querySelector('.v6-p243-decay');
     if(decay){
       decay.innerHTML=decay.innerHTML
@@ -36,21 +38,10 @@
     const section=t.content.querySelector('[data-strict-page="243"]')||t.content.querySelector('.v4strict-243');
     if(section&&!section.querySelector('.v7-p243-source-groups')){
       const layer=document.createElement('div');layer.className='v7-p243-source-groups';layer.setAttribute('aria-hidden','true');
-      layer.innerHTML=`
-        <div class="v7-p243-laws-frame"><b>判斷先後順序</b></div>
-        <div class="v7-p243-strata-caption">▼ 未經倒轉的地層示意圖</div>
-        <div class="v7-p243-dating-limit">定年極限<span></span></div>
-        <div class="v7-p243-second-cloud"></div>
-        <div class="v7-p243-carbon">除碳作用</div>
-        <div class="v7-p243-rock-frame"></div>
-        <div class="v7-p243-oxygen-oval"></div>
-        <div class="v7-p243-third-cloud"></div>
-        <div class="v7-p243-uv">被紫外線照射</div>
-        <div class="v7-p243-inert">化性不活潑，在大氣層中，比例逐漸上升</div>`;
+      layer.innerHTML=`<div class="v7-p243-laws-frame"><b>判斷先後順序</b></div><div class="v7-p243-strata-caption">▼ 未經倒轉的地層示意圖</div><div class="v7-p243-dating-limit">定年極限<span></span></div><div class="v7-p243-second-cloud"></div><div class="v7-p243-carbon">除碳作用</div><div class="v7-p243-rock-frame"></div><div class="v7-p243-oxygen-oval"></div><div class="v7-p243-third-cloud"></div><div class="v7-p243-uv">被紫外線照射</div><div class="v7-p243-inert">化性不活潑，在大氣層中，比例逐漸上升</div>`;
       section.appendChild(layer);
     }
     const q43=t.content.querySelector('[data-question="43"]');if(q43)q43.classList.add('v7-p243-fossil-box');
-    // Keep numbered source prompts on top of their publisher grouping shapes.
     for(const n of [21,22,23,25,29,32,40,41,42,43]){const q=t.content.querySelector(`[data-question="${n}"]`);if(q)q.style.zIndex='5';}
     return t.innerHTML;
   };
