@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'wrongbook-v2/**'
       - '.github/workflows/wrongbook-v2-fullpage-visual.yml'
 
 jobs:
