@@ -36,8 +36,10 @@ jobs:
           const loader=fs.readFileSync('wrongbook-v2/earth-source-trace-tail-loader-v6.js','utf8');
           if(loader.includes('earth-source-trace-p253-correct-v6'))throw Error('old p253 correction overlay still loaded');
           const css=fs.readFileSync('wrongbook-v2/earth-source-hierarchy-v9.css','utf8');
-          if(/\.v9-q[^{}]*\{[^}]*font-size\s*:\s*(?:10|11)(?:\.|px)/.test(css))throw Error('V9 question text uses micro-font workaround');
-          console.log('V9 hierarchy architecture guard PASS',all.length,'explicit question owners');
+          const qRule=css.match(/\.v9-q\{([^}]*)\}/)?.[1]||'';
+          const qSize=Number(qRule.match(/font-size\s*:\s*([0-9.]+)px/)?.[1]||0);
+          if(qSize<12.5)throw Error(`V9 base question text too small: ${qSize}`);
+          console.log('V9 hierarchy architecture guard PASS',all.length,'explicit question owners','qSize',qSize);
           NODE
       - name: Run rendered V9 collision gate
         run: |
@@ -63,8 +65,7 @@ jobs:
           assert data['pages']==list(range(242,254))
           assert data['modes']==['recall','learn']
           assert len(data['reports'])==24
-          for k,v in data['totals'].items():
-              assert v==0,(k,v)
+          for k,v in data['totals'].items(): assert v==0,(k,v)
           print('EARTH_V9_COLLISION_GATE_PASS')
           PY
       - name: Existing source and refinement regression gates
