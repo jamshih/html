@@ -15,23 +15,74 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: earth-collision-zero-20260816
-      - name: Encode source Q49 two-row prompt
+          fetch-depth: 0
+      - name: Build clean production commit from main
         run: |
+          set -euo pipefail
+          FILES=(
+            wrongbook-v2/earth-source-prompt-renderer-v7.js
+            wrongbook-v2/earth-source-prompts-v7-242-243.js
+            wrongbook-v2/earth-source-prompts-v7-244-245.js
+            wrongbook-v2/earth-source-prompts-v7-252-253.js
+            wrongbook-v2/earth-source-refine-figure-blanks-v7.js
+            wrongbook-v2/earth-source-refine-p243-v7.js
+            wrongbook-v2/earth-source-refine-p244-v7.js
+            wrongbook-v2/earth-source-trace-p242-true-v6.css
+            wrongbook-v2/earth-source-trace-p242-v6.js
+            wrongbook-v2/earth-source-trace-p243-true-v6.css
+            wrongbook-v2/earth-source-trace-p243-v6.js
+            wrongbook-v2/earth-source-trace-p244-v6.css
+            wrongbook-v2/earth-source-trace-p244-v6.js
+            wrongbook-v2/earth-source-trace-p245-v6.css
+            wrongbook-v2/earth-source-trace-p247-v6.js
+            wrongbook-v2/earth-source-trace-p248-v6.css
+            wrongbook-v2/earth-source-trace-p248-v6.js
+            wrongbook-v2/earth-source-trace-p249-v6.js
+            wrongbook-v2/earth-source-trace-p250-v6.js
+            wrongbook-v2/earth-source-trace-p251-v6.js
+            wrongbook-v2/earth-source-trace-p252-v6.css
+            wrongbook-v2/earth-source-trace-p252-v6.js
+            wrongbook-v2/earth-source-trace-p253-correct-v6.css
+            wrongbook-v2/earth-source-trace-v6.css
+            wrongbook-v2/index.html
+          )
+          rm -rf /tmp/earth-prod && mkdir -p /tmp/earth-prod
+          for f in "${FILES[@]}"; do
+            mkdir -p "/tmp/earth-prod/$(dirname "$f")"
+            cp "$f" "/tmp/earth-prod/$f"
+          done
+          git fetch origin main
+          git checkout -B earth-collision-production-20260816 origin/main
+          for f in "${FILES[@]}"; do cp "/tmp/earth-prod/$f" "$f"; done
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('wrongbook-v2/earth-source-prompts-v7-252-253.js')
+          p=Path('wrongbook-v2/index.html')
           s=p.read_text()
-          old="E(49,'大潮：日地月成一線（月相：<b class=\"v4strict-num\">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[48,48,48,48,48]})"
-          new="E(49,'大潮：日地月成一線（月相：<b class=\"v4strict-num\">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，<br>乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[48,48,48,48,48]})"
-          if new not in s:
-              if old not in s: raise SystemExit('q49 source row not found')
-              p.write_text(s.replace(old,new,1))
+          s=s.replace('<script src="./earth-collision-qa-v8.js"></script>','')
+          p.write_text(s)
           PY
+          node --check wrongbook-v2/earth-source-prompt-renderer-v7.js
+          node --check wrongbook-v2/earth-source-prompts-v7-242-243.js
+          node --check wrongbook-v2/earth-source-prompts-v7-244-245.js
           node --check wrongbook-v2/earth-source-prompts-v7-252-253.js
+          node --check wrongbook-v2/earth-source-refine-figure-blanks-v7.js
+          node --check wrongbook-v2/earth-source-refine-p243-v7.js
+          node --check wrongbook-v2/earth-source-refine-p244-v7.js
+          node --check wrongbook-v2/earth-source-trace-p242-v6.js
+          node --check wrongbook-v2/earth-source-trace-p243-v6.js
+          node --check wrongbook-v2/earth-source-trace-p244-v6.js
+          node --check wrongbook-v2/earth-source-trace-p247-v6.js
+          node --check wrongbook-v2/earth-source-trace-p248-v6.js
+          node --check wrongbook-v2/earth-source-trace-p249-v6.js
+          node --check wrongbook-v2/earth-source-trace-p250-v6.js
+          node --check wrongbook-v2/earth-source-trace-p251-v6.js
+          node --check wrongbook-v2/earth-source-trace-p252-v6.js
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-source-prompts-v7-252-253.js
+          git add "${FILES[@]}"
           git diff --cached --check
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Match p253 Q49 photographed line break'
-          git push origin HEAD:earth-collision-zero-20260816
+          test ! -e .github/workflows/earth-collision-qa-temp.yml || git diff --quiet origin/main -- .github/workflows/earth-collision-qa-temp.yml
+          test ! -e .github/workflows/earth-collision-edit-temp.yml || git diff --quiet origin/main -- .github/workflows/earth-collision-edit-temp.yml
+          test ! -e wrongbook-v2/earth-collision-qa-v8.js
+          git commit -m 'Finish Earth source-truth collision reconstruction'
+          git push --force-with-lease origin HEAD:earth-collision-production-20260816
