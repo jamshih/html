@@ -1,0 +1,9 @@
+# superseded by a new branch based on current main; retained only on the old branch
+name: Superseded Earth Atlas Branch
+on:
+  workflow_dispatch:
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo superseded
