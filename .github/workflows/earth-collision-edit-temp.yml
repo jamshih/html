@@ -16,55 +16,52 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: earth-collision-zero-20260816
-      - name: Apply p244 source-truth collision correction
+      - name: Apply remaining-page source-truth collision batch
         run: |
           python3 - <<'PY'
           from pathlib import Path
           root=Path('wrongbook-v2')
           def rep(path, old, new):
               p=root/path; s=p.read_text()
-              if old not in s: raise SystemExit(f'missing target in {path}: {old[:120]}')
+              if old not in s: raise SystemExit(f'missing target in {path}: {old[:100]}')
               p.write_text(s.replace(old,new,1))
 
-          # Exact prompt wording and geometry stay synchronized.
-          manifest='earth-source-prompts-v7-244-245.js'
-          for old,new in {
-            "sourceRect:R(397,488,225,36)":"sourceRect:R(397,500,225,32)",
-            "sourceRect:R(344,385,112,30)":"sourceRect:R(344,382,112,28)",
-            "sourceRect:R(418,416,136,42)":"sourceRect:R(420,435,136,42)",
-            "sourceRect:R(558,438,310,52)":"sourceRect:R(558,430,325,50)",
-            "sourceRect:R(385,928,400,55)":"sourceRect:R(385,938,400,55)",
-            "sourceRect:R(385,990,400,48)":"sourceRect:R(385,1000,400,48)",
-            "sourceRect:R(385,1042,155,30)":"sourceRect:R(385,1052,155,30)",
-            "sourceRect:R(555,1045,120,26)":"sourceRect:R(555,1055,120,26)"
-          }.items(): rep(manifest,old,new)
+          # p245 — separate the galaxy-hierarchy row.
+          rep('earth-source-trace-p245-v6.css','left:420px!important;top:610px!important;width:190px!important','left:420px!important;top:610px!important;width:130px!important')
+          rep('earth-source-trace-p245-v6.css','left:560px!important;top:610px!important;width:170px!important','left:570px!important;top:610px!important;width:150px!important')
 
-          layout='earth-source-trace-p244-v6.js'
-          for old,new in {
-            "colorExamples:{role:'figure',rect:R(30,386,190,82),safeRect:R(30,386,190,82)}":"colorExamples:{role:'figure',rect:R(30,400,190,68),safeRect:R(30,400,190,68)}",
-            "planetLabel:{role:'source-label',rect:R(55,545,80,25)}":"planetLabel:{role:'source-label',rect:R(55,520,70,25)}",
-            "starLabel:{role:'source-label',rect:R(145,550,80,25)}":"starLabel:{role:'source-label',rect:R(145,520,70,25)}",
-            "astronaut:{role:'figure',rect:R(14,560,130,125),safeRect:R(14,560,130,125)}":"astronaut:{role:'figure',rect:R(14,570,100,120),safeRect:R(14,570,100,120)}",
-            "starNode:{role:'figure',rect:R(92,572,88,92),safeRect:R(92,572,88,92)}":"starNode:{role:'figure',rect:R(115,568,80,90),safeRect:R(115,568,80,90)}",
-            "zodiacCopy:{role:'source-label',rect:R(55,838,255,72)}":"zodiacCopy:{role:'source-label',rect:R(55,870,255,68)}",
-            "distanceBox:{role:'figure',rect:R(370,900,455,245),safeRect:R(370,900,455,245)":"distanceBox:{role:'figure',rect:R(370,910,455,245),safeRect:R(370,910,455,245)",
-            "distanceTitle:{role:'source-label',rect:R(382,904,205,24),inside:'distanceBox',localRect:R(12,4,205,24)}":"distanceTitle:{role:'source-label',rect:R(382,914,205,24),inside:'distanceBox',localRect:R(12,4,205,24)}",
-            "parallaxTriangle:{role:'figure',rect:R(500,1074,158,48),inside:'distanceBox',localRect:R(130,174,158,48),safeRect:R(500,1074,158,48)}":"parallaxTriangle:{role:'figure',rect:R(500,1084,158,40),inside:'distanceBox',localRect:R(130,174,158,40),safeRect:R(500,1084,158,40)}",
-            "distanceUse:{role:'source-label',rect:R(382,1118,390,23),inside:'distanceBox',localRect:R(12,218,390,23)}":"distanceUse:{role:'source-label',rect:R(382,1132,390,20),inside:'distanceBox',localRect:R(12,222,390,20)}",
-            "color2ToStar:{path:'M300 360L165 570'":"color2ToStar:{path:'M300 372L175 568'",
-            "q7ToBright:{path:'M398 416L337 548'":"q7ToBright:{path:'M344 414L238 445L238 540L278 568'",
-            "q6ToBright:{path:'M397 518L360 553'":"q6ToBright:{path:'M397 532L397 548L360 560'"
-          }.items(): rep(layout,old,new)
+          # p247 — move the lower solar-position anchors below the long source prompts above them.
+          rep('earth-source-trace-p247-v6.js','v6P247Q(ch,mode,27,68,475,340','v6P247Q(ch,mode,27,68,520,340')
+          rep('earth-source-trace-p247-v6.js','v6P247Q(ch,mode,28,630,535,120','v6P247Q(ch,mode,28,630,570,120')
+          rep('earth-source-trace-p247-v6.js','v6P247Q(ch,mode,29,755,500,120','v6P247Q(ch,mode,29,755,570,120')
 
-          css='earth-source-trace-p244-v6.css'
-          rep(css,'.v8-p244-page .v8-p244-q[data-question="14"]{font-size:13.4px!important}', '.v8-p244-page .v8-p244-q[data-question="14"]{font-size:12.8px!important;line-height:1.25!important}')
-          rep(css,'.v8-p244-page .v8-p244-q[data-question="11"],.v8-p244-page .v8-p244-q[data-question="12"],.v8-p244-page .v8-p244-q[data-question="13"],.v8-p244-page .v8-p244-q[data-question="16"],.v8-p244-page .v8-p244-q[data-question="17"]{white-space:nowrap!important}', '.v8-p244-page .v8-p244-q[data-question="6"],.v8-p244-page .v8-p244-q[data-question="7"],.v8-p244-page .v8-p244-q[data-question="11"],.v8-p244-page .v8-p244-q[data-question="12"],.v8-p244-page .v8-p244-q[data-question="13"],.v8-p244-page .v8-p244-q[data-question="16"],.v8-p244-page .v8-p244-q[data-question="17"]{white-space:nowrap!important}')
+          # p249 — retain the textbook's source grouping while separating evidence/instruction rows.
+          rep('earth-source-trace-p249-v6.js','v6P249Q(ch,22,95,685,300','v6P249Q(ch,22,95,735,300')
+          rep('earth-source-trace-p249-v6.js','v6P249Q(ch,24,730,654,145','v6P249Q(ch,24,720,735,160')
+          rep('earth-source-refine-figure-blanks-v7.js','left:4px;top:0;width:300px;font-size:13px','left:4px;top:-28px;width:300px;font-size:13px')
+
+          # p250 — source-grid coordinates for the complete upper atmosphere block, not isolated nudges.
+          p=root/'earth-source-trace-p250-v6.js'; s=p.read_text()
+          start=s.index('const P250_POS='); end=s.index(';\nconst P250_TXT',start)
+          newpos="const P250_POS={1:[290,282,140],2:[55,365,90],3:[55,515,90],4:[80,565,230],5:[145,405,190],6:[385,395,70],7:[145,475,190],8:[440,360,160],9:[445,397,110],10:[445,445,110],11:[445,497,110],12:[445,550,110],13:[565,410,220],14:[565,455,220],15:[565,505,220],16:[565,550,220],17:[565,600,220],48:[500,690,310],49:[500,730,310],50:[500,780,310],51:[610,860,230],52:[600,920,150],53:[600,970,150],54:[615,1025,220],55:[80,1030,260],56:[80,1090,320],57:[80,1160,300],58:[590,1095,230],59:[590,1150,230],60:[560,1205,275]}"
+          p.write_text(s[:start]+newpos+s[end:])
+
+          # p251 — consecutive ENSO prompts each get a source row.
+          rep('earth-source-trace-p251-v6.js','39:[500,965,340]','39:[500,990,340]')
+
+          # p253 — the bottom half is printed densely in the source; use its full horizontal bands.
+          p=root/'earth-source-trace-p253-correct-v6.css'; s=p.read_text()
+          block='''\n/* NEW_SOURCE_TRUTH second collision pass: source-row density and disjoint active-recall fields. */\n.v6-p253-q[data-question="28"]{top:185px!important}\n.v6-p253-q[data-question="34"]{top:365px!important}\n.v6-p253-q[data-question="43"],.v6-p253-q[data-question="44"],.v6-p253-q[data-question="45"],.v6-p253-q[data-question="46"],.v6-p253-q[data-question="47"],.v6-p253-q[data-question="48"],.v6-p253-q[data-question="49"],.v6-p253-q[data-question="50"]{font-size:11.3px!important;line-height:1.16!important}\n.v6-p253-q[data-question="43"]{left:410px!important;top:890px!important;width:470px!important}\n.v6-p253-q[data-question="44"]{left:410px!important;top:930px!important;width:470px!important}\n.v6-p253-q[data-question="45"]{left:400px!important;top:970px!important;width:500px!important}\n.v6-p253-q[data-question="46"]{left:280px!important;top:1035px!important;width:600px!important}\n.v6-p253-q[data-question="47"]{left:280px!important;top:1080px!important;width:600px!important}\n.v6-p253-q[data-question="48"]{left:180px!important;top:1120px!important;width:680px!important}\n.v6-p253-q[data-question="49"]{left:180px!important;top:1155px!important;width:700px!important}\n.v6-p253-q[data-question="50"]{left:180px!important;top:1210px!important;width:700px!important}\n'''
+          if 'NEW_SOURCE_TRUTH second collision pass' in s: raise SystemExit('p253 second pass already present')
+          p.write_text(s+block)
           PY
-          node --check wrongbook-v2/earth-source-trace-p244-v6.js
-          node --check wrongbook-v2/earth-source-prompts-v7-244-245.js
+          node --check wrongbook-v2/earth-source-trace-p247-v6.js
+          node --check wrongbook-v2/earth-source-trace-p249-v6.js
+          node --check wrongbook-v2/earth-source-trace-p250-v6.js
+          node --check wrongbook-v2/earth-source-trace-p251-v6.js
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add wrongbook-v2/earth-source-trace-p244-v6.js wrongbook-v2/earth-source-trace-p244-v6.css wrongbook-v2/earth-source-prompts-v7-244-245.js
+          git add wrongbook-v2/earth-source-trace-p245-v6.css wrongbook-v2/earth-source-trace-p247-v6.js wrongbook-v2/earth-source-trace-p249-v6.js wrongbook-v2/earth-source-refine-figure-blanks-v7.js wrongbook-v2/earth-source-trace-p250-v6.js wrongbook-v2/earth-source-trace-p251-v6.js wrongbook-v2/earth-source-trace-p253-correct-v6.css
           git diff --cached --check
-          git commit -m 'Clear p244 source-owned collisions'
+          git commit -m 'Clear remaining second-pass Earth collisions'
           git push origin HEAD:earth-collision-zero-20260816
