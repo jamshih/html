@@ -53,7 +53,7 @@
   E(46,'由於月球與太陽對地球的 <b class="v4strict-num">(46)</b> {{0}} 作用，再加上地球自轉，使得海水會有週期性漲退現象',1,['引力']),
   E(47,'因月球每日約公轉13度，導致隔日滿潮時刻會延遲約 <b class="v4strict-num">(47)</b> {{0}} 分鐘',1,['50'],{answerAliases:[['50分鐘']]}),
   E(48,'半日潮：每天漲退2次，潮汐週期約為 <b class="v4strict-num">(48)</b> {{0}}',1,['12小時25分']),
-  E(49,'大潮：日地月成一線（月相：<b class="v4strict-num">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[48,48,48,48,48]}),
+  E(49,'大潮：日地月成一線（月相：<b class="v4strict-num">(49)</b> {{0}} 與 {{1}}），當日滿潮水位較 {{2}}，<br>乾潮水位較 {{3}}，潮差較 {{4}}',5,['朔','望','高','低','大'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[48,48,48,48,48]}),
   E(50,'小潮：日地月成90度（月相：<b class="v4strict-num">(50)</b> {{0}} 與 {{1}}），當日潮差較 {{2}}',3,['上弦','下弦','小'],{replaceFields:true,keepOldAsAliases:false,blankWidths:[52,52,52]})
  ];
 })();
