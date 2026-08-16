@@ -18,6 +18,7 @@ jobs:
       - name: Syntax guard
         run: |
           node --check wrongbook-v2/earth-source-trace-p242-v6.js
+          node --check wrongbook-v2/earth-source-trace-p243-v6.js
           node --check wrongbook-v2/earth-source-prompt-renderer-v7.js
           node --check wrongbook-v2/earth-collision-qa-v8.js
       - name: Install Traditional Chinese font
@@ -25,7 +26,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-cjk
           fc-cache -f
-      - name: Capture current Earth spreads and collision QA
+      - name: Capture all Earth spreads and collision QA
         run: |
           tar -czf /tmp/wrongbook-main-source.tgz wrongbook-v2
           python3 -m http.server 4173 >/tmp/earth-collision-http.log 2>&1 &
@@ -35,31 +36,43 @@ jobs:
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           for CH in 1 2 3 4 5 6; do
-            URL="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+            BASE="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
-              --user-data-dir="/tmp/earth-collision-shot-${CH}" --window-size=2200,1600 --virtual-time-budget=6000 \
-              --screenshot="/tmp/earth-collision-ch${CH}.png" "$URL"
+              --user-data-dir="/tmp/earth-shot-${CH}" --window-size=2200,1600 --virtual-time-budget=7000 \
+              --screenshot="/tmp/earth-collision-ch${CH}.png" "$BASE"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --user-data-dir="/tmp/earth-qa-${CH}" --window-size=2200,1600 --virtual-time-budget=9000 \
+              --dump-dom "${BASE}&collisionqa=1" > "/tmp/earth-collision-qa-ch${CH}.html"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+              --user-data-dir="/tmp/earth-debug-${CH}" --window-size=2200,1600 --virtual-time-budget=9000 \
+              --screenshot="/tmp/earth-collision-debug-ch${CH}.png" "${BASE}&collisiondebug=1"
           done
-          QA='http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=1&mode=recall&collisionqa=1'
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
-            --user-data-dir=/tmp/earth-collision-qa --window-size=2200,1600 --virtual-time-budget=9000 \
-            --dump-dom "$QA" > /tmp/earth-collision-qa.html
-          DEBUG='http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=1&mode=recall&collisiondebug=1'
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
-            --user-data-dir=/tmp/earth-collision-debug --window-size=2200,1600 --virtual-time-budget=9000 \
-            --screenshot=/tmp/earth-collision-debug-ch1.png "$DEBUG"
           python3 - <<'PY'
           from pathlib import Path
           import re,html,json
-          s=Path('/tmp/earth-collision-qa.html').read_text(errors='ignore')
-          m=re.search(r'<pre id="earth-collision-results"[^>]*>(.*?)</pre>',s,re.S)
-          if not m: raise SystemExit('missing earth-collision-results')
-          report=json.loads(html.unescape(re.sub('<[^>]+>','',m.group(1))))
-          p242=next((x for x in report['pages'] if x['page']==242),None)
-          Path('/tmp/earth-collision-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
-          Path('/tmp/p242-collision-report.json').write_text(json.dumps(p242,ensure_ascii=False,indent=2))
-          print(json.dumps(p242,ensure_ascii=False,indent=2))
-          if not p242 or p242['status']!='PASS': raise SystemExit('page 242 collision gate failed')
+          all_pages=[]
+          for ch in range(1,7):
+              s=Path(f'/tmp/earth-collision-qa-ch{ch}.html').read_text(errors='ignore')
+              m=re.search(r'<pre id="earth-collision-results"[^>]*>(.*?)</pre>',s,re.S)
+              if not m: raise SystemExit(f'missing earth-collision-results for chapter {ch}')
+              report=json.loads(html.unescape(re.sub('<[^>]+>','',m.group(1))))
+              rendered=[p for p in report['pages'] if p['status']!='NOT_RENDERED']
+              Path(f'/tmp/earth-collision-report-ch{ch}.json').write_text(json.dumps(rendered,ensure_ascii=False,indent=2))
+              all_pages.extend(rendered)
+          by_page={p['page']:p for p in all_pages}
+          pages=[by_page[p] for p in range(242,254) if p in by_page]
+          final={
+              'pages':pages,
+              'renderedPages':len(pages),
+              'totalUnwantedCollisions':sum(len(p.get('collisions',[])) for p in pages),
+              'connectorTextIntersections':sum(p.get('connectorTextIntersections',0) for p in pages),
+              'connectorFigureIntersections':sum(p.get('connectorFigureIntersections',0) for p in pages),
+              'ok':len(pages)==12 and all(p['status']=='PASS' for p in pages)
+          }
+          Path('/tmp/earth-collision-report.json').write_text(json.dumps(final,ensure_ascii=False,indent=2))
+          print(json.dumps({'pages':[(p['page'],p['status'],len(p.get('collisions',[]))) for p in pages],**{k:final[k] for k in ['renderedPages','totalUnwantedCollisions','connectorTextIntersections','connectorFigureIntersections','ok']}},ensure_ascii=False,indent=2))
+          if not final['ok']:
+              raise SystemExit('12-page Earth collision gate failed')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -67,9 +80,8 @@ jobs:
           name: earth-collision-workspace
           path: |
             /tmp/earth-collision-ch*.png
-            /tmp/earth-collision-debug-ch1.png
-            /tmp/earth-collision-qa.html
-            /tmp/earth-collision-report.json
-            /tmp/p242-collision-report.json
+            /tmp/earth-collision-debug-ch*.png
+            /tmp/earth-collision-qa-ch*.html
+            /tmp/earth-collision-report*.json
             /tmp/wrongbook-main-source.tgz
           retention-days: 3
