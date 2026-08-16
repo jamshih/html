@@ -54,6 +54,7 @@
   E(45,'<b class="v4strict-num">(45)</b> {{0}}',1,['菊石'],{sourceRect:R(455,532,105,32)}),
   E(46,'<b class="v4strict-num">(46)</b> {{0}}',1,['大型哺乳類'],{sourceRect:R(650,532,155,32)}),
   E(47,'<b class="v4strict-num">(47)</b> {{0}}<br>生物演化出硬組織',1,['寒武紀大爆發'],{sourceRect:R(84,497,160,55)}),
-  E(48,'<span class="v7-p243-boundary-part"><b class="v4strict-num">(48)</b> {{0}}</span><span class="v7-p243-boundary-part"><b class="v4strict-num">(49)</b> {{1}}</span>',2,['二疊紀末大滅絕','白堊紀末大滅絕'],{sourceNumbers:[48,49],sourceRect:R(350,500,285,30),sourceLabels:['分界依據','分界依據']})
+  E(48,'<b class="v4strict-num">(48)</b> {{0}}',1,['二疊紀末大滅絕'],{sourceRect:R(360,502,130,28),sourceLabel:'分界依據'}),
+  E(49,'<b class="v4strict-num">(49)</b> {{0}}',1,['白堊紀末大滅絕'],{sourceRect:R(545,502,130,28),fieldSource:{number:48,index:1},sourceLabel:'分界依據'})
  ];
 })();
