@@ -24,7 +24,6 @@ try{
   tab.on('console',m=>{if(m.type()==='error')consoleErrors.push({type:'console',text:m.text(),url:tab.url()});});
   tab.on('pageerror',e=>consoleErrors.push({type:'pageerror',text:String(e),url:tab.url()}));
 
-  // Canonical 910x1270 desktop/source-space captures in both product modes.
   for(const mode of ['recall','learn']){
     for(let chapter=1;chapter<=6;chapter++){
       const url=`${base}?refpreview=1&chapter=${chapter}&mode=${mode}&earthclusterqa=1`;
@@ -70,20 +69,31 @@ try{
     }
   }
 
-  // Existing corpus/source gates are part of the acceptance gate, not optional diagnostics.
+  // Persist canonical evidence before any later gate so a failing assertion still leaves diagnostics.
+  await fs.writeFile(path.join(out,'geometry.json'),JSON.stringify({generatedAt:new Date().toISOString(),geometry,consoleErrors},null,2));
+
+  // Existing E2E suites assume a clean initial app route/state. Run each in a fresh tab and clear
+  // storage first so the preceding 12-page visual traversal cannot contaminate chapter/home state.
   async function runGate(name,query){
-    await tab.setViewport({width:1600,height:1200,deviceScaleFactor:1});
-    await tab.goto(`${base}?${query}`,{waitUntil:'domcontentloaded',timeout:15000});
-    await tab.waitForSelector('#e2e-results',{timeout:30000});
-    const result=await tab.$eval('#e2e-results',el=>({status:el.dataset.status,text:el.textContent||''}));
-    await fs.writeFile(path.join(out,`${name}.json`),result.text);
-    if(result.status!=='PASS')throw new Error(`${name} failed: ${result.text.slice(0,2000)}`);
+    const gate=await browser.newPage();
+    try{
+      await gate.setViewport({width:1600,height:1200,deviceScaleFactor:1});
+      await gate.goto(base,{waitUntil:'domcontentloaded',timeout:15000});
+      await gate.evaluate(()=>{localStorage.clear();sessionStorage.clear();});
+      await gate.goto(`${base}?${query}`,{waitUntil:'domcontentloaded',timeout:15000});
+      await gate.waitForSelector('#e2e-results',{timeout:30000});
+      const result=await gate.$eval('#e2e-results',el=>({status:el.dataset.status,text:el.textContent||''}));
+      await fs.writeFile(path.join(out,`${name}.json`),result.text);
+      if(result.status!=='PASS')throw new Error(`${name} failed: ${result.text.slice(0,2000)}`);
+    } finally {
+      await gate.close();
+    }
   }
   await runGate('source-trace-e2e','sourcee2e=1');
   await runGate('source-refinement-e2e','refinee2e=1');
 
-  // Real mobile presentation audit. Do not force source scale=1 here: the product must fit/scale the
-  // fixed source-space composition coherently at a phone viewport in both Recall and Learn modes.
+  // Mobile presentation audit. Do not force source scale=1 here: the product itself must fit/scale
+  // the fixed source-space composition coherently at a phone viewport in both modes.
   await tab.setViewport({width:390,height:844,deviceScaleFactor:1});
   for(const mode of ['recall','learn']){
     for(let chapter=1;chapter<=6;chapter++){
@@ -109,10 +119,9 @@ try{
     }
   }
 
-  await fs.writeFile(path.join(out,'geometry.json'),JSON.stringify({generatedAt:new Date().toISOString(),geometry,consoleErrors},null,2));
   await fs.writeFile(path.join(out,'mobile.json'),JSON.stringify({generatedAt:new Date().toISOString(),mobile},null,2));
   if(consoleErrors.length)console.error(`Captured ${consoleErrors.length} browser errors; inspect geometry.json`);
-  console.log(`Captured ${geometry.length} canonical Earth page/mode renders, ${mobile.length} mobile chapter/mode states, and both source E2E gates to ${out}`);
+  console.log(`Captured ${geometry.length} canonical renders, ${mobile.length} mobile states, and both source E2E gates to ${out}`);
 } finally {
   await browser.close();
 }
