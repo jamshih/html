@@ -14,3 +14,14 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  link.href='./paper-first-visual-fix-20260817.css?v=20260817-1';
  document.head.appendChild(link);
 })();
+
+// Tutor answers are escaped as plain text for safety. Load the dedicated math layer early;
+// it observes #app and typesets only tutor text once KaTeX is ready.
+(function(){
+ if(document.getElementById('tutorMathV5'))return;
+ const script=document.createElement('script');
+ script.id='tutorMathV5';
+ script.src='./tutor-math-v5.js?wb=20260817-1';
+ script.async=true;
+ document.head.appendChild(script);
+})();
