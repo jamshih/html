@@ -46,14 +46,11 @@
  },12000);
 })();
 
-// AI 或動態資料只要進入一般文字 UI，就再套一次臺灣用語正規化。
 if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  const __baseEsc=esc;
  esc=function(value=''){return __baseEsc(twTaiwanizeString(String(value)))};
 }
 
-// Load narrowly-scoped paper-first visual QA fixes with an explicit version so
-// GitHub Pages/browser caches cannot keep a stale alignment rule alive.
 (function(){
  if(document.getElementById('paperFirstVisualFix20260817'))return;
  const link=document.createElement('link');
@@ -63,8 +60,6 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  document.head.appendChild(link);
 })();
 
-// Tutor answers are escaped as plain text for safety. Load the dedicated math layer early;
-// it observes #app and typesets only tutor text once KaTeX is ready.
 (function(){
  if(document.getElementById('tutorMathV5'))return;
  const script=document.createElement('script');
@@ -74,35 +69,43 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  document.head.appendChild(script);
 })();
 
-// V6 owns the one-and-only tutor collapse control. It uses a new filename so stale V5 assets
-// cannot survive GitHub Pages/browser caches. Keep the boot cloak up until both its CSS and JS
-// have loaded, so users never see the obsolete text-chevron control first.
+// Load all tutor presentation/flow guards before revealing the app. This prevents legacy mode
+// handlers from being briefly interactive and guarantees one consistent tutor UI from first paint.
 (function(){
  const oldFinish=window.__wrongbookFinishBoot;
- let cssReady=false,jsReady=false,pendingFinish=false;
+ let cssReady=false,dialogReady=false,flowReady=false,pendingFinish=false;
  const maybeReady=()=>{
-  if(!cssReady||!jsReady)return;
+  if(!cssReady||!dialogReady||!flowReady)return;
   window.__wrongbookTutorDialogV6Ready=true;
+  window.__wrongbookTutorFlowV7Ready=true;
   if(pendingFinish)oldFinish?.();
  };
  window.__wrongbookFinishBoot=function(){
-  if(window.__wrongbookTutorDialogV6Ready)return oldFinish?.();
+  if(window.__wrongbookTutorDialogV6Ready&&window.__wrongbookTutorFlowV7Ready)return oldFinish?.();
   pendingFinish=true;
  };
 
  const link=document.createElement('link');
  link.id='tutorDialogControlV6Css';
  link.rel='stylesheet';
- link.href='./tutor-dialog-control-v6.css?wb=20260817-1';
+ link.href='./tutor-dialog-control-v6.css?wb=20260817-4';
  link.onload=()=>{cssReady=true;maybeReady()};
  link.onerror=()=>{cssReady=true;maybeReady()};
  document.head.appendChild(link);
 
- const script=document.createElement('script');
- script.id='tutorDialogControlV6';
- script.src='./tutor-dialog-control-v6.js?wb=20260817-1';
- script.async=false;
- script.onload=()=>{jsReady=true;maybeReady()};
- script.onerror=()=>{jsReady=true;maybeReady()};
- document.head.appendChild(script);
+ const dialog=document.createElement('script');
+ dialog.id='tutorDialogControlV6';
+ dialog.src='./tutor-dialog-control-v6.js?wb=20260817-3';
+ dialog.async=false;
+ dialog.onload=()=>{dialogReady=true;maybeReady()};
+ dialog.onerror=()=>{dialogReady=true;maybeReady()};
+ document.head.appendChild(dialog);
+
+ const flow=document.createElement('script');
+ flow.id='tutorFlowFixV7';
+ flow.src='./tutor-flow-fix-v7.js?wb=20260817-1';
+ flow.async=false;
+ flow.onload=()=>{flowReady=true;maybeReady()};
+ flow.onerror=()=>{flowReady=true;maybeReady()};
+ document.head.appendChild(flow);
 })();

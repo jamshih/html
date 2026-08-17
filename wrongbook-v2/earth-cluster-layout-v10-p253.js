@@ -40,12 +40,14 @@
     lines.dataset.sourceClusterOwner='p253-climate-ocean-system';
     lines.dataset.visualOwner='earth-cluster-layout-v10-p253';
 
-    // q40/q41 finish near y=829 and q43 begins near y=867 in the source grid. q42 owns the
-    // wide whitespace band between them and must stay on one row.
-    ownPrompt(page,42,'p253-current-vertical-flow',165,690,835);
+    // Source photograph: q41 owns the two-line surface-current row. q42 is a separate
+    // vertical-flow row beneath it and begins farther right, before the wave subgroup.
+    // Keep a visible baseline gap instead of forcing both rows through the same band.
+    ownPrompt(page,42,'p253-current-vertical-flow',305,550,850);
 
-    // Source grid: q43 occupies the upper wave sub-band; q44 begins below with clear whitespace.
-    ownPrompt(page,43,'p253-wave-nearshore',420,400,867);
+    // Source grid: q43 starts the nearshore-wave subgroup below q42. q44/q45 remain
+    // attached to the same right-hand branch with readable source-like vertical gaps.
+    ownPrompt(page,43,'p253-wave-nearshore',420,400,881);
     ownPrompt(page,44,'p253-wave-nearshore',420,400,931);
     ownPrompt(page,45,'p253-wave-nearshore',420,440,976);
 
@@ -79,7 +81,7 @@
         <path d="M160 784H422V852H160" stroke-width="3" stroke-dasharray="8 6"/>
 
         <path d="M160 878V1008M160 878H168M160 1008H405" stroke-width="4"/>
-        <path d="M405 860V1040M405 870H416M405 930H416M405 975H416M405 1040H416" stroke-width="4"/>
+        <path d="M405 874V1040M405 884H416M405 934H416M405 978H416M405 1040H416" stroke-width="4"/>
 
         <path d="M165 1048H185M185 1048V1238M185 1098H205M185 1148H205M185 1190H205M185 1230H205" stroke-width="4"/>
       </g>

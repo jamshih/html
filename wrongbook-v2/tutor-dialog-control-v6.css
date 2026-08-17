@@ -1,6 +1,87 @@
-/* Wrong Book V6 — single final collapse control, inspired by compact corner/focus controls. */
-.v6-tutor-collapse-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:20;padding:0 0 2px}.v6-tutor-collapse-summary{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:1.2;font-weight:780;color:#4e544d}.v6-tutor-collapse-button{appearance:none;position:relative;isolation:isolate;flex:0 0 auto;width:42px;height:42px;padding:0;border:0;border-radius:15px;background:#232423;color:#f6f7f4;display:grid;place-items:center;cursor:pointer;box-shadow:0 5px 16px rgba(20,22,20,.17);transition:transform .14s ease,background .14s ease,box-shadow .14s ease}.v6-tutor-collapse-button:hover{background:#181918;transform:translateY(-1px);box-shadow:0 8px 22px rgba(20,22,20,.23)}.v6-tutor-collapse-button:active{transform:translateY(0) scale(.96)}.v6-tutor-collapse-button:focus-visible{outline:3px solid rgba(85,123,86,.26);outline-offset:3px}.v6-tutor-collapse-button svg{width:23px;height:23px;display:block;transition:transform .18s ease}.v6-tutor-collapse-button path{fill:none;stroke:currentColor;stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round}.v6-tutor-collapse-button[data-state="collapsed"] svg{transform:rotate(180deg)}.v6-tutor-collapse-button::after{content:attr(data-tooltip);position:absolute;right:calc(100% + 9px);top:50%;z-index:30;transform:translate(5px,-50%);padding:7px 9px;border-radius:8px;background:#1f211f;color:#fff;font-size:11px;font-weight:720;line-height:1;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;box-shadow:0 7px 20px rgba(20,22,20,.2);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}.v6-tutor-collapse-button:hover::after,.v6-tutor-collapse-button:focus-visible::after{opacity:1;visibility:visible;transform:translate(0,-50%)}
-.v5-tutor-dock.v6-tutor-collapsed{gap:0!important;padding:9px 11px!important;overflow:visible!important;min-height:0!important;max-height:none!important}.v5-tutor-dock.v6-tutor-collapsed>:not(.v6-tutor-collapse-bar){display:none!important}.v5-tutor-dock.v6-tutor-collapsed>.v6-tutor-collapse-bar{padding:0!important}.v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-summary{font-size:12px}.v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-button{width:40px;height:40px}
+/* Wrong Book V6 — compact theme-aware collapse control.
+   IMPORTANT: the app theme, not the OS theme, owns this control. The default Wrong Book
+   surface is light, so an OS-level dark preference must never turn this button dark while
+   the rest of the workspace is light. */
+:root{
+  --v6-collapse-bg:#FFFDF8;
+  --v6-collapse-bg-hover:#F4F4F0;
+  --v6-collapse-fg:#666A63;
+  --v6-collapse-border:#E1E0DA;
+  --v6-collapse-shadow:none;
+  --v6-collapse-shadow-hover:0 1px 4px rgba(38,42,37,.08);
+  --v6-collapse-focus:rgba(85,123,86,.22);
+  --v6-collapse-tooltip-bg:#242624;
+  --v6-collapse-tooltip-fg:#F7F7F3;
+}
+
+html[data-theme="light"],body[data-theme="light"],
+html[data-appearance="light"],body[data-appearance="light"],
+html[data-color-scheme="light"],body[data-color-scheme="light"],
+html.light,body.light,html.theme-light,body.theme-light,html.light-mode,body.light-mode{
+  --v6-collapse-bg:#FFFDF8;
+  --v6-collapse-bg-hover:#F4F4F0;
+  --v6-collapse-fg:#666A63;
+  --v6-collapse-border:#E1E0DA;
+  --v6-collapse-shadow:none;
+  --v6-collapse-shadow-hover:0 1px 4px rgba(38,42,37,.08);
+  --v6-collapse-focus:rgba(85,123,86,.22);
+  --v6-collapse-tooltip-bg:#242624;
+  --v6-collapse-tooltip-fg:#F7F7F3;
+}
+
+html[data-theme="dark"],body[data-theme="dark"],
+html[data-appearance="dark"],body[data-appearance="dark"],
+html[data-color-scheme="dark"],body[data-color-scheme="dark"],
+html.dark,body.dark,html.theme-dark,body.theme-dark,html.dark-mode,body.dark-mode{
+  --v6-collapse-bg:#292B28;
+  --v6-collapse-bg-hover:#343733;
+  --v6-collapse-fg:#ECEDE9;
+  --v6-collapse-border:#41443F;
+  --v6-collapse-shadow:none;
+  --v6-collapse-shadow-hover:0 1px 5px rgba(0,0,0,.22);
+  --v6-collapse-focus:rgba(145,183,147,.26);
+  --v6-collapse-tooltip-bg:#ECEDE9;
+  --v6-collapse-tooltip-fg:#242624;
+}
+
+.v6-tutor-collapse-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:20;padding:0 0 2px}
+.v6-tutor-collapse-summary{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:1.2;font-weight:780;color:inherit}
+.v6-tutor-collapse-button{appearance:none;position:relative;isolation:isolate;flex:0 0 auto;width:28px;height:28px;padding:0;border:1px solid var(--v6-collapse-border);border-radius:8px;background:var(--v6-collapse-bg);color:var(--v6-collapse-fg);display:grid;place-items:center;cursor:pointer;box-shadow:var(--v6-collapse-shadow);transition:transform .14s ease,background .14s ease,box-shadow .14s ease,border-color .14s ease,color .14s ease}
+.v6-tutor-collapse-button:hover{background:var(--v6-collapse-bg-hover);transform:translateY(-1px);box-shadow:var(--v6-collapse-shadow-hover)}
+.v6-tutor-collapse-button:active{transform:translateY(0) scale(.96)}
+.v6-tutor-collapse-button:focus-visible{outline:3px solid var(--v6-collapse-focus);outline-offset:2px}
+.v6-tutor-collapse-button svg{width:15px;height:15px;display:block;transition:transform .18s ease}
+.v6-tutor-collapse-button path{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.v6-tutor-collapse-button[data-state="collapsed"] svg{transform:rotate(180deg)}
+.v6-tutor-collapse-button::after{content:attr(data-tooltip);position:absolute;right:calc(100% + 8px);top:50%;z-index:30;transform:translate(4px,-50%);padding:6px 8px;border-radius:7px;background:var(--v6-collapse-tooltip-bg);color:var(--v6-collapse-tooltip-fg);font-size:10px;font-weight:720;line-height:1;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;box-shadow:0 5px 16px rgba(20,22,20,.14);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}
+.v6-tutor-collapse-button:hover::after,.v6-tutor-collapse-button:focus-visible::after{opacity:1;visibility:visible;transform:translate(0,-50%)}
+
+.v5-tutor-dock.v6-tutor-collapsed{gap:0!important;padding:8px 10px!important;overflow:visible!important;min-height:0!important;max-height:none!important}
+.v5-tutor-dock.v6-tutor-collapsed>:not(.v6-tutor-collapse-bar){display:none!important}
+.v5-tutor-dock.v6-tutor-collapsed>.v6-tutor-collapse-bar{padding:0!important}
+.v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-summary{font-size:12px}
+.v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-button{width:28px;height:28px}
 .v5-tutor-dock>.v5-dialog-collapse-bar{display:none!important}
-@media(max-width:700px){.v6-tutor-collapse-bar{position:sticky;top:-8px;z-index:25;background:inherit;padding:5px 1px 4px}.v6-tutor-collapse-summary{font-size:12px}.v6-tutor-collapse-button{width:44px;height:44px;border-radius:15px}.v6-tutor-collapse-button::after{display:none}.v5-tutor-dock.v6-tutor-collapsed{max-height:none!important;overflow:visible!important;bottom:calc(74px + env(safe-area-inset-bottom))}.v5-tutor-dock.v6-tutor-collapsed>.v6-tutor-collapse-bar{position:static}}
+
+/* Diagnosis such as “學生混淆了…” is internal tutor reasoning, not student-facing copy. */
+.v5-tutor-stage-head strong:not(.is-right){display:none!important}
+
+/* Students may revisit any already-generated tutor step without asking the model again. */
+.v7-tutor-step-nav{margin-left:auto;display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.v7-tutor-step-nav button{appearance:none;width:26px;height:26px;padding:0;border:1px solid var(--v6-collapse-border);border-radius:7px;background:var(--v6-collapse-bg);color:var(--v6-collapse-fg);display:grid;place-items:center;cursor:pointer;font:inherit;font-size:15px;line-height:1;box-shadow:none}
+.v7-tutor-step-nav button:hover:not(:disabled){background:var(--v6-collapse-bg-hover)}
+.v7-tutor-step-nav button:disabled{opacity:.32;cursor:default}
+.v7-tutor-step-nav span{min-width:40px;text-align:center;color:var(--muted,#73756F);font-size:9px;font-weight:760;white-space:nowrap}
+
+@media(max-width:700px){
+  .v6-tutor-collapse-bar{position:sticky;top:-8px;z-index:25;background:inherit;padding:4px 1px 3px}
+  .v6-tutor-collapse-summary{font-size:12px}
+  .v6-tutor-collapse-button{width:34px;height:34px;border-radius:10px}
+  .v6-tutor-collapse-button svg{width:17px;height:17px}
+  .v6-tutor-collapse-button::after{display:none}
+  .v5-tutor-dock.v6-tutor-collapsed{max-height:none!important;overflow:visible!important;bottom:calc(74px + env(safe-area-inset-bottom))}
+  .v5-tutor-dock.v6-tutor-collapsed>.v6-tutor-collapse-bar{position:static}
+  .v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-button{width:34px;height:34px}
+  .v7-tutor-step-nav button{width:30px;height:30px}
+}
 @media(prefers-reduced-motion:reduce){.v6-tutor-collapse-button,.v6-tutor-collapse-button svg,.v6-tutor-collapse-button::after{transition:none}}
