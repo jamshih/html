@@ -1,0 +1,75 @@
+name: Wrongbook Clearnote Termguard Hotfix Temp QA
+
+on:
+  push:
+    branches: [wrongbook-clearnote-termguard-hotfix-20260817]
+    paths:
+      - 'wrongbook-v2/**'
+      - '.github/workflows/wrongbook-clearnote-termguard-hotfix-temp.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: for f in wrongbook-v2/*.js; do node --check "$f"; done
+      - name: Exact production Taiwan terminology guard
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const curriculumFiles=['curriculum-tw.js','curriculum-more-tw.js','curriculum-tw-fixes.js'];
+          const src=curriculumFiles.map(f=>fs.readFileSync('wrongbook-v2/'+f,'utf8')).join('\n')+'\n;globalThis.__C=CURRICULUM_TW;';
+          const ctx={};vm.createContext(ctx);vm.runInContext(src,ctx);
+          const text=JSON.stringify(ctx.__C);
+          const banned=['線粒體','高爾基體','溶酶體','概率','種群','群落','生境','質粒','數據','視頻','信息','矢量','網絡','軟件','硬件','激活能'];
+          for(const term of banned)if(text.includes(term))throw new Error(`normalized curriculum contains non-Taiwan preferred term: ${term}`);
+          if(/(^|[^演])算法/.test(text))throw new Error('normalized curriculum contains 算法 instead of 演算法');
+          const otherFiles=fs.readdirSync('wrongbook-v2').filter(f=>/\.(js|html)$/.test(f)&&!curriculumFiles.includes(f)&&f!=='tw-ui-guard.js');
+          for(const f of otherFiles){let t=fs.readFileSync('wrongbook-v2/'+f,'utf8');if(f==='product-engine-v3.js')t=t.replace(/\.replaceAll\('[^']+','[^']+'\)/g,'');for(const term of banned)if(t.includes(term))throw new Error(`${f} contains non-Taiwan preferred term: ${term}`);if(/(^|[^演])算法/.test(t))throw new Error(`${f} contains 算法 instead of 演算法`);}
+          console.log('Taiwan terminology guard passed after normalization');
+          NODE
+      - name: Install fonts and start server
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fc-cache -f
+          nohup python3 -m http.server 4173 >/tmp/hotfix-http.log 2>&1 &
+          sleep 1
+          curl -fsS http://127.0.0.1:4173/wrongbook-v2/ >/dev/null
+      - name: Desktop and mobile mind-map gates
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          for SPEC in desktop:1600,1200 mobile:390,844; do
+            NAME="${SPEC%%:*}"; SIZE="${SPEC#*:}"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/hotfix-$NAME" --window-size="$SIZE" --virtual-time-budget=120000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?mindmapskillqa=1" > "/tmp/hotfix-$NAME.html"
+            python3 - "$NAME" <<'PY'
+          from pathlib import Path
+          import re,html,json,sys
+          name=sys.argv[1]; t=Path(f'/tmp/hotfix-{name}.html').read_text(errors='replace')
+          m=re.search(r'<pre id="mindmap-skill-qa-results" data-status="([^"]+)">(.*?)</pre>',t,re.S)
+          if not m: raise SystemExit(f'{name}: missing QA payload')
+          d=json.loads(html.unescape(m.group(2))); print(name,d.get('status'),d.get('chaptersRendered'),d.get('canonicalRendered'),d.get('totals'))
+          if d.get('status')!='PASS': raise SystemExit(1)
+          PY
+          done
+      - name: Current Earth regressions
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          for Q in sourcee2e=1 refinee2e=1; do
+            NAME="${Q%%=*}"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/hotfix-$NAME" --window-size=1440,1000 --virtual-time-budget=30000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?$Q" > "/tmp/hotfix-$NAME.html"
+            python3 - "$NAME" <<'PY'
+          from pathlib import Path
+          import re,html,json,sys
+          name=sys.argv[1]; t=Path(f'/tmp/hotfix-{name}.html').read_text(errors='replace')
+          m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',t,re.S)
+          if not m: raise SystemExit(f'{name}: missing E2E payload')
+          d=json.loads(html.unescape(m.group(2))); print(name,d.get('status'))
+          if d.get('status')!='PASS': raise SystemExit(1)
+          PY
+          done
