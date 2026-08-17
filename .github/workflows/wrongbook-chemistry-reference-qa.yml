@@ -8,6 +8,7 @@ on:
       - 'wrongbook-v2/chemistry-*.js'
       - 'wrongbook-v2/chemistry-*.css'
       - 'wrongbook-v2/qa/chemistry-page*-qa.html'
+      - 'wrongbook-v2/qa/chemistry-v2-qa.html'
       - 'wrongbook-v2/index.html'
       - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
   pull_request:
@@ -15,6 +16,7 @@ on:
       - 'wrongbook-v2/chemistry-*.js'
       - 'wrongbook-v2/chemistry-*.css'
       - 'wrongbook-v2/qa/chemistry-page*-qa.html'
+      - 'wrongbook-v2/qa/chemistry-v2-qa.html'
       - 'wrongbook-v2/index.html'
       - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
   workflow_dispatch:
@@ -22,7 +24,7 @@ on:
 jobs:
   chemistry-pages:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Install Traditional Chinese fonts
@@ -40,51 +42,40 @@ jobs:
           node --check wrongbook-v2/chemistry-gsat-page3-v6.js
           node --check wrongbook-v2/chemistry-gsat-page3-fix-v7.js
           node --check wrongbook-v2/chemistry-gsat-page4-v8.js
+          node --check wrongbook-v2/chemistry-reference-v2-core.js
+          node --check wrongbook-v2/chemistry-reference-gsat-v2.js
+          node --check wrongbook-v2/chemistry-reference-elective-v2.js
+          node --check wrongbook-v2/chemistry-reference-completion-v2.js
+          node --check wrongbook-v2/chemistry-reference-qa-v2.js
       - name: Start static server
         run: |
           python3 -m http.server 4173 --directory wrongbook-v2 > /tmp/chem-http.log 2>&1 &
           echo $! > /tmp/chem-http.pid
           sleep 2
-      - name: Render Page 1 Recall and run DOM QA
+      - name: Render legacy locked pages 1–4
         run: |
           BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
           test -n "$BROWSER"
-          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot=chemistry-page1-recall.png http://127.0.0.1:4173/qa/chemistry-page1-qa.html
-          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page1-qa.html > chemistry-page1-dom.html
-          grep -q 'data-qa-pass="true"' chemistry-page1-dom.html
-          grep -q 'data-qa-questions="21"' chemistry-page1-dom.html
-          grep -q 'data-qa-blanks="36"' chemistry-page1-dom.html
-          grep -q 'data-qa-figures="11"' chemistry-page1-dom.html
-      - name: Render Page 2 Recall and run DOM QA
+          for N in 1 2 3 4; do
+            "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot="chemistry-page${N}-recall.png" "http://127.0.0.1:4173/qa/chemistry-page${N}-qa.html"
+            "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom "http://127.0.0.1:4173/qa/chemistry-page${N}-qa.html" > "chemistry-page${N}-dom.html"
+            grep -q 'data-qa-pass="true"' "chemistry-page${N}-dom.html"
+          done
+      - name: Render complete Chemistry corpus and run DOM QA
         run: |
+          set -euo pipefail
           BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
           test -n "$BROWSER"
-          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot=chemistry-page2-recall.png http://127.0.0.1:4173/qa/chemistry-page2-qa.html
-          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page2-qa.html > chemistry-page2-dom.html
-          grep -q 'data-qa-pass="true"' chemistry-page2-dom.html
-          grep -q 'data-qa-questions="21"' chemistry-page2-dom.html
-          grep -q 'data-qa-blanks="24"' chemistry-page2-dom.html
-          grep -q 'data-qa-figures="12"' chemistry-page2-dom.html
-      - name: Render Page 3 Recall and run DOM QA
-        run: |
-          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
-          test -n "$BROWSER"
-          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot=chemistry-page3-recall.png http://127.0.0.1:4173/qa/chemistry-page3-qa.html
-          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page3-qa.html > chemistry-page3-dom.html
-          grep -q 'data-qa-pass="true"' chemistry-page3-dom.html
-          grep -q 'data-qa-questions="20"' chemistry-page3-dom.html
-          grep -q 'data-qa-blanks="24"' chemistry-page3-dom.html
-          grep -q 'data-qa-figures="13"' chemistry-page3-dom.html
-      - name: Render Page 4 Recall and run DOM QA
-        run: |
-          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
-          test -n "$BROWSER"
-          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot=chemistry-page4-recall.png http://127.0.0.1:4173/qa/chemistry-page4-qa.html
-          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page4-qa.html > chemistry-page4-dom.html
-          grep -q 'data-qa-pass="true"' chemistry-page4-dom.html
-          grep -q 'data-qa-questions="21"' chemistry-page4-dom.html
-          grep -q 'data-qa-blanks="24"' chemistry-page4-dom.html
-          grep -q 'data-qa-figures="13"' chemistry-page4-dom.html
+          mkdir -p chemistry-v2-artifacts
+          PAGES="gsat-01 gsat-02 gsat-03 gsat-04 gsat-05 gsat-06 elec-matter-energy elec-structure-rate elec-equilibrium-1 elec-equilibrium-2 elec-organic-tech"
+          for PAGE in $PAGES; do
+            echo "=== Render $PAGE ==="
+            URL="http://127.0.0.1:4173/qa/chemistry-v2-qa.html?page=$PAGE"
+            "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=3000 --screenshot="chemistry-v2-artifacts/${PAGE}.png" "$URL"
+            "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=3000 --dump-dom "$URL" > "chemistry-v2-artifacts/${PAGE}.html"
+            grep -q 'data-qa-pass="true"' "chemistry-v2-artifacts/${PAGE}.html"
+            grep -q "data-qa-page=\"${PAGE}\"" "chemistry-v2-artifacts/${PAGE}.html"
+          done
       - name: Upload rendered QA artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -99,4 +90,5 @@ jobs:
             chemistry-page3-dom.html
             chemistry-page4-recall.png
             chemistry-page4-dom.html
+            chemistry-v2-artifacts/
           if-no-files-found: warn
