@@ -63,12 +63,8 @@
     right.dataset.sourceCluster='p247-ice-age-panel';
     right.dataset.visualOwner='earth-cluster-layout-v9';
 
-    // The old panel baked q38-q40 answers into permanent prose. Keep only non-question printed
-    // source text. The horizontal divider is a real source border, not a collision workaround.
     right.innerHTML='<b class="v9-p247-ice-title">★ 易使地球進入冰期的組合：</b><p class="v9-p247-ice-support">到高緯度的太陽輻射較小，高緯度的冰原較易往外擴展</p><i class="v9-p247-ice-separator" data-source-object="p247-ice-panel-divider" data-source-role="border" aria-hidden="true"></i><b class="v9-p247-comparison-heading">同一束光線直射與斜射地表之比較：</b>';
 
-    // Remove the answer-bearing duplicate sentence from the left legacy scaffold. The interactive
-    // question remains the single source owner at the photographed location.
     const ps=[...left.querySelectorAll('p')];
     if(ps.length>2)ps[ps.length-1].remove();
 
@@ -79,8 +75,8 @@
 
     move(page,right,38,[40,29,165,null],'p247-ice-age-panel');
     move(page,right,39,[202,29,180,null],'p247-ice-age-panel');
-    move(page,right,40,[40,120,330,null],'p247-ice-age-panel');
-    move(page,right,41,[32,344,355,null],'p247-ice-age-panel');
+    move(page,right,40,[24,120,365,null],'p247-ice-age-panel');
+    move(page,right,41,[24,344,365,null],'p247-ice-age-panel');
     right.appendChild(figure);
     own(figure,'p247-insolation-comparison','figure','p247-ice-age-panel');
     setBox(figure,34,207,330,137);
@@ -98,8 +94,6 @@
     own(airTitle,'p250-air-layer-title','heading','p250-atmosphere-layers');
     airTitle.dataset.sourceCluster='p250-atmosphere-title';
 
-    // q48/q49 used to be painted a second time by .v6-p250-method. The cluster now owns only
-    // its connector; all educational wording is rendered once by the verified prompts.
     method.innerHTML='<svg class="v9-p250-method-branch" data-source-object="p250-saturation-branch" data-source-role="connector" viewBox="0 0 420 175" preserveAspectRatio="none" aria-hidden="true"><path d="M10 14V148M10 148H82"/><circle cx="10" cy="14" r="7"/><circle cx="10" cy="148" r="7"/></svg>';
     method.dataset.sourceCluster='p250-saturation-methods';
     method.dataset.visualOwner='earth-cluster-layout-v9';
@@ -107,8 +101,6 @@
     move(page,method,49,[18,64,400,null],'p250-saturation-methods');
     move(page,method,50,[82,128,335,null],'p250-saturation-methods');
 
-    // The legacy RH element permanently printed the numerator/denominator answers. It is now a
-    // parent coordinate space containing only source decoration plus q51-q54 as the single owners.
     rh.innerHTML='<i class="v9-p250-fraction-rule" data-source-object="p250-rh-fraction-rule" data-source-role="border" aria-hidden="true"></i><span class="v9-p250-rh-times" data-source-object="p250-rh-times" data-source-role="source-label">×100%</span>';
     rh.dataset.sourceCluster='p250-relative-humidity';
     rh.dataset.visualOwner='earth-cluster-layout-v9';
@@ -117,7 +109,6 @@
     move(page,rh,53,[92,91,235,null],'p250-relative-humidity');
     move(page,rh,54,[118,147,305,null],'p250-relative-humidity');
 
-    // Keep the two lower study groups coherent as parents instead of six unrelated page coordinates.
     const wet=document.createElement('div');
     wet.className='v9-p250-wetbulb-cluster';wet.dataset.sourceCluster='p250-wetbulb-method';wet.dataset.visualOwner='earth-cluster-layout-v9';page.appendChild(wet);
     move(page,wet,55,[8,22,270,null],'p250-wetbulb-method');
@@ -130,8 +121,6 @@
     move(page,dew,59,[105,64,235,null],'p250-dewpoint-rh');
     move(page,dew,60,[0,117,330,null],'p250-dewpoint-rh');
 
-    // One source connector owner replaces the shifted legacy spine. It is page-level because it
-    // intentionally connects three neighboring clusters.
     if(branches){
       branches.innerHTML='<path d="M405 719V1143M405 850H477M82 989H405M405 989H418M405 1050H472M405 1143H472" fill="none"/><g class="v9-p250-spine-nodes"><circle cx="405" cy="719" r="7"/><circle cx="405" cy="850" r="7"/><circle cx="405" cy="989" r="7"/><circle cx="405" cy="1050" r="7"/><circle cx="405" cy="1143" r="7"/></g>';
       own(branches,'p250-humidity-spine','connector','p250-humidity-system');
