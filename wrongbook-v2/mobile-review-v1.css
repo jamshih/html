@@ -1,0 +1,153 @@
+/* Mobile review-first layer: larger type, touch-first review cards, and viewport-fixed navigation. */
+@media (max-width:1024px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  body{font-size:17px;line-height:1.55}
+  .app-shell{display:block;min-height:100dvh;transform:none!important}
+  .main{min-height:100dvh;transform:none!important}
+  .sidebar{display:none!important}
+  .topbar{height:64px;padding:0 16px;position:sticky;top:0;z-index:60}
+  .mobile-menu-btn{display:grid!important}
+  .topbar-actions .ghost-btn{display:none}
+  .crumb{font-size:14px;max-width:58vw}
+  .content{padding:18px 14px calc(108px + env(safe-area-inset-bottom))}
+
+  .page-head{align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:18px}
+  .page-head h2{font-size:28px;line-height:1.22;letter-spacing:-.02em;margin:0 0 6px}
+  .page-head p{font-size:16px;line-height:1.6}
+  .section-title{margin:8px 0 12px}
+  .section-title h3{font-size:22px;line-height:1.25}
+  .section-title small{font-size:14px}
+  .panel-head{padding:15px 16px}
+  .panel-head h3{font-size:18px;line-height:1.35}
+  .meta{font-size:14px;line-height:1.45}
+  .primary-btn,.soft-btn,.ghost-btn,.text-btn,.danger-btn{min-height:46px;font-size:16px;border-radius:12px;padding:11px 14px}
+  .subject-tabs{gap:9px;padding-bottom:7px}
+  .subject-tab{min-height:44px;font-size:15px;padding:9px 13px}
+
+  /* The bottom navigation is attached to the viewport, never to page content. */
+  .mobile-nav{
+    position:fixed!important;
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    top:auto!important;
+    width:100%!important;
+    margin:0!important;
+    transform:none!important;
+    z-index:2147483000!important;
+    background:rgba(255,255,255,.97)!important;
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+    border-top:1px solid var(--line)!important;
+    padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))!important;
+    box-shadow:0 -8px 28px rgba(28,35,31,.06);
+  }
+  .mobile-nav button{min-height:56px!important;gap:3px!important;font-size:12px!important;border-radius:12px!important}
+  .mobile-nav button svg{width:22px!important;height:22px!important}
+  .mobile-nav .capture-mobile{width:auto!important;height:56px!important;min-height:56px!important;margin:0!important;border-radius:12px!important;background:transparent!important;color:#6e7380!important;box-shadow:none!important}
+  .mobile-nav .capture-mobile:active{background:var(--surface-2)!important}
+
+  /* Home becomes a quick review dashboard on phones/tablets. */
+  .desktop-home-only,.desktop-notebook-only{display:none!important}
+  .mobile-study-home,.mobile-notebook-page,.mobile-problem-review,.mobile-review-page{display:block}
+  .mobile-review-hero{padding:22px 20px;border-radius:20px;background:var(--surface);border:1px solid var(--line);box-shadow:0 10px 28px rgba(30,39,33,.05)}
+  .mobile-review-hero .eyebrow{font-size:14px;font-weight:800;color:var(--muted);margin-bottom:5px}
+  .mobile-review-hero h2{font-size:36px;line-height:1.12;letter-spacing:-.035em;margin:0}
+  .mobile-review-hero h2 strong{font-size:48px;color:var(--red)}
+  .mobile-review-hero p{font-size:16px;color:var(--muted);line-height:1.55;margin:10px 0 18px}
+  .mobile-review-hero .primary-btn{width:100%;min-height:54px;font-size:18px}
+  .mobile-review-summary{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0 4px}
+  .mobile-review-summary>div{padding:12px;border-radius:13px;background:var(--surface-2)}
+  .mobile-review-summary strong{display:block;font-size:22px;line-height:1.2}
+  .mobile-review-summary span{display:block;margin-top:3px;color:var(--muted);font-size:13px}
+
+  .mobile-section{margin-top:28px}
+  .mobile-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 11px}
+  .mobile-section-head h3{font-size:22px;line-height:1.25;margin:0}
+  .mobile-section-head .text-btn{font-size:15px;min-height:36px;padding:6px 8px}
+  .mobile-review-list{display:grid;border-top:1px solid var(--line)}
+  .mobile-review-row{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;padding:16px 3px;display:grid;grid-template-columns:12px minmax(0,1fr) auto;align-items:center;gap:12px;cursor:pointer}
+  .mobile-review-row:active{background:var(--surface-2)}
+  .mobile-review-row .subject-dot{width:9px;height:9px;border-radius:50%;background:var(--subject-color,var(--accent))}
+  .mobile-review-row strong{display:block;font-size:18px;line-height:1.42}
+  .mobile-review-row small{display:block;margin-top:4px;color:var(--muted);font-size:14px;line-height:1.4}
+  .mobile-row-status{font-size:13px;font-weight:750;white-space:nowrap;padding:5px 8px;border-radius:999px;background:var(--green-bg);color:var(--green)}
+  .mobile-row-status.paper{background:var(--surface-2);color:var(--muted)}
+  .mobile-empty{padding:20px 4px;color:var(--muted);font-size:16px}
+
+  /* Wrong-book browsing is card/list based on mobile rather than a squeezed desktop table. */
+  .mobile-notebook-intro{margin-bottom:14px}
+  .mobile-notebook-intro p{font-size:16px;color:var(--muted);margin:6px 0 0}
+  .mobile-notebook-list{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:0 15px}
+
+  /* Mobile detail is for remembering the mistake; handwriting stays optional. */
+  .mobile-problem-review{display:grid;gap:14px}
+  .mobile-problem-review .back-link{justify-content:flex-start;width:max-content;font-size:15px;padding-left:0}
+  .mobile-problem-title h1{font-size:27px;line-height:1.35;letter-spacing:-.02em;margin:4px 0 8px}
+  .mobile-problem-title p{font-size:15px;color:var(--muted);margin:0}
+  .mobile-original-question,.mobile-mistake-card,.mobile-truth-card,.mobile-review-choice{padding:18px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
+  .mobile-card-label{font-size:13px;font-weight:850;color:var(--muted);letter-spacing:.02em;margin-bottom:8px}
+  .mobile-original-question .question-copy{font-size:18px;line-height:1.7;font-weight:650;white-space:pre-wrap}
+  .mobile-original-question img{display:block;width:100%;max-height:360px;object-fit:contain;border-radius:12px;margin-bottom:14px;background:#fafafa}
+  .mobile-mistake-card{background:var(--red-bg);border-color:rgba(217,79,92,.18)}
+  .mobile-mistake-card h3,.mobile-truth-card h3,.mobile-review-choice h3{font-size:20px;line-height:1.35;margin:0 0 9px}
+  .mobile-mistake-card p,.mobile-truth-card p,.mobile-review-choice p{font-size:16px;line-height:1.65;margin:0}
+  .mobile-answer-compare{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+  .mobile-answer-compare>div{padding:12px;border-radius:12px;background:rgba(255,255,255,.72)}
+  .mobile-answer-compare span{display:block;font-size:13px;color:var(--muted)}
+  .mobile-answer-compare strong{display:block;margin-top:3px;font-size:19px}
+  .mobile-truth-list{display:grid;gap:9px;margin-top:10px}
+  .mobile-truth-line{padding:11px 12px;border-radius:12px;background:var(--green-bg);color:#226e4f;font-size:16px;line-height:1.55}
+  .mobile-review-choice .primary-btn,.mobile-review-choice .soft-btn{width:100%;min-height:52px;margin-top:12px}
+  .mobile-paper-note{display:flex;gap:9px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--surface-2);font-size:14px;color:var(--muted);line-height:1.5;margin-top:12px}
+
+  /* Dedicated direct-answer review flow. */
+  .mobile-review-page .page-head{margin-bottom:14px}
+  .mobile-review-page .mode-switch{width:100%;display:grid;grid-template-columns:1fr 1fr;padding:4px}
+  .mobile-review-page .mode-switch button{min-height:44px;font-size:15px}
+  .mobile-review-current{padding:18px 16px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
+  .mobile-review-context{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .mobile-review-context .meta{font-size:14px}
+  .mobile-direct-badge{font-size:13px;font-weight:800;color:var(--green);background:var(--green-bg);padding:5px 8px;border-radius:999px;white-space:nowrap}
+  .mobile-review-mistake{padding:13px 14px;border-radius:13px;background:var(--amber-bg);color:#795019;font-size:15px;line-height:1.55;margin-bottom:14px}
+  .mobile-review-mistake strong{display:block;font-size:13px;margin-bottom:3px}
+  .mobile-review-page .redo-question{font-size:21px;line-height:1.65;font-weight:750;margin:8px 0 16px}
+  .mobile-review-page .redo-option{min-height:58px;padding:14px 15px;font-size:17px;line-height:1.5;border-radius:14px;margin:9px 0}
+  .mobile-review-page .redo-option strong{font-size:18px}
+  .mobile-review-page .page-actions{display:grid;grid-template-columns:.7fr 1.3fr;gap:9px;width:100%;margin-top:16px!important}
+  .mobile-review-page .page-actions>*{width:100%;min-height:50px}
+  .mobile-review-page .callout{font-size:15px;line-height:1.6}
+  .mobile-review-page .fill-card{padding:4px;max-width:none}
+  .mobile-review-page .fill-sentence{font-size:23px;line-height:1.85;margin:16px 0}
+  .mobile-review-page .tutor-input{grid-template-columns:1fr;gap:9px}
+  .mobile-review-page .tutor-input input{min-height:50px;font-size:17px}
+  .mobile-review-queue{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none;padding:2px 0 7px;margin:14px 0 0}
+  .mobile-review-queue::-webkit-scrollbar{display:none}
+  .mobile-review-chip{flex:0 0 auto;max-width:78vw;border:1px solid var(--line);background:var(--surface);border-radius:13px;padding:10px 12px;text-align:left;font-size:14px;line-height:1.4}
+  .mobile-review-chip.active{border-color:var(--accent);background:var(--accent-2);font-weight:750}
+  .mobile-review-chip small{display:block;color:var(--muted);margin-top:2px;font-size:12px}
+  .mobile-paper-deferred{margin-top:20px;padding:15px 16px;border-radius:15px;background:var(--surface-2);color:var(--muted);font-size:15px;line-height:1.55}
+
+  .mobile-drawer{z-index:2147483100}
+}
+
+@media (max-width:520px){
+  .content{padding:15px 12px calc(104px + env(safe-area-inset-bottom))}
+  .page-head h2{font-size:26px}
+  .mobile-review-hero{padding:20px 17px}
+  .mobile-review-hero h2{font-size:32px}
+  .mobile-review-hero h2 strong{font-size:44px}
+  .mobile-review-summary strong{font-size:20px}
+  .mobile-review-row strong{font-size:17px}
+  .mobile-answer-compare{grid-template-columns:1fr}
+}
+
+/* iPhone landscape can exceed the legacy 860px breakpoint; keep the nav viewport-fixed there too. */
+@media (orientation:landscape) and (max-height:520px) and (max-width:1024px){
+  .topbar{height:56px}
+  .content{padding-top:12px;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  .mobile-nav button,.mobile-nav .capture-mobile{min-height:48px!important;height:48px!important}
+  .mobile-nav button svg{width:20px!important;height:20px!important}
+}
