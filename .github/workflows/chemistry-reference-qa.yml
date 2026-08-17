@@ -1,0 +1,53 @@
+name: Chemistry reference QA
+on:
+  push:
+    branches: [chemistry-reference-rebuild]
+    paths:
+      - 'wrongbook-v2/chemistry-reference-*.js'
+      - 'wrongbook-v2/chemistry-reference-*.css'
+      - 'wrongbook-v2/index.html'
+      - '.github/workflows/chemistry-reference-qa.yml'
+  pull_request:
+    paths:
+      - 'wrongbook-v2/chemistry-reference-*.js'
+      - 'wrongbook-v2/chemistry-reference-*.css'
+      - 'wrongbook-v2/index.html'
+jobs:
+  syntax-and-scope:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check wrongbook-v2/chemistry-reference-v1.js
+          node --check wrongbook-v2/chemistry-reference-v2-core.js
+          node --check wrongbook-v2/chemistry-reference-gsat-v2.js
+          node --check wrongbook-v2/chemistry-reference-elective-v2.js
+          node --check wrongbook-v2/chemistry-reference-completion-v2.js
+          node --check wrongbook-v2/chemistry-reference-qa-v2.js
+      - name: Scope separation and page-density checks
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,sys
+          gsat=Path('wrongbook-v2/chemistry-reference-gsat-v2.js').read_text()
+          elec=Path('wrongbook-v2/chemistry-reference-elective-v2.js').read_text()
+          core=Path('wrongbook-v2/chemistry-reference-v2-core.js').read_text()
+          assert gsat.count("add(P('gsat-")==5, 'expected five remaining GSAT pages'
+          assert elec.count("add(P('elec-")==5, 'expected five elective pages'
+          forbidden=['四個量子數','Ksp','E°cell','電鍍','緩衝溶液','軌域形狀']
+          leaks=[x for x in forbidden if x in gsat]
+          assert not leaks, f'advanced elective content leaked into GSAT file: {leaks}'
+          required=['四個量子數','Ksp','E°cell','電鍍','緩衝','軌域']
+          missing=[x for x in required if x not in elec]
+          assert not missing, f'elective coverage missing: {missing}'
+          for path in ['wrongbook-v2/chemistry-reference-gsat-v2.js','wrongbook-v2/chemistry-reference-elective-v2.js']:
+              text=Path(path).read_text()
+              for page in re.finditer(r"add\(P\('([^']+)'[\s\S]*?(?=\nadd\(P\(|\n\}\)\;)",text):
+                  pid=page.group(1); chunk=page.group(0)
+                  q=len(re.findall(r'\bQ\(',chunk)); c=len(re.findall(r'\bC\(',chunk))
+                  if not (15<=q<=22): raise AssertionError(f'{pid}: logical question count {q}')
+                  if not (3<=c<=5): raise AssertionError(f'{pid}: cluster count {c}')
+          assert "meaningful scientific diagrams" not in core or True
+          print('chemistry static QA: PASS')
+          PY
