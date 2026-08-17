@@ -115,8 +115,8 @@
      17:[540,162,286],
      18:[540,274,286],
      19:[540,333,286],
-     20:[145,460,690],
-     21:[82,533,770],
+     20:[145,452,690],
+     21:[82,548,770],
      22:[95,682,285],
      24:[680,653,170],
      25:[105,778,278],
@@ -135,8 +135,8 @@
    if(q23){
      setRect(q23,400,650,510,245);q23.dataset.parentId='p249-boundaries';
      const fields=directSpans(q23);
-     const xs=[24,150,248,300];
-     const ys=[42,18,42,-8];
+     const xs=[24,150,248,380];
+     const ys=[42,18,42,80];
      fields.forEach((el,i)=>{if(Number.isFinite(xs[i]))el.style.setProperty('left',`${xs[i]}px`,'important');if(Number.isFinite(ys[i]))el.style.setProperty('top',`${ys[i]}px`,'important');});
    }
    const taiwan=root.querySelector('.v6-p249-taiwan');setRect(taiwan,383,885,405,300);
