@@ -1,0 +1,191 @@
+/* Earth cluster ownership v9 — source-space geometry only.
+   Canonical source space is 910x1270. These rules intentionally override legacy global geometry
+   only for reconstructed Earth clusters; unrelated pages and subjects are untouched. */
+
+/* ---------------- shared blank geometry ----------------
+   Recall inputs and Learn answers occupy the same source blank rectangle. Answer reveal must never
+   make a prompt taller or push neighboring figure/text geometry. */
+.v9-p246-zodiac-cluster .v4strict-fill,
+.v6-p247-bottom .v4strict-fill,
+.v6-p250-method .v4strict-fill,
+.v6-p250-rh .v4strict-fill,
+.v9-p250-wetbulb-cluster .v4strict-fill,
+.v9-p250-dewpoint-cluster .v4strict-fill{
+  display:inline-block!important;width:var(--fw)!important;min-width:var(--fw)!important;
+  height:20px!important;min-height:20px!important;line-height:20px!important;
+  vertical-align:baseline!important;margin:0 2px!important;padding:0!important;
+  position:relative!important;box-sizing:border-box!important;text-align:center!important;
+}
+.v9-p246-zodiac-cluster .v4strict-fill.learn,
+.v6-p247-bottom .v4strict-fill.learn,
+.v6-p250-method .v4strict-fill.learn,
+.v6-p250-rh .v4strict-fill.learn,
+.v9-p250-wetbulb-cluster .v4strict-fill.learn,
+.v9-p250-dewpoint-cluster .v4strict-fill.learn{
+  overflow:visible!important;white-space:nowrap!important;
+}
+.v9-p246-zodiac-cluster .v4strict-fill input,
+.v6-p247-bottom .v4strict-fill input,
+.v6-p250-method .v4strict-fill input,
+.v6-p250-rh .v4strict-fill input,
+.v9-p250-wetbulb-cluster .v4strict-fill input,
+.v9-p250-dewpoint-cluster .v4strict-fill input{
+  width:var(--fw)!important;height:20px!important;line-height:1.05!important;
+  padding:0 2px!important;box-sizing:border-box!important;font:inherit!important;
+}
+
+/* ---------------- page 246: zodiac/orbit + day-2 labels ---------------- */
+.v9-p246-zodiac-cluster{
+  position:absolute!important;left:50px!important;top:720px!important;width:586px!important;height:506px!important;
+  z-index:2!important;box-sizing:border-box!important;pointer-events:none!important;
+}
+.v9-p246-zodiac-cluster>.v6-p246-zodiac{
+  position:absolute!important;left:0!important;top:0!important;width:535px!important;height:505px!important;
+  z-index:2!important;pointer-events:none!important;
+}
+.v9-p246-zodiac-cluster>[data-question="8"],
+.v9-p246-zodiac-cluster>[data-question="9"]{
+  z-index:5!important;pointer-events:auto!important;font-size:14px!important;line-height:1.3!important;
+  white-space:nowrap!important;background:transparent!important;border:0!important;padding:0!important;margin:0!important;
+}
+.v9-p246-zodiac-cluster .v4strict-num{font-size:10px!important;display:inline!important;margin:0!important;}
+
+/* ---------------- page 247: Milankovitch / ice-age lower cluster ---------------- */
+.v6-p247-bottom[data-source-cluster="p247-milankovitch-bottom"]{
+  left:68px!important;top:824px!important;width:746px!important;height:397px!important;
+  box-sizing:border-box!important;background:#cbd9e1!important;border:0!important;overflow:visible!important;
+}
+.v6-p247-bottom[data-source-cluster="p247-milankovitch-bottom"]>.bottom-title{
+  left:0!important;top:-40px!important;padding:7px 12px!important;font-size:22px!important;line-height:1.15!important;
+  white-space:nowrap!important;
+}
+.v6-p247-bottom[data-source-cluster="p247-milankovitch-bottom"]>.left{
+  left:0!important;top:0!important;width:353px!important;height:397px!important;
+  padding:14px 18px 8px 8px!important;border-right:2px solid #536d92!important;box-sizing:border-box!important;
+  overflow:visible!important;
+}
+.v6-p247-bottom[data-source-cluster="p247-milankovitch-bottom"]>.right{
+  left:353px!important;top:0!important;width:393px!important;height:397px!important;
+  padding:0!important;border:1px solid #4e899c!important;box-sizing:border-box!important;
+  background:rgba(224,238,241,.36)!important;overflow:visible!important;
+}
+.v6-p247-bottom [data-source-cluster-owner="p247-milankovitch-summary"],
+.v6-p247-bottom [data-source-cluster-owner="p247-ice-age-panel"]{
+  margin:0!important;box-sizing:border-box!important;background:transparent!important;
+}
+.v6-p247-bottom .v9-p247-ice-title{
+  position:absolute;left:11px;top:9px;width:360px;margin:0!important;
+  color:#4f668b!important;font-size:15px!important;line-height:1.25!important;font-weight:900!important;
+}
+.v6-p247-bottom .v9-p247-ice-support{
+  position:absolute;left:40px;top:60px;width:340px;margin:0!important;
+  color:#403d38!important;font-size:12.6px!important;line-height:1.3!important;white-space:nowrap!important;
+}
+.v6-p247-bottom .v9-p247-ice-separator{
+  position:absolute;left:0;top:80px;width:391px;height:0;border:0;border-top:1.5px solid #4e899c;
+  display:block;z-index:1;
+}
+.v6-p247-bottom .v9-p247-comparison-heading{
+  position:absolute;left:24px;top:144px;width:350px;
+  color:#403d38!important;font-size:13px!important;line-height:1.25!important;font-weight:800!important;
+}
+.v6-p247-bottom .v6-p247-insolation[data-source-cluster-owner="p247-ice-age-panel"]{
+  margin:0!important;z-index:2!important;overflow:visible!important;
+}
+.v6-p247-bottom .v6-p247-q{
+  font-size:13px!important;line-height:1.28!important;z-index:4!important;
+}
+/* These source paragraphs contain explicit <br> line breaks. The generic .v5-recall flex renderer
+   treats text nodes as separate flex items, so block formatting is required to preserve textbook order. */
+.v6-p247-bottom [data-question="40"],
+.v6-p247-bottom [data-question="41"]{
+  display:block!important;font-size:12.8px!important;line-height:1.25!important;white-space:normal!important;
+}
+.v6-p247-bottom [data-question="38"],
+.v6-p247-bottom [data-question="39"]{font-size:12.8px!important;white-space:nowrap!important;}
+.v6-p247-bottom b.v4strict-num{display:inline!important;margin:0!important;padding:0!important;font-size:10px!important;line-height:inherit!important;}
+
+/* ---------------- page 250: atmospheric / humidity cluster system ---------------- */
+.v6-p250-air-title[data-source-object="p250-air-layer-title"]{
+  left:322px!important;top:628px!important;width:190px!important;height:auto!important;
+  box-sizing:border-box!important;padding:9px 13px!important;font-size:22px!important;line-height:1.15!important;
+}
+.v6-p250-method[data-source-cluster="p250-saturation-methods"]{
+  left:395px!important;top:704px!important;width:420px!important;height:178px!important;
+  margin:0!important;padding:0!important;box-sizing:border-box!important;
+  font-size:13.5px!important;line-height:1.35!important;background:transparent!important;z-index:4!important;
+}
+.v6-p250-method .v9-p250-method-branch{
+  position:absolute;left:0;top:0;width:420px;height:175px;overflow:visible;z-index:1;pointer-events:none;
+}
+.v6-p250-method .v9-p250-method-branch path{
+  fill:none;stroke:#54aebc;stroke-width:5;stroke-linecap:square;stroke-linejoin:miter;
+}
+.v6-p250-method .v9-p250-method-branch circle{
+  fill:#fff;stroke:#555;stroke-width:3;
+}
+.v6-p250-method [data-source-cluster-owner="p250-saturation-methods"]{z-index:3!important;}
+.v6-p250-method [data-question="48"]{display:block!important;overflow:visible!important;}
+.v6-p250-method .v9-p250-method-heading{
+  position:absolute;left:0;top:0;width:390px;display:block;font-size:14.5px!important;line-height:1.25!important;font-weight:800!important;
+}
+.v6-p250-method .v9-p250-method-row{
+  position:absolute;left:0;top:38px;width:220px;display:block;margin:0!important;font-size:13.5px!important;line-height:20px!important;
+}
+.v6-p250-method b.v4strict-num{
+  display:inline!important;margin:0!important;padding:0!important;font-size:10px!important;line-height:inherit!important;
+}
+.v6-p250-method [data-question="49"]{white-space:nowrap!important;font-size:13px!important;}
+.v9-p250-rain-pill{
+  display:inline-block;background:#6d98ad!important;color:#fff!important;border-radius:14px!important;
+  padding:2px 9px!important;font-weight:800!important;white-space:nowrap!important;line-height:1.25!important;
+}
+.v6-p250-rh[data-source-cluster="p250-relative-humidity"]{
+  left:415px!important;top:888px!important;width:430px!important;height:200px!important;
+  margin:0!important;padding:0!important;box-sizing:border-box!important;
+  font-size:13.5px!important;line-height:1.35!important;background:transparent!important;z-index:4!important;
+}
+.v6-p250-rh span.v9-p250-rh-label{
+  position:absolute!important;left:0!important;top:88px!important;margin:0!important;width:auto!important;
+  display:block!important;text-align:left!important;white-space:nowrap!important;font-size:13.5px!important;line-height:1.2!important;font-weight:500!important;z-index:3!important;
+}
+.v6-p250-rh .v9-p250-rh-box{
+  position:absolute;left:136px;width:181px;height:32px;border:2px dashed #59a9b9;box-sizing:border-box;z-index:1;display:block;
+}
+.v6-p250-rh .v9-p250-rh-box.numerator{top:54px;}
+.v6-p250-rh .v9-p250-rh-box.denominator{top:104px;}
+.v6-p250-rh .v9-p250-fraction-rule{
+  position:absolute!important;left:136px!important;top:94px!important;width:181px!important;height:0!important;
+  margin:0!important;border:0!important;border-top:2px solid #555!important;display:block!important;z-index:1!important;
+}
+.v6-p250-rh span.v9-p250-rh-times{
+  position:absolute!important;left:322px!important;top:91px!important;margin:0!important;width:auto!important;
+  display:block!important;text-align:left!important;white-space:nowrap!important;font-size:13.5px!important;
+  line-height:1.2!important;font-weight:500!important;z-index:3!important;
+}
+.v6-p250-rh [data-question="52"],.v6-p250-rh [data-question="53"]{
+  display:block!important;font-size:12.8px!important;line-height:20px!important;white-space:nowrap!important;
+}
+.v6-p250-rh b.v4strict-num{display:inline!important;margin:0!important;padding:0!important;font-size:10px!important;line-height:inherit!important;}
+.v6-p250-rh [data-source-cluster-owner="p250-relative-humidity"]{z-index:3!important;}
+.v9-p250-wetbulb-cluster{
+  position:absolute;left:72px;top:1004px;width:325px;height:191px;z-index:4;
+  font-size:13.5px;line-height:1.35;box-sizing:border-box;
+}
+.v9-p250-dewpoint-cluster{
+  position:absolute;left:470px;top:1069px;width:360px;height:164px;z-index:4;
+  font-size:13.5px;line-height:1.35;box-sizing:border-box;
+}
+.v9-p250-wetbulb-cluster .v6-p250-q,
+.v9-p250-dewpoint-cluster .v6-p250-q{font-size:13.5px!important;line-height:1.35!important;}
+.v6-p250-branches[data-source-object="p250-humidity-spine"]{
+  left:0!important;top:0!important;width:910px!important;height:1270px!important;z-index:2!important;
+  overflow:visible!important;pointer-events:none!important;
+}
+.v6-p250-branches[data-source-object="p250-humidity-spine"] path{
+  stroke:#54aebc!important;stroke-width:5!important;stroke-linecap:square!important;stroke-linejoin:miter!important;
+}
+.v6-p250-branches[data-source-object="p250-humidity-spine"] circle{
+  fill:#fff!important;stroke:#555!important;stroke-width:3!important;
+}
+.v6-p250-page .v6-p250-q{box-sizing:border-box!important;}
