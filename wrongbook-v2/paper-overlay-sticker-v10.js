@@ -1,11 +1,11 @@
 // Wrong Book V10 — make worksheet AI diagrams draggable, persistent stickers.
 (function(){
-  const VERSION='2026-08-17-paper-overlay-sticker-v10';
+  const VERSION='2026-08-17-paper-overlay-sticker-v10b';
   if(window.__wrongbookPaperOverlayStickerV10===VERSION)return;
   window.__wrongbookPaperOverlayStickerV10=VERSION;
 
   const STORE_KEY='wrongbook-v10-ai-sticker-position';
-  let observer=null,resizeQueued=false;
+  let observer=null,resizeQueued=false,restoreQueued=false;
 
   const style=document.createElement('style');
   style.id='wrongbookPaperOverlayStickerV10Style';
@@ -48,9 +48,7 @@
   function paper(){return document.getElementById('paper')||document.querySelector('.v3-paper,.paper')}
   function layer(){return paper()?.querySelector(':scope > .v9-paper-ai-layer')||document.querySelector('.v9-paper-ai-layer')}
   function card(){return layer()?.querySelector('.v9-sheet-ai-card')||document.querySelector('.v9-sheet-ai-card')}
-  function currentProblemId(){
-    try{return String(window.state?.selectedProblemId||window.selectedProblem?.()?.id||'current')}catch{return'current'}
-  }
+  function currentProblemId(){try{return String(window.state?.selectedProblemId||window.selectedProblem?.()?.id||'current')}catch{return'current'}}
   function hash(s=''){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(36)}
   function stickerKey(el){return `${currentProblemId()}:${hash(el?.dataset?.v9Signature||el?.textContent||'diagram')}`}
   function readStore(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'{}')||{}}catch{return{}}}
@@ -64,8 +62,16 @@
   }
   function restore(el,host){
     const saved=readStore()[stickerKey(el)];if(!saved)return false;
-    const {maxX,maxY}=limits(el,host),pos=clampPosition(Number(saved.x||0)*maxX,Number(saved.y||0)*maxY,maxX,maxY);
-    el.style.left=`${Math.round(pos.left)}px`;el.style.top=`${Math.round(pos.top)}px`;el.style.visibility='visible';el.dataset.v10UserPositioned='1';return true
+    const {maxX,maxY}=limits(el,host),pos=clampPosition(Number(saved.x||0)*maxX,Number(saved.y||0)*maxY,maxX,maxY),left=Math.round(pos.left),top=Math.round(pos.top);
+    const currentLeft=Math.round(parseFloat(el.style.left)||0),currentTop=Math.round(parseFloat(el.style.top)||0);
+    if(currentLeft!==left)el.style.left=`${left}px`;
+    if(currentTop!==top)el.style.top=`${top}px`;
+    if(el.style.visibility!=='visible')el.style.visibility='visible';
+    el.dataset.v10UserPositioned='1';return true
+  }
+  function queueRestore(){
+    if(restoreQueued)return;restoreQueued=true;
+    requestAnimationFrame(()=>{restoreQueued=false;const el=card(),host=layer();if(el&&host&&el.dataset.v10UserPositioned==='1'&&!el.classList.contains('v10-sticker-dragging'))restore(el,host)})
   }
 
   function bind(el){
@@ -104,7 +110,18 @@
   function queueResize(){if(resizeQueued)return;resizeQueued=true;requestAnimationFrame(()=>{resizeQueued=false;const el=card(),host=layer();if(el&&host&&el.dataset.v10UserPositioned==='1')restore(el,host);apply()})}
   function mount(){
     const app=document.getElementById('app');if(!app)return setTimeout(mount,50);
-    if(!observer){observer=new MutationObserver(records=>{if(records.some(r=>r.type==='childList'))requestAnimationFrame(apply)});observer.observe(app,{subtree:true,childList:true});window.__wrongbookPaperOverlayStickerV10Observer=observer}
+    if(!observer){
+      observer=new MutationObserver(records=>{
+        let needsBind=false,needsRestore=false;
+        for(const r of records){
+          if(r.type==='childList')needsBind=true;
+          if(r.type==='attributes'&&r.target?.classList?.contains('v9-sheet-ai-card')&&r.attributeName==='style'&&r.target.dataset.v10UserPositioned==='1'&&!r.target.classList.contains('v10-sticker-dragging'))needsRestore=true;
+        }
+        if(needsBind)requestAnimationFrame(apply);
+        if(needsRestore)queueRestore();
+      });
+      observer.observe(app,{subtree:true,childList:true,attributes:true,attributeFilter:['style']});window.__wrongbookPaperOverlayStickerV10Observer=observer
+    }
     window.addEventListener('resize',queueResize,{passive:true});apply();
   }
   mount();
@@ -120,8 +137,9 @@
     const layerAboveInk=!ds||Number(hs.zIndex)>Number(ds.zIndex);
     const layerBelowToolbar=!ts||!Number.isFinite(Number(ts.zIndex))||Number(hs.zIndex)<Number(ts.zIndex);
     let storageOk=false;try{const k=`${STORE_KEY}-qa`,v={x:.4,y:.6};localStorage.setItem(k,JSON.stringify(v));storageOk=JSON.parse(localStorage.getItem(k)||'{}').x===.4;localStorage.removeItem(k)}catch{}
-    const pass=clampOk&&pointerEnabled&&bound&&layerAboveInk&&layerBelowToolbar&&storageOk;
-    return{pass,version:VERSION,clampOk,pointerEnabled,bound,layerAboveInk,layerBelowToolbar,storageOk,cursor:cs.cursor,layerZ:hs.zIndex,drawZ:ds?.zIndex||null,toolbarZ:ts?.zIndex||null};
+    const persistentOverride=typeof restore==='function'&&typeof persist==='function'&&observer instanceof MutationObserver;
+    const pass=clampOk&&pointerEnabled&&bound&&layerAboveInk&&layerBelowToolbar&&storageOk&&persistentOverride;
+    return{pass,version:VERSION,clampOk,pointerEnabled,bound,layerAboveInk,layerBelowToolbar,storageOk,persistentOverride,cursor:cs.cursor,layerZ:hs.zIndex,drawZ:ds?.zIndex||null,toolbarZ:ts?.zIndex||null};
   };
   function scheduleQA(tries=0){setTimeout(()=>{const r=window.runWrongbookAiStickerQA?.();if(r?.reason==='sticker-not-mounted'&&tries<30)return scheduleQA(tries+1);window.__wrongbookAiStickerV10QA=r;if(r&&!r.pass)console.warn('[Wrongbook AI sticker QA failed]',r)},180)}
   scheduleQA();
