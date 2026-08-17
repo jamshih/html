@@ -38,6 +38,7 @@ jobs:
           node --check wrongbook-v2/chemistry-gsat-page2-v4.js
           node --check wrongbook-v2/chemistry-gsat-page2-fix-v5.js
           node --check wrongbook-v2/chemistry-gsat-page3-v6.js
+          node --check wrongbook-v2/chemistry-gsat-page3-fix-v7.js
       - name: Start static server
         run: |
           python3 -m http.server 4173 --directory wrongbook-v2 > /tmp/chem-http.log 2>&1 &
@@ -71,7 +72,7 @@ jobs:
           "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page3-qa.html > chemistry-page3-dom.html
           grep -q 'data-qa-pass="true"' chemistry-page3-dom.html
           grep -q 'data-qa-questions="21"' chemistry-page3-dom.html
-          grep -q 'data-qa-blanks="26"' chemistry-page3-dom.html
+          grep -q 'data-qa-blanks="24"' chemistry-page3-dom.html
           grep -q 'data-qa-figures="13"' chemistry-page3-dom.html
       - name: Upload rendered QA artifacts
         if: always()
