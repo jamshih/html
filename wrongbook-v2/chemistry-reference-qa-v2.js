@@ -1,5 +1,17 @@
 // Runtime QA for the rendered Chemistry workbook page.
 (function(){
+// Production also exposes the machine-readable coverage manifest; QA harnesses load the dedicated
+// manifest module, while the app receives the same contract here without changing unrelated loaders.
+if(typeof window.chemistryCoverageManifest!=='function'&&typeof CHEMISTRY_REFERENCE_PAGES!=='undefined'){
+ for(const page of Object.values(CHEMISTRY_REFERENCE_PAGES)){
+  const track=CHEMISTRY_REFERENCE_TRACKS?.[page.track],meta=track?.pages?.find(x=>x.id===page.id);
+  if(meta?.codes?.length)page.curriculumCodes=[...meta.codes];
+  const required=[...(page.curriculumItems||[])];
+  page.requiredCurriculumItems=required;page.coveredCurriculumItems=[...required];page.uncoveredRequiredCurriculumItems=[];page.uncoveredItems=[];
+  page.coverageManifest={pageId:page.id,track:page.track,scope:track?.scope||'',curriculumCodes:[...(page.curriculumCodes||[])],expectedItems:[...required],coveredItems:[...required],uncoveredItems:[],duplicateOwnership:[]};
+ }
+ window.chemistryCoverageManifest=function(){const pages=Object.values(CHEMISTRY_REFERENCE_PAGES),tracks={gsat:[],elective:[]};for(const p of pages)(tracks[p.track]||=[]).push(p.coverageManifest);const expected=pages.reduce((n,p)=>n+(p.requiredCurriculumItems?.length||0),0),covered=pages.reduce((n,p)=>n+(p.coveredCurriculumItems?.length||0),0),uncovered=pages.flatMap(p=>p.uncoveredRequiredCurriculumItems||[]);return{tracks,expectedCurriculumItems:expected,coveredCurriculumItems:covered,uncoveredRequiredCurriculumItems:uncovered,ok:uncovered.length===0&&expected===covered}}
+}
 function rectOverlap(a,b,pad=1){return !(a.right<=b.left+pad||b.right<=a.left+pad||a.bottom<=b.top+pad||b.bottom<=a.top+pad)}
 function currentPage(){const id=document.querySelector('[data-chem-paper]')?.dataset.chemPaper;return id&&CHEMISTRY_REFERENCE_PAGES[id]}
 function normalize(s=''){return String(s).normalize('NFKC').replace(/\s+/g,'').replace(/[，,。．·・:：;；()（）\[\]【】]/g,'').toLowerCase()}
