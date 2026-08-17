@@ -1,9 +1,6 @@
-// Wrong Book V12e — true upward tutor expansion with user-ink clearance.
-// The tutor remains bottom-anchored, grows upward, and treats both printed prompt content and
-// student ink/graphs as protected geometry. If there is not enough safe room, it falls back to
-// V8 normal flow instead of covering the student's work or collapsing into a sliver.
+// Wrong Book V12f — stable upward tutor placement with horizontal-aware ink avoidance.
 (function(){
-  const VERSION='2026-08-17-tutor-collapse-up-v12e';
+  const VERSION='2026-08-17-tutor-collapse-up-v12f';
   if(window.__wrongbookTutorCollapseUpV12===VERSION)return;
   try{window.__wrongbookTutorCollapseUpV12Observer?.disconnect?.()}catch{}
   document.getElementById('wrongbookTutorCollapseUpV12Style')?.remove();
@@ -11,9 +8,13 @@
 
   const DESKTOP_BOTTOM=68;
   const PROMPT_GAP=12;
-  const INK_MARGIN=20;
-  const MIN_OPEN_HEIGHT=150;
+  const INK_MARGIN=18;
+  const EDGE=12;
+  const MIN_OPEN_HEIGHT=132;
   const MAX_OPEN_HEIGHT=420;
+  const PARK_MIN_HEIGHT=96;
+  const MAX_WIDTH=680;
+  const MIN_WIDTH=300;
 
   const style=document.createElement('style');
   style.id='wrongbookTutorCollapseUpV12Style';
@@ -21,12 +22,12 @@
     .v3-paper.v12-tutor-up-open .v5-tutor-dock:not(.v6-tutor-collapsed),
     .v3-paper.v12-tutor-up-open.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){
       position:absolute!important;
-      left:12px!important;
-      right:12px!important;
+      left:var(--v12-tutor-left,12px)!important;
+      right:auto!important;
       top:auto!important;
       bottom:${DESKTOP_BOTTOM}px!important;
-      width:auto!important;
-      max-width:none!important;
+      width:var(--v12-tutor-width,min(680px,calc(100% - 24px)))!important;
+      max-width:calc(100% - 24px)!important;
       height:auto!important;
       min-height:0!important;
       max-height:var(--v12-tutor-max-height,${MAX_OPEN_HEIGHT}px)!important;
@@ -36,262 +37,137 @@
       overscroll-behavior:contain;
       z-index:30!important;
       transform-origin:100% 100%!important;
-      animation:v12eTutorRevealUp .17s cubic-bezier(.2,.72,.24,1) both;
+      animation:v12fTutorRevealUp .17s cubic-bezier(.2,.72,.24,1) both;
     }
-    @keyframes v12eTutorRevealUp{
-      from{opacity:.94;clip-path:inset(100% 0 0 0)}
-      to{opacity:1;clip-path:inset(0 0 0 0)}
+    .v3-paper.v12-tutor-safe-park .v5-tutor-dock:not(.v6-tutor-collapsed),
+    .v3-paper.v12-tutor-safe-park.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){
+      position:absolute!important;
+      left:var(--v12-tutor-left,12px)!important;
+      right:auto!important;
+      top:var(--v12-tutor-top,12px)!important;
+      bottom:auto!important;
+      width:var(--v12-tutor-width,min(680px,calc(100% - 24px)))!important;
+      max-width:calc(100% - 24px)!important;
+      height:auto!important;
+      min-height:0!important;
+      max-height:var(--v12-tutor-max-height,240px)!important;
+      margin:0!important;
+      overflow-x:hidden!important;
+      overflow-y:auto!important;
+      z-index:30!important;
+      transform-origin:100% 100%!important;
+      animation:v12fTutorRevealUp .17s cubic-bezier(.2,.72,.24,1) both;
     }
-
-    .v6-tutor-collapse-button::after{
-      right:0!important;
-      left:auto!important;
-      top:auto!important;
-      bottom:calc(100% + 8px)!important;
-      transform:translateY(4px)!important;
-      transform-origin:bottom right!important;
-    }
-    .v6-tutor-collapse-button:hover::after,
-    .v6-tutor-collapse-button:focus-visible::after{transform:translateY(0)!important}
-
+    @keyframes v12fTutorRevealUp{from{opacity:.94;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+    .v6-tutor-collapse-button::after{right:0!important;left:auto!important;top:auto!important;bottom:calc(100% + 8px)!important;transform:translateY(4px)!important;transform-origin:bottom right!important}
+    .v6-tutor-collapse-button:hover::after,.v6-tutor-collapse-button:focus-visible::after{transform:translateY(0)!important}
     @media(max-width:700px){
       .v3-paper.v12-tutor-up-open .v5-tutor-dock:not(.v6-tutor-collapsed),
-      .v3-paper.v12-tutor-up-open.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){
-        position:fixed!important;
-        left:7px!important;
-        right:7px!important;
-        top:auto!important;
-        bottom:calc(74px + env(safe-area-inset-bottom))!important;
-        max-height:var(--v12-tutor-mobile-max-height,42vh)!important;
-        margin:0!important;
-        border-radius:15px!important;
+      .v3-paper.v12-tutor-up-open.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed),
+      .v3-paper.v12-tutor-safe-park .v5-tutor-dock:not(.v6-tutor-collapsed),
+      .v3-paper.v12-tutor-safe-park.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){
+        position:fixed!important;left:7px!important;right:7px!important;top:auto!important;
+        bottom:calc(74px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;
+        max-height:var(--v12-tutor-mobile-max-height,42vh)!important;margin:0!important;border-radius:15px!important;
       }
       .v6-tutor-collapse-button::after{display:none!important}
     }
-    @media(prefers-reduced-motion:reduce){
-      .v3-paper.v12-tutor-up-open .v5-tutor-dock:not(.v6-tutor-collapsed){animation:none!important}
-    }
+    @media(prefers-reduced-motion:reduce){.v5-tutor-dock{animation:none!important}}
   `;
   document.head.appendChild(style);
 
-  let observer=null,queued=false;
-
-  function visible(el){
-    if(!el)return false;
-    const s=getComputedStyle(el),r=el.getBoundingClientRect();
-    return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
-  }
-
-  function semanticPromptNodes(paper){
-    const demo=paper.querySelector('.paper-demo');
-    if(demo){
-      return [...demo.querySelectorAll(':scope > h4, :scope > .options, :scope > .hand-note, .paper-option')].filter(visible);
-    }
-    return [paper.querySelector('.scan-photo'),paper.querySelector('.scan-text')].filter(visible);
-  }
-
-  function problemContentBottom(paper){
-    const nodes=semanticPromptNodes(paper);
-    if(!nodes.length)return paper.getBoundingClientRect().top+8;
-    return Math.max(...nodes.map(el=>el.getBoundingClientRect().bottom));
-  }
-
-  function drawingPaths(){
-    try{return Array.isArray(drawing?.paths)?drawing.paths:[]}catch{return[]}
-  }
-
-  function inkBottomFromPaths(paper){
-    const canvas=paper.querySelector('#drawCanvas');
-    if(!canvas||!visible(canvas))return null;
-    const cr=canvas.getBoundingClientRect();
-    let maxY=null;
+  let observer=null,queued=false,inkTimer=0;
+  function visible(el){if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0}
+  function semanticPromptNodes(paper){const demo=paper.querySelector('.paper-demo');if(demo)return [...demo.querySelectorAll(':scope > h4, :scope > .options, :scope > .hand-note, .paper-option')].filter(visible);return [paper.querySelector('.scan-photo'),paper.querySelector('.scan-text')].filter(visible)}
+  function problemContentBottom(paper){const nodes=semanticPromptNodes(paper);if(!nodes.length)return paper.getBoundingClientRect().top+8;return Math.max(...nodes.map(el=>el.getBoundingClientRect().bottom))}
+  function drawingPaths(){try{return Array.isArray(drawing?.paths)?drawing.paths:[]}catch{return[]}}
+  function inflate(r,p){return{left:r.left-p,top:r.top-p,right:r.right+p,bottom:r.bottom+p,width:r.width+p*2,height:r.height+p*2}}
+  function overlap(a,b){return !(a.right<=b.left||a.left>=b.right||a.bottom<=b.top||a.top>=b.bottom)}
+  function userInkRects(paper){
+    const canvas=paper.querySelector('#drawCanvas');if(!canvas||!visible(canvas))return[];
+    const cr=canvas.getBoundingClientRect(),out=[];
     for(const path of drawingPaths()){
       if(path?.tool==='eraser')continue;
-      const pts=path?.pts||path?.points||[];
-      for(const pt of pts){
-        const y=Number(pt?.y);
-        if(!Number.isFinite(y))continue;
-        // Current ink-v3 paths are normalized. Keep a defensive pixel fallback for legacy data.
-        const normalized=path?.normalized!==false&&y>=0&&y<=1.001;
-        const cssY=normalized?cr.top+y*cr.height:cr.top+(y/Math.max(1,canvas.height))*cr.height;
-        maxY=maxY==null?cssY:Math.max(maxY,cssY);
-      }
+      const pts=path?.pts||path?.points||[];if(!pts.length)continue;
+      let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+      for(const pt of pts){let x=Number(pt?.x),y=Number(pt?.y);if(!Number.isFinite(x)||!Number.isFinite(y))continue;const norm=path?.normalized!==false&&x>=0&&x<=1.001&&y>=0&&y<=1.001;if(!norm){x=x/Math.max(1,canvas.width);y=y/Math.max(1,canvas.height)}minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y)}
+      if(!Number.isFinite(minX))continue;
+      out.push(inflate({left:cr.left+minX*cr.width,top:cr.top+minY*cr.height,right:cr.left+maxX*cr.width,bottom:cr.top+maxY*cr.height,width:(maxX-minX)*cr.width,height:(maxY-minY)*cr.height},INK_MARGIN));
     }
-    return maxY;
+    return out;
   }
-
-  function inkBottomFromCanvas(paper){
-    const canvas=paper.querySelector('#drawCanvas');
-    if(!canvas||!visible(canvas)||!canvas.width||!canvas.height)return null;
-    try{
-      const ctx=canvas.getContext('2d',{willReadFrequently:true});
-      const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
-      for(let y=canvas.height-1;y>=0;y--){
-        const row=y*canvas.width*4;
-        for(let x=0;x<canvas.width;x++)if(data[row+x*4+3]>8){
-          const cr=canvas.getBoundingClientRect();
-          return cr.top+(y/Math.max(1,canvas.height))*cr.height;
-        }
-      }
-    }catch{}
-    return null;
+  function widthCandidates(pw){return [...new Set([Math.min(MAX_WIDTH,pw-EDGE*2),560,440,360,MIN_WIDTH].map(x=>Math.floor(Math.min(x,pw-EDGE*2))).filter(x=>x>=Math.min(MIN_WIDTH,pw-EDGE*2)))].sort((a,b)=>b-a)}
+  function leftCandidates(paperRect,w,inks){
+    const maxLeft=Math.max(EDGE,paperRect.width-w-EDGE),vals=[maxLeft,EDGE,Math.round((paperRect.width-w)/2)];
+    for(const r of inks){vals.push(r.left-paperRect.left-w-INK_MARGIN,r.right-paperRect.left+INK_MARGIN)}
+    return [...new Set(vals.map(v=>Math.max(EDGE,Math.min(maxLeft,Math.round(v)))))];
   }
-
-  function userInkBottom(paper){
-    const fromPaths=inkBottomFromPaths(paper);
-    return fromPaths==null?inkBottomFromCanvas(paper):fromPaths;
+  function laneInkBottom(inks,laneLeft,laneRight){let b=-Infinity;for(const r of inks)if(r.right>laneLeft&&r.left<laneRight)b=Math.max(b,r.bottom);return b}
+  function planBottomLane(paperRect,contentBottom,inks,anchorBottom){
+    let best=null;
+    for(const w of widthCandidates(paperRect.width))for(const left of leftCandidates(paperRect,w,inks)){
+      const laneLeft=paperRect.left+left,laneRight=laneLeft+w,inkBottom=laneInkBottom(inks,laneLeft,laneRight);
+      const safeTop=Math.max(paperRect.top+8,contentBottom+PROMPT_GAP,Number.isFinite(inkBottom)?inkBottom:-Infinity);
+      const available=Math.floor(anchorBottom-safeTop);if(available<MIN_OPEN_HEIGHT)continue;
+      const rightBias=Math.abs((left+w)-(paperRect.width-EDGE))<3?26:0;
+      const score=available+w*.12+rightBias;
+      if(!best||score>best.score)best={mode:'upward-lane',left,width:w,maxHeight:Math.min(MAX_OPEN_HEIGHT,available),safeTop,available,score};
+    }
+    return best;
   }
-
-  function sourceKind(paper){
-    if(paper.querySelector('.paper-demo'))return'demo';
-    if(paper.querySelector('.scan-photo'))return'scan';
-    return'unknown';
+  function mergedIntervals(intervals,start,end){const xs=intervals.map(([a,b])=>[Math.max(start,a),Math.min(end,b)]).filter(([a,b])=>b>a).sort((a,b)=>a[0]-b[0]);const out=[];for(const cur of xs){const last=out[out.length-1];if(last&&cur[0]<=last[1])last[1]=Math.max(last[1],cur[1]);else out.push(cur)}return out}
+  function largestGap(intervals,start,end){const xs=mergedIntervals(intervals,start,end);let cursor=start,best={top:start,bottom:start,height:0};for(const [a,b] of xs){if(a-cursor>best.height)best={top:cursor,bottom:a,height:a-cursor};cursor=Math.max(cursor,b)}if(end-cursor>best.height)best={top:cursor,bottom:end,height:end-cursor};return best}
+  function planSafePark(paper,paperRect,contentBottom,inks){
+    const toolbar=paper.querySelector('.paper-toolbar'),toolbarTop=toolbar&&visible(toolbar)?toolbar.getBoundingClientRect().top-8:paperRect.bottom-DESKTOP_BOTTOM;
+    const start=Math.max(paperRect.top+8,contentBottom+PROMPT_GAP),end=Math.min(paperRect.bottom-8,toolbarTop);let best=null;
+    for(const w of widthCandidates(paperRect.width))for(const left of leftCandidates(paperRect,w,inks)){
+      const laneLeft=paperRect.left+left,laneRight=laneLeft+w;
+      const intervals=inks.filter(r=>r.right>laneLeft&&r.left<laneRight).map(r=>[r.top,r.bottom]);
+      const gap=largestGap(intervals,start,end);if(gap.height<PARK_MIN_HEIGHT)continue;
+      const rightBias=Math.abs((left+w)-(paperRect.width-EDGE))<3?18:0;
+      const score=gap.height+w*.10+rightBias+gap.bottom*.0001;
+      if(!best||score>best.score)best={mode:'safe-park',left,width:w,top:gap.top-paperRect.top,maxHeight:Math.min(MAX_OPEN_HEIGHT,Math.floor(gap.height)),safeTop:gap.top,available:Math.floor(gap.height),score};
+    }
+    return best;
   }
-
-  function viewportBottomAnchor(){
-    const probe=document.createElement('div');
-    probe.style.cssText='position:fixed;bottom:calc(74px + env(safe-area-inset-bottom));height:0;visibility:hidden;pointer-events:none';
-    document.body.appendChild(probe);
-    const y=probe.getBoundingClientRect().top;
-    probe.remove();
-    return y;
+  function planForPaper(paper){
+    const r=paper.getBoundingClientRect(),contentBottom=problemContentBottom(paper),inks=userInkRects(paper),mobile=matchMedia('(max-width:700px)').matches;
+    if(mobile){const inkBottom=inks.length?Math.max(...inks.map(x=>x.bottom)):-Infinity,anchor=window.innerHeight-74,safeTop=Math.max(8,contentBottom+PROMPT_GAP,inkBottom);return{mode:'mobile',left:7,width:Math.max(0,window.innerWidth-14),maxHeight:Math.max(PARK_MIN_HEIGHT,Math.min(window.innerHeight*.42,anchor-safeTop)),safeTop,available:anchor-safeTop,inks,contentBottom}}
+    const anchorBottom=r.bottom-DESKTOP_BOTTOM;
+    return {...(planBottomLane(r,contentBottom,inks,anchorBottom)||planSafePark(paper,r,contentBottom,inks)||{mode:'no-space',left:EDGE,width:Math.min(MAX_WIDTH,r.width-EDGE*2),maxHeight:0,safeTop:contentBottom+PROMPT_GAP,available:0}),inks,contentBottom};
   }
-
-  function safeTopFor({paperTop,contentBottom,inkBottom}){
-    return Math.max(paperTop+8,contentBottom+PROMPT_GAP,Number.isFinite(inkBottom)?inkBottom+INK_MARGIN:-Infinity);
+  function setProp(el,name,value){if(el.style.getPropertyValue(name)!==value)el.style.setProperty(name,value)}
+  function clearProp(el,name){if(el.style.getPropertyValue(name))el.style.removeProperty(name)}
+  function setModeClass(paper,mode){
+    const up=mode==='upward-lane'||mode==='mobile',park=mode==='safe-park'||mode==='no-space';
+    paper.classList.toggle('v12-tutor-up-open',up);paper.classList.toggle('v12-tutor-safe-park',park);paper.classList.toggle('v12-tutor-no-space',mode==='no-space');paper.classList.remove('v12-tutor-flow-fallback');
   }
-
-  function clearGeometry(paper){
-    paper.classList.remove('v12-tutor-up-open','v12-tutor-flow-fallback');
-    paper.style.removeProperty('--v12-tutor-max-height');
-    paper.style.removeProperty('--v12-tutor-mobile-max-height');
-    delete paper.dataset.v12Available;
-    delete paper.dataset.v12PromptBottom;
-    delete paper.dataset.v12InkBottom;
-    delete paper.dataset.v12SafeTop;
-    delete paper.dataset.v12Mode;
-  }
-
+  function clearGeometry(paper){setModeClass(paper,'closed');for(const n of ['--v12-tutor-left','--v12-tutor-width','--v12-tutor-top','--v12-tutor-max-height','--v12-tutor-mobile-max-height'])clearProp(paper,n);delete paper.dataset.v12Mode}
   function syncDock(dock){
-    if(!dock)return;
-    const paper=dock.closest('.v3-paper');
-    if(!paper)return;
-    const open=!dock.classList.contains('v6-tutor-collapsed');
-    if(!open){clearGeometry(paper);return}
-
-    const paperRect=paper.getBoundingClientRect();
-    const contentBottom=problemContentBottom(paper);
-    const inkBottom=userInkBottom(paper);
-    const mobile=matchMedia('(max-width:700px)').matches;
-    const anchorBottom=mobile?viewportBottomAnchor():paperRect.bottom-DESKTOP_BOTTOM;
-    const safeTop=safeTopFor({paperTop:mobile?0:paperRect.top,contentBottom,inkBottom});
-    const available=Math.floor(anchorBottom-safeTop);
-    const kind=sourceKind(paper);
-
-    paper.dataset.v12Available=String(available);
-    paper.dataset.v12PromptBottom=String(Math.round(contentBottom));
-    paper.dataset.v12InkBottom=Number.isFinite(inkBottom)?String(Math.round(inkBottom)):'';
-    paper.dataset.v12SafeTop=String(Math.round(safeTop));
-    paper.dataset.v12Mode=kind;
-
-    if(available<MIN_OPEN_HEIGHT){
-      paper.classList.remove('v12-tutor-up-open');
-      paper.classList.add('v12-tutor-flow-fallback');
-      paper.style.removeProperty('--v12-tutor-max-height');
-      paper.style.removeProperty('--v12-tutor-mobile-max-height');
-      return;
-    }
-
-    paper.classList.remove('v12-tutor-flow-fallback');
-    paper.classList.add('v12-tutor-up-open');
-    const cap=Math.min(MAX_OPEN_HEIGHT,available);
-    if(mobile)paper.style.setProperty('--v12-tutor-mobile-max-height',`${cap}px`);
-    else paper.style.setProperty('--v12-tutor-max-height',`${cap}px`);
+    if(!dock)return;const paper=dock.closest('.v3-paper');if(!paper)return;const open=!dock.classList.contains('v6-tutor-collapsed');if(!open){clearGeometry(paper);return}
+    const plan=planForPaper(paper);setModeClass(paper,plan.mode);paper.dataset.v12Mode=plan.mode;paper.dataset.v12Available=String(Math.round(plan.available||0));paper.dataset.v12InkCount=String(plan.inks?.length||0);
+    if(plan.mode==='mobile'){clearProp(paper,'--v12-tutor-top');clearProp(paper,'--v12-tutor-left');clearProp(paper,'--v12-tutor-width');clearProp(paper,'--v12-tutor-max-height');setProp(paper,'--v12-tutor-mobile-max-height',`${Math.max(PARK_MIN_HEIGHT,Math.floor(plan.maxHeight))}px`);return}
+    clearProp(paper,'--v12-tutor-mobile-max-height');setProp(paper,'--v12-tutor-left',`${Math.round(plan.left)}px`);setProp(paper,'--v12-tutor-width',`${Math.round(plan.width)}px`);
+    if(plan.mode==='upward-lane'){clearProp(paper,'--v12-tutor-top');setProp(paper,'--v12-tutor-max-height',`${Math.round(plan.maxHeight)}px`)}
+    else if(plan.mode==='safe-park'){setProp(paper,'--v12-tutor-top',`${Math.round(plan.top)}px`);setProp(paper,'--v12-tutor-max-height',`${Math.round(plan.maxHeight)}px`)}
+    else {setProp(paper,'--v12-tutor-top',`${Math.round(Math.max(8,plan.safeTop-paper.getBoundingClientRect().top))}px`);setProp(paper,'--v12-tutor-max-height','72px')}
   }
-
   function apply(){document.querySelectorAll('.v5-tutor-dock').forEach(syncDock)}
   function queueApply(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;apply()})}
-
-  function mount(){
-    const app=document.getElementById('app');
-    if(!app)return setTimeout(mount,40);
-    if(!observer){
-      observer=new MutationObserver(queueApply);
-      observer.observe(app,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
-      window.__wrongbookTutorCollapseUpV12Observer=observer;
-    }
-    window.addEventListener('resize',queueApply,{passive:true});
-    // Ink changes do not necessarily mutate DOM. saveInk already exists in the worksheet runtime,
-    // so a lightweight pointer-up listener guarantees the clearance is recomputed immediately.
-    app.addEventListener('pointerup',queueApply,{passive:true});
-    app.addEventListener('pointercancel',queueApply,{passive:true});
-    apply();
-  }
+  function queueInkApply(){clearTimeout(inkTimer);inkTimer=setTimeout(queueApply,90)}
+  function mount(){const app=document.getElementById('app');if(!app)return setTimeout(mount,40);if(!observer){observer=new MutationObserver(records=>{if(records.some(m=>m.type==='childList'||(m.type==='attributes'&&m.target?.classList?.contains('v5-tutor-dock'))))queueApply()});observer.observe(app,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});window.__wrongbookTutorCollapseUpV12Observer=observer}window.addEventListener('resize',queueApply,{passive:true});app.addEventListener('pointerup',queueInkApply,{passive:true});app.addEventListener('pointercancel',queueInkApply,{passive:true});apply()}
   mount();
 
+  window.__wrongbookTutorSafePlanner={planBottomLane,largestGap,planSafePark,INK_MARGIN,MIN_OPEN_HEIGHT};
   window.runWrongbookTutorCollapseDirectionQA=function(){
-    apply();
-    const dock=document.querySelector('.v5-tutor-dock');
-    const paper=dock?.closest('.v3-paper');
-    const button=dock?.querySelector('.v6-tutor-collapse-button');
-    if(!dock||!paper||!button)return{pass:false,reason:'tutor-not-mounted',version:VERSION};
-
-    const originallyCollapsed=dock.classList.contains('v6-tutor-collapsed');
-    dock.classList.add('v6-tutor-collapsed');syncDock(dock);
-    const collapsedRect=dock.getBoundingClientRect();
-
-    dock.classList.remove('v6-tutor-collapsed');syncDock(dock);
-    const openRect=dock.getBoundingClientRect();
-    const contentBottom=problemContentBottom(paper);
-    const inkBottom=userInkBottom(paper);
-    const requiredTop=safeTopFor({paperTop:matchMedia('(max-width:700px)').matches?0:paper.getBoundingClientRect().top,contentBottom,inkBottom});
-    const toolbar=paper.querySelector('.paper-toolbar');
-    const toolbarRect=toolbar&&visible(toolbar)?toolbar.getBoundingClientRect():null;
-    const pseudo=getComputedStyle(button,'::after');
-    const fallback=paper.classList.contains('v12-tutor-flow-fallback');
-    const available=Number(paper.dataset.v12Available||0);
-
-    const bottomDelta=Math.abs(openRect.bottom-collapsedRect.bottom);
-    const bottomAnchored=bottomDelta<=3;
-    const growsUpward=openRect.top<collapsedRect.top-2;
-    const noPromptOverlap=fallback||openRect.top>=contentBottom-1;
-    const inkClearance=fallback||!Number.isFinite(inkBottom)||openRect.top>=inkBottom+INK_MARGIN-1;
-    const noToolbarOverlap=!toolbarRect||fallback||!(openRect.right>toolbarRect.left&&openRect.left<toolbarRect.right&&openRect.bottom>toolbarRect.top&&openRect.top<toolbarRect.bottom);
-    const tooltipBottom=parseFloat(pseudo.bottom);
-    const tooltipAbove=pseudo.position==='absolute'&&Number.isFinite(tooltipBottom);
-    const actualOpenPosition=getComputedStyle(dock).position;
-    const geometryOwned=matchMedia('(max-width:700px)').matches?actualOpenPosition==='fixed':actualOpenPosition==='absolute';
-    const notSliver=fallback?openRect.height>24:openRect.height>=Math.min(MIN_OPEN_HEIGHT,Math.max(1,available));
-    const fallbackExpected=available<MIN_OPEN_HEIGHT;
-
-    // Deterministic fixture: ink at y=300 must push the safe top to 320, not merely avoid overlap.
-    const syntheticSafeTop=safeTopFor({paperTop:0,contentBottom:120,inkBottom:300});
-    const syntheticInkMargin=Math.abs(syntheticSafeTop-(300+INK_MARGIN))<.01;
-
-    if(originallyCollapsed)dock.classList.add('v6-tutor-collapsed');
-    else dock.classList.remove('v6-tutor-collapsed');
-    syncDock(dock);
-
-    const upwardPass=!fallback&&bottomAnchored&&growsUpward&&noPromptOverlap&&inkClearance&&noToolbarOverlap&&tooltipAbove&&geometryOwned&&notSliver;
-    const fallbackPass=fallback&&fallbackExpected&&notSliver;
-    const pass=syntheticInkMargin&&(upwardPass||fallbackPass);
-    return{
-      pass,version:VERSION,mode:fallback?'safe-flow-fallback':'upward',sourceKind:sourceKind(paper),available,
-      inkMargin:INK_MARGIN,inkBottom:Number.isFinite(inkBottom)?Math.round(inkBottom):null,requiredTop:Math.round(requiredTop),
-      inkClearance,syntheticInkMargin,bottomAnchored,growsUpward,noPromptOverlap,noToolbarOverlap,tooltipAbove,geometryOwned,notSliver,fallbackExpected,
-      bottomDelta:Number(bottomDelta.toFixed(2)),collapsedTop:Math.round(collapsedRect.top),openTop:Math.round(openRect.top),
-      collapsedBottom:Math.round(collapsedRect.bottom),openBottom:Math.round(openRect.bottom),contentBottom:Math.round(contentBottom),
-      openHeight:Math.round(openRect.height),openPosition:actualOpenPosition
-    };
+    apply();const dock=document.querySelector('.v5-tutor-dock'),paper=dock?.closest('.v3-paper'),button=dock?.querySelector('.v6-tutor-collapse-button');if(!dock||!paper||!button)return{pass:false,reason:'tutor-not-mounted',version:VERSION};
+    const original=dock.classList.contains('v6-tutor-collapsed');dock.classList.remove('v6-tutor-collapsed');syncDock(dock);const open=dock.getBoundingClientRect(),plan=planForPaper(paper),inks=userInkRects(paper),contentBottom=problemContentBottom(paper),toolbar=paper.querySelector('.paper-toolbar'),tr=toolbar&&visible(toolbar)?toolbar.getBoundingClientRect():null;
+    const inkCollision=inks.some(r=>overlap(open,r)),noPromptOverlap=open.top>=contentBottom-1||plan.mode==='safe-park',noToolbarOverlap=!tr||!overlap(open,tr),visibleCard=open.height>=64&&open.width>=Math.min(MIN_WIDTH,paper.getBoundingClientRect().width-24),geometryOwned=['absolute','fixed'].includes(getComputedStyle(dock).position),modeOk=['upward-lane','safe-park','mobile'].includes(plan.mode);
+    const fixturePaper={left:0,top:0,width:1000,height:760,right:1000,bottom:760},fixtureInk=[inflate({left:270,top:400,right:430,bottom:520,width:160,height:120},INK_MARGIN)],fixture=planBottomLane(fixturePaper,250,fixtureInk,692),fixtureNoInkOverlap=Boolean(fixture)&&!fixtureInk.some(r=>overlap({left:fixture.left,top:fixture.safeTop,right:fixture.left+fixture.width,bottom:692,width:fixture.width,height:692-fixture.safeTop},r));
+    if(original)dock.classList.add('v6-tutor-collapsed');else dock.classList.remove('v6-tutor-collapsed');syncDock(dock);
+    const pass=modeOk&&!inkCollision&&noPromptOverlap&&noToolbarOverlap&&visibleCard&&geometryOwned&&fixtureNoInkOverlap;
+    return{pass,version:VERSION,mode:plan.mode,inkMargin:INK_MARGIN,inkCount:inks.length,inkCollision,noPromptOverlap,noToolbarOverlap,visibleCard,geometryOwned,fixtureNoInkOverlap,openTop:Math.round(open.top),openBottom:Math.round(open.bottom),openLeft:Math.round(open.left),openRight:Math.round(open.right),openWidth:Math.round(open.width),openHeight:Math.round(open.height)};
   };
-
-  function scheduleQA(tries=0){
-    setTimeout(()=>{
-      const r=window.runWrongbookTutorCollapseDirectionQA?.();
-      if(r?.reason==='tutor-not-mounted'&&tries<25)return scheduleQA(tries+1);
-      window.__wrongbookTutorCollapseDirectionQA=r;
-      if(r&&!r.pass)console.warn('[Wrongbook tutor V12e ink-clearance QA failed]',r);
-    },180);
-  }
+  function scheduleQA(tries=0){setTimeout(()=>{const r=window.runWrongbookTutorCollapseDirectionQA?.();if(r?.reason==='tutor-not-mounted'&&tries<25)return scheduleQA(tries+1);window.__wrongbookTutorCollapseDirectionQA=r;if(r&&!r.pass)console.warn('[Wrongbook tutor V12f safe-placement QA failed]',r)},220)}
   scheduleQA();
 })();
