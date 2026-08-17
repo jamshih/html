@@ -1,6 +1,10 @@
 // Page 253 human-readability repair. The source photograph is authoritative.
 // This layer changes only page-253 cluster geometry/connector ownership; prompts and answers stay canonical.
 (function(){
+  const M=window.SOURCE_PROMPTS_V7||{};
+  const q43=(M[253]||[]).find(r=>Number(r.number)===43);
+  if(q43)q43.blankWidths=[52,52,52];
+
   const prev=window.v5PageHtml;
   if(typeof prev!=='function')return;
 
@@ -28,9 +32,9 @@
 
     // In the source, the nearshore-wave question subgroup begins to the RIGHT of its green bracket.
     // Legacy prompt caps/global positioning pulled q44/q45 left into the connector corridor.
-    ownPrompt(page,43,'p253-wave-nearshore',420,390);
-    ownPrompt(page,44,'p253-wave-nearshore',420,390);
-    ownPrompt(page,45,'p253-wave-nearshore',420,390);
+    ownPrompt(page,43,'p253-wave-nearshore',420,450);
+    ownPrompt(page,44,'p253-wave-nearshore',420,440);
+    ownPrompt(page,45,'p253-wave-nearshore',420,440);
 
     // The v6 approximation used long global horizontals through prompt glyphs. Keep the source
     // hierarchy, but route long runs through whitespace around the actual printed rows.
