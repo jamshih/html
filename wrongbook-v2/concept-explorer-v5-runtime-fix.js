@@ -50,4 +50,16 @@
     script.onerror=()=>console.error('[concept-chapters-v7] failed to load');
     document.body.appendChild(script);
   }
+
+  // AI-generated explanation diagrams behave like movable stickers across Wrongbook.
+  // The sticker module watches #app, so diagrams rendered later are upgraded automatically.
+  const stickerStamp='20260817-1';
+  if(!window.__wrongbookAiDiagramStickerV1&&!document.querySelector('script[data-ai-diagram-sticker-v1]')){
+    const script=document.createElement('script');
+    script.src=`./ai-diagram-sticker-v1.js?wb=${stickerStamp}`;
+    script.async=false;
+    script.dataset.aiDiagramStickerV1='1';
+    script.onerror=()=>console.error('[ai-diagram-sticker-v1] failed to load');
+    document.body.appendChild(script);
+  }
 })();
