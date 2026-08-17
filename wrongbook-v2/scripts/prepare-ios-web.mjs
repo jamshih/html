@@ -23,9 +23,7 @@ await mkdir(dist, { recursive: true });
 
 for (const entry of await readdir(root, { withFileTypes: true })) {
   if (excluded.has(entry.name) || entry.name === '.DS_Store') continue;
-  const from = path.join(root, entry.name);
-  const to = path.join(dist, entry.name);
-  await cp(from, to, { recursive: true });
+  await cp(path.join(root, entry.name), path.join(dist, entry.name), { recursive: true });
 }
 
 const indexPath = path.join(dist, 'index.html');
@@ -51,12 +49,33 @@ manifest = manifest
   .replaceAll('../wrongbook-prototype/icon-512.png', './assets/icon-512.png');
 await writeFile(manifestPath, manifest);
 
-const unresolved = [
-  ...(html.match(/\.\.\/wrongbook-prototype\//g) ?? []),
-  ...(manifest.match(/\.\.\/wrongbook-prototype\//g) ?? []),
-];
+const unresolved = `${html}\n${manifest}`.match(/\.\.\/wrongbook-prototype\//g) ?? [];
 if (unresolved.length) {
   throw new Error('Native bundle still contains parent-relative wrongbook-prototype asset references.');
 }
 
+const localRefs = new Set();
+for (const match of html.matchAll(/(?:src|href)=["'](\.\/[^"']+)["']/g)) {
+  localRefs.add(match[1]);
+}
+for (const icon of JSON.parse(manifest).icons ?? []) {
+  if (typeof icon.src === 'string' && icon.src.startsWith('./')) localRefs.add(icon.src);
+}
+
+const missing = [];
+for (const ref of localRefs) {
+  const clean = ref.slice(2).split(/[?#]/, 1)[0];
+  if (!clean) continue;
+  try {
+    await stat(path.join(dist, clean));
+  } catch {
+    missing.push(ref);
+  }
+}
+
+if (missing.length) {
+  throw new Error(`Native bundle has missing local assets:\n${missing.map((item) => `- ${item}`).join('\n')}`);
+}
+
 console.log(`Prepared self-contained Capacitor web bundle at ${path.relative(root, dist)}/`);
+console.log(`Validated ${localRefs.size} local HTML/manifest asset references.`);
