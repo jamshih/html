@@ -3,34 +3,36 @@
 // 2) stale responses from an abandoned mode may not take ownership of the visible tutor.
 // 3) students can move backward/forward through already-generated steps without another AI call.
 (function(){
-  const VERSION='2026-08-17-tutor-flow-v7';
+  const VERSION='2026-08-17-tutor-flow-v7-state2';
   if(window.__wrongbookTutorFlowV7===VERSION)return;
   window.__wrongbookTutorFlowV7=VERSION;
 
   let hooksInstalled=false;
   let baseBuildStageGuide=null;
-  let baseSwitchMode=null;
 
+  function appState(){
+    try{return typeof state!=='undefined'?state:null}catch{return null}
+  }
   function problem(){
-    try{return typeof window.selectedProblem==='function'?window.selectedProblem():null}catch{return null}
+    try{return typeof selectedProblem==='function'?selectedProblem():null}catch{return null}
   }
   function session(p=problem()){
-    if(!p)return null;
-    return window.state?.tutorSessions?.[p.id]||null;
+    const st=appState();
+    if(!p||!st)return null;
+    return st.tutorSessions?.[p.id]||null;
   }
 
   function installRuntimeHooks(){
     if(hooksInstalled)return true;
-    if(typeof window.v5TutorStart!=='function'||typeof window.v5TutorSwitchMode!=='function'||typeof window.v5BuildStageGuide!=='function')return false;
+    if(typeof v5TutorStart!=='function'||typeof v5TutorSwitchMode!=='function'||typeof v5BuildStageGuide!=='function')return false;
 
     hooksInstalled=true;
-    baseBuildStageGuide=window.v5BuildStageGuide;
-    baseSwitchMode=window.v5TutorSwitchMode;
+    baseBuildStageGuide=v5BuildStageGuide;
 
     // A response from a session that is no longer the selected problem's live session must never
     // set state.aiGuideMode or replace the visible guide. This closes the direct→instructive race.
     window.v5BuildStageGuide=function(p,s,index){
-      const live=p?.id?window.state?.tutorSessions?.[p.id]:null;
+      const live=appState()?.tutorSessions?.[p?.id];
       if(live&&s&&live.id!==s.id)return null;
       return baseBuildStageGuide.apply(this,arguments);
     };
@@ -40,13 +42,13 @@
     // when moving to instructive mode, which allowed direct-mode state/results to remain authoritative.
     window.v5TutorSwitchMode=function(mode){
       if(!['instructive','direct'].includes(mode))return;
-      const p=problem(),s=session(p);
-      if(window.state?.aiGuideMode===mode&&s?.mode===mode){
-        window.render?.();
+      const st=appState(),p=problem(),s=session(p);
+      if(st?.aiGuideMode===mode&&s?.mode===mode){
+        if(typeof render==='function')render();
         return s;
       }
-      window.v5CancelGuidePlayback?.();
-      return window.v5TutorStart(mode);
+      if(typeof v5CancelGuidePlayback==='function')v5CancelGuidePlayback();
+      return typeof v5TutorStart==='function'?v5TutorStart(mode):null;
     };
     try{v5TutorSwitchMode=window.v5TutorSwitchMode}catch{}
 
@@ -58,13 +60,14 @@
     installRuntimeHooks();
     const p=problem(),s=session(p);
     if(!p||!s||!Array.isArray(s.stages)||!s.stages.length)return false;
-    const target=Math.max(0,Math.min(s.stages.length-1,(Number(s.activeIndex)||0)+delta));
-    if(target===s.activeIndex)return false;
-    window.v5CancelGuidePlayback?.();
-    const guide=window.v5BuildStageGuide?.(p,s,target);
-    window.save?.();
-    window.render?.();
-    if(guide)setTimeout(()=>window.v3GuideReplay?.(),45);
+    const current=Math.max(0,Math.min(s.stages.length-1,Number(s.activeIndex)||0));
+    const target=Math.max(0,Math.min(s.stages.length-1,current+delta));
+    if(target===current)return false;
+    if(typeof v5CancelGuidePlayback==='function')v5CancelGuidePlayback();
+    const guide=typeof v5BuildStageGuide==='function'?v5BuildStageGuide(p,s,target):null;
+    if(typeof save==='function')save();
+    if(typeof render==='function')render();
+    if(guide)setTimeout(()=>{if(typeof v3GuideReplay==='function')v3GuideReplay()},45);
     return true;
   }
 
@@ -122,13 +125,13 @@
     if(!['instructive','direct'].includes(mode))return;
     event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
     installRuntimeHooks();
-    const p=problem(),s=session(p);
-    if(window.state?.aiGuideMode===mode&&s?.mode===mode){
-      window.render?.();
+    const st=appState(),p=problem(),s=session(p);
+    if(st?.aiGuideMode===mode&&s?.mode===mode){
+      if(typeof render==='function')render();
       return;
     }
-    window.v5CancelGuidePlayback?.();
-    window.v5TutorStart?.(mode);
+    if(typeof v5CancelGuidePlayback==='function')v5CancelGuidePlayback();
+    if(typeof v5TutorStart==='function')v5TutorStart(mode);
   },true);
 
   let queued=false;
@@ -159,15 +162,17 @@
     const navExpected=Boolean(s?.stages?.length>1);
     const navOk=navExpected?Boolean(nav):!nav;
     const routesOk=instructive?.dataset.v5TutorMode==='instructive'&&direct?.dataset.v5TutorMode==='direct'&&window.__wrongbookTutorModeOwner==='v7';
+    const st=appState();
     return{
-      pass:Boolean(routesOk&&visibleInternal.length===0&&navOk&&hooksInstalled),
+      pass:Boolean(routesOk&&visibleInternal.length===0&&navOk&&hooksInstalled&&st),
       version:VERSION,
       hooksInstalled,
+      stateAvailable:Boolean(st),
       routesOk,
       internalDiagnosisVisible:visibleInternal.length,
       navExpected,
       navPresent:Boolean(nav),
-      activeMode:window.state?.aiGuideMode||null,
+      activeMode:st?.aiGuideMode||null,
       sessionMode:s?.mode||null,
       activeIndex:s?.activeIndex??null,
       stageCount:s?.stages?.length||0
@@ -177,7 +182,7 @@
   function scheduleQA(tries=0){
     setTimeout(()=>{
       const result=window.runWrongbookTutorFlowQA?.();
-      if((!result||!result.hooksInstalled)&&tries<30)return scheduleQA(tries+1);
+      if((!result||!result.hooksInstalled||!result.stateAvailable)&&tries<30)return scheduleQA(tries+1);
       window.__wrongbookTutorFlowV7QA=result;
       if(result&&!result.pass)console.warn('[Wrongbook tutor flow QA failed]',result);
     },120);
