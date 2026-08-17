@@ -39,8 +39,6 @@
   }));
  };
 
- // Never reveal an intermediate UI on timeout. If initialization genuinely stalls, keep the
- // neutral loading surface and tell the user instead of exposing whichever legacy render won.
  window.setTimeout(()=>{
   if(window.__wrongbookBootFinished)return;
   const copy=document.querySelector('#wbBootScreen .wb-boot-copy span');
@@ -73,5 +71,38 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  script.id='tutorMathV5';
  script.src='./tutor-math-v5.js?wb=20260817-1';
  script.async=true;
+ document.head.appendChild(script);
+})();
+
+// V6 owns the one-and-only tutor collapse control. It uses a new filename so stale V5 assets
+// cannot survive GitHub Pages/browser caches. Keep the boot cloak up until both its CSS and JS
+// have loaded, so users never see the obsolete text-chevron control first.
+(function(){
+ const oldFinish=window.__wrongbookFinishBoot;
+ let cssReady=false,jsReady=false,pendingFinish=false;
+ const maybeReady=()=>{
+  if(!cssReady||!jsReady)return;
+  window.__wrongbookTutorDialogV6Ready=true;
+  if(pendingFinish)oldFinish?.();
+ };
+ window.__wrongbookFinishBoot=function(){
+  if(window.__wrongbookTutorDialogV6Ready)return oldFinish?.();
+  pendingFinish=true;
+ };
+
+ const link=document.createElement('link');
+ link.id='tutorDialogControlV6Css';
+ link.rel='stylesheet';
+ link.href='./tutor-dialog-control-v6.css?wb=20260817-1';
+ link.onload=()=>{cssReady=true;maybeReady()};
+ link.onerror=()=>{cssReady=true;maybeReady()};
+ document.head.appendChild(link);
+
+ const script=document.createElement('script');
+ script.id='tutorDialogControlV6';
+ script.src='./tutor-dialog-control-v6.js?wb=20260817-1';
+ script.async=false;
+ script.onload=()=>{jsReady=true;maybeReady()};
+ script.onerror=()=>{jsReady=true;maybeReady()};
  document.head.appendChild(script);
 })();
