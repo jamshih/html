@@ -1,17 +1,15 @@
 /* Paper-first compatibility gate.
-   Historical source-map harnesses must exercise the pre-redesign UI contract; production and
-   V5 product QA continue through the paper-first runtime. Also gives large iPad landscape a
+   Historical source-map harnesses keep references to the pre-redesign UI contract; production
+   and V5 product QA continue through the paper-first runtime. Large iPad landscape gets a
    notebook-first workspace without turning the general tablet UI into a phone layout. */
 (function(){
   const q=new URLSearchParams(location.search);
   const legacy=['e2e','e2ev3','sourcee2e','refinee2e'].some(k=>q.has(k));
   if(legacy){
     const names=['sidebar','mobileNav','mobileDrawer','shell','homePage','notebookPage','recognitionPanel','problemWorkspace','reviewPage','captureModal','openCapture','render'];
-    names.forEach(name=>{
-      const d=Object.getOwnPropertyDescriptor(window,name);
-      if(!d||!('value' in d)||typeof d.value!=='function')return;
-      try{Object.defineProperty(window,name,{...d,writable:false})}catch{}
-    });
+    window.__paperFirstLegacyOriginals={};
+    names.forEach(name=>{try{window.__paperFirstLegacyOriginals[name]=eval(name)}catch{}});
+    document.documentElement.dataset.paperFirstLegacy='1';
     return;
   }
   const style=document.createElement('style');
