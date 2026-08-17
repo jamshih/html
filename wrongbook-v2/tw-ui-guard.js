@@ -88,7 +88,7 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  const link=document.createElement('link');
  link.id='tutorDialogControlV6Css';
  link.rel='stylesheet';
- link.href='./tutor-dialog-control-v6.css?wb=20260817-4';
+ link.href='./tutor-dialog-control-v6.css?wb=20260817-5';
  link.onload=()=>{cssReady=true;maybeReady()};
  link.onerror=()=>{cssReady=true;maybeReady()};
  document.head.appendChild(link);
@@ -103,7 +103,7 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
 
  const flow=document.createElement('script');
  flow.id='tutorFlowFixV7';
- flow.src='./tutor-flow-fix-v7.js?wb=20260817-2';
+ flow.src='./tutor-flow-fix-v7.js?wb=20260817-3';
  flow.async=false;
  flow.onload=()=>{flowReady=true;maybeReady()};
  flow.onerror=()=>{flowReady=true;maybeReady()};

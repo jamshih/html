@@ -63,6 +63,10 @@ html.dark,body.dark,html.theme-dark,body.theme-dark,html.dark-mode,body.dark-mod
 .v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-button{width:28px;height:28px}
 .v5-tutor-dock>.v5-dialog-collapse-bar{display:none!important}
 
+/* v5TutorStageLabel() returns an empty string while the AI request is loading, but the old
+   markup still creates the styled <span>. Its padding/background is the mystery empty pill. */
+.v5-tutor-stage-head>span:empty{display:none!important;padding:0!important;margin:0!important;min-width:0!important}
+
 /* Diagnosis such as “學生混淆了…” is internal tutor reasoning, not student-facing copy. */
 .v5-tutor-stage-head strong:not(.is-right){display:none!important}
 

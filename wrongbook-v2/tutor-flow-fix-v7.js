@@ -3,7 +3,7 @@
 // 2) stale responses from an abandoned mode may not take ownership of the visible tutor.
 // 3) students can move backward/forward through already-generated steps without another AI call.
 (function(){
-  const VERSION='2026-08-17-tutor-flow-v7-state2';
+  const VERSION='2026-08-17-tutor-flow-v7-state3';
   if(window.__wrongbookTutorFlowV7===VERSION)return;
   window.__wrongbookTutorFlowV7=VERSION;
 
@@ -29,8 +29,6 @@
     hooksInstalled=true;
     baseBuildStageGuide=v5BuildStageGuide;
 
-    // A response from a session that is no longer the selected problem's live session must never
-    // set state.aiGuideMode or replace the visible guide. This closes the direct→instructive race.
     window.v5BuildStageGuide=function(p,s,index){
       const live=appState()?.tutorSessions?.[p?.id];
       if(live&&s&&live.id!==s.id)return null;
@@ -38,8 +36,6 @@
     };
     try{v5BuildStageGuide=window.v5BuildStageGuide}catch{}
 
-    // Switching tabs starts that tab's own session. The old implementation only nulled the session
-    // when moving to instructive mode, which allowed direct-mode state/results to remain authoritative.
     window.v5TutorSwitchMode=function(mode){
       if(!['instructive','direct'].includes(mode))return;
       const st=appState(),p=problem(),s=session(p);
@@ -74,6 +70,15 @@
   function decorateDock(dock){
     if(!dock)return;
     installRuntimeHooks();
+
+    // v3GuideMarkup always emits the stage-label span. During loading there is no stage yet,
+    // so v5TutorStageLabel() returns "" and the span becomes a visible padded blank pill.
+    // Hide it semantically as well as via CSS so later style changes cannot revive it.
+    dock.querySelectorAll('.v5-tutor-stage-head>span').forEach(el=>{
+      if(el.textContent.trim())return;
+      el.hidden=true;
+      el.setAttribute('aria-hidden','true');
+    });
 
     // Never surface internal diagnosis/blind-spot prose to the student.
     dock.querySelectorAll('.v5-tutor-stage-head strong:not(.is-right)').forEach(el=>{
@@ -110,7 +115,6 @@
     document.querySelectorAll('.v5-tutor-dock').forEach(decorateDock);
   }
 
-  // Capture before the legacy bubble listeners. Each mode tab has exactly one semantic route.
   document.addEventListener('click',event=>{
     const step=event.target.closest?.('[data-v7-tutor-step]');
     if(step){
@@ -150,13 +154,13 @@
   };
   mount();
 
-  // Lightweight runtime QA. It does not call the API or alter the student's current session.
   window.runWrongbookTutorFlowQA=function(){
     installRuntimeHooks();apply();
     const dock=document.querySelector('.v5-tutor-dock');
     const instructive=dock?.querySelector('[data-v5-tutor-mode="instructive"]');
     const direct=dock?.querySelector('[data-v5-tutor-mode="direct"]');
     const visibleInternal=[...document.querySelectorAll('.v5-tutor-stage-head strong:not(.is-right)')].filter(el=>!el.hidden&&getComputedStyle(el).display!=='none');
+    const visibleEmptyStageBadges=[...document.querySelectorAll('.v5-tutor-stage-head>span')].filter(el=>!el.textContent.trim()&&!el.hidden&&getComputedStyle(el).display!=='none');
     const s=session();
     const nav=dock?.querySelector('.v7-tutor-step-nav');
     const navExpected=Boolean(s?.stages?.length>1);
@@ -164,12 +168,13 @@
     const routesOk=instructive?.dataset.v5TutorMode==='instructive'&&direct?.dataset.v5TutorMode==='direct'&&window.__wrongbookTutorModeOwner==='v7';
     const st=appState();
     return{
-      pass:Boolean(routesOk&&visibleInternal.length===0&&navOk&&hooksInstalled&&st),
+      pass:Boolean(routesOk&&visibleInternal.length===0&&visibleEmptyStageBadges.length===0&&navOk&&hooksInstalled&&st),
       version:VERSION,
       hooksInstalled,
       stateAvailable:Boolean(st),
       routesOk,
       internalDiagnosisVisible:visibleInternal.length,
+      emptyStageBadgeVisible:visibleEmptyStageBadges.length,
       navExpected,
       navPresent:Boolean(nav),
       activeMode:st?.aiGuideMode||null,
