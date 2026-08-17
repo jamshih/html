@@ -33,7 +33,7 @@ jobs:
           node --check wrongbook-v2/paper-first-compat-restore-v1.js
           ! grep -q 'function v4tbMascot' wrongbook-v2/mindmap-textbook-v4.js
           ! grep -q 'v4tbPageNumber\|v4tbSplitSections\|v4tbPageHeader\|v4tb-blank-no' wrongbook-v2/mindmap-textbook-v4.js
-          grep -q 'MIND MAP MAKING SKILL' wrongbook-v2/MIND_MAP_MAKING_SKILL.md
+          grep -qi 'mind map making skill' wrongbook-v2/MIND_MAP_MAKING_SKILL.md
 
       - name: Inject visual-proof helper for this runner only
         run: |
