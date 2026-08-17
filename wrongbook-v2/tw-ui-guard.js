@@ -93,7 +93,7 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  const link=document.createElement('link');
  link.id='tutorDialogControlV6Css';
  link.rel='stylesheet';
- link.href='./tutor-dialog-control-v6.css?wb=20260817-1';
+ link.href='./tutor-dialog-control-v6.css?wb=20260817-2';
  link.onload=()=>{cssReady=true;maybeReady()};
  link.onerror=()=>{cssReady=true;maybeReady()};
  document.head.appendChild(link);
