@@ -100,7 +100,7 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
 
  const script=document.createElement('script');
  script.id='tutorDialogControlV6';
- script.src='./tutor-dialog-control-v6.js?wb=20260817-1';
+ script.src='./tutor-dialog-control-v6.js?wb=20260817-2';
  script.async=false;
  script.onload=()=>{jsReady=true;maybeReady()};
  script.onerror=()=>{jsReady=true;maybeReady()};
