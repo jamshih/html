@@ -142,3 +142,24 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  css('reviewWritingSheetV8Css','./review-writing-sheet-v8.css?wb=20260817-1','reviewCss');
  js('reviewWritingSheetV8','./review-writing-sheet-v8.js?wb=20260817-2','reviewJs');
 })();
+
+// V10 tutor copy formatter: convert escaped newlines/markdown to readable prose before the app is shown.
+(function(){
+ const oldFinish=window.__wrongbookFinishBoot;
+ let cssReady=false,jsReady=false,pendingFinish=false;
+ const maybeReady=()=>{
+  if(!cssReady||!jsReady)return;
+  window.__wrongbookTutorCopyV10Ready=true;
+  if(pendingFinish)oldFinish?.();
+ };
+ window.__wrongbookFinishBoot=function(){
+  if(window.__wrongbookTutorCopyV10Ready)return oldFinish?.();
+  pendingFinish=true;
+ };
+ const css=document.createElement('link');
+ css.id='tutorCopyV10Css';css.rel='stylesheet';css.href='./tutor-copy-v10.css?wb=20260817-1';
+ css.onload=css.onerror=()=>{cssReady=true;maybeReady()};document.head.appendChild(css);
+ const js=document.createElement('script');
+ js.id='tutorCopyV10';js.src='./tutor-copy-v10.js?wb=20260817-1';js.async=false;
+ js.onload=js.onerror=()=>{jsReady=true;maybeReady()};document.head.appendChild(js);
+})();
