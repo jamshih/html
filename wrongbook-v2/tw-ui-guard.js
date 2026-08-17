@@ -110,21 +110,22 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  document.head.appendChild(flow);
 })();
 
-// V8 owns three production guarantees: an expanded tutor never covers the prompt, conceptual
-// diagrams can be rendered inside tutor steps, and review sessions always include scratch paper.
-// Keep the boot cloak up until all six V8 assets have loaded to avoid another first-paint UI swap.
+// V8/V12 production guarantees: the tutor never covers the prompt, the compact control really
+// expands upward, diagrams can render on the sheet, and review sessions include scratch paper.
+// Keep the boot cloak up until the geometry owner is loaded so there is no downward-growing flash.
 (function(){
  const oldFinish=window.__wrongbookFinishBoot;
- const ready={nonOverlapCss:false,nonOverlapJs:false,diagramCss:false,diagramJs:false,reviewCss:false,reviewJs:false};
+ const ready={nonOverlapCss:false,nonOverlapJs:false,collapseUpJs:false,diagramCss:false,diagramJs:false,reviewCss:false,reviewJs:false};
  let pendingFinish=false;
  const allReady=()=>Object.values(ready).every(Boolean);
  const maybeReady=()=>{
   if(!allReady())return;
   window.__wrongbookTutorV8Ready=true;
+  window.__wrongbookTutorCollapseUpV12Ready=true;
   if(pendingFinish)oldFinish?.();
  };
  window.__wrongbookFinishBoot=function(){
-  if(window.__wrongbookTutorV8Ready)return oldFinish?.();
+  if(window.__wrongbookTutorV8Ready&&window.__wrongbookTutorCollapseUpV12Ready)return oldFinish?.();
   pendingFinish=true;
  };
  function css(id,href,key){
@@ -136,7 +137,8 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
   script.onload=script.onerror=()=>{ready[key]=true;maybeReady()};document.head.appendChild(script);
  }
  css('tutorNonOverlapV8Css','./tutor-nonoverlap-v8.css?wb=20260817-1','nonOverlapCss');
- js('tutorNonOverlapV8','./tutor-nonoverlap-v8.js?wb=20260817-1','nonOverlapJs');
+ js('tutorNonOverlapV8','./tutor-nonoverlap-v8.js?wb=20260817-2','nonOverlapJs');
+ js('tutorCollapseUpV12','./tutor-collapse-up-v12.js?wb=20260817-2','collapseUpJs');
  css('tutorDiagramV8Css','./tutor-diagram-v8.css?wb=20260817-1','diagramCss');
  js('tutorDiagramV8','./tutor-diagram-v8.js?wb=20260817-1','diagramJs');
  css('reviewWritingSheetV8Css','./review-writing-sheet-v8.css?wb=20260817-1','reviewCss');
