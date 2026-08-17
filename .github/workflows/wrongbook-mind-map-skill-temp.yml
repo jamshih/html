@@ -33,6 +33,7 @@ jobs:
           node --check wrongbook-v2/paper-first-compat-restore-v1.js
           ! grep -q 'function v4tbMascot' wrongbook-v2/mindmap-textbook-v4.js
           ! grep -q 'v4tbPageNumber\|v4tbSplitSections\|v4tbPageHeader\|v4tb-blank-no' wrongbook-v2/mindmap-textbook-v4.js
+          ! grep -q 'v4tb-slot:after\|v4tb-flow-visual:before' wrongbook-v2/mindmap-textbook-v4.css
           grep -qi 'mind map making skill' wrongbook-v2/MIND_MAP_MAKING_SKILL.md
 
       - name: Inject visual-proof helper for this runner only
@@ -73,7 +74,6 @@ jobs:
           PY
 
       - name: Run all non-Earth chapters — mobile geometry gate
-        if: always()
         run: |
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
@@ -91,6 +91,33 @@ jobs:
           print(json.dumps({k:data.get(k) for k in ['status','viewport','subjectsExpected','chaptersExpected','chaptersRendered','canonicalExpected','canonicalRendered','totals']},ensure_ascii=False,indent=2))
           if m.group(1)!='PASS' or data.get('status')!='PASS': raise SystemExit(1)
           PY
+
+      - name: Run current Wrongbook and Earth regression gates
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          parse_e2e() {
+            python3 - "$1" <<'PY'
+          from pathlib import Path
+          import html,re,json,sys
+          t=Path(sys.argv[1]).read_text(errors='replace')
+          m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',t,re.S)
+          if not m:
+              print(t[-5000:])
+              raise SystemExit('e2e-results missing')
+          payload=html.unescape(m.group(2))
+          data=json.loads(payload)
+          print(json.dumps({'status':data.get('status'),'viewport':data.get('viewport'),'error':data.get('error'),'failed':[x for x in data.get('results',[]) if not x.get('ok')]},ensure_ascii=False,indent=2))
+          if m.group(1)!='PASS' or data.get('status')!='PASS': raise SystemExit(1)
+          PY
+          }
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/mindmap-current-e2e --window-size=1440,1000 --virtual-time-budget=90000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?e2e=1" > /tmp/mindmap-current-e2e.html
+          parse_e2e /tmp/mindmap-current-e2e.html
+          for Q in sourcee2e=1 refinee2e=1; do
+            NAME="${Q%%=*}"
+            "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/mindmap-$NAME" --window-size=1440,1000 --virtual-time-budget=30000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?$Q" > "/tmp/mindmap-$NAME.html"
+            parse_e2e "/tmp/mindmap-$NAME.html"
+          done
 
       - name: Capture representative visual proof for every non-Earth subject
         if: always()
@@ -112,5 +139,8 @@ jobs:
             /tmp/mindmap-skill-desktop.json
             /tmp/mindmap-skill-mobile.html
             /tmp/mindmap-skill-mobile.json
+            /tmp/mindmap-current-e2e.html
+            /tmp/mindmap-sourcee2e.html
+            /tmp/mindmap-refinee2e.html
             /tmp/mindmap-shots/*.png
             /tmp/wrongbook-mindmap-http.log
