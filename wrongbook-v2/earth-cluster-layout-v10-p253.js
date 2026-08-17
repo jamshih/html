@@ -40,9 +40,9 @@
     lines.dataset.sourceClusterOwner='p253-climate-ocean-system';
     lines.dataset.visualOwner='earth-cluster-layout-v10-p253';
 
-    // The source prints q42 as one wide ocean-current row above the wave cluster. The legacy
-    // 290px box at x~571 wrapped its final clause downward into q43.
-    ownPrompt(page,42,'p253-current-vertical-flow',165,690,806);
+    // q40/q41 finish near y=829 and q43 begins near y=867 in the source grid. q42 owns the
+    // wide whitespace band between them and must stay on one row.
+    ownPrompt(page,42,'p253-current-vertical-flow',165,690,835);
 
     // Source grid: q43 occupies the upper wave sub-band; q44 begins below with clear whitespace.
     ownPrompt(page,43,'p253-wave-nearshore',420,400,867);
