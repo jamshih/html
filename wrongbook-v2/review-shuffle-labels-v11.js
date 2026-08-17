@@ -1,11 +1,16 @@
 // Wrong Book V11 — shuffled review options keep visual labels A, B, C... from top to bottom.
 // Internal grading still uses the original source option label, so correctness is unchanged.
 (function(){
-  const VERSION='2026-08-17-review-shuffle-labels-v11';
+  const VERSION='2026-08-17-review-shuffle-labels-v11b';
   if(window.__wrongbookReviewShuffleLabelsV11===VERSION)return;
   window.__wrongbookReviewShuffleLabelsV11=VERSION;
 
   if(document.documentElement.dataset.paperFirstLegacy==='1')return;
+
+  function appState(){try{return typeof state!=='undefined'?state:(window.state||{})}catch{return window.state||{}}}
+  function stableShuffle(source,seed){try{return typeof v3StableShuffle==='function'?v3StableShuffle(source,seed):[...source]}catch{return typeof window.v3StableShuffle==='function'?window.v3StableShuffle(source,seed):[...source]}}
+  function answerEqual(a,b){try{return typeof sameAnswers==='function'?sameAnswers(a,b):[...a].sort().join('|')===[...b].sort().join('|')}catch{return[...a].sort().join('|')===[...b].sort().join('|')}}
+  function subjectName(id){try{return typeof subjectById==='function'?subjectById(id).name:id}catch{return id}}
 
   function labelAt(index){
     if(index<26)return String.fromCharCode(65+index);
@@ -14,8 +19,9 @@
 
   function labeledOptions(p){
     const source=Array.isArray(p?.options)?p.options:[];
-    const seed=`${p?.id||'review'}:${window.state?.reviewShuffleSeed||'v3'}`;
-    const shuffled=typeof window.v3StableShuffle==='function'?window.v3StableShuffle(source,seed):[...source];
+    const st=appState();
+    const seed=`${p?.id||'review'}:${st.reviewShuffleSeed||'v3'}`;
+    const shuffled=stableShuffle(source,seed);
     return shuffled.map(([sourceLabel,text],index)=>({sourceLabel:String(sourceLabel),text,displayLabel:labelAt(index),index}));
   }
 
@@ -25,22 +31,23 @@
   }
 
   function escHtml(value=''){
-    if(typeof window.esc==='function')return window.esc(value);
+    try{if(typeof esc==='function')return esc(value)}catch{}
     return String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
   }
 
   function renderRedoProblem(p){
+    const st=appState();
     const opts=labeledOptions(p);
-    const selections=(window.state?.reviewSelections||[]).map(String);
+    const selections=(st.reviewSelections||[]).map(String);
     const correct=(p?.correct||[]).map(String);
     const selectedSet=new Set(selections),correctSet=new Set(correct);
-    const checked=Boolean(window.state?.reviewChecked);
-    const isCorrect=typeof window.sameAnswers==='function'?window.sameAnswers(selections,correct):[...selections].sort().join('|')===[...correct].sort().join('|');
+    const checked=Boolean(st.reviewChecked);
+    const isCorrect=answerEqual(selections,correct);
     const userDisplay=displayAnswers(opts,selections)||'未作答';
     const correctDisplay=displayAnswers(opts,correct)||'—';
 
     return `<div style="max-width:760px;margin:0 auto" data-review-shuffle-v11="1">
-      <div class="meta">${escHtml(typeof window.subjectById==='function'?window.subjectById(p.subject).name:p.subject)} · ${escHtml(p.concept)} · 選項順序每輪會重新排列，題號依畫面由上而下重排</div>
+      <div class="meta">${escHtml(subjectName(p.subject))} · ${escHtml(p.concept)} · 選項順序每輪會重新排列，題號依畫面由上而下重排</div>
       <h2 style="margin:7px 0 16px">${escHtml(p.problemText)}</h2>
       ${opts.length?opts.map(item=>{
         const sel=selectedSet.has(item.sourceLabel);
@@ -87,8 +94,10 @@
     const internalSourceKept=!mounted||domLabels.every(x=>x.source&&x.source===x.data);
     const domUnique=!mounted||new Set(domLabels.map(x=>x.source)).size===domLabels.length;
 
-    const pass=sequential&&sourcePreserved&&uniqueSources&&mappingCorrect&&domSequential&&internalSourceKept&&domUnique;
-    return{pass,version:VERSION,mounted,sequential,sourcePreserved,uniqueSources,mappingCorrect,domSequential,internalSourceKept,domUnique,fixture:labeled.map(x=>`${x.displayLabel}->${x.sourceLabel}`),dom:domLabels};
+    const st=appState();
+    const selectedDomOk=!mounted||buttons.every(b=>b.classList.contains('selected')===(st.reviewSelections||[]).map(String).includes(b.dataset.reviewSourceOption))||Boolean(st.reviewChecked);
+    const pass=sequential&&sourcePreserved&&uniqueSources&&mappingCorrect&&domSequential&&internalSourceKept&&domUnique&&selectedDomOk;
+    return{pass,version:VERSION,mounted,sequential,sourcePreserved,uniqueSources,mappingCorrect,domSequential,internalSourceKept,domUnique,selectedDomOk,fixture:labeled.map(x=>`${x.displayLabel}->${x.sourceLabel}`),dom:domLabels};
   };
 
   function scheduleQA(tries=0){
