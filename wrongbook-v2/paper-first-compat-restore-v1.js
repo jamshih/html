@@ -127,3 +127,19 @@ if(new URLSearchParams(location.search).get('mindmapskillqa')==='1'){
   script.dataset.mindmapSkillQaLoader='1';
   document.head.appendChild(script);
 }
+
+// Mobile review-first layer: keep phone study touch-first and keep the bottom menu attached to the viewport.
+if(!document.getElementById('mobileReviewV1Css')){
+  const link=document.createElement('link');
+  link.id='mobileReviewV1Css';
+  link.rel='stylesheet';
+  link.href='./mobile-review-v1.css?wb=20260817-1';
+  document.head.appendChild(link);
+}
+if(!document.getElementById('mobileReviewV1')){
+  const script=document.createElement('script');
+  script.id='mobileReviewV1';
+  script.src='./mobile-review-v1.js?wb=20260817-1';
+  script.async=false;
+  document.head.appendChild(script);
+}
