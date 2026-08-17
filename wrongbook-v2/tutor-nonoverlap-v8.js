@@ -50,3 +50,14 @@
   };
   const css=document.createElement('link');css.id='paperOverlayV9Css';css.rel='stylesheet';css.href='./paper-overlay-v9.css?wb=20260817-3';css.onload=css.onerror=loadJs;document.head.appendChild(css);
 })();
+
+// V11: the compact tutor control opens upward. Keep this separate from V8 geometry so the
+// non-overlap invariant stays unchanged while the visual reveal direction can evolve independently.
+(function loadWrongbookTutorCollapseUpV11(){
+  if(document.getElementById('tutorCollapseUpV11'))return;
+  const js=document.createElement('script');
+  js.id='tutorCollapseUpV11';
+  js.src='./tutor-collapse-up-v11.js?wb=20260817-1';
+  js.async=false;
+  document.head.appendChild(js);
+})();
