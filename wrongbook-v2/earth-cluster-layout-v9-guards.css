@@ -1,0 +1,11 @@
+/* Final geometry guards for explicit v9 source clusters only.
+   Legacy .v5-recall rules cap prompt boxes at 310px; these source-local children use measured widths. */
+.v6-p247-bottom [data-source-cluster-owner="p247-milankovitch-summary"],
+.v6-p247-bottom [data-source-cluster-owner="p247-ice-age-panel"],
+.v6-p250-method [data-source-cluster-owner="p250-saturation-methods"],
+.v6-p250-rh [data-source-cluster-owner="p250-relative-humidity"],
+.v9-p250-wetbulb-cluster [data-source-cluster-owner="p250-wetbulb-method"],
+.v9-p250-dewpoint-cluster [data-source-cluster-owner="p250-dewpoint-rh"]{
+  max-width:none!important;
+  max-height:none!important;
+}
