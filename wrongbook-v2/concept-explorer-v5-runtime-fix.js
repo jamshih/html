@@ -31,4 +31,24 @@
     };
     try{v5CeBindSearchResults=window.v5CeBindSearchResults}catch{}
   }
+
+  // V6 keeps the existing concept data/review logic, but replaces the deeply nested visual
+  // explorer with a shallow navigator and a sparse Obsidian-style graph. Load it separately
+  // so the redesign can be rolled back without touching the curriculum or study engine.
+  const realmStamp='20260817-1';
+  if(!document.querySelector('link[data-concept-realm-v6]')){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=`./concept-realm-v6.css?wb=${realmStamp}`;
+    link.dataset.conceptRealmV6='1';
+    document.head.appendChild(link);
+  }
+  if(!window.__wrongbookConceptRealmV6&&!document.querySelector('script[data-concept-realm-v6]')){
+    const script=document.createElement('script');
+    script.src=`./concept-realm-v6.js?wb=${realmStamp}`;
+    script.async=false;
+    script.dataset.conceptRealmV6='1';
+    script.onerror=()=>console.error('[concept-realm-v6] failed to load');
+    document.body.appendChild(script);
+  }
 })();
