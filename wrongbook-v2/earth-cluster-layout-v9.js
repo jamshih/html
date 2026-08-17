@@ -8,19 +8,26 @@
   fieldSpec(246,8,[60]);
   fieldSpec(246,9,[60]);
 
-  // Page 250: the prompt owner must also own the photographed visual treatment. Recreate the
-  // fields at source-like widths so Learn mode does not change the reading order or force wraps.
+  // Page 247: measured source blanks. q40/q41 use true block line breaks rather than the generic
+  // flex prompt layout, so Learn answers stay on the photographed line instead of forming a third row.
+  fieldSpec(247,38,[45]);
+  fieldSpec(247,39,[50]);
+  fieldSpec(247,40,[92]);
+  fieldSpec(247,41,[58]);
+
+  // Page 250: the prompt owner also owns the photographed visual treatment. Recreate fields at
+  // source-like widths so Learn mode does not change reading order or force unrelated wrapping.
   const p48=fieldSpec(250,48,[96]);
   if(p48)p48.template='<div class="v9-p250-method-heading">使未飽和空氣塊達飽和的兩個方法：</div><div class="v9-p250-method-row">甲. <b class="v4strict-num">(48)</b> {{0}}</div>';
   const p49=fieldSpec(250,49,[96]);
   if(p49)p49.template='乙. <b class="v4strict-num">(49)</b> {{0}}　← 自然界的 <strong class="v9-p250-rain-pill">成雲致雨</strong> 主要方式';
   fieldSpec(250,50,[112]);
-  fieldSpec(250,51,[92]);
-  const p52=fieldSpec(250,52,[178]);
-  if(p52)p52.template='相對溼度＝<b class="v4strict-num">(52)</b> {{0}}';
-  const p53=fieldSpec(250,53,[178]);
+  fieldSpec(250,51,[82]);
+  const p52=fieldSpec(250,52,[160]);
+  if(p52)p52.template='<b class="v4strict-num">(52)</b> {{0}}';
+  const p53=fieldSpec(250,53,[160]);
   if(p53)p53.template='<b class="v4strict-num">(53)</b> {{0}}';
-  fieldSpec(250,54,[82]);
+  fieldSpec(250,54,[72]);
 
   const prev=window.v5PageHtml;
   if(typeof prev!=='function')return;
@@ -55,9 +62,6 @@
     const zodiac=page.querySelector('.v6-p246-zodiac');
     if(!zodiac)return;
 
-    // The source has the orbit/zodiac art and the day-2 labels in one visual frame. Legacy code
-    // positioned the SVG at x=100 but later moved q8/q9 to x=510, causing answers to land on a
-    // planet marker. Give the subgroup a single parent at the measured source frame instead.
     const cluster=document.createElement('div');
     cluster.className='v9-p246-zodiac-cluster';
     cluster.dataset.sourceCluster='p246-zodiac-orbit';
@@ -68,8 +72,6 @@
     own(zodiac,'p246-zodiac-figure','figure','p246-zodiac-orbit');
     setBox(zodiac,0,0,535,505);
 
-    // The photograph places the two right-side planet markers much closer to the central orbit than
-    // the legacy approximation. Correct only those local SVG children and their two dashed rays.
     const planets=[...zodiac.querySelectorAll('g[fill="#92a4c5"] circle')];
     if(planets[2]){planets[2].setAttribute('cx','370');planets[2].setAttribute('cy','112');planets[2].dataset.sourceObject='p246-orbit-planet-q9';}
     if(planets[3]){planets[3].setAttribute('cx','400');planets[3].setAttribute('cy','147');planets[3].dataset.sourceObject='p246-orbit-planet-q8';}
@@ -109,12 +111,36 @@
     move(page,left,37,[24,314,325,null],'p247-milankovitch-summary');
 
     move(page,right,38,[40,29,165,null],'p247-ice-age-panel');
-    move(page,right,39,[202,29,180,null],'p247-ice-age-panel');
-    move(page,right,40,[24,120,365,null],'p247-ice-age-panel');
-    move(page,right,41,[24,344,365,null],'p247-ice-age-panel');
+    move(page,right,39,[202,29,182,null],'p247-ice-age-panel');
+    move(page,right,40,[24,94,365,null],'p247-ice-age-panel');
+    move(page,right,41,[24,350,365,null],'p247-ice-age-panel');
+
+    // Rebuild the teaching figure at the photographed proportions. It remains one figure owner,
+    // but now includes the ground planes, vertical/tilted comparison blocks and quantitative labels.
+    figure.setAttribute('viewBox','0 0 330 180');
+    figure.setAttribute('preserveAspectRatio','xMidYMid meet');
+    figure.innerHTML=`
+      <g fill="none" stroke="#586a7d" stroke-width="1.7">
+        <path d="M8 20L93 57"/><path d="M8 34L93 71"/><path d="M8 48L93 85"/>
+        <path d="M177 27L268 27"/><path d="M177 41L268 41"/><path d="M177 55L268 55"/>
+      </g>
+      <text x="15" y="118" font-size="10" fill="#403d38" transform="rotate(-90 15 118)">北回歸線處</text>
+      <polygon points="48,130 112,130 138,145 73,145" fill="#efe9a9" stroke="#8f854d" stroke-width="1.2"/>
+      <polygon points="82,48 117,42 117,126 82,132" fill="#e6ce43" stroke="#6d6532" stroke-width="1.5"/>
+      <path d="M99.5 45V129M82 88H117" stroke="#a99331" stroke-width="1"/>
+      <text x="67" y="59" font-size="10" fill="#403d38">1</text><text x="111" y="139" font-size="10" fill="#403d38">1</text>
+      <polygon points="184,132 255,132 292,151 218,151" fill="#efe9a9" stroke="#8f854d" stroke-width="1.2"/>
+      <g transform="translate(210 48) rotate(-48 38 44)">
+        <polygon points="0,8 48,0 48,83 0,91" fill="#e6ce43" stroke="#6d6532" stroke-width="1.5"/>
+        <path d="M24 4V87M0 47H48" stroke="#a99331" stroke-width="1"/>
+      </g>
+      <path d="M239 112A33 33 0 0 1 263 129" fill="none" stroke="#777" stroke-width="1.2"/>
+      <text x="239" y="130" font-size="10" fill="#403d38">43°</text>
+      <text x="272" y="130" font-size="10" fill="#403d38">1.47</text>
+      <text x="82" y="165" font-size="12" fill="#403d38">夏至</text><text x="228" y="165" font-size="12" fill="#403d38">冬至</text>`;
     right.appendChild(figure);
     own(figure,'p247-insolation-comparison','figure','p247-ice-age-panel');
-    setBox(figure,34,207,330,137);
+    setBox(figure,34,164,330,180);
   }
 
   function repair250(t){
@@ -132,17 +158,17 @@
     method.innerHTML='<svg class="v9-p250-method-branch" data-source-object="p250-saturation-branch" data-source-role="connector" viewBox="0 0 420 175" preserveAspectRatio="none" aria-hidden="true"><path d="M10 14V148M10 148H82"/><circle cx="10" cy="14" r="7"/><circle cx="10" cy="148" r="7"/></svg>';
     method.dataset.sourceCluster='p250-saturation-methods';
     method.dataset.visualOwner='earth-cluster-layout-v9';
-    move(page,method,48,[18,0,395,null],'p250-saturation-methods');
-    move(page,method,49,[18,64,400,null],'p250-saturation-methods');
-    move(page,method,50,[82,128,335,null],'p250-saturation-methods');
+    move(page,method,48,[18,0,395,64],'p250-saturation-methods');
+    move(page,method,49,[18,78,400,null],'p250-saturation-methods');
+    move(page,method,50,[82,132,335,null],'p250-saturation-methods');
 
-    rh.innerHTML='<i class="v9-p250-fraction-rule" data-source-object="p250-rh-fraction-rule" data-source-role="border" aria-hidden="true"></i><span class="v9-p250-rh-times" data-source-object="p250-rh-times" data-source-role="source-label">×100%</span>';
+    rh.innerHTML='<span class="v9-p250-rh-label" data-source-object="p250-rh-label" data-source-role="source-label">相對溼度＝</span><i class="v9-p250-rh-box numerator" data-source-object="p250-rh-numerator-box" data-source-role="border" aria-hidden="true"></i><i class="v9-p250-fraction-rule" data-source-object="p250-rh-fraction-rule" data-source-role="border" aria-hidden="true"></i><i class="v9-p250-rh-box denominator" data-source-object="p250-rh-denominator-box" data-source-role="border" aria-hidden="true"></i><span class="v9-p250-rh-times" data-source-object="p250-rh-times" data-source-role="source-label">×100%</span>';
     rh.dataset.sourceCluster='p250-relative-humidity';
     rh.dataset.visualOwner='earth-cluster-layout-v9';
-    move(page,rh,51,[118,0,305,null],'p250-relative-humidity');
-    move(page,rh,52,[0,46,340,null],'p250-relative-humidity');
-    move(page,rh,53,[92,91,235,null],'p250-relative-humidity');
-    move(page,rh,54,[118,147,305,null],'p250-relative-humidity');
+    move(page,rh,51,[118,12,305,null],'p250-relative-humidity');
+    move(page,rh,52,[107,58,220,null],'p250-relative-humidity');
+    move(page,rh,53,[107,108,220,null],'p250-relative-humidity');
+    move(page,rh,54,[118,156,305,null],'p250-relative-humidity');
 
     const wet=document.createElement('div');
     wet.className='v9-p250-wetbulb-cluster';wet.dataset.sourceCluster='p250-wetbulb-method';wet.dataset.visualOwner='earth-cluster-layout-v9';page.appendChild(wet);
