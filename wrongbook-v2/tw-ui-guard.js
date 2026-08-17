@@ -103,7 +103,7 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
 
  const flow=document.createElement('script');
  flow.id='tutorFlowFixV7';
- flow.src='./tutor-flow-fix-v7.js?wb=20260817-1';
+ flow.src='./tutor-flow-fix-v7.js?wb=20260817-2';
  flow.async=false;
  flow.onload=()=>{flowReady=true;maybeReady()};
  flow.onerror=()=>{flowReady=true;maybeReady()};
