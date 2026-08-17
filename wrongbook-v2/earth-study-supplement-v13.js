@@ -1,23 +1,21 @@
-// v13 loader upgraded on 2026-08-17: the old add-on-card approach is retired.
-// Load the v14 source-faithful workbook-sheet renderer after v11/v12 so v14 becomes canonical.
+// v15 canonical Earth renderer: actual reference-sheet imagery + handwriting-first chalkboard interaction.
 (function(){
-  const stamp='20260817-3';
-  function addStyle(href,key){
-    if(document.querySelector(`link[data-${key}]`))return;
+  const stamp='20260817-15';
+  function style(){
+    if(document.querySelector('link[data-earth-png-board-v15]'))return;
     const l=document.createElement('link');
-    l.rel='stylesheet';l.href=`./${href}?wb=${stamp}`;l.setAttribute(`data-${key}`,'1');
+    l.rel='stylesheet';
+    l.href=`./earth-png-board-v15.css?wb=${stamp}`;
+    l.dataset.earthPngBoardV15='1';
     document.head.appendChild(l);
   }
-  function load(src,done){
-    const existing=[...document.scripts].find(s=>s.src&&s.src.includes(src));
-    if(existing){if(done)done();return;}
-    const s=document.createElement('script');s.src=`./${src}?wb=${stamp}`;s.async=false;
-    s.onload=()=>done&&done();
-    s.onerror=()=>console.error('[earth-v14] failed to load',src);
+  function script(){
+    if(window.EARTH_PNG_BOARD_V15){render();return;}
+    const s=document.createElement('script');
+    s.src=`./earth-png-board-v15.js?wb=${stamp}`;
+    s.async=false;
+    s.onerror=()=>console.error('[earth-v15] failed to load');
     document.body.appendChild(s);
   }
-  addStyle('earth-reference-sheet-v14.css','earth-reference-v14');
-  addStyle('earth-reference-sheet-v14-density.css','earth-reference-v14-density');
-  if(window.EARTH_REFERENCE_SHEET_V14){render();return;}
-  load('earth-reference-sheet-v14-data.js',()=>load('earth-reference-sheet-v14.js'));
+  style();script();
 })();
