@@ -31,4 +31,23 @@
     };
     try{v5CeBindSearchResults=window.v5CeBindSearchResults}catch{}
   }
+
+  // V7 deliberately removes the graph/realm experiment. Concepts are now organized directly
+  // by the Taiwan 108 curriculum: subject -> chapter -> section -> concept, with no graph view.
+  const chapterStamp='20260817-1';
+  if(!document.querySelector('link[data-concept-chapters-v7]')){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=`./concept-chapters-v7.css?wb=${chapterStamp}`;
+    link.dataset.conceptChaptersV7='1';
+    document.head.appendChild(link);
+  }
+  if(!window.__wrongbookConceptChaptersV7&&!document.querySelector('script[data-concept-chapters-v7]')){
+    const script=document.createElement('script');
+    script.src=`./concept-chapters-v7.js?wb=${chapterStamp}`;
+    script.async=false;
+    script.dataset.conceptChaptersV7='1';
+    script.onerror=()=>console.error('[concept-chapters-v7] failed to load');
+    document.body.appendChild(script);
+  }
 })();

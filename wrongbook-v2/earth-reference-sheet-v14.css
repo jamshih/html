@@ -1,0 +1,202 @@
+/* Earth Science reference-sheet fidelity v14
+   Goal: faithfully reproduce the supplied six 1055×1491 workbook-style sheets as live HTML/CSS,
+   while keeping all text/selectable content code-native. */
+.earth11-page-head{max-width:1180px;margin:0 auto 8px;padding:0 12px}
+.earth11-page-head h2{margin:0;font-size:18px;font-weight:900;color:#31281e}
+.earth11-page-head p{margin:4px 0 0;font-size:12px;color:#756d62}
+.earth11-source{display:flex;justify-content:center;gap:7px;margin:6px auto 8px}
+.earth11-source button{border:1px solid #b9ad9c;background:#fffdf8;color:#6d6458;border-radius:8px;padding:6px 11px;font-size:11px;font-weight:800;cursor:pointer}
+.earth11-source button.active{background:#2f2a25;color:white;border-color:#2f2a25}
+.earth11-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;max-width:1055px;margin:0 auto 10px;padding:0 8px}
+.earth11-nav button{border:1px solid #d8cdbd;background:#fffdf7;border-radius:10px;display:flex;align-items:center;gap:6px;padding:7px 8px;min-width:0;cursor:pointer;box-shadow:0 1px 3px rgba(58,45,29,.06)}
+.earth11-nav button b{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--tab) 15%,white);color:var(--tab);font-size:12px}
+.earth11-nav button span{font-size:11px;font-weight:800;color:#665e54;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.earth11-nav button.active{border:2px solid var(--tab);background:color-mix(in srgb,var(--tab) 5%,white)}
+.earth11-nav button.active b{background:var(--tab);color:white}
+
+.earth11-stage{width:100%;overflow-x:auto;padding:4px 14px 28px;scrollbar-gutter:stable both-edges}
+.earth11-shell{
+  --paper:#fbf6ea;
+  width:min(1055px,calc(100vw - 42px));
+  min-width:760px;
+  margin:0 auto;
+  position:relative;
+  border:1.4px solid #8e765b;
+  border-radius:18px;
+  padding:20px 22px 16px;
+  color:#302a22;
+  background:
+    radial-gradient(circle at 17% 8%,rgba(255,255,255,.7),transparent 30%),
+    radial-gradient(circle at 76% 34%,rgba(238,224,191,.18),transparent 28%),
+    repeating-linear-gradient(0deg,rgba(102,78,44,.015) 0,rgba(102,78,44,.015) 1px,transparent 1px,transparent 4px),
+    var(--paper);
+  box-shadow:0 10px 30px rgba(61,48,33,.12),inset 0 0 0 4px rgba(255,255,255,.45);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+.earth11-shell::after{content:"";position:absolute;inset:6px;border:1px solid rgba(110,89,63,.12);border-radius:13px;pointer-events:none}
+.earth11-top-ribbon{
+  width:max-content;
+  max-width:80%;
+  margin:-4px auto 8px;
+  padding:7px 30px 8px;
+  border-radius:12px 12px 8px 8px;
+  color:white;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--earth11) 84%,#1e293b),var(--earth11));
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.13),0 2px 0 rgba(255,255,255,.75);
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.28em;
+  text-align:center;
+  position:relative;
+}
+.earth11-top-ribbon::before,.earth11-top-ribbon::after{content:"";position:absolute;top:50%;width:22px;height:13px;transform:translateY(-50%) rotate(28deg);border-top:5px solid var(--earth11);border-bottom:5px solid var(--earth11);border-radius:50%}
+.earth11-top-ribbon::before{left:-29px}.earth11-top-ribbon::after{right:-29px;transform:translateY(-50%) rotate(-28deg)}
+
+.earth11-title{display:grid;grid-template-columns:auto 1fr auto 1fr;align-items:center;gap:12px;margin:0 2px 8px}
+.earth11-start{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:900;color:#5d4b35;border:1px solid #c7aa7d;background:#fffaf0;border-radius:999px;padding:5px 9px;white-space:nowrap}
+.earth11-start span{font-size:17px}
+.earth11-title-rule{height:2px;background:linear-gradient(90deg,transparent,var(--earth11));position:relative}
+.earth11-title-rule.right{background:linear-gradient(90deg,var(--earth11),transparent)}
+.earth11-title h1{margin:0;font-family:"DFKai-SB","BiauKai","Noto Serif TC",serif;font-size:50px;font-weight:800;letter-spacing:.08em;color:#30271e;white-space:nowrap;text-align:center;line-height:1}
+.earth11-title h1::before,.earth11-title h1::after{content:"•";color:var(--earth11);font-size:17px;vertical-align:middle;margin:0 11px}
+.earth11-flow{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin:0 0 10px;font-size:10px;color:#756c61}
+.earth11-flow span{font-weight:800;background:rgba(255,255,255,.52);border:1px solid color-mix(in srgb,var(--earth11) 22%,#d5c6b3);padding:3px 8px;border-radius:999px}
+.earth11-flow b{color:var(--earth11);font-size:12px}
+
+.earth11-grid{display:grid;grid-template-columns:1fr 1.03fr;gap:10px;align-items:start}
+.earth11-cluster{
+  min-width:0;
+  border:2.2px solid var(--earth11);
+  border-radius:15px;
+  background:rgba(255,253,247,.83);
+  overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.92);
+}
+.earth11-cluster>header{display:flex;align-items:center;gap:7px;padding:7px 10px 5px}
+.earth11-cluster>header>span{width:33px;height:33px;display:grid;place-items:center;flex:0 0 33px;border-radius:50%;background:var(--earth11);color:white;font-size:20px;font-weight:900;box-shadow:inset 0 -2px 0 rgba(0,0,0,.13)}
+.earth11-cluster h3{margin:0;color:var(--earth11);font-size:20px;font-weight:950;letter-spacing:.04em}
+.earth11-cluster-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(205px,.95fr);gap:8px;padding:0 9px 9px;align-items:start}
+.earth11-text{min-width:0}
+.earth11-facts{display:flex;flex-direction:column;gap:1px}
+.earth11-fact{
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr);
+  gap:2px;
+  align-items:start;
+  min-width:0;
+  padding:4px 2px 5px;
+  border-bottom:1px dotted rgba(79,65,48,.12);
+  font-family:"DFKai-SB","BiauKai","Noto Serif TC",serif;
+}
+.earth11-fact:last-child{border-bottom:none}
+.earth11-qno{font-family:"Noto Sans TC","PingFang TC",sans-serif;font-weight:900;font-size:12px;line-height:1.55;color:#443d34}
+.earth11-fact>div{min-width:0;line-height:1.55}
+.earth11-fact b{
+  display:inline;
+  font-family:"Noto Sans TC","PingFang TC",sans-serif;
+  color:#312b25;
+  font-size:11.7px;
+  font-weight:950;
+  margin-right:6px;
+}
+.earth11-fact b::after{
+  content:"";
+  display:inline-block;
+  width:34px;
+  margin:0 4px 2px 5px;
+  border-bottom:1.4px solid #5c5145;
+}
+.earth11-fact span:not(.earth11-qno){font-size:11.4px;color:#3d3933}
+.earth11-figure{min-width:0}
+.earth11-figure-grid{display:grid;grid-template-columns:1fr;gap:6px}
+.earth11-figure-card{
+  position:relative;
+  min-width:0;
+  min-height:118px;
+  border:1.5px solid color-mix(in srgb,var(--earth11) 58%,#a99b88);
+  border-radius:9px;
+  padding:20px 7px 6px;
+  background:linear-gradient(180deg,#fffefb,#f8f4e9);
+  overflow:hidden;
+}
+.earth11-figure-label{
+  position:absolute;
+  top:5px;left:7px;
+  z-index:2;
+  padding:2px 7px 3px;
+  border-radius:4px;
+  background:color-mix(in srgb,var(--earth11) 84%,#1f2937);
+  color:white;
+  font-size:9.5px;
+  font-weight:900;
+  letter-spacing:.04em;
+  line-height:1.2;
+}
+.earth11-svg{width:100%;height:auto;max-height:190px;display:block;color:#3b332a}
+.earth11-moon-figure{display:flex;align-items:center;justify-content:space-between;gap:5px;min-height:116px;padding:10px 4px 0}
+.earth11-moon-figure>div{display:flex;flex-direction:column;align-items:center;gap:5px}
+.earth11-moon-figure b{color:var(--earth11)}
+.earth11-moon-figure small{font-size:9px;font-weight:800}
+.earth11-moon{display:block;width:34px;height:34px;border-radius:50%;border:1px solid #263246;box-shadow:0 2px 5px rgba(22,28,39,.16)}
+.earth11-moon.m-new{background:#263246}
+.earth11-moon.m-full{background:#f5e7b4}
+.earth11-moon.m-first{background:linear-gradient(90deg,#263246 0 50%,#f5e7b4 50% 100%)}
+.earth11-moon.m-last{background:linear-gradient(90deg,#f5e7b4 0 50%,#263246 50% 100%)}
+
+.earth11-shell[data-earth11-chapter="1"] .earth11-cluster:nth-child(3),
+.earth11-shell[data-earth11-chapter="1"] .earth11-cluster:nth-child(4){grid-column:1/-1}
+.earth11-shell[data-earth11-chapter="1"] .earth11-cluster:nth-child(3) .earth11-cluster-body,
+.earth11-shell[data-earth11-chapter="1"] .earth11-cluster:nth-child(4) .earth11-cluster-body{grid-template-columns:1fr 1.4fr}
+.earth11-shell[data-earth11-chapter="2"] .earth11-grid,
+.earth11-shell[data-earth11-chapter="3"] .earth11-grid,
+.earth11-shell[data-earth11-chapter="4"] .earth11-grid,
+.earth11-shell[data-earth11-chapter="5"] .earth11-grid,
+.earth11-shell[data-earth11-chapter="6"] .earth11-grid{grid-template-columns:1fr}
+.earth11-shell[data-earth11-chapter="2"] .earth11-cluster-body,
+.earth11-shell[data-earth11-chapter="3"] .earth11-cluster-body,
+.earth11-shell[data-earth11-chapter="4"] .earth11-cluster-body,
+.earth11-shell[data-earth11-chapter="5"] .earth11-cluster-body,
+.earth11-shell[data-earth11-chapter="6"] .earth11-cluster-body{grid-template-columns:minmax(0,1.04fr) minmax(360px,1.28fr)}
+.earth11-shell[data-earth11-chapter="2"] .earth11-figure-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.earth11-shell[data-earth11-chapter="2"] .earth11-cluster:first-child .earth11-figure-grid{grid-template-columns:1fr}
+.earth11-shell[data-earth11-chapter="2"] .earth11-cluster:first-child .earth11-figure-card{min-height:138px}
+.earth11-shell[data-earth11-chapter="2"] .earth11-cluster:nth-child(4) .earth11-figure-card{min-height:145px}
+.earth11-shell[data-earth11-chapter="3"] .earth11-cluster:nth-child(1) .earth11-figure-card,
+.earth11-shell[data-earth11-chapter="3"] .earth11-cluster:nth-child(2) .earth11-figure-card,
+.earth11-shell[data-earth11-chapter="4"] .earth11-cluster:nth-child(4) .earth11-figure-card,
+.earth11-shell[data-earth11-chapter="5"] .earth11-cluster:nth-child(1) .earth11-figure-card,
+.earth11-shell[data-earth11-chapter="6"] .earth11-cluster:nth-child(1) .earth11-figure-card{min-height:160px}
+
+.earth11-shell[data-earth11-chapter="1"]{--earth11:#1768a7;--paper:#fbf6ea}
+.earth11-shell[data-earth11-chapter="2"]{--earth11:#0b7f83;--paper:#fbf7ed}
+.earth11-shell[data-earth11-chapter="3"]{--earth11:#21813e;--paper:#fbf8ec}
+.earth11-shell[data-earth11-chapter="4"]{--earth11:#e36b12;--paper:#fbf5ea}
+.earth11-shell[data-earth11-chapter="5"]{--earth11:#6652a3;--paper:#faf7ed}
+.earth11-shell[data-earth11-chapter="6"]{--earth11:#087598;--paper:#f9f7ee}
+
+.earth11-footer{text-align:center;margin-top:11px;padding-top:9px;border-top:1px dashed #a08d74;color:#766552;font-size:11px;font-weight:800;letter-spacing:.12em}
+.earth-study-supplement{display:none!important}
+
+@media(max-width:900px){
+  .earth11-page-head,.earth11-nav{min-width:760px}
+  .earth11-stage{padding-left:8px;padding-right:8px}
+  .earth11-shell{width:760px;min-width:760px;padding:15px 16px 13px;border-radius:14px}
+  .earth11-title h1{font-size:39px}
+  .earth11-top-ribbon{font-size:13px;padding:6px 22px}
+  .earth11-cluster h3{font-size:17px}
+  .earth11-cluster-body,
+  .earth11-shell[data-earth11-chapter="2"] .earth11-cluster-body,
+  .earth11-shell[data-earth11-chapter="3"] .earth11-cluster-body,
+  .earth11-shell[data-earth11-chapter="4"] .earth11-cluster-body,
+  .earth11-shell[data-earth11-chapter="5"] .earth11-cluster-body,
+  .earth11-shell[data-earth11-chapter="6"] .earth11-cluster-body{grid-template-columns:minmax(0,1fr) minmax(280px,1.1fr)}
+  .earth11-fact b{font-size:10.8px}.earth11-fact span:not(.earth11-qno){font-size:10.4px}
+}
+@media(max-width:640px){
+  .earth11-page-head{display:none}
+  .earth11-nav{min-width:760px;margin-bottom:6px}
+}
+@media(prefers-reduced-motion:no-preference){
+  .earth11-nav button{transition:transform .14s ease,box-shadow .14s ease}
+  .earth11-nav button:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(58,45,29,.09)}
+}

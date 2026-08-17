@@ -1,0 +1,6 @@
+/* v13: 上弦月／下弦月亮面方向 branch. */
+.earth-extra-map[data-topic="quarter-moon-direction"]{--accent:#4d6ea8;--soft:#eaf0fb;--soft2:#f5f8fe}
+.earth-extra-moon-table{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:7px}
+.earth-extra-moon-table>div{padding:9px;border-radius:11px;background:var(--soft2);border:1px solid #e6ebf5;color:#605b54;font-size:11px;line-height:1.48}
+.earth-extra-moon-table b{display:block;margin-bottom:3px;color:#2d2a25;font-size:11.5px}
+@media (max-width:760px){.earth-extra-moon-table{grid-template-columns:1fr}}
