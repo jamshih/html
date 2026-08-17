@@ -1,0 +1,52 @@
+name: Wrongbook Earth Cluster QA
+
+on:
+  push:
+    branches:
+      - 'agent/earth-cluster-*'
+    paths:
+      - 'wrongbook-v2/**'
+      - '.github/workflows/wrongbook-earth-cluster-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  earth-cluster-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Traditional Chinese QA font
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+      - name: Install browser driver dependency
+        run: npm install --no-save --package-lock=false puppeteer-core@24.16.0
+      - name: JavaScript syntax guard
+        run: |
+          for f in wrongbook-v2/*.js; do node --check "$f"; done
+          node --check wrongbook-v2/earth-cluster-qa-v9.mjs
+      - name: Capture all 12 Earth source pages in Recall and Learn
+        env:
+          EARTH_QA_OUT: /tmp/earth-cluster-qa
+        run: |
+          python3 -m http.server 4173 >/tmp/earth-cluster-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          export CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME_BIN"
+          node wrongbook-v2/earth-cluster-qa-v9.mjs
+          test "$(find /tmp/earth-cluster-qa -name 'p*-recall-current.png' | wc -l)" -eq 12
+          test "$(find /tmp/earth-cluster-qa -name 'p*-learn-current.png' | wc -l)" -eq 12
+      - name: Upload Earth cluster QA artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-earth-cluster-qa
+          if-no-files-found: error
+          path: |
+            /tmp/earth-cluster-qa/*.png
+            /tmp/earth-cluster-qa/geometry.json
