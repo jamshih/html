@@ -62,7 +62,7 @@
   if(document.getElementById('paperOverlayStickerV10'))return;
   const js=document.createElement('script');
   js.id='paperOverlayStickerV10';
-  js.src='./paper-overlay-sticker-v10.js?wb=20260817-1';
+  js.src='./paper-overlay-sticker-v10.js?wb=20260817-2';
   js.async=false;
   document.head.appendChild(js);
 })();
