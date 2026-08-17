@@ -31,24 +31,24 @@
    const decay=root.querySelector('.v8-p243-decay');
    const q38=question(root,38),q39=question(root,39);
    setRect(q38,20,7,310);
-   setRect(q39,175,169,155);
-   for(const [q,w] of [[q38,44],[q39,38]]){
+   setRect(q39,205,169,145);
+   for(const [q,w] of [[q38,44],[q39,30]]){
      const blank=q?.querySelector('.v4strict-fill');
      if(blank){blank.style.setProperty('width',`${w}px`,'important');blank.style.setProperty('min-width',`${w}px`,'important');}
    }
    // The graph already has the canonical q39 suffix owner; only the tick "3" remains static. Nudge it away from the prompt.
    const tick3=decay?.querySelector('svg text:nth-of-type(5)');
-   if(tick3)tick3.style.setProperty('transform','translateX(-10px)','important');
+   if(tick3)tick3.style.setProperty('transform','translateX(-4px)','important');
    const staticSuffix=decay?.querySelector('svg text:nth-of-type(6)');
    if(staticSuffix)staticSuffix.style.setProperty('display','none','important');
    const fossil=root.querySelector('[data-source-connector="fossilToTimeline"]');
-   if(fossil){fossil.setAttribute('d','M190 445V460H140V500H240');fossil.style.setProperty('d','path("M190 445V460H140V500H240")','important');}
+   if(fossil){fossil.setAttribute('d','M190 445V460H55V600');fossil.style.setProperty('d','path("M190 445V460H55V600")','important');}
    const q49=root.querySelector('[data-source-label="q49"]');
-   setRect(q49,475,495,155);
+   setRect(q49,535,478,150);
  }
  function normalize244(root){
    // Preserve the exact source prompt wording while giving the printed suffixes enough horizontal room.
-   setRect(question(root,6),397,500,250);
+   setRect(question(root,6),397,500,320);
    const q21=question(root,21);
    setRect(q21,170,145,155);
  }
@@ -82,7 +82,7 @@
      if(instruction){instruction.style.fontSize='12.5px';instruction.style.lineHeight='1.4';}
      const cells=directSpans(q15);
      const xs=[376,460,548,628,376,460,548,628,376,460,548];
-     const ys=[127,127,127,127,211,211,211,211,299,299,299];
+     const ys=[178,178,178,178,275,275,275,275,370,370,370];
      cells.forEach((el,i)=>{
        if(Number.isFinite(xs[i]))el.style.setProperty('left',`${xs[i]}px`,'important');
        if(Number.isFinite(ys[i]))el.style.setProperty('top',`${ys[i]}px`,'important');
@@ -116,7 +116,7 @@
      18:[540,274,286],
      19:[540,333,286],
      20:[145,470,690],
-     21:[82,548,770],
+     21:[82,533,770],
      22:[95,682,285],
      24:[680,653,170],
      25:[105,778,278],
@@ -126,7 +126,7 @@
    for(const n of [16,17,18,19,20,21,22,24,25,26]){
      const el=question(root,n);if(!el)continue;
      el.style.fontSize=n===16?'13px':(n===21?'12.5px':([20,22].includes(n)?'13px':'13.5px'));
-     el.style.lineHeight=n===21?'1.18':([20,22].includes(n)?'1.25':(n===16?'1.45':'1.35'));
+     el.style.lineHeight=n===21?'1.1':([20,22].includes(n)?'1.25':(n===16?'1.45':'1.35'));
      el.style.setProperty('background','transparent','important');
      el.style.setProperty('padding','0','important');
    }
@@ -135,7 +135,7 @@
    if(q23){
      setRect(q23,400,650,490,245);q23.dataset.parentId='p249-boundaries';
      const fields=directSpans(q23);
-     const xs=[24,150,248,350];
+     const xs=[24,150,248,320];
      fields.forEach((el,i)=>{if(Number.isFinite(xs[i]))el.style.setProperty('left',`${xs[i]}px`,'important');});
    }
    const taiwan=root.querySelector('.v6-p249-taiwan');setRect(taiwan,383,885,405,300);
