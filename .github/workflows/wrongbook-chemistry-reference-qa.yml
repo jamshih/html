@@ -1,6 +1,15 @@
 name: Wrongbook Chemistry Reference QA
 
 on:
+  push:
+    branches:
+      - chemistry-reference-rebuild
+    paths:
+      - 'wrongbook-v2/chemistry-reference-*.js'
+      - 'wrongbook-v2/chemistry-reference-*.css'
+      - 'wrongbook-v2/qa/chemistry-page1-qa.html'
+      - 'wrongbook-v2/index.html'
+      - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
   pull_request:
     paths:
       - 'wrongbook-v2/chemistry-reference-*.js'
