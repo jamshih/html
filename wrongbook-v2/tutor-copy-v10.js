@@ -1,6 +1,6 @@
 // Wrong Book V10 — clean tutor prose rendering + visible-copy QA.
 (function(){
-  const VERSION='2026-08-17-tutor-copy-v10';
+  const VERSION='2026-08-17-tutor-copy-v10b';
   if(window.__wrongbookTutorCopyV10===VERSION)return;
   window.__wrongbookTutorCopyV10=VERSION;
 
@@ -43,7 +43,7 @@
     return (h>>>0).toString(36);
   }
   function decorate(el){
-    if(!el||el.closest('.katex'))return false;
+    if(!el||el.closest('.katex')||el.querySelector?.('.katex'))return false;
     const source=el.textContent||'';
     const normalized=normalizeEscapedBreaks(source);
     const sig=signature(normalized);
@@ -60,6 +60,8 @@
     if(changed&&typeof window.v5RenderTutorMath==='function')requestAnimationFrame(()=>window.v5RenderTutorMath(document));
     return changed;
   }
+  window.v10FormatTutorCopy=decorate;
+  window.v10ApplyTutorCopy=apply;
 
   let queued=false;
   function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;apply(document)})}
@@ -75,17 +77,17 @@
 
   window.runWrongbookTutorCopyQA=function(){
     const fixture=document.createElement('p');
-    fixture.className='v5-tutor-stage-copy-fixture';
     fixture.textContent='第一步\\n\\n1. **合力**應為 0。\\n2. **靜摩擦力**重新平衡。';
     decorate(fixture);
     const text=fixture.textContent||'';
     const fixtureOk=!text.includes('\\n')&&!text.includes('**')&&fixture.querySelectorAll('strong').length===2&&fixture.querySelectorAll('.v10-copy-block').length===2;
+    const mathFixture=document.createElement('p');mathFixture.innerHTML='<span class="katex">P(A|B)</span>';const mathBefore=mathFixture.innerHTML;decorate(mathFixture);const mathPreserved=mathFixture.innerHTML===mathBefore;
     apply(document);
     const visible=[...document.querySelectorAll(SELECTOR)].filter(el=>el.offsetParent!==null);
     const rawNewlines=visible.filter(el=>(el.textContent||'').includes('\\n')).length;
     const rawBold=visible.filter(el=>(el.textContent||'').includes('**')).length;
-    const pass=fixtureOk&&rawNewlines===0&&rawBold===0;
-    return{pass,version:VERSION,fixtureOk,rawNewlines,rawBold,visibleCount:visible.length};
+    const pass=fixtureOk&&mathPreserved&&rawNewlines===0&&rawBold===0;
+    return{pass,version:VERSION,fixtureOk,mathPreserved,rawNewlines,rawBold,visibleCount:visible.length};
   };
   function scheduleQA(tries=0){
     setTimeout(()=>{
