@@ -9,6 +9,7 @@ on:
       - 'wrongbook-v2/chemistry-*.css'
       - 'wrongbook-v2/qa/chemistry-v2-qa.html'
       - 'wrongbook-v2/qa/chemistry-responsive-qa.html'
+      - 'wrongbook-v2/qa/chemistry-interaction-qa.html'
       - 'wrongbook-v2/index.html'
       - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
   pull_request:
@@ -17,6 +18,7 @@ on:
       - 'wrongbook-v2/chemistry-*.css'
       - 'wrongbook-v2/qa/chemistry-v2-qa.html'
       - 'wrongbook-v2/qa/chemistry-responsive-qa.html'
+      - 'wrongbook-v2/qa/chemistry-interaction-qa.html'
       - 'wrongbook-v2/index.html'
       - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
   workflow_dispatch:
@@ -90,6 +92,14 @@ jobs:
               done
             done
           done
+      - name: Track and study-mode interaction QA
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          URL="http://127.0.0.1:4173/qa/chemistry-interaction-qa.html"
+          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1280,1000 --virtual-time-budget=3500 --screenshot="chemistry-v2-artifacts/interaction.png" "$URL"
+          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=3500 --dump-dom "$URL" > chemistry-v2-artifacts/interaction.html
+          grep -q 'data-qa-pass="true"' chemistry-v2-artifacts/interaction.html
       - name: Upload rendered QA artifacts
         if: always()
         uses: actions/upload-artifact@v4
