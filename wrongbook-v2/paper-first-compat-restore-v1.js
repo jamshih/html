@@ -101,6 +101,15 @@
   finishAfterScriptChain();
 })();
 
+// Production review refinement: shuffled choices keep A/B/C/D labels in visual top-to-bottom order.
+if(document.documentElement.dataset.paperFirstLegacy!=='1'&&!document.getElementById('reviewShuffleLabelsV11')){
+  const script=document.createElement('script');
+  script.id='reviewShuffleLabelsV11';
+  script.src='./review-shuffle-labels-v11.js?wb=20260817-1';
+  script.async=false;
+  document.head.appendChild(script);
+}
+
 // Branch QA loader: inert in normal product use. The dedicated cross-subject
 // mind-map gate is loaded only when its explicit query flag is present.
 if(new URLSearchParams(location.search).get('mindmapskillqa')==='1'){
