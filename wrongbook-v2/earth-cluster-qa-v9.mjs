@@ -16,6 +16,7 @@ const browser=await puppeteer.launch({
 });
 
 const geometry=[];
+const mobile=[];
 const consoleErrors=[];
 try{
   const tab=await browser.newPage();
@@ -23,6 +24,7 @@ try{
   tab.on('console',m=>{if(m.type()==='error')consoleErrors.push({type:'console',text:m.text(),url:tab.url()});});
   tab.on('pageerror',e=>consoleErrors.push({type:'pageerror',text:String(e),url:tab.url()}));
 
+  // Canonical 910x1270 desktop/source-space captures in both product modes.
   for(const mode of ['recall','learn']){
     for(let chapter=1;chapter<=6;chapter++){
       const url=`${base}?refpreview=1&chapter=${chapter}&mode=${mode}&earthclusterqa=1`;
@@ -68,9 +70,49 @@ try{
     }
   }
 
+  // Existing corpus/source gates are part of the acceptance gate, not optional diagnostics.
+  async function runGate(name,query){
+    await tab.setViewport({width:1600,height:1200,deviceScaleFactor:1});
+    await tab.goto(`${base}?${query}`,{waitUntil:'domcontentloaded',timeout:15000});
+    await tab.waitForSelector('#e2e-results',{timeout:30000});
+    const result=await tab.$eval('#e2e-results',el=>({status:el.dataset.status,text:el.textContent||''}));
+    await fs.writeFile(path.join(out,`${name}.json`),result.text);
+    if(result.status!=='PASS')throw new Error(`${name} failed: ${result.text.slice(0,2000)}`);
+  }
+  await runGate('source-trace-e2e','sourcee2e=1');
+  await runGate('source-refinement-e2e','refinee2e=1');
+
+  // Real mobile presentation audit. Do not force source scale=1 here: the product must fit/scale the
+  // fixed source-space composition coherently at a phone viewport in both Recall and Learn modes.
+  await tab.setViewport({width:390,height:844,deviceScaleFactor:1});
+  for(const mode of ['recall','learn']){
+    for(let chapter=1;chapter<=6;chapter++){
+      const url=`${base}?refpreview=1&chapter=${chapter}&mode=${mode}&earthclusterqa=1`;
+      await tab.goto(url,{waitUntil:'domcontentloaded',timeout:15000});
+      await tab.waitForFunction(()=>Boolean(document.querySelector('[data-v4ref-viewport]')),{timeout:10000});
+      await tab.evaluate(async()=>{if(document.fonts?.ready)await document.fonts.ready;await new Promise(r=>setTimeout(r,180));});
+      const state=await tab.evaluate(({chapter,mode})=>{
+        const view=document.querySelector('[data-v4ref-viewport]');
+        const roots=[...document.querySelectorAll('[data-strict-page],[data-source-owned-page],[data-source-trace-page]')].filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return s.display!=='none'&&r.width>1&&r.height>1;});
+        const vr=view?.getBoundingClientRect();
+        return {
+          chapter,mode,viewport:{width:innerWidth,height:innerHeight},
+          view:vr?{left:vr.left,top:vr.top,width:vr.width,height:vr.height,scrollWidth:view.scrollWidth,scrollHeight:view.scrollHeight}:null,
+          pageCount:roots.length,
+          pages:roots.map(el=>{const r=el.getBoundingClientRect();return {page:el.dataset.strictPage||el.dataset.sourceOwnedPage||el.dataset.sourceTracePage,left:r.left,top:r.top,width:r.width,height:r.height};})
+        };
+      },{chapter,mode});
+      if(!state.view||state.pageCount<2)throw new Error(`mobile chapter ${chapter} ${mode}: source pages missing`);
+      if(!Number.isFinite(state.view.width)||state.view.width<=0)throw new Error(`mobile chapter ${chapter} ${mode}: invalid viewport geometry`);
+      mobile.push(state);
+      await tab.screenshot({path:path.join(out,`mobile-ch${chapter}-${mode}.png`),type:'png',fullPage:false});
+    }
+  }
+
   await fs.writeFile(path.join(out,'geometry.json'),JSON.stringify({generatedAt:new Date().toISOString(),geometry,consoleErrors},null,2));
+  await fs.writeFile(path.join(out,'mobile.json'),JSON.stringify({generatedAt:new Date().toISOString(),mobile},null,2));
   if(consoleErrors.length)console.error(`Captured ${consoleErrors.length} browser errors; inspect geometry.json`);
-  console.log(`Captured ${geometry.length} Earth page/mode renders to ${out}`);
+  console.log(`Captured ${geometry.length} canonical Earth page/mode renders, ${mobile.length} mobile chapter/mode states, and both source E2E gates to ${out}`);
 } finally {
   await browser.close();
 }
