@@ -14,8 +14,6 @@
   --v6-collapse-tooltip-fg:#F7F7F3;
 }
 
-/* Explicit light-theme hooks. These intentionally repeat the defaults so an inherited theme
-   variable from another layer cannot make the button dark inside a light workspace. */
 html[data-theme="light"],body[data-theme="light"],
 html[data-appearance="light"],body[data-appearance="light"],
 html[data-color-scheme="light"],body[data-color-scheme="light"],
@@ -31,7 +29,6 @@ html.light,body.light,html.theme-light,body.theme-light,html.light-mode,body.lig
   --v6-collapse-tooltip-fg:#F7F7F3;
 }
 
-/* Dark only when the application itself explicitly declares dark mode. */
 html[data-theme="dark"],body[data-theme="dark"],
 html[data-appearance="dark"],body[data-appearance="dark"],
 html[data-color-scheme="dark"],body[data-color-scheme="dark"],
@@ -66,6 +63,16 @@ html.dark,body.dark,html.theme-dark,body.theme-dark,html.dark-mode,body.dark-mod
 .v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-button{width:28px;height:28px}
 .v5-tutor-dock>.v5-dialog-collapse-bar{display:none!important}
 
+/* Diagnosis such as “學生混淆了…” is internal tutor reasoning, not student-facing copy. */
+.v5-tutor-stage-head strong:not(.is-right){display:none!important}
+
+/* Students may revisit any already-generated tutor step without asking the model again. */
+.v7-tutor-step-nav{margin-left:auto;display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.v7-tutor-step-nav button{appearance:none;width:26px;height:26px;padding:0;border:1px solid var(--v6-collapse-border);border-radius:7px;background:var(--v6-collapse-bg);color:var(--v6-collapse-fg);display:grid;place-items:center;cursor:pointer;font:inherit;font-size:15px;line-height:1;box-shadow:none}
+.v7-tutor-step-nav button:hover:not(:disabled){background:var(--v6-collapse-bg-hover)}
+.v7-tutor-step-nav button:disabled{opacity:.32;cursor:default}
+.v7-tutor-step-nav span{min-width:40px;text-align:center;color:var(--muted,#73756F);font-size:9px;font-weight:760;white-space:nowrap}
+
 @media(max-width:700px){
   .v6-tutor-collapse-bar{position:sticky;top:-8px;z-index:25;background:inherit;padding:4px 1px 3px}
   .v6-tutor-collapse-summary{font-size:12px}
@@ -75,5 +82,6 @@ html.dark,body.dark,html.theme-dark,body.theme-dark,html.dark-mode,body.dark-mod
   .v5-tutor-dock.v6-tutor-collapsed{max-height:none!important;overflow:visible!important;bottom:calc(74px + env(safe-area-inset-bottom))}
   .v5-tutor-dock.v6-tutor-collapsed>.v6-tutor-collapse-bar{position:static}
   .v5-tutor-dock.v6-tutor-collapsed .v6-tutor-collapse-button{width:34px;height:34px}
+  .v7-tutor-step-nav button{width:30px;height:30px}
 }
 @media(prefers-reduced-motion:reduce){.v6-tutor-collapse-button,.v6-tutor-collapse-button svg,.v6-tutor-collapse-button::after{transition:none}}
