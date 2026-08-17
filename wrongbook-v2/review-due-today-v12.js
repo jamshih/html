@@ -1,7 +1,7 @@
 // Wrong Book V12 — Today review queue contains only items due today or overdue.
 // A completed item scheduled for tomorrow / N days later disappears from 「今天要複習」 immediately.
 (function(){
-  const VERSION='2026-08-17-review-due-today-v12';
+  const VERSION='2026-08-17-review-due-today-v12b';
   if(window.__wrongbookReviewDueTodayV12===VERSION)return;
   window.__wrongbookReviewDueTodayV12=VERSION;
 
@@ -88,13 +88,20 @@
     return {pass,version:VERSION,today,fixtureCorrect,fixtureIds,noFutureInRuntime,noFutureRendered,currentFuture,currentAbsentFromToday,runtime:runtime.map(x=>({id:x.id,due:x.due,dueISO:itemDueISO(x)})),rendered:renderedRows};
   };
 
+  // The compatibility layer renders once before this late production refinement loads.
+  // If the user is already on Review, rerender once so future items disappear immediately instead of waiting for another click.
+  try{
+    const st=appState();
+    if(st.page==='review'&&typeof render==='function')requestAnimationFrame(()=>render());
+  }catch{}
+
   function scheduleQA(tries=0){
     setTimeout(()=>{
       const r=window.runWrongbookReviewDueTodayQA?.();
       window.__wrongbookReviewDueTodayQA=r;
       if(r&&!r.pass)console.warn('[Wrongbook today-review QA failed]',r);
       if(!document.querySelector('[data-review-problem]')&&tries<8)setTimeout(()=>scheduleQA(tries+1),240);
-    },160);
+    },180);
   }
   scheduleQA();
 })();
