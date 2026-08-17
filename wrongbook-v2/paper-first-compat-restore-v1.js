@@ -2,6 +2,7 @@
    Historical QA gets its saved UI contract when possible. Production keeps the paper-first UI,
    while preserving the existing whole-sheet scan capability instead of hiding it. */
 (function(){
+  const finishBoot=()=>{try{window.__wrongbookFinishBoot?.()}catch{}};
   const originals=window.__paperFirstLegacyOriginals;
   if(originals){
     try{if(originals.sidebar)sidebar=originals.sidebar}catch{}
@@ -20,7 +21,7 @@
   }
 
   const paperFirst=Boolean(window.WRONGBOOK_PAPER_FIRST_VERSION);
-  if(!paperFirst){try{render()}catch{};return}
+  if(!paperFirst){try{render()}catch{};finishBoot();return}
 
   const baseHome=homePage;
   homePage=function(){
@@ -93,4 +94,5 @@
   };
 
   try{render()}catch{}
+  finishBoot();
 })();
