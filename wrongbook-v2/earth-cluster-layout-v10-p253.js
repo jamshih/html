@@ -40,6 +40,10 @@
     lines.dataset.sourceClusterOwner='p253-climate-ocean-system';
     lines.dataset.visualOwner='earth-cluster-layout-v10-p253';
 
+    // The source prints q42 as one wide ocean-current row above the wave cluster. The legacy
+    // 290px box at x~571 wrapped its final clause downward into q43.
+    ownPrompt(page,42,'p253-current-vertical-flow',165,690,806);
+
     // Source grid: q43 occupies the upper wave sub-band; q44 begins below with clear whitespace.
     ownPrompt(page,43,'p253-wave-nearshore',420,400,867);
     ownPrompt(page,44,'p253-wave-nearshore',420,400,931);
@@ -67,7 +71,7 @@
 
       <g class="v10-p253-ocean-lines" fill="none" stroke="#5b9357" stroke-linecap="square" stroke-linejoin="miter">
         <path d="M90 570V1048" stroke-width="7"/>
-        <path d="M90 612H280M90 805H165M90 910H160M90 1048H165" stroke-width="5"/>
+        <path d="M90 612H280M90 805H155M90 910H160M90 1048H165" stroke-width="5"/>
 
         <path d="M280 565V755M280 612H302M280 665H330M280 742H330" stroke-width="4"/>
         <path d="M330 636V755M330 636H410M330 704H410M330 755H410" stroke-width="4"/>
