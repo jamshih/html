@@ -2,7 +2,19 @@
 // V15 owns the user-facing Earth mind-map route; older source-trace/V11 renderers
 // remain available only as data/QA dependencies and must not replace production.
 (function(){
-  const stamp='20260817-18';
+  const stamp='20260817-19';
+
+  function applyQaRoute(){
+    const qs=new URLSearchParams(location.search);
+    if(!qs.has('earth15qa'))return;
+    const chapter=Math.min(6,Math.max(1,Number(qs.get('earth15chapter')||qs.get('chapter')||1)));
+    try{
+      state.page='mindmap';
+      state.subject='earth';
+      state.refEarthChapter=chapter;
+      state.earthMindSource='reference';
+    }catch{}
+  }
 
   function installApprovedAssetAliases(){
     const placements=window.MINDMAP_ASSET_PLACEMENTS?.earth;
@@ -103,6 +115,7 @@
   }
 
   function script(){
+    applyQaRoute();
     installApprovedAssetAliases();
     if(window.EARTH_PNG_BOARD_V15){installProductionOwner();return;}
     const s=document.createElement('script');
