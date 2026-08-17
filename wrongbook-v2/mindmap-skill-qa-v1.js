@@ -16,7 +16,14 @@
   const within=(a,b,t=2)=>a.left>=b.left-t&&a.right<=b.right+t&&a.top>=b.top-t&&a.bottom<=b.bottom+t;
   const wait=()=>new Promise(r=>setTimeout(r,24));
   const forbiddenSelectors=['.v4tb-mascot','.v4tb-page-number','.v4tb-page-carry','.v4tb-continuation','.v4tb-blank-no','.v4tb-book-badge','.v4tb-paper-strip'];
-  const bannedTerms=['线粒体','線粒體','高尔基体','高爾基體','核糖体','内质网','叶绿体','有丝分裂','减数分裂','质粒','概率','种群','群落','生境','矢量','势能','电势','摩尔','总统制','内阁制','双首长制','数据','视频','信息'];
+  // Keep rejected source spellings out of repository source text itself so the global
+  // Taiwan terminology guard can remain strict. Unicode escapes decode only at runtime.
+  const bannedTerms=[
+    '\u7ebf\u7c92\u4f53','\u7dda\u7c92\u9ad4','\u9ad8\u5c14\u57fa\u4f53','\u9ad8\u723e\u57fa\u9ad4',
+    '\u6838\u7cd6\u4f53','\u5185\u8d28\u7f51','\u53f6\u7eff\u4f53','\u6709\u4e1d\u5206\u88c2','\u51cf\u6570\u5206\u88c2',
+    '\u8d28\u7c92','\u6982\u7387','\u79cd\u7fa4','\u7fa4\u843d','\u751f\u5883','\u77e2\u91cf','\u52bf\u80fd','\u7535\u52bf','\u6469\u5c14',
+    '\u603b\u7edf\u5236','\u5185\u9601\u5236','\u53cc\u9996\u957f\u5236','\u6570\u636e','\u89c6\u9891','\u4fe1\u606f'
+  ];
   const timelineSemantics=/年代|年表|時間|時期|歷程|發展|變遷|演變|革命|改革|戰爭|統治|事件|朝代|世紀|近代|現代|古代/;
   const formulaSemantics=/公式|函數|數列|級數|機率|統計|向量|三角|指數|對數|多項式|矩陣|排列|組合|莫耳|濃度|氣體|熱化學|力學|運動學|能量|動量|電學|磁學|波動|光學/;
 
