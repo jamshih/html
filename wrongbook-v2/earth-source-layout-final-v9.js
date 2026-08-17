@@ -2,11 +2,11 @@
 (function(){
  const H=window.SOURCE_HIERARCHY_V9;if(!H)return;
  const annual=H[246]?.nodes?.['p246-annual'];
- if(annual){annual.sourceRect.h=415;annual.safeRect.h=415;annual.contentRect.h=390;}
+ if(annual){annual.sourceRect.h=415;annual.safeRect.h=415;annual.contentRect.h=415;}
  const insolation=H[247]?.nodes?.['p247-insolation'];
- if(insolation){insolation.sourceRect.y=770;insolation.sourceRect.h=440;insolation.safeRect.y=770;insolation.safeRect.h=440;insolation.contentRect.y=770;insolation.contentRect.h=440;}
+ if(insolation){insolation.sourceRect.y=770;insolation.sourceRect.h=470;insolation.safeRect.y=770;insolation.safeRect.h=470;insolation.contentRect.y=770;insolation.contentRect.h=470;}
  const evidence=H[249]?.nodes?.['p249-evidence'];
- if(evidence){evidence.sourceRect.h=195;evidence.safeRect.h=195;evidence.contentRect.h=195;}
+ if(evidence){evidence.sourceRect.h=260;evidence.safeRect.h=260;evidence.contentRect.h=260;}
  const boundaries=H[249]?.nodes?.['p249-boundaries'];
  if(boundaries){boundaries.sourceRect.y=630;boundaries.safeRect.y=630;boundaries.contentRect.y=630;boundaries.sourceRect.h=555;boundaries.safeRect.h=555;boundaries.contentRect.h=555;}
  const layers=H[250]?.nodes?.['p250-layers'];
@@ -25,13 +25,19 @@
    root.querySelectorAll(`${selector} text`).forEach(el=>{if(wanted.has((el.textContent||'').trim()))el.remove();});
  }
  function normalize248(root){
-   // q15 is one canonical source owner equal to the printed interior block. All prompt/answer cells are local to it.
+   // q15 is one canonical source owner equal to the complete printed interior block. Keep it measurable (not display:contents)
+   // so its instruction and all eleven table cells have one valid source owner without changing their visible coordinates.
    const q15=question(root,15);
    if(q15){
+     q15.style.setProperty('display','block','important');
+     q15.style.setProperty('position','absolute','important');
+     q15.style.setProperty('box-sizing','border-box','important');
      q15.style.setProperty('inset','auto','important');
      setRect(q15,62,775,780,425);
      q15.style.setProperty('pointer-events','none','important');
      q15.dataset.parentId='p248-interior';
+     q15.dataset.sourceRole='source-box';
+     q15.dataset.visualOwner='q15';
      const instruction=q15.querySelector('[data-source-label="q15-instruction"]');
      setRect(instruction,22,37,744);
      if(instruction){instruction.style.fontSize='12.5px';instruction.style.lineHeight='1.42';}
@@ -68,8 +74,8 @@
      17:[540,162,286],
      18:[540,274,286],
      19:[540,333,286],
-     20:[82,472,758],
-     21:[82,555,758],
+     20:[145,470,690],
+     21:[82,520,770],
      22:[95,682,285],
      24:[680,653,170],
      25:[105,778,278],
@@ -78,18 +84,18 @@
    for(const [n,r] of Object.entries(rects))setRect(question(root,+n),r[0],r[1],r[2]);
    for(const n of [16,17,18,19,20,21,22,24,25,26]){
      const el=question(root,n);if(!el)continue;
-     el.style.fontSize=n===16?'13px':([20,21,22].includes(n)?'13px':'13.5px');
-     el.style.lineHeight=[20,21].includes(n)?'1.25':(n===16?'1.45':'1.35');
+     el.style.fontSize=n===16?'13px':(n===21?'12.5px':([20,22].includes(n)?'13px':'13.5px'));
+     el.style.lineHeight=n===21?'1.2':([20,22].includes(n)?'1.25':(n===16?'1.45':'1.35'));
      el.style.setProperty('background','transparent','important');
      el.style.setProperty('padding','0','important');
    }
    const q16=question(root,16);if(q16){q16.style.minHeight='205px';q16.dataset.sourceRole='text-row';q16.dataset.visualOwner='q16';}
    const q23=question(root,23);
-   if(q23){q23.style.setProperty('width','510px','important');q23.dataset.parentId='p249-boundaries';}
+   if(q23){q23.style.setProperty('width','560px','important');q23.dataset.parentId='p249-boundaries';}
    const taiwan=root.querySelector('.v6-p249-taiwan');setRect(taiwan,383,900,405,300);
    const q27=question(root,27);
    if(q27){
-     setRect(q27,410,875,480,330);q27.dataset.parentId='p249-boundaries';
+     setRect(q27,410,875,500,330);q27.dataset.parentId='p249-boundaries';
      let s=q27.querySelector('[data-source-label="q27-instruction"]');
      if(!s){s=document.createElement('span');s.dataset.sourceLabel='q27-instruction';s.dataset.sourceRole='text-row';q27.prepend(s);}
      s.style.cssText='position:absolute;left:0;top:0;width:390px;font-size:13px;line-height:1.25;pointer-events:none';
