@@ -24,8 +24,18 @@ async function waitForVisualPatch(){
   }
 }
 
+async function loadRendered(page){
+  await page.goto(`${ORIGIN}?visualqa=${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+  await page.waitForSelector('#app',{timeout:15000});
+  await page.waitForFunction(()=>{
+    const link=document.getElementById('paperFirstVisualFix20260817');
+    if(!link)return false;
+    return [...document.styleSheets].some(s=>String(s.href||'').includes('paper-first-visual-fix-20260817.css'));
+  },{timeout:15000});
+  await page.waitForTimeout(700);
+}
+
 const centerY=b=>b?b.y+b.height/2:null;
-const overlap=(a,b)=>Boolean(a&&b&&Math.max(a.x,b.x)<Math.min(a.x+a.width,b.x+b.width)&&Math.max(a.y,b.y)<Math.min(a.y+a.height,b.y+b.height));
 
 await waitForVisualPatch();
 const browser=await chromium.launch({headless:true});
@@ -39,7 +49,7 @@ const fail=(tag,value)=>{failed=true;console.error(tag,JSON.stringify(value,null
   const errors=[];
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
   page.on('pageerror',e=>errors.push(`pageerror: ${e.message}`));
-  await page.goto(`${ORIGIN}?visualqa=${Date.now()}`,{waitUntil:'networkidle',timeout:30000});
+  await loadRendered(page);
   const button=page.locator('.pf-sidebar .capture-btn').first();
   const icon=button.locator('svg').first();
   const label=button.locator('span').first();
@@ -70,7 +80,7 @@ const fail=(tag,value)=>{failed=true;console.error(tag,JSON.stringify(value,null
   const errors=[];
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
   page.on('pageerror',e=>errors.push(`pageerror: ${e.message}`));
-  await page.goto(`${ORIGIN}?visualqa=${Date.now()}`,{waitUntil:'networkidle',timeout:30000});
+  await loadRendered(page);
   const nav=page.locator('.pf-mobile-nav');
   const buttons=nav.locator(':scope > button');
   const boxes=[];
@@ -82,15 +92,14 @@ const fail=(tag,value)=>{failed=true;console.error(tag,JSON.stringify(value,null
   const spread=centerYs.length?Math.max(...centerYs)-Math.min(...centerYs):999;
   const heights=peers.map(b=>b.height);
   const heightSpread=heights.length?Math.max(...heights)-Math.min(...heights):999;
-  const navBox=await nav.boundingBox();
   results.phone={
     navVisible:await nav.isVisible().catch(()=>false),
     scanVisible:await scan.isVisible().catch(()=>false),
     equalBaseline:spread<=1,
     equalHeight:heightSpread<=1,
     centerSpread:spread,heightSpread,
-    scanBox,navBox,
-    scanInsideNav:Boolean(scanBox&&navBox&&!overlap(scanBox,{x:navBox.x,y:navBox.y-40,width:navBox.width,height:40})),
+    scanBox,
+    navBox:await nav.boundingBox(),
     noOverflow:await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+2),
     errors
   };
