@@ -133,6 +133,9 @@
    const q16=question(root,16);if(q16){q16.style.minHeight='205px';q16.dataset.sourceRole='text-row';q16.dataset.visualOwner='q16';}
    const q23=question(root,23);
    if(q23){
+     q23.style.setProperty('max-width','none','important');
+     q23.style.setProperty('min-width','510px','important');
+     q23.style.setProperty('box-sizing','border-box','important');
      setRect(q23,400,650,510,245);q23.dataset.parentId='p249-boundaries';
      const fields=directSpans(q23);
      const xs=[24,150,248,300];
