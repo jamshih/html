@@ -29,7 +29,7 @@ jobs:
         run: |
           for f in wrongbook-v2/*.js; do node --check "$f"; done
           node --check wrongbook-v2/earth-cluster-qa-v9.mjs
-      - name: Capture all 12 Earth source pages in Recall and Learn
+      - name: Capture canonical, source-gate, and mobile Earth QA
         env:
           EARTH_QA_OUT: /tmp/earth-cluster-qa
         run: |
@@ -42,6 +42,10 @@ jobs:
           node wrongbook-v2/earth-cluster-qa-v9.mjs
           test "$(find /tmp/earth-cluster-qa -name 'p*-recall-current.png' | wc -l)" -eq 12
           test "$(find /tmp/earth-cluster-qa -name 'p*-learn-current.png' | wc -l)" -eq 12
+          test "$(find /tmp/earth-cluster-qa -name 'mobile-ch*-recall.png' | wc -l)" -eq 6
+          test "$(find /tmp/earth-cluster-qa -name 'mobile-ch*-learn.png' | wc -l)" -eq 6
+          test -s /tmp/earth-cluster-qa/source-trace-e2e.json
+          test -s /tmp/earth-cluster-qa/source-refinement-e2e.json
       - name: Upload Earth cluster QA artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -49,4 +53,4 @@ jobs:
           if-no-files-found: error
           path: |
             /tmp/earth-cluster-qa/*.png
-            /tmp/earth-cluster-qa/geometry.json
+            /tmp/earth-cluster-qa/*.json
