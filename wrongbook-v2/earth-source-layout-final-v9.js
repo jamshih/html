@@ -125,18 +125,19 @@
    for(const [n,r] of Object.entries(rects))setRect(question(root,+n),r[0],r[1],r[2]);
    for(const n of [16,17,18,19,20,21,22,24,25,26]){
      const el=question(root,n);if(!el)continue;
-     el.style.fontSize=n===16?'13px':(n===21?'12.5px':([20,22].includes(n)?'13px':'13.5px'));
-     el.style.lineHeight=n===21?'1.1':([20,22].includes(n)?'1.25':(n===16?'1.45':'1.35'));
+     el.style.fontSize=n===16?'13px':(n===21||n===20?'12.5px':(n===22?'13px':'13.5px'));
+     el.style.lineHeight=n===21?'1.1':(n===20?'1.12':(n===22?'1.25':(n===16?'1.45':'1.35')));
      el.style.setProperty('background','transparent','important');
      el.style.setProperty('padding','0','important');
    }
    const q16=question(root,16);if(q16){q16.style.minHeight='205px';q16.dataset.sourceRole='text-row';q16.dataset.visualOwner='q16';}
    const q23=question(root,23);
    if(q23){
-     setRect(q23,400,650,490,245);q23.dataset.parentId='p249-boundaries';
+     setRect(q23,400,650,510,245);q23.dataset.parentId='p249-boundaries';
      const fields=directSpans(q23);
-     const xs=[24,150,248,280];
-     fields.forEach((el,i)=>{if(Number.isFinite(xs[i]))el.style.setProperty('left',`${xs[i]}px`,'important');});
+     const xs=[24,150,248,300];
+     const ys=[42,18,42,-8];
+     fields.forEach((el,i)=>{if(Number.isFinite(xs[i]))el.style.setProperty('left',`${xs[i]}px`,'important');if(Number.isFinite(ys[i]))el.style.setProperty('top',`${ys[i]}px`,'important');});
    }
    const taiwan=root.querySelector('.v6-p249-taiwan');setRect(taiwan,383,885,405,300);
    const q27=question(root,27);
