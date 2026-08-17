@@ -2,7 +2,7 @@
 // This is loaded directly after all paper-first/runtime compatibility layers so no legacy
 // collapse UI can win the final render. It also neutralizes handwriting-only wording.
 (function(){
-  const VERSION='2026-08-17-tutor-dialog-control-v6-theme1';
+  const VERSION='2026-08-17-tutor-dialog-control-v6-theme2';
   if(window.__wrongbookTutorDialogControlV6===VERSION)return;
   window.__wrongbookTutorDialogControlV6=VERSION;
 
@@ -92,6 +92,8 @@
     button.setAttribute('aria-label',label);
     button.dataset.tooltip=label;
     button.dataset.state=collapsed?'collapsed':'expanded';
+    // Do not set a title attribute: the CSS tooltip is intentional; the browser-native tooltip is not.
+    button.removeAttribute('title');
   }
 
   function applyCollapsedState(dock,collapsed,{persist=false}={}){
@@ -148,11 +150,6 @@
     applyCollapsedState(dock,!dock.classList.contains('v6-tutor-collapsed'),{persist:true});
   },true);
 
-  document.addEventListener('pointerover',event=>{
-    const button=event.target.closest?.('.v6-tutor-collapse-button');
-    if(button)button.title=button.dataset.tooltip||button.getAttribute('aria-label')||'';
-  },true);
-
   let queued=false;
   function queueApply(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;apply()})}
   const app=document.getElementById('app');
@@ -198,14 +195,15 @@
     applyCollapsedState(dock,wasCollapsed,{persist:false});
 
     const mobile=matchMedia('(max-width:700px)').matches;
-    const expectedSize=mobile?36:30;
+    const expectedSize=mobile?34:28;
     const buttonCount=document.querySelectorAll('.v6-tutor-collapse-button').length;
     const legacyBarCount=document.querySelectorAll('.v5-dialog-collapse-bar').length;
-    const lightIsLight=rgbBrightness(light.background)>180;
+    const lightIsLight=rgbBrightness(light.background)>220;
     const darkIsDark=rgbBrightness(dark.background)<90;
     const sizeOk=Math.abs(light.width-expectedSize)<.6&&Math.abs(light.height-expectedSize)<.6&&Math.abs(dark.width-expectedSize)<.6&&Math.abs(dark.height-expectedSize)<.6;
-    const pass=buttonCount===1&&legacyBarCount===0&&contentHidden&&sizeOk&&lightIsLight&&darkIsDark&&light.background!==dark.background;
-    return{pass,version:VERSION,mobile,expectedSize,buttonCount,legacyBarCount,contentHidden,sizeOk,lightIsLight,darkIsDark,light,dark};
+    const noNativeTooltip=!button.hasAttribute('title');
+    const pass=buttonCount===1&&legacyBarCount===0&&contentHidden&&sizeOk&&lightIsLight&&darkIsDark&&light.background!==dark.background&&noNativeTooltip;
+    return{pass,version:VERSION,mobile,expectedSize,buttonCount,legacyBarCount,contentHidden,sizeOk,lightIsLight,darkIsDark,noNativeTooltip,light,dark};
   };
 
   function scheduleRuntimeQA(tries=0){
