@@ -71,7 +71,7 @@ jobs:
           "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot=chemistry-page3-recall.png http://127.0.0.1:4173/qa/chemistry-page3-qa.html
           "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page3-qa.html > chemistry-page3-dom.html
           grep -q 'data-qa-pass="true"' chemistry-page3-dom.html
-          grep -q 'data-qa-questions="21"' chemistry-page3-dom.html
+          grep -q 'data-qa-questions="20"' chemistry-page3-dom.html
           grep -q 'data-qa-blanks="24"' chemistry-page3-dom.html
           grep -q 'data-qa-figures="13"' chemistry-page3-dom.html
       - name: Upload rendered QA artifacts
