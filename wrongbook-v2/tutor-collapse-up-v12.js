@@ -2,13 +2,12 @@
 // The compact tutor is bottom-anchored. Opening it keeps the same bottom edge and grows the
 // panel upward into the safe space above the control. The prompt is treated as a hard ceiling.
 (function(){
-  const VERSION='2026-08-17-tutor-collapse-up-v12';
+  const VERSION='2026-08-17-tutor-collapse-up-v12b';
   if(window.__wrongbookTutorCollapseUpV12===VERSION)return;
   window.__wrongbookTutorCollapseUpV12=VERSION;
 
   const DESKTOP_BOTTOM=68;
   const GAP=12;
-  const MIN_OPEN_HEIGHT=96;
 
   const style=document.createElement('style');
   style.id='wrongbookTutorCollapseUpV12Style';
@@ -50,12 +49,9 @@
     .v6-tutor-collapse-button:focus-visible::after{transform:translateY(0)!important}
 
     /* V8's open-flow margins must not reserve a second, downward-growing copy of the panel. */
-    .v3-paper.v12-tutor-up-open.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){
-      margin:0!important;
-    }
+    .v3-paper.v12-tutor-up-open.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){margin:0!important}
 
     @media(max-width:700px){
-      /* On phones keep the same bottom anchor above the nav and reveal upward. */
       .v3-paper.v12-tutor-up-open .v5-tutor-dock:not(.v6-tutor-collapsed){
         position:fixed!important;
         left:7px!important;
@@ -110,13 +106,13 @@
     const contentBottom=problemContentBottom(paper);
     if(matchMedia('(max-width:700px)').matches){
       const anchorBottom=viewportBottomAnchor();
-      const safeTop=Math.max(8,Math.min(anchorBottom-MIN_OPEN_HEIGHT,contentBottom+GAP));
-      const available=Math.max(MIN_OPEN_HEIGHT,Math.floor(anchorBottom-safeTop));
+      const safeTop=Math.max(8,contentBottom+GAP);
+      const available=Math.max(1,Math.floor(anchorBottom-safeTop));
       paper.style.setProperty('--v12-tutor-mobile-max-height',`${available}px`);
     }else{
       const anchorBottom=paperRect.bottom-DESKTOP_BOTTOM;
       const safeTop=Math.max(paperRect.top+8,contentBottom+GAP);
-      const available=Math.max(MIN_OPEN_HEIGHT,Math.floor(anchorBottom-safeTop));
+      const available=Math.max(1,Math.floor(anchorBottom-safeTop));
       paper.style.setProperty('--v12-tutor-max-height',`${available}px`);
     }
   }
@@ -148,11 +144,9 @@
 
     const originallyCollapsed=dock.classList.contains('v6-tutor-collapsed');
 
-    // Measure the real collapsed anchor first.
     dock.classList.add('v6-tutor-collapsed');syncDock(dock);
     const collapsedRect=dock.getBoundingClientRect();
 
-    // Then open the same DOM and verify that its bottom stays fixed while its top moves upward.
     dock.classList.remove('v6-tutor-collapsed');syncDock(dock);
     const openRect=dock.getBoundingClientRect();
     const contentBottom=problemContentBottom(paper);
