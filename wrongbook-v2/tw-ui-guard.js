@@ -140,5 +140,5 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  css('tutorDiagramV8Css','./tutor-diagram-v8.css?wb=20260817-1','diagramCss');
  js('tutorDiagramV8','./tutor-diagram-v8.js?wb=20260817-1','diagramJs');
  css('reviewWritingSheetV8Css','./review-writing-sheet-v8.css?wb=20260817-1','reviewCss');
- js('reviewWritingSheetV8','./review-writing-sheet-v8.js?wb=20260817-1','reviewJs');
+ js('reviewWritingSheetV8','./review-writing-sheet-v8.js?wb=20260817-2','reviewJs');
 })();
