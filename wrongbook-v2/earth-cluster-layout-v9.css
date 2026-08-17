@@ -1,6 +1,6 @@
-/* Earth cluster ownership v9 — page 247 / 250 only.
+/* Earth cluster ownership v9 — source-space geometry only.
    Canonical source space is 910x1270. These rules intentionally override legacy global geometry
-   only for the reconstructed clusters; unrelated pages and subjects are untouched. */
+   only for reconstructed Earth clusters; unrelated pages and subjects are untouched. */
 
 /* ---------------- page 247: Milankovitch / ice-age lower cluster ---------------- */
 .v6-p247-bottom[data-source-cluster="p247-milankovitch-bottom"]{
@@ -30,11 +30,15 @@
   color:#4f668b!important;font-size:15px!important;line-height:1.25!important;font-weight:900!important;
 }
 .v6-p247-bottom .v9-p247-ice-support{
-  position:absolute;left:40px;top:63px;width:330px;margin:0!important;
+  position:absolute;left:40px;top:64px;width:330px;margin:0!important;
   color:#403d38!important;font-size:13.5px!important;line-height:1.35!important;
 }
+.v6-p247-bottom .v9-p247-ice-separator{
+  position:absolute;left:0;top:112px;width:391px;height:0;border:0;border-top:1.5px solid #4e899c;
+  display:block;z-index:1;
+}
 .v6-p247-bottom .v9-p247-comparison-heading{
-  position:absolute;left:40px;top:143px;width:330px;
+  position:absolute;left:40px;top:175px;width:330px;
   color:#403d38!important;font-size:13.5px!important;line-height:1.25!important;font-weight:800!important;
 }
 .v6-p247-bottom .v6-p247-insolation[data-source-cluster-owner="p247-ice-age-panel"]{
@@ -69,18 +73,22 @@
   display:block;font-size:14.5px!important;line-height:1.25!important;font-weight:800!important;margin-bottom:8px!important;
 }
 .v6-p250-method .v9-p250-method-row{display:block;margin-top:2px!important;}
+.v6-p250-method [data-question="49"]{white-space:nowrap!important;font-size:13px!important;}
 .v9-p250-rain-pill{
   display:inline-block;background:#6d98ad!important;color:#fff!important;border-radius:14px!important;
   padding:2px 9px!important;font-weight:800!important;white-space:nowrap!important;line-height:1.25!important;
 }
 .v6-p250-rh[data-source-cluster="p250-relative-humidity"]{
-  left:415px!important;top:888px!important;width:430px!important;height:187px!important;
+  left:415px!important;top:888px!important;width:430px!important;height:190px!important;
   margin:0!important;padding:0!important;box-sizing:border-box!important;
   font-size:13.5px!important;line-height:1.35!important;background:transparent!important;z-index:4!important;
 }
 .v6-p250-rh .v9-p250-fraction-rule{
-  position:absolute!important;left:142px!important;top:88px!important;width:147px!important;height:0!important;
+  position:absolute!important;left:132px!important;top:88px!important;width:181px!important;height:0!important;
   margin:0!important;border:0!important;border-top:2px solid #555!important;display:block!important;z-index:1!important;
+}
+.v6-p250-rh .v9-p250-rh-times{
+  position:absolute;left:315px;top:95px;white-space:nowrap;font-size:13.5px;font-weight:500;z-index:3;
 }
 .v6-p250-rh [data-source-cluster-owner="p250-relative-humidity"]{z-index:3!important;}
 .v9-p250-wetbulb-cluster{
