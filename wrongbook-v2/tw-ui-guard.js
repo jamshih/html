@@ -1,3 +1,53 @@
+// Keep the real app completely hidden until the final paper-first runtime has rendered.
+// Several legacy modules still render while the synchronous script chain is loading; without this
+// boot cloak the browser can paint those intermediate versions for a frame or two.
+(function(){
+ if(window.__wrongbookBootCloak)return;
+ window.__wrongbookBootCloak=true;
+ document.documentElement.classList.add('wb-ui-booting');
+
+ const style=document.createElement('style');
+ style.id='wrongbookBootCloakStyle';
+ style.textContent=`
+  html.wb-ui-booting #app{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+  #wbBootScreen{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;background:#fbfbf8;color:#243126;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}
+  #wbBootScreen .wb-boot-card{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;background:rgba(255,255,255,.92);box-shadow:0 8px 28px rgba(40,62,43,.08)}
+  #wbBootScreen .wb-boot-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#557B56;color:#fff;font-weight:800;font-size:19px}
+  #wbBootScreen .wb-boot-copy{display:grid;gap:2px}
+  #wbBootScreen strong{font-size:15px;line-height:1.25}
+  #wbBootScreen span{font-size:12px;color:#738075}
+  @media (prefers-reduced-motion:no-preference){#wbBootScreen .wb-boot-mark{animation:wbBootPulse 1.25s ease-in-out infinite alternate}@keyframes wbBootPulse{to{transform:scale(.94);opacity:.78}}}
+ `;
+ document.head.appendChild(style);
+
+ if(!document.getElementById('wbBootScreen')){
+  const boot=document.createElement('div');
+  boot.id='wbBootScreen';
+  boot.setAttribute('role','status');
+  boot.setAttribute('aria-live','polite');
+  boot.innerHTML='<div class="wb-boot-card"><div class="wb-boot-mark">錯</div><div class="wb-boot-copy"><strong>錯題本</strong><span>正在載入你的工作紙…</span></div></div>';
+  document.body.appendChild(boot);
+ }
+
+ window.__wrongbookFinishBoot=function(){
+  if(window.__wrongbookBootFinished)return;
+  window.__wrongbookBootFinished=true;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   document.documentElement.classList.remove('wb-ui-booting');
+   const boot=document.getElementById('wbBootScreen');
+   if(boot)boot.remove();
+  }));
+ };
+
+ // Never reveal an intermediate UI on timeout. If initialization genuinely stalls, keep the
+ // neutral loading surface and tell the user instead of exposing whichever legacy render won.
+ window.setTimeout(()=>{
+  if(window.__wrongbookBootFinished)return;
+  const copy=document.querySelector('#wbBootScreen .wb-boot-copy span');
+  if(copy)copy.textContent='載入時間較長，請重新整理頁面。';
+ },12000);
+})();
+
 // AI 或動態資料只要進入一般文字 UI，就再套一次臺灣用語正規化。
 if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  const __baseEsc=esc;
