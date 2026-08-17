@@ -27,7 +27,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-cjk
           fc-cache -f
-      - name: Capture complete Earth chapter spreads
+      - name: Capture production illustrated Earth chapters
         run: |
           python3 -m http.server 4173 >/tmp/wrongbook-http.log 2>&1 &
           SERVER_PID=$!
@@ -36,16 +36,38 @@ jobs:
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
           for CH in 1 2 3 4 5 6; do
-            URL="http://127.0.0.1:4173/wrongbook-v2/?refpreview=1&chapter=${CH}&mode=recall"
+            URL="http://127.0.0.1:4173/wrongbook-v2/?earth15qa=1&earth15chapter=${CH}"
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
               --user-data-dir="/tmp/wrongbook-full-$CH" \
-              --window-size=2400,1500 --virtual-time-budget=5000 \
+              --window-size=2400,1500 --virtual-time-budget=6000 \
               --screenshot="/tmp/wrongbook-full-ch${CH}.png" "$URL"
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
               --user-data-dir="/tmp/wrongbook-dom-$CH" \
-              --window-size=2400,1500 --virtual-time-budget=5000 \
+              --window-size=2400,1500 --virtual-time-budget=6000 \
               --dump-dom "$URL" > "/tmp/wrongbook-full-ch${CH}.html"
           done
+      - name: Assert production renderer and approved assets
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          failures=[]
+          expected_assets={1:7,2:2,3:1,4:1,5:1,6:0}
+          for ch in range(1,7):
+              text=Path(f'/tmp/wrongbook-full-ch{ch}.html').read_text(errors='ignore')
+              if 'data-earth15-root' not in text:
+                  failures.append(f'ch{ch}: missing earth15 production root')
+              if 'v5-semantic-canvas' in text or 'data-v4ref-canvas="1"' in text:
+                  failures.append(f'ch{ch}: legacy Earth canvas leaked into production')
+              marker=f'data-earth15-page="{ch}"'
+              if marker not in text:
+                  failures.append(f'ch{ch}: wrong illustrated page; expected {marker}')
+              count=text.count('data-mindmap-asset=')
+              if count < expected_assets[ch]:
+                  failures.append(f'ch{ch}: approved assets {count} < expected {expected_assets[ch]}')
+          if failures:
+              raise SystemExit('\n'.join(failures))
+          print('PASS: V15 owns all six chapters; approved enhanced assets render on chapters 1-5.')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: wrongbook-earth-fullpage-visual
