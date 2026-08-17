@@ -2,7 +2,7 @@
 // A delayed Supabase reconcile can finish seconds after page load. Historically, handwriting
 // did not advance state.localUpdatedAt, so a cloud pull could replace fresh local ink and then
 // render a blank canvas. Fresh pen edits now participate in the same last-write-wins clock.
-const V5_CLOUD_INK_GUARD_VERSION='2026-08-17-cloud-ink-race-guard-v5';
+const V5_CLOUD_INK_GUARD_VERSION='2026-08-17-cloud-ink-race-guard-v5b';
 const V5_LOCAL_INK_UPDATED_AT='wrongbook-v5-local-ink-updated-at';
 
 function v5CloudInkLocalTs(){
@@ -13,17 +13,20 @@ function v5CloudInkMarkLocal(){
   const now=Date.now();
   try{localStorage.setItem(V5_LOCAL_INK_UPDATED_AT,String(now))}catch{}
   try{if(typeof state==='object'&&state)state.localUpdatedAt=Math.max(Number(state.localUpdatedAt)||0,now)}catch{}
-  // Persist the state clock without calling render. save() is safe here and also schedules sync,
-  // but avoid recursion when this mark was itself reached through saveInk -> save wrappers.
+  // Persist the state clock without calling render. Avoid save() recursion because saveInk already
+  // schedules the cloud write through the existing sync layer.
   try{
     if(typeof storageSet==='function'&&typeof state==='object'&&state)storageSet('wrongbook-v2-state',JSON.stringify(state));
   }catch{}
   return now;
 }
 function v5CloudInkCloudTs(row){
+  // payload.clientUpdatedAt and state.localUpdatedAt are the same client clock. Server updated_at
+  // is only a fallback: comparing the server timestamp directly can make an identical cloud row
+  // look newer simply because the HTTP write completed a moment later.
   const payloadTs=Number(row?.payload?.clientUpdatedAt||0)||0;
-  const rowTs=Date.parse(String(row?.updated_at||''))||0;
-  return Math.max(payloadTs,rowTs);
+  if(payloadTs)return payloadTs;
+  return Date.parse(String(row?.updated_at||''))||0;
 }
 
 // saveInk is called once a stroke/erase/undo/clear is committed. Mark that moment as a real
