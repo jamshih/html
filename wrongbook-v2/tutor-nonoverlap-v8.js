@@ -1,6 +1,6 @@
 // Wrong Book V8 — keep the expanded AI tutor out of the problem prompt's visual space.
 (function(){
-  const VERSION='2026-08-17-tutor-nonoverlap-v8-v12g';
+  const VERSION='2026-08-17-tutor-nonoverlap-v8-v12h';
   if(window.__wrongbookTutorNonOverlapV8===VERSION)return;
   window.__wrongbookTutorNonOverlapV8=VERSION;
 
@@ -28,7 +28,7 @@
       if(typeof window.runWrongbookTutorCollapseDirectionQA!=='function')return{pass:false,reason:'waiting-v12',version:VERSION};
       const safe=window.runWrongbookTutorCollapseDirectionQA();
       if(safe?.reason)return{pass:false,reason:safe.reason,version:VERSION,promptOnlyPlacement:safe};
-      return{pass:Boolean(safe.pass&&safe.promptOnly&&safe.noPromptOverlap),version:VERSION,mode:'prompt-only-upward-v12g',...safe};
+      return{pass:Boolean(safe.pass&&safe.promptOnly&&safe.noPromptOverlap&&safe.promptGapOk),version:VERSION,mode:'prompt-only-upward-v12h',...safe};
     }
 
     const wasCollapsed=dock.classList.contains('v6-tutor-collapsed');dock.classList.remove('v6-tutor-collapsed');syncDock(dock);
@@ -57,12 +57,22 @@
   const css=document.createElement('link');css.id='paperOverlayV9Css';css.rel='stylesheet';css.href='./paper-overlay-v9.css?wb=20260817-3';css.onload=css.onerror=loadJs;document.head.appendChild(css);
 })();
 
-// V12g owns actual geometry: full-width, same bottom edge, top grows upward, prompt remains the only hard ceiling.
+// V10 upgrades the worksheet diagram copy into a draggable, per-problem persistent sticker.
+(function loadWrongbookPaperOverlayStickerV10(){
+  if(document.getElementById('paperOverlayStickerV10'))return;
+  const js=document.createElement('script');
+  js.id='paperOverlayStickerV10';
+  js.src='./paper-overlay-sticker-v10.js?wb=20260817-1';
+  js.async=false;
+  document.head.appendChild(js);
+})();
+
+// V12h owns actual geometry: full-width, same bottom edge, top grows upward, with 32px prompt breathing room.
 (function loadWrongbookTutorCollapseUpV12(){
   if(document.getElementById('tutorCollapseUpV12'))return;
   const js=document.createElement('script');
   js.id='tutorCollapseUpV12';
-  js.src='./tutor-collapse-up-v12.js?wb=20260817-4';
+  js.src='./tutor-collapse-up-v12.js?wb=20260817-5';
   js.async=false;
   document.head.appendChild(js);
 })();
