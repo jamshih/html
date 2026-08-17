@@ -110,6 +110,15 @@ if(document.documentElement.dataset.paperFirstLegacy!=='1'&&!document.getElement
   document.head.appendChild(script);
 }
 
+// Production review queue: 「今天要複習」 must contain only due/overdue items, never future items.
+if(document.documentElement.dataset.paperFirstLegacy!=='1'&&!document.getElementById('reviewDueTodayV12')){
+  const script=document.createElement('script');
+  script.id='reviewDueTodayV12';
+  script.src='./review-due-today-v12.js?wb=20260817-1';
+  script.async=false;
+  document.head.appendChild(script);
+}
+
 // Branch QA loader: inert in normal product use. The dedicated cross-subject
 // mind-map gate is loaded only when its explicit query flag is present.
 if(new URLSearchParams(location.search).get('mindmapskillqa')==='1'){
