@@ -26,13 +26,15 @@ try{
   for(const mode of ['recall','learn']){
     for(let chapter=1;chapter<=6;chapter++){
       const url=`${base}?refpreview=1&chapter=${chapter}&mode=${mode}&earthclusterqa=1`;
-      await tab.goto(url,{waitUntil:'networkidle0',timeout:45000});
+      await tab.goto(url,{waitUntil:'domcontentloaded',timeout:15000});
+      await tab.waitForFunction(()=>Boolean(document.querySelector('[data-v4ref-viewport]')),{timeout:10000});
       await tab.evaluate(async()=>{
         if(document.fonts?.ready)await document.fonts.ready;
         const view=document.querySelector('[data-v4ref-viewport]');
         if(view&&typeof window.v4RefSetScale==='function')window.v4RefSetScale(view,1,{x:0,y:0});
         if(view){view.scrollLeft=0;view.scrollTop=0;}
         document.body.classList.add('earth-cluster-qa-capture');
+        await new Promise(r=>setTimeout(r,180));
         await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
       });
 
