@@ -76,7 +76,8 @@
 .v6-p247-bottom .v6-p247-q{
   font-size:13.5px!important;line-height:1.32!important;z-index:4!important;
 }
-.v6-p247-bottom [data-question="41"]{font-size:13px!important;line-height:1.25!important;white-space:normal!important;}
+.v6-p247-bottom [data-question="40"],
+.v6-p247-bottom [data-question="41"]{font-size:12.8px!important;line-height:1.25!important;white-space:normal!important;}
 
 /* ---------------- page 250: atmospheric / humidity cluster system ---------------- */
 .v6-p250-air-title[data-source-object="p250-air-layer-title"]{
@@ -102,6 +103,10 @@
   display:block;font-size:14.5px!important;line-height:1.25!important;font-weight:800!important;margin-bottom:8px!important;
 }
 .v6-p250-method .v9-p250-method-row{display:block;margin-top:2px!important;}
+/* Legacy p250 used every <b> as a block heading. Question numbers inside the new cluster are inline. */
+.v6-p250-method b.v4strict-num{
+  display:inline!important;margin:0!important;padding:0!important;font-size:10px!important;line-height:inherit!important;
+}
 .v6-p250-method [data-question="49"]{white-space:nowrap!important;font-size:13px!important;}
 .v9-p250-rain-pill{
   display:inline-block;background:#6d98ad!important;color:#fff!important;border-radius:14px!important;
@@ -116,8 +121,11 @@
   position:absolute!important;left:132px!important;top:88px!important;width:181px!important;height:0!important;
   margin:0!important;border:0!important;border-top:2px solid #555!important;display:block!important;z-index:1!important;
 }
-.v6-p250-rh .v9-p250-rh-times{
-  position:absolute;left:315px;top:95px;white-space:nowrap;font-size:13.5px;font-weight:500;z-index:3;
+/* Reset the old `.v6-p250-rh span { margin-left:90px; width:135px }` formula scaffold. */
+.v6-p250-rh span.v9-p250-rh-times{
+  position:absolute!important;left:315px!important;top:95px!important;margin:0!important;width:auto!important;
+  display:block!important;text-align:left!important;white-space:nowrap!important;font-size:13.5px!important;
+  line-height:1.2!important;font-weight:500!important;z-index:3!important;
 }
 .v6-p250-rh [data-source-cluster-owner="p250-relative-humidity"]{z-index:3!important;}
 .v9-p250-wetbulb-cluster{
