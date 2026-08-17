@@ -94,14 +94,3 @@
 
   try{render()}catch{}
 })();
-
-// Load after tutor-runtime-guard-v5 so the handwriting-aware bridge wraps the final runtime functions.
-(function(){
-  if(window.__v5InkDirtyLoaderAdded)return;window.__v5InkDirtyLoaderAdded=true;
-  const src='./tutor-handwriting-dirty-v5.js?build=20260817-1';
-  if(document.readyState==='loading'){
-    document.write(`<script src="${src}"><\/script>`);
-    return;
-  }
-  const script=document.createElement('script');script.src=src;script.async=false;document.head.appendChild(script);
-})();
