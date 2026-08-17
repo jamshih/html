@@ -6,6 +6,7 @@ on:
       - 'wrongbook-v2/**'
       - '.github/scripts/wrongbook-live-qa.mjs'
       - '.github/scripts/wrongbook-live-diag.mjs'
+      - '.github/scripts/wrongbook-visual-alignment-qa.mjs'
       - '.github/workflows/wrongbook-live-qa.yml'
   workflow_dispatch:
 permissions:
@@ -28,6 +29,8 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Diagnose deployed paper-first runtime
         run: node .github/scripts/wrongbook-live-diag.mjs
+      - name: Verify visible alignment and responsive scan controls
+        run: node .github/scripts/wrongbook-visual-alignment-qa.mjs
       - name: Verify deployed Pages build and interactions
         run: node .github/scripts/wrongbook-live-qa.mjs
       - name: Upload live screenshots and report
