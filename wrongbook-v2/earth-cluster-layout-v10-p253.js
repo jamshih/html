@@ -17,12 +17,13 @@
   const prev=window.v5PageHtml;
   if(typeof prev!=='function')return;
 
-  function ownPrompt(page,n,cluster,left,width){
+  function ownPrompt(page,n,cluster,left,width,top){
     const el=page.querySelector(`[data-question="${n}"]`);
     if(!el)return;
     el.dataset.sourceClusterOwner=cluster;
     el.dataset.visualOwner='earth-cluster-layout-v10-p253';
     if(left!=null)el.style.setProperty('left',`${left}px`,'important');
+    if(top!=null)el.style.setProperty('top',`${top}px`,'important');
     if(width!=null){
       el.style.setProperty('width',`${width}px`,'important');
       el.style.setProperty('max-width','none','important');
@@ -39,10 +40,10 @@
     lines.dataset.sourceClusterOwner='p253-climate-ocean-system';
     lines.dataset.visualOwner='earth-cluster-layout-v10-p253';
 
-    // The source prints q43/q44 as two-line rows to the right of a single local branch.
-    ownPrompt(page,43,'p253-wave-nearshore',420,400);
-    ownPrompt(page,44,'p253-wave-nearshore',420,400);
-    ownPrompt(page,45,'p253-wave-nearshore',420,440);
+    // Source grid: q43 occupies the upper wave sub-band; q44 begins below with clear whitespace.
+    ownPrompt(page,43,'p253-wave-nearshore',420,400,867);
+    ownPrompt(page,44,'p253-wave-nearshore',420,400,931);
+    ownPrompt(page,45,'p253-wave-nearshore',420,440,976);
 
     // Replace the legacy global routes with source-owned local branches that stay in whitespace.
     lines.innerHTML=`
@@ -74,7 +75,7 @@
         <path d="M160 784H422V852H160" stroke-width="3" stroke-dasharray="8 6"/>
 
         <path d="M160 878V1008M160 878H168M160 1008H405" stroke-width="4"/>
-        <path d="M405 870V1040M405 890H416M405 930H416M405 975H416M405 1040H416" stroke-width="4"/>
+        <path d="M405 860V1040M405 870H416M405 930H416M405 975H416M405 1040H416" stroke-width="4"/>
 
         <path d="M165 1048H185M185 1048V1238M185 1098H205M185 1148H205M185 1190H205M185 1230H205" stroke-width="4"/>
       </g>
