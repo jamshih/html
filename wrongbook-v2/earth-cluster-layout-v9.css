@@ -2,6 +2,35 @@
    Canonical source space is 910x1270. These rules intentionally override legacy global geometry
    only for reconstructed Earth clusters; unrelated pages and subjects are untouched. */
 
+/* ---------------- shared blank geometry ----------------
+   Recall inputs and Learn answers occupy the same source blank rectangle. Answer reveal must never
+   make a prompt taller or push neighboring figure/text geometry. */
+.v6-p247-bottom .v4strict-fill,
+.v6-p250-method .v4strict-fill,
+.v6-p250-rh .v4strict-fill,
+.v9-p250-wetbulb-cluster .v4strict-fill,
+.v9-p250-dewpoint-cluster .v4strict-fill{
+  display:inline-block!important;width:var(--fw)!important;min-width:var(--fw)!important;
+  height:20px!important;min-height:20px!important;line-height:20px!important;
+  vertical-align:baseline!important;margin:0 2px!important;padding:0!important;
+  position:relative!important;box-sizing:border-box!important;text-align:center!important;
+}
+.v6-p247-bottom .v4strict-fill.learn,
+.v6-p250-method .v4strict-fill.learn,
+.v6-p250-rh .v4strict-fill.learn,
+.v9-p250-wetbulb-cluster .v4strict-fill.learn,
+.v9-p250-dewpoint-cluster .v4strict-fill.learn{
+  overflow:visible!important;white-space:nowrap!important;
+}
+.v6-p247-bottom .v4strict-fill input,
+.v6-p250-method .v4strict-fill input,
+.v6-p250-rh .v4strict-fill input,
+.v9-p250-wetbulb-cluster .v4strict-fill input,
+.v9-p250-dewpoint-cluster .v4strict-fill input{
+  width:var(--fw)!important;height:20px!important;line-height:1.05!important;
+  padding:0 2px!important;box-sizing:border-box!important;font:inherit!important;
+}
+
 /* ---------------- page 247: Milankovitch / ice-age lower cluster ---------------- */
 .v6-p247-bottom[data-source-cluster="p247-milankovitch-bottom"]{
   left:68px!important;top:824px!important;width:746px!important;height:397px!important;
@@ -47,7 +76,7 @@
 .v6-p247-bottom .v6-p247-q{
   font-size:13.5px!important;line-height:1.32!important;z-index:4!important;
 }
-.v6-p247-bottom .v6-p247-q .v4strict-fill{height:19px!important;vertical-align:baseline!important;}
+.v6-p247-bottom [data-question="41"]{font-size:13px!important;line-height:1.25!important;white-space:normal!important;}
 
 /* ---------------- page 250: atmospheric / humidity cluster system ---------------- */
 .v6-p250-air-title[data-source-object="p250-air-layer-title"]{
