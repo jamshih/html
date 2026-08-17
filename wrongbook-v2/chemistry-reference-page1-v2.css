@@ -3,8 +3,10 @@
 .chem-wide-figures-v2 .chem-figure{height:auto;min-height:0}
 .chem-phase-figures-v2{grid-template-columns:1.18fr 1fr 1fr;gap:7px}
 .chem-phase-figures-v2 .chem-figure{height:100%;min-width:0}
-.chem-classification .chem-question-list{width:40%;padding-right:10px;font-size:12.7px;line-height:1.55}
-.chem-classification .chem-wide-figures-v2{left:41%}
+/* Real Noto CJK metrics need slightly more text width than the fallback font. Keep the body size; recover space by widening the text lane and tightening only inter-question rhythm. */
+.chem-classification .chem-question-list{width:43.5%;padding-right:10px;font-size:12.7px;line-height:1.47}
+.chem-classification .chem-question{margin:2px 0}
+.chem-classification .chem-wide-figures-v2{left:44.5%}
 .chem-phases .chem-question-list{width:43%;padding-right:10px;font-size:12.8px;line-height:1.58}
 .chem-phases .chem-phase-figures-v2{left:44%}
 .chem-figure-svg .atom.c{fill:#a78ac0}
