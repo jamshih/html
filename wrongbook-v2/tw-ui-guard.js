@@ -3,3 +3,14 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  const __baseEsc=esc;
  esc=function(value=''){return __baseEsc(twTaiwanizeString(String(value)))};
 }
+
+// Load narrowly-scoped paper-first visual QA fixes with an explicit version so
+// GitHub Pages/browser caches cannot keep a stale alignment rule alive.
+(function(){
+ if(document.getElementById('paperFirstVisualFix20260817'))return;
+ const link=document.createElement('link');
+ link.id='paperFirstVisualFix20260817';
+ link.rel='stylesheet';
+ link.href='./paper-first-visual-fix-20260817.css?v=20260817-1';
+ document.head.appendChild(link);
+})();
