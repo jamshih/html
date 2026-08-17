@@ -1,19 +1,23 @@
-// Earth cluster ownership v9. Source-photo geometry is authoritative; this layer only repairs
-// p247/p250 regions whose legacy page-global coordinates/duplicate prose make them unreadable.
+// Earth cluster ownership v9. Source-photo geometry is authoritative; this layer repairs only
+// Earth-page regions whose legacy page-global coordinates/duplicate prose make them unreadable.
 (function(){
   const M=window.SOURCE_PROMPTS_V7||{};
   const byNumber=(page,n)=>(M[page]||[]).find(r=>Number(r.number)===Number(n));
+  const fieldSpec=(page,n,widths)=>{const r=byNumber(page,n);if(!r)return null;r.replaceFields=true;r.blankWidths=widths;return r;};
 
-  // Preserve the source wording while allowing the photographed visual treatment to be rendered
-  // by the same prompt owner instead of by a second permanent-text overlay.
-  const p48=byNumber(250,48);
+  // Page 250: the prompt owner must also own the photographed visual treatment. Recreate the
+  // fields at source-like widths so Learn mode does not change the reading order or force wraps.
+  const p48=fieldSpec(250,48,[96]);
   if(p48)p48.template='<div class="v9-p250-method-heading">使未飽和空氣塊達飽和的兩個方法：</div><div class="v9-p250-method-row">甲. <b class="v4strict-num">(48)</b> {{0}}</div>';
-  const p49=byNumber(250,49);
+  const p49=fieldSpec(250,49,[96]);
   if(p49)p49.template='乙. <b class="v4strict-num">(49)</b> {{0}}　← 自然界的 <strong class="v9-p250-rain-pill">成雲致雨</strong> 主要方式';
-  const p52=byNumber(250,52);
+  fieldSpec(250,50,[112]);
+  fieldSpec(250,51,[92]);
+  const p52=fieldSpec(250,52,[178]);
   if(p52)p52.template='相對溼度＝<b class="v4strict-num">(52)</b> {{0}}';
-  const p53=byNumber(250,53);
-  if(p53)p53.template='<b class="v4strict-num">(53)</b> {{0}} ×100%';
+  const p53=fieldSpec(250,53,[178]);
+  if(p53)p53.template='<b class="v4strict-num">(53)</b> {{0}}';
+  fieldSpec(250,54,[82]);
 
   const prev=window.v5PageHtml;
   if(typeof prev!=='function')return;
@@ -59,12 +63,12 @@
     right.dataset.sourceCluster='p247-ice-age-panel';
     right.dataset.visualOwner='earth-cluster-layout-v9';
 
-    // The old right panel baked the same answers/prose underneath q38-q40. Replace it with only
-    // genuinely non-question source text; q38-q41 become the single owners of their printed prompts.
-    right.innerHTML='<b class="v9-p247-ice-title">★ 易使地球進入冰期的組合：</b><p class="v9-p247-ice-support">高緯度的太陽輻射較少，<br>高緯度的冰原較易往外擴展</p><b class="v9-p247-comparison-heading">同一束光線直射與斜射地表之比較：</b>';
+    // The old panel baked q38-q40 answers into permanent prose. Keep only non-question printed
+    // source text. The horizontal divider is a real source border, not a collision workaround.
+    right.innerHTML='<b class="v9-p247-ice-title">★ 易使地球進入冰期的組合：</b><p class="v9-p247-ice-support">到高緯度的太陽輻射較小，高緯度的冰原較易往外擴展</p><i class="v9-p247-ice-separator" data-source-object="p247-ice-panel-divider" data-source-role="border" aria-hidden="true"></i><b class="v9-p247-comparison-heading">同一束光線直射與斜射地表之比較：</b>';
 
     // Remove the answer-bearing duplicate sentence from the left legacy scaffold. The interactive
-    // question remains the source owner at the photographed location.
+    // question remains the single source owner at the photographed location.
     const ps=[...left.querySelectorAll('p')];
     if(ps.length>2)ps[ps.length-1].remove();
 
@@ -75,11 +79,11 @@
 
     move(page,right,38,[40,29,165,null],'p247-ice-age-panel');
     move(page,right,39,[202,29,180,null],'p247-ice-age-panel');
-    move(page,right,40,[40,92,330,null],'p247-ice-age-panel');
-    move(page,right,41,[40,347,330,null],'p247-ice-age-panel');
+    move(page,right,40,[40,120,330,null],'p247-ice-age-panel');
+    move(page,right,41,[40,352,330,null],'p247-ice-age-panel');
     right.appendChild(figure);
     own(figure,'p247-insolation-comparison','figure','p247-ice-age-panel');
-    setBox(figure,34,166,330,180);
+    setBox(figure,34,207,330,143);
   }
 
   function repair250(t){
@@ -94,24 +98,24 @@
     own(airTitle,'p250-air-layer-title','heading','p250-atmosphere-layers');
     airTitle.dataset.sourceCluster='p250-atmosphere-title';
 
-    // q48/q49 used to be painted a second time by .v6-p250-method. The cluster itself now owns
-    // only its children and connector; all educational wording comes from the verified prompts.
+    // q48/q49 used to be painted a second time by .v6-p250-method. The cluster now owns only
+    // its connector; all educational wording is rendered once by the verified prompts.
     method.innerHTML='<svg class="v9-p250-method-branch" data-source-object="p250-saturation-branch" data-source-role="connector" viewBox="0 0 420 175" preserveAspectRatio="none" aria-hidden="true"><path d="M10 14V148M10 148H82"/><circle cx="10" cy="14" r="7"/><circle cx="10" cy="148" r="7"/></svg>';
     method.dataset.sourceCluster='p250-saturation-methods';
     method.dataset.visualOwner='earth-cluster-layout-v9';
-    move(page,method,48,[18,0,390,null],'p250-saturation-methods');
-    move(page,method,49,[18,64,395,null],'p250-saturation-methods');
+    move(page,method,48,[18,0,395,null],'p250-saturation-methods');
+    move(page,method,49,[18,64,400,null],'p250-saturation-methods');
     move(page,method,50,[82,128,335,null],'p250-saturation-methods');
 
-    // The legacy RH element permanently printed the numerator/denominator answers. Convert it into
-    // a coordinate-space parent with a decorative fraction rule only.
-    rh.innerHTML='<i class="v9-p250-fraction-rule" data-source-object="p250-rh-fraction-rule" data-source-role="border" aria-hidden="true"></i>';
+    // The legacy RH element permanently printed the numerator/denominator answers. It is now a
+    // parent coordinate space containing only source decoration plus q51-q54 as the single owners.
+    rh.innerHTML='<i class="v9-p250-fraction-rule" data-source-object="p250-rh-fraction-rule" data-source-role="border" aria-hidden="true"></i><span class="v9-p250-rh-times" data-source-object="p250-rh-times" data-source-role="source-label">×100%</span>';
     rh.dataset.sourceCluster='p250-relative-humidity';
     rh.dataset.visualOwner='earth-cluster-layout-v9';
     move(page,rh,51,[118,0,305,null],'p250-relative-humidity');
-    move(page,rh,52,[0,48,300,null],'p250-relative-humidity');
-    move(page,rh,53,[92,91,260,null],'p250-relative-humidity');
-    move(page,rh,54,[118,142,305,null],'p250-relative-humidity');
+    move(page,rh,52,[0,46,340,null],'p250-relative-humidity');
+    move(page,rh,53,[92,91,235,null],'p250-relative-humidity');
+    move(page,rh,54,[118,147,305,null],'p250-relative-humidity');
 
     // Keep the two lower study groups coherent as parents instead of six unrelated page coordinates.
     const wet=document.createElement('div');
