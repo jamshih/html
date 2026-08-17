@@ -36,6 +36,8 @@ jobs:
           node --check wrongbook-v2/chemistry-reference-scope-page1-v2.js
           node --check wrongbook-v2/chemistry-reference-page1-fix-v3.js
           node --check wrongbook-v2/chemistry-gsat-page2-v4.js
+          node --check wrongbook-v2/chemistry-gsat-page2-fix-v5.js
+          node --check wrongbook-v2/chemistry-gsat-page3-v6.js
       - name: Start static server
         run: |
           python3 -m http.server 4173 --directory wrongbook-v2 > /tmp/chem-http.log 2>&1 &
@@ -61,6 +63,16 @@ jobs:
           grep -q 'data-qa-questions="21"' chemistry-page2-dom.html
           grep -q 'data-qa-blanks="24"' chemistry-page2-dom.html
           grep -q 'data-qa-figures="12"' chemistry-page2-dom.html
+      - name: Render Page 3 Recall and run DOM QA
+        run: |
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$BROWSER"
+          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=2500 --screenshot=chemistry-page3-recall.png http://127.0.0.1:4173/qa/chemistry-page3-qa.html
+          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=2500 --dump-dom http://127.0.0.1:4173/qa/chemistry-page3-qa.html > chemistry-page3-dom.html
+          grep -q 'data-qa-pass="true"' chemistry-page3-dom.html
+          grep -q 'data-qa-questions="21"' chemistry-page3-dom.html
+          grep -q 'data-qa-blanks="26"' chemistry-page3-dom.html
+          grep -q 'data-qa-figures="13"' chemistry-page3-dom.html
       - name: Upload rendered QA artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -71,4 +83,6 @@ jobs:
             chemistry-page1-dom.html
             chemistry-page2-recall.png
             chemistry-page2-dom.html
+            chemistry-page3-recall.png
+            chemistry-page3-dom.html
           if-no-files-found: warn
