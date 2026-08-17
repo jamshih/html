@@ -1,31 +1,41 @@
 /* Final source-grid geometry for the source-owned Earth V9 DOM. No duplicate renderer or hidden-answer workaround. */
 
-/* p243: keep half-life suffixes inside the printed graph band and route the fossil connector below its label. */
-.v8-p243-decay .v8-p243-q[data-question="38"]{width:340px!important}
-.v8-p243-decay .v8-p243-q[data-question="39"]{left:220px!important;width:155px!important;font-size:12.5px!important}
-.v8-p243-decay .v8-p243-q[data-question="39"] .v4strict-fill{width:62px!important;min-width:62px!important}
-.v8-p243-connectors [data-source-connector="fossilToTimeline"]{d:path("M275 452V482H240V500")}
+/* p243: keep the half-life labels compact enough to stay inside the source graph, and route the fossil branch under the heading. */
+.v8-p243-decay .v8-p243-q[data-question="38"]{width:315px!important;font-size:12.5px!important}
+.v8-p243-decay .v8-p243-q[data-question="38"] .v4strict-fill{width:44px!important;min-width:44px!important}
+.v8-p243-decay .v8-p243-q[data-question="39"]{left:197px!important;width:155px!important;font-size:12.5px!important}
+.v8-p243-decay .v8-p243-q[data-question="39"] .v4strict-fill{width:38px!important;min-width:38px!important}
+.v8-p243-connectors [data-source-connector="fossilToTimeline"]{d:path("M190 445V480H250V500")!important}
+.v8-p243-qpart[data-source-label="q49"]{left:510px!important;width:140px!important}
 
-/* p244: preserve printed suffixes. Keep the original source connector route; the previous override crossed q7's blank. */
-.v8-p244-page .v8-p244-q[data-question="6"]{width:290px!important}
-.v8-p244-distance .v8-p244-q[data-question="21"]{left:175px!important;width:170px!important}
+/* p244: preserve the printed suffixes and keep the colour branch clear of its owner label. */
+.v8-p244-page .v8-p244-q[data-question="6"]{width:235px!important}
+.v8-p244-distance .v8-p244-q[data-question="21"]{left:185px!important;width:130px!important}
+.v8-p244-connectors [data-source-connector="color2ToStar"]{d:path("M300 372L245 430L225 545L180 568")!important}
 
-/* p246: the third annual-motion band starts below the 24-hour row and has its own printed height. */
+/* p246: keep the 24-hour row separate and lift the final annual-motion row inside its source panel. */
+.v6-p246-q[data-question="9"]{left:510px!important;top:798px!important;width:112px!important}
+.v6-p246-q[data-question="8"]{left:510px!important;top:850px!important;width:112px!important}
 .v7-p246-annual{height:385px!important;min-height:385px!important}
 .v7-p246-annual-q[data-question="11"]{height:76px!important}
-.v7-p246-annual-q[data-question="12"]{top:322px!important;height:58px!important;line-height:1.13!important}
+.v7-p246-annual-q[data-question="12"]{top:310px!important;height:68px!important;line-height:1.13!important}
 
-/* p247: separate source labels that were colliding with their adjacent canonical prompt rows. */
-.v6-p247-sunrise text:nth-of-type(5){transform:translateY(-4px)}
-.v6-p247-sunrise text:nth-of-type(6){transform:translateY(4px)}
+/* p247: use the printed source bands rather than pushing prompts into the figures. */
+.v6-p247-sunrise text:nth-of-type(4){transform:translateY(-8px)}
+.v6-p247-sunrise text:nth-of-type(5){transform:translateY(8px)}
 .v6-p247-south text:nth-of-type(1){transform:translateY(-4px)}
 .v6-p247-south text:nth-of-type(2){transform:translateY(4px)}
-.v6-p247-q[data-question="22"]{left:585px!important;width:225px!important}
-.v6-p247-q[data-question="33"]{top:700px!important;width:265px!important}
-.v6-p247-q[data-question="39"]{top:825px!important;width:315px!important}
-.v6-p247-insolation{top:970px!important;height:205px!important}
-.v6-p247-q[data-question="40"]{top:1095px!important;width:320px!important}
-.v6-p247-q[data-question="41"]{left:475px!important;top:1165px!important;width:345px!important;font-size:12.5px!important;line-height:1.17!important}
+.v6-p247-q[data-question="22"]{left:550px!important;top:185px!important;width:245px!important}
+.v6-p247-q[data-question="27"]{top:500px!important}
+.v6-p247-q[data-question="33"]{top:715px!important;width:190px!important}
+.v6-p247-q[data-question="39"]{left:690px!important;top:850px!important;width:190px!important}
+.v6-p247-insolation{left:460px!important;top:985px!important;width:360px!important;height:230px!important}
+.v6-p247-q[data-question="40"]{left:500px!important;top:930px!important;width:340px!important}
+.v6-p247-q[data-question="41"]{left:500px!important;top:1180px!important;width:330px!important;font-size:12.5px!important;line-height:1.17!important}
+
+/* p248: separate the next section title from the preceding S-wave axis, and keep q8 above the depth tick. */
+.v6-p248-head.h4{top:730px!important}
+.v6-p248-q[data-question="8"]{top:510px!important}
 
 /* p253: q40 begins to the right of the fixed 季風 label rather than underneath it. */
 .v9-p253-large-wind .q40{left:176px!important;top:108px!important;width:360px!important;font-size:12.5px!important;line-height:1.08!important}
