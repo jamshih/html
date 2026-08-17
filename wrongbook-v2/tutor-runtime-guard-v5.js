@@ -365,6 +365,7 @@
     document.body.classList.toggle('pf-workspace-active',Boolean(document.querySelector('.pf-problem-workspace')));
     document.querySelectorAll('[data-pf-notebook-index]').forEach(el=>el.onclick=e=>{e.stopPropagation();state.page='notebook';state.selectedProblemId=null;state.mobileMenu=false;save();render();window.scrollTo({top:0,behavior:'instant'})});
     document.querySelectorAll('[data-pf-subject]').forEach(el=>el.onclick=e=>{e.stopPropagation();state.subject=el.dataset.pfSubject;state.selectedProblemId=null;save();render()});
+    document.querySelectorAll('.pf-drawer [data-action="closeMenu"]').forEach(el=>el.onclick=e=>{e.stopPropagation();state.mobileMenu=false;save();render()});
     pfHydrateProblemImages();
   }
 
