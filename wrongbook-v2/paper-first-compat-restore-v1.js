@@ -114,7 +114,7 @@ if(document.documentElement.dataset.paperFirstLegacy!=='1'&&!document.getElement
 if(document.documentElement.dataset.paperFirstLegacy!=='1'&&!document.getElementById('reviewDueTodayV12')){
   const script=document.createElement('script');
   script.id='reviewDueTodayV12';
-  script.src='./review-due-today-v12.js?wb=20260817-1';
+  script.src='./review-due-today-v12.js?wb=20260817-2';
   script.async=false;
   document.head.appendChild(script);
 }
