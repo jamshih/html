@@ -13,7 +13,9 @@
   const overlap=(a,b)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>EPS&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>EPS;
   const cssPx=(o,p)=>parseFloat(getComputedStyle(o)[p])||0;
   const within=(a,b,t=2)=>a.left>=b.left-t&&a.right<=b.right+t&&a.top>=b.top-t&&a.bottom<=b.bottom+t;
-  const wait=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+  // requestAnimationFrame can remain suspended in headless --dump-dom runs. A short
+  // timer settles synchronous render/CSS layout reliably in both CI and browsers.
+  const wait=()=>new Promise(r=>setTimeout(r,24));
   const forbiddenSelectors=['.v4tb-mascot','.v4tb-page-number','.v4tb-page-carry','.v4tb-continuation','.v4tb-blank-no','.v4tb-book-badge','.v4tb-paper-strip'];
 
   function addIssue(report,type,node,extra={}){
