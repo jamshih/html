@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - agent/wrongbook-concepts-tutor-v5-20260814
-      - agent/wrongbook-paper-first-20260817
   workflow_dispatch:
 permissions:
   contents: read
