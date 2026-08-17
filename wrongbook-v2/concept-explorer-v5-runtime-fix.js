@@ -32,23 +32,22 @@
     try{v5CeBindSearchResults=window.v5CeBindSearchResults}catch{}
   }
 
-  // V6 keeps the existing concept data/review logic, but replaces the deeply nested visual
-  // explorer with a shallow navigator and a sparse Obsidian-style graph. Load it separately
-  // so the redesign can be rolled back without touching the curriculum or study engine.
-  const realmStamp='20260817-1';
-  if(!document.querySelector('link[data-concept-realm-v6]')){
+  // V7 deliberately removes the graph/realm experiment. Concepts are now organized directly
+  // by the Taiwan 108 curriculum: subject -> chapter -> section -> concept, with no graph view.
+  const chapterStamp='20260817-1';
+  if(!document.querySelector('link[data-concept-chapters-v7]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href=`./concept-realm-v6.css?wb=${realmStamp}`;
-    link.dataset.conceptRealmV6='1';
+    link.href=`./concept-chapters-v7.css?wb=${chapterStamp}`;
+    link.dataset.conceptChaptersV7='1';
     document.head.appendChild(link);
   }
-  if(!window.__wrongbookConceptRealmV6&&!document.querySelector('script[data-concept-realm-v6]')){
+  if(!window.__wrongbookConceptChaptersV7&&!document.querySelector('script[data-concept-chapters-v7]')){
     const script=document.createElement('script');
-    script.src=`./concept-realm-v6.js?wb=${realmStamp}`;
+    script.src=`./concept-chapters-v7.js?wb=${chapterStamp}`;
     script.async=false;
-    script.dataset.conceptRealmV6='1';
-    script.onerror=()=>console.error('[concept-realm-v6] failed to load');
+    script.dataset.conceptChaptersV7='1';
+    script.onerror=()=>console.error('[concept-chapters-v7] failed to load');
     document.body.appendChild(script);
   }
 })();
