@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 12
     env:
       WB_LIVE_URL: https://jamshih.github.io/html/wrongbook-v2/
-      WB_EXPECT_BUILD: wrongbook-v5
+      WB_EXPECT_BUILD: 2026-08-17-wrongbook-v5-paper-first
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
