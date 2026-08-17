@@ -1,10 +1,11 @@
 // Wrongbook V5 handwriting-aware tutor state bridge.
-// Marks fresh student ink as unreviewed, switches the tutor CTA to re-evaluate,
-// invalidates stale guide cache keys, and tells the guide model that the latest
-// workspace image is authoritative over the historical/original answer field.
-const V5_INK_DIRTY_VERSION='2026-08-17-handwriting-dirty-v5';
+// Fresh student ink is authoritative current work. This bridge marks it unreviewed,
+// switches the tutor CTA to re-evaluate, invalidates stale guide cache keys, and
+// keeps dirty detection working even if another runtime captured the original saveInk.
+const V5_INK_DIRTY_VERSION='2026-08-17-handwriting-dirty-v5b';
 const V5_INK_DIRTY_STORAGE='wrongbook-v5-tutor-ink-revisions';
 window.__v5TutorInkReviewing=window.__v5TutorInkReviewing||{};
+window.__v5InkSignatures=window.__v5InkSignatures||{};
 
 function v5InkLedger(){
   try{
@@ -26,6 +27,19 @@ function v5InkBump(problemId){
 function v5InkMarkChecked(problemId,revision){
   if(!problemId)return;const ledger=v5InkLedger(),seen=Math.max(Number(ledger.checked[problemId])||0,Number(revision)||0);ledger.checked[problemId]=seen;v5InkWriteLedger(ledger);
 }
+function v5InkSignature(){
+  const paths=(typeof drawing==='object'&&Array.isArray(drawing?.paths))?drawing.paths:[];let pts=0,last='';
+  for(const path of paths){const xs=Array.isArray(path?.pts)?path.pts:[];pts+=xs.length;const p=xs[xs.length-1];if(p)last=`${Number(p.x).toFixed(4)},${Number(p.y).toFixed(4)},${path?.tool||''}`}
+  return `${paths.length}|${pts}|${last}`;
+}
+function v5InkPrimeSignature(problemId=typeof drawing==='object'?drawing?.key:''){
+  if(!problemId)return;window.__v5InkSignatures[problemId]=v5InkSignature();
+}
+function v5InkObserveChange(problemId=typeof drawing==='object'?drawing?.key:''){
+  if(!problemId)return false;const sig=v5InkSignature(),prev=window.__v5InkSignatures[problemId];
+  if(prev===undefined){window.__v5InkSignatures[problemId]=sig;return false}
+  if(sig===prev)return false;window.__v5InkSignatures[problemId]=sig;v5InkBump(problemId);requestAnimationFrame(v5InkRefreshDirtyUi);return true;
+}
 function v5InkDirtyActionsMarkup(){return `<div class="v5-tutor-actions"><button class="primary-btn" data-v5-tutor-evaluate>我寫好了，幫我看</button><button class="soft-btn" data-v5-tutor-hint>再給我一點提示</button><button class="v5-link-btn" data-v5-tutor-mode="direct">直接看詳解</button></div>`}
 function v5InkBindDirtyActions(root=document){
   root.querySelector('[data-v5-tutor-evaluate]')?.addEventListener('click',()=>v5TutorEvaluate());
@@ -39,9 +53,16 @@ function v5InkRefreshDirtyUi(){
   const actions=document.querySelector('.v5-tutor-actions');if(!actions)return;actions.outerHTML=v5InkDirtyActionsMarkup();v5InkBindDirtyActions(document);
 }
 
+// Prime before the drawing runtime mutates paths, then observe after it finishes.
+document.addEventListener('pointerdown',e=>{if(e.target?.id==='drawCanvas')v5InkPrimeSignature()},true);
+document.addEventListener('pointerup',e=>{if(e.target?.id==='drawCanvas')requestAnimationFrame(()=>v5InkObserveChange())},false);
+document.addEventListener('pointercancel',e=>{if(e.target?.id==='drawCanvas')requestAnimationFrame(()=>v5InkObserveChange())},false);
+document.addEventListener('click',e=>{if(e.target?.closest?.('[data-action="undoInk"],[data-action="clearInk"]'))v5InkPrimeSignature()},true);
+document.addEventListener('click',e=>{if(e.target?.closest?.('[data-action="undoInk"],[data-action="clearInk"]'))requestAnimationFrame(()=>v5InkObserveChange())},false);
+
 if(typeof saveInk==='function'&&!window.__v5InkDirtySaveWrapped){
   window.__v5InkDirtySaveWrapped=true;const baseSaveInk=saveInk;
-  saveInk=function(){const problemId=typeof drawing==='object'?drawing?.key:'';const out=baseSaveInk.apply(this,arguments);if(problemId){v5InkBump(problemId);requestAnimationFrame(v5InkRefreshDirtyUi)}return out};
+  saveInk=function(){const out=baseSaveInk.apply(this,arguments);v5InkObserveChange();return out};
 }
 
 if(typeof v5TutorControls==='function'&&!window.__v5InkDirtyControlsWrapped){
@@ -72,4 +93,5 @@ if(typeof v5TutorCall==='function'&&!window.__v5InkDirtyTutorCallWrapped){
   };
 }
 
-window.v5TutorInkState=function(problemId=selectedProblem()?.id||''){return{version:V5_INK_DIRTY_VERSION,problemId,revision:v5InkRevision(problemId),checkedRevision:v5InkCheckedRevision(problemId),reviewingRevision:Number(window.__v5TutorInkReviewing?.[problemId])||0,dirty:problemId?v5InkRevision(problemId)>v5InkEffectiveChecked(problemId):false}};
+setTimeout(()=>{try{v5InkPrimeSignature();v5InkRefreshDirtyUi()}catch{}},0);
+window.v5TutorInkState=function(problemId=selectedProblem()?.id||''){return{version:V5_INK_DIRTY_VERSION,problemId,revision:v5InkRevision(problemId),checkedRevision:v5InkCheckedRevision(problemId),reviewingRevision:Number(window.__v5TutorInkReviewing?.[problemId])||0,dirty:problemId?v5InkRevision(problemId)>v5InkEffectiveChecked(problemId):false,signature:window.__v5InkSignatures?.[problemId]||''}};
