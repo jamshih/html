@@ -12,7 +12,11 @@ function v4tbStripSvgText(svg=''){
   return String(svg).replace(/<text\b[^>]*>[\s\S]*?<\/text>/gi,'');
 }
 function v4tbSectionVisual(subjectId,chapter,section){
-  return v4tbStripSvgText(v4HeroGraphic(subjectId,`${chapter.title} ${section.title}`));
+  const nativeFigure=v4tbStripSvgText(v4HeroGraphic(subjectId,`${chapter.title} ${section.title}`));
+  const assetIds=typeof mindmapApprovedAssetIds==='function'?mindmapApprovedAssetIds(subjectId,chapter.id,section.id):[];
+  if(!assetIds.length)return nativeFigure;
+  const assets=typeof mindmapApprovedAssetHtml==='function'?mindmapApprovedAssetHtml(assetIds,{label:`${section.title}概念插圖`}):'';
+  return `<div class="v4tb-figure-composite assets-${assetIds.length}"><div class="v4tb-native-figure">${nativeFigure}</div>${assets}</div>`;
 }
 function v4tbTaiwanTermText(text=''){
   // Use the one canonical Taiwan-terminology normalization boundary. This keeps
@@ -170,7 +174,8 @@ function v4tbChapterHeader(subjectName,chapter,chapterStats){
   return `<header class="v4tb-map-header"><div><span>${esc(v4tbTaiwanTermText(subjectName))} · 108 課綱</span><h3>${esc(v4tbTaiwanTermText(chapter.title))}</h3></div><div class="v4tb-map-progress" aria-label="章節完成度"><span>${chapterStats.done}/${chapterStats.total}</span><i><b style="width:${chapterStats.pct}%"></b></i></div></header>`;
 }
 function v4tbKnowledgeMap(subjectId,subjectName,chapter,chapterStats){
-  return `<section class="panel v4tb-sheet v4tb-knowledge-map" style="--subject:${v4MindPalette(subjectId)[0]}" data-v4tb-subject="${v4EscapeAttr(subjectId)}" data-v4tb-chapter="${v4EscapeAttr(chapter.id)}">
+  const illustrated=['earth','chemistry','biology'].includes(subjectId)?` mindmap--illustrated mindmap--${subjectId}`:'';
+  return `<section class="panel v4tb-sheet v4tb-knowledge-map${illustrated}" style="--subject:${v4MindPalette(subjectId)[0]}" data-v4tb-subject="${v4EscapeAttr(subjectId)}" data-v4tb-chapter="${v4EscapeAttr(chapter.id)}">
     ${v4tbChapterHeader(subjectName,chapter,chapterStats)}
     <div class="v4tb-page-body">
       ${(chapter.sections||[]).map((section,si)=>v4tbSection(subjectId,chapter,section,si)).join('')}
