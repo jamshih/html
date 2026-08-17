@@ -1,10 +1,10 @@
 /* Earth mind-map entrypoint.
    The old p242–253 reconstruction files remain available for historical QA, but
    production Earth 心智圖 is now owned by earth-mindmap-reference-v11.*.
-   This loader is intentionally binder-free: the V11 module only replaces
-   mindmapPage for subject=earth and reuses the app's existing bind()/state flow. */
+   This loader is intentionally binder-free: the V11 modules only replace
+   mindmapPage for subject=earth and reuse the app's existing bind()/state flow. */
 (function(){
-  const VERSION='20260817-1';
+  const VERSION='20260817-2';
   const qs=new URLSearchParams(location.search);
 
   if(!document.querySelector('link[data-earth-mindmap-v11]')){
@@ -32,12 +32,23 @@
     }catch{}
   };
 
-  if(window.EARTH_REFERENCE_MINDMAP_V11){afterLoad();return;}
+  const loadEclipse=()=>{
+    if(window.EARTH_ECLIPSE_DIRECTION_V11){afterLoad();return;}
+    const patch=document.createElement('script');
+    patch.src=`./earth-mindmap-eclipse-v11.js?wb=${VERSION}`;
+    patch.async=false;
+    patch.dataset.earthEclipseV11='1';
+    patch.addEventListener('load',afterLoad,{once:true});
+    patch.addEventListener('error',()=>{console.error('[WrongBook] Earth eclipse-direction V11 failed to load.');afterLoad();},{once:true});
+    document.head.appendChild(patch);
+  };
+
+  if(window.EARTH_REFERENCE_MINDMAP_V11){loadEclipse();return;}
   const script=document.createElement('script');
   script.src=`./earth-mindmap-reference-v11.js?wb=${VERSION}`;
   script.async=false;
   script.dataset.earthMindmapV11='1';
-  script.addEventListener('load',afterLoad,{once:true});
+  script.addEventListener('load',loadEclipse,{once:true});
   script.addEventListener('error',()=>console.error('[WrongBook] Earth mind map V11 failed to load.'),{once:true});
   document.head.appendChild(script);
 })();
