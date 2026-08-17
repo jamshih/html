@@ -14,8 +14,8 @@
     lines.dataset.sourceClusterOwner='p253-climate-ocean-system';
     lines.dataset.visualOwner='earth-cluster-layout-v10-p253';
 
-    // Re-route the simplified v6 branches to the photographed page-253 corridors.
-    // Long branches terminate immediately before prompt rectangles instead of running through glyphs.
+    // The v6 approximation used long global horizontals through prompt glyphs. Keep the source
+    // hierarchy, but route every long run through whitespace immediately above/below text rows.
     lines.innerHTML=`
       <defs>
         <marker id="p253green-v10" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -23,35 +23,40 @@
         </marker>
       </defs>
 
-      <!-- climate / greenhouse spine: source nodes around y=136,237,432 -->
+      <!-- Climate spine. q27 occupies y136-174, q28 y186-224, q31 y229-267,
+           q30 y301-339, q32 y396-414 and q36 begins y431. Long runs therefore use the
+           photographed gaps rather than the prompt baselines. -->
       <g class="v10-p253-climate-lines" fill="none" stroke="#dd7b35" stroke-linecap="square" stroke-linejoin="miter">
         <path d="M90 100V432" stroke-width="7"/>
-        <path d="M90 136H542M90 237H542M90 327H270M90 432H412" stroke-width="4"/>
-        <path d="M542 237V146" stroke-width="4"/>
+        <path d="M90 178H532V196H542" stroke-width="4"/>
+        <path d="M90 228H372V220H542V146" stroke-width="4"/>
+        <path d="M90 344H270" stroke-width="4"/>
+        <path d="M90 423H300" stroke-width="4"/>
       </g>
       <g class="v10-p253-climate-nodes" fill="#fff" stroke="#666" stroke-width="3">
         <circle cx="90" cy="136" r="7"/><circle cx="90" cy="237" r="7"/>
         <circle cx="90" cy="432" r="7"/><circle cx="542" cy="237" r="7"/>
       </g>
 
-      <!-- ocean main spine and the three source-owned concept nodes -->
+      <!-- Ocean main spine and local child brackets. -->
       <g class="v10-p253-ocean-lines" fill="none" stroke="#5b9357" stroke-linecap="square" stroke-linejoin="miter">
         <path d="M90 570V1048" stroke-width="7"/>
-        <path d="M90 611H280M90 805H165M90 910H160M90 1048H165" stroke-width="5"/>
+        <path d="M90 612H280M90 805H165M90 910H160M90 1048H165" stroke-width="5"/>
 
-        <!-- wind/current cluster: local bracket remains left of q37-q40 text -->
-        <path d="M280 565V755M280 611H302M280 665H330M280 742H330" stroke-width="4"/>
+        <!-- Wind/current cluster stays entirely left of q37-q40. -->
+        <path d="M280 565V755M280 612H302M280 665H330M280 742H330" stroke-width="4"/>
         <path d="M330 636V755M330 636H410M330 704H410M330 755H410" stroke-width="4"/>
 
-        <!-- q41 source dashed enclosure; border surrounds the row instead of crossing it -->
-        <path d="M165 786H420V850H165" stroke-width="3" stroke-dasharray="8 6"/>
+        <!-- q41 enclosure: border surrounds the two-line row, never bisects it. -->
+        <path d="M160 784H422V852H160" stroke-width="3" stroke-dasharray="8 6"/>
 
-        <!-- wave cluster: left ownership bracket + right local teaching bracket.
-             Horizontal runs use whitespace corridors immediately above prompt rows. -->
-        <path d="M160 884V1007M160 884H182M160 930H350M160 1007H350" stroke-width="4"/>
-        <path d="M400 870V1039M400 890H407M400 930H355M400 975H355M400 1039H355" stroke-width="4"/>
+        <!-- Wave ownership bracket. The explanatory copy occupies x170-400 around y900-950;
+             do not draw a horizontal through it. Connect the left and right subclusters by going
+             below the copy and staying left of q43-q45 prompt rectangles. -->
+        <path d="M160 878V1008M160 878H168M160 1008H350" stroke-width="4"/>
+        <path d="M350 1008V870H400M400 870V1040M400 890H407M400 930H355M400 975H355M400 1040H355" stroke-width="4"/>
 
-        <!-- tide cluster: short branch stubs only; prompt prose owns the space to the right -->
+        <!-- Tide cluster: source-like short stubs only. -->
         <path d="M165 1048H185M185 1048V1238M185 1098H205M185 1148H205M185 1190H205M185 1230H205" stroke-width="4"/>
       </g>
       <g class="v10-p253-ocean-nodes" fill="#fff" stroke="#666" stroke-width="3">
