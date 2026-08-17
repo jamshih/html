@@ -9,6 +9,7 @@
 }
 .v5-tutor-stage > p.v10-tutor-copy{
   margin:10px 0 11px;
+  max-width:78ch;
   font-size:14px;
   line-height:1.72;
   letter-spacing:.005em;
@@ -18,6 +19,6 @@
 .v10-tutor-copy strong{font-weight:800;color:inherit}
 .v3-guide-caption.v10-tutor-copy{line-height:1.55}
 @media(max-width:720px){
-  .v5-tutor-stage > p.v10-tutor-copy{font-size:13px;line-height:1.68;margin:8px 0 10px}
+  .v5-tutor-stage > p.v10-tutor-copy{max-width:none;font-size:13px;line-height:1.68;margin:8px 0 10px}
   .v10-tutor-copy .v10-copy-gap{height:.62em}
 }
