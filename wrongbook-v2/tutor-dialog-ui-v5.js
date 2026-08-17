@@ -1,8 +1,8 @@
 // Wrong Book V5 — collapsible tutor dialogue UI + neutral answer wording.
-// The tutor is a dialogue surface. Visible copy should talk about answers, progress and AI marks,
+// The tutor is a dialogue surface. Visible copy should talk about answers, progress and AI hints,
 // not imply that the interaction itself is a handwriting-only workflow.
 (function(){
-  const VERSION='2026-08-17-tutor-dialog-ui-v5b';
+  const VERSION='2026-08-17-tutor-dialog-ui-v5c';
   if(window.__wrongbookTutorDialogUI===VERSION)return;
   window.__wrongbookTutorDialogUI=VERSION;
 
@@ -12,10 +12,10 @@
     ['AI 筆跡會直接畫在原題上','AI 提示會顯示在題目上'],
     ['AI 讀得到你的筆跡','AI 會參考你的作答'],
     ['AI 也寫在這裡','AI 提示也會顯示在這裡'],
-    ['顯示 AI 筆跡','顯示 AI 標記'],
-    ['隱藏 AI 筆跡','隱藏 AI 標記'],
-    ['顯示筆跡','顯示標記'],
-    ['隱藏筆跡','隱藏標記'],
+    ['顯示 AI 筆跡','顯示 AI 提示'],
+    ['隱藏 AI 筆跡','隱藏 AI 提示'],
+    ['顯示筆跡','顯示提示'],
+    ['隱藏筆跡','隱藏提示'],
     ['我寫好了，幫我看','我答好了，幫我看'],
     ['新增的筆跡','更新的作答'],
     ['新筆跡','新作答'],
@@ -88,6 +88,9 @@
     return `AI 家教 · ${right?'目前方向正確':stage||'引導中'}`;
   }
 
+  function setTextIfChanged(el,value){if(el&&el.textContent!==value)el.textContent=value}
+  function setAttrIfChanged(el,name,value){if(el&&el.getAttribute(name)!==value)el.setAttribute(name,value)}
+
   function ensureCollapseBar(dock){
     let bar=dock.querySelector(':scope > .v5-dialog-collapse-bar');
     if(!bar){
@@ -103,10 +106,10 @@
     const label=bar.querySelector('.v5-dialog-collapse-label');
     const chevron=bar.querySelector('.v5-dialog-collapse-chevron');
     const summary=bar.querySelector('.v5-dialog-collapse-summary');
-    if(toggle)toggle.setAttribute('aria-expanded',String(!collapsed));
-    if(label)label.textContent=collapsed?'展開':'收合';
-    if(chevron)chevron.textContent=collapsed?'⌄':'⌃';
-    if(summary)summary.textContent=summaryFor(dock);
+    setAttrIfChanged(toggle,'aria-expanded',String(!collapsed));
+    setTextIfChanged(label,collapsed?'展開':'收合');
+    setTextIfChanged(chevron,collapsed?'⌄':'⌃');
+    setTextIfChanged(summary,summaryFor(dock));
   }
 
   function normalizeVisibleCopy(root=document){
