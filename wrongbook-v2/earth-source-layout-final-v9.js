@@ -31,7 +31,7 @@
    const decay=root.querySelector('.v8-p243-decay');
    const q38=question(root,38),q39=question(root,39);
    setRect(q38,20,7,310);
-   setRect(q39,205,169,145);
+   setRect(q39,205,148,145);
    for(const [q,w] of [[q38,44],[q39,30]]){
      const blank=q?.querySelector('.v4strict-fill');
      if(blank){blank.style.setProperty('width',`${w}px`,'important');blank.style.setProperty('min-width',`${w}px`,'important');}
@@ -115,7 +115,7 @@
      17:[540,162,286],
      18:[540,274,286],
      19:[540,333,286],
-     20:[145,470,690],
+     20:[145,460,690],
      21:[82,533,770],
      22:[95,682,285],
      24:[680,653,170],
@@ -135,7 +135,7 @@
    if(q23){
      setRect(q23,400,650,490,245);q23.dataset.parentId='p249-boundaries';
      const fields=directSpans(q23);
-     const xs=[24,150,248,320];
+     const xs=[24,150,248,280];
      fields.forEach((el,i)=>{if(Number.isFinite(xs[i]))el.style.setProperty('left',`${xs[i]}px`,'important');});
    }
    const taiwan=root.querySelector('.v6-p249-taiwan');setRect(taiwan,383,885,405,300);
