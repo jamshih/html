@@ -80,10 +80,10 @@
     move(page,right,38,[40,29,165,null],'p247-ice-age-panel');
     move(page,right,39,[202,29,180,null],'p247-ice-age-panel');
     move(page,right,40,[40,120,330,null],'p247-ice-age-panel');
-    move(page,right,41,[40,352,330,null],'p247-ice-age-panel');
+    move(page,right,41,[32,344,355,null],'p247-ice-age-panel');
     right.appendChild(figure);
     own(figure,'p247-insolation-comparison','figure','p247-ice-age-panel');
-    setBox(figure,34,207,330,143);
+    setBox(figure,34,207,330,137);
   }
 
   function repair250(t){
