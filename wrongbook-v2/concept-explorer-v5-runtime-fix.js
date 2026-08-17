@@ -51,9 +51,21 @@
     document.body.appendChild(script);
   }
 
-  // AI-generated explanation diagrams behave like movable stickers across Wrongbook.
-  // The sticker module watches #app, so diagrams rendered later are upgraded automatically.
-  const stickerStamp='20260817-1';
+  // Known concepts receive a real, topic-specific diagram instead of generic teaching-objective
+  // text. The renderer also declares an explicit drag-card/drag-handle DOM contract.
+  const dedicatedDiagramStamp='20260817-2';
+  if(!window.__wrongbookDedicatedAiDiagramsV1&&!document.querySelector('script[data-ai-dedicated-diagrams-v1]')){
+    const script=document.createElement('script');
+    script.src=`./ai-dedicated-diagrams-v1.js?wb=${dedicatedDiagramStamp}`;
+    script.async=false;
+    script.dataset.aiDedicatedDiagramsV1='1';
+    script.onerror=()=>console.error('[ai-dedicated-diagrams-v1] failed to load');
+    document.body.appendChild(script);
+  }
+
+  // AI explanation cards behave like true floating stickers. V2 uses a viewport-level portal,
+  // so overflow/transform rules on the original panel cannot prevent dragging.
+  const stickerStamp='20260817-2';
   if(!window.__wrongbookAiDiagramStickerV1&&!document.querySelector('script[data-ai-diagram-sticker-v1]')){
     const script=document.createElement('script');
     script.src=`./ai-diagram-sticker-v1.js?wb=${stickerStamp}`;
