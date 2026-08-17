@@ -15,19 +15,10 @@ function v4tbSectionVisual(subjectId,chapter,section){
   return v4tbStripSvgText(v4HeroGraphic(subjectId,`${chapter.title} ${section.title}`));
 }
 function v4tbTaiwanTermText(text=''){
-  // Clearnote/public-note material may contain Simplified Chinese or Mainland terms.
-  // Normalize only known concept terminology here; ambiguous source text must be repaired
-  // in canonical data rather than hidden by blind character conversion.
-  const map={
-    ...(TW_TERM_POLICY?.preferred||{}),
-    '线粒体':'粒線體','高尔基体':'高基氏體','核糖体':'核糖體','内质网':'內質網','叶绿体':'葉綠體','细胞膜':'細胞膜','细胞核':'細胞核',
-    '有丝分裂':'有絲分裂','减数分裂':'減數分裂','氧化还原':'氧化還原','摩尔质量':'莫耳質量','摩尔':'莫耳','矢量':'向量','势能':'位能','电势':'電位',
-    '函数':'函數','概率':'機率','数列':'數列','级数':'級數','几何':'幾何','导数':'導數','总统制':'總統制','内阁制':'內閣制','双首长制':'雙首長制',
-    '权利':'權利','权力':'權力','产业':'產業','人口迁移':'人口遷移','修辞':'修辭','语法':'語法','数据':'資料','视频':'影片','信息':'資訊'
-  };
-  let out=String(text??'');
-  Object.entries(map).sort((a,b)=>b[0].length-a[0].length).forEach(([from,to])=>{out=out.split(from).join(to)});
-  return out;
+  // Use the one canonical Taiwan-terminology normalization boundary. This keeps
+  // public-note repair rules consistent across curriculum data and mind-map rendering.
+  const value=String(text??'');
+  return typeof twTaiwanizeString==='function'?twTaiwanizeString(value):value;
 }
 function v4tbPointState(subjectId,chapter,p){
   const key=v4PointKey(subjectId,chapter,p),val=state.mindAnswers?.[key]||'',level=state.mindHintLevels?.[key]||0;
