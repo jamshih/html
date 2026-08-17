@@ -10,11 +10,14 @@
   max-height:none!important;
 }
 
-/* Page 252 q26 is one four-line source paragraph. The shared .v5-recall flex layout turns each
-   text node around <br> into a flex item, doubling the block height and clipping the last rows.
-   Keep the measured source position; only restore normal block line-flow inside this printed object. */
+/* Page 252 q26 is one four-line source paragraph spanning the space up to the salinity chart.
+   The old 300/310px prompt cap forced every source row to wrap and pushed the final line below the
+   910x1270 page. Keep its measured source top; restore normal line-flow and the available source width. */
 .v6-p252-q[data-question="26"]{
   display:block!important;
+  width:368px!important;
+  max-width:none!important;
+  max-height:none!important;
   white-space:normal!important;
   line-height:1.3!important;
 }
