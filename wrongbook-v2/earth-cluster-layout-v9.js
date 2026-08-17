@@ -5,6 +5,9 @@
   const byNumber=(page,n)=>(M[page]||[]).find(r=>Number(r.number)===Number(n));
   const fieldSpec=(page,n,widths)=>{const r=byNumber(page,n);if(!r)return null;r.replaceFields=true;r.blankWidths=widths;return r;};
 
+  fieldSpec(246,8,[60]);
+  fieldSpec(246,9,[60]);
+
   // Page 250: the prompt owner must also own the photographed visual treatment. Recreate the
   // fields at source-like widths so Learn mode does not change the reading order or force wraps.
   const p48=fieldSpec(250,48,[96]);
@@ -45,6 +48,38 @@
     setBox(el,box[0],box[1],box[2],box[3]);
     return el;
   };
+
+  function repair246(t){
+    const page=t.content.querySelector('[data-source-trace-page="246"],[data-strict-page="246"]');
+    if(!page)return;
+    const zodiac=page.querySelector('.v6-p246-zodiac');
+    if(!zodiac)return;
+
+    // The source has the orbit/zodiac art and the day-2 labels in one visual frame. Legacy code
+    // positioned the SVG at x=100 but later moved q8/q9 to x=510, causing answers to land on a
+    // planet marker. Give the subgroup a single parent at the measured source frame instead.
+    const cluster=document.createElement('div');
+    cluster.className='v9-p246-zodiac-cluster';
+    cluster.dataset.sourceCluster='p246-zodiac-orbit';
+    cluster.dataset.sourceRole='figure-group';
+    cluster.dataset.visualOwner='earth-cluster-layout-v9';
+    page.appendChild(cluster);
+    cluster.appendChild(zodiac);
+    own(zodiac,'p246-zodiac-figure','figure','p246-zodiac-orbit');
+    setBox(zodiac,0,0,535,505);
+
+    // The photograph places the two right-side planet markers much closer to the central orbit than
+    // the legacy approximation. Correct only those local SVG children and their two dashed rays.
+    const planets=[...zodiac.querySelectorAll('g[fill="#92a4c5"] circle')];
+    if(planets[2]){planets[2].setAttribute('cx','370');planets[2].setAttribute('cy','112');planets[2].dataset.sourceObject='p246-orbit-planet-q9';}
+    if(planets[3]){planets[3].setAttribute('cx','400');planets[3].setAttribute('cy','147');planets[3].dataset.sourceObject='p246-orbit-planet-q8';}
+    const rays=[...zodiac.querySelectorAll('g[stroke="#4c5055"] path')];
+    if(rays[0])rays[0].setAttribute('d','M134 146L272 185L400 147');
+    if(rays[1])rays[1].setAttribute('d','M280 111L272 185L370 112');
+
+    move(page,cluster,9,[405,98,150,null],'p246-zodiac-orbit');
+    move(page,cluster,8,[405,130,150,null],'p246-zodiac-orbit');
+  }
 
   function repair247(t){
     const page=t.content.querySelector('[data-source-trace-page="247"],[data-strict-page="247"]');
@@ -130,9 +165,11 @@
 
   window.v5PageHtml=function(ch,sem,page,mode){
     const html=prev(ch,sem,page,mode);
-    if(page!==247&&page!==250)return html;
+    if(page!==246&&page!==247&&page!==250)return html;
     const t=document.createElement('template');t.innerHTML=html;
-    if(page===247)repair247(t);else repair250(t);
+    if(page===246)repair246(t);
+    else if(page===247)repair247(t);
+    else repair250(t);
     return t.innerHTML;
   };
   if(typeof window.render==='function')window.render();
