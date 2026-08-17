@@ -3,6 +3,10 @@
    while preserving the existing whole-sheet scan capability instead of hiding it. */
 (function(){
   const finishBoot=()=>{try{window.__wrongbookFinishBoot?.()}catch{}};
+  const finishAfterScriptChain=()=>{
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',finishBoot,{once:true});
+    else finishBoot();
+  };
   const originals=window.__paperFirstLegacyOriginals;
   if(originals){
     try{if(originals.sidebar)sidebar=originals.sidebar}catch{}
@@ -21,7 +25,7 @@
   }
 
   const paperFirst=Boolean(window.WRONGBOOK_PAPER_FIRST_VERSION);
-  if(!paperFirst){try{render()}catch{};finishBoot();return}
+  if(!paperFirst){try{render()}catch{};finishAfterScriptChain();return}
 
   const baseHome=homePage;
   homePage=function(){
@@ -94,5 +98,5 @@
   };
 
   try{render()}catch{}
-  finishBoot();
+  finishAfterScriptChain();
 })();
