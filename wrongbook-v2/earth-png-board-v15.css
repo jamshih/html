@@ -1,0 +1,107 @@
+/* Earth PNG Chalkboard v15 — source image stays untouched; interaction lives on top. */
+.earth15-page-head{max-width:1220px;margin:0 auto 8px;padding:0 14px}
+.earth15-page-head h2{margin:0;font-size:18px;font-weight:900;color:#2f2923}
+.earth15-page-head p{margin:4px 0 0;color:#776e63;font-size:12px}
+.earth15-source{display:flex;justify-content:center;gap:7px;margin:6px auto 8px}
+.earth15-source button{border:1px solid #bdb4a9;background:#fff;color:#655d54;border-radius:9px;padding:6px 11px;font-size:11px;font-weight:850;cursor:pointer}
+.earth15-source button.active{background:#233b32;color:#fff;border-color:#233b32}
+
+.earth15-board{
+  --chalk:#f4efe2;
+  --chalk-muted:#becbc2;
+  --board:#173b31;
+  --board-deep:#102d26;
+  max-width:1260px;
+  margin:0 auto 30px;
+  padding:14px 14px 17px;
+  border:10px solid #694832;
+  border-radius:18px;
+  background:
+    radial-gradient(ellipse at 18% 12%,rgba(255,255,255,.04),transparent 25%),
+    radial-gradient(ellipse at 81% 78%,rgba(255,255,255,.025),transparent 24%),
+    repeating-linear-gradient(7deg,rgba(255,255,255,.008) 0 1px,transparent 1px 5px),
+    var(--board);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.05),inset 0 0 28px rgba(0,0,0,.26),0 12px 34px rgba(31,28,23,.18);
+  color:var(--chalk);
+}
+.earth15-board::before{content:"";display:block;height:4px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:-4px 12px 10px}
+.earth15-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 3px 10px;flex-wrap:wrap}
+.earth15-topbar-copy{display:flex;align-items:baseline;gap:9px;min-width:0}
+.earth15-topbar-copy strong{font-family:"DFKai-SB","BiauKai","Noto Serif TC",serif;font-size:19px;letter-spacing:.08em;color:#fff8e7;white-space:nowrap}
+.earth15-topbar-copy span{font-size:11px;color:var(--chalk-muted);white-space:nowrap}
+.earth15-save-state{font-size:10px;color:#d3ded7;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.12);border-radius:999px;padding:4px 8px;white-space:nowrap}
+
+.earth15-chapters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:0 3px 10px}
+.earth15-chapters button{appearance:none;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(0,0,0,.14);color:#dce6df;padding:7px 7px;cursor:pointer;text-align:left;min-width:0;display:flex;align-items:center;gap:7px;transition:background .14s ease,border-color .14s ease,transform .14s ease}
+.earth15-chapters button:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
+.earth15-chapters button.active{border-color:rgba(255,255,255,.58);background:rgba(255,255,255,.11);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.earth15-chapters button b{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border:1.5px solid currentColor;border-radius:50%;font-family:"DFKai-SB","BiauKai",serif;font-size:14px}
+.earth15-chapters button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px;font-weight:800}
+
+.earth15-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 3px 10px;padding:8px 9px;border-radius:11px;background:rgba(7,24,20,.58);border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.earth15-toolgroup{display:flex;align-items:center;gap:5px;padding-right:7px;margin-right:2px;border-right:1px solid rgba(255,255,255,.12)}
+.earth15-toolgroup:last-child{border-right:0;padding-right:0;margin-right:0}
+.earth15-tool{appearance:none;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.035);color:#e7eee9;border-radius:8px;min-height:33px;padding:6px 9px;font:800 11px/1 "Noto Sans TC","PingFang TC",sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.earth15-tool:hover{background:rgba(255,255,255,.08)}
+.earth15-tool.active{background:#f2ecdc;color:#183a31;border-color:#f2ecdc;box-shadow:0 0 0 2px rgba(255,255,255,.10)}
+.earth15-tool svg{width:15px;height:15px;display:block}
+.earth15-tool.danger{color:#f1c0b7}
+.earth15-tool.danger.armed{background:#9d3f35;color:#fff;border-color:#bd7065}
+.earth15-color{appearance:none;width:27px;height:27px;border-radius:50%;border:2px solid rgba(255,255,255,.34);padding:0;cursor:pointer;box-shadow:inset 0 0 0 3px rgba(0,0,0,.13)}
+.earth15-color.active{outline:2px solid #fff;outline-offset:2px}
+.earth15-size{width:82px;accent-color:#efe9da}
+.earth15-size-label{font-size:10px;color:#b9c6bf;white-space:nowrap}
+.earth15-finger{display:none}
+@media(pointer:coarse){.earth15-finger{display:inline-flex}}
+
+.earth15-stage{position:relative;overflow:auto;overscroll-behavior:contain;padding:7px 5px 13px;border-radius:10px;background:rgba(4,19,15,.32);box-shadow:inset 0 0 18px rgba(0,0,0,.20);scrollbar-color:#80664e #102d26}
+.earth15-sheet{
+  width:min(900px,100%);
+  min-width:680px;
+  aspect-ratio:900/1272;
+  position:relative;
+  margin:0 auto;
+  background:#f8f5ed;
+  border-radius:3px;
+  overflow:hidden;
+  box-shadow:0 7px 24px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.16);
+  user-select:none;
+  -webkit-user-select:none;
+}
+.earth15-sheet img.earth15-strip{position:absolute;left:0;width:100%;height:600%;max-width:none;display:block;object-fit:fill;pointer-events:none;-webkit-user-drag:none}
+.earth15-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;cursor:crosshair;touch-action:pan-x pan-y}
+.earth15-sheet[data-tool="eraser"] .earth15-canvas{cursor:cell}
+.earth15-sheet[data-tool="hand"] .earth15-canvas,.earth15-sheet[data-tool="type"] .earth15-canvas{pointer-events:none}
+.earth15-sheet.finger-ink .earth15-canvas{touch-action:none}
+.earth15-type-layer{position:absolute;inset:0;z-index:4;pointer-events:none}
+.earth15-sheet[data-tool="type"] .earth15-type-layer{pointer-events:auto;cursor:text}
+.earth15-type-item{position:absolute;display:flex;align-items:center;gap:2px;transform:translateY(-50%);pointer-events:auto}
+.earth15-type-item input{width:190px;max-width:260px;border:0;border-bottom:1.5px solid rgba(28,52,87,.52);outline:0;background:rgba(255,255,255,.16);color:#17375f;padding:1px 3px 2px;border-radius:2px;font-family:"DFKai-SB","BiauKai","Noto Serif TC",serif;font-weight:700;line-height:1.15;box-shadow:none}
+.earth15-type-item input:focus{background:rgba(255,249,218,.78);border-bottom-color:#17375f;box-shadow:0 0 0 2px rgba(255,249,218,.55)}
+.earth15-type-controls{display:flex;opacity:0;transition:opacity .12s ease;gap:2px}
+.earth15-type-item:hover .earth15-type-controls,.earth15-type-item:focus-within .earth15-type-controls{opacity:1}
+.earth15-type-controls button{appearance:none;border:0;border-radius:50%;width:20px;height:20px;padding:0;display:grid;place-items:center;background:rgba(21,44,70,.82);color:white;font-size:11px;cursor:pointer}
+.earth15-type-controls .drag{cursor:grab}
+.earth15-type-controls .drag:active{cursor:grabbing}
+
+.earth15-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:10px 0 0;color:#cbd7d0;font-size:10.5px;text-align:center;flex-wrap:wrap}
+.earth15-hint kbd{font:800 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:#173b31;background:#eee7d8;border-radius:5px;padding:3px 6px;box-shadow:inset 0 -1px 0 #c9bfad}
+.earth15-loading{min-height:560px;display:grid;place-items:center;color:#e9efe9;font-size:13px}
+
+@media(max-width:980px){
+  .earth15-board{border-width:7px;border-radius:14px;padding:10px 9px 13px}
+  .earth15-chapters{grid-template-columns:repeat(3,1fr)}
+  .earth15-stage{padding:5px 3px 10px}
+}
+@media(max-width:720px){
+  .earth15-page-head{display:none}
+  .earth15-board{margin:0 -4px 20px;border-left-width:4px;border-right-width:4px;border-radius:10px}
+  .earth15-topbar-copy span{display:none}
+  .earth15-chapters{grid-template-columns:repeat(2,1fr)}
+  .earth15-chapters button{padding:6px}
+  .earth15-toolbar{position:sticky;left:0;z-index:8;width:max-content;min-width:100%;padding:7px 7px}
+  .earth15-sheet{width:720px;min-width:720px;margin-left:0}
+  .earth15-tool{padding:6px 8px}
+  .earth15-size{width:62px}
+}
+@media(prefers-reduced-motion:reduce){.earth15-chapters button,.earth15-type-controls{transition:none}}
