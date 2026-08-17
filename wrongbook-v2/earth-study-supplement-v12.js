@@ -67,10 +67,9 @@
     const marker='<div class="earth-study-supplement-grid">';
     const start=html.indexOf(marker);
     if(start<0)return html+card;
-    const sectionEnd=html.indexOf('</section>',start);
-    if(sectionEnd<0)return html+card;
-    const gridEnd=html.lastIndexOf('</div>',sectionEnd);
-    if(gridEnd<0)return html+card;
+    const close='</div>\n  </section>';
+    const gridEnd=html.lastIndexOf(close);
+    if(gridEnd<start)return html+card;
     return html.slice(0,gridEnd)+card+html.slice(gridEnd);
   };
 
