@@ -1,6 +1,6 @@
 // Wrong Book V8 — keep the expanded AI tutor out of the problem prompt's visual space.
 (function(){
-  const VERSION='2026-08-17-tutor-nonoverlap-v8-v12b';
+  const VERSION='2026-08-17-tutor-nonoverlap-v8-v12f';
   if(window.__wrongbookTutorNonOverlapV8===VERSION)return;
   window.__wrongbookTutorNonOverlapV8=VERSION;
 
@@ -26,10 +26,9 @@
 
     if(document.getElementById('tutorCollapseUpV12')){
       if(typeof window.runWrongbookTutorCollapseDirectionQA!=='function')return{pass:false,reason:'waiting-v12',version:VERSION};
-      const up=window.runWrongbookTutorCollapseDirectionQA();
-      if(up?.reason)return{pass:false,reason:up.reason,version:VERSION,upward:up};
-      const pass=Boolean(up.bottomAnchored&&up.growsUpward&&up.noPromptOverlap&&up.noToolbarOverlap&&up.geometryOwned);
-      return{pass,version:VERSION,mode:'upward-v12',...up};
+      const safe=window.runWrongbookTutorCollapseDirectionQA();
+      if(safe?.reason)return{pass:false,reason:safe.reason,version:VERSION,safePlacement:safe};
+      return{pass:Boolean(safe.pass),version:VERSION,mode:'safe-placement-v12f',...safe};
     }
 
     const wasCollapsed=dock.classList.contains('v6-tutor-collapsed');dock.classList.remove('v6-tutor-collapsed');syncDock(dock);
@@ -58,12 +57,12 @@
   const css=document.createElement('link');css.id='paperOverlayV9Css';css.rel='stylesheet';css.href='./paper-overlay-v9.css?wb=20260817-3';css.onload=css.onerror=loadJs;document.head.appendChild(css);
 })();
 
-// V12 owns actual geometry: same bottom edge, top moves upward, prompt remains a hard ceiling.
+// V12f owns the actual safe placement around prompt content and student ink.
 (function loadWrongbookTutorCollapseUpV12(){
   if(document.getElementById('tutorCollapseUpV12'))return;
   const js=document.createElement('script');
   js.id='tutorCollapseUpV12';
-  js.src='./tutor-collapse-up-v12.js?wb=20260817-2';
+  js.src='./tutor-collapse-up-v12.js?wb=20260817-3';
   js.async=false;
   document.head.appendChild(js);
 })();
