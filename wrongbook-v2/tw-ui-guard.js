@@ -109,3 +109,36 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  flow.onerror=()=>{flowReady=true;maybeReady()};
  document.head.appendChild(flow);
 })();
+
+// V8 owns three production guarantees: an expanded tutor never covers the prompt, conceptual
+// diagrams can be rendered inside tutor steps, and review sessions always include scratch paper.
+// Keep the boot cloak up until all six V8 assets have loaded to avoid another first-paint UI swap.
+(function(){
+ const oldFinish=window.__wrongbookFinishBoot;
+ const ready={nonOverlapCss:false,nonOverlapJs:false,diagramCss:false,diagramJs:false,reviewCss:false,reviewJs:false};
+ let pendingFinish=false;
+ const allReady=()=>Object.values(ready).every(Boolean);
+ const maybeReady=()=>{
+  if(!allReady())return;
+  window.__wrongbookTutorV8Ready=true;
+  if(pendingFinish)oldFinish?.();
+ };
+ window.__wrongbookFinishBoot=function(){
+  if(window.__wrongbookTutorV8Ready)return oldFinish?.();
+  pendingFinish=true;
+ };
+ function css(id,href,key){
+  const link=document.createElement('link');link.id=id;link.rel='stylesheet';link.href=href;
+  link.onload=link.onerror=()=>{ready[key]=true;maybeReady()};document.head.appendChild(link);
+ }
+ function js(id,src,key){
+  const script=document.createElement('script');script.id=id;script.src=src;script.async=false;
+  script.onload=script.onerror=()=>{ready[key]=true;maybeReady()};document.head.appendChild(script);
+ }
+ css('tutorNonOverlapV8Css','./tutor-nonoverlap-v8.css?wb=20260817-1','nonOverlapCss');
+ js('tutorNonOverlapV8','./tutor-nonoverlap-v8.js?wb=20260817-1','nonOverlapJs');
+ css('tutorDiagramV8Css','./tutor-diagram-v8.css?wb=20260817-1','diagramCss');
+ js('tutorDiagramV8','./tutor-diagram-v8.js?wb=20260817-1','diagramJs');
+ css('reviewWritingSheetV8Css','./review-writing-sheet-v8.css?wb=20260817-1','reviewCss');
+ js('reviewWritingSheetV8','./review-writing-sheet-v8.js?wb=20260817-1','reviewJs');
+})();
