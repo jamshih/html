@@ -1,0 +1,24 @@
+{
+  "name": "wrongbook-ios",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "web:stage": "node scripts/stage-web.mjs",
+    "ios:prepare:testflight": "bash scripts/prepare-testflight.sh",
+    "ios:sync": "node scripts/write-capacitor-config.mjs && swift scripts/render-icon.swift assets/app-icon-1024.png && npm run web:stage && npx cap sync ios && bash scripts/configure-ios.sh && bash scripts/generate-icons.sh",
+    "ios:open": "npx cap open ios",
+    "ios:verify": "bash scripts/verify-release.sh",
+    "ios:archive": "bash scripts/archive.sh"
+  },
+  "dependencies": {
+    "@capacitor/core": "8.4.2",
+    "@capacitor/ios": "8.4.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.4.2"
+  }
+}
