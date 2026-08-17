@@ -77,19 +77,19 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
 })();
 
 // The tutor is a dialogue, not a handwriting-only tool. Load the compact collapsible dialogue
-// presentation and its neutral answer/AI-mark wording as an independent, cache-busted layer.
+// presentation and its neutral answer/AI-hint wording as an independent, cache-busted layer.
 (function(){
  if(!document.getElementById('tutorDialogUiV5Css')){
   const link=document.createElement('link');
   link.id='tutorDialogUiV5Css';
   link.rel='stylesheet';
-  link.href='./tutor-dialog-ui-v5.css?wb=20260817-1';
+  link.href='./tutor-dialog-ui-v5.css?wb=20260817-2';
   document.head.appendChild(link);
  }
  if(document.getElementById('tutorDialogUiV5'))return;
  const script=document.createElement('script');
  script.id='tutorDialogUiV5';
- script.src='./tutor-dialog-ui-v5.js?wb=20260817-1';
+ script.src='./tutor-dialog-ui-v5.js?wb=20260817-2';
  script.defer=true;
  document.head.appendChild(script);
 })();
