@@ -47,10 +47,12 @@ jobs:
           test -s /tmp/earth-cluster-qa/source-trace-e2e.json
           test -s /tmp/earth-cluster-qa/source-refinement-e2e.json
       - name: Upload Earth cluster QA artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: wrongbook-earth-cluster-qa
-          if-no-files-found: error
+          if-no-files-found: warn
           path: |
             /tmp/earth-cluster-qa/*.png
             /tmp/earth-cluster-qa/*.json
+            /tmp/earth-cluster-qa/*.txt
