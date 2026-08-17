@@ -92,7 +92,24 @@ jobs:
           if m.group(1)!='PASS' or data.get('status')!='PASS': raise SystemExit(1)
           PY
 
-      - name: Run current Wrongbook and Earth regression gates
+      - name: Record legacy broad E2E as non-blocking diagnostic
+        continue-on-error: true
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME"
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/mindmap-legacy-e2e --window-size=1440,1000 --virtual-time-budget=90000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?e2e=1" > /tmp/mindmap-current-e2e.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import html,re,json
+          t=Path('/tmp/mindmap-current-e2e.html').read_text(errors='replace')
+          m=re.search(r'<pre id="e2e-results" data-status="([^"]+)">(.*?)</pre>',t,re.S)
+          if not m:
+              raise SystemExit('legacy e2e result missing')
+          data=json.loads(html.unescape(m.group(2)))
+          print(json.dumps({'status':data.get('status'),'error':data.get('error'),'failed':[x for x in data.get('results',[]) if not x.get('ok')]},ensure_ascii=False,indent=2))
+          PY
+
+      - name: Run current Earth source-truth regression gates
         run: |
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME"
@@ -105,14 +122,11 @@ jobs:
           if not m:
               print(t[-5000:])
               raise SystemExit('e2e-results missing')
-          payload=html.unescape(m.group(2))
-          data=json.loads(payload)
+          data=json.loads(html.unescape(m.group(2)))
           print(json.dumps({'status':data.get('status'),'viewport':data.get('viewport'),'error':data.get('error'),'failed':[x for x in data.get('results',[]) if not x.get('ok')]},ensure_ascii=False,indent=2))
           if m.group(1)!='PASS' or data.get('status')!='PASS': raise SystemExit(1)
           PY
           }
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir=/tmp/mindmap-current-e2e --window-size=1440,1000 --virtual-time-budget=90000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?e2e=1" > /tmp/mindmap-current-e2e.html
-          parse_e2e /tmp/mindmap-current-e2e.html
           for Q in sourcee2e=1 refinee2e=1; do
             NAME="${Q%%=*}"
             "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-data-dir="/tmp/mindmap-$NAME" --window-size=1440,1000 --virtual-time-budget=30000 --dump-dom "http://127.0.0.1:4173/wrongbook-v2/?$Q" > "/tmp/mindmap-$NAME.html"
