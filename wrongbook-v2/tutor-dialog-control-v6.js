@@ -2,7 +2,7 @@
 // This is loaded directly after all paper-first/runtime compatibility layers so no legacy
 // collapse UI can win the final render. It also neutralizes handwriting-only wording.
 (function(){
-  const VERSION='2026-08-17-tutor-dialog-control-v6';
+  const VERSION='2026-08-17-tutor-dialog-control-v6-theme1';
   if(window.__wrongbookTutorDialogControlV6===VERSION)return;
   window.__wrongbookTutorDialogControlV6=VERSION;
 
@@ -168,4 +168,54 @@
     const dock=document.querySelector('.v5-tutor-dock');
     return{version:VERSION,problemId:dock?.dataset.v6ProblemId||currentProblemId(),collapsed:Boolean(dock?.classList.contains('v6-tutor-collapsed')),buttonCount:document.querySelectorAll('.v6-tutor-collapse-button').length,legacyBarCount:document.querySelectorAll('.v5-dialog-collapse-bar').length};
   };
+
+  function rgbBrightness(value=''){
+    const nums=String(value).match(/[\d.]+/g)?.slice(0,3).map(Number)||[];
+    return nums.length===3?(nums[0]*.2126+nums[1]*.7152+nums[2]*.0722):NaN;
+  }
+  window.runWrongbookTutorCollapseQA=function(){
+    apply();
+    const dock=document.querySelector('.v5-tutor-dock');
+    const button=dock?.querySelector(':scope > .v6-tutor-collapse-bar .v6-tutor-collapse-button');
+    if(!dock||!button)return{pass:false,reason:'tutor-not-mounted'};
+
+    const root=document.documentElement;
+    const hadTheme=root.hasAttribute('data-theme');
+    const oldTheme=root.getAttribute('data-theme');
+    const sample=theme=>{
+      root.setAttribute('data-theme',theme);
+      const s=getComputedStyle(button);
+      return{width:parseFloat(s.width),height:parseFloat(s.height),background:s.backgroundColor,color:s.color,border:s.borderColor};
+    };
+    const light=sample('light');
+    const dark=sample('dark');
+    if(hadTheme)root.setAttribute('data-theme',oldTheme||'');else root.removeAttribute('data-theme');
+
+    const wasCollapsed=dock.classList.contains('v6-tutor-collapsed');
+    applyCollapsedState(dock,true,{persist:false});
+    const collapsedChildren=[...dock.children].filter(el=>!el.classList.contains('v6-tutor-collapse-bar'));
+    const contentHidden=collapsedChildren.every(el=>getComputedStyle(el).display==='none');
+    applyCollapsedState(dock,wasCollapsed,{persist:false});
+
+    const mobile=matchMedia('(max-width:700px)').matches;
+    const expectedSize=mobile?36:30;
+    const buttonCount=document.querySelectorAll('.v6-tutor-collapse-button').length;
+    const legacyBarCount=document.querySelectorAll('.v5-dialog-collapse-bar').length;
+    const lightIsLight=rgbBrightness(light.background)>180;
+    const darkIsDark=rgbBrightness(dark.background)<90;
+    const sizeOk=Math.abs(light.width-expectedSize)<.6&&Math.abs(light.height-expectedSize)<.6&&Math.abs(dark.width-expectedSize)<.6&&Math.abs(dark.height-expectedSize)<.6;
+    const pass=buttonCount===1&&legacyBarCount===0&&contentHidden&&sizeOk&&lightIsLight&&darkIsDark&&light.background!==dark.background;
+    return{pass,version:VERSION,mobile,expectedSize,buttonCount,legacyBarCount,contentHidden,sizeOk,lightIsLight,darkIsDark,light,dark};
+  };
+
+  function scheduleRuntimeQA(tries=0){
+    requestAnimationFrame(()=>{
+      const result=window.runWrongbookTutorCollapseQA?.();
+      if(result?.reason==='tutor-not-mounted'&&tries<20)return setTimeout(()=>scheduleRuntimeQA(tries+1),150);
+      window.__wrongbookTutorDialogV6QA=result;
+      if(result&&!result.pass)console.warn('[Wrongbook tutor collapse QA failed]',result);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>scheduleRuntimeQA(),{once:true});
+  else scheduleRuntimeQA();
 })();
