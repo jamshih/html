@@ -1,0 +1,85 @@
+/* Wrong Book V8 — real scratch sheet for review sessions. */
+.v8-review-sheet{
+  margin:18px 0 12px;
+  border:1px solid #DEDCD4;
+  border-radius:8px;
+  background:#FFFDF8;
+  overflow:hidden;
+}
+.v8-review-sheet-head{
+  min-height:38px;
+  padding:7px 9px 7px 12px;
+  border-bottom:1px solid #E7E4DC;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.v8-review-sheet-title{min-width:0}
+.v8-review-sheet-title strong{display:block;font-size:11px;line-height:1.25;color:#3F423D}
+.v8-review-sheet-title span{display:block;margin-top:2px;color:#8A8D86;font-size:8px;line-height:1.25}
+.v8-review-sheet-tools{display:flex;align-items:center;gap:3px;flex:0 0 auto}
+.v8-review-sheet-tools button{
+  appearance:none;
+  min-width:31px;
+  height:31px;
+  padding:0 7px;
+  border:1px solid transparent;
+  border-radius:6px;
+  background:transparent;
+  color:#676A64;
+  display:grid;
+  place-items:center;
+  font:inherit;
+  font-size:12px;
+  line-height:1;
+  cursor:pointer;
+}
+.v8-review-sheet-tools button:hover{background:#F1F1ED}
+.v8-review-sheet-tools button.is-active{background:#E8EEE7;color:#3F6A44;border-color:#DCE6DA}
+.v8-review-sheet-tools button[data-v8-review-tool="clear"]{font-size:9px;min-width:38px}
+.v8-review-paper{
+  position:relative;
+  min-height:250px;
+  background:
+    linear-gradient(#EDEBE4 1px,transparent 1px) 0 35px/100% 35px,
+    linear-gradient(90deg,rgba(185,98,89,.13) 1px,transparent 1px) 44px 0/100% 100%,
+    #FFFDF8;
+  touch-action:none;
+  overflow:hidden;
+}
+.v8-review-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.v8-review-sheet-hint{position:absolute;left:57px;top:13px;color:#B0B0AA;font-size:9px;pointer-events:none;user-select:none;transition:opacity .12s ease}
+.v8-review-sheet.has-ink .v8-review-sheet-hint{opacity:0}
+
+html[data-theme="dark"] .v8-review-sheet,body[data-theme="dark"] .v8-review-sheet,
+html.dark .v8-review-sheet,body.dark .v8-review-sheet,
+html.theme-dark .v8-review-sheet,body.theme-dark .v8-review-sheet{
+  border-color:#41443F;background:#222421;
+}
+html[data-theme="dark"] .v8-review-sheet-head,body[data-theme="dark"] .v8-review-sheet-head,
+html.dark .v8-review-sheet-head,body.dark .v8-review-sheet-head{border-color:#3A3D38}
+html[data-theme="dark"] .v8-review-sheet-title strong,body[data-theme="dark"] .v8-review-sheet-title strong,
+html.dark .v8-review-sheet-title strong,body.dark .v8-review-sheet-title strong{color:#ECEDE9}
+html[data-theme="dark"] .v8-review-paper,body[data-theme="dark"] .v8-review-paper,
+html.dark .v8-review-paper,body.dark .v8-review-paper{
+  background:linear-gradient(#343733 1px,transparent 1px) 0 35px/100% 35px,linear-gradient(90deg,rgba(185,98,89,.20) 1px,transparent 1px) 44px 0/100% 100%,#242623;
+}
+html[data-theme="dark"] .v8-review-sheet-tools button,body[data-theme="dark"] .v8-review-sheet-tools button,
+html.dark .v8-review-sheet-tools button,body.dark .v8-review-sheet-tools button{color:#C7CAC4}
+html[data-theme="dark"] .v8-review-sheet-tools button:hover,body[data-theme="dark"] .v8-review-sheet-tools button:hover,
+html.dark .v8-review-sheet-tools button:hover,body.dark .v8-review-sheet-tools button:hover{background:#30332F}
+html[data-theme="dark"] .v8-review-sheet-tools button.is-active,body[data-theme="dark"] .v8-review-sheet-tools button.is-active,
+html.dark .v8-review-sheet-tools button.is-active,body.dark .v8-review-sheet-tools button.is-active{background:#2F3B30;color:#BBD0BC;border-color:#405142}
+
+@media(max-width:860px){
+  .v8-review-sheet{margin:15px 0 11px}
+  .v8-review-paper{min-height:230px}
+  .v8-review-sheet-head{padding-left:9px}
+  .v8-review-sheet-tools button{min-width:34px;height:34px}
+}
+@media(max-width:430px){
+  .v8-review-paper{min-height:210px;background-position:0 31px,38px 0;background-size:100% 31px,100% 100%}
+  .v8-review-sheet-title span{display:none}
+  .v8-review-sheet-hint{left:49px}
+}
