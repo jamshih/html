@@ -25,6 +25,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Install Traditional Chinese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
       - name: JavaScript syntax
         run: |
           node --check wrongbook-v2/chemistry-reference-v1.js
