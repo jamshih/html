@@ -14,14 +14,3 @@ if(typeof esc==='function'&&typeof twTaiwanizeString==='function'){
  link.href='./paper-first-visual-fix-20260817.css?v=20260817-1';
  document.head.appendChild(link);
 })();
-
-// Load the tutor vision bridge early; the bridge waits for the tutor runtime and
-// then wraps the final functions, so it is safe even though this file loads first.
-(function(){
- if(document.getElementById('tutorVisionAccuracyV5'))return;
- const script=document.createElement('script');
- script.id='tutorVisionAccuracyV5';
- script.src='./tutor-vision-accuracy-v5.js?build=20260817-2';
- script.async=true;
- document.head.appendChild(script);
-})();
