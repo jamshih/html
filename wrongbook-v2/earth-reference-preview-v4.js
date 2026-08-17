@@ -1,11 +1,17 @@
-/* Earth mind-map entrypoint.
-   The old p242–253 reconstruction files remain available for historical QA, but
-   production Earth 心智圖 is now owned by earth-mindmap-reference-v11.*.
-   This loader is intentionally binder-free: the V11 modules only replace
-   mindmapPage for subject=earth and reuse the app's existing bind()/state flow. */
+/* Legacy Earth V11 preview loader.
+   Production Earth 心智圖 is owned by earth-png-board-v15.* (loaded by
+   earth-study-supplement-v13.js). The older V11 renderer is intentionally
+   available only behind an explicit QA/preview query so it can never race
+   with or replace the production illustrated renderer. */
 (function(){
-  const VERSION='20260817-2';
+  const VERSION='20260817-17';
   const qs=new URLSearchParams(location.search);
+  const wantsLegacyPreview=qs.has('refpreview')||qs.get('earthrenderer')==='v11';
+
+  // Critical production guard: V11 directly overrides mindmapPage(). Loading
+  // it during normal app startup can steal Earth from the approved-asset V15
+  // renderer depending on network timing. Keep it QA-only.
+  if(!wantsLegacyPreview)return;
 
   if(!document.querySelector('link[data-earth-mindmap-v11]')){
     const link=document.createElement('link');
@@ -17,7 +23,7 @@
 
   const afterLoad=()=>{
     const api=window.EARTH_REFERENCE_MINDMAP_V11;
-    if(qs.has('refpreview')&&api?.pages?.length){
+    if(api?.pages?.length){
       const requested=Math.max(1,Math.min(api.pages.length,Number(qs.get('chapter')||1)));
       state.page='mindmap';
       state.subject='earth';
@@ -25,11 +31,7 @@
       try{save()}catch{}
       try{render()}catch{}
       document.body.classList.add('earth-ref-v11-preview');
-      return;
     }
-    try{
-      if(state.page==='mindmap'&&activeSubject?.()?.id==='earth')render();
-    }catch{}
   };
 
   const loadEclipse=()=>{
