@@ -21,7 +21,7 @@ const saferTitles={
  'micelle':'去污聚集結構','polymer-chain':'聚合前後結構','acid-rain':'大氣污染成酸機制',
  'partial-pressure':'混合氣體壓力','orbital-shapes':'電子機率雲形狀','salt-hydrolysis':'鹽類與水反應',
  'indicator-range':'變色範圍','isomer':'相同分子式，不同連接','solubility-curve':'溫度－最大溶解量關係',
- 'activation-basic':'反應能障比較','activation-advanced':'反應能障與途徑'
+ 'activation-basic':'反應能障比較','activation-advanced':'反應能障與途徑','redox-titration':'滴定定量分析'
 };
 Object.entries(saferTitles).forEach(([id,title])=>{if(figs[id])figs[id].title=title});
 function addFig(pageId,clusterId,id,purpose){const p=CHEMISTRY_REFERENCE_PAGES[pageId];if(!p)return;const c=p.clusters.find(x=>x.id===clusterId);if(c&&!c.figures.includes(id))c.figures.push(id);if(!p.figures.some(x=>x.id===id))p.figures.push({id,purpose})}
