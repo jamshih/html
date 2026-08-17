@@ -29,6 +29,7 @@ jobs:
         run: |
           for f in wrongbook-v2/*.js; do node --check "$f"; done
           node --check wrongbook-v2/earth-cluster-qa-v9.mjs
+          node --check wrongbook-v2/earth-cluster-geometry-gate-v9.mjs
       - name: Capture canonical, source-gate, and mobile Earth QA
         env:
           EARTH_QA_OUT: /tmp/earth-cluster-qa
@@ -40,12 +41,14 @@ jobs:
           export CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
           test -n "$CHROME_BIN"
           node wrongbook-v2/earth-cluster-qa-v9.mjs
+          node wrongbook-v2/earth-cluster-geometry-gate-v9.mjs
           test "$(find /tmp/earth-cluster-qa -name 'p*-recall-current.png' | wc -l)" -eq 12
           test "$(find /tmp/earth-cluster-qa -name 'p*-learn-current.png' | wc -l)" -eq 12
           test "$(find /tmp/earth-cluster-qa -name 'mobile-ch*-recall.png' | wc -l)" -eq 6
           test "$(find /tmp/earth-cluster-qa -name 'mobile-ch*-learn.png' | wc -l)" -eq 6
           test -s /tmp/earth-cluster-qa/source-trace-e2e.json
           test -s /tmp/earth-cluster-qa/source-refinement-e2e.json
+          test -s /tmp/earth-cluster-qa/geometry-gate.json
       - name: Upload Earth cluster QA artifacts
         if: always()
         uses: actions/upload-artifact@v4
