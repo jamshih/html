@@ -2,11 +2,12 @@
 // The tutor is a dialogue surface. Visible copy should talk about answers, progress and AI marks,
 // not imply that the interaction itself is a handwriting-only workflow.
 (function(){
-  const VERSION='2026-08-17-tutor-dialog-ui-v5';
+  const VERSION='2026-08-17-tutor-dialog-ui-v5b';
   if(window.__wrongbookTutorDialogUI===VERSION)return;
   window.__wrongbookTutorDialogUI=VERSION;
 
   const copyRules=[
+    ['直接在原題上寫；寫好後按「我寫好了，幫我看」','完成你的回答後，按「我答好了，幫我看」'],
     ['AI 正在看你的題目與筆跡…','AI 正在看你的題目與作答…'],
     ['AI 筆跡會直接畫在原題上','AI 提示會顯示在題目上'],
     ['AI 讀得到你的筆跡','AI 會參考你的作答'],
@@ -28,24 +29,37 @@
     for(const [from,to] of copyRules)text=text.split(from).join(to);
     return text;
   }
+  function normalizeDeep(value){
+    if(typeof value==='string')return normalizeText(value);
+    if(Array.isArray(value))return value.map(normalizeDeep);
+    if(value&&typeof value==='object'){
+      const out={};for(const [k,v] of Object.entries(value))out[k]=normalizeDeep(v);return out;
+    }
+    return value;
+  }
 
-  // Keep AI-facing wording neutral too so responses do not echo handwriting-only terminology.
-  if(typeof window.v3GuideApi==='function'&&!window.__wrongbookTutorDialogApiWrapped){
+  function installApiWrapper(){
+    if(window.__wrongbookTutorDialogApiWrapped)return true;
+    if(typeof window.v3GuideApi!=='function')return false;
     window.__wrongbookTutorDialogApiWrapped=true;
     const baseApi=window.v3GuideApi;
-    const normalizeDeep=value=>{
-      if(typeof value==='string')return normalizeText(value);
-      if(Array.isArray(value))return value.map(normalizeDeep);
-      if(value&&typeof value==='object'){
-        const out={};for(const [k,v] of Object.entries(value))out[k]=normalizeDeep(v);return out;
-      }
-      return value;
-    };
     window.v3GuideApi=async function(body){
       const res=await baseApi.call(this,normalizeDeep(body));
       return normalizeDeep(res);
     };
     try{v3GuideApi=window.v3GuideApi}catch{}
+    return true;
+  }
+  if(!installApiWrapper()){
+    let tries=0;const timer=setInterval(()=>{tries++;if(installApiWrapper()||tries>80)clearInterval(timer)},100);
+  }
+
+  // Toasts live outside #app, so normalize them at the source as well.
+  if(typeof window.toast==='function'&&!window.__wrongbookTutorDialogToastWrapped){
+    window.__wrongbookTutorDialogToastWrapped=true;
+    const baseToast=window.toast;
+    window.toast=function(message){return baseToast.call(this,normalizeText(message))};
+    try{toast=window.toast}catch{}
   }
 
   function selectedId(){
