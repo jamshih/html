@@ -100,3 +100,12 @@
   try{render()}catch{}
   finishAfterScriptChain();
 })();
+
+// Branch QA loader: inert in normal product use. The dedicated cross-subject
+// mind-map gate is loaded only when its explicit query flag is present.
+if(new URLSearchParams(location.search).get('mindmapskillqa')==='1'){
+  const script=document.createElement('script');
+  script.src='./mindmap-skill-qa-v1.js';
+  script.dataset.mindmapSkillQaLoader='1';
+  document.head.appendChild(script);
+}
