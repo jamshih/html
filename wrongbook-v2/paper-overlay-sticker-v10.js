@@ -1,6 +1,6 @@
 // Wrong Book V10 — make worksheet AI diagrams draggable, persistent stickers.
 (function(){
-  const VERSION='2026-08-17-paper-overlay-sticker-v10b';
+  const VERSION='2026-08-17-paper-overlay-sticker-v10c';
   if(window.__wrongbookPaperOverlayStickerV10===VERSION)return;
   window.__wrongbookPaperOverlayStickerV10=VERSION;
 
@@ -32,16 +32,16 @@
       opacity:.72;
     }
     .v9-sheet-ai-card:hover{box-shadow:0 11px 32px rgba(39,48,39,.13)!important}
-    .v9-sheet-ai-card.v10-sticker-dragging{
+    .v9-sheet-ai-card[data-v10-dragging='1']{
       cursor:grabbing!important;
       box-shadow:0 16px 38px rgba(39,48,39,.18)!important;
       transform:scale(1.008);
     }
     .v9-sheet-ai-card .v8-ai-diagram-head{padding-right:31px!important}
-    html[data-theme='dark'] .v9-sheet-ai-card.v10-sticker-dragging,
-    body[data-theme='dark'] .v9-sheet-ai-card.v10-sticker-dragging,
-    html.dark .v9-sheet-ai-card.v10-sticker-dragging,
-    body.dark .v9-sheet-ai-card.v10-sticker-dragging{box-shadow:0 16px 38px rgba(0,0,0,.34)!important}
+    html[data-theme='dark'] .v9-sheet-ai-card[data-v10-dragging='1'],
+    body[data-theme='dark'] .v9-sheet-ai-card[data-v10-dragging='1'],
+    html.dark .v9-sheet-ai-card[data-v10-dragging='1'],
+    body.dark .v9-sheet-ai-card[data-v10-dragging='1']{box-shadow:0 16px 38px rgba(0,0,0,.34)!important}
   `;
   document.head.appendChild(style);
 
@@ -71,7 +71,7 @@
   }
   function queueRestore(){
     if(restoreQueued)return;restoreQueued=true;
-    requestAnimationFrame(()=>{restoreQueued=false;const el=card(),host=layer();if(el&&host&&el.dataset.v10UserPositioned==='1'&&!el.classList.contains('v10-sticker-dragging'))restore(el,host)})
+    requestAnimationFrame(()=>{restoreQueued=false;const el=card(),host=layer();if(el&&host&&el.dataset.v10UserPositioned==='1'&&el.dataset.v10Dragging!=='1')restore(el,host)})
   }
 
   function bind(el){
@@ -86,7 +86,7 @@
       if(e.target.closest('button,a,input,textarea,select'))return;
       const r=el.getBoundingClientRect(),hr=host.getBoundingClientRect();
       drag={id:e.pointerId,startX:e.clientX,startY:e.clientY,left:r.left-hr.left,top:r.top-hr.top,moved:false};
-      el.classList.add('v10-sticker-dragging');
+      el.dataset.v10Dragging='1';
       try{el.setPointerCapture(e.pointerId)}catch{}
       e.preventDefault();e.stopPropagation();
     },true);
@@ -100,7 +100,7 @@
     const finish=e=>{
       if(!drag||drag.id!==e.pointerId)return;
       try{el.releasePointerCapture(e.pointerId)}catch{}
-      const moved=drag.moved;drag=null;el.classList.remove('v10-sticker-dragging');if(moved)persist(el,host);
+      const moved=drag.moved;drag=null;delete el.dataset.v10Dragging;if(moved)persist(el,host);
       e.preventDefault();e.stopPropagation();
     };
     el.addEventListener('pointerup',finish,true);el.addEventListener('pointercancel',finish,true);
@@ -115,7 +115,7 @@
         let needsBind=false,needsRestore=false;
         for(const r of records){
           if(r.type==='childList')needsBind=true;
-          if(r.type==='attributes'&&r.target?.classList?.contains('v9-sheet-ai-card')&&r.attributeName==='style'&&r.target.dataset.v10UserPositioned==='1'&&!r.target.classList.contains('v10-sticker-dragging'))needsRestore=true;
+          if(r.type==='attributes'&&r.target?.classList?.contains('v9-sheet-ai-card')&&r.attributeName==='style'&&r.target.dataset.v10UserPositioned==='1'&&r.target.dataset.v10Dragging!=='1')needsRestore=true;
         }
         if(needsBind)requestAnimationFrame(apply);
         if(needsRestore)queueRestore();
@@ -134,12 +134,13 @@
     const clampFixture=clampPosition(-15,999,320,240),clampOk=clampFixture.left===0&&clampFixture.top===240;
     const pointerEnabled=cs.pointerEvents==='auto'&&cs.touchAction==='none';
     const bound=el.dataset.v10StickerBound==='1';
+    const classMutationFree=!el.classList.contains('v10-sticker-dragging');
     const layerAboveInk=!ds||Number(hs.zIndex)>Number(ds.zIndex);
     const layerBelowToolbar=!ts||!Number.isFinite(Number(ts.zIndex))||Number(hs.zIndex)<Number(ts.zIndex);
     let storageOk=false;try{const k=`${STORE_KEY}-qa`,v={x:.4,y:.6};localStorage.setItem(k,JSON.stringify(v));storageOk=JSON.parse(localStorage.getItem(k)||'{}').x===.4;localStorage.removeItem(k)}catch{}
     const persistentOverride=typeof restore==='function'&&typeof persist==='function'&&observer instanceof MutationObserver;
-    const pass=clampOk&&pointerEnabled&&bound&&layerAboveInk&&layerBelowToolbar&&storageOk&&persistentOverride;
-    return{pass,version:VERSION,clampOk,pointerEnabled,bound,layerAboveInk,layerBelowToolbar,storageOk,persistentOverride,cursor:cs.cursor,layerZ:hs.zIndex,drawZ:ds?.zIndex||null,toolbarZ:ts?.zIndex||null};
+    const pass=clampOk&&pointerEnabled&&bound&&classMutationFree&&layerAboveInk&&layerBelowToolbar&&storageOk&&persistentOverride;
+    return{pass,version:VERSION,clampOk,pointerEnabled,bound,classMutationFree,layerAboveInk,layerBelowToolbar,storageOk,persistentOverride,cursor:cs.cursor,layerZ:hs.zIndex,drawZ:ds?.zIndex||null,toolbarZ:ts?.zIndex||null};
   };
   function scheduleQA(tries=0){setTimeout(()=>{const r=window.runWrongbookAiStickerQA?.();if(r?.reason==='sticker-not-mounted'&&tries<30)return scheduleQA(tries+1);window.__wrongbookAiStickerV10QA=r;if(r&&!r.pass)console.warn('[Wrongbook AI sticker QA failed]',r)},180)}
   scheduleQA();
