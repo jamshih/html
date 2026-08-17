@@ -1,15 +1,15 @@
-// Wrong Book V12g — prompt-only upward tutor placement.
-// Student ink no longer affects tutor geometry. The tutor behaves like the pre-protection version:
-// full-width, bottom-anchored, grows upward, and only treats the printed problem prompt as protected.
+// Wrong Book V12h — prompt-only upward tutor placement with extra breathing room.
+// Student ink does not affect tutor geometry. The tutor stays full-width and bottom-anchored,
+// grows upward, and keeps a deliberate visual gap below the printed problem prompt.
 (function(){
-  const VERSION='2026-08-17-tutor-collapse-up-v12g';
+  const VERSION='2026-08-17-tutor-collapse-up-v12h';
   if(window.__wrongbookTutorCollapseUpV12===VERSION)return;
   try{window.__wrongbookTutorCollapseUpV12Observer?.disconnect?.()}catch{}
   document.getElementById('wrongbookTutorCollapseUpV12Style')?.remove();
   window.__wrongbookTutorCollapseUpV12=VERSION;
 
   const DESKTOP_BOTTOM=68;
-  const PROMPT_GAP=12;
+  const PROMPT_GAP=32;
   const MIN_OPEN_HEIGHT=150;
   const MAX_OPEN_HEIGHT=420;
 
@@ -34,9 +34,9 @@
       overscroll-behavior:contain;
       z-index:30!important;
       transform-origin:100% 100%!important;
-      animation:v12gTutorRevealUp .17s cubic-bezier(.2,.72,.24,1) both;
+      animation:v12hTutorRevealUp .17s cubic-bezier(.2,.72,.24,1) both;
     }
-    @keyframes v12gTutorRevealUp{
+    @keyframes v12hTutorRevealUp{
       from{opacity:.94;clip-path:inset(100% 0 0 0)}
       to{opacity:1;clip-path:inset(0 0 0 0)}
     }
@@ -205,6 +205,8 @@
     const bottomDelta=Math.abs(openRect.bottom-collapsedRect.bottom);
     const bottomAnchored=fallback||bottomDelta<=3;
     const growsUpward=fallback||openRect.top<collapsedRect.top-2;
+    const actualPromptGap=openRect.top-contentBottom;
+    const promptGapOk=fallback||actualPromptGap>=PROMPT_GAP-1;
     const noPromptOverlap=fallback||openRect.top>=contentBottom-1;
     const noToolbarOverlap=!toolbarRect||fallback||!overlap(openRect,toolbarRect);
     const tooltipBottom=parseFloat(pseudo.bottom);
@@ -223,12 +225,13 @@
     else dock.classList.remove('v6-tutor-collapsed');
     syncDock(dock);
 
-    const upwardPass=!fallback&&bottomAnchored&&growsUpward&&noPromptOverlap&&noToolbarOverlap&&tooltipAbove&&geometryOwned&&notSliver;
+    const upwardPass=!fallback&&bottomAnchored&&growsUpward&&promptGapOk&&noPromptOverlap&&noToolbarOverlap&&tooltipAbove&&geometryOwned&&notSliver;
     const fallbackPass=fallback&&available<MIN_OPEN_HEIGHT&&notSliver;
     const pass=promptOnly&&semanticPromptMeasured&&(upwardPass||fallbackPass);
     return{
       pass,version:VERSION,mode:fallback?'safe-flow-fallback':'upward-prompt-only',sourceKind:sourceKind(paper),available,
-      promptOnly,semanticPromptMeasured,bottomAnchored,growsUpward,noPromptOverlap,noToolbarOverlap,tooltipAbove,geometryOwned,notSliver,
+      promptGap:PROMPT_GAP,actualPromptGap:Math.round(actualPromptGap),promptGapOk,promptOnly,semanticPromptMeasured,
+      bottomAnchored,growsUpward,noPromptOverlap,noToolbarOverlap,tooltipAbove,geometryOwned,notSliver,
       bottomDelta:Number(bottomDelta.toFixed(2)),collapsedTop:Math.round(collapsedRect.top),openTop:Math.round(openRect.top),
       collapsedBottom:Math.round(collapsedRect.bottom),openBottom:Math.round(openRect.bottom),contentBottom:Math.round(contentBottom),
       openHeight:Math.round(openRect.height),openPosition:actualOpenPosition
@@ -240,7 +243,7 @@
       const r=window.runWrongbookTutorCollapseDirectionQA?.();
       if(r?.reason==='tutor-not-mounted'&&tries<25)return scheduleQA(tries+1);
       window.__wrongbookTutorCollapseDirectionQA=r;
-      if(r&&!r.pass)console.warn('[Wrongbook tutor V12g prompt-only upward QA failed]',r);
+      if(r&&!r.pass)console.warn('[Wrongbook tutor V12h spacing QA failed]',r);
     },180);
   }
   scheduleQA();
