@@ -1,0 +1,38 @@
+/* GSAT Chemistry page 2 — preserve photographed study-sheet geometry and high diagram density. */
+.chem-paper[data-chem-paper="gsat-02"] .chem-reference-banner{background:linear-gradient(90deg,#067b89,#0b7f86,#128f96)}
+.chem-paper[data-chem-paper="gsat-02"] .chem-title-row>i,
+.chem-paper[data-chem-paper="gsat-02"] .chem-title-row>i:after{background:#0b7f86}
+.chem-paper[data-chem-paper="gsat-02"] .chem-title-row h1{font-size:47px}
+/* With the real Noto CJK metrics, give the prose lane more width instead of shrinking the type. */
+.chem-paper[data-chem-paper="gsat-02"] .chem2-body{display:grid;grid-template-columns:46% 54%;gap:9px}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-questions{min-width:0;padding-right:4px}
+.chem-paper[data-chem-paper="gsat-02"] .chem-question-list{font-size:12.8px;line-height:1.44}
+.chem-paper[data-chem-paper="gsat-02"] .chem-question{margin:1.3px 0}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-figures{display:grid;gap:7px;min-width:0;min-height:0;height:100%}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-figures-2{grid-template-columns:1fr 1fr}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-figures-3{grid-template-columns:1fr 1fr 1fr}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-figures-4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-figures .chem-figure{height:100%;min-height:0;border-color:#52a1a5;background:rgba(248,252,249,.82)}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-separation .chem2-body{grid-template-columns:47% 53%}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-bonding .chem2-body{grid-template-columns:49% 51%}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-gas .chem2-body{grid-template-columns:47% 53%}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-gas .chem-question-list{font-size:12.7px;line-height:1.42}
+.chem-paper[data-chem-paper="gsat-02"] .chem2-gas .chem-question{margin:1px 0}
+.chem-figure-svg .energy-profile .axes{fill:none;stroke:#5b6c74;stroke-width:1.5}
+.chem-figure-svg .energy-profile .curve{fill:none;stroke:#dd7d31;stroke-width:2.6}
+.chem-figure-svg .energy-profile .level{stroke:#547382;stroke-width:1.6}
+.chem-figure-svg .energy-profile .heat-arrow{stroke:#0b7f86;stroke-width:2.2}
+.chem-figure-svg .energy-cycle .cycle-ring{fill:none;stroke:#76aeb2;stroke-width:1.3;stroke-dasharray:4 4}
+.chem-figure-svg .energy-node{fill:#eef8f8;stroke:#519398;stroke-width:1.4}
+.chem-figure-svg .energy-node.n0{fill:#fff1c9}.chem-figure-svg .energy-node.n1{fill:#ffe1d1}.chem-figure-svg .energy-node.n2{fill:#fff6d7}.chem-figure-svg .energy-node.n3{fill:#e6f2fb}
+.chem-figure-svg .node-label{font-size:9px;font-weight:800}
+.chem-figure-svg .apparatus .glass,.chem-figure-svg .sep-funnel .glass{fill:rgba(192,229,237,.25);stroke:#567c88;stroke-width:1.6}
+.chem-figure-svg .apparatus .tube,.chem-figure-svg .sep-funnel .tube{fill:none;stroke:#536b75;stroke-width:2}
+.chem-figure-svg .apparatus .liquid,.chem-figure-svg .water-tech .water{stroke:#51a3bd;stroke-width:4}
+.chem-figure-svg .apparatus .coolant{stroke:#82bfd0;stroke-width:6;opacity:.7}
+.chem-figure-svg .sep-funnel .layer{stroke:none}.chem-figure-svg .sep-funnel .layer1{fill:#a9d8ec}.chem-figure-svg .sep-funnel .layer2{fill:#f2d69a}
+.chem-figure-svg .chrom .paper{fill:#fcfcf7;stroke:#6f8995;stroke-width:1.4}.chem-figure-svg .chrom .baseline{stroke:#6d7780;stroke-width:1.2}.chem-figure-svg .chrom .solvent-front{stroke:#70a9b6;stroke-width:1;stroke-dasharray:4 3}.chem-figure-svg .chrom .spot.s1{fill:#e8883d}.chem-figure-svg .chrom .spot.s2{fill:#6e97c8}.chem-figure-svg .chrom .spot.s3{fill:#9477b6}
+.chem-figure-svg .water-tech .tank{fill:#eef8fb;stroke:#668894;stroke-width:1.4}.chem-figure-svg .water-tech .clean{fill:#f8fcfc}.chem-figure-svg .water-tech .membrane{fill:#f2eedb;stroke:#a68b54;stroke-width:1.3}.chem-figure-svg .water-tech .ion-a{fill:#e9a447}.chem-figure-svg .water-tech .ion-b{fill:#76a9c7}
+.chem-figure-svg .lattice .ion-sign{font-size:10px;font-weight:900;fill:#fff}.chem-figure-svg .cov-mol .bond{stroke:#536b76;stroke-width:2.4}.chem-figure-svg .electron{fill:#4a7e9a}.chem-figure-svg .metal-ion{fill:#dcad63;stroke:#926c34;stroke-width:1.2}.chem-figure-svg .electron-path{fill:none;stroke:#4f86a0;stroke-width:1.3;stroke-dasharray:4 3}
+.chem-figure-svg .gasbox>rect,.chem-figure-svg .pressure-box>rect{fill:#f8fbfb;stroke:#698895;stroke-width:1.4}.chem-figure-svg .gasbox .motion,.chem-figure-svg .pressure-box .motion{stroke:#517d91;stroke-width:1.4}.chem-figure-svg .pressure-box .wall-hit{stroke:#db7a3d;stroke-width:2.3}
+@media(max-width:900px){.chem-paper[data-chem-paper="gsat-02"] .chem-question-list{font-size:12.8px}}

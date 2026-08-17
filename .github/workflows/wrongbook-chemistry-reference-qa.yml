@@ -1,0 +1,109 @@
+name: Wrongbook Chemistry Reference QA
+
+on:
+  push:
+    branches:
+      - chemistry-reference-rebuild
+    paths:
+      - 'wrongbook-v2/chemistry-*.js'
+      - 'wrongbook-v2/chemistry-*.css'
+      - 'wrongbook-v2/qa/chemistry-v2-qa.html'
+      - 'wrongbook-v2/qa/chemistry-responsive-qa.html'
+      - 'wrongbook-v2/qa/chemistry-interaction-qa.html'
+      - 'wrongbook-v2/index.html'
+      - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
+  pull_request:
+    paths:
+      - 'wrongbook-v2/chemistry-*.js'
+      - 'wrongbook-v2/chemistry-*.css'
+      - 'wrongbook-v2/qa/chemistry-v2-qa.html'
+      - 'wrongbook-v2/qa/chemistry-responsive-qa.html'
+      - 'wrongbook-v2/qa/chemistry-interaction-qa.html'
+      - 'wrongbook-v2/index.html'
+      - '.github/workflows/wrongbook-chemistry-reference-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  chemistry-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Traditional Chinese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+      - name: JavaScript syntax
+        run: |
+          node --check wrongbook-v2/chemistry-reference-v1.js
+          node --check wrongbook-v2/chemistry-reference-scope-page1-v2.js
+          node --check wrongbook-v2/chemistry-reference-page1-fix-v3.js
+          node --check wrongbook-v2/chemistry-gsat-page2-v4.js
+          node --check wrongbook-v2/chemistry-gsat-page2-fix-v5.js
+          node --check wrongbook-v2/chemistry-reference-v2-core.js
+          node --check wrongbook-v2/chemistry-reference-gsat-v2.js
+          node --check wrongbook-v2/chemistry-reference-elective-v2.js
+          node --check wrongbook-v2/chemistry-reference-completion-v2.js
+          node --check wrongbook-v2/chemistry-reference-manifest-v2.js
+          node --check wrongbook-v2/chemistry-reference-qa-v2.js
+      - name: Start static server
+        run: |
+          python3 -m http.server 4173 --directory wrongbook-v2 > /tmp/chem-http.log 2>&1 &
+          echo $! > /tmp/chem-http.pid
+          sleep 2
+      - name: Render every Chemistry page in Recall and Learn
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$BROWSER"
+          mkdir -p chemistry-v2-artifacts/desktop
+          PAGES="gsat-01 gsat-02 gsat-03 gsat-04 gsat-05 gsat-06 elec-matter-energy elec-structure-rate elec-equilibrium-1 elec-equilibrium-2 elec-organic-tech"
+          for PAGE in $PAGES; do
+            for MODE in recall learn; do
+              echo "=== Desktop $PAGE $MODE ==="
+              URL="http://127.0.0.1:4173/qa/chemistry-v2-qa.html?page=$PAGE&mode=$MODE"
+              "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1440,1800 --virtual-time-budget=3000 --screenshot="chemistry-v2-artifacts/desktop/${PAGE}-${MODE}.png" "$URL"
+              "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=3000 --dump-dom "$URL" > "chemistry-v2-artifacts/desktop/${PAGE}-${MODE}.html"
+              grep -q 'data-qa-pass="true"' "chemistry-v2-artifacts/desktop/${PAGE}-${MODE}.html"
+              grep -q "data-qa-page=\"${PAGE}\"" "chemistry-v2-artifacts/desktop/${PAGE}-${MODE}.html"
+              grep -q "data-qa-mode=\"${MODE}\"" "chemistry-v2-artifacts/desktop/${PAGE}-${MODE}.html"
+              grep -q 'data-qa-uncovered="0"' "chemistry-v2-artifacts/desktop/${PAGE}-${MODE}.html"
+            done
+          done
+      - name: Tablet and mobile pan-zoom QA
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$BROWSER"
+          mkdir -p chemistry-v2-artifacts/tablet chemistry-v2-artifacts/mobile
+          PAGES="gsat-03 elec-structure-rate"
+          for PAGE in $PAGES; do
+            for MODE in recall learn; do
+              for SPEC in "tablet:820,1180" "mobile:430,900"; do
+                NAME="${SPEC%%:*}"; SIZE="${SPEC#*:}"
+                echo "=== $NAME $PAGE $MODE ==="
+                URL="http://127.0.0.1:4173/qa/chemistry-responsive-qa.html?page=$PAGE&mode=$MODE"
+                "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size="$SIZE" --virtual-time-budget=3500 --screenshot="chemistry-v2-artifacts/${NAME}/${PAGE}-${MODE}.png" "$URL"
+                "$BROWSER" --headless --no-sandbox --disable-gpu --window-size="$SIZE" --virtual-time-budget=3500 --dump-dom "$URL" > "chemistry-v2-artifacts/${NAME}/${PAGE}-${MODE}.html"
+                grep -q 'data-qa-pass="true"' "chemistry-v2-artifacts/${NAME}/${PAGE}-${MODE}.html"
+                grep -q "data-qa-page=\"${PAGE}\"" "chemistry-v2-artifacts/${NAME}/${PAGE}-${MODE}.html"
+                grep -q "data-qa-mode=\"${MODE}\"" "chemistry-v2-artifacts/${NAME}/${PAGE}-${MODE}.html"
+              done
+            done
+          done
+      - name: Track and study-mode interaction QA
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          URL="http://127.0.0.1:4173/qa/chemistry-interaction-qa.html"
+          "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1280,1000 --virtual-time-budget=3500 --screenshot="chemistry-v2-artifacts/interaction.png" "$URL"
+          "$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=3500 --dump-dom "$URL" > chemistry-v2-artifacts/interaction.html
+          grep -q 'data-qa-pass="true"' chemistry-v2-artifacts/interaction.html
+      - name: Upload rendered QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-chemistry-pages-qa
+          path: chemistry-v2-artifacts/
+          if-no-files-found: warn

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chemistry Page 1 QA</title>
+<link rel="stylesheet" href="../chemistry-reference-v1.css">
+<link rel="stylesheet" href="../chemistry-reference-page1-v2.css">
+<style>
+html,body{margin:0;background:#e8ecee;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+#qa-root{padding:24px}.qa-paper-wrap{width:1000px;margin:0 auto}.qa-readout{width:960px;margin:16px auto;padding:12px 16px;border-radius:12px;background:#14232b;color:#e9f4f7;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.qa-pass{color:#76e0aa}.qa-fail{color:#ff9f93}
+</style>
+<script>
+const state={chemistryAnswers:{},chemistryMode:'recall',chemistryTrack:'gsat',chemistryPageId:'gsat-01'};
+function esc(s=''){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+function save(){}
+function render(){}
+function mindmapPage(){return''}
+function bind(){}
+function activeSubject(){return{id:'chemistry',name:'化學'}}
+function subjectTabs(){return''}
+</script>
+</head>
+<body>
+<div id="qa-root"><div class="qa-paper-wrap" id="paper"></div><pre class="qa-readout" id="qa">rendering…</pre></div>
+<script src="../chemistry-reference-v1.js"></script>
+<script src="../chemistry-reference-scope-page1-v2.js"></script>
+<script src="../chemistry-reference-page1-fix-v3.js"></script>
+<script>
+(function(){
+  const target=document.getElementById('paper');
+  target.innerHTML=chemPaper(CHEMISTRY_GSAT_PAGE_1,'recall');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const staticQa=chemistryReferenceQa(CHEMISTRY_GSAT_PAGE_1);
+    const domQa=chemistryReferenceDomQa();
+    const expected={questions:21,blanks:36,figures:11};
+    const expectedOk=staticQa.questions===expected.questions&&staticQa.blanks===expected.blanks&&staticQa.figures===expected.figures;
+    const scopeOk=staticQa.scopeSeparationOk===true;
+    const pass=staticQa.ok===true&&domQa.ok===true&&expectedOk&&scopeOk;
+    document.documentElement.dataset.qaPass=pass?'true':'false';
+    document.documentElement.dataset.qaQuestions=String(staticQa.questions);
+    document.documentElement.dataset.qaBlanks=String(staticQa.blanks);
+    document.documentElement.dataset.qaFigures=String(staticQa.figures);
+    const out={pass,expected,staticQa,domQa};
+    const qa=document.getElementById('qa');
+    qa.classList.add(pass?'qa-pass':'qa-fail');
+    qa.textContent=JSON.stringify(out,null,2);
+    console.log('CHEMISTRY_QA '+JSON.stringify(out));
+  }));
+})();
+</script>
+</body>
+</html>
