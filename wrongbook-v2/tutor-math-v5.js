@@ -1,6 +1,6 @@
 // Wrongbook V5 tutor math rendering.
 // Keeps AI copy escaped/safe, then lets KaTeX auto-render TeX delimiters inside tutor-only UI.
-const V5_TUTOR_MATH_VERSION='2026-08-17-tutor-math-v5';
+const V5_TUTOR_MATH_VERSION='2026-08-17-tutor-math-v5b';
 const V5_KATEX_VERSION='0.16.11';
 
 (function(){
@@ -10,7 +10,7 @@ const V5_KATEX_VERSION='0.16.11';
   style.id='v5TutorMathStyle';
   style.textContent=`
     .v5-tutor-dock .katex{font-size:1.02em}
-    .v5-tutor-dock .katex-display{margin:.55em 0;overflow-x:auto;overflow-y:hidden;padding:.08em 0}
+    .v5-tutor-dock .katex-display{margin:.58em 0;overflow-x:auto;overflow-y:hidden;padding:.12em 0;text-align:center}
     .v5-tutor-stage>p .katex-display{font-size:1.08em}
     .v3-guide-caption .katex{font-size:.95em}
     .tutor-answer .katex-display,.tutor-step .katex-display{margin:.5em 0}
@@ -56,6 +56,12 @@ const V5_KATEX_VERSION='0.16.11';
     return /\\\(|\\\[|\$\$|\$(?!\s|$)/.test(String(text));
   }
 
+  // Gemini sometimes puts a fraction inside inline $...$ even when it is the main equation.
+  // Promote those fractions to display math so numerator/denominator stay legible on tablet/mobile.
+  function normalizeTutorMathSource(text=''){
+    return String(text).replace(/\$([^$\n]*\\frac[^$\n]*)\$/g,(_,body)=>`\\[${body.trim()}\\]`);
+  }
+
   const SELECTORS=[
     '.v5-tutor-stage p',
     '.v5-tutor-stage-head strong',
@@ -74,7 +80,8 @@ const V5_KATEX_VERSION='0.16.11';
       const scope=root?.querySelectorAll?root:document;
       scope.querySelectorAll(SELECTORS).forEach(el=>{
         if(el.querySelector('.katex'))return;
-        const text=el.textContent||'';if(!containsMathDelimiter(text))return;
+        const source=el.textContent||'';if(!containsMathDelimiter(source))return;
+        const normalized=normalizeTutorMathSource(source);if(normalized!==source)el.textContent=normalized;
         try{
           window.renderMathInElement(el,{
             delimiters:[
