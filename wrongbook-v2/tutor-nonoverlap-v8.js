@@ -98,3 +98,15 @@
   }
   scheduleQA();
 })();
+
+// V9: keep user ink in a stable worksheet coordinate frame and move AI diagrams/key concepts
+// onto the worksheet only when a non-overlapping position is available.
+(function loadWrongbookPaperOverlayV9(){
+  if(document.getElementById('paperOverlayV9'))return;
+  const css=document.createElement('link');
+  css.id='paperOverlayV9Css';css.rel='stylesheet';css.href='./paper-overlay-v9.css?wb=20260817-2';
+  document.head.appendChild(css);
+  const js=document.createElement('script');
+  js.id='paperOverlayV9';js.src='./paper-overlay-v9.js?wb=20260817-2';js.async=false;
+  document.head.appendChild(js);
+})();
