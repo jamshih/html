@@ -22,11 +22,16 @@
   loadScript('wrongbookHumanVisibilityV22','./tutor-human-visibility-v22.js?wb=20260818-2059')
     .catch(err=>console.error('[Wrongbook human visibility guard]',err));
 
+  // AI diagrams are opt-in. Load this independently so later async diagram renderers cannot
+  // resurrect a sticky overlay or reveal a diagram before the user presses 「開始圖解」.
+  loadScript('wrongbookAiDiagramOptInV1','./ai-diagram-opt-in-v1.js?wb=20260818-1')
+    .catch(err=>console.error('[Wrongbook AI diagram opt-in guard]',err));
+
   loadScript('wrongbookAiDiagramScopeGuardV3','./ai-diagram-scope-guard-v3.js?wb=20260818-1124-full-card-1')
     .then(()=>loadScript('wrongbookAiDiagramStickerV5','./ai-diagram-sticker-v5.js?wb=20260818-1124-full-card-1'))
     .then(()=>loadScript('wrongbookTutorDiagramPageUxV19','./tutor-diagram-page-ux-v19.js?wb=20260818-1430'))
     .then(()=>loadScript('wrongbookTikzSpatialGeometryV1','./tikz-spatial-geometry-v1.js?wb=20260818-1527'))
     .catch(err=>console.error('[Wrongbook full-card sticker bootstrap]',err));
 
-  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v22-human-visibility',legacyV4Blocked:true,diagramPageUx:true,tikzSpatial:true,humanVisibilityGuard:true};
+  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v22-human-visibility-diagram-opt-in',legacyV4Blocked:true,diagramPageUx:true,tikzSpatial:true,humanVisibilityGuard:true,diagramOptIn:true};
 })();
