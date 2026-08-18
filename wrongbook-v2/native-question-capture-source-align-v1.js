@@ -1,4 +1,4 @@
-// Final Wrong Book scan boot order: high-resolution preprocess -> scanner -> highlighter -> OCR -> compact semantic AI -> clean question display.
+// Final Wrong Book scan boot order: high-resolution preprocess -> scanner -> OCR -> clean question -> single stable tutor navigator.
 (function(){
   if(window.__wrongbookNativeQuestionSourceAlignV2)return;
   window.__wrongbookNativeQuestionSourceAlignV2=true;
@@ -19,12 +19,12 @@
   loadScript('./ocr-clean-question-display-v1.js?wb=20260818-1124','data-wb-ocr-clean-display');
   loadScript('./scan-persistence-lite-v1.js?wb=20260818-1124','data-wb-scan-persistence-lite');
   loadScript('./tutor-clean-figure-v1.js?wb=20260818-1124','data-wb-tutor-clean-figure');
-  loadScript('./tutor-workspace-unify-v13.js?wb=20260818-1203','data-wb-tutor-workspace-unify-v13');
-  loadScript('./tutor-nav-stability-v14.js?wb=20260818-1212','data-wb-tutor-nav-stability-v14');
-  loadScript('./problem-context-isolation-v1.js?wb=20260818-1228','data-wb-problem-context-isolation-v1');
-  loadScript('./tutor-nav-inplace-v15.js?wb=20260818-1258','data-wb-tutor-nav-inplace-v15');
-  loadScript('./tutor-nav-visual-v16.js?wb=20260818-1326','data-wb-tutor-nav-visual-v16');
-  loadScript('./tutor-frame-no-flash-v17.js?wb=20260818-1308','data-wb-tutor-frame-no-flash-v17');
-  loadScript('./tutor-nav-paint-lock-v18.js?wb=20260818-1326','data-wb-tutor-nav-paint-lock-v18-loader');
-  loadScript('./ink-history-v4.js?wb=20260818-1326','data-wb-ink-history-v4');
+
+  // One owner from the start. V14/V15 are intentionally no longer booted; their layered observers caused the loading flash and navigator handoff.
+  loadScript('./tutor-nav-visual-v16.js?wb=20260818-1348','data-wb-tutor-nav-visual-v16');
+  loadScript('./tutor-workspace-unify-v13.js?wb=20260818-1348','data-wb-tutor-workspace-unify-v13');
+  loadScript('./problem-context-isolation-v1.js?wb=20260818-1348','data-wb-problem-context-isolation-v1');
+  loadScript('./tutor-frame-no-flash-v17.js?wb=20260818-1348','data-wb-tutor-frame-no-flash-v17');
+  loadScript('./tutor-nav-paint-lock-v18.js?wb=20260818-1348','data-wb-tutor-nav-paint-lock-v18-loader');
+  loadScript('./ink-history-v4.js?wb=20260818-1348','data-wb-ink-history-v4');
 })();
