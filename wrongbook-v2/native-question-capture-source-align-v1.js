@@ -19,4 +19,5 @@
   loadScript('./ocr-clean-question-display-v1.js?wb=20260818-1124','data-wb-ocr-clean-display');
   loadScript('./scan-persistence-lite-v1.js?wb=20260818-1124','data-wb-scan-persistence-lite');
   loadScript('./tutor-clean-figure-v1.js?wb=20260818-1124','data-wb-tutor-clean-figure');
+  loadScript('./tutor-workspace-unify-v13.js?wb=20260818-1203','data-wb-tutor-workspace-unify-v13');
 })();
