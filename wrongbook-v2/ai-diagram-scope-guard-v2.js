@@ -18,11 +18,15 @@
     });
   }
 
+  // Independent final visibility guard: it must load even if an optional diagram renderer fails.
+  loadScript('wrongbookHumanVisibilityV22','./tutor-human-visibility-v22.js?wb=20260818-2059')
+    .catch(err=>console.error('[Wrongbook human visibility guard]',err));
+
   loadScript('wrongbookAiDiagramScopeGuardV3','./ai-diagram-scope-guard-v3.js?wb=20260818-1124-full-card-1')
     .then(()=>loadScript('wrongbookAiDiagramStickerV5','./ai-diagram-sticker-v5.js?wb=20260818-1124-full-card-1'))
     .then(()=>loadScript('wrongbookTutorDiagramPageUxV19','./tutor-diagram-page-ux-v19.js?wb=20260818-1430'))
     .then(()=>loadScript('wrongbookTikzSpatialGeometryV1','./tikz-spatial-geometry-v1.js?wb=20260818-1527'))
     .catch(err=>console.error('[Wrongbook full-card sticker bootstrap]',err));
 
-  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v19-tikz1',legacyV4Blocked:true,diagramPageUx:true,tikzSpatial:true};
+  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v22-human-visibility',legacyV4Blocked:true,diagramPageUx:true,tikzSpatial:true,humanVisibilityGuard:true};
 })();
