@@ -14,6 +14,7 @@
       .v3-paper .v5-tutor-dock:not(.v6-tutor-collapsed),
       .v3-paper.v12-tutor-up-open .v5-tutor-dock:not(.v6-tutor-collapsed),
       .v3-paper.v12-tutor-up-open.v8-tutor-open-flow .v5-tutor-dock:not(.v6-tutor-collapsed){
+        box-sizing:border-box!important;
         left:0!important;
         right:0!important;
         width:min(760px,72vw)!important;
