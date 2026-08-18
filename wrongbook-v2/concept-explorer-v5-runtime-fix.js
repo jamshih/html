@@ -34,7 +34,7 @@
 
   // V7 deliberately removes the graph/realm experiment. Concepts are now organized directly
   // by the Taiwan 108 curriculum: subject -> chapter -> section -> concept, with no graph view.
-  const chapterStamp='20260817-1';
+  const chapterStamp='20260818-mobile-grid-1';
   if(!document.querySelector('link[data-concept-chapters-v7]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
