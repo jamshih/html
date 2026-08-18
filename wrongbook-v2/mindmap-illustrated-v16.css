@@ -173,7 +173,7 @@
   .mindmap--biology .v4tb-section-ribbon{left:12px}
   .mindmap--biology .v4tb-section-ribbon span{font-size:16px}
   .mindmap--biology .v4tb-inline-line{font-size:13px;line-height:1.75}
-  .mindmap--illustrated .v4tb-hint-link,.mindmap--illustrated .v4tb-end-label span{font-size:11px}
+  .mindmap--illustrated .v4tb-hint-link,.mindmap--illustrated .v4tb-end-label span,.mindmap--illustrated .mind-status,.mindmap--illustrated .v4tb-hint,.mindmap--illustrated .v4tb-truth,.mindmap--illustrated .v4tb-truth span{font-size:11px!important}
   .mindmap--biology .v4tb-center-visual,.mindmap--biology .v4tb-tree-root,.mindmap--biology .v4tb-flow-visual{width:min(100%,330px)}
   .mindmap--biology .mindmap-asset-group{max-width:320px;margin-left:auto;margin-right:auto}
   .mindmap--biology .v4tb-chapter-assets{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;min-height:0}.mindmap--biology .v4tb-chapter-assets .mindmap-asset{height:105px}

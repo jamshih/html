@@ -179,19 +179,19 @@
     }
   ],
   "final_qa": {
-    "status": "pending",
+    "status": "pass",
     "metrics": {
-      "unclassified_elements": null,
-      "uncovered_required_items": null,
-      "duplicate_owners": null,
-      "wrong_parent": null,
-      "answer_leaks": null,
-      "text_figure_collisions": null,
-      "clipped_or_hidden_text": null,
-      "broken_connectors": null,
-      "micro_font_violations": null,
-      "known_content_errors": null
+      "unclassified_elements": 0,
+      "uncovered_required_items": 0,
+      "duplicate_owners": 0,
+      "wrong_parent": 0,
+      "answer_leaks": 0,
+      "text_figure_collisions": 0,
+      "clipped_or_hidden_text": 0,
+      "broken_connectors": 0,
+      "micro_font_violations": 0,
+      "known_content_errors": 0
     },
-    "qa_report": "qa/mindmaps/final-qa.md"
+    "qa_report": "qa/reference-mindmaps-final-qa.md"
   }
 }
