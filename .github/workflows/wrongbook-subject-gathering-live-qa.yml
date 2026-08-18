@@ -1,0 +1,41 @@
+name: Wrongbook Subject Gathering Live QA
+
+on:
+  pull_request:
+    paths:
+      - 'wrongbook-v2/qa/mindmap-subject-gathering-live-v2.js'
+      - '.github/workflows/wrongbook-subject-gathering-live-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-subject-gathering:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: node --check wrongbook-v2/qa/mindmap-subject-gathering-live-v2.js
+      - name: Install Playwright core
+        run: |
+          mkdir -p /tmp/wb-live-pw
+          cd /tmp/wb-live-pw
+          npm init -y >/dev/null 2>&1
+          npm install playwright-core@1.55.0 --no-save
+          ln -s /tmp/wb-live-pw/node_modules "$GITHUB_WORKSPACE/node_modules"
+      - name: Test actual GitHub Pages subject gathering
+        env:
+          CHROMIUM_PATH: /usr/bin/chromium
+        run: |
+          set -o pipefail
+          node wrongbook-v2/qa/mindmap-subject-gathering-live-v2.js | tee /tmp/wb-subject-gathering-live-result.json
+      - name: Upload live QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-subject-gathering-live-qa
+          path: |
+            /tmp/wb-subject-gathering-live-result.json
+            /tmp/wrongbook-subject-gathering-live-chemistry.png
+            /tmp/wrongbook-subject-gathering-live-mobile.png
+          if-no-files-found: warn
