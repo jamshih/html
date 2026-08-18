@@ -3,7 +3,7 @@
    Also repairs the known coordinate-geometry prompt and adds safe ink redo without replacing the ink engine. */
 (function(){
   'use strict';
-  const VERSION='2026-08-18-problem-workspace-integrity-v1.1';
+  const VERSION='2026-08-18-problem-workspace-integrity-v1.2';
   if(window.__problemWorkspaceIntegrityV1===VERSION)return;
   window.__problemWorkspaceIntegrityV1=VERSION;
   document.documentElement.dataset.problemWorkspaceIntegrity=VERSION;
@@ -33,12 +33,36 @@
     /* Keep a long tutor step above the ink toolbar instead of covering it. */
     .pf-problem-workspace .v5-tutor-dock{max-height:min(38vh,310px)!important;overflow:auto!important}
 
+    /* Desktop/tablet problem view follows the supplied reference: no app sidebar or duplicate problem header,
+       paper begins directly below the global breadcrumb bar, and the context rail touches the paper edge. */
+    @media (min-width:861px){
+      body.pf-workspace-active .app-shell,
+      body.pf-workspace-active .pf-app-shell{display:block!important}
+      body.pf-workspace-active .sidebar,
+      body.pf-workspace-active .pf-sidebar{display:none!important}
+      body.pf-workspace-active .main{margin-left:0!important;width:100%!important;max-width:none!important}
+      body.pf-workspace-active .content{max-width:none!important;padding:0 0 0 42px!important}
+      .pf-problem-workspace{max-width:none!important;margin:0!important}
+      .pf-problem-workspace .pf-problem-head{display:none!important}
+      .pf-problem-workspace .pf-paper-column>.panel>.panel-head{display:none!important}
+      .pf-problem-workspace .pf-workspace-layout{grid-template-columns:minmax(0,1fr) clamp(340px,27vw,420px)!important;gap:0!important;align-items:stretch!important}
+      .pf-problem-workspace .pf-context-rail{border-left:1px solid var(--line)!important;padding:16px 18px 0 24px!important;min-height:calc(100vh - 58px)!important;align-content:start!important}
+      .pf-problem-workspace .paper{min-height:calc(100vh - 58px)!important;border-top:0!important;border-bottom:0!important;box-shadow:none!important}
+      .pf-problem-workspace .paper-demo{min-height:calc(100vh - 58px)!important;padding:30px 68px 250px!important}
+      .pf-problem-workspace .paper-demo h4{font-size:18px!important;line-height:1.78!important}
+      .pf-problem-workspace .paper-option{font-size:15px!important;line-height:1.68!important}
+    }
+
+    @media (min-width:861px) and (max-width:1100px){
+      body.pf-workspace-active .content{padding-left:24px!important}
+      .pf-problem-workspace .pf-workspace-layout{grid-template-columns:minmax(0,1fr) 320px!important}
+      .pf-problem-workspace .paper-demo{padding-left:42px!important;padding-right:42px!important}
+    }
     @media (max-width:900px){
-      .pf-problem-workspace .paper-demo{padding:28px 26px 265px!important}
       .pf-problem-workspace .paper-demo h4{font-size:16px!important;line-height:1.7!important}
       .pf-problem-workspace .paper-option{font-size:14px!important}
     }
-    @media (max-width:700px){
+    @media (max-width:860px){
       .pf-problem-workspace .paper{min-height:calc(100dvh - 150px)!important}
       .pf-problem-workspace .paper-demo{min-height:calc(100dvh - 150px)!important;padding:24px 18px 310px!important}
       .pf-problem-workspace .v5-tutor-dock{left:8px!important;right:8px!important;width:auto!important;bottom:74px!important;max-height:34vh!important}
@@ -63,14 +87,14 @@
     const s=appState(),problems=s?.problems;
     if(!Array.isArray(problems))return false;
     let changed=false;
-    const prefix='10. 空間中有兩點 A(1, 5, -4)、B(-14, 15';
+    const matcher=/^10\.\s*空間中有兩點\s*A\(1,\s*5,\s*-4\)、B\(-14,\s*15/;
     const canonical='10. 空間中有兩點 A(1, 5, -4)、B(-14, 15, 6)，已知點 P(-5, r, s) 在 AB 上。若平面通過 P 點且與直線 AB 垂直，且此平面方程式為 3x + by + cz + d = 0，求序組 (r, s, d)。';
     for(const p of problems){
       const text=String(p?.problemText||'');
-      if(!text.startsWith(prefix))continue;
+      if(!matcher.test(text))continue;
       /* The tuple previously shown at the end was the student's presumed wrong answer, not prompt text. */
       if(text!==canonical){p.problemText=canonical;changed=true}
-      p.responseType='free_response';
+      if(p.responseType!=='free_response'){p.responseType='free_response';changed=true}
     }
     if(changed){try{save()}catch{}}
     return changed;
@@ -125,6 +149,17 @@
     }catch(e){console.warn('[problem-workspace-integrity] tutor restore failed',e)}
   }
 
+  function matchReferenceRail(workspace){
+    const rail=workspace?.querySelector('.pf-context-rail');
+    if(!rail)return;
+    /* Corrected-statement data still exists (and can surface in notes/review), but the detail rail should
+       match the supplied four-item hierarchy instead of adding a fifth accordion above 我的筆記. */
+    for(const disclosure of rail.querySelectorAll('.pf-disclosure')){
+      const label=String(disclosure.querySelector(':scope > summary')?.textContent||'').trim();
+      if(label.startsWith('修正與正確敘述'))disclosure.remove();
+    }
+  }
+
   function patch(){
     patchQueued=false;
     repairKnownCoordinatePrompt();
@@ -137,6 +172,7 @@
     fullPrompt(p,paper);
     ensureToolbar(paper);
     ensureTutor(paper,p);
+    matchReferenceRail(workspace);
     workspace.dataset.paperFirstIntegrity='ready';
   }
   function queuePatch(){if(patchQueued)return;patchQueued=true;queueMicrotask(patch)}
