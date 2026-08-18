@@ -33,9 +33,10 @@ jobs:
       - name: Real Playwright handed-layout regression
         env:
           CHROMIUM_PATH: /usr/bin/chromium
-          WB_QA_URL: http://127.0.0.1:8765/index.html
+          WB_QA_URL: http://127.0.0.1:8765/wrongbook-v2/index.html
         run: |
-          python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-handed-http.log 2>&1 &
+          set -o pipefail
+          python3 -m http.server 8765 --directory . >/tmp/wb-handed-http.log 2>&1 &
           server=$!
           trap 'kill $server || true' EXIT
           sleep 1
