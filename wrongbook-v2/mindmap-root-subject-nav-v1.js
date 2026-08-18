@@ -143,6 +143,7 @@
           .attr('role','button')
           .attr('tabindex',0)
           .attr('data-mm-root-subject',subject=>String(subject.id));
+        group.append('rect').attr('class','mm-root-subject-hit').attr('rx',18).attr('ry',18);
         group.append('circle').attr('class','mm-root-subject-dot');
         group.append('text').attr('class','mm-root-subject-name');
         group.append('text').attr('class','mm-root-subject-hint').text('點擊展開');
@@ -172,6 +173,12 @@
         const point=layout.result.get(String(subject.id))||{x:layout.cx,y:layout.cy};
         return`translate(${point.x.toFixed(2)},${point.y.toFixed(2)})`;
       });
+
+    joined.select('.mm-root-subject-hit')
+      .attr('x',subject=>String(subject.id)===current?-26:-38)
+      .attr('y',subject=>String(subject.id)===current?-28:-22)
+      .attr('width',subject=>String(subject.id)===current?132:76)
+      .attr('height',subject=>String(subject.id)===current?68:76);
 
     joined.select('.mm-root-subject-dot')
       .attr('r',subject=>String(subject.id)===current?14:10);
