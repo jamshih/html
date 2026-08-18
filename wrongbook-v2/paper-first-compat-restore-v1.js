@@ -148,7 +148,7 @@ if(!document.getElementById('mobileReviewV1')){
 if(document.documentElement.dataset.paperFirstLegacy!=='1'&&!document.getElementById('problemWorkspaceIntegrityV1')){
   const script=document.createElement('script');
   script.id='problemWorkspaceIntegrityV1';
-  script.src='./problem-workspace-integrity-v1.js?wb=20260818-3';
+  script.src='./problem-workspace-integrity-v1.js?wb=20260818-4';
   script.async=false;
   document.head.appendChild(script);
 }
