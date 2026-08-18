@@ -94,3 +94,14 @@
   setTimeout(install,0);
   window.WrongBookMindmapScopeMerge={version:VERSION,install};
 })();
+
+// Final runtime owner for the problem tutor. Load after the scan/tutor compatibility chain so the
+// restored stationary geometry and strict per-problem session guard win over older presentation layers.
+(function(){
+  if(document.querySelector('script[data-wb-tutor-stationary-v21]'))return;
+  const script=document.createElement('script');
+  script.src='./tutor-stationary-restore-v21.js?wb=20260818-1952';
+  script.async=false;
+  script.setAttribute('data-wb-tutor-stationary-v21','1');
+  document.body.appendChild(script);
+})();
