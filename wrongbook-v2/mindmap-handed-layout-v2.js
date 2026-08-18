@@ -7,12 +7,15 @@
 
   const DEFAULT_SIDE='right';
   const DRAG_CLICK_SUPPRESS_MS=480;
+  const NODE_CLICK_VIEWPORT_LOCK_MS=1150;
   const SVG_NS='http://www.w3.org/2000/svg';
   let installToken=0;
   let observer=null;
   let settleRaf=0;
   let settleUntil=0;
   let dragging=false;
+  let viewportLock=null;
+  let restoringViewport=false;
 
   const currentSubjectId=()=>String((typeof state==='object'&&state?.subject)||'');
   const currentSide=()=>state?.mindMapHandedness==='left'?'left':state?.mindMapHandedness==='right'?'right':'';
@@ -116,6 +119,7 @@
       const target=pos.get(nodeKey(link?.target));
       if(!source||!target)return;
       const d=linkPath(source,target);
+      path.dataset.mmHandedPath=d;
       if(path.getAttribute('d')!==d)path.setAttribute('d',d);
     });
     ensureNodeHitTargets(svg);
@@ -136,6 +140,7 @@
     const tx=w/2-(bbox.x+bbox.width/2)*scale;
     const ty=h/2-(bbox.y+bbox.height/2)*scale;
     const transform=d3.zoomIdentity.translate(tx,ty).scale(scale);
+    viewportLock=null;
     svg.__zoom=transform;
     world.setAttribute('transform',transform.toString());
     return true;
@@ -204,9 +209,31 @@
     else toolbar.insertBefore(select,toolbar.firstChild);
   }
 
-  function pointerInWorld(event,svg){
-    const [sx,sy]=d3.pointer(event,svg);
-    return d3.zoomTransform(svg).invert([sx,sy]);
+  function lockViewport(svg){
+    if(!svg||typeof d3==='undefined')return;
+    const world=svg.querySelector(':scope > g');
+    if(!world)return;
+    const zoom=d3.zoomTransform(svg);
+    viewportLock={
+      until:performance.now()+NODE_CLICK_VIEWPORT_LOCK_MS,
+      transform:world.getAttribute('transform')||zoom.toString(),
+      zoom:d3.zoomIdentity.translate(zoom.x,zoom.y).scale(zoom.k)
+    };
+  }
+
+  function restoreViewportIfLocked(svg){
+    if(!viewportLock||performance.now()>=viewportLock.until){viewportLock=null;return false}
+    const world=svg?.querySelector(':scope > g');
+    if(!world||restoringViewport)return false;
+    const wanted=viewportLock.transform;
+    if(world.getAttribute('transform')===wanted)return false;
+    restoringViewport=true;
+    try{
+      d3.select(svg).interrupt();
+      svg.__zoom=viewportLock.zoom;
+      world.setAttribute('transform',wanted);
+    }finally{restoringViewport=false}
+    return true;
   }
 
   function installDrag(svg){
@@ -217,6 +244,10 @@
     const drag=d3.drag()
       .touchable(()=>true)
       .clickDistance(4)
+      .subject(function(event,d){
+        const p=positions(svg).get(nodeKey(d))||{x:0,y:0};
+        return{x:p.x,y:p.y};
+      })
       .filter(function(event){
         if(document.getElementById('mmWrap')?.classList.contains('is-drawing'))return false;
         return event.button==null||event.button===0;
@@ -224,23 +255,20 @@
       .on('start',function(event,d){
         event.sourceEvent?.preventDefault?.();
         event.sourceEvent?.stopPropagation?.();
+        viewportLock=null;
         dragging=true;
         this.classList.add('is-node-dragging');
-        const [wx,wy]=pointerInWorld(event.sourceEvent,svg);
-        const [screenX,screenY]=d3.pointer(event.sourceEvent,svg);
         const side=effectiveSide(),subject=currentSubjectId(),bucket=offsetBucket(side,subject);
-        const key=nodeKey(d),o=bucket[key]||{};
+        const key=nodeKey(d),o=bucket[key]||{},zoomK=d3.zoomTransform(svg).k||1;
         this.__mmDrag={
-          key,side,subject,wx,wy,screenX,screenY,
+          key,side,subject,startX:event.x,startY:event.y,zoomK,
           startDx:Number(o.dx)||0,startDy:Number(o.dy)||0,moved:false
         };
       })
       .on('drag',function(event){
         const dragState=this.__mmDrag;if(!dragState)return;
-        const [wx,wy]=pointerInWorld(event.sourceEvent,svg);
-        const [screenX,screenY]=d3.pointer(event.sourceEvent,svg);
-        const dx=wx-dragState.wx,dy=wy-dragState.wy;
-        if(Math.hypot(screenX-dragState.screenX,screenY-dragState.screenY)>=4)dragState.moved=true;
+        const dx=event.x-dragState.startX,dy=event.y-dragState.startY;
+        if(Math.hypot(dx,dy)*dragState.zoomK>=4)dragState.moved=true;
         const bucket=offsetBucket(dragState.side,dragState.subject);
         bucket[dragState.key]={dx:dragState.startDx+dx,dy:dragState.startDy+dy};
         applyLayout(svg);
@@ -273,16 +301,34 @@
     if(!world||typeof MutationObserver==='undefined')return;
     const structuralClass=value=>String(value||'').split(/\s+/).filter(Boolean).filter(name=>name!=='mm-draggable-node'&&name!=='is-node-dragging').sort().join(' ');
     observer=new MutationObserver(records=>{
-      const structural=records.some(r=>{
-        if(hitOnlyMutation(r))return false;
-        return r.type==='childList'||(r.attributeName==='class'&&structuralClass(r.oldValue)!==structuralClass(r.target?.getAttribute?.('class')));
-      });
-      if(structural){
-        installDrag(svg);
-        stabilize(svg,640,false);
+      let needsLayout=false,structural=false;
+      for(const record of records){
+        if(record.type==='attributes'&&record.target===world&&record.attributeName==='transform'){
+          restoreViewportIfLocked(svg);
+          continue;
+        }
+        if(record.type==='attributes'&&record.attributeName==='transform'&&record.target?.matches?.('g.node')){
+          const wanted=record.target.dataset.mmHandedTransform;
+          if(wanted&&record.target.getAttribute('transform')!==wanted)needsLayout=true;
+          continue;
+        }
+        if(record.type==='attributes'&&record.attributeName==='d'&&record.target?.matches?.('.link-layer path.link')){
+          const wanted=record.target.dataset.mmHandedPath;
+          if(wanted&&record.target.getAttribute('d')!==wanted)needsLayout=true;
+          continue;
+        }
+        if(hitOnlyMutation(record))continue;
+        if(record.type==='childList'||(record.attributeName==='class'&&structuralClass(record.oldValue)!==structuralClass(record.target?.getAttribute?.('class'))))structural=true;
       }
+      if(needsLayout&&!dragging)applyLayout(svg);
+      if(structural){installDrag(svg);stabilize(svg,660,false)}
     });
-    observer.observe(world,{subtree:true,childList:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+    observer.observe(world,{subtree:true,childList:true,attributes:true,attributeFilter:['class','transform','d'],attributeOldValue:true});
+  }
+
+  function updateHint(){
+    const hint=document.getElementById('mmHint');
+    if(hint)hint.textContent='點節點展開/收合 · 拖曳任一節點自由排列 · 拖曳空白平移 · 滾輪縮放 · 開啟畫筆即可直接手寫';
   }
 
   function install(){
@@ -297,6 +343,7 @@
     wrap.classList.toggle('is-right-handed',effectiveSide()==='right');
     ensureToolbarControl();
     ensurePrompt(wrap);
+    updateHint();
     applyLayout(svg);
     installDrag(svg);
     observe(svg);
@@ -305,16 +352,19 @@
     if(svg.dataset.mmStableDragEvents!==VERSION){
       svg.dataset.mmStableDragEvents=VERSION;
       svg.addEventListener('click',event=>{
-        if(!event.target.closest?.('g.node'))return;
+        const node=event.target.closest?.('g.node');
+        if(!node)return;
         const suppressUntil=Number(svg.dataset.mmSuppressClickUntil)||0;
-        if(performance.now()<suppressUntil||event.target.closest?.('g.node')?.dataset.mmJustDragged==='1'){
+        if(performance.now()<suppressUntil||node.dataset.mmJustDragged==='1'){
           event.preventDefault();
           event.stopImmediatePropagation();
+          return;
         }
+        lockViewport(svg);
       },true);
-      document.getElementById('mmReset')?.addEventListener('click',()=>setTimeout(()=>{applyLayout(svg);fitLayout(svg)},80));
+      document.getElementById('mmReset')?.addEventListener('click',()=>{viewportLock=null;setTimeout(()=>{applyLayout(svg);fitLayout(svg)},80)});
       for(const id of ['mmExpandAll','mmCollapseAll']){
-        document.getElementById(id)?.addEventListener('click',()=>stabilize(svg,700,true));
+        document.getElementById(id)?.addEventListener('click',()=>{viewportLock=null;stabilize(svg,700,true)});
       }
     }
     setTimeout(()=>{if(token===installToken)stabilize(svg,80,false)},900);
@@ -346,6 +396,8 @@
         rootDraggable:Boolean(svg?.querySelector('g.node.root.mm-draggable-node')),
         freeDrag:true,
         singleNodeDrag:true,
+        viewportStableOnNodeClick:true,
+        touchDragUsesLocalCoordinates:true,
         pass:Boolean(nodes.length&&draggable.length===nodes.length&&hits.length===nodes.length&&svg?.querySelector('g.node.root.mm-draggable-node'))
       };
     }
