@@ -99,9 +99,18 @@
 // restored stationary geometry and strict per-problem session guard win over older presentation layers.
 (function(){
   if(document.querySelector('script[data-wb-tutor-stationary-v21]'))return;
+  const loadBottomAlignment=()=>{
+    if(document.querySelector('script[data-wb-tutor-stationary-bottom-v21]'))return;
+    const fix=document.createElement('script');
+    fix.src='./tutor-stationary-bottom-fix-v21.js?wb=20260818-2015';
+    fix.async=false;
+    fix.setAttribute('data-wb-tutor-stationary-bottom-v21','1');
+    document.body.appendChild(fix);
+  };
   const script=document.createElement('script');
   script.src='./tutor-stationary-restore-v21.js?wb=20260818-1952';
   script.async=false;
   script.setAttribute('data-wb-tutor-stationary-v21','1');
+  script.addEventListener('load',loadBottomAlignment,{once:true});
   document.body.appendChild(script);
 })();
