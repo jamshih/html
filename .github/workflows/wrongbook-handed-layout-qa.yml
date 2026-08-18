@@ -48,6 +48,7 @@ jobs:
           name: wrongbook-handed-layout-qa
           path: |
             /tmp/wb-handed-result.json
+            /tmp/wb-handed-http.log
             /tmp/wrongbook-handed-right.png
             /tmp/wrongbook-handed-left.png
             /tmp/wrongbook-handed-mobile.png
