@@ -1,16 +1,35 @@
 // Wrong Book radial mind-map subject navigation.
 // Reuses the app's canonical SUBJECTS + setSubject() state flow.
 (function(){
-  const VERSION='2026-08-18-mindmap-subject-nav-v1';
+  const VERSION='2026-08-18-mindmap-subject-nav-v2';
   let installToken=0;
+
+  function neutralizeMindmapSubjectContainer(){
+    const wrap=document.getElementById('mmWrap');
+    if(!wrap)return null;
+    const current=String(wrap.getAttribute('data-subject')||state?.subject||'');
+    if(current)wrap.dataset.mmSubject=current;
+    // `data-subject` is reserved for actual subject controls by app-5.js.
+    // Leaving it on the whole mind-map wrapper makes bind() attach an onclick
+    // to the canvas; clicks on the nested <select> then re-render the page
+    // before the native selection/change can complete.
+    wrap.removeAttribute('data-subject');
+    if(wrap.onclick)wrap.onclick=null;
+    return wrap;
+  }
 
   function install(){
     if(typeof state!=='object'||state.page!=='mindmap')return;
+    neutralizeMindmapSubjectContainer();
     const toolbar=document.getElementById('mmToolbar');
     if(!toolbar||!Array.isArray(SUBJECTS)||typeof setSubject!=='function')return;
-    if(toolbar.querySelector('[data-mm-subject-nav]'))return;
-    const token=++installToken;
     const current=String(state.subject||SUBJECTS[0]?.id||'');
+    const existing=toolbar.querySelector('[data-mm-subject-nav]');
+    if(existing){
+      if(existing.value!==current)existing.value=current;
+      return;
+    }
+    const token=++installToken;
     const select=document.createElement('select');
     select.id='mmSubjectSelect';
     select.dataset.mmSubjectNav=VERSION;
@@ -22,7 +41,12 @@
       option.selected=subject.id===current;
       select.appendChild(option);
     }
-    select.addEventListener('change',()=>{
+    // Defensive event isolation: the subject selector must never be owned by
+    // a click handler on an ancestor, even if another runtime patch adds one.
+    select.addEventListener('pointerdown',event=>event.stopPropagation());
+    select.addEventListener('click',event=>event.stopPropagation());
+    select.addEventListener('change',event=>{
+      event.stopPropagation();
       if(token!==installToken)return;
       const next=select.value;
       if(!next||next===state.subject)return;
@@ -37,8 +61,25 @@
 
   if(typeof bind==='function'){
     const baseBind=bind;
-    bind=function(){baseBind();setTimeout(install,0)};
+    bind=function(){
+      baseBind();
+      // Clear the accidental wrapper click handler synchronously, before the
+      // user can interact with the freshly rendered mind-map.
+      neutralizeMindmapSubjectContainer();
+      setTimeout(install,0);
+    };
   }
   setTimeout(install,0);
-  window.WrongBookMindmapSubjectNav={version:VERSION,install};
+  window.WrongBookMindmapSubjectNav={
+    version:VERSION,
+    install,
+    neutralizeMindmapSubjectContainer,
+    qa(){
+      const wrap=document.getElementById('mmWrap');
+      const select=document.getElementById('mmSubjectSelect');
+      const expected=String(state?.subject||'');
+      const pass=Boolean(state?.page!=='mindmap'||(wrap&&select&&!wrap.hasAttribute('data-subject')&&!wrap.onclick&&select.value===expected));
+      return{version:VERSION,pass,wrapperPresent:Boolean(wrap),wrapperHasInteractiveDataSubject:Boolean(wrap?.hasAttribute('data-subject')),wrapperHasClickHandler:Boolean(wrap?.onclick),selectPresent:Boolean(select),selectedValue:select?.value||null,expectedSubject:expected};
+    }
+  };
 })();
