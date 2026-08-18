@@ -2,9 +2,29 @@
 // Fixes first-frame fit and the zero-radius root orientation without replacing the renderer.
 (function(){
   const VERSION='2026-08-18-radial-geometry-fix-v3';
+  const SUBJECT_NAV_VERSION='2026-08-18-mindmap-subject-nav-v1';
   let installToken=0;
 
+  function ensureSubjectNavigation(){
+    if(!document.querySelector('link[data-mm-subject-nav-style]')){
+      const link=document.createElement('link');
+      link.rel='stylesheet';
+      link.href=`./mindmap-subject-nav-v1.css?wb=${SUBJECT_NAV_VERSION}`;
+      link.dataset.mmSubjectNavStyle=SUBJECT_NAV_VERSION;
+      document.head.appendChild(link);
+    }
+    if(!window.WrongBookMindmapSubjectNav&&!document.querySelector('script[data-mm-subject-nav-loader]')){
+      const script=document.createElement('script');
+      script.src=`./mindmap-subject-nav-v1.js?wb=${SUBJECT_NAV_VERSION}`;
+      script.dataset.mmSubjectNavLoader=SUBJECT_NAV_VERSION;
+      document.body.appendChild(script);
+    }else{
+      window.WrongBookMindmapSubjectNav?.install?.();
+    }
+  }
+
   function install(){
+    ensureSubjectNavigation();
     if(typeof state!=='object'||state.page!=='mindmap')return;
     const wrap=document.getElementById('mmWrap');
     const svg=document.getElementById('mmSvg');
@@ -88,6 +108,7 @@
     const baseBind=bind;
     bind=function(){baseBind();setTimeout(install,0)};
   }
+  ensureSubjectNavigation();
   setTimeout(install,0);
   window.WrongBookMindmapGeometryFix={version:VERSION,install};
 })();
