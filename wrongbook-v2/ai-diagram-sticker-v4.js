@@ -27,7 +27,7 @@
     .wb-ai-sticker-v4 *:not(${INTERACTIVE}){cursor:grab!important}
     .wb-ai-sticker-v4 ${INTERACTIVE}{cursor:auto!important;touch-action:auto!important;user-select:auto!important}
     .wb-ai-sticker-v4.wb-ai-is-dragging,.wb-ai-sticker-v4.wb-ai-is-dragging *:not(${INTERACTIVE}){cursor:grabbing!important}
-    #paper,.paper,.v3-paper,[data-wb-writing-surface],[data-wb-writing-paper]{transform:none!important;translate:none!important}
+    #paper,.paper,.v3-paper,[data-wb-writing-surface],[data-wb-writing-paper]{translate:none!important}
   `;
   document.head.appendChild(style);
 
