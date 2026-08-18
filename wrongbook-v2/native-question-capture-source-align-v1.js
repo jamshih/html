@@ -21,4 +21,5 @@
   loadScript('./tutor-clean-figure-v1.js?wb=20260818-1124','data-wb-tutor-clean-figure');
   loadScript('./tutor-workspace-unify-v13.js?wb=20260818-1203','data-wb-tutor-workspace-unify-v13');
   loadScript('./tutor-nav-stability-v14.js?wb=20260818-1212','data-wb-tutor-nav-stability-v14');
+  loadScript('./problem-context-isolation-v1.js?wb=20260818-1228','data-wb-problem-context-isolation-v1');
 })();
