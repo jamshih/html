@@ -6,9 +6,9 @@ on:
       - 'wrongbook-v2/on-device-image-preprocess-v1.js'
       - 'wrongbook-v2/ai-fast-route-v1.js'
       - 'wrongbook-v2/ai-diagram-runtime-fix-v1.js'
-      - 'wrongbook-v2/ai-diagram-scope-guard-v1.js'
+      - 'wrongbook-v2/ai-diagram-scope-guard-v2.js'
       - 'wrongbook-v2/ai-diagram-tools-v1.js'
-      - 'wrongbook-v2/ai-diagram-sticker-v3.js'
+      - 'wrongbook-v2/ai-diagram-sticker-v4.js'
       - 'wrongbook-v2/concept-explorer-v5-runtime-fix.js'
       - 'wrongbook-v2/index.html'
       - 'wrongbook-v2/qa/ai-pipeline-selftest.html'
@@ -27,9 +27,9 @@ jobs:
           node --check wrongbook-v2/on-device-image-preprocess-v1.js
           node --check wrongbook-v2/ai-fast-route-v1.js
           node --check wrongbook-v2/ai-diagram-runtime-fix-v1.js
-          node --check wrongbook-v2/ai-diagram-scope-guard-v1.js
+          node --check wrongbook-v2/ai-diagram-scope-guard-v2.js
           node --check wrongbook-v2/ai-diagram-tools-v1.js
-          node --check wrongbook-v2/ai-diagram-sticker-v3.js
+          node --check wrongbook-v2/ai-diagram-sticker-v4.js
           node --check wrongbook-v2/concept-explorer-v5-runtime-fix.js
       - name: Static contracts
         run: |
@@ -37,14 +37,17 @@ jobs:
           grep -q 'rowProjection:true' wrongbook-v2/on-device-image-preprocess-v1.js
           grep -q 'wrongbook-ai-fast' wrongbook-v2/ai-fast-route-v1.js
           grep -q 'diagram-spec:v1:' wrongbook-v2/ai-diagram-runtime-fix-v1.js
-          grep -q 'broadWritingDiagramContracts' wrongbook-v2/ai-diagram-scope-guard-v1.js
+          grep -q 'tightRoots' wrongbook-v2/ai-diagram-scope-guard-v2.js
+          grep -q 'smallest complete visual card' wrongbook-v2/ai-diagram-scope-guard-v2.js
           grep -q 'deterministic-svg' wrongbook-v2/ai-diagram-tools-v1.js
-          grep -q 'sameParentLayer:true' wrongbook-v2/ai-diagram-sticker-v3.js
-          grep -q 'includesContainerAndText:true' wrongbook-v2/ai-diagram-sticker-v3.js
-          grep -q 'writingDraggable' wrongbook-v2/ai-diagram-sticker-v3.js
-          ! grep -q 'appendChild(card)' wrongbook-v2/ai-diagram-sticker-v3.js
-          ! grep -q '214748' wrongbook-v2/ai-diagram-sticker-v3.js
-          ! grep -q 'ai-diagram-sticker-v2.js' wrongbook-v2/index.html
+          grep -q 'tightVisibleHitbox:true' wrongbook-v2/ai-diagram-sticker-v4.js
+          grep -q 'oversizedDraggable' wrongbook-v2/ai-diagram-sticker-v4.js
+          grep -q 'sameParentLayer:true' wrongbook-v2/ai-diagram-sticker-v4.js
+          grep -q 'includesContainerAndText:true' wrongbook-v2/ai-diagram-sticker-v4.js
+          ! grep -q 'appendChild(card)' wrongbook-v2/ai-diagram-sticker-v4.js
+          ! grep -q '214748' wrongbook-v2/ai-diagram-sticker-v4.js
+          ! grep -q 'ai-diagram-sticker-v3.js' wrongbook-v2/index.html
+          ! grep -q 'ai-diagram-scope-guard-v1.js' wrongbook-v2/index.html
           ! grep -q 'ai-diagram-sticker-v1.js' wrongbook-v2/concept-explorer-v5-runtime-fix.js
       - name: Browser preprocessing diagram and drag QA
         run: |
