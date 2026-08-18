@@ -1,0 +1,3 @@
+/* Self-QA fix: allow dragged recall cards to remain reachable instead of clipping at canvas edges. */
+.wbpg-canvas{overflow:auto;overscroll-behavior:contain}
+@media(max-width:780px){.wbpg-canvas{overflow:auto;-webkit-overflow-scrolling:touch}}
