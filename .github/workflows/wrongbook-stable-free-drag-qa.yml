@@ -9,6 +9,7 @@ on:
       - 'wrongbook-v2/mindmap-subject-nav-v1.js'
       - 'wrongbook-v2/mindmap-radial-runtime-fix-v3.js'
       - 'wrongbook-v2/qa/mindmap-stable-free-drag-v2-playwright.js'
+      - 'wrongbook-v2/qa/mindmap-drag-diagnostic-v1.js'
       - '.github/workflows/wrongbook-stable-free-drag-qa.yml'
 
 permissions:
@@ -25,7 +26,7 @@ jobs:
           node --check wrongbook-v2/mindmap-root-subject-nav-v1.js
           node --check wrongbook-v2/mindmap-subject-nav-v1.js
           node --check wrongbook-v2/mindmap-radial-runtime-fix-v3.js
-          node --check wrongbook-v2/qa/mindmap-stable-free-drag-v2-playwright.js
+          node --check wrongbook-v2/qa/mindmap-drag-diagnostic-v1.js
       - name: Install Playwright core
         run: |
           mkdir -p /tmp/wb-pw
@@ -33,7 +34,7 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install playwright-core@1.55.0 --no-save
           ln -s /tmp/wb-pw/node_modules "$GITHUB_WORKSPACE/node_modules"
-      - name: Real Chromium node stability and free-drag regression
+      - name: Diagnose selected-node versus sibling movement
         env:
           CHROMIUM_PATH: /usr/bin/chromium
           WB_QA_URL: http://127.0.0.1:8765/wrongbook-v2/index.html
@@ -43,8 +44,7 @@ jobs:
           server=$!
           trap 'kill $server || true' EXIT
           sleep 1
-          # This rerun includes the full-node pointer-ownership fix.
-          node wrongbook-v2/qa/mindmap-stable-free-drag-v2-playwright.js | tee /tmp/wb-stable-drag-result.json
+          node wrongbook-v2/qa/mindmap-drag-diagnostic-v1.js | tee /tmp/wb-stable-drag-result.json
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,6 +53,4 @@ jobs:
           path: |
             /tmp/wb-stable-drag-result.json
             /tmp/wb-stable-drag-http.log
-            /tmp/wrongbook-stable-free-drag-desktop.png
-            /tmp/wrongbook-stable-free-drag-mobile.png
           if-no-files-found: warn
