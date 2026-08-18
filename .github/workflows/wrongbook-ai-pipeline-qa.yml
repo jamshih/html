@@ -1,0 +1,47 @@
+name: Wrongbook AI Pipeline QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wrongbook-v2/on-device-image-preprocess-v1.js'
+      - 'wrongbook-v2/ai-fast-route-v1.js'
+      - 'wrongbook-v2/ai-diagram-tools-v1.js'
+      - 'wrongbook-v2/ai-diagram-sticker-v2.js'
+      - 'wrongbook-v2/concept-explorer-v5-runtime-fix.js'
+      - 'wrongbook-v2/index.html'
+      - 'wrongbook-v2/qa/ai-pipeline-selftest.html'
+      - '.github/workflows/wrongbook-ai-pipeline-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ai-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check wrongbook-v2/on-device-image-preprocess-v1.js
+          node --check wrongbook-v2/ai-fast-route-v1.js
+          node --check wrongbook-v2/ai-diagram-tools-v1.js
+          node --check wrongbook-v2/ai-diagram-sticker-v2.js
+          node --check wrongbook-v2/concept-explorer-v5-runtime-fix.js
+      - name: Static contracts
+        run: |
+          grep -q 'wholeOriginalUpload:false' wrongbook-v2/on-device-image-preprocess-v1.js
+          grep -q 'rowProjection:true' wrongbook-v2/on-device-image-preprocess-v1.js
+          grep -q 'wrongbook-ai-fast' wrongbook-v2/ai-fast-route-v1.js
+          grep -q 'deterministic-svg' wrongbook-v2/ai-diagram-tools-v1.js
+          grep -q 'wholeCardDrag:true' wrongbook-v2/ai-diagram-sticker-v2.js
+          ! grep -q 'ai-diagram-sticker-v1.js' wrongbook-v2/concept-explorer-v5-runtime-fix.js
+      - name: Browser preprocessing diagram and drag QA
+        run: |
+          python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-http.log 2>&1 &
+          server=$!
+          trap 'kill $server || true' EXIT
+          sleep 1
+          chromium --headless --no-sandbox --disable-gpu --virtual-time-budget=12000 --dump-dom http://127.0.0.1:8765/qa/ai-pipeline-selftest.html > /tmp/wb-ai-dom.html
+          cat /tmp/wb-ai-dom.html
+          grep -q 'data-status="PASS"' /tmp/wb-ai-dom.html
+          grep -q '"status": "PASS"' /tmp/wb-ai-dom.html
