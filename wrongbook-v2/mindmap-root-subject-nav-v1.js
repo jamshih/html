@@ -1,11 +1,14 @@
 // Wrong Book root-level subject gathering.
-// Collapsing any subject tree reveals every subject as peer nodes inside the mind-map canvas.
+// Clicking a subject root collapses visually into a global peer-level subject overview.
 (function(){
   const VERSION='2026-08-18-root-subject-gathering-v2';
   const SVG_NS='http://www.w3.org/2000/svg';
   let observer=null;
   let resizeObserver=null;
   let openTimer=0;
+  let overviewOpen=false;
+  let overviewSubject='';
+  let bypassRootClick=false;
 
   function currentSubjectId(){
     return String((typeof state==='object'&&state?.subject)||'');
@@ -72,11 +75,18 @@
     return{cx,cy,rx,ry,result};
   }
 
+  function setOverview(open){
+    overviewOpen=Boolean(open);
+    overviewSubject=overviewOpen?currentSubjectId():'';
+    requestAnimationFrame(sync);
+  }
+
   function expandCurrentRoot(){
     const root=document.querySelector('#mmSvg g.node.root');
     if(!root?.classList.contains('collapsed'))return false;
     const target=root.querySelector('circle')||root;
-    target.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
+    bypassRootClick=true;
+    try{target.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}))}finally{bypassRootClick=false}
     return true;
   }
 
@@ -84,14 +94,17 @@
     const next=String(subjectId||'');
     if(!next)return;
     clearTimeout(openTimer);
+    setOverview(false);
     if(next===currentSubjectId()){
       expandCurrentRoot();
+      setTimeout(sync,60);
       return;
     }
     setSubject(next);
     const ensureExpanded=()=>{
       if(typeof state!=='object'||state.page!=='mindmap'||currentSubjectId()!==next)return;
       expandCurrentRoot();
+      sync();
     };
     setTimeout(ensureExpanded,40);
     openTimer=setTimeout(ensureExpanded,720);
@@ -184,10 +197,15 @@
     const svg=document.getElementById('mmSvg');
     const root=svg?.querySelector('g.node.root');
     if(!wrap||!svg||!root)return false;
+    if(overviewOpen&&overviewSubject!==currentSubjectId()){
+      overviewOpen=false;
+      overviewSubject='';
+    }
     const nav=createNavigator(svg);
     if(!nav)return false;
 
-    const collapsed=root.classList.contains('collapsed');
+    const rootCollapsed=root.classList.contains('collapsed');
+    const collapsed=overviewOpen||rootCollapsed;
     wrap.classList.toggle('wbmm-root-overview',collapsed);
     nav.style.display=collapsed?'':'none';
     nav.setAttribute('aria-hidden',collapsed?'false':'true');
@@ -227,10 +245,13 @@
     if(svg.dataset.rootSubjectNav!==VERSION){
       svg.dataset.rootSubjectNav=VERSION;
       svg.addEventListener('click',event=>{
-        if(!event.target.closest?.('g.node.root'))return;
-        setTimeout(sync,0);
-        setTimeout(sync,620);
+        if(!event.target.closest?.('g.node.root')||bypassRootClick)return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setOverview(true);
       },true);
+      document.getElementById('mmExpandAll')?.addEventListener('click',()=>{overviewOpen=false;overviewSubject='';setTimeout(sync,620)});
+      document.getElementById('mmCollapseAll')?.addEventListener('click',()=>{overviewOpen=false;overviewSubject='';setTimeout(sync,620)});
     }
   }
 
@@ -248,17 +269,21 @@
     install,
     sync,
     openSubject,
+    setOverview,
     qa(){
       const wrap=document.getElementById('mmWrap');
       const svg=document.getElementById('mmSvg');
       const root=svg?.querySelector('g.node.root');
       const nav=document.getElementById('mmRootSubjectNav');
       const subjects=subjectRegistry();
-      const collapsed=Boolean(root?.classList.contains('collapsed'));
+      const rootCollapsed=Boolean(root?.classList.contains('collapsed'));
+      const collapsed=Boolean(overviewOpen||rootCollapsed);
       const nodes=[...(nav?.querySelectorAll('[data-mm-root-subject]')||[])];
       return{
         version:VERSION,
         collapsed,
+        explicitOverview:overviewOpen,
+        rootCollapsed,
         overviewClass:Boolean(wrap?.classList.contains('wbmm-root-overview')),
         gatheringVisible:Boolean(nav&&nav.style.display!=='none'),
         subjectCount:subjects.length,
