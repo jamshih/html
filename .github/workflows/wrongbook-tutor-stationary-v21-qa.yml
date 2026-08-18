@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'wrongbook-v2/tutor-stationary-restore-v21.js'
+      - 'wrongbook-v2/tutor-stationary-inline-lock-v22.js'
       - 'wrongbook-v2/mindmap-single-scope-merge-v1.js'
       - 'wrongbook-v2/qa/tutor-stationary-v21.html'
       - '.github/workflows/wrongbook-tutor-stationary-v21-qa.yml'
@@ -11,6 +12,7 @@ on:
     branches: [main]
     paths:
       - 'wrongbook-v2/tutor-stationary-restore-v21.js'
+      - 'wrongbook-v2/tutor-stationary-inline-lock-v22.js'
       - 'wrongbook-v2/mindmap-single-scope-merge-v1.js'
       - 'wrongbook-v2/qa/tutor-stationary-v21.html'
       - '.github/workflows/wrongbook-tutor-stationary-v21-qa.yml'
@@ -26,14 +28,17 @@ jobs:
       - name: Syntax and ownership contracts
         run: |
           node --check wrongbook-v2/tutor-stationary-restore-v21.js
+          node --check wrongbook-v2/tutor-stationary-inline-lock-v22.js
           node --check wrongbook-v2/mindmap-single-scope-merge-v1.js
           grep -q "problemSignature" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "sessionMatchesProblem" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "restoredFrom:'v12h'" wrongbook-v2/tutor-stationary-restore-v21.js
-          grep -q "calibrateBottom" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "height:auto!important" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "max-width:360px" wrongbook-v2/tutor-stationary-restore-v21.js
-          grep -q "tutor-stationary-restore-v21.js?wb=20260818-2024-v12h" wrongbook-v2/mindmap-single-scope-merge-v1.js
+          grep -q "setProperty(name,value,'important')" wrongbook-v2/tutor-stationary-inline-lock-v22.js
+          grep -q "const adjustment=GAP-gap" wrongbook-v2/tutor-stationary-inline-lock-v22.js
+          grep -q "tutor-stationary-restore-v21.js?wb=20260818-2032-v12h" wrongbook-v2/mindmap-single-scope-merge-v1.js
+          grep -q "tutor-stationary-inline-lock-v22.js?wb=20260818-2032" wrongbook-v2/mindmap-single-scope-merge-v1.js
       - name: Real browser stationary tutor regression
         run: |
           python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-v21-http.log 2>&1 &
