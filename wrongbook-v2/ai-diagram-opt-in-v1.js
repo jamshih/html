@@ -2,7 +2,7 @@
 // Keeps legacy paper hints from sticking to the workspace and only reveals AI diagrams after an explicit user action.
 (function(){
   'use strict';
-  const VERSION='2026-08-18-ai-diagram-opt-in-v1';
+  const VERSION='2026-08-18-ai-diagram-opt-in-v1.1';
   if(window.__wrongbookAiDiagramOptInV1===VERSION)return;
   window.__wrongbookAiDiagramOptInV1=VERSION;
 
@@ -21,14 +21,18 @@
   const openProblems=new Set();
   let queued=false;
 
+  const scoped=(prefix,selectors)=>selectors.split(',').map(selector=>`${prefix} ${selector.trim()}`).join(',');
   if(!document.getElementById(STYLE_ID)){
     const style=document.createElement('style');
     style.id=STYLE_ID;
+    const overlayCss=[scoped('.pf-problem-workspace',LEGACY_OVERLAY),scoped('.problem-details',LEGACY_OVERLAY)].join(',');
+    const closedCss=[
+      scoped('.pf-problem-workspace:not([data-wb-diagram-opt-in-open="1"])',CARD_SELECTORS),
+      scoped('.problem-details:not([data-wb-diagram-opt-in-open="1"])',CARD_SELECTORS)
+    ].join(',');
     style.textContent=`
-      .pf-problem-workspace ${LEGACY_OVERLAY},
-      .problem-details ${LEGACY_OVERLAY}{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
-      .pf-problem-workspace:not([data-wb-diagram-opt-in-open="1"]) ${CARD_SELECTORS},
-      .problem-details:not([data-wb-diagram-opt-in-open="1"]) ${CARD_SELECTORS}{display:none!important;visibility:hidden!important;pointer-events:none!important}
+      ${overlayCss}{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+      ${closedCss}{display:none!important;visibility:hidden!important;pointer-events:none!important}
       .wb-diagram-opt-in-control{display:flex;align-items:center;justify-content:flex-start;padding:0 0 12px;margin:0}
       .wb-diagram-opt-in-control .soft-btn{min-height:38px;white-space:nowrap}
     `;
