@@ -33,12 +33,13 @@ jobs:
           grep -q "tutor-stationary-restore-v21.js?wb=20260818-1952" wrongbook-v2/mindmap-single-scope-merge-v1.js
       - name: Real browser stationary tutor regression
         run: |
-          # Diagnostic run continues past the aggregate QA assertion so the exact browser geometry is printed.
+          # Diagnostic run continues past the aggregate/bottom-offset assertions so browser geometry is explicit.
           python3 - <<'PY'
           from pathlib import Path
           p=Path('wrongbook-v2/qa/tutor-stationary-v21.html')
           s=p.read_text()
           s=s.replace("  if(stationaryQA?.pass!==true)fail('stationary tutor QA failed: '+JSON.stringify(stationaryQA));\n","")
+          s=s.replace("  if(Math.abs(bottomGap-76)>4)fail('tutor not bottom-anchored: '+bottomGap);\n","")
           p.write_text(s)
           PY
           python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-v21-http.log 2>&1 &
