@@ -54,24 +54,30 @@ async function assertGathering(page, expectedCurrent, viewportWidth) {
   const current = page.locator(`#mmRootSubjectNav [data-mm-root-subject="${expectedCurrent}"]`);
   assert.strictEqual(await current.getAttribute('aria-current'), 'true', 'current subject must be emphasized');
   const svgBox = await page.locator('#mmSvg').boundingBox();
-  const currentBox = await current.boundingBox();
-  assert(svgBox && currentBox, 'SVG and current node must have boxes');
+  const currentDot = await current.locator('.mm-root-subject-dot').boundingBox();
+  assert(svgBox && currentDot, 'SVG and current subject dot must have boxes');
   const svgCenter = { x: svgBox.x + svgBox.width / 2, y: svgBox.y + svgBox.height / 2 + 8 };
-  const currentCenter = { x: currentBox.x + currentBox.width / 2, y: currentBox.y + currentBox.height / 2 };
-  assert(Math.abs(currentCenter.x - svgCenter.x) < (viewportWidth <= 760 ? 70 : 95), 'current subject must remain near canvas center');
-  assert(Math.abs(currentCenter.y - svgCenter.y) < 65, 'current subject must remain near canvas center vertically');
+  const currentCenter = { x: currentDot.x + currentDot.width / 2, y: currentDot.y + currentDot.height / 2 };
+  assert(Math.abs(currentCenter.x - svgCenter.x) < 45, 'current subject must remain at canvas center');
+  assert(Math.abs(currentCenter.y - svgCenter.y) < 45, 'current subject must remain at canvas center vertically');
 
   const nodeBoxes = await page.locator('#mmRootSubjectNav [data-mm-root-subject]').evaluateAll(nodes => nodes.map(node => {
     const r = node.getBoundingClientRect();
-    return { id: node.getAttribute('data-mm-root-subject'), x:r.x, y:r.y, width:r.width, height:r.height };
+    const hit=node.querySelector('.mm-root-subject-hit');
+    const hr=hit?.getBoundingClientRect();
+    return { id: node.getAttribute('data-mm-root-subject'), x:r.x, y:r.y, width:r.width, height:r.height, hitWidth:hr?.width||0, hitHeight:hr?.height||0, hitPointer:hit?getComputedStyle(hit).pointerEvents:'' };
   }));
   assert.strictEqual(nodeBoxes.length, 10);
   for (const box of nodeBoxes) {
     assert(box.width > 4 && box.height > 4, `subject ${box.id} must be visibly rendered`);
+    assert(box.hitWidth >= 70 && box.hitHeight >= 60, `subject ${box.id} hit target too small`);
+    assert.strictEqual(box.hitPointer, 'all', `subject ${box.id} hit target must receive pointer events`);
     assert(box.x >= svgBox.x - 5 && box.x + box.width <= svgBox.x + svgBox.width + 5, `subject ${box.id} clipped horizontally`);
     assert(box.y >= svgBox.y - 5 && box.y + box.height <= svgBox.y + svgBox.height + 5, `subject ${box.id} clipped vertically`);
     if (box.id !== expectedCurrent) {
-      const c = { x: box.x + box.width/2, y: box.y + box.height/2 };
+      const dot = await page.locator(`#mmRootSubjectNav [data-mm-root-subject="${box.id}"] .mm-root-subject-dot`).boundingBox();
+      assert(dot, `peer ${box.id} dot missing`);
+      const c = { x: dot.x + dot.width/2, y: dot.y + dot.height/2 };
       const distance = Math.hypot(c.x - currentCenter.x, c.y - currentCenter.y);
       assert(distance >= (viewportWidth <= 760 ? 78 : 150), `peer ${box.id} is not an outer node: ${distance}`);
     }
@@ -127,7 +133,7 @@ async function runDesktop(browser) {
   const chemistryQA=await assertGathering(page,'chemistry',1280);
   await page.screenshot({path:'/tmp/wrongbook-subject-gathering-chemistry.png',fullPage:false});
 
-  await page.locator('#mmRootSubjectNav [data-mm-root-subject="biology"]').click();
+  await page.locator('#mmRootSubjectNav [data-mm-root-subject="biology"] .mm-root-subject-hit').click();
   await page.waitForFunction(() => eval('state').subject==='biology');
   await page.waitForSelector('#mmSvg g.node.root');
   await page.waitForFunction(() => !document.getElementById('mmWrap')?.classList.contains('wbmm-root-overview'));
@@ -139,7 +145,7 @@ async function runDesktop(browser) {
   const biologyQA=await assertGathering(page,'biology',1280);
   await page.screenshot({path:'/tmp/wrongbook-subject-gathering-biology.png',fullPage:false});
 
-  await page.locator('#mmRootSubjectNav [data-mm-root-subject="biology"]').click();
+  await page.locator('#mmRootSubjectNav [data-mm-root-subject="biology"] .mm-root-subject-hit').click();
   await page.waitForFunction(() => !document.getElementById('mmWrap')?.classList.contains('wbmm-root-overview'));
   await sleep(700);
   assert((await page.locator('#mmSvg g.node').count())>1,'current subject node must re-expand its own tree');
