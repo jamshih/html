@@ -5,6 +5,7 @@ const hi=read('iscanner-highlight-bridge-v3.js');
 const semantic=read('ocr-first-analysis-v1.js');
 const display=read('ocr-clean-question-display-v1.js');
 const persist=read('scan-persistence-lite-v1.js');
+const tutor=read('tutor-clean-figure-v1.js');
 const loader=read('native-question-capture-source-align-v1.js');
 const sw=read('sw.js');
 const checks={
@@ -20,8 +21,9 @@ const checks={
   figureVisible:display.includes('題目的圖')&&display.includes('problemFiguresInline:true'),
   rawSecondary:display.includes('原始掃描對照')&&display.includes('rawScanSecondary:true'),
   cleanArtifactPersistence:persist.includes('cleanArtifactPersisted:true')&&persist.includes("state.scanBase64=''"),
-  loaderOrder:['on-device-image-preprocess-v2.js','iscanner-highlight-bridge-v3.js','ocr-first-analysis-v1.js','ocr-clean-question-display-v1.js','scan-persistence-lite-v1.js'].every(x=>loader.includes(x)),
-  cacheIncludes:['on-device-image-preprocess-v2.js','iscanner-highlight-bridge-v3.js','ocr-first-analysis-v1.js','ocr-clean-question-display-v1.js','ocr-clean-question-display-v1.css','scan-persistence-lite-v1.js'].every(x=>sw.includes(x))
+  tutorNoFullCamera:tutor.includes('fullCameraImage:false')&&tutor.includes('figureOnlyWhenNeeded:true'),
+  loaderOrder:['on-device-image-preprocess-v2.js','iscanner-highlight-bridge-v3.js','ocr-first-analysis-v1.js','ocr-clean-question-display-v1.js','scan-persistence-lite-v1.js','tutor-clean-figure-v1.js'].every(x=>loader.includes(x)),
+  cacheIncludes:['on-device-image-preprocess-v2.js','iscanner-highlight-bridge-v3.js','ocr-first-analysis-v1.js','ocr-clean-question-display-v1.js','ocr-clean-question-display-v1.css','scan-persistence-lite-v1.js','tutor-clean-figure-v1.js'].every(x=>sw.includes(x))
 };
 for(const [k,v] of Object.entries(checks))console.log(`${v?'PASS':'FAIL'} ${k}`);
 if(Object.values(checks).some(v=>!v))process.exit(1);
