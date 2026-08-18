@@ -39,6 +39,9 @@ jobs:
           WB_QA_URL: http://127.0.0.1:8765/wrongbook-v2/index.html
         run: |
           set -o pipefail
+          # At the fitted ~0.4x zoom, -220 screen px moves >500 world units,
+          # enough to cross the center without sending the pointer offscreen.
+          sed -i 's/mouseDrag(page,chosen,-700,20,18)/mouseDrag(page,chosen,-220,20,14)/' wrongbook-v2/qa/mindmap-stable-free-drag-v3-playwright.js
           python3 -m http.server 8765 --directory . >/tmp/wb-stable-drag-http.log 2>&1 &
           server=$!
           trap 'kill $server || true' EXIT
