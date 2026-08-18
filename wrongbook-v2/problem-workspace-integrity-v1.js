@@ -3,7 +3,7 @@
    Also repairs the known coordinate-geometry prompt and adds safe ink redo without replacing the ink engine. */
 (function(){
   'use strict';
-  const VERSION='2026-08-18-problem-workspace-integrity-v1.2';
+  const VERSION='2026-08-18-problem-workspace-integrity-v1.3';
   if(window.__problemWorkspaceIntegrityV1===VERSION)return;
   window.__problemWorkspaceIntegrityV1=VERSION;
   document.documentElement.dataset.problemWorkspaceIntegrity=VERSION;
@@ -30,8 +30,8 @@
     /* Free-response/calculation questions should not surface a presumed wrong answer on the paper. */
     .pf-problem-workspace .pf-free-response-paper .hand-note{display:none!important}
 
-    /* Keep a long tutor step above the ink toolbar instead of covering it. */
-    .pf-problem-workspace .v5-tutor-dock{max-height:min(38vh,310px)!important;overflow:auto!important}
+    /* Keep a long tutor step contained instead of letting it cover unrelated controls. */
+    .pf-problem-workspace .v5-tutor-dock{overflow:auto!important}
 
     /* Desktop/tablet problem view follows the supplied reference: no app sidebar or duplicate problem header,
        paper begins directly below the global breadcrumb bar, and the context rail touches the paper edge. */
@@ -46,11 +46,12 @@
       .pf-problem-workspace .pf-problem-head{display:none!important}
       .pf-problem-workspace .pf-paper-column>.panel>.panel-head{display:none!important}
       .pf-problem-workspace .pf-workspace-layout{grid-template-columns:minmax(0,1fr) clamp(340px,27vw,420px)!important;gap:0!important;align-items:stretch!important}
-      .pf-problem-workspace .pf-context-rail{border-left:1px solid var(--line)!important;padding:16px 18px 0 24px!important;min-height:calc(100vh - 58px)!important;align-content:start!important}
+      .pf-problem-workspace .pf-context-rail{border-left:1px solid var(--line)!important;padding:16px 18px 0 24px!important;min-height:calc(100vh - 58px)!important;align-content:start!important;margin:0!important;width:100%!important;max-width:none!important}
       .pf-problem-workspace .paper{min-height:calc(100vh - 58px)!important;border-top:0!important;border-bottom:0!important;box-shadow:none!important}
       .pf-problem-workspace .paper-demo{min-height:calc(100vh - 58px)!important;padding:30px 68px 250px!important}
       .pf-problem-workspace .paper-demo h4{font-size:18px!important;line-height:1.78!important}
       .pf-problem-workspace .paper-option{font-size:15px!important;line-height:1.68!important}
+      .pf-problem-workspace .v5-tutor-dock{max-height:min(38vh,310px)!important}
     }
 
     @media (min-width:861px) and (max-width:1100px){
@@ -61,13 +62,6 @@
     @media (max-width:900px){
       .pf-problem-workspace .paper-demo h4{font-size:16px!important;line-height:1.7!important}
       .pf-problem-workspace .paper-option{font-size:14px!important}
-    }
-    @media (max-width:860px){
-      .pf-problem-workspace .paper{min-height:calc(100dvh - 150px)!important}
-      .pf-problem-workspace .paper-demo{min-height:calc(100dvh - 150px)!important;padding:24px 18px 310px!important}
-      .pf-problem-workspace .v5-tutor-dock{left:8px!important;right:8px!important;width:auto!important;bottom:74px!important;max-height:34vh!important}
-      .pf-problem-workspace .paper-toolbar{left:8px!important;right:8px!important;bottom:10px!important;overflow-x:auto!important;flex-wrap:nowrap!important}
-      .pf-problem-workspace .paper-toolbar .toolset{flex:0 0 auto!important}
     }
   `;
   document.head.appendChild(style);
