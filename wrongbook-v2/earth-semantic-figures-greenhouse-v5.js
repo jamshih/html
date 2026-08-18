@@ -1,1 +1,0 @@
-V5_RENDERERS['greenhouse-cloud']=()=>v5Svg(`<path d="M48 105q-18-34 20-45q10-35 48-16q28-30 58 2q43-2 43 33q27 10 13 38H66q-26 0-18-12Z" fill="#f1cfd2" stroke="#c77c83"/><path d="M88 137V111M186 111V137" stroke="#c26a55" stroke-width="3" marker-end="url(#v5arr)"/><text x="137" y="82" text-anchor="middle" font-size="13">氣候保溫分支</text>`);

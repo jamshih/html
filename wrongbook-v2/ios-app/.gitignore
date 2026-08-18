@@ -1,7 +1,0 @@
-node_modules/
-www/
-build/
-.DS_Store
-*.xcarchive
-*.ipa
-assets/app-icon-1024.png
