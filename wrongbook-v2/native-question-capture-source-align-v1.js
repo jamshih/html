@@ -23,5 +23,5 @@
   loadScript('./tutor-nav-stability-v14.js?wb=20260818-1212','data-wb-tutor-nav-stability-v14');
   loadScript('./problem-context-isolation-v1.js?wb=20260818-1228','data-wb-problem-context-isolation-v1');
   loadScript('./tutor-nav-inplace-v15.js?wb=20260818-1238','data-wb-tutor-nav-inplace-v15');
-  loadScript('./tutor-nav-visual-v16.js?wb=20260818-1244','data-wb-tutor-nav-visual-v16');
+  loadScript('./tutor-nav-visual-v16.js?wb=20260818-1250','data-wb-tutor-nav-visual-v16');
 })();
