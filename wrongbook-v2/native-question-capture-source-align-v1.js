@@ -14,7 +14,6 @@
 
   const selected=()=>{try{return typeof selectedProblem==='function'?selectedProblem():null}catch{return null}};
   const tutorSession=p=>{try{return p&&typeof v5TutorSession==='function'?v5TutorSession(p):(p&&state?.tutorSessions?.[p.id])||null}catch{return null}};
-  const escTutor=v=>typeof esc==='function'?esc(String(v??'')):String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
   function tutorDisclosure(p){
     const awaiting=String(p?.id||'').startsWith('scan-')&&!p?.confirmed;
@@ -86,7 +85,10 @@
       }
     }
     for(const button of buttons){
-      button.disabled=false;button.removeAttribute('disabled');button.setAttribute('aria-disabled','false');button.dataset.universalTutor='1';
+      if(button.disabled)button.disabled=false;
+      if(button.hasAttribute('disabled'))button.removeAttribute('disabled');
+      if(button.getAttribute('aria-disabled')!=='false')button.setAttribute('aria-disabled','false');
+      if(button.dataset.universalTutor!=='1')button.dataset.universalTutor='1';
       if(!String(button.textContent||'').includes('AI 家教'))button.textContent='✦ AI 家教看我的作答';
     }
   }
@@ -103,8 +105,6 @@
 
   document.addEventListener('click',event=>{
     const button=event.target?.closest?.('[data-action="aiOnPaper"]');if(!button)return;
-    // V13 is the preferred owner once loaded. This fallback only closes the boot-time gap and keeps
-    // every problem usable if a later presentation module fails to initialize.
     if(window.__wrongbookTutorWorkspaceUnifyV13)return;
     event.preventDefault();event.stopPropagation();startTutorFallback();
   },true);
@@ -136,15 +136,15 @@
   loadScript('./iscanner-live-autocapture-v1.js?wb=20260818-1124','data-wb-iscanner-live');
   loadScript('./iscanner-highlight-bridge-v3.js?wb=20260818-1124','data-wb-ocr-first-highlight');
   loadScript('./ocr-first-analysis-v1.js?wb=20260818-1124','data-wb-ocr-first-analysis');
-  loadScript('./ocr-clean-question-display-v1.js?wb=20260818-1124','data-wb-ocr-clean-display');
+  loadScript('./ocr-clean-question-display-v1.js?wb=20260818-1909','data-wb-ocr-clean-display');
   loadScript('./scan-persistence-lite-v1.js?wb=20260818-1124','data-wb-scan-persistence-lite');
   loadScript('./tutor-clean-figure-v1.js?wb=20260818-1124','data-wb-tutor-clean-figure');
 
-  // One tutor navigator owner. The tutor remains visibility:hidden (with final geometry reserved)
-  // until V16 has normalized the DOM, so there is no loading-time navigator/frame handoff.
-  loadScript('./tutor-nav-visual-v16.js?wb=20260818-1356','data-wb-tutor-nav-visual-v16');
+  // These are the crash-safe idempotent builds. Query versions are intentionally bumped so GitHub Pages/CDN
+  // cannot reuse the older observer-loop scripts after deployment.
+  loadScript('./tutor-nav-visual-v16.js?wb=20260818-1909','data-wb-tutor-nav-visual-v16');
   revealTutorWhenStable();
-  loadScript('./tutor-workspace-unify-v13.js?wb=20260818-1356','data-wb-tutor-workspace-unify-v13');
+  loadScript('./tutor-workspace-unify-v13.js?wb=20260818-1909','data-wb-tutor-workspace-unify-v13');
   loadScript('./problem-context-isolation-v1.js?wb=20260818-1356','data-wb-problem-context-isolation-v1');
   loadScript('./tutor-frame-no-flash-v17.js?wb=20260818-1356','data-wb-tutor-frame-no-flash-v17');
   loadScript('./tutor-nav-paint-lock-v18.js?wb=20260818-1356','data-wb-tutor-nav-paint-lock-v18-loader');
@@ -153,6 +153,6 @@
 
   window.wrongbookUniversalTutorAccessQA=function(){
     ensureTutorDom();const p=selected(),buttons=[...document.querySelectorAll('[data-action="aiOnPaper"]')],enabled=buttons.every(b=>!b.disabled&&b.getAttribute('aria-disabled')!=='true'),sidebar=Boolean(document.querySelector('.wb-universal-tutor-disclosure,#miniTutorInput,[data-action="askMiniTutor"]'));
-    return{version:'2026-08-18-universal-tutor-v1',selectedProblemId:p?.id||null,selectedSubject:p?.subject||null,everyProblemEligible:true,noSubjectGate:true,noQuestionTypeGate:true,noConfirmationGate:true,noHandwritingGate:true,onPaperButtonPresent:!p||buttons.length>0,onPaperButtonEnabled:!p||enabled,sidebarTutorAccess:!p||sidebar,stagedTutorAvailable:typeof v5TutorStart==='function',preferredOwnerV13:Boolean(window.__wrongbookTutorWorkspaceUnifyV13),pass:Boolean(!p||(buttons.length>0&&enabled&&sidebar))};
+    return{version:'2026-08-18-universal-tutor-v1.1-idempotent',selectedProblemId:p?.id||null,selectedSubject:p?.subject||null,everyProblemEligible:true,noSubjectGate:true,noQuestionTypeGate:true,noConfirmationGate:true,noHandwritingGate:true,onPaperButtonPresent:!p||buttons.length>0,onPaperButtonEnabled:!p||enabled,sidebarTutorAccess:!p||sidebar,stagedTutorAvailable:typeof v5TutorStart==='function',preferredOwnerV13:Boolean(window.__wrongbookTutorWorkspaceUnifyV13),pass:Boolean(!p||(buttons.length>0&&enabled&&sidebar))};
   };
 })();
