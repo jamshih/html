@@ -1,8 +1,8 @@
 // Wrong Book radial mind-map geometry regression guard.
 // Fixes first-frame fit and the zero-radius root orientation without replacing the renderer.
 (function(){
-  const VERSION='2026-08-18-radial-geometry-fix-v4';
-  const SUBJECT_NAV_VERSION='2026-08-18-mindmap-subject-nav-v1';
+  const VERSION='2026-08-18-radial-geometry-fix-v5';
+  const SUBJECT_NAV_VERSION='2026-08-18-mindmap-subject-nav-v2';
   const SHELL_MAP_HOTFIX_VERSION='2026-08-18-shell-map-hotfix-v1';
   let installToken=0;
 
@@ -18,7 +18,18 @@
     document.body.appendChild(script);
   }
 
+  function neutralizeSubjectContainer(){
+    const wrap=document.getElementById('mmWrap');
+    if(!wrap)return null;
+    const current=String(wrap.getAttribute('data-subject')||state?.subject||'');
+    if(current)wrap.dataset.mmSubject=current;
+    wrap.removeAttribute('data-subject');
+    if(wrap.onclick)wrap.onclick=null;
+    return wrap;
+  }
+
   function ensureSubjectNavigation(){
+    neutralizeSubjectContainer();
     if(!document.querySelector('link[data-mm-subject-nav-style]')){
       const link=document.createElement('link');
       link.rel='stylesheet';
@@ -26,12 +37,14 @@
       link.dataset.mmSubjectNavStyle=SUBJECT_NAV_VERSION;
       document.head.appendChild(link);
     }
-    if(!window.WrongBookMindmapSubjectNav&&!document.querySelector('script[data-mm-subject-nav-loader]')){
+    const loadedVersion=window.WrongBookMindmapSubjectNav?.version||'';
+    const loader=document.querySelector('script[data-mm-subject-nav-loader]');
+    if(loadedVersion!==SUBJECT_NAV_VERSION&&!loader){
       const script=document.createElement('script');
       script.src=`./mindmap-subject-nav-v1.js?wb=${SUBJECT_NAV_VERSION}`;
       script.dataset.mmSubjectNavLoader=SUBJECT_NAV_VERSION;
       document.body.appendChild(script);
-    }else{
+    }else if(loadedVersion===SUBJECT_NAV_VERSION){
       window.WrongBookMindmapSubjectNav?.install?.();
     }
   }
@@ -40,7 +53,7 @@
     ensureShellMapHotfix();
     ensureSubjectNavigation();
     if(typeof state!=='object'||state.page!=='mindmap')return;
-    const wrap=document.getElementById('mmWrap');
+    const wrap=neutralizeSubjectContainer();
     const svg=document.getElementById('mmSvg');
     if(!wrap||!svg||typeof d3==='undefined')return;
     if(svg.dataset.geometryFix===VERSION)return;
@@ -120,10 +133,14 @@
 
   if(typeof bind==='function'){
     const baseBind=bind;
-    bind=function(){baseBind();setTimeout(install,0)};
+    bind=function(){
+      baseBind();
+      neutralizeSubjectContainer();
+      setTimeout(install,0);
+    };
   }
   ensureShellMapHotfix();
   ensureSubjectNavigation();
   setTimeout(install,0);
-  window.WrongBookMindmapGeometryFix={version:VERSION,install};
+  window.WrongBookMindmapGeometryFix={version:VERSION,install,neutralizeSubjectContainer};
 })();
