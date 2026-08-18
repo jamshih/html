@@ -5,6 +5,7 @@
 #mmRootSubjectNav .mm-subject-gathering-orbit{fill:none;stroke:rgba(201,194,179,.72);stroke-width:1.2;stroke-dasharray:2 8;vector-effect:non-scaling-stroke;pointer-events:none}
 #mmRootSubjectNav .mm-subject-gathering-title{fill:var(--mm-sub);font:700 11px/1 "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;letter-spacing:.16em;pointer-events:none}
 #mmRootSubjectNav .mm-root-subject-button{cursor:pointer;outline:none;transition:opacity .14s ease}
+#mmRootSubjectNav .mm-root-subject-hit{fill:transparent;pointer-events:all}
 #mmRootSubjectNav .mm-root-subject-button:hover .mm-root-subject-dot,#mmRootSubjectNav .mm-root-subject-button:focus-visible .mm-root-subject-dot{transform:scale(1.18)}
 #mmRootSubjectNav .mm-root-subject-dot{fill:#fff;stroke:var(--mm-text);stroke-width:2;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;transition:transform .14s ease,fill .14s ease}
 #mmRootSubjectNav .mm-root-subject-button.is-active .mm-root-subject-dot{fill:var(--mm-text);stroke:var(--mm-text)}
