@@ -1,0 +1,64 @@
+name: Wrongbook Stationary Tutor V21 QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'wrongbook-v2/tutor-stationary-restore-v21.js'
+      - 'wrongbook-v2/mindmap-single-scope-merge-v1.js'
+      - 'wrongbook-v2/qa/tutor-stationary-v21.html'
+      - '.github/workflows/wrongbook-tutor-stationary-v21-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'wrongbook-v2/tutor-stationary-restore-v21.js'
+      - 'wrongbook-v2/mindmap-single-scope-merge-v1.js'
+      - 'wrongbook-v2/qa/tutor-stationary-v21.html'
+      - '.github/workflows/wrongbook-tutor-stationary-v21-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  stationary-tutor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and ownership contracts
+        run: |
+          node --check wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "problemSignature" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "sessionMatchesProblem" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "bottom:76px" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "max-width:360px" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "tutor-stationary-restore-v21.js?wb=20260818-1952" wrongbook-v2/mindmap-single-scope-merge-v1.js
+      - name: Real browser stationary tutor regression
+        run: |
+          python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-v21-http.log 2>&1 &
+          server=$!
+          trap 'kill $server || true' EXIT
+          sleep 1
+          chromium --headless --no-sandbox --disable-gpu --window-size=1365,900 --virtual-time-budget=15000 --dump-dom http://127.0.0.1:8765/qa/tutor-stationary-v21.html > /tmp/wb-v21-dom.html
+          cat /tmp/wb-v21-dom.html
+          grep -q 'data-status="PASS"' /tmp/wb-v21-dom.html
+          grep -q '"pass": true' /tmp/wb-v21-dom.html
+          grep -q '"staleTutorRejected": true' /tmp/wb-v21-dom.html
+          grep -q '"contextQaPass": true' /tmp/wb-v21-dom.html
+          grep -q '"stationaryQaPass": true' /tmp/wb-v21-dom.html
+          grep -q '"sameDockAcrossPaging": true' /tmp/wb-v21-dom.html
+          grep -q '"geometryStableAcrossPaging": true' /tmp/wb-v21-dom.html
+          grep -q '"pageHeightOk": true' /tmp/wb-v21-dom.html
+          grep -q '"runtimeErrors": \[\]' /tmp/wb-v21-dom.html
+      - name: Capture rendered evidence
+        if: always()
+        run: |
+          chromium --headless --no-sandbox --disable-gpu --window-size=1365,900 --virtual-time-budget=15000 --screenshot=/tmp/wb-v21.png http://127.0.0.1:8765/qa/tutor-stationary-v21.html || true
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-stationary-tutor-v21
+          path: |
+            /tmp/wb-v21-dom.html
+            /tmp/wb-v21.png
+            /tmp/wb-v21-http.log
+          if-no-files-found: warn
