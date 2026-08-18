@@ -1,0 +1,32 @@
+name: Wrongbook Native Question Capture QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wrongbook-v2/native-question-capture-v1.js'
+      - 'wrongbook-v2/native-question-capture-v1.css'
+      - 'wrongbook-v2/native-question-capture-source-align-v1.js'
+      - 'wrongbook-v2/qa/native-question-capture-v1.mjs'
+      - 'wrongbook-v2/index.html'
+      - 'wrongbook-v2/sw.js'
+      - '.github/workflows/wrongbook-native-question-capture-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-question-capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check wrongbook-v2/native-question-capture-v1.js
+          node --check wrongbook-v2/native-question-capture-source-align-v1.js
+      - name: Targeting, answer-schema and diagram-fallback regression
+        run: node wrongbook-v2/qa/native-question-capture-v1.mjs
