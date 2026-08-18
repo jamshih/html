@@ -20,7 +20,8 @@
 
   loadScript('wrongbookAiDiagramScopeGuardV3','./ai-diagram-scope-guard-v3.js?wb=20260818-1124-full-card-1')
     .then(()=>loadScript('wrongbookAiDiagramStickerV5','./ai-diagram-sticker-v5.js?wb=20260818-1124-full-card-1'))
+    .then(()=>loadScript('wrongbookTutorDiagramPageUxV19','./tutor-diagram-page-ux-v19.js?wb=20260818-1430'))
     .catch(err=>console.error('[Wrongbook full-card sticker bootstrap]',err));
 
-  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap',legacyV4Blocked:true};
+  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v19',legacyV4Blocked:true,diagramPageUx:true};
 })();
