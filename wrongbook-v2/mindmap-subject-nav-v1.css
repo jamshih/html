@@ -1,0 +1,6 @@
+/* Subject switcher integrated into the existing radial mind-map toolbar. */
+#mmSubjectSelect{flex:0 0 auto;min-width:104px;max-width:148px;padding:6px 30px 6px 10px;border:1px solid var(--mm-line);border-radius:7px;background:#fff;color:var(--mm-text);font:600 12px/1.2 "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;cursor:pointer;outline:none}
+#mmSubjectSelect:hover{background:#f5f2eb}
+#mmSubjectSelect:focus-visible{border-color:#8f887a;box-shadow:0 0 0 2px rgba(143,136,122,.14)}
+#mmToolbar .mm-subject-sep{margin-right:1px}
+@media(max-width:760px){#mmSubjectSelect{min-width:92px;max-width:116px;padding:7px 24px 7px 8px;font-size:11px}}
