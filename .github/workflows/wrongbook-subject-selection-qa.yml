@@ -1,0 +1,51 @@
+name: Wrongbook Subject Selection QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'wrongbook-v2/index.html'
+      - 'wrongbook-v2/mindmap-subject-nav-v1.js'
+      - 'wrongbook-v2/mindmap-radial-runtime-fix-v3.js'
+      - 'wrongbook-v2/qa/subject-selection-v1.html'
+      - '.github/workflows/wrongbook-subject-selection-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  subject-selection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and production cache contracts
+        run: |
+          node --check wrongbook-v2/mindmap-subject-nav-v1.js
+          node --check wrongbook-v2/mindmap-radial-runtime-fix-v3.js
+          grep -q 'mindmap-subject-nav-v2' wrongbook-v2/mindmap-subject-nav-v1.js
+          grep -q 'mindmap-subject-nav-v2' wrongbook-v2/mindmap-radial-runtime-fix-v3.js
+          grep -q '2026-08-18-subject-selection-2000' wrongbook-v2/index.html
+          grep -Fq 'mindmap-radial-runtime-fix-v3.js?wb=20260818-geometry-5' wrongbook-v2/index.html
+      - name: Real browser subject-selection regression
+        run: |
+          python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-subject-http.log 2>&1 &
+          server=$!
+          trap 'kill $server || true' EXIT
+          sleep 1
+          chromium --headless --no-sandbox --disable-gpu --window-size=1440,1000 --virtual-time-budget=45000 --dump-dom http://127.0.0.1:8765/qa/subject-selection-v1.html > /tmp/wb-subject-dom.html
+          cat /tmp/wb-subject-dom.html
+          grep -q 'data-status="PASS"' /tmp/wb-subject-dom.html
+          grep -q '"pass": true' /tmp/wb-subject-dom.html
+          grep -q '"wrapperHasInteractiveDataSubject": false' /tmp/wb-subject-dom.html
+          grep -q '"wrapperHasClickHandler": false' /tmp/wb-subject-dom.html
+          grep -q '"runtimeErrors": \[\]' /tmp/wb-subject-dom.html
+      - name: Capture QA screenshot
+        run: |
+          chromium --headless --no-sandbox --disable-gpu --window-size=1440,1000 --virtual-time-budget=45000 --screenshot=/tmp/wrongbook-subject-selection-qa.png http://127.0.0.1:8765/qa/subject-selection-v1.html || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wrongbook-subject-selection-qa
+          path: |
+            /tmp/wb-subject-dom.html
+            /tmp/wrongbook-subject-selection-qa.png
+          if-no-files-found: warn
