@@ -3,6 +3,7 @@
 (function(){
   const VERSION='2026-08-18-mindmap-subject-nav-v3';
   const ROOT_NAV_VERSION='2026-08-18-root-subject-nav-v1';
+  const HANDED_LAYOUT_VERSION='2026-08-18-handed-layout-v1';
   let installToken=0;
 
   function ensureRootSubjectNavigation(){
@@ -21,6 +22,25 @@
     const script=document.createElement('script');
     script.src=`./mindmap-root-subject-nav-v1.js?wb=${ROOT_NAV_VERSION}`;
     script.dataset.mmRootSubjectNavLoader=ROOT_NAV_VERSION;
+    document.body.appendChild(script);
+  }
+
+  function ensureHandedLayout(){
+    if(!document.querySelector('link[data-mm-handed-layout-style]')){
+      const link=document.createElement('link');
+      link.rel='stylesheet';
+      link.href=`./mindmap-handed-layout-v1.css?wb=${HANDED_LAYOUT_VERSION}`;
+      link.dataset.mmHandedLayoutStyle=HANDED_LAYOUT_VERSION;
+      document.head.appendChild(link);
+    }
+    if(window.WrongBookMindmapHandedLayout?.version===HANDED_LAYOUT_VERSION){
+      window.WrongBookMindmapHandedLayout.install?.();
+      return;
+    }
+    if(document.querySelector('script[data-mm-handed-layout-loader]'))return;
+    const script=document.createElement('script');
+    script.src=`./mindmap-handed-layout-v1.js?wb=${HANDED_LAYOUT_VERSION}`;
+    script.dataset.mmHandedLayoutLoader=HANDED_LAYOUT_VERSION;
     document.body.appendChild(script);
   }
 
@@ -48,6 +68,7 @@
     const existing=toolbar.querySelector('[data-mm-subject-nav]');
     if(existing){
       if(existing.value!==current)existing.value=current;
+      ensureHandedLayout();
       return;
     }
     const token=++installToken;
@@ -78,6 +99,7 @@
     divider.setAttribute('aria-hidden','true');
     toolbar.insertBefore(divider,toolbar.firstChild);
     toolbar.insertBefore(select,divider);
+    ensureHandedLayout();
   }
 
   if(typeof bind==='function'){
@@ -95,6 +117,7 @@
     version:VERSION,
     install,
     ensureRootSubjectNavigation,
+    ensureHandedLayout,
     neutralizeMindmapSubjectContainer,
     qa(){
       const wrap=document.getElementById('mmWrap');
