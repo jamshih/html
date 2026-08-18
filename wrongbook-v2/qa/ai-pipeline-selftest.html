@@ -1,0 +1,25 @@
+<!doctype html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wrongbook AI pipeline self-test</title><style>body{font-family:system-ui;margin:20px}.card{width:520px;min-height:280px;border:1px solid #ddd;border-radius:18px;background:#fff}pre{white-space:pre-wrap}</style></head><body><section id="diagramCard" class="card"><div><strong>測試圖解</strong><span> AI 圖解</span></div><svg viewBox="0 0 400 200"><path d="M20 100H380" stroke="#555"/></svg></section><pre id="result" data-status="RUNNING">RUNNING</pre><script>var state={subject:'physics'};var SUPABASE_PUBLISHABLE_KEY='';function selectedProblem(){return{concept:'斜面受力',problemText:'物體靜止在斜面上。'}};</script><script src="../on-device-image-preprocess-v1.js"></script><script src="../ai-diagram-tools-v1.js"></script><script src="../ai-diagram-sticker-v2.js"></script><script>
+(async()=>{const checks=[];const ok=(name,value,detail='')=>checks.push({name,ok:Boolean(value),detail});try{
+  const src=document.createElement('canvas');src.width=1800;src.height=1200;const c=src.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,src.width,src.height);c.fillStyle='#111';for(let y=300;y<=760;y+=92){c.fillRect(260,y,1040,18);c.fillRect(300,y+30,760,12)}c.strokeStyle='#111';c.lineWidth=7;c.beginPath();c.moveTo(1120,420);c.lineTo(1420,650);c.stroke();const blob=await new Promise(r=>src.toBlob(r,'image/jpeg',.95));const file=new File([blob],'sheet.jpg',{type:'image/jpeg'});const processed=await wbPreprocessImageFile(file);
+  ok('preprocess returns JPEG',processed.mimeType==='image/jpeg');
+  ok('preprocess never uploads original dimensions',processed.preprocess.output.width<=1500&&processed.preprocess.output.height<=1500,JSON.stringify(processed.preprocess.output));
+  ok('row projection found content',processed.preprocess.rows.length>0,String(processed.preprocess.rows.length));
+  ok('physics preprocessing uses grayscale',processed.preprocess.grayscale===true);
+  ok('outer whitespace cropped',processed.preprocess.crop.width<1800||processed.preprocess.crop.height<1200,JSON.stringify(processed.preprocess.crop));
+  ok('QA declares original upload disabled',__wrongbookImagePreprocessQA().wholeOriginalUpload===false);
+
+  const renderTarget=document.createElement('section');renderTarget.className='card';document.body.appendChild(renderTarget);wbRenderDiagramSpec(renderTarget,{title:'受力圖',kind:'free_body',elements:[{type:'rect',x:430,y:270,width:140,height:90,label:'物體',style:'secondary'},{type:'vector',x1:500,y1:315,x2:500,y2:520,label:'mg',style:'accent',arrowEnd:true},{type:'vector',x1:500,y1:315,x2:500,y2:100,label:'N',style:'primary',arrowEnd:true}],essentialTerms:['重力','正向力'],notes:[]},{subject:'physics',title:'受力圖',concept:'受力',problemText:''});
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+  ok('dedicated diagram rendered',Boolean(renderTarget.querySelector('.wb-dd-svg')));
+  ok('diagram contains real vectors',renderTarget.querySelectorAll('line[marker-end]').length>=2,String(renderTarget.querySelectorAll('line[marker-end]').length));
+  ok('diagram has explicit sticker contract',Boolean(renderTarget.dataset.aiDiagramCard));
+  ok('diagram omits teacher-facing wording',!/學生能夠|協助學生|學習目標|推論出/.test(renderTarget.textContent));
+
+  const sticker=renderTarget;const before=sticker.getBoundingClientRect();sticker.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:41,pointerType:'mouse',button:0,clientX:before.left+80,clientY:before.top+80}));window.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,cancelable:true,pointerId:41,pointerType:'mouse',clientX:before.left+210,clientY:before.top+150}));window.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,cancelable:true,pointerId:41,pointerType:'mouse',clientX:before.left+210,clientY:before.top+150}));const after=sticker.getBoundingClientRect();
+  ok('AI diagram becomes floating sticker',sticker.classList.contains('wb-ai-is-floating'));
+  ok('mouse drag changes sticker position',Math.abs(after.left-before.left)>20||Math.abs(after.top-before.top)>20,`${before.left},${before.top} -> ${after.left},${after.top}`);
+  const sqa=__wrongbookAiStickerV2QA();ok('whole-card drag runtime active',sqa.wholeCardDrag===true);ok('orphan guard active',sqa.orphanGuard===true);
+}catch(e){checks.push({name:'uncaught error',ok:false,detail:String(e&&e.stack||e)})}
+const failed=checks.filter(x=>!x.ok);const el=document.getElementById('result');el.dataset.status=failed.length?'FAIL':'PASS';el.textContent=JSON.stringify({status:el.dataset.status,checks},null,2);document.title='AI_PIPELINE_'+el.dataset.status;
+})();
+</script></body></html>
