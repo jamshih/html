@@ -1,186 +1,39 @@
-// Wrong Book free-recall mind-map playground.
-// Loaded last: curriculum supplies ONLY structure; students supply all content.
+// Wrong Book exact radial mind-map playground.
+// Source of truth: user-provided D3 radial interface. Curriculum gives structure only; students draw their recall.
 (function(){
+  const COLORS=["#534AB7","#0F6E56","#993C1D","#993556","#185FA5","#7A5A2F","#2F6E7A","#7C4D79"];
   const e=value=>typeof esc==='function'?esc(String(value??'')):String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const safe=value=>e(value).replace(/`/g,'&#96;');
-
-  const BIOLOGY_108={
-    title:'108課綱 高中生物',
-    groups:[
-      {id:'bio-required',title:'必修生物',chapters:[
-        {id:'bio-r-1',title:'第1章 細胞的構造與功能',sections:[{id:'bio-r-1-1',title:'1-1 細胞的構造'},{id:'bio-r-1-2',title:'1-2 細胞與能量'},{id:'bio-r-1-3',title:'1-3 染色體與細胞分裂'}]},
-        {id:'bio-r-2',title:'第2章 生殖與遺傳',sections:[{id:'bio-r-2-1',title:'2-1 性狀的遺傳'},{id:'bio-r-2-2',title:'2-2 遺傳物質'},{id:'bio-r-2-3',title:'2-3 基因轉殖技術及其應用'}]},
-        {id:'bio-r-3',title:'第3章 演化與生物多樣性',sections:[{id:'bio-r-3-1',title:'3-1 生物的演化'},{id:'bio-r-3-2',title:'3-2 生命樹'},{id:'bio-r-3-3',title:'3-3 生物多樣性'}]}
-      ]},
-      {id:'bio-elective-1',title:'選修生物 I',chapters:[
-        {id:'bio-e1-1',title:'第1章 細胞的特性',sections:[{id:'bio-e1-1-1',title:'1-1 細胞的分子組成'},{id:'bio-e1-1-2',title:'1-2 細胞的構造與功能'},{id:'bio-e1-1-3',title:'1-3 細胞的生命歷程'}]},
-        {id:'bio-e1-2',title:'第2章 細胞代謝與能量',sections:[{id:'bio-e1-2-1',title:'2-1 細胞的代謝作用'},{id:'bio-e1-2-2',title:'2-2 細胞的能量來源'},{id:'bio-e1-2-3',title:'2-3 能量的來源、流轉與使用'}]},
-        {id:'bio-e1-3',title:'第3章 從染色體到DNA',sections:[{id:'bio-e1-3-1',title:'3-1 遺傳染色體學說驗證'},{id:'bio-e1-3-2',title:'3-2 攜帶遺傳訊息的分子'},{id:'bio-e1-3-3',title:'3-3 DNA的結構'}]},
-        {id:'bio-e1-4',title:'第4章 DNA與生物科技',sections:[{id:'bio-e1-4-1',title:'4-1 DNA複製'},{id:'bio-e1-4-2',title:'4-2 基因的表現'},{id:'bio-e1-4-3',title:'4-3 基因表現的調控'},{id:'bio-e1-4-4',title:'4-4 遺傳變異'},{id:'bio-e1-4-5',title:'4-5 生物科技'}]}
-      ]},
-      {id:'bio-elective-2',title:'選修生物 II',chapters:[
-        {id:'bio-e2-1',title:'第1章 生物的起源與演化',sections:[{id:'bio-e2-1-1',title:'1-1 生物起源的主要假說'},{id:'bio-e2-1-2',title:'1-2 生物起源的過程'},{id:'bio-e2-1-3',title:'1-3 生命型式的演化歷程'}]},
-        {id:'bio-e2-2',title:'第2章 植物體的形態、構造與功能',sections:[{id:'bio-e2-2-1',title:'2-1 植物體的組成層次'},{id:'bio-e2-2-2',title:'2-2 植物的營養構造與功能'}]},
-        {id:'bio-e2-3',title:'第3章 植物體物質的吸收、合成與運輸',sections:[{id:'bio-e2-3-1',title:'3-1 水和無機鹽的吸收與運輸'},{id:'bio-e2-3-2',title:'3-2 光合作用'},{id:'bio-e2-3-3',title:'3-3 有機養分的運輸'}]},
-        {id:'bio-e2-4',title:'第4章 植物的生殖、生長和發育',sections:[{id:'bio-e2-4-1',title:'4-1 植物的生殖'},{id:'bio-e2-4-2',title:'4-2 種子的萌發與幼苗的生長'},{id:'bio-e2-4-3',title:'4-3 植物激素'},{id:'bio-e2-4-4',title:'4-4 植物對環境刺激的反應'}]}
-      ]},
-      {id:'bio-elective-3',title:'選修生物 III',chapters:[
-        {id:'bio-e3-1',title:'第1章 動物體的組成與恆定',sections:[{id:'bio-e3-1-1',title:'1-1 動物體的組成'},{id:'bio-e3-1-2',title:'1-2 恆定'}]},
-        {id:'bio-e3-2',title:'第2章 循環與消化',sections:[{id:'bio-e3-2-1',title:'2-1 循環系統'},{id:'bio-e3-2-2',title:'2-2 消化系統'}]},
-        {id:'bio-e3-3',title:'第3章 呼吸與排泄',sections:[{id:'bio-e3-3-1',title:'3-1 呼吸系統'},{id:'bio-e3-3-2',title:'3-2 排泄作用'}]},
-        {id:'bio-e3-4',title:'第4章 神經、內分泌與免疫',sections:[{id:'bio-e3-4-1',title:'4-1 神經系統'},{id:'bio-e3-4-2',title:'4-2 內分泌系統'},{id:'bio-e3-4-3',title:'4-3 免疫系統'}]},
-        {id:'bio-e3-5',title:'第5章 生殖與胚胎發育',sections:[{id:'bio-e3-5-1',title:'5-1 生殖系統'},{id:'bio-e3-5-2',title:'5-2 胚胎發育'}]}
-      ]},
-      {id:'bio-elective-4',title:'選修生物 IV',chapters:[
-        {id:'bio-e4-1',title:'第1章 生物的演化',sections:[{id:'bio-e4-1-1',title:'1-1 遺傳變異與演化'},{id:'bio-e4-1-2',title:'1-2 族群遺傳'},{id:'bio-e4-1-3',title:'1-3 現代演化理論的發展'},{id:'bio-e4-1-4',title:'1-4 物種的形成'}]},
-        {id:'bio-e4-2',title:'第2章 生物與環境',sections:[{id:'bio-e4-2-1',title:'2-1 族群與群集'},{id:'bio-e4-2-2',title:'2-2 生態系'},{id:'bio-e4-2-3',title:'2-3 多樣的生態系'}]},
-        {id:'bio-e4-3',title:'第3章 生物多樣性與保育',sections:[{id:'bio-e4-3-1',title:'3-1 生物多樣性'},{id:'bio-e4-3-2',title:'3-2 人類與環境'}]}
-      ]}
-    ]
-  };
-
-  function genericScaffold(subjectId){
-    const curriculum=typeof twCurriculumSubject==='function'?twCurriculumSubject(subjectId):null;
-    const chapters=(curriculum?.chapters||[]).map((chapter,ci)=>({
-      id:String(chapter.id||`${subjectId}-c${ci+1}`),
-      title:String(chapter.title||`第 ${ci+1} 章`),
-      sections:(chapter.sections||[]).map((section,si)=>({
-        id:String(section.id||`${chapter.id||`c${ci+1}`}-s${si+1}`),
-        title:String(section.title||`單元 ${si+1}`)
-      }))
-    })).filter(ch=>ch.sections.length);
-    return {title:`108課綱 ${activeSubject().name}`,groups:[{id:`${subjectId}-core`,title:String(curriculum?.scope||'108課綱核心架構'),chapters}]};
+  const BIOLOGY_108={title:"108課綱\n高中生物",groups:[
+    {title:"必修生物",chapters:[{title:"第1章 細胞的構造與功能",sections:["1-1 細胞的構造","1-2 細胞與能量","1-3 染色體與細胞分裂"]},{title:"第2章 生殖與遺傳",sections:["2-1 性狀的遺傳","2-2 遺傳物質","2-3 基因轉殖技術及其應用"]},{title:"第3章 演化與生物多樣性",sections:["3-1 生物的演化","3-2 生命樹","3-3 生物多樣性"]}]},
+    {title:"選修生物 I",chapters:[{title:"第1章 細胞的特性",sections:["1-1 細胞的分子組成","1-2 細胞的構造與功能","1-3 細胞的生命歷程"]},{title:"第2章 細胞代謝與能量",sections:["2-1 細胞的代謝作用","2-2 細胞的能量來源","2-3 能量的來源、流轉與使用"]},{title:"第3章 從染色體到DNA",sections:["3-1 遺傳染色體學說驗證","3-2 攜帶遺傳訊息的分子","3-3 DNA的結構"]},{title:"第4章 DNA與生物科技",sections:["4-1 DNA複製","4-2 基因的表現","4-3 基因表現的調控","4-4 遺傳變異","4-5 生物科技"]}]},
+    {title:"選修生物 II",chapters:[{title:"第1章 生物的起源與演化",sections:["1-1 生物起源的主要假說","1-2 生物起源的過程","1-3 生命型式的演化歷程"]},{title:"第2章 植物體的形態、構造與功能",sections:["2-1 植物體的組成層次","2-2 植物的營養構造與功能"]},{title:"第3章 植物體物質的吸收、合成與運輸",sections:["3-1 水和無機鹽的吸收與運輸","3-2 光合作用","3-3 有機養分的運輸"]},{title:"第4章 植物的生殖、生長和發育",sections:["4-1 植物的生殖","4-2 種子的萌發與幼苗的生長","4-3 植物激素","4-4 植物對環境刺激的反應"]}]},
+    {title:"選修生物 III",chapters:[{title:"第1章 動物體的組成與恆定",sections:["1-1 動物體的組成","1-2 恆定"]},{title:"第2章 循環與消化",sections:["2-1 循環系統","2-2 消化系統"]},{title:"第3章 呼吸與排泄",sections:["3-1 呼吸系統","3-2 排泄作用"]},{title:"第4章 神經、內分泌與免疫",sections:["4-1 神經系統","4-2 內分泌系統","4-3 免疫系統"]},{title:"第5章 生殖與胚胎發育",sections:["5-1 生殖系統","5-2 胚胎發育"]}]},
+    {title:"選修生物 IV",chapters:[{title:"第1章 生物的演化",sections:["1-1 遺傳變異與演化","1-2 族群遺傳","1-3 現代演化理論的發展","1-4 物種的形成"]},{title:"第2章 生物與環境",sections:["2-1 族群與群集","2-2 生態系","2-3 多樣的生態系"]},{title:"第3章 生物多樣性與保育",sections:["3-1 生物多樣性","3-2 人類與環境"]}]}
+  ]};
+  function genericStructure(subjectId){const curriculum=typeof twCurriculumSubject==='function'?twCurriculumSubject(subjectId):null;const chapters=(curriculum?.chapters||[]).map((chapter,ci)=>({title:String(chapter.title||`第${ci+1}章`),sections:(chapter.sections||[]).map((section,si)=>String(section.title||`單元 ${si+1}`))})).filter(ch=>ch.sections.length);return{title:`108課綱\n${activeSubject().name}`,groups:[{title:String(curriculum?.scope||"108課綱核心架構"),chapters}]}}
+  function subjectStructure(subjectId){return subjectId==="biology"?BIOLOGY_108:genericStructure(subjectId)}
+  function toHierarchy(structure){return{name:structure.title,children:structure.groups.map(g=>({name:g.title,children:g.chapters.map(ch=>({name:ch.title,children:ch.sections.map(name=>({name}))}))}))}}
+  function inkStore(){state.mindMapInk=state.mindMapInk&&typeof state.mindMapInk==='object'?state.mindMapInk:{};return state.mindMapInk}
+  function strokesFor(subjectId){const store=inkStore();if(!Array.isArray(store[subjectId]))store[subjectId]=[];return store[subjectId]}
+  function reviewStore(){state.mindMapReview=state.mindMapReview&&typeof state.mindMapReview==='object'?state.mindMapReview:{};return state.mindMapReview}
+  function legendMarkup(structure){return structure.groups.map((g,i)=>`<div class="row"><span class="dot" style="background:${COLORS[i%COLORS.length]}"></span>${e(g.title)}</div>`).join("")}
+  function reviewMarkup(subjectId){const r=reviewStore()[subjectId];if(!r)return"";if(r.loading)return`<div id="mmReview" class="loading"><strong>AI 正在讀你的手寫</strong><span>找錯誤、缺漏與可以補上的概念…</span></div>`;if(r.error)return`<div id="mmReview" class="error"><button data-mm-review-close>×</button><strong>AI 檢查失敗</strong><span>${e(r.error)}</span></div>`;const steps=Array.isArray(r.steps)?r.steps:[];return`<div id="mmReview"><button data-mm-review-close>×</button><strong>AI 回饋</strong>${r.explanation?`<p>${e(r.explanation)}</p>`:""}${steps.length?`<div>${steps.map(s=>`<span class="${/錯|修正|不正確|混淆/.test(s)?"fix":/補|缺|可加|加入/.test(s)?"add":""}">${e(s)}</span>`).join("")}</div>`:""}</div>`}
+  function radialPage(){const subject=activeSubject(),structure=subjectStructure(subject.id);return`<div id="mmWrap" class="wbmm-wrap" data-subject="${e(subject.id)}"><div id="mmToolbar"><button id="mmExpandAll">展開全部</button><button id="mmCollapseAll">收合全部</button><button id="mmReset">置中</button><span class="sep"></span><button id="mmDraw" aria-pressed="false">✎ 畫筆</button><button id="mmUndo" ${strokesFor(subject.id).length?"":"disabled"}>撤銷</button><button id="mmClearInk" ${strokesFor(subject.id).length?"":"disabled"}>清除筆跡</button><button id="mmAiCheck" ${strokesFor(subject.id).length?"":"disabled"}>✦ AI 檢查</button></div><div id="mmLegend"><div class="cap">課程</div>${legendMarkup(structure)}</div><div id="mmBreadcrumb"></div><div id="mmHint">點節點展開/收合（會自動置中）· 滑鼠懸停可看路徑高亮 · 拖曳平移 · 滾輪縮放 · 開啟畫筆即可直接手寫</div><svg id="mmSvg" aria-label="${e(subject.name)} 自由心智圖"></svg>${reviewMarkup(subject.id)}</div>`}
+  function bindRadial(){if(state.page!=="mindmap")return;const wrap=document.getElementById("mmWrap"),svgEl=document.getElementById("mmSvg");if(!wrap||!svgEl)return;if(typeof d3==="undefined"){wrap.insertAdjacentHTML("beforeend",'<div class="wbmm-d3-error">心智圖引擎載入失敗，請重新整理。</div>');return}const subjectId=activeSubject().id,structure=subjectStructure(subjectId),data=toHierarchy(structure);const svg=d3.select(svgEl),g=svg.append("g"),linkLayer=g.append("g").attr("class","link-layer"),inkLayer=g.append("g").attr("class","ink-layer"),nodeLayer=g.append("g").attr("class","node-layer"),zoom=d3.zoom().scaleExtent([.15,3]).on("zoom",ev=>g.attr("transform",ev.transform));let drawMode=false,currentStroke=null,currentPath=null;const enableZoom=()=>{svg.call(zoom).on("dblclick.zoom",null);svg.on("dblclick.mmcenter",()=>centerView())};enableZoom();let root=d3.hierarchy(data),idCounter=0;root.x0=0;root.y0=0;root.descendants().forEach(d=>{d.id=idCounter++;d._children=d.children;if(d.depth>1)d.children=null});const radius=900,tree=d3.tree().size([2*Math.PI,radius]).separation((a,b)=>(a.parent===b.parent?1:1.6)/Math.max(a.depth,1)),linkGen=d3.linkRadial().angle(d=>d.x).radius(d=>d.y);
+    function branchColor(d){if(d.depth===0)return"#2c2c2a";const anc=d.depth===1?d:d.ancestors().find(a=>a.depth===1),idx=anc?.parent?.children?.indexOf(anc)??0;return COLORS[(idx<0?0:idx)%COLORS.length]}
+    function renderInk(){const strokes=strokesFor(subjectId),line=d3.line().x(p=>p[0]).y(p=>p[1]).curve(d3.curveCatmullRom.alpha(.45)),paths=inkLayer.selectAll("path.ink-stroke").data(strokes,(d,i)=>d.id||i);paths.enter().append("path").attr("class","ink-stroke").merge(paths).attr("d",d=>line(d.points||[]));paths.exit().remove();const has=strokes.length>0;["mmUndo","mmClearInk","mmAiCheck"].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=!has})}
+    function update(source){tree(root);const nodes=root.descendants(),links=root.links(),link=linkLayer.selectAll("path.link").data(links,d=>d.target.id),enter=link.enter().append("path").attr("class","link").attr("d",()=>{const o={x:source.x0??source.x,y:source.y0??source.y};return linkGen({source:o,target:o})}).style("opacity",0);link.merge(enter).transition().duration(550).ease(d3.easeCubicOut).style("opacity",1).attr("d",linkGen);link.exit().transition().duration(350).ease(d3.easeCubicIn).attr("d",()=>{const o={x:source.x,y:source.y};return linkGen({source:o,target:o})}).style("opacity",0).remove();const node=nodeLayer.selectAll("g.node").data(nodes,d=>d.id),nodeEnter=node.enter().append("g").attr("class",d=>"node depth"+d.depth+(d.depth===0?" root":"")+(d._children?" has-children":"")+((d._children&&!d.children)?" collapsed":"")).attr("transform",()=>`rotate(${((source.x0??source.x)*180/Math.PI)-90}) translate(${source.y0??source.y},0)`).style("opacity",0).on("click",(event,d)=>{if(drawMode)return;event.stopPropagation();if(d.children){d._children=d.children;d.children=null}else d.children=d._children;update(d);setTimeout(()=>focusNode(d),560)}).on("mouseenter",(event,d)=>{if(!drawMode)highlightPath(d,true)}).on("mouseleave",(event,d)=>{if(!drawMode)highlightPath(d,false)});const inner=nodeEnter.append("g").attr("class","node-inner");inner.append("circle").attr("r",d=>d.depth===0?7:d.depth===1?6:4).attr("fill",branchColor);inner.append("text").attr("dy","0.31em").each(function(d){const t=d3.select(this);String(d.data.name||"").split("\n").forEach((line,i)=>t.append("tspan").attr("dy",i===0?0:"1.2em").text(line))}).attr("fill",d=>d.depth<=1?branchColor(d):"var(--mm-sub)");const merged=node.merge(nodeEnter);merged.attr("class",d=>"node depth"+d.depth+(d.depth===0?" root":"")+(d._children?" has-children":"")+((d._children&&!d.children)?" collapsed":""));merged.transition().duration(550).ease(d3.easeCubicOut).style("opacity",1).attr("transform",d=>`rotate(${(d.x*180/Math.PI)-90}) translate(${d.y},0)`);merged.select("text").attr("x",d=>d.x<Math.PI?10:-10).attr("text-anchor",d=>d.x<Math.PI?"start":"end").attr("transform",d=>d.x>=Math.PI?"rotate(180)":null).selectAll("tspan").attr("x",function(){return d3.select(this.parentNode).attr("x")});node.exit().transition().duration(350).ease(d3.easeCubicIn).style("opacity",0).attr("transform",()=>`rotate(${(source.x*180/Math.PI)-90}) translate(${source.y},0)`).remove();nodes.forEach(d=>{d.x0=d.x;d.y0=d.y});document.getElementById("mmBreadcrumb").innerHTML="";renderInk()}
+    function highlightPath(d,on){const ids=new Set(d.ancestors().map(a=>a.id));linkLayer.selectAll("path.link").classed("highlight",l=>on&&ids.has(l.source.id)&&ids.has(l.target.id));const chain=d.ancestors().reverse();document.getElementById("mmBreadcrumb").innerHTML=on?chain.map((a,i)=>i===chain.length-1?`<span>${e(String(a.data.name).replace("\n",""))}</span>`:e(String(a.data.name).replace("\n",""))).join(" › "):""}
+    function centerView(){if(!nodeLayer.node())return;const bbox=nodeLayer.node().getBBox(),w=svgEl.clientWidth,h=svgEl.clientHeight;if(!bbox.width||!bbox.height||!w||!h)return;const scale=Math.min(w/bbox.width,h/bbox.height,1)*.85,tx=w/2-(bbox.x+bbox.width/2)*scale,ty=h/2-(bbox.y+bbox.height/2)*scale;svg.transition().duration(600).ease(d3.easeCubicInOut).call(zoom.transform,d3.zoomIdentity.translate(tx,ty).scale(scale))}
+    function focusNode(d){const w=svgEl.clientWidth,h=svgEl.clientHeight,current=d3.zoomTransform(svgEl),angle=d.x-Math.PI/2,px=Math.cos(angle)*d.y,py=Math.sin(angle)*d.y,targetScale=Math.max(current.k,.55);svg.transition().duration(500).ease(d3.easeCubicInOut).call(zoom.transform,d3.zoomIdentity.translate(w/2-px*targetScale-w*.08,h/2-py*targetScale).scale(targetScale))}
+    function toggleDraw(force){drawMode=typeof force==="boolean"?force:!drawMode;wrap.classList.toggle("is-drawing",drawMode);const btn=document.getElementById("mmDraw");btn?.setAttribute("aria-pressed",drawMode?"true":"false");if(btn)btn.textContent=drawMode?"✓ 畫筆中":"✎ 畫筆";if(drawMode){svg.on(".zoom",null).on("dblclick.mmcenter",null)}else enableZoom()}
+    function graphPoint(event){const [sx,sy]=d3.pointer(event,svgEl),t=d3.zoomTransform(svgEl);return t.invert([sx,sy])}
+    function startInk(event){if(!drawMode||event.button>0)return;event.preventDefault();event.stopPropagation();const point=graphPoint(event);currentStroke={id:`ink-${Date.now()}-${Math.random().toString(36).slice(2,6)}`,points:[point]};strokesFor(subjectId).push(currentStroke);currentPath=inkLayer.append("path").attr("class","ink-stroke live");svgEl.setPointerCapture?.(event.pointerId);moveInk(event)}
+    function moveInk(event){if(!drawMode||!currentStroke)return;event.preventDefault();const p=graphPoint(event),last=currentStroke.points[currentStroke.points.length-1];if(!last||Math.hypot(p[0]-last[0],p[1]-last[1])>1.2)currentStroke.points.push(p);const line=d3.line().x(q=>q[0]).y(q=>q[1]).curve(d3.curveCatmullRom.alpha(.45));currentPath?.attr("d",line(currentStroke.points))}
+    function endInk(event){if(!currentStroke)return;if(currentStroke.points.length<2)currentStroke.points.push([currentStroke.points[0][0]+.1,currentStroke.points[0][1]+.1]);currentStroke=null;currentPath=null;save();renderInk();try{svgEl.releasePointerCapture?.(event.pointerId)}catch{}}
+    async function captureMapPng(){const clone=svgEl.cloneNode(true);clone.setAttribute("xmlns","http://www.w3.org/2000/svg");clone.setAttribute("width",String(Math.max(900,svgEl.clientWidth||1200)));clone.setAttribute("height",String(Math.max(650,svgEl.clientHeight||800)));const style=document.createElement("style");style.textContent='text{font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;fill:#2c2c2a}.link{fill:none;stroke:#c9c2b3;stroke-width:1.2}.ink-stroke{fill:none;stroke:#34312e;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.node circle{stroke:#faf8f3;stroke-width:1.6}';clone.insertBefore(style,clone.firstChild);const serialized=new XMLSerializer().serializeToString(clone),blob=new Blob([serialized],{type:"image/svg+xml;charset=utf-8"}),url=URL.createObjectURL(blob),img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url});const out=document.createElement("canvas"),scale=Math.min(2,2200/Math.max(img.width||1200,img.height||800,1));out.width=Math.round((img.width||1200)*scale);out.height=Math.round((img.height||800)*scale);const ctx=out.getContext("2d");ctx.fillStyle="#faf8f3";ctx.fillRect(0,0,out.width,out.height);ctx.drawImage(img,0,0,out.width,out.height);URL.revokeObjectURL(url);const data=out.toDataURL("image/png");return{base64:data.split(",")[1],mimeType:"image/png"}}
+    async function aiCheck(){if(!strokesFor(subjectId).length)return;const store=reviewStore();store[subjectId]={loading:true};save();const old=document.getElementById("mmReview");if(old)old.outerHTML=reviewMarkup(subjectId);else wrap.insertAdjacentHTML("beforeend",reviewMarkup(subjectId));const btn=document.getElementById("mmAiCheck");if(btn){btn.disabled=true;btn.textContent="AI 檢查中…"}try{const visual=await captureMapPng(),body={problemText:`${activeSubject().name} 108課綱自由心智圖。畫面中的印刷文字只提供課程→章→節結構，深色手寫筆跡才是學生從記憶寫出的內容。`,studentAnswer:[],correctAnswer:[],subject:activeSubject().name,mode:"correction",question:"請先用視覺辨識學生的深色手寫筆跡，不要把課綱節點文字當成學生答案。指出手寫內容中明確錯誤、因果倒置、名詞混淆或條件缺漏；再指出最值得補上的概念或關係。不要重寫整份標準答案。若沒有明確錯誤，直接說沒有發現明確錯誤。steps 請以「修正｜...」或「補充｜...」開頭。",imageBase64:visual.base64,mimeType:visual.mimeType},res=typeof v3GuideApi==="function"?await v3GuideApi(body):await apiCall("/tutor",body),result=res?.result||res||{};store[subjectId]={loading:false,explanation:String(result.explanation||result.reply||""),steps:Array.isArray(result.steps)?result.steps.map(String):[],updatedAt:Date.now()}}catch(err){store[subjectId]={loading:false,error:String(err?.message||err||"AI 檢查失敗")}}save();const current=document.getElementById("mmReview");if(current)current.outerHTML=reviewMarkup(subjectId);else wrap.insertAdjacentHTML("beforeend",reviewMarkup(subjectId));if(btn){btn.disabled=false;btn.textContent="✦ AI 檢查"}document.querySelector("[data-mm-review-close]")?.addEventListener("click",()=>document.getElementById("mmReview")?.remove())}
+    svgEl.addEventListener("pointerdown",startInk,{passive:false});svgEl.addEventListener("pointermove",moveInk,{passive:false});svgEl.addEventListener("pointerup",endInk,{passive:false});svgEl.addEventListener("pointercancel",endInk,{passive:false});document.getElementById("mmReset").onclick=centerView;document.getElementById("mmExpandAll").onclick=()=>{root.descendants().forEach(d=>{if(d._children)d.children=d._children});update(root);setTimeout(centerView,600)};document.getElementById("mmCollapseAll").onclick=()=>{root.descendants().forEach(d=>{if(d.depth>1&&d.children){d._children=d.children;d.children=null}});update(root);setTimeout(centerView,600)};document.getElementById("mmDraw").onclick=()=>toggleDraw();document.getElementById("mmUndo").onclick=()=>{const s=strokesFor(subjectId);s.pop();save();renderInk()};document.getElementById("mmClearInk").onclick=()=>{if(!confirm("清除這一科的所有手寫筆跡？課綱結構會保留。"))return;inkStore()[subjectId]=[];delete reviewStore()[subjectId];save();renderInk();document.getElementById("mmReview")?.remove()};document.getElementById("mmAiCheck").onclick=aiCheck;document.querySelector("[data-mm-review-close]")?.addEventListener("click",()=>document.getElementById("mmReview")?.remove());update(root);renderInk();setTimeout(centerView,250)
   }
-  function scaffold(subjectId){return subjectId==='biology'?BIOLOGY_108:genericScaffold(subjectId)}
-
-  function store(){
-    state.mindPlayground=state.mindPlayground||{};
-    state.mindPlayground.nodes=state.mindPlayground.nodes||{};
-    state.mindPlayground.nav=state.mindPlayground.nav||{};
-    state.mindPlayground.review=state.mindPlayground.review||{};
-    return state.mindPlayground;
-  }
-  function selected(subjectId){
-    const map=scaffold(subjectId),st=store(),nav=st.nav[subjectId]||{};
-    const group=map.groups.find(x=>x.id===nav.groupId)||map.groups[0];
-    const chapter=group?.chapters.find(x=>x.id===nav.chapterId)||group?.chapters[0];
-    const section=chapter?.sections.find(x=>x.id===nav.sectionId)||chapter?.sections[0];
-    if(group&&chapter&&section)st.nav[subjectId]={groupId:group.id,chapterId:chapter.id,sectionId:section.id};
-    return {map,group,chapter,section};
-  }
-  const sectionKey=(subjectId,group,chapter,section)=>`${subjectId}:${group.id}:${chapter.id}:${section.id}`;
-  function nodesFor(subjectId,group,chapter,section){
-    const key=sectionKey(subjectId,group,chapter,section),st=store();
-    if(!Array.isArray(st.nodes[key]))st.nodes[key]=[];
-    return st.nodes[key];
-  }
-  function totalIdeas(subjectId,map){
-    return map.groups.reduce((a,g)=>a+g.chapters.reduce((b,c)=>b+c.sections.reduce((d,s)=>d+nodesFor(subjectId,g,c,s).filter(n=>String(n.text||'').trim()).length,0),0),0);
-  }
-  function setNav(subjectId,groupId,chapterId,sectionId){
-    const map=scaffold(subjectId),st=store();
-    const group=map.groups.find(x=>x.id===groupId)||map.groups[0];
-    const chapter=group?.chapters.find(x=>x.id===chapterId)||group?.chapters[0];
-    const section=chapter?.sections.find(x=>x.id===sectionId)||chapter?.sections[0];
-    if(!section)return;
-    st.nav[subjectId]={groupId:group.id,chapterId:chapter.id,sectionId:section.id};
-    state.conceptChapter=chapter.title;
-    save();render();
-  }
-
-  function outline(subjectId,map,sel){
-    return `<aside class="wbpg-outline panel"><div class="wbpg-outline-head"><span>只提供結構</span><strong>${e(map.title)}</strong></div><div class="wbpg-tree">${map.groups.map(group=>{
-      const open=group.id===sel.group.id;
-      return `<section class="wbpg-group ${open?'is-open':''}"><button data-wbpg-group="${safe(group.id)}"><i></i><strong>${e(group.title)}</strong><small>${group.chapters.length} 章</small></button><div class="wbpg-chapters">${group.chapters.map(chapter=>{
-        const active=chapter.id===sel.chapter.id;
-        const count=chapter.sections.reduce((n,sec)=>n+nodesFor(subjectId,group,chapter,sec).filter(x=>String(x.text||'').trim()).length,0);
-        return `<button class="${active?'active':''}" data-wbpg-chapter="${safe(chapter.id)}" data-wbpg-group-id="${safe(group.id)}"><span>${e(chapter.title)}</span><small>${count?`${count} 個想法`:`${chapter.sections.length} 節`}</small></button>`;
-      }).join('')}</div></section>`;
-    }).join('')}</div></aside>`;
-  }
-  function sectionTabs(sel){
-    return `<div class="wbpg-sections">${sel.chapter.sections.map(sec=>`<button class="${sec.id===sel.section.id?'active':''}" data-wbpg-section="${safe(sec.id)}" data-wbpg-group-id="${safe(sel.group.id)}" data-wbpg-chapter-id="${safe(sel.chapter.id)}">${e(sec.title)}</button>`).join('')}</div>`;
-  }
-  function nodeCard(node,index){
-    const text=String(node.text||'');
-    return `<article class="wbpg-node ${text.trim()?'has-text':''}" data-wbpg-node="${safe(node.id)}" style="--x:${Number(node.x)||50};--y:${Number(node.y)||50}"><div class="wbpg-handle" data-wbpg-drag="${safe(node.id)}"><span>想法 ${index+1}</span><button data-wbpg-delete="${safe(node.id)}" aria-label="刪除想法">×</button></div><textarea data-wbpg-text="${safe(node.id)}" placeholder="寫下你記得的任何東西…">${e(text)}</textarea></article>`;
-  }
-  function reviewKind(step){if(/修正|錯|不正確|混淆|應改/.test(step))return'fix';if(/補充|可加|缺少|延伸|加入/.test(step))return'add';return'note'}
-  function reviewPanel(review){
-    if(!review)return'';
-    if(review.loading)return `<aside class="wbpg-review"><div class="wbpg-review-head"><b>AI REVIEW</b><strong>正在讀你的回想</strong></div><div class="wbpg-loading"><i></i>找概念衝突、遺漏與可補的連結…</div></aside>`;
-    if(review.error)return `<aside class="wbpg-review is-error"><div class="wbpg-review-head"><b>AI REVIEW</b><strong>這次檢查沒有完成</strong></div><p>${e(review.error)}</p></aside>`;
-    const steps=Array.isArray(review.steps)?review.steps:[];
-    return `<aside class="wbpg-review"><div class="wbpg-review-head"><b>AI REVIEW</b><strong>保留你的版本，只指出要修與可補的地方</strong></div>${review.reply?`<p class="wbpg-summary">${e(review.reply)}</p>`:''}${steps.length?`<div class="wbpg-review-list">${steps.map(step=>`<div class="${reviewKind(step)}"><i></i><span>${e(step)}</span></div>`).join('')}</div>`:''}${review.nextPrompt?`<div class="wbpg-next"><span>下一個回想問題</span><strong>${e(review.nextPrompt)}</strong></div>`:''}</aside>`;
-  }
-  function canvas(subjectId,sel){
-    const nodes=nodesFor(subjectId,sel.group,sel.chapter,sel.section),key=sectionKey(subjectId,sel.group,sel.chapter,sel.section),review=store().review[key];
-    return `<section class="wbpg-work panel"><header class="wbpg-work-head"><div><span>${e(sel.group.title)} · ${e(sel.chapter.title)}</span><h3>${e(sel.section.title)}</h3><p>沒有預設答案。關鍵字、公式、流程、例子、圖像關係、容易混淆的點，都由你自己放上來。</p></div><div class="wbpg-actions"><button class="soft-btn" data-wbpg-clear>清空這一節</button><button class="primary-btn" data-wbpg-ai ${nodes.some(n=>String(n.text||'').trim())?'':'disabled'}>${review?.loading?'AI 檢查中…':'AI 檢查我的回想'}</button></div></header><div class="wbpg-canvas" data-wbpg-canvas><svg class="wbpg-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${nodes.map(n=>`<path data-wbpg-line="${safe(n.id)}" d="M50 50 L ${Number(n.x)||50} ${Number(n.y)||50}"/>`).join('')}</svg><div class="wbpg-center"><span>課綱結構</span><strong>${e(sel.section.title)}</strong><small>內容由你自己建立</small></div>${nodes.map(nodeCard).join('')}<button class="wbpg-add" data-wbpg-add><b>＋</b><span>新增想法</span></button>${nodes.length?'<div class="wbpg-hint">拖曳卡片調整位置 · 自動儲存</div>':'<div class="wbpg-empty"><strong>從空白開始。</strong><span>把腦中記得的內容全部丟上來。</span></div>'}</div>${reviewPanel(review)}</section>`;
-  }
-
-  function playgroundPage(){
-    const subject=activeSubject(),sel=selected(subject.id);
-    if(!sel.section)return `<div class="page-head"><div><h2>自由心智圖 · ${e(subject.name)}</h2><p>這一科目前沒有可用的章節／單元結構。</p></div></div>${subjectTabs()}`;
-    const count=totalIdeas(subject.id,sel.map);
-    return `<div class="page-head wbpg-page-head"><div><div class="tw-badge">臺灣 108 課綱 · 結構模式</div><h2>自由心智圖 · ${e(subject.name)}</h2><p>課綱只告訴你「有哪些章、哪些節」。內容全部由你從記憶建立；AI 只在你完成回想後指出錯誤與值得補上的概念。</p></div><div class="wbpg-count"><strong>${count}</strong><span>你寫下的想法</span></div></div>${subjectTabs()}<div class="wbpg-layout">${outline(subject.id,sel.map,sel)}<main class="wbpg-main"><div class="wbpg-crumb"><span>${e(subject.name)}</span><b>›</b><span>${e(sel.group.title)}</span><b>›</b><span>${e(sel.chapter.title)}</span></div>${sectionTabs(sel)}${canvas(subject.id,sel)}</main></div>`;
-  }
-
-  function addNode(subjectId){
-    const sel=selected(subjectId);if(!sel.section)return;
-    const nodes=nodesFor(subjectId,sel.group,sel.chapter,sel.section),slots=[[22,27],[78,27],[22,73],[78,73],[50,18],[50,82],[14,50],[86,50]],pos=slots[nodes.length%slots.length],id=`n${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`;
-    nodes.push({id,text:'',x:pos[0],y:pos[1]});save();render();
-    requestAnimationFrame(()=>document.querySelector(`[data-wbpg-text="${id}"]`)?.focus());
-  }
-  function deleteNode(subjectId,id){
-    const sel=selected(subjectId);if(!sel.section)return;const key=sectionKey(subjectId,sel.group,sel.chapter,sel.section);
-    store().nodes[key]=(store().nodes[key]||[]).filter(x=>x.id!==id);save();render();
-  }
-  function clearSection(subjectId){
-    const sel=selected(subjectId);if(!sel.section)return;const key=sectionKey(subjectId,sel.group,sel.chapter,sel.section);
-    if(!confirm('清空這一節你寫下的所有想法？課綱結構會保留。'))return;
-    store().nodes[key]=[];delete store().review[key];save();render();
-  }
-  async function reviewCurrent(subjectId){
-    const sel=selected(subjectId);if(!sel.section)return;const key=sectionKey(subjectId,sel.group,sel.chapter,sel.section),nodes=nodesFor(subjectId,sel.group,sel.chapter,sel.section).filter(n=>String(n.text||'').trim());
-    if(!nodes.length){if(typeof toast==='function')toast('先寫下你記得的內容');return;}
-    store().review[key]={loading:true};save();render();
-    const studentText=nodes.map((n,i)=>`#${i+1} ${String(n.text||'').trim()}`).join('\n');
-    const problemText=`科目：${activeSubject().name}\n課程：${sel.group.title}\n章：${sel.chapter.title}\n節：${sel.section.title}\n\n學生自由回想節點：\n${studentText}`;
-    const question=['你正在檢查臺灣高中 108 課綱學生自己建立的自由心智圖。','這不是填空題，也不是要求完整標準答案。','只做三件事：1) 指出學生已寫內容中明確不正確、因果倒置、用語混淆或條件缺漏；2) 指出這個節下最值得補上的概念或關係；3) 給一個下一步回想問題。','保留學生自己的表達，不要把整節重寫成講義。','如果沒有明確錯誤，要直接說沒有發現明確錯誤，不要硬挑錯。','steps 每項盡量使用「修正｜#節點編號｜內容」或「補充｜#節點編號或0｜內容」格式。'].join('\n');
-    try{
-      const response=await apiCall('/tutor',{problemText,question,studentAnswer:[],correctAnswer:[]}),result=response?.result||{};
-      store().review[key]={loading:false,reply:String(result.reply||''),steps:Array.isArray(result.steps)?result.steps.map(String):[],nextPrompt:String(result.nextPrompt||''),updatedAt:Date.now()};save();render();
-    }catch(error){store().review[key]={loading:false,error:String(error?.message||error||'AI 檢查失敗')};save();render();}
-  }
-
-  function bindDrag(subjectId){
-    document.querySelectorAll('[data-wbpg-drag]').forEach(handle=>handle.onpointerdown=event=>{
-      if(event.target.closest('button'))return;
-      const id=handle.dataset.wbpgDrag,nodeEl=handle.closest('[data-wbpg-node]'),canvas=nodeEl?.closest('[data-wbpg-canvas]');if(!nodeEl||!canvas)return;
-      event.preventDefault();nodeEl.classList.add('is-dragging');handle.setPointerCapture?.(event.pointerId);
-      const move=ev=>{const rect=canvas.getBoundingClientRect(),x=Math.max(10,Math.min(90,(ev.clientX-rect.left)/rect.width*100)),y=Math.max(13,Math.min(87,(ev.clientY-rect.top)/rect.height*100));nodeEl.style.setProperty('--x',x);nodeEl.style.setProperty('--y',y);const line=canvas.querySelector(`[data-wbpg-line="${id}"]`);if(line)line.setAttribute('d',`M50 50 L ${x} ${y}`);};
-      const up=ev=>{nodeEl.classList.remove('is-dragging');window.removeEventListener('pointermove',move);const sel=selected(subjectId),node=sel.section?nodesFor(subjectId,sel.group,sel.chapter,sel.section).find(x=>x.id===id):null;if(node){node.x=parseFloat(nodeEl.style.getPropertyValue('--x'))||node.x;node.y=parseFloat(nodeEl.style.getPropertyValue('--y'))||node.y;save();}try{handle.releasePointerCapture?.(ev.pointerId)}catch{}};
-      window.addEventListener('pointermove',move);window.addEventListener('pointerup',up,{once:true});
-    });
-  }
-  function bindPlayground(){
-    if(state.page!=='mindmap')return;
-    const subjectId=activeSubject().id,map=scaffold(subjectId);
-    document.querySelectorAll('[data-wbpg-group]').forEach(el=>el.onclick=()=>{const group=map.groups.find(x=>x.id===el.dataset.wbpgGroup),chapter=group?.chapters?.[0],section=chapter?.sections?.[0];if(section)setNav(subjectId,group.id,chapter.id,section.id);});
-    document.querySelectorAll('[data-wbpg-chapter]').forEach(el=>el.onclick=()=>{const group=map.groups.find(x=>x.id===el.dataset.wbpgGroupId),chapter=group?.chapters.find(x=>x.id===el.dataset.wbpgChapter),section=chapter?.sections?.[0];if(section)setNav(subjectId,group.id,chapter.id,section.id);});
-    document.querySelectorAll('[data-wbpg-section]').forEach(el=>el.onclick=()=>setNav(subjectId,el.dataset.wbpgGroupId,el.dataset.wbpgChapterId,el.dataset.wbpgSection));
-    document.querySelector('[data-wbpg-add]')?.addEventListener('click',()=>addNode(subjectId));
-    document.querySelectorAll('[data-wbpg-delete]').forEach(el=>el.onclick=()=>deleteNode(subjectId,el.dataset.wbpgDelete));
-    document.querySelectorAll('[data-wbpg-text]').forEach(el=>el.oninput=()=>{const sel=selected(subjectId),node=nodesFor(subjectId,sel.group,sel.chapter,sel.section).find(x=>x.id===el.dataset.wbpgText);if(node){node.text=el.value;save();}el.closest('.wbpg-node')?.classList.toggle('has-text',Boolean(el.value.trim()));const ai=document.querySelector('[data-wbpg-ai]');if(ai)ai.disabled=!nodesFor(subjectId,sel.group,sel.chapter,sel.section).some(n=>String(n.text||'').trim());});
-    document.querySelector('[data-wbpg-clear]')?.addEventListener('click',()=>clearSection(subjectId));
-    document.querySelector('[data-wbpg-ai]')?.addEventListener('click',()=>reviewCurrent(subjectId));
-    bindDrag(subjectId);
-  }
-
-  // Canonical ownership: this module is intentionally loaded after all legacy mind-map renderers.
-  mindmapPage=playgroundPage;
-  const baseBind=bind;
-  bind=function(){baseBind();bindPlayground();};
-  window.WrongBookMindPlayground={scaffold,reviewCurrent,version:'2026-08-18-playground-v1'};
-  render();
+  mindmapPage=radialPage;const baseBind=bind;bind=function(){baseBind();bindRadial()};window.WrongBookMindPlayground={structure:subjectStructure,version:"2026-08-18-radial-draw-v2"};render();
 })();
