@@ -7,6 +7,7 @@
 .wbmm-wrap .node.mm-draggable-node{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
 .wbmm-wrap .node.mm-draggable-node:active,.wbmm-wrap .node.is-node-dragging{cursor:grabbing}
 .wbmm-wrap .node.is-node-dragging .node-inner{transform:scale(1.06)}
+.wbmm-wrap .node.mm-draggable-node>.node-inner{pointer-events:none}
 .wbmm-wrap .node .mm-node-drag-hit{fill:transparent;pointer-events:all;stroke:none}
 .wbmm-wrap.is-drawing .node.mm-draggable-node{cursor:crosshair}
 .wbmm-wrap.is-drawing .node .mm-node-drag-hit{pointer-events:none}
