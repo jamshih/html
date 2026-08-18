@@ -18,9 +18,10 @@
     });
   }
 
-  // Independent final visibility guard: it must load even if an optional diagram renderer fails.
+  // Keep V22's complex-diagram visibility repair, then let V23 own the clarified final surface.
   loadScript('wrongbookHumanVisibilityV22','./tutor-human-visibility-v22.js?wb=20260818-2059')
-    .catch(err=>console.error('[Wrongbook human visibility guard]',err));
+    .then(()=>loadScript('wrongbookWorkspacePolishV23','./workspace-polish-v23.js?wb=20260818-2237'))
+    .catch(err=>console.error('[Wrongbook final workspace guards]',err));
 
   // AI diagrams are opt-in. Load this independently so later async diagram renderers cannot
   // resurrect a sticky overlay or reveal a diagram before the user presses 「開始圖解」.
@@ -33,5 +34,5 @@
     .then(()=>loadScript('wrongbookTikzSpatialGeometryV1','./tikz-spatial-geometry-v1.js?wb=20260818-1527'))
     .catch(err=>console.error('[Wrongbook full-card sticker bootstrap]',err));
 
-  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v22-human-visibility-diagram-opt-in-2',legacyV4Blocked:true,diagramPageUx:true,tikzSpatial:true,humanVisibilityGuard:true,diagramOptIn:true};
+  window.__wrongbookAiDiagramScopeV2Compat={version:'2026-08-18-full-card-bootstrap-v23-workspace-polish-diagram-opt-in',legacyV4Blocked:true,diagramPageUx:true,tikzSpatial:true,humanVisibilityGuard:true,workspacePolishV23:true,diagramOptIn:true};
 })();
