@@ -1,13 +1,12 @@
-// Wrong Book V16b — compact tutor navigator visual requested by the user.
-// Visual-only layer: preserves V15 in-place/no-rerender navigation behavior.
+// Wrong Book V16c — compact tutor navigator visual requested by the user.
+// This file is visibly confirmed to load in production, so it also boots the final paint-lock and ink-history guards.
 (function(){
-  const VERSION='2026-08-18-tutor-nav-visual-v16b';
+  const VERSION='2026-08-18-tutor-nav-visual-v16c';
   if(window.__wrongbookTutorNavVisualV16===VERSION)return;
   window.__wrongbookTutorNavVisualV16=VERSION;
   const STYLE_ID='wrongbookTutorNavVisualV16Style';
   document.getElementById(STYLE_ID)?.remove();
   const style=document.createElement('style');style.id=STYLE_ID;style.textContent=`
-    /* Actual requested compact size: small rounded squares, fixed centered count. */
     .v14-tutor-nav.v15-tutor-nav{width:168px!important;height:44px!important;margin:8px auto 10px!important;display:grid!important;grid-template-columns:44px 52px 44px!important;align-items:center!important;justify-content:center!important;gap:14px!important;padding:0!important;border:0!important;background:transparent!important}
     .v14-tutor-nav.v15-tutor-nav button{box-sizing:border-box!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;max-height:44px!important;flex:0 0 44px!important;padding:0!important;display:grid!important;place-items:center!important;border:1px solid #deddd8!important;border-radius:13px!important;background:#fffdf9!important;color:#62665f!important;box-shadow:none!important;font-family:inherit!important;font-size:24px!important;font-weight:650!important;line-height:1!important;letter-spacing:0!important;transform:none!important;transition:background-color .12s ease,border-color .12s ease,color .12s ease!important}
     .v14-tutor-nav.v15-tutor-nav button:hover:not(:disabled){background:#f6f5f1!important;border-color:#cfcec8!important}.v14-tutor-nav.v15-tutor-nav button:active:not(:disabled){background:#efeee9!important;transform:none!important}.v14-tutor-nav.v15-tutor-nav button:disabled{opacity:1!important;color:#d2d2ce!important;border-color:#ecebe7!important;background:#fffdf9!important;cursor:default!important}
@@ -15,5 +14,10 @@
     .v5-tutor-dock.v15-inplace-stepping .v14-tutor-nav.v15-tutor-nav,.v5-tutor-dock.v15-inplace-stepping .v14-tutor-nav.v15-tutor-nav *{animation:none!important;transition:none!important}
     @media(max-width:700px){.v14-tutor-nav.v15-tutor-nav{width:152px!important;height:40px!important;grid-template-columns:40px 48px 40px!important;gap:12px!important;margin:7px auto 9px!important}.v14-tutor-nav.v15-tutor-nav button{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important;flex-basis:40px!important;border-radius:12px!important;font-size:22px!important}.v14-tutor-nav.v15-tutor-nav .v14-tutor-nav-count{width:48px!important;min-width:48px!important;max-width:48px!important;height:40px!important;font-size:14px!important}}
   `;document.head.appendChild(style);
-  window.wrongbookTutorNavVisualQA=function(){const nav=document.querySelector('.v14-tutor-nav.v15-tutor-nav');if(!nav)return{version:VERSION,pass:true,navigatorPresent:false};const buttons=[...nav.querySelectorAll('button')],count=nav.querySelector('.v14-tutor-nav-count'),mobile=matchMedia('(max-width:700px)').matches,nr=nav.getBoundingClientRect(),br=buttons[0]?.getBoundingClientRect(),cr=count?.getBoundingClientRect(),eb=mobile?40:44,en=mobile?152:168,ec=mobile?48:52,close=(a,b)=>Math.abs(a-b)<=1;return{version:VERSION,pass:Boolean(buttons.length===2&&close(nr.width,en)&&close(br?.width||0,eb)&&close(br?.height||0,eb)&&close(cr?.width||0,ec)),navigatorPresent:true,pattern:'‹ 1 / 3 ›',buttonCount:buttons.length,navigatorWidth:Math.round(nr.width),buttonSize:Math.round(br?.width||0),counterWidth:Math.round(cr?.width||0),fixedDimensions:true,tabularCounter:true,visualOnly:true,preservesV15InPlaceNavigation:Boolean(window.__wrongbookTutorNavInplaceV15)}};
+
+  function boot(src,attr){if(document.querySelector(`script[${attr}]`))return;const s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');document.body.appendChild(s)}
+  boot('./tutor-nav-paint-lock-v18.js?wb=20260818-1326','data-wb-tutor-nav-paint-lock-v18');
+  boot('./ink-history-v4.js?wb=20260818-1326','data-wb-ink-history-v4-v16');
+
+  window.wrongbookTutorNavVisualQA=function(){const nav=document.querySelector('.v14-tutor-nav.v15-tutor-nav');if(!nav)return{version:VERSION,pass:true,navigatorPresent:false};const buttons=[...nav.querySelectorAll('button')],count=nav.querySelector('.v14-tutor-nav-count'),mobile=matchMedia('(max-width:700px)').matches,nr=nav.getBoundingClientRect(),br=buttons[0]?.getBoundingClientRect(),cr=count?.getBoundingClientRect(),eb=mobile?40:44,en=mobile?152:168,ec=mobile?48:52,close=(a,b)=>Math.abs(a-b)<=1;return{version:VERSION,pass:Boolean(buttons.length===2&&close(nr.width,en)&&close(br?.width||0,eb)&&close(br?.height||0,eb)&&close(cr?.width||0,ec)),navigatorPresent:true,pattern:'‹ 1 / 3 ›',buttonCount:buttons.length,navigatorWidth:Math.round(nr.width),buttonSize:Math.round(br?.width||0),counterWidth:Math.round(cr?.width||0),fixedDimensions:true,tabularCounter:true,bootsPaintLockV18:true,bootsInkHistoryV4:true,preservesV15InPlaceNavigation:Boolean(window.__wrongbookTutorNavInplaceV15)}};
 })();
