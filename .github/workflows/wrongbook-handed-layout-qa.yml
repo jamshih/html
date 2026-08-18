@@ -1,0 +1,53 @@
+name: Wrongbook Handed Mindmap QA
+
+on:
+  pull_request:
+    paths:
+      - 'wrongbook-v2/mindmap-handed-layout-v1.js'
+      - 'wrongbook-v2/mindmap-handed-layout-v1.css'
+      - 'wrongbook-v2/mindmap-subject-nav-v1.js'
+      - 'wrongbook-v2/qa/mindmap-handed-layout-v1-playwright.js'
+      - '.github/workflows/wrongbook-handed-layout-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  handed-layout:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and scope contracts
+        run: |
+          node --check wrongbook-v2/mindmap-handed-layout-v1.js
+          node --check wrongbook-v2/mindmap-subject-nav-v1.js
+          node --check wrongbook-v2/qa/mindmap-handed-layout-v1-playwright.js
+          grep -q "handed-layout-v1" wrongbook-v2/mindmap-subject-nav-v1.js
+      - name: Install Playwright core
+        run: |
+          mkdir -p /tmp/wb-pw
+          cd /tmp/wb-pw
+          npm init -y >/dev/null 2>&1
+          npm install playwright-core@1.55.0 --no-save
+          ln -s /tmp/wb-pw/node_modules "$GITHUB_WORKSPACE/node_modules"
+      - name: Real Playwright handed-layout regression
+        env:
+          CHROMIUM_PATH: /usr/bin/chromium
+          WB_QA_URL: http://127.0.0.1:8765/index.html
+        run: |
+          python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-handed-http.log 2>&1 &
+          server=$!
+          trap 'kill $server || true' EXIT
+          sleep 1
+          node wrongbook-v2/qa/mindmap-handed-layout-v1-playwright.js | tee /tmp/wb-handed-result.json
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-handed-layout-qa
+          path: |
+            /tmp/wb-handed-result.json
+            /tmp/wrongbook-handed-right.png
+            /tmp/wrongbook-handed-left.png
+            /tmp/wrongbook-handed-mobile.png
+          if-no-files-found: warn
