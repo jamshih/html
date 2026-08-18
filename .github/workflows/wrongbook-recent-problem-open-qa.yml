@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'wrongbook-v2/index.html'
       - 'wrongbook-v2/tutor-nav-visual-v16.js'
       - 'wrongbook-v2/tutor-workspace-unify-v13.js'
       - 'wrongbook-v2/tutor-dialog-compact-v20.js'
@@ -14,6 +15,7 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'wrongbook-v2/index.html'
       - 'wrongbook-v2/tutor-nav-visual-v16.js'
       - 'wrongbook-v2/tutor-workspace-unify-v13.js'
       - 'wrongbook-v2/tutor-dialog-compact-v20.js'
@@ -42,6 +44,8 @@ jobs:
           grep -q 'ocrq-sheet v3-paper' wrongbook-v2/ocr-clean-question-display-v1.js
           grep -q 'ocrq-toolbar paper-toolbar' wrongbook-v2/ocr-clean-question-display-v1.js
           grep -q '20260818-1909' wrongbook-v2/native-question-capture-source-align-v1.js
+          grep -q '2026-08-18-production-stability-1909' wrongbook-v2/index.html
+          grep -Fq 'native-question-capture-source-align-v1.js?wb=20260818-1909' wrongbook-v2/index.html
       - name: Real browser recent-card regression
         run: |
           python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-recent-http.log 2>&1 &
