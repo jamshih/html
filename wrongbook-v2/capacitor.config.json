@@ -1,0 +1,10 @@
+{
+  "appId": "com.jamshih.wrongbook",
+  "appName": "錯題本",
+  "webDir": "dist",
+  "backgroundColor": "#f6f7fb",
+  "ios": {
+    "contentInset": "automatic",
+    "preferredContentMode": "mobile"
+  }
+}

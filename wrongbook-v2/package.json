@@ -1,0 +1,28 @@
+{
+  "name": "wrongbook-ios",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Native iOS packaging for the Wrong Book web app.",
+  "scripts": {
+    "prepare:ios-assets": "node ./scripts/prepare-ios-assets.mjs",
+    "prepare:ios-web": "npm run prepare:ios-assets && node ./scripts/prepare-ios-web.mjs",
+    "ios:add": "npm run prepare:ios-web && npx cap add ios && npm run ios:configure && npm run ios:assets",
+    "ios:configure": "bash ./scripts/configure-ios.sh",
+    "ios:assets": "npx @capacitor/assets generate --ios",
+    "ios:sync": "npm run prepare:ios-web && npx cap sync ios && npm run ios:configure && npm run ios:assets",
+    "ios:open": "npm run ios:sync && npx cap open ios",
+    "ios:run": "npm run ios:sync && npx cap run ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.5.0",
+    "@capacitor/ios": "^8.5.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.0",
+    "sharp": "^0.34.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
