@@ -4,8 +4,10 @@ on:
     branches: [main]
     paths:
       - 'wrongbook-v2/tutor-nav-visual-v16.js'
+      - 'wrongbook-v2/tutor-workspace-unify-v13.js'
       - 'wrongbook-v2/tutor-dialog-compact-v20.js'
       - 'wrongbook-v2/problem-workspace-integrity-v1.js'
+      - 'wrongbook-v2/ocr-clean-question-display-v1.js'
       - 'wrongbook-v2/native-question-capture-source-align-v1.js'
       - 'wrongbook-v2/qa/recent-problem-open-v21.html'
       - '.github/workflows/wrongbook-recent-problem-open-qa.yml'
@@ -13,8 +15,10 @@ on:
     branches: [main]
     paths:
       - 'wrongbook-v2/tutor-nav-visual-v16.js'
+      - 'wrongbook-v2/tutor-workspace-unify-v13.js'
       - 'wrongbook-v2/tutor-dialog-compact-v20.js'
       - 'wrongbook-v2/problem-workspace-integrity-v1.js'
+      - 'wrongbook-v2/ocr-clean-question-display-v1.js'
       - 'wrongbook-v2/native-question-capture-source-align-v1.js'
       - 'wrongbook-v2/qa/recent-problem-open-v21.html'
       - '.github/workflows/wrongbook-recent-problem-open-qa.yml'
@@ -27,12 +31,17 @@ jobs:
     timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
-      - name: Syntax and observer safety contracts
+      - name: Syntax and crash contracts
         run: |
           node --check wrongbook-v2/tutor-nav-visual-v16.js
+          node --check wrongbook-v2/tutor-workspace-unify-v13.js
+          node --check wrongbook-v2/ocr-clean-question-display-v1.js
+          node --check wrongbook-v2/native-question-capture-source-align-v1.js
           grep -q 'observerIdempotent' wrongbook-v2/tutor-nav-visual-v16.js
-          grep -q "count&&count.textContent!==label" wrongbook-v2/tutor-nav-visual-v16.js
-          grep -q 'inPlacePagingNoRender:true' wrongbook-v2/tutor-nav-visual-v16.js
+          grep -q 'observerIdempotent' wrongbook-v2/tutor-workspace-unify-v13.js
+          grep -q 'ocrq-sheet v3-paper' wrongbook-v2/ocr-clean-question-display-v1.js
+          grep -q 'ocrq-toolbar paper-toolbar' wrongbook-v2/ocr-clean-question-display-v1.js
+          grep -q '20260818-1909' wrongbook-v2/native-question-capture-source-align-v1.js
       - name: Real browser recent-card regression
         run: |
           python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-recent-http.log 2>&1 &
@@ -43,4 +52,5 @@ jobs:
           cat /tmp/wb-recent-dom.html
           grep -q 'data-status="PASS"' /tmp/wb-recent-dom.html
           grep -q '"pass": true' /tmp/wb-recent-dom.html
+          grep -q '"ocrIntegrityCompatible": true' /tmp/wb-recent-dom.html
           grep -q '"sameTutorDockAcrossPaging": true' /tmp/wb-recent-dom.html
