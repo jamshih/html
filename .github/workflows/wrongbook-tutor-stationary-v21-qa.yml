@@ -26,44 +26,42 @@ jobs:
       - name: Syntax and ownership contracts
         run: |
           node --check wrongbook-v2/tutor-stationary-restore-v21.js
+          node --check wrongbook-v2/mindmap-single-scope-merge-v1.js
           grep -q "problemSignature" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "sessionMatchesProblem" wrongbook-v2/tutor-stationary-restore-v21.js
-          grep -q "bottom:76px" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "restoredFrom:'v12h'" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "calibrateBottom" wrongbook-v2/tutor-stationary-restore-v21.js
+          grep -q "height:auto!important" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "max-width:360px" wrongbook-v2/tutor-stationary-restore-v21.js
-          grep -q "tutor-stationary-restore-v21.js?wb=20260818-1952" wrongbook-v2/mindmap-single-scope-merge-v1.js
+          grep -q "tutor-stationary-restore-v21.js?wb=20260818-2024-v12h" wrongbook-v2/mindmap-single-scope-merge-v1.js
       - name: Real browser stationary tutor regression
         run: |
-          # Diagnostic run continues past the aggregate/bottom-offset assertions so browser geometry is explicit.
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path('wrongbook-v2/qa/tutor-stationary-v21.html')
-          s=p.read_text()
-          s=s.replace("  if(stationaryQA?.pass!==true)fail('stationary tutor QA failed: '+JSON.stringify(stationaryQA));\n","")
-          s=s.replace("  if(Math.abs(bottomGap-76)>4)fail('tutor not bottom-anchored: '+bottomGap);\n","")
-          p.write_text(s)
-          PY
           python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-v21-http.log 2>&1 &
           server=$!
           trap 'kill $server || true' EXIT
           sleep 1
-          chromium --headless --no-sandbox --disable-gpu --window-size=1365,900 --virtual-time-budget=15000 --dump-dom http://127.0.0.1:8765/qa/tutor-stationary-v21.html > /tmp/wb-v21-dom.html
+          chromium --headless --no-sandbox --disable-gpu --window-size=1365,900 --virtual-time-budget=16000 --dump-dom http://127.0.0.1:8765/qa/tutor-stationary-v21.html > /tmp/wb-v21-dom.html
           cat /tmp/wb-v21-dom.html
           grep -q 'data-status="PASS"' /tmp/wb-v21-dom.html
           grep -q '"pass": true' /tmp/wb-v21-dom.html
           grep -q '"staleTutorRejected": true' /tmp/wb-v21-dom.html
           grep -q '"contextQaPass": true' /tmp/wb-v21-dom.html
+          grep -q '"stationaryQaPass": true' /tmp/wb-v21-dom.html
+          grep -q '"restoredFrom": "v12h"' /tmp/wb-v21-dom.html
           grep -q '"sameDockAcrossPaging": true' /tmp/wb-v21-dom.html
           grep -q '"geometryStableAcrossPaging": true' /tmp/wb-v21-dom.html
+          grep -q '"diagramContained": true' /tmp/wb-v21-dom.html
+          grep -q '"stickerContained": true' /tmp/wb-v21-dom.html
           grep -q '"pageHeightOk": true' /tmp/wb-v21-dom.html
           grep -q '"runtimeErrors": \[\]' /tmp/wb-v21-dom.html
       - name: Capture rendered evidence
         if: always()
         run: |
-          python3 -m http.server 8765 --directory wrongbook-v2 >/tmp/wb-v21-shot-http.log 2>&1 &
+          python3 -m http.server 8766 --directory wrongbook-v2 >/tmp/wb-v21-shot-http.log 2>&1 &
           server=$!
           trap 'kill $server || true' EXIT
           sleep 1
-          chromium --headless --no-sandbox --disable-gpu --window-size=1365,900 --virtual-time-budget=15000 --screenshot=/tmp/wb-v21.png http://127.0.0.1:8765/qa/tutor-stationary-v21.html || true
+          chromium --headless --no-sandbox --disable-gpu --window-size=1365,900 --virtual-time-budget=16000 --screenshot=/tmp/wb-v21.png http://127.0.0.1:8766/qa/tutor-stationary-v21.html || true
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -73,4 +71,5 @@ jobs:
             /tmp/wb-v21-dom.html
             /tmp/wb-v21.png
             /tmp/wb-v21-http.log
+            /tmp/wb-v21-shot-http.log
           if-no-files-found: warn
