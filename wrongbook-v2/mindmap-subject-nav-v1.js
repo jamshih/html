@@ -1,8 +1,28 @@
 // Wrong Book radial mind-map subject navigation.
 // Reuses the app's canonical SUBJECTS + setSubject() state flow.
 (function(){
-  const VERSION='2026-08-18-mindmap-subject-nav-v2';
+  const VERSION='2026-08-18-mindmap-subject-nav-v3';
+  const ROOT_NAV_VERSION='2026-08-18-root-subject-nav-v1';
   let installToken=0;
+
+  function ensureRootSubjectNavigation(){
+    if(!document.querySelector('link[data-mm-root-subject-nav-style]')){
+      const link=document.createElement('link');
+      link.rel='stylesheet';
+      link.href=`./mindmap-root-subject-nav-v1.css?wb=${ROOT_NAV_VERSION}`;
+      link.dataset.mmRootSubjectNavStyle=ROOT_NAV_VERSION;
+      document.head.appendChild(link);
+    }
+    if(window.WrongBookMindmapRootSubjectNav?.version===ROOT_NAV_VERSION){
+      window.WrongBookMindmapRootSubjectNav.install?.();
+      return;
+    }
+    if(document.querySelector('script[data-mm-root-subject-nav-loader]'))return;
+    const script=document.createElement('script');
+    script.src=`./mindmap-root-subject-nav-v1.js?wb=${ROOT_NAV_VERSION}`;
+    script.dataset.mmRootSubjectNavLoader=ROOT_NAV_VERSION;
+    document.body.appendChild(script);
+  }
 
   function neutralizeMindmapSubjectContainer(){
     const wrap=document.getElementById('mmWrap');
@@ -20,6 +40,7 @@
 
   function install(){
     if(typeof state!=='object'||state.page!=='mindmap')return;
+    ensureRootSubjectNavigation();
     neutralizeMindmapSubjectContainer();
     const toolbar=document.getElementById('mmToolbar');
     if(!toolbar||!Array.isArray(SUBJECTS)||typeof setSubject!=='function')return;
@@ -73,6 +94,7 @@
   window.WrongBookMindmapSubjectNav={
     version:VERSION,
     install,
+    ensureRootSubjectNavigation,
     neutralizeMindmapSubjectContainer,
     qa(){
       const wrap=document.getElementById('mmWrap');
