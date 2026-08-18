@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="qa-run" content="stationary-tutor-v21-v12h">
+  <title>Wrongbook stationary tutor QA</title>
+  <style>
+    html,body{margin:0;background:#f7f7f3;font-family:system-ui,"PingFang TC",sans-serif}
+    #frame{display:block;width:1365px;height:900px;border:0;background:white}
+    #result{position:fixed;left:8px;top:8px;z-index:999999;max-width:520px;max-height:42vh;overflow:auto;margin:0;padding:8px 10px;background:rgba(20,24,20,.94);color:#e9f6e9;border-radius:8px;font:11px/1.35 ui-monospace,monospace;pointer-events:none}
+  </style>
+</head>
+<body data-status="RUNNING">
+<iframe id="frame" title="Wrong Book under test"></iframe>
+<pre id="result">RUNNING</pre>
+<script>
+(async()=>{
+  const problemId='scan-stationary-geometry-v21';
+  const problemText='10. 空間中有兩點 A(1, 5, -4)、B(-14, 15, 6)，已知點 P(-5, r, s) 在 AB 上。若平面通過 P 點且與直線 AB 垂直，且此平面方程式為 3x + by + cz + d = 0，求序組 (r, s, d)。';
+  const staleProbability='太棒了！你的答案完全正確。條件機率公式為 P(A∩B)/P(B)，對應選項 (D)。';
+  const now=new Date().toISOString();
+  const problem={id:problemId,subject:'math',title:'10. 空間中有兩點 A(1, 5, -4)、B(-14, 15',concept:'空間中的直線與平面',conceptCode:'MATH-GEO-SPACE',chapter:'空間向量',student:[],correct:[],mastery:54,due:'今天',mistakeType:'參數與法向量關係',attempts:1,problemText,options:[],corrections:{},insight:'',aiChapterHint:'',confirmed:true,responseType:'free_response',cleanQuestionFile:'',cleanQuestionFileMeta:null,ocrPrintedCrop:'',ocrResult:null,sourceImage:''};
+  // Reproduce the screenshot bug: an unrelated probability answer persisted under the geometry problem id.
+  const staleSession={id:'qa-stale-probability',problemId,mode:'direct',stages:[{id:'stale-1',stageType:'final_explanation',goal:'條件機率',promptToStudent:staleProbability,successCriteria:'',waitForStudent:false,revealFinalAnswer:true,actions:[]}],activeIndex:0,status:'ready',diagnosis:{studentOnRightTrack:true},assistanceLevel:'direct',attempts:1,requestCount:1,createdAt:now,updatedAt:now};
+  localStorage.setItem('wrongbook-v2-state',JSON.stringify({page:'home',subject:'math',selectedProblemId:problemId,problems:[problem],tutorSessions:{[problemId]:staleSession},aiGuideMode:'direct',annotations:[],notes:[],mindAnswers:{},mindHints:{},mindChapter:{},mindRevealed:{},mobileMenu:false,aiLoading:false,aiError:''}));
+  localStorage.removeItem('wrongbook-v2-ink');
+
+  const out=document.getElementById('result'),frame=document.getElementById('frame'),sleep=ms=>new Promise(r=>setTimeout(r,ms)),fail=m=>{throw new Error(m)},errors=[];
+  const rect=el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
+  const close=(a,b,t=3)=>Math.abs(Number(a)-Number(b))<=t;
+  const sameAnchor=(a,b,t=3)=>close(a.x,b.x,t)&&close(a.right,b.right,t)&&close(a.bottom,b.bottom,t)&&close(a.width,b.width,t);
+  const w=frame.contentWindow;
+  w.addEventListener('error',e=>errors.push('error: '+(e.message||e.error?.message||'unknown')));
+  w.addEventListener('unhandledrejection',e=>errors.push('rejection: '+(e.reason?.message||String(e.reason||'unknown'))));
+  frame.src='../index.html?qaTutorStationaryV21=1';
+  await new Promise((resolve,reject)=>{frame.onload=resolve;setTimeout(()=>reject(new Error('index load timeout')),12000)});
+  const d=w.document,stateNow=()=>w.eval('state');
+  await sleep(2600);
+
+  if(stateNow()?.page!=='home')fail('app did not start on home: '+String(stateNow()?.page));
+  if(!String(w.__wrongbookTutorStationaryV21||'').includes('v12h'))fail('restored V12h stationary tutor guard not loaded');
+  const recent=d.querySelector(`[data-problem="${problemId}"]`);if(!recent)fail('recent geometry problem control not found');
+  recent.click();await sleep(1800);
+  if(stateNow()?.page!=='notebook')fail('recent problem did not enter notebook');
+  if(stateNow()?.selectedProblemId!==problemId)fail('selected problem changed');
+  if(d.body.innerText.includes('P(A∩B)/P(B)'))fail('stale probability tutor leaked into geometry problem');
+  if(w.eval(`state.tutorSessions[${JSON.stringify(problemId)}]`))fail('stale unscoped tutor session was not rejected');
+  const contextQA=w.wrongbookTutorContextGuardQA?.();if(contextQA?.pass!==true)fail('context isolation QA failed: '+JSON.stringify(contextQA));
+
+  // Build a correctly scoped two-step geometry session using the guarded factory.
+  w.eval(`(()=>{const p=selectedProblem();state.aiGuideMode='direct';const s=v5TutorEnsureSession(p,'direct');s.stages=[{id:'geo-1',stageType:'hint',goal:'先找直線 AB 的方向向量',promptToStudent:'先計算 B-A，得到直線 AB 的方向向量，再利用 P 在 AB 上求參數。',successCriteria:'能寫出 AB 的方向向量',waitForStudent:false,revealFinalAnswer:false,actions:[]},{id:'geo-2',stageType:'worked_step',goal:'把方向向量連到平面的法向量',promptToStudent:'平面與 AB 垂直，所以 AB 的方向向量可以作為平面的法向量；再把 P 代入平面方程式。',successCriteria:'能建立平面法向量關係',waitForStudent:false,revealFinalAnswer:false,actions:[{kind:'write',targetRegionId:'',tone:'guide',caption:'diagram',text:'[[DIAGRAM|flow|title=空間中的直線與平面|a=A(1,5,-4)|b=P(-5,r,s)|c=B(-14,15,6)]]'}]}];s.activeIndex=0;s.status='ready';s.diagnosis={studentOnRightTrack:true};s.updatedAt=new Date().toISOString();save();render()})()`);
+  await sleep(1600);
+
+  const workspace=d.querySelector('.pf-problem-workspace');if(!workspace)fail('problem workspace missing');
+  const paper=d.querySelector('.pf-problem-workspace .v3-paper');if(!paper)fail('paper missing');
+  const toolbar=paper.querySelector(':scope > .paper-toolbar,:scope > .ocrq-toolbar');if(!toolbar)fail('bottom pen toolbar missing');
+  const dock=d.querySelector('.pf-problem-workspace .v5-tutor-dock');if(!dock)fail('tutor dock missing');
+  const nav=dock.querySelector('.v16-canonical-nav');if(!nav)fail('canonical 2-step navigator missing');
+  if(d.querySelectorAll('.pf-problem-workspace .v5-tutor-dock').length!==1)fail('duplicate tutor docks');
+  if(d.querySelectorAll('.v16-canonical-nav').length!==1)fail('duplicate canonical navigators');
+  if([...d.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav,.v5-tutor-step-nav')].some(el=>w.getComputedStyle(el).display!=='none'))fail('legacy tutor navigator visible');
+
+  // Let the dynamic bottom calibration complete before measuring.
+  w.wrongbookTutorStationaryQA?.();await sleep(120);
+  const stationaryQA=w.wrongbookTutorStationaryQA?.();if(stationaryQA?.pass!==true)fail('stationary tutor QA failed: '+JSON.stringify(stationaryQA));
+  const dockBefore=rect(dock),paperBefore=rect(paper),toolbarBefore=rect(toolbar),toolbarGap=Math.round(toolbarBefore.y-dockBefore.bottom),toolbarBottomGap=Math.round(paperBefore.bottom-toolbarBefore.bottom),paperSideGap=Math.round(dockBefore.x-paperBefore.x);
+  if(toolbarGap<10)fail('tutor overlaps or touches bottom pen toolbar: '+toolbarGap);
+  if(Math.abs(toolbarBottomGap-12)>5)fail('pen toolbar not at paper bottom: '+toolbarBottomGap);
+  if(paperSideGap<8||Math.abs((paperBefore.right-dockBefore.right)-paperSideGap)>4)fail('stationary tutor is not worksheet-bounded/full-width');
+  if(w.getComputedStyle(dock).position!=='absolute')fail('desktop tutor is not stationary absolute');
+  if(dockBefore.height>422)fail('tutor became page-sized: '+dockBefore.height);
+  if(paperBefore.height>1120)fail('paper height exploded: '+paperBefore.height);
+  const prompt=d.querySelector('.ocrq-prompt-card,.paper-demo h4');if(prompt&&dockBefore.y-prompt.getBoundingClientRect().bottom<28)fail('tutor overlaps printed prompt');
+
+  const sameDock=dock;
+  nav.querySelector('[data-v15-tutor-next]')?.click();await sleep(650);
+  const dockAfterNext=d.querySelector('.pf-problem-workspace .v5-tutor-dock');if(dockAfterNext!==sameDock)fail('tutor dock recreated on next');
+  if(d.querySelector('.v14-tutor-nav-count')?.textContent.trim()!=='2 / 2')fail('next step counter failed');
+  const nextRect=rect(dockAfterNext);if(!sameAnchor(dockBefore,nextRect,4))fail('stationary bottom/width shifted on next: '+JSON.stringify({before:dockBefore,after:nextRect}));
+  if(d.body.innerText.includes('P(A∩B)/P(B)'))fail('stale probability content reappeared after paging');
+
+  // Ignore dormant hidden diagram markup; only visible rendered diagrams can violate containment.
+  const sourceDiagram=[...dockAfterNext.querySelectorAll('.v8-ai-diagram,[data-wb-dedicated-diagram="1"]')].find(el=>{const r=rect(el);return r.width>1&&r.height>1})||null;let diagramContained=true;
+  if(sourceDiagram){const rr=rect(sourceDiagram),dr=rect(dockAfterNext);diagramContained=rr.width<=dr.width+2&&rr.height<=218&&rr.x>=dr.x-2&&rr.right<=dr.right+2;if(!diagramContained)fail('AI diagram escaped stationary tutor: '+JSON.stringify({diagram:rr,dock:dr}));const diagramNav=sourceDiagram.querySelector('.wb-diagram-page-nav');if(diagramNav&&w.getComputedStyle(diagramNav).position==='sticky')fail('diagram navigator is still sticky')}
+  const stickers=[...paper.querySelectorAll('.v9-sheet-ai-card')],stickerContained=stickers.every(el=>{const r=rect(el);return r.width<=362&&r.height<=312});if(!stickerContained)fail('worksheet AI diagram sticker became page-sized');
+
+  d.querySelector('[data-v15-tutor-prev]')?.click();await sleep(500);
+  if(d.querySelector('.pf-problem-workspace .v5-tutor-dock')!==sameDock)fail('tutor dock recreated on previous');
+  const dockAfterPrev=rect(sameDock);if(!sameAnchor(dockBefore,dockAfterPrev,4))fail('stationary bottom/width shifted on previous');
+  if(d.querySelector('.v14-tutor-nav-count')?.textContent.trim()!=='1 / 2')fail('previous step counter failed');
+
+  // Normalizers must become idle; no layout/observer storm is allowed back in.
+  const v21=w.__wrongbookTutorStationaryV21Metrics||{},v16=w.__wrongbookTutorNavV16Metrics||{},v13=w.__wrongbookTutorWorkspaceV13Metrics||{};
+  const start={v21p:v21.passes||0,v21c:v21.domChanges||0,v16p:v16.normalizationPasses||0,v16c:v16.domChanges||0,v13p:v13.normalizationPasses||0,v13c:v13.domChanges||0};await sleep(1200);
+  const idle={v21Pass:(v21.passes||0)-start.v21p,v21Change:(v21.domChanges||0)-start.v21c,v16Pass:(v16.normalizationPasses||0)-start.v16p,v16Change:(v16.domChanges||0)-start.v16c,v13Pass:(v13.normalizationPasses||0)-start.v13p,v13Change:(v13.domChanges||0)-start.v13c};
+  if(idle.v21Pass>5||idle.v21Change>1||idle.v16Pass>5||idle.v16Change>1||idle.v13Pass>5||idle.v13Change>1)fail('DOM observers did not settle: '+JSON.stringify(idle));
+  if(errors.length)fail('runtime errors: '+errors.join(' | '));
+
+  const finalQA=w.wrongbookTutorStationaryQA?.();if(finalQA?.pass!==true)fail('final stationary QA failed: '+JSON.stringify(finalQA));
+  const result={pass:true,build:d.querySelector('meta[name="wrongbook-build"]')?.content||'',flow:'home -> recent geometry problem -> reject stale probability tutor -> V12h stationary tutor -> next -> previous',staleTutorRejected:true,contextQaPass:contextQA?.pass===true,stationaryQaPass:finalQA?.pass===true,restoredFrom:finalQA?.restoredFrom||'',toolbarGap,toolbarBottomGap,dock:{width:Math.round(dockBefore.width),height:Math.round(dockBefore.height),position:w.getComputedStyle(dock).position},paperHeight:Math.round(paperBefore.height),sameDockAcrossPaging:true,geometryStableAcrossPaging:true,diagramContained,stickerContained,pageHeightOk:paperBefore.height<=1120,idle,runtimeErrors:errors};
+  document.body.dataset.status='PASS';out.textContent=JSON.stringify(result,null,2);
+})().catch(err=>{document.body.dataset.status='FAIL';document.getElementById('result').textContent=JSON.stringify({pass:false,error:err.message,stack:err.stack},null,2)});
+</script>
+</body>
+</html>
