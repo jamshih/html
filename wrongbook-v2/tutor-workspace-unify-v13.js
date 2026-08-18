@@ -31,16 +31,13 @@
       if(s&&s.mode==='instructive'&&Array.isArray(s.stages)&&s.stages.length){if(typeof v5TutorEvaluate==='function')await v5TutorEvaluate();else if(typeof v5TutorHint==='function')await v5TutorHint();else if(typeof v5TutorStart==='function')await v5TutorStart('instructive')}
       else if(typeof v5TutorStart==='function')await v5TutorStart('instructive');
       else{typeof toast==='function'&&toast('AI 家教尚未載入，請重新整理後再試');return false}
-      setTimeout(()=>{const dock=document.querySelector('.v5-tutor-dock');dock?.classList.remove('v6-tutor-collapsed');dock?.scrollIntoView?.({block:'nearest',behavior:'smooth'})},80);return true;
+      setTimeout(()=>{const dock=document.querySelector('.v5-tutor-dock');if(dock?.classList.contains('v6-tutor-collapsed')){const toggle=dock.querySelector('.v6-tutor-collapse-button');if(toggle)toggle.click();else dock.classList.remove('v6-tutor-collapsed')}dock?.scrollIntoView?.({block:'nearest',behavior:'smooth'})},100);return true;
     }catch(e){typeof toast==='function'&&toast('AI 家教提示失敗：'+(e?.message||e));return false}
   }
 
   document.addEventListener('click',event=>{const button=event.target?.closest?.('[data-action="aiOnPaper"]');if(!button)return;event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();runUnifiedOnPaperTutor()},true);
 
-  function normalizeTutorDom(){
-    document.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav').forEach(el=>el.remove());
-    document.querySelectorAll('[data-action="aiOnPaper"]').forEach(button=>{button.textContent='✦ AI 家教看我的作答';button.setAttribute('aria-label','讓 AI 家教讀取目前作答並給文字與題目上的提示');button.dataset.tutorOwner='v13'});
-  }
+  function normalizeTutorDom(){document.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav').forEach(el=>el.remove());document.querySelectorAll('[data-action="aiOnPaper"]').forEach(button=>{button.textContent='✦ AI 家教看我的作答';button.setAttribute('aria-label','讓 AI 家教讀取目前作答並給文字與題目上的提示');button.dataset.tutorOwner='v13'})}
   let queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;normalizeTutorDom()})}
   const mount=()=>{const app=document.getElementById('app');if(!app)return setTimeout(mount,50);new MutationObserver(queue).observe(app,{subtree:true,childList:true});normalizeTutorDom()};mount();
 
