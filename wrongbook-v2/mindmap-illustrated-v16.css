@@ -1,7 +1,7 @@
 /* Reference-led illustrated mind maps for Earth Science, Chemistry, and Biology. */
 .mindmap--illustrated{
   --mindmap-font-display:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
-  --mindmap-font-body:"Noto Sans TC","Source Han Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --mindmap-font-body:"LXGW WenKai TC","Klee One","BiauKai","DFKai-SB",cursive;
   --mindmap-font-weight-title:800;
   --mindmap-font-weight-label:700;
   --mindmap-font-weight-body:450;
@@ -15,6 +15,12 @@
   letter-spacing:var(--mindmap-letter-spacing);
   color:var(--mindmap-text);
 }
+.v4ref-page-head,.v4ref-modebar,.v4ref-chapter-nav,.v4ref-toolbar,.v4ref-canvas{
+  --mindmap-font-display:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  --mindmap-font-body:"LXGW WenKai TC","Klee One","BiauKai","DFKai-SB",cursive;
+  font-family:var(--mindmap-font-body);
+}
+.v4ref-source-header h3,.v4ref-ribbon{font-family:var(--mindmap-font-display)}
 .mindmap--illustrated h1,.mindmap--illustrated h2,.mindmap--illustrated h3,
 .mindmap--illustrated .v4tb-map-header h3,.mindmap--illustrated .chem-title-row h1{
   font-family:var(--mindmap-font-display);
