@@ -28,7 +28,7 @@ iframe{display:block;border:0}
 <script src="./learning-objects-v5.js"></script><script src="./concept-explorer-v5.js"></script><script src="./concept-explorer-v5-runtime-fix.js"></script><script src="./ai-diagram-sticker-v2.js?wb=20260818-2"></script><script src="./paper-first-compat-v1.js?pf=20260817-5"></script><script src="./tutor-runtime-guard-v5.js?pf=20260817-5"></script><script src="./paper-first-compat-restore-v1.js?pf=20260817-7"></script><script src="./e2e-product-v5-run.js"></script><script src="./e2e-v3.js"></script><script src="./mindmap-infrastructure-only-v1.js?wb=20260818-1"></script><script src="./mindmap-reference-true-v1.js?wb=20260818-1"></script></body></html>
 </template>
 <script>
-const qaDocument=document.getElementById("qa-app-document").innerHTML;
+const qaDocument=document.getElementById("qa-app-document").innerHTML.replaceAll('type="text/htmlpreview"','');
 document.getElementById("qa-mobile").srcdoc=qaDocument;
 document.getElementById("qa-tablet").srcdoc=qaDocument;
 </script>
