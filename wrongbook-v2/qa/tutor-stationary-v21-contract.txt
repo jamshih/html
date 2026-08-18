@@ -1,0 +1,1 @@
+Acceptance contract: one tutor dock; geometry-fixed dialog; no cross-problem tutor content; pen toolbar at paper bottom; stable Next/Previous DOM; contained optional AI diagram; no observer churn; no runtime errors.
