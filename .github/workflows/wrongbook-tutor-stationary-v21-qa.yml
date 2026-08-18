@@ -36,7 +36,8 @@ jobs:
           grep -q "height:auto!important" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "max-width:360px" wrongbook-v2/tutor-stationary-restore-v21.js
           grep -q "setProperty(name,value,'important')" wrongbook-v2/tutor-stationary-inline-lock-v22.js
-          grep -q "const adjustment=GAP-gap" wrongbook-v2/tutor-stationary-inline-lock-v22.js
+          grep -q "adjustment=GAP-gap" wrongbook-v2/tutor-stationary-inline-lock-v22.js
+          grep -q "syncPager" wrongbook-v2/tutor-stationary-inline-lock-v22.js
           grep -q "tutor-stationary-restore-v21.js?wb=20260818-2032-v12h" wrongbook-v2/mindmap-single-scope-merge-v1.js
           grep -q "tutor-stationary-inline-lock-v22.js?wb=20260818-2032" wrongbook-v2/mindmap-single-scope-merge-v1.js
       - name: Real browser stationary tutor regression
