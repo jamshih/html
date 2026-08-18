@@ -80,7 +80,8 @@
   const nextRect=rect(dockAfterNext);if(!sameAnchor(dockBefore,nextRect,4))fail('stationary bottom/width shifted on next: '+JSON.stringify({before:dockBefore,after:nextRect}));
   if(d.body.innerText.includes('P(A∩B)/P(B)'))fail('stale probability content reappeared after paging');
 
-  const sourceDiagram=dockAfterNext.querySelector('.v8-ai-diagram,[data-wb-dedicated-diagram="1"]');let diagramContained=true;
+  // Ignore dormant hidden diagram markup; only visible rendered diagrams can violate containment.
+  const sourceDiagram=[...dockAfterNext.querySelectorAll('.v8-ai-diagram,[data-wb-dedicated-diagram="1"]')].find(el=>{const r=rect(el);return r.width>1&&r.height>1})||null;let diagramContained=true;
   if(sourceDiagram){const rr=rect(sourceDiagram),dr=rect(dockAfterNext);diagramContained=rr.width<=dr.width+2&&rr.height<=218&&rr.x>=dr.x-2&&rr.right<=dr.right+2;if(!diagramContained)fail('AI diagram escaped stationary tutor: '+JSON.stringify({diagram:rr,dock:dr}));const diagramNav=sourceDiagram.querySelector('.wb-diagram-page-nav');if(diagramNav&&w.getComputedStyle(diagramNav).position==='sticky')fail('diagram navigator is still sticky')}
   const stickers=[...paper.querySelectorAll('.v9-sheet-ai-card')],stickerContained=stickers.every(el=>{const r=rect(el);return r.width<=362&&r.height<=312});if(!stickerContained)fail('worksheet AI diagram sticker became page-sized');
 
