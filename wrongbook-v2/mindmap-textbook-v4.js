@@ -68,6 +68,7 @@ function v4tbReadingCue(subjectId,mode){
 }
 function v4tbRecall(subjectId,chapter,section,p,mode='flow'){
   const {key,val,ok,level,attempted}=v4tbPointState(subjectId,chapter,p),size=v4tbAnswerSize(p.a),related=v4tbRelated(subjectId,chapter,section);
+  if(subjectId==='biology'&&state.biologyMindMode==='learn')return `<div class="v4tb-recall v4tb-recall-${mode} is-learning" data-v4tb-point="${v4EscapeAttr(p.id)}" data-v4tb-owner="${v4EscapeAttr(section.id||section.title)}"><div class="v4tb-inline-line"><span class="v4tb-question">${esc(v4tbQuestion(p.q))}</span><span class="v4tb-learn-answer">${esc(v4tbTaiwanTermText(p.a))}</span></div></div>`;
   return `<div class="v4tb-recall v4tb-recall-${mode} ${ok?'is-correct':attempted?'is-attempted':''}" data-v4tb-point="${v4EscapeAttr(p.id)}" data-v4tb-owner="${v4EscapeAttr(section.id||section.title)}">
     <div class="v4tb-inline-line">
       <span class="v4tb-question">${esc(v4tbQuestion(p.q))}</span>
@@ -208,8 +209,9 @@ function mindmapPage(){
   const s=activeSubject(),curriculum=twCurriculumSubject(s.id),chapters=v4tbCurriculumChapters(s.id,curriculum),chosen=chapters.find(ch=>ch.title===state.conceptChapter)||chapters[0];
   if(!chosen)return'<div class="empty">這科目前沒有課綱資料。</div>';
   const chapterStats=v4ChapterStats(s.id,chosen),chapterIndex=chapters.indexOf(chosen),prevChapter=chapters[(chapterIndex-1+chapters.length)%chapters.length],nextChapter=chapters[(chapterIndex+1)%chapters.length];
+  const biologyMode=s.id==='biology'?`<div class="v4tb-mode" role="group" aria-label="生物學習模式"><button class="${state.biologyMindMode==='learn'?'':'active'}" data-v4tb-mode="recall">Recall 回想</button><button class="${state.biologyMindMode==='learn'?'active':''}" data-v4tb-mode="learn">Learn 答案</button></div>`:'';
   return `<div class="page-head v4tb-page-head"><div><div class="tw-badge">${esc(TW_TERM_POLICY.label)}</div><h2>心智圖學習 · ${esc(v4tbTaiwanTermText(s.name))}</h2><p>先看關係，再回想細節：圖、比較、流程、時間脈絡、公式與概念層級依內容自動選擇。</p></div><div class="v4-head-progress"><span>本章 ${chapterStats.pct}%</span><i><b style="width:${chapterStats.pct}%"></b></i></div></div>
-    ${subjectTabs()}
+    ${subjectTabs()}${biologyMode}
     <div class="v4tb-layout">
       <nav class="v4tb-chapters" aria-label="章節"><span class="v4tb-chapter-summary">${chapters.length} 個核心章節</span>${chapters.map(ch=>{const st=v4ChapterStats(s.id,ch);return `<button class="mind-chapter-btn ${chosen.id===ch.id?'active':''}" data-concept-chapter="${v4EscapeAttr(ch.title)}"><strong>${esc(v4tbTaiwanTermText(ch.title))}</strong><small>${st.done}/${st.total}</small></button>`}).join('')}</nav>
       <main class="v4tb-main"><div class="v4tb-book-stack">${v4tbKnowledgeMap(s.id,s.name,chosen,chapterStats)}</div>
@@ -220,6 +222,7 @@ function mindmapPage(){
 const v4tbBaseBind=bind;
 bind=function(){
   v4tbBaseBind();
+  document.querySelectorAll('[data-v4tb-mode]').forEach(button=>button.onclick=()=>{state.biologyMindMode=button.dataset.v4tbMode==='learn'?'learn':'recall';save();render()});
 };
 
 render();

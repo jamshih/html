@@ -139,6 +139,10 @@
 .rm-cmb-note{height:170px;display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:8px;align-items:center;border:1.4px solid #7653a1;border-radius:11px;background:#fffdfa;padding:10px 11px}.rm-cmb-note h3{font-family:var(--mindmap-font-body);font-size:14px;color:#5f3e8f;margin-bottom:4px}.rm-cmb-note p{font-size:12px;line-height:1.4}.rm-cmb-note .rm-art{width:155px;height:105px;object-fit:contain;border-radius:48%}
 .rm-sheet>footer{position:absolute;left:28px;right:28px;bottom:15px;height:36px;display:flex;align-items:center;justify-content:center;border-top:1px dashed #aa9d86;color:#7a6a52;font-size:12px;letter-spacing:.2em}
 .rm-art{display:block;max-width:100%;user-select:none;-webkit-user-drag:none}
+.rm-sheet.mindmap--illustrated small{font-size:10px}
+.rm-sheet.mindmap--illustrated .rm-blank input{font-size:10px}
+.rm-sheet.mindmap--illustrated .rm-remnants p{font-size:10px}
+.rm-sheet.mindmap--illustrated .rm-hubble text{font-size:10px}
 
 @media(max-width:1180px){
   .rm-stage{padding-left:12px;padding-right:12px}
