@@ -1,1 +1,0 @@
-Target flow: home -> recent scanned geometry problem -> reject stale cross-problem tutor session -> render one bottom-anchored stationary tutor -> page next/previous in-place -> verify pen toolbar remains at the paper bottom and observer activity settles.
