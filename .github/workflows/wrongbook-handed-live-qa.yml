@@ -1,0 +1,41 @@
+name: Wrongbook Handed Mindmap Live QA
+
+on:
+  pull_request:
+    paths:
+      - 'wrongbook-v2/qa/mindmap-handed-live-v1.js'
+      - '.github/workflows/wrongbook-handed-live-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-handed-layout:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: node --check wrongbook-v2/qa/mindmap-handed-live-v1.js
+      - name: Install Playwright core
+        run: |
+          mkdir -p /tmp/wb-live-pw
+          cd /tmp/wb-live-pw
+          npm init -y >/dev/null 2>&1
+          npm install playwright-core@1.55.0 --no-save
+          ln -s /tmp/wb-live-pw/node_modules "$GITHUB_WORKSPACE/node_modules"
+      - name: Test actual GitHub Pages deployment
+        env:
+          CHROMIUM_PATH: /usr/bin/chromium
+        run: |
+          set -o pipefail
+          node wrongbook-v2/qa/mindmap-handed-live-v1.js | tee /tmp/wb-handed-live-result.json
+      - name: Upload live QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-handed-live-qa
+          path: |
+            /tmp/wb-handed-live-result.json
+            /tmp/wrongbook-handed-live-desktop.png
+            /tmp/wrongbook-handed-live-mobile.png
+          if-no-files-found: warn
