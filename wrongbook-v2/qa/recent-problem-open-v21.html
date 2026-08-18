@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW">
-<head><meta charset="utf-8"><meta name="qa-run" content="pr-validation-2"><title>Wrongbook recent problem open QA</title></head>
+<head><meta charset="utf-8"><meta name="qa-run" content="pr-validation-3"><title>Wrongbook recent problem open QA</title></head>
 <body data-status="RUNNING">
 <pre id="result">RUNNING</pre>
 <script>
@@ -60,12 +60,14 @@
 
   const metrics=w.__wrongbookTutorNavV16Metrics;
   if(!metrics)fail('navigator metrics missing');
-  const settleStart={callbacks:metrics.observerCallbacks,passes:metrics.normalizationPasses,changes:metrics.domChanges};
+  const workspaceMetrics=w.__wrongbookTutorWorkspaceV13Metrics;
+  if(!workspaceMetrics)fail('tutor workspace metrics missing');
+  const settleStart={callbacks:metrics.observerCallbacks,passes:metrics.normalizationPasses,changes:metrics.domChanges,workspacePasses:workspaceMetrics.normalizationPasses,workspaceChanges:workspaceMetrics.domChanges};
   await sleep(900);
-  const settleEnd={callbacks:metrics.observerCallbacks,passes:metrics.normalizationPasses,changes:metrics.domChanges};
-  const idlePassDelta=settleEnd.passes-settleStart.passes;
-  const idleChangeDelta=settleEnd.changes-settleStart.changes;
+  const settleEnd={callbacks:metrics.observerCallbacks,passes:metrics.normalizationPasses,changes:metrics.domChanges,workspacePasses:workspaceMetrics.normalizationPasses,workspaceChanges:workspaceMetrics.domChanges};
+  const idlePassDelta=settleEnd.passes-settleStart.passes,idleChangeDelta=settleEnd.changes-settleStart.changes,idleWorkspacePassDelta=settleEnd.workspacePasses-settleStart.workspacePasses,idleWorkspaceChangeDelta=settleEnd.workspaceChanges-settleStart.workspaceChanges;
   if(idlePassDelta>4||idleChangeDelta>1)fail(`navigator observer did not settle: passes +${idlePassDelta}, changes +${idleChangeDelta}`);
+  if(idleWorkspacePassDelta>4||idleWorkspaceChangeDelta>1)fail(`workspace observer did not settle: passes +${idleWorkspacePassDelta}, changes +${idleWorkspaceChangeDelta}`);
 
   const sameDock=dock;
   nav.querySelector('[data-v15-tutor-next]')?.click();
@@ -77,16 +79,15 @@
   if(d.querySelector('.v5-tutor-dock')!==sameDock)fail('tutor dock was recreated on previous');
   if(d.querySelector('.v14-tutor-nav-count')?.textContent.trim()!=='1 / 3')fail('previous did not restore navigator count');
 
-  const navQA=w.wrongbookTutorNavVisualQA?.()||null;
-  const tutorQA=w.wrongbookTutorDialogCompactQA?.()||null;
-  const universalQA=w.wrongbookUniversalTutorAccessQA?.()||null;
+  const navQA=w.wrongbookTutorNavVisualQA?.()||null,tutorQA=w.wrongbookTutorDialogCompactQA?.()||null,workspaceQA=w.wrongbookTutorWorkspaceUnifyQA?.()||null,universalQA=w.wrongbookUniversalTutorAccessQA?.()||null;
   if(navQA&&navQA.pass!==true)fail('navigator runtime QA failed: '+JSON.stringify(navQA));
   if(tutorQA&&tutorQA.pass!==true)fail('tutor dialog QA failed: '+JSON.stringify(tutorQA));
+  if(workspaceQA&&workspaceQA.pass!==true)fail('tutor workspace QA failed: '+JSON.stringify(workspaceQA));
   if(universalQA&&universalQA.pass!==true)fail('universal tutor QA failed: '+JSON.stringify(universalQA));
   if(errors.length)fail('runtime errors after click: '+errors.join(' | '));
 
   const finalState=stateNow();
-  const result={pass:true,flow:'home -> recent wrong problem -> workspace -> next -> previous',page:finalState.page,selectedProblemId:finalState.selectedProblemId,workspacePresent:true,canvasPresent:true,undoPresent:true,redoPresent:true,canonicalNavigatorCount:navs.length,legacyNavigatorCount:legacy.length,idleObserverPassDelta:idlePassDelta,idleDomChangeDelta:idleChangeDelta,sameTutorDockAcrossPaging:true,navQA,tutorQA,universalQA,runtimeErrors:errors};
+  const result={pass:true,flow:'home -> recent wrong problem -> workspace -> next -> previous',page:finalState.page,selectedProblemId:finalState.selectedProblemId,workspacePresent:true,canvasPresent:true,undoPresent:true,redoPresent:true,canonicalNavigatorCount:navs.length,legacyNavigatorCount:legacy.length,idleObserverPassDelta:idlePassDelta,idleDomChangeDelta:idleChangeDelta,idleWorkspacePassDelta,idleWorkspaceChangeDelta,sameTutorDockAcrossPaging:true,navQA,tutorQA,workspaceQA,universalQA,runtimeErrors:errors};
   document.body.dataset.status='PASS';out.textContent=JSON.stringify(result,null,2);
 })().catch(err=>{document.body.dataset.status='FAIL';document.getElementById('result').textContent=JSON.stringify({pass:false,error:err.message,stack:err.stack},null,2)});
 </script>
