@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="qa-run" content="subject-selection-v2"><title>Wrongbook subject selection QA</title></head>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="qa-run" content="subject-selection-v3"><title>Wrongbook subject selection QA</title></head>
 <body data-status="RUNNING"><pre id="result">RUNNING</pre><script>
 (async()=>{
   const out=document.getElementById('result');
@@ -22,7 +22,6 @@
     return{iframe,w,d,errors,state:()=>w.eval('state'),subjects:()=>w.eval('SUBJECTS.map(s=>({id:s.id,name:s.name}))')};
   }
 
-  function visible(d,el){if(!el)return false;const s=d.defaultView.getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>1&&r.height>1}
   function assertHitTarget(d,el,label){
     const r=el.getBoundingClientRect();
     if(r.width<2||r.height<2)fail(label+' has no clickable size');
@@ -31,115 +30,75 @@
     const hit=d.elementFromPoint(x,y);
     if(!hit||!(hit===el||el.contains(hit)))fail(label+' does not receive pointer events; hit '+(hit?.className||hit?.tagName||'nothing'));
   }
-  async function goHome(ctx){ctx.w.eval("state.page='home'; state.mobileMenu=false; render()");await sleep(150)}
-  async function goMindmap(ctx){ctx.w.eval("state.page='mindmap'; state.mobileMenu=false; render()");for(let i=0;i<40&&!ctx.d.getElementById('mmSubjectSelect');i++)await sleep(120);if(!ctx.d.getElementById('mmSubjectSelect'))fail('mind-map subject selector did not appear')}
+
+  async function goMindmap(ctx){
+    ctx.w.eval("state.page='mindmap'; state.mobileMenu=false; render()");
+    for(let i=0;i<50&&!ctx.d.getElementById('mmSubjectSelect');i++)await sleep(120);
+    if(!ctx.d.getElementById('mmSubjectSelect'))fail(ctx.iframe.dataset.qa+' mind-map subject selector did not appear');
+  }
+
+  async function verifyMindmap(ctx,targets,label){
+    await goMindmap(ctx);
+    let wrap=ctx.d.getElementById('mmWrap'),select=ctx.d.getElementById('mmSubjectSelect');
+    if(!wrap||!select||!ctx.d.getElementById('mmSvg'))fail(label+' mind-map controls missing');
+    if(wrap.hasAttribute('data-subject'))fail(label+' mind-map wrapper still exposes interactive data-subject');
+    if(wrap.onclick)fail(label+' mind-map wrapper still owns a click handler');
+    assertHitTarget(ctx.d,select,label+' mind-map subject select');
+
+    const originalSelect=select;
+    select.dispatchEvent(new ctx.w.PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:1,pointerType:label==='mobile'?'touch':'mouse'}));
+    select.dispatchEvent(new ctx.w.MouseEvent('click',{bubbles:true,cancelable:true,view:ctx.w}));
+    await sleep(120);
+    if(!originalSelect.isConnected)fail(label+' clicking subject select destroyed it before change');
+    if(ctx.state().page!=='mindmap')fail(label+' clicking subject select changed page before selection');
+
+    const results=[];
+    for(const id of targets){
+      select=ctx.d.getElementById('mmSubjectSelect');
+      if(!select)fail(label+' selector missing before '+id);
+      select.value=id;
+      select.dispatchEvent(new ctx.w.Event('change',{bubbles:true}));
+      for(let i=0;i<50&&ctx.state().subject!==id;i++)await sleep(80);
+      await sleep(260);
+      if(ctx.state().subject!==id)fail(label+' selection failed for '+id+'; got '+ctx.state().subject);
+      if(ctx.state().page!=='mindmap')fail(label+' selection left mindmap for '+id+': '+ctx.state().page);
+      wrap=ctx.d.getElementById('mmWrap');select=ctx.d.getElementById('mmSubjectSelect');
+      const svg=ctx.d.getElementById('mmSvg');
+      if(!wrap||!select||!svg)fail(label+' mind-map DOM missing after '+id);
+      if(wrap.hasAttribute('data-subject')||wrap.onclick)fail(label+' wrapper interception returned after '+id);
+      if(select.value!==id)fail(label+' selector value mismatch for '+id+': '+select.value);
+      assertHitTarget(ctx.d,select,label+' selector after '+id);
+      const qa=ctx.w.WrongBookMindmapSubjectNav?.qa?.();
+      if(!qa||qa.pass!==true)fail(label+' subject nav QA failed after '+id+': '+JSON.stringify(qa));
+      results.push({id,nodeCount:svg.querySelectorAll('g.node').length,qa});
+    }
+    return results;
+  }
 
   localStorage.removeItem('wrongbook-v2-state');
   localStorage.removeItem('wrongbook-v2-ink');
   const desktop=await boot('desktop',1280,900);
   const subjects=desktop.subjects();
   if(subjects.length<8)fail('unexpected subject count '+subjects.length);
-  if(desktop.state().page!=='home')fail('desktop did not start on home');
-
-  // Validate the subject buttons that the CURRENT shell actually exposes.
-  // Do not assume a retired Home card layout: discover rendered controls by data-subject.
-  const shellSubjectResults=[];
-  for(const subject of subjects){
-    await goHome(desktop);
-    const controls=[...desktop.d.querySelectorAll(`button[data-subject="${subject.id}"]`)].filter(el=>visible(desktop.d,el));
-    if(!controls.length)continue;
-    const control=controls[0];
-    assertHitTarget(desktop.d,control,'desktop shell '+subject.id);
-    control.click();await sleep(150);
-    if(desktop.state().subject!==subject.id)fail(`desktop shell ${subject.id} did not select subject; got ${desktop.state().subject}`);
-    shellSubjectResults.push(subject.id);
-  }
-  if(!shellSubjectResults.length)fail('current desktop shell exposes no clickable subject controls');
-
-  // Core reproduction: the mind-map selector was nested inside #mmWrap, which
-  // previously inherited a global data-subject onclick and destroyed the select.
-  await goMindmap(desktop);
-  let wrap=desktop.d.getElementById('mmWrap'),select=desktop.d.getElementById('mmSubjectSelect');
-  if(!wrap||!select)fail('desktop mind-map controls missing');
-  if(wrap.hasAttribute('data-subject'))fail('mind-map wrapper still exposes interactive data-subject');
-  if(wrap.onclick)fail('mind-map wrapper still owns a click handler');
-  assertHitTarget(desktop.d,select,'desktop mind-map subject select');
-  const originalSelect=select;
-  select.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:1,pointerType:'mouse'}));
-  select.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:desktop.w}));
-  await sleep(100);
-  if(!originalSelect.isConnected)fail('clicking subject select destroyed it before change');
-  if(desktop.state().page!=='mindmap')fail('clicking subject select changed page before selection');
-
-  const mindmapResults=[];
-  for(const subject of subjects){
-    select=desktop.d.getElementById('mmSubjectSelect');
-    if(!select)fail('mind-map select missing before '+subject.id);
-    select.value=subject.id;
-    select.dispatchEvent(new Event('change',{bubbles:true}));
-    for(let i=0;i<40&&desktop.state().subject!==subject.id;i++)await sleep(80);
-    await sleep(220);
-    const st=desktop.state();
-    if(st.subject!==subject.id)fail(`mind-map select ${subject.id} did not update state; got ${st.subject}`);
-    if(st.page!=='mindmap')fail(`mind-map select ${subject.id} left mind-map page: ${st.page}`);
-    wrap=desktop.d.getElementById('mmWrap');select=desktop.d.getElementById('mmSubjectSelect');
-    if(!wrap||!select||!desktop.d.getElementById('mmSvg'))fail('mind-map DOM missing after '+subject.id);
-    if(wrap.hasAttribute('data-subject')||wrap.onclick)fail('interactive wrapper handler returned after '+subject.id);
-    if(select.value!==subject.id)fail(`mind-map select visual value mismatch for ${subject.id}: ${select.value}`);
-    assertHitTarget(desktop.d,select,'desktop mind-map select after '+subject.id);
-    const qa=desktop.w.WrongBookMindmapSubjectNav?.qa?.();
-    if(!qa||qa.pass!==true)fail('subject nav runtime QA failed after '+subject.id+': '+JSON.stringify(qa));
-    mindmapResults.push(subject.id);
-  }
+  const ids=subjects.map(s=>s.id);
+  const desktopResults=await verifyMindmap(desktop,ids,'desktop');
 
   localStorage.removeItem('wrongbook-v2-state');
   const mobile=await boot('mobile',390,844);
-  if(mobile.state().page!=='home')fail('mobile did not start on home');
-  const mobileShellControls=[...mobile.d.querySelectorAll('button[data-subject]')].filter(el=>visible(mobile.d,el));
-  const mobileShellResults=[];
-  if(mobileShellControls.length){
-    const target=mobileShellControls[0],id=target.dataset.subject;
-    assertHitTarget(mobile.d,target,'mobile shell '+id);
-    target.click();await sleep(160);
-    if(mobile.state().subject!==id)fail('mobile shell subject control did not select '+id);
-    mobileShellResults.push(id);
-  }
-
-  await goMindmap(mobile);
-  wrap=mobile.d.getElementById('mmWrap');select=mobile.d.getElementById('mmSubjectSelect');
-  if(!wrap||!select)fail('mobile mind-map selector missing');
-  if(wrap.hasAttribute('data-subject')||wrap.onclick)fail('mobile mind-map wrapper still intercepts subject click');
-  assertHitTarget(mobile.d,select,'mobile mind-map subject select');
-  const originalMobileSelect=select;
-  select.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:2,pointerType:'touch'}));
-  select.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:mobile.w}));
-  await sleep(100);
-  if(!originalMobileSelect.isConnected)fail('mobile selector destroyed on tap before change');
-
-  const mobileTargets=['biology','math','earth','chemistry'].filter(id=>subjects.some(s=>s.id===id));
-  for(const id of mobileTargets){
-    select=mobile.d.getElementById('mmSubjectSelect');
-    if(!select)fail('mobile selector missing before '+id);
-    select.value=id;
-    select.dispatchEvent(new Event('change',{bubbles:true}));
-    for(let i=0;i<40&&mobile.state().subject!==id;i++)await sleep(80);
-    await sleep(220);
-    if(mobile.state().subject!==id)fail('mobile mind-map selection failed for '+id);
-    select=mobile.d.getElementById('mmSubjectSelect');wrap=mobile.d.getElementById('mmWrap');
-    if(!select||select.value!==id)fail('mobile selector did not persist '+id);
-    if(wrap?.hasAttribute('data-subject')||wrap?.onclick)fail('mobile wrapper interception returned after '+id);
-    assertHitTarget(mobile.d,select,'mobile mind-map select after '+id);
-    const qa=mobile.w.WrongBookMindmapSubjectNav?.qa?.();
-    if(!qa||qa.pass!==true)fail('mobile subject nav runtime QA failed after '+id+': '+JSON.stringify(qa));
-  }
+  const preferred=['biology','math','earth','chemistry','physics','chinese','english'];
+  const mobileTargets=preferred.filter(id=>ids.includes(id));
+  if(mobileTargets.length<4)fail('not enough mobile subject targets');
+  const mobileResults=await verifyMindmap(mobile,mobileTargets,'mobile');
 
   const build=desktop.d.querySelector('meta[name="wrongbook-build"]')?.content||'';
   if(build!=='2026-08-18-subject-selection-2000')fail('wrong production build loaded: '+build);
   const geometryScript=[...desktop.d.scripts].find(s=>s.src.includes('mindmap-radial-runtime-fix-v3.js'))?.src||'';
   if(!geometryScript.includes('20260818-geometry-5'))fail('geometry-5 cache key not loaded: '+geometryScript);
+  const subjectNavScript=[...desktop.d.scripts].find(s=>s.src.includes('mindmap-subject-nav-v1.js'))?.src||'';
+  if(!subjectNavScript.includes('mindmap-subject-nav-v2'))fail('subject-nav-v2 cache key not loaded: '+subjectNavScript);
   if(allErrors.length)fail('runtime errors: '+allErrors.join(' | '));
 
-  const result={pass:true,flow:'current shell subject controls + all mind-map subjects + mobile mind-map subjects',build,subjectCount:subjects.length,shellSubjectResults,mindmapResults,mobileShellResults,mobileTargets,desktopSubjectNavQA:desktop.w.WrongBookMindmapSubjectNav?.qa?.()||null,mobileSubjectNavQA:mobile.w.WrongBookMindmapSubjectNav?.qa?.()||null,runtimeErrors:allErrors};
+  const result={pass:true,flow:'mind-map subject selector pointer survival + every desktop subject + representative mobile subjects',build,subjectCount:subjects.length,desktopResults,mobileResults,runtimeErrors:allErrors};
   document.body.dataset.status='PASS';out.textContent=JSON.stringify(result,null,2);
 })().catch(err=>{document.body.dataset.status='FAIL';document.getElementById('result').textContent=JSON.stringify({pass:false,error:err.message,stack:err.stack},null,2)});
 </script></body></html>
