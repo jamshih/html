@@ -13,7 +13,8 @@ function v4tbStripSvgText(svg=''){
 }
 function v4tbSectionVisual(subjectId,chapter,section){
   const nativeFigure=v4tbStripSvgText(v4HeroGraphic(subjectId,`${chapter.title} ${section.title}`));
-  const assetIds=typeof mindmapApprovedAssetIds==='function'?mindmapApprovedAssetIds(subjectId,chapter.id,section.id):[];
+  const assetChapterId=section.assetChapterId||chapter.id;
+  const assetIds=typeof mindmapApprovedAssetIds==='function'?mindmapApprovedAssetIds(subjectId,assetChapterId,section.id):[];
   if(!assetIds.length)return nativeFigure;
   const assets=typeof mindmapApprovedAssetHtml==='function'?mindmapApprovedAssetHtml(assetIds,{label:`${section.title}概念插圖`}):'';
   return `<div class="v4tb-figure-composite assets-${assetIds.length}"><div class="v4tb-native-figure">${nativeFigure}</div>${assets}</div>`;
@@ -175,22 +176,42 @@ function v4tbChapterHeader(subjectName,chapter,chapterStats){
 }
 function v4tbKnowledgeMap(subjectId,subjectName,chapter,chapterStats){
   const illustrated=['earth','chemistry','biology'].includes(subjectId)?` mindmap--illustrated mindmap--${subjectId}`:'';
+  const chapterAssets=v4tbChapterAssets(subjectId,chapter);
   return `<section class="panel v4tb-sheet v4tb-knowledge-map${illustrated}" style="--subject:${v4MindPalette(subjectId)[0]}" data-v4tb-subject="${v4EscapeAttr(subjectId)}" data-v4tb-chapter="${v4EscapeAttr(chapter.id)}">
     ${v4tbChapterHeader(subjectName,chapter,chapterStats)}
     <div class="v4tb-page-body">
       ${(chapter.sections||[]).map((section,si)=>v4tbSection(subjectId,chapter,section,si)).join('')}
+      ${chapterAssets}
       <div class="v4tb-end-label"><span>脈絡整合完成度</span><strong>${chapterStats.done}/${chapterStats.total}</strong></div>
     </div>
   </section>`;
 }
+function v4tbChapterAssets(subjectId,chapter){
+  if(subjectId!=='biology'||chapter.id!=='bio-cycle'||typeof mindmapApprovedAssetHtml!=='function')return'';
+  const ids=Object.values(window.MINDMAP_APPROVED_ASSETS||{}).filter(asset=>asset.subject==='biology'&&String(asset.owner||'').startsWith('biology:inventory:')).map(asset=>asset.id);
+  return mindmapApprovedAssetHtml(ids,{className:'mindmap-asset-group v4tb-chapter-assets',label:'生命週期與生殖概念插圖'});
+}
+function v4tbCurriculumChapters(subjectId,curriculum){
+  const chapters=Array.isArray(curriculum?.chapters)?curriculum.chapters:[];
+  if(subjectId!=='biology')return chapters;
+  const groups=[
+    ['bio-cell','bio-membrane'],['bio-enzyme','bio-resp'],['bio-photo'],['bio-mendel'],['bio-molecular','bio-biotech'],
+    ['bio-evolution'],['bio-plant'],['bio-animal','bio-immunity'],['bio-cycle'],['bio-ecology']
+  ];
+  const byId=Object.fromEntries(chapters.map(chapter=>[chapter.id,chapter]));
+  return groups.map(ids=>ids.map(id=>byId[id]).filter(Boolean)).filter(group=>group.length).map(group=>{
+    const primary=group[0];
+    return {...primary,sections:group.flatMap(source=>(source.sections||[]).map(section=>({...section,assetChapterId:source.id})))};
+  });
+}
 function mindmapPage(){
-  const s=activeSubject(),curriculum=twCurriculumSubject(s.id),chosen=curriculum.chapters.find(ch=>ch.title===state.conceptChapter)||curriculum.chapters[0];
+  const s=activeSubject(),curriculum=twCurriculumSubject(s.id),chapters=v4tbCurriculumChapters(s.id,curriculum),chosen=chapters.find(ch=>ch.title===state.conceptChapter)||chapters[0];
   if(!chosen)return'<div class="empty">這科目前沒有課綱資料。</div>';
-  const chapterStats=v4ChapterStats(s.id,chosen),chapterIndex=curriculum.chapters.indexOf(chosen),prevChapter=curriculum.chapters[(chapterIndex-1+curriculum.chapters.length)%curriculum.chapters.length],nextChapter=curriculum.chapters[(chapterIndex+1)%curriculum.chapters.length];
+  const chapterStats=v4ChapterStats(s.id,chosen),chapterIndex=chapters.indexOf(chosen),prevChapter=chapters[(chapterIndex-1+chapters.length)%chapters.length],nextChapter=chapters[(chapterIndex+1)%chapters.length];
   return `<div class="page-head v4tb-page-head"><div><div class="tw-badge">${esc(TW_TERM_POLICY.label)}</div><h2>心智圖學習 · ${esc(v4tbTaiwanTermText(s.name))}</h2><p>先看關係，再回想細節：圖、比較、流程、時間脈絡、公式與概念層級依內容自動選擇。</p></div><div class="v4-head-progress"><span>本章 ${chapterStats.pct}%</span><i><b style="width:${chapterStats.pct}%"></b></i></div></div>
     ${subjectTabs()}
     <div class="v4tb-layout">
-      <nav class="v4tb-chapters" aria-label="章節"><span class="v4tb-chapter-summary">${curriculum.chapters.length} 個核心章節</span>${curriculum.chapters.map(ch=>{const st=v4ChapterStats(s.id,ch);return `<button class="mind-chapter-btn ${chosen.id===ch.id?'active':''}" data-concept-chapter="${v4EscapeAttr(ch.title)}"><strong>${esc(v4tbTaiwanTermText(ch.title))}</strong><small>${st.done}/${st.total}</small></button>`}).join('')}</nav>
+      <nav class="v4tb-chapters" aria-label="章節"><span class="v4tb-chapter-summary">${chapters.length} 個核心章節</span>${chapters.map(ch=>{const st=v4ChapterStats(s.id,ch);return `<button class="mind-chapter-btn ${chosen.id===ch.id?'active':''}" data-concept-chapter="${v4EscapeAttr(ch.title)}"><strong>${esc(v4tbTaiwanTermText(ch.title))}</strong><small>${st.done}/${st.total}</small></button>`}).join('')}</nav>
       <main class="v4tb-main"><div class="v4tb-book-stack">${v4tbKnowledgeMap(s.id,s.name,chosen,chapterStats)}</div>
       <div class="v4tb-sheet-footer"><button class="soft-btn" data-v4-chapter="${v4EscapeAttr(prevChapter.title)}">← 上一章</button><span>${esc(v4tbTaiwanTermText(chosen.title))}</span><button class="primary-btn" data-v4-chapter="${v4EscapeAttr(nextChapter.title)}">下一章 →</button></div></main>
     </div>`;

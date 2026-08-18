@@ -67,11 +67,22 @@ function v4RefItemHtml(ch,item,mode){
    ${mode==='review'?`<span class="v4ref-review-line ${ok?'good':user?'bad':''}">${ok?'✓ 正確':user?'你的答案：'+v4RefEsc(user)+' · 正解：'+v4RefEsc(item.fields.map(f=>f.answer).join('／')):'正解：'+v4RefEsc(item.fields.map(f=>f.answer).join('／'))}</span>`:''}
  </div>`;
 }
+function v4RefZoneApprovedAssets(ch,z){
+ const byChapter={
+  2:['earth-science-02__telescope','earth-science-02__star-sparkles'],
+  3:['earth-science-03__planetesimal'],
+  4:['earth-science-04__seismograph'],
+  5:['earth-science-05__sun']
+ };
+ const ids=z===ch.zones[0]?byChapter[ch.number]||[]:[];
+ return typeof mindmapApprovedAssetHtml==='function'?mindmapApprovedAssetHtml(ids,{className:'mindmap-asset-group v4ref-approved-assets',label:`${z.title}核准概念插圖`}):'';
+}
 function v4RefZoneHtml(ch,z,mode){
  const cols=z.items.length>22?3:z.items.length>11?2:1;
+ const approvedAssets=v4RefZoneApprovedAssets(ch,z);
  return `<section class="v4ref-zone" data-v4ref-zone="${v4RefEsc(z.id)}" style="--zone:${z.color};left:${z.x}px;top:${z.y}px;width:${z.w}px;height:${z.h}px">
    <header class="v4ref-ribbon">${v4RefEsc(z.title)}</header>
-   <div class="v4ref-zone-diagram">${v4RefMiniDiagram(z.diagram)}</div>
+   <div class="v4ref-zone-diagram ${approvedAssets?'has-approved-assets':''}">${v4RefMiniDiagram(z.diagram)}${approvedAssets}</div>
    <div class="v4ref-zone-items" style="--cols:${cols}">${z.items.map(i=>v4RefItemHtml(ch,i,mode)).join('')}</div>
  </section>`;
 }
