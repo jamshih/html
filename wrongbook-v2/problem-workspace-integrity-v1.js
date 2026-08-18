@@ -393,3 +393,57 @@
   if(app)new MutationObserver(queuePatch).observe(app,{childList:true,subtree:true});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',queuePatch,{once:true});else queuePatch();
 })();
+
+/* Async loading recovery: persisted requests must never render as a fake forever-running request. */
+(function(){
+  'use strict';
+  const VERSION='2026-08-18-async-loading-recovery-v1';
+  if(window.__wrongbookAsyncLoadingRecovery===VERSION)return;
+  window.__wrongbookAsyncLoadingRecovery=VERSION;
+
+  function recoverPersistedAsyncState(){
+    if(typeof state!=='object'||!state)return {changed:false,recovered:0};
+    let changed=false,recovered=0;
+    if(state.aiLoading){state.aiLoading=false;changed=true}
+    if(state.aiGuideLoading){state.aiGuideLoading=false;changed=true}
+    if(state.aiGuideLoadingProblemId){state.aiGuideLoadingProblemId='';changed=true}
+    if(state.communityLoading){state.communityLoading=false;changed=true}
+    if(state.tutorSessions&&typeof state.tutorSessions==='object'){
+      for(const session of Object.values(state.tutorSessions)){
+        if(!session||session.status!=='loading')continue;
+        const hasStages=Array.isArray(session.stages)&&session.stages.length>0;
+        session.status=hasStages?'ready':'error';
+        if(!hasStages)session.error='上次 AI 請求已中斷，請重新開始。';
+        session.updatedAt=new Date().toISOString();
+        changed=true;recovered++;
+      }
+    }
+    if(changed&&typeof save==='function'){try{save()}catch{}}
+    return {changed,recovered};
+  }
+
+  function installTutorTimeout(){
+    if(typeof v3GuideApi!=='function'||window.__wrongbookGuideApiTimeoutWrapped)return false;
+    window.__wrongbookGuideApiTimeoutWrapped=true;
+    const base=v3GuideApi;
+    v3GuideApi=function(body){
+      let timer=0;
+      const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('AI 回應逾時，請重新嘗試。')),45000)});
+      return Promise.race([Promise.resolve().then(()=>base.call(this,body)),timeout]).finally(()=>clearTimeout(timer));
+    };
+    try{window.v3GuideApi=v3GuideApi}catch{}
+    return true;
+  }
+
+  const result=recoverPersistedAsyncState();
+  installTutorTimeout();
+  if(result.changed&&typeof render==='function'){try{render()}catch{}}
+  window.wrongbookLoadingRecoveryQA=()=>({
+    version:VERSION,
+    recovered:result.recovered,
+    aiLoading:Boolean(state?.aiLoading),
+    aiGuideLoading:Boolean(state?.aiGuideLoading),
+    staleTutorLoading:Object.values(state?.tutorSessions||{}).filter(s=>s?.status==='loading').length,
+    timeoutInstalled:Boolean(window.__wrongbookGuideApiTimeoutWrapped)
+  });
+})();
