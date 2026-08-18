@@ -1,12 +1,21 @@
-/* Root-only subject switcher for the radial mind-map overview. */
-#mmRootSubjectNav{position:absolute;left:50%;top:calc(50% + 82px);transform:translateX(-50%);z-index:14;width:min(760px,calc(100% - 32px));display:grid;gap:7px;justify-items:center;pointer-events:auto}
-#mmRootSubjectNav[hidden]{display:none!important}
-#mmRootSubjectNav .mm-root-subject-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mm-sub);background:rgba(250,248,243,.88);padding:3px 8px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-#mmRootSubjectNav .mm-root-subject-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border:1px solid rgba(201,194,179,.9);border-radius:12px;background:rgba(250,248,243,.9);box-shadow:0 8px 22px rgba(44,44,42,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-#mmRootSubjectNav .mm-root-subject-button{appearance:none;border:1px solid var(--mm-line);border-radius:999px;background:#fff;color:var(--mm-text);font:600 12px/1.2 "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;padding:7px 11px;cursor:pointer;white-space:nowrap;transition:transform .1s ease,background .12s ease,border-color .12s ease}
-#mmRootSubjectNav .mm-root-subject-button:hover{background:#f5f2eb;border-color:var(--mm-line-strong)}
-#mmRootSubjectNav .mm-root-subject-button:active{transform:scale(.96)}
-#mmRootSubjectNav .mm-root-subject-button[aria-current]{background:var(--mm-text);border-color:var(--mm-text);color:#fff}
-#mmRootSubjectNav .mm-root-subject-button:focus-visible{outline:2px solid #534ab7;outline-offset:2px}
-@media(max-width:760px){#mmRootSubjectNav{left:8px;right:8px;top:calc(50% + 74px);width:auto;transform:none;justify-items:stretch}#mmRootSubjectNav .mm-root-subject-label{justify-self:center}#mmRootSubjectNav .mm-root-subject-list{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:7px;scroll-snap-type:x proximity}#mmRootSubjectNav .mm-root-subject-list::-webkit-scrollbar{display:none}#mmRootSubjectNav .mm-root-subject-button{font-size:11px;padding:7px 10px;scroll-snap-align:start}}
-@media(prefers-reduced-motion:reduce){#mmRootSubjectNav .mm-root-subject-button{transition:none}}
+/* In-canvas subject gathering shown when a radial mind-map root is collapsed. */
+#mmRootSubjectNav{pointer-events:auto;overflow:visible}
+#mmRootSubjectNav[aria-hidden="true"]{display:none!important}
+.wbmm-root-overview #mmSvg .link-layer,.wbmm-root-overview #mmSvg .node-layer{opacity:0;pointer-events:none}
+#mmRootSubjectNav .mm-subject-gathering-orbit{fill:none;stroke:rgba(201,194,179,.72);stroke-width:1.2;stroke-dasharray:2 8;vector-effect:non-scaling-stroke;pointer-events:none}
+#mmRootSubjectNav .mm-subject-gathering-title{fill:var(--mm-sub);font:700 11px/1 "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;letter-spacing:.16em;pointer-events:none}
+#mmRootSubjectNav .mm-root-subject-button{cursor:pointer;outline:none;transition:opacity .14s ease}
+#mmRootSubjectNav .mm-root-subject-hit{fill:transparent;pointer-events:all}
+#mmRootSubjectNav .mm-root-subject-button:hover .mm-root-subject-dot,#mmRootSubjectNav .mm-root-subject-button:focus-visible .mm-root-subject-dot{transform:scale(1.18)}
+#mmRootSubjectNav .mm-root-subject-dot{fill:#fff;stroke:var(--mm-text);stroke-width:2;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;transition:transform .14s ease,fill .14s ease}
+#mmRootSubjectNav .mm-root-subject-button.is-active .mm-root-subject-dot{fill:var(--mm-text);stroke:var(--mm-text)}
+#mmRootSubjectNav .mm-root-subject-name{fill:var(--mm-text);font:700 14px/1.2 "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;paint-order:stroke;stroke:rgba(250,248,243,.96);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+#mmRootSubjectNav .mm-root-subject-button.is-active .mm-root-subject-name{font-size:22px;font-weight:800}
+#mmRootSubjectNav .mm-root-subject-hint{fill:var(--mm-sub);font:600 10px/1.2 "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;letter-spacing:.04em;paint-order:stroke;stroke:rgba(250,248,243,.96);stroke-width:4px;pointer-events:none}
+@media(max-width:760px){
+  #mmRootSubjectNav .mm-root-subject-name{font-size:12px;stroke-width:4px}
+  #mmRootSubjectNav .mm-root-subject-button.is-active .mm-root-subject-name{font-size:18px}
+  #mmRootSubjectNav .mm-root-subject-hint{font-size:9px}
+  #mmRootSubjectNav .mm-subject-gathering-title{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){#mmRootSubjectNav .mm-root-subject-button,#mmRootSubjectNav .mm-root-subject-dot{transition:none}}
