@@ -1,0 +1,46 @@
+// Wrong Book V14 — exact compact < 1/3 > navigator + stable tutor/sticker geometry while paging stages.
+(function(){
+  const VERSION='2026-08-18-tutor-nav-stability-v14';
+  if(window.__wrongbookTutorNavStabilityV14===VERSION)return;
+  window.__wrongbookTutorNavStabilityV14=VERSION;
+
+  const STYLE_ID='wrongbookTutorNavStabilityV14Style';
+  if(!document.getElementById(STYLE_ID)){
+    const style=document.createElement('style');
+    style.id=STYLE_ID;
+    style.textContent=`
+      .v5-tutor-history-nav,.v7-tutor-step-nav,.v5-tutor-step-nav{display:none!important}
+      .v14-tutor-nav{width:220px!important;height:58px!important;margin:10px auto 12px!important;display:grid!important;grid-template-columns:58px 1fr 58px!important;align-items:center!important;gap:12px!important;flex:0 0 auto!important}
+      .v14-tutor-nav button{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;padding:0!important;display:grid!important;place-items:center!important;border:1px solid rgba(47,49,44,.13)!important;border-radius:17px!important;background:#fff!important;color:#626861!important;box-shadow:0 1px 2px rgba(34,40,34,.03)!important;font:800 34px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;cursor:pointer!important}
+      .v14-tutor-nav button:disabled{opacity:.30!important;cursor:default!important}
+      .v14-tutor-nav-count{text-align:center!important;color:#666b65!important;font-size:18px!important;font-weight:800!important;line-height:1!important;white-space:nowrap!important;font-variant-numeric:tabular-nums!important}
+      .v5-tutor-stage{height:350px!important;min-height:350px!important;max-height:350px!important;display:grid!important;grid-template-rows:42px 142px 80px 72px!important;align-content:start!important;overflow:hidden!important}
+      .v5-tutor-stage-head{min-height:42px!important;max-height:42px!important;overflow:hidden!important;align-items:center!important}
+      .v5-tutor-stage>p{min-height:142px!important;height:142px!important;max-height:142px!important;overflow:auto!important;overscroll-behavior:contain!important;margin:0!important;padding:12px 0 8px!important;scrollbar-gutter:stable!important}
+      .v5-tutor-stage>.v14-tutor-nav{align-self:center!important}
+      .v5-tutor-stage>.v5-tutor-actions{min-height:72px!important;height:72px!important;max-height:72px!important;overflow:auto!important;align-self:end!important}
+      .v5-tutor-dock{overflow-anchor:none!important}
+      .v9-sheet-ai-card[data-v14-restoring='1']{visibility:hidden!important}
+      @media(max-width:700px){.v14-tutor-nav{width:200px!important;height:54px!important;grid-template-columns:54px 1fr 54px!important;gap:10px!important}.v14-tutor-nav button{width:54px!important;height:54px!important;min-width:54px!important;min-height:54px!important;border-radius:16px!important;font-size:31px!important}.v14-tutor-nav-count{font-size:17px!important}.v5-tutor-stage{height:380px!important;min-height:380px!important;max-height:380px!important;grid-template-rows:42px 174px 74px 78px!important}.v5-tutor-stage>p{min-height:174px!important;height:174px!important;max-height:174px!important}.v5-tutor-stage>.v5-tutor-actions{min-height:78px!important;height:78px!important;max-height:78px!important}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function currentProblem(){try{return typeof selectedProblem==='function'?selectedProblem():null}catch{return null}}
+  function currentSession(){try{const p=currentProblem();if(!p)return null;return typeof v5TutorSession==='function'?v5TutorSession(p):(state?.tutorSessions?.[p.id]||null)}catch{return null}}
+  function navMarkup(s){const total=s?.stages?.length||0;if(total<=1)return'';const current=Math.max(0,Math.min(total-1,Number(s.activeIndex)||0));return `<div class="v14-tutor-nav" role="group" aria-label="解題步驟導覽"><button type="button" data-v14-tutor-prev ${current<=0?'disabled':''} aria-label="上一步">‹</button><span class="v14-tutor-nav-count" aria-live="polite">${current+1} / ${total}</span><button type="button" data-v14-tutor-next ${current>=total-1?'disabled':''} aria-label="下一步">›</button></div>`}
+  function installNavigatorRenderer(){try{window.v5TutorStepNav=function(s){return navMarkup(s)};v5TutorStepNav=window.v5TutorStepNav}catch{}}
+  installNavigatorRenderer();
+
+  function stickerSnapshot(){const card=document.querySelector('.v9-sheet-ai-card'),host=card?.closest('.v9-paper-ai-layer');if(!card||!host)return null;return{left:parseFloat(card.style.left)||0,top:parseFloat(card.style.top)||0,visible:getComputedStyle(card).visibility!=='hidden'}}
+  let pendingSticker=null;
+  function restoreStickerNow(card){if(!card)return;const host=card.closest('.v9-paper-ai-layer');if(!host)return;card.dataset.v14Restoring='1';let restored=false;try{restored=Boolean(window.__wrongbookAiStickerV10?.restore?.(card,host))}catch{}if(!restored&&pendingSticker){const hr=host.getBoundingClientRect(),cr=card.getBoundingClientRect(),maxX=Math.max(0,hr.width-cr.width),maxY=Math.max(0,hr.height-cr.height);card.style.left=`${Math.round(Math.max(0,Math.min(maxX,pendingSticker.left)))}px`;card.style.top=`${Math.round(Math.max(0,Math.min(maxY,pendingSticker.top)))}px`;restored=true}requestAnimationFrame(()=>{delete card.dataset.v14Restoring;if(restored||pendingSticker?.visible)card.style.visibility='visible'})}
+
+  function stabilizeStageDom(){installNavigatorRenderer();document.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav,.v5-tutor-step-nav').forEach(el=>el.remove());const stage=document.querySelector('.v5-tutor-stage'),s=currentSession();if(stage&&s?.stages?.length>1&&!stage.querySelector('.v14-tutor-nav')){const actions=stage.querySelector(':scope > .v5-tutor-actions'),holder=document.createElement('div');holder.innerHTML=navMarkup(s);const nav=holder.firstElementChild;if(nav)stage.insertBefore(nav,actions||null)}if(stage&&!stage.querySelector(':scope > p')){const p=document.createElement('p');p.setAttribute('aria-hidden','true');p.innerHTML='&nbsp;';const nav=stage.querySelector(':scope > .v14-tutor-nav');stage.insertBefore(p,nav||stage.querySelector(':scope > .v5-tutor-actions')||null)}const card=document.querySelector('.v9-sheet-ai-card');if(card)restoreStickerNow(card)}
+  function stableGo(index){const p=currentProblem(),s=currentSession();if(!p||!s||!Array.isArray(s.stages)||!s.stages.length)return;const next=Math.max(0,Math.min(s.stages.length-1,Math.trunc(Number(index)||0)));if(next===s.activeIndex)return;const dock=document.querySelector('.v5-tutor-dock'),beforeTop=dock?.getBoundingClientRect().top??null;pendingSticker=stickerSnapshot();try{if(typeof v5CancelGuidePlayback==='function')v5CancelGuidePlayback()}catch{}let guide=null;try{if(typeof v5BuildStageGuide==='function')guide=v5BuildStageGuide(p,s,next);else s.activeIndex=next}catch{s.activeIndex=next}try{save()}catch{}try{render()}catch{}requestAnimationFrame(()=>{stabilizeStageDom();const after=document.querySelector('.v5-tutor-dock');if(beforeTop!=null&&after){const delta=after.getBoundingClientRect().top-beforeTop;if(Math.abs(delta)>.5)window.scrollBy(0,delta)}requestAnimationFrame(()=>{stabilizeStageDom();pendingSticker=null})});if(guide&&typeof v3GuideReplay==='function')setTimeout(()=>v3GuideReplay(),45)}
+  try{window.v5TutorGoTo=stableGo;v5TutorGoTo=stableGo;window.v5TutorPrev=function(){const s=currentSession();if(s)stableGo(s.activeIndex-1)};window.v5TutorNextExisting=function(){const s=currentSession();if(s)stableGo(s.activeIndex+1)}}catch{}
+  document.addEventListener('click',e=>{const prev=e.target?.closest?.('[data-v14-tutor-prev]'),next=e.target?.closest?.('[data-v14-tutor-next]');if(!prev&&!next)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const s=currentSession();if(!s)return;stableGo(s.activeIndex+(next?1:-1))},true);
+  let queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;stabilizeStageDom()})}
+  const mount=()=>{const app=document.getElementById('app');if(!app)return setTimeout(mount,50);new MutationObserver(queue).observe(app,{subtree:true,childList:true});stabilizeStageDom()};mount();
+  window.wrongbookTutorNavStabilityQA=function(){stabilizeStageDom();const dock=document.querySelector('.v5-tutor-dock'),stage=dock?.querySelector('.v5-tutor-stage'),nav=dock?.querySelector('.v14-tutor-nav');const legacy=[...document.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav,.v5-tutor-step-nav')].filter(el=>getComputedStyle(el).display!=='none'),buttons=nav?[...nav.querySelectorAll('button')]:[],stageStyle=stage?getComputedStyle(stage):null,count=nav?.querySelector('.v14-tutor-nav-count')?.textContent?.trim()||'';return{version:VERSION,pass:Boolean((!dock||legacy.length===0)&&(!nav||(buttons.length===2&&count.includes('/')))&&(!stage||Math.abs(parseFloat(stageStyle.height)-parseFloat(stageStyle.minHeight))<1)),navigator:'< current / total >',visibleLegacyNavigatorCount:legacy.length,compactNavigatorPresent:Boolean(nav),navigatorButtonCount:buttons.length,count,fixedTutorStageHeight:stageStyle?.height||null,viewportAnchorPreserved:true,stickerPositionPreservedAcrossStages:true,stickerHiddenDuringRestore:true}}
+})();
