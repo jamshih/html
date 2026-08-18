@@ -148,6 +148,7 @@
   loadScript('./problem-context-isolation-v1.js?wb=20260818-1356','data-wb-problem-context-isolation-v1');
   loadScript('./tutor-frame-no-flash-v17.js?wb=20260818-1356','data-wb-tutor-frame-no-flash-v17');
   loadScript('./tutor-nav-paint-lock-v18.js?wb=20260818-1356','data-wb-tutor-nav-paint-lock-v18-loader');
+  loadScript('./tutor-dialog-compact-v20.js?wb=20260818-1710','data-wb-tutor-dialog-compact-v20');
   loadScript('./ink-history-v4.js?wb=20260818-1356','data-wb-ink-history-v4');
 
   window.wrongbookUniversalTutorAccessQA=function(){
