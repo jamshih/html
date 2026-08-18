@@ -15,7 +15,7 @@
   if(!document.getElementById(cssId)){
     const link=document.createElement('link');link.id=cssId;link.rel='stylesheet';link.href='./iscanner-capture-v2.css?wb=20260818-1002';document.head.appendChild(link);
   }
-  if(!document.querySelector('script[data-wb-iscanner-v3]')){
-    const script=document.createElement('script');script.src='./iscanner-capture-v3.js?wb=20260818-1010';script.async=false;script.dataset.wbIscannerV3='1';document.body.appendChild(script);
-  }
+  function loadScript(src,attr){if(document.querySelector(`script[${attr}]`))return;const s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');document.body.appendChild(s)}
+  loadScript('./iscanner-capture-v3.js?wb=20260818-1010','data-wb-iscanner-v3');
+  loadScript('./iscanner-highlight-bridge-v1.js?wb=20260818-1012','data-wb-iscanner-highlight');
 })();
