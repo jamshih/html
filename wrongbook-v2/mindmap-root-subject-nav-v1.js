@@ -8,10 +8,15 @@
     return String((typeof state==='object'&&state?.subject)||'');
   }
 
+  function subjectRegistry(){
+    return typeof SUBJECTS!=='undefined'&&Array.isArray(SUBJECTS)?SUBJECTS:[];
+  }
+
   function createNavigator(wrap){
     let nav=document.getElementById('mmRootSubjectNav');
     if(nav)return nav;
-    if(!Array.isArray(window.SUBJECTS||globalThis.SUBJECTS)||typeof setSubject!=='function')return null;
+    const subjects=subjectRegistry();
+    if(!subjects.length||typeof setSubject!=='function')return null;
 
     nav=document.createElement('div');
     nav.id='mmRootSubjectNav';
@@ -28,7 +33,7 @@
     list.setAttribute('role','group');
     list.setAttribute('aria-label','108課綱科目');
 
-    SUBJECTS.forEach(subject=>{
+    subjects.forEach(subject=>{
       const button=document.createElement('button');
       button.type='button';
       button.className='mm-root-subject-button';
