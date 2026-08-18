@@ -43,6 +43,7 @@ jobs:
           server=$!
           trap 'kill $server || true' EXIT
           sleep 1
+          # This rerun includes the full-node pointer-ownership fix.
           node wrongbook-v2/qa/mindmap-stable-free-drag-v2-playwright.js | tee /tmp/wb-stable-drag-result.json
       - name: Upload QA evidence
         if: always()
