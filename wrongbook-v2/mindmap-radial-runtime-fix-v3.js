@@ -2,7 +2,7 @@
 // Keeps radial geometry intact while enforcing readable labels and stable root orientation.
 (function(){
   const VERSION='2026-08-18-radial-readable-labels-v6';
-  const SUBJECT_NAV_VERSION='2026-08-18-mindmap-subject-nav-v2';
+  const SUBJECT_NAV_VERSION='2026-08-18-mindmap-subject-nav-v3';
   const SHELL_MAP_HOTFIX_VERSION='2026-08-18-shell-map-hotfix-v1';
 
   // Visual parameters: requested readability changes live here and nowhere else.
