@@ -28,10 +28,8 @@ async function enterMindmap(page, subject='chemistry') {
 async function collapseRoot(page) {
   const root = page.locator('#mmSvg g.node.root');
   await root.waitFor({ state: 'visible' });
-  if (!(await root.getAttribute('class')).includes('collapsed')) {
-    await root.locator('circle').click();
-  }
-  await page.waitForFunction(() => document.querySelector('#mmSvg g.node.root')?.classList.contains('collapsed'), null, { timeout: 7000 });
+  await root.locator('circle').click();
+  await page.waitForFunction(() => document.getElementById('mmWrap')?.classList.contains('wbmm-root-overview'), null, { timeout: 7000 });
   await page.waitForFunction(() => {
     const nav = document.getElementById('mmRootSubjectNav');
     return nav && nav.namespaceURI === 'http://www.w3.org/2000/svg' && nav.getAttribute('aria-hidden') === 'false';
@@ -42,7 +40,7 @@ async function collapseRoot(page) {
 async function assertGathering(page, expectedCurrent, viewportWidth) {
   const qa = await page.evaluate(() => window.WrongBookMindmapRootSubjectNav.qa());
   assert.strictEqual(qa.pass, true, `gathering QA failed: ${JSON.stringify(qa)}`);
-  assert.strictEqual(qa.collapsed, true, 'root must be collapsed in gathering');
+  assert.strictEqual(qa.collapsed, true, 'visual root must be collapsed into gathering');
   assert.strictEqual(qa.subjectCount, 10, 'expected canonical 10 subjects');
   assert.strictEqual(qa.nodeCount, 10, 'all subjects must render as nodes');
   assert.strictEqual(qa.currentCount, 1, 'exactly one current subject node');
@@ -132,7 +130,7 @@ async function runDesktop(browser) {
   await page.locator('#mmRootSubjectNav [data-mm-root-subject="biology"]').click();
   await page.waitForFunction(() => eval('state').subject==='biology');
   await page.waitForSelector('#mmSvg g.node.root');
-  await page.waitForFunction(() => !document.querySelector('#mmSvg g.node.root')?.classList.contains('collapsed'));
+  await page.waitForFunction(() => !document.getElementById('mmWrap')?.classList.contains('wbmm-root-overview'));
   await sleep(950);
   assert.strictEqual(await page.locator('#mmRootSubjectNav').getAttribute('aria-hidden'),'true','gathering must hide after opening another subject');
   assert((await page.locator('#mmSvg g.node').count())>1,'selected subject tree must expand');
@@ -142,7 +140,7 @@ async function runDesktop(browser) {
   await page.screenshot({path:'/tmp/wrongbook-subject-gathering-biology.png',fullPage:false});
 
   await page.locator('#mmRootSubjectNav [data-mm-root-subject="biology"]').click();
-  await page.waitForFunction(() => !document.querySelector('#mmSvg g.node.root')?.classList.contains('collapsed'));
+  await page.waitForFunction(() => !document.getElementById('mmWrap')?.classList.contains('wbmm-root-overview'));
   await sleep(700);
   assert((await page.locator('#mmSvg g.node').count())>1,'current subject node must re-expand its own tree');
   assert.strictEqual(await page.locator('#mmRootSubjectNav').getAttribute('aria-hidden'),'true');
