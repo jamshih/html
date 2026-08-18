@@ -70,7 +70,7 @@
     for(let y=0;y<h;y++)rowDark[y]/=w;
     for(let x=0;x<w;x++)colDark[x]/=h;
     const rowSmooth=smooth(rowDark,2),colSmooth=smooth(colDark,2),paperLike=(bright/total)>.48;
-    const rowThreshold=paperLike?.0045:.011,colThreshold=paperLike?.0035:.009;
+    const rowThreshold=paperLike ? .0045 : .011,colThreshold=paperLike ? .0035 : .009;
     const rows=bandsFromProjection(rowSmooth,rowThreshold,2,Math.max(4,Math.round(h*.014)));
     let y1=0,y2=h;
     if(paperLike&&rows.length){y1=rows[0][0];y2=rows[rows.length-1][1];[y1,y2]=expandRange(y1,y2,h,.42,.035)}
