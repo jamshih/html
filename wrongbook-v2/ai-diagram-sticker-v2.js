@@ -109,6 +109,17 @@
     card.style.top=`${Math.round(clamp(r.top,INSET,Math.max(INSET,innerHeight-visibleHeight-INSET)))}px`;
   }
 
+  function cleanOrphans(){
+    const l=document.getElementById('wb-ai-sticker-v2-layer');if(!l)return;
+    for(const card of l.querySelectorAll('.wb-ai-sticker-v2.wb-ai-is-floating')){
+      const anchor=card.__wbAiV2Anchor;
+      if(anchor&&!anchor.isConnected){
+        if(active?.card===card)active=null;
+        card.remove();
+      }
+    }
+  }
+
   function labelElements(root){
     const base=root?.nodeType===1?root:document.body,out=[];
     const walker=document.createTreeWalker(base,NodeFilter.SHOW_TEXT,{acceptNode(node){const p=node.parentElement;return p&&!p.closest('script,style,template')&&norm(node.nodeValue).includes(LABEL)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
@@ -142,6 +153,7 @@
   }
 
   function scan(root=document.getElementById('app')||document.body){
+    cleanOrphans();
     const explicit=[];if(root.matches?.('[data-ai-diagram-card]'))explicit.push(root);explicit.push(...(root.querySelectorAll?.('[data-ai-diagram-card]')||[]));for(const card of explicit)upgrade(card);
     for(const label of labelElements(root)){const card=cardForLabel(label);if(card)upgrade(card)}
   }
@@ -197,6 +209,6 @@
 
   window.__wrongbookAiStickerV2QA=function(){
     const cards=[...document.querySelectorAll('.wb-ai-sticker-v2')];
-    return {loaded:true,cards:cards.length,draggable:cards.filter(c=>c.dataset.aiStickerDraggable==='true').length,floating:cards.filter(c=>c.classList.contains('wb-ai-is-floating')).length,layer:Boolean(document.getElementById('wb-ai-sticker-v2-layer')),wholeCardDrag:true};
+    return {loaded:true,cards:cards.length,draggable:cards.filter(c=>c.dataset.aiStickerDraggable==='true').length,floating:cards.filter(c=>c.classList.contains('wb-ai-is-floating')).length,layer:Boolean(document.getElementById('wb-ai-sticker-v2-layer')),wholeCardDrag:true,orphanGuard:true};
   };
 })();
