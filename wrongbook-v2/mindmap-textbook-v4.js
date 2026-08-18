@@ -233,6 +233,7 @@ const v4tbBaseBind=bind;
 bind=function(){
   v4tbBaseBind();
   document.querySelectorAll('[data-v4tb-mode]').forEach(button=>button.onclick=()=>{state.biologyMindMode=button.dataset.v4tbMode==='learn'?'learn':'recall';save();render()});
+  if(typeof activeSubject==='function'&&activeSubject().id==='biology')document.querySelectorAll('[data-mind-key]').forEach(input=>input.oninput=()=>{state.mindAnswers=state.mindAnswers||{};state.mindAnswers[input.dataset.mindKey]=input.value.trim();save()});
 };
 
 render();

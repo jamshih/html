@@ -71,6 +71,7 @@
 .mindmap--biology .v4tb-section-ribbon small{background:var(--mindmap-paper);color:#786d64}
 .mindmap--biology .v4tb-reading-cue{margin-bottom:11px;background:transparent;border:0;border-bottom:1px dashed color-mix(in srgb,var(--branch) 42%,#cec5b8);border-radius:0;padding:3px 4px 8px;color:#6b625b;font-size:10.5px}
 .mindmap--biology .v4tb-flow-body{grid-template-columns:minmax(125px,1fr) minmax(160px,.9fr);gap:12px;align-items:start}
+.mindmap--biology .v4tb-figure-composite{grid-template-columns:1fr}
 .mindmap--biology .v4tb-flow-before,.mindmap--biology .v4tb-flow-after{grid-column:1}
 .mindmap--biology .v4tb-flow-visual{grid-column:2;grid-row:1 / span 2;position:sticky;top:12px}
 .mindmap--biology .v4tb-visual-map{display:flex;flex-direction:column;min-height:0;gap:5px}
@@ -144,6 +145,7 @@
   .mindmap--chemistry .chem-approved-assets .mindmap-asset{height:78px;max-width:116px}
   .mindmap--chemistry .chem-connectors{display:none}
   .mindmap--chemistry footer{position:relative;left:auto;right:auto;bottom:auto;height:auto;min-height:48px;margin:2px 6px 0;padding-top:12px;display:flex;flex-direction:column;gap:4px;text-align:center;font-size:11px;line-height:1.45}
+  .mindmap--chemistry footer small{font-size:11px}
 }
 
 @media(max-width:900px){
@@ -171,6 +173,7 @@
   .mindmap--biology .v4tb-section-ribbon{left:12px}
   .mindmap--biology .v4tb-section-ribbon span{font-size:16px}
   .mindmap--biology .v4tb-inline-line{font-size:13px;line-height:1.75}
+  .mindmap--illustrated .v4tb-hint-link,.mindmap--illustrated .v4tb-end-label span{font-size:11px}
   .mindmap--biology .v4tb-center-visual,.mindmap--biology .v4tb-tree-root,.mindmap--biology .v4tb-flow-visual{width:min(100%,330px)}
   .mindmap--biology .mindmap-asset-group{max-width:320px;margin-left:auto;margin-right:auto}
   .mindmap--biology .v4tb-chapter-assets{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;min-height:0}.mindmap--biology .v4tb-chapter-assets .mindmap-asset{height:105px}
