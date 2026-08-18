@@ -17,5 +17,5 @@
   }
   function loadScript(src,attr){if(document.querySelector(`script[${attr}]`))return;const s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');document.body.appendChild(s)}
   loadScript('./iscanner-capture-v3.js?wb=20260818-1010','data-wb-iscanner-v3');
-  loadScript('./iscanner-highlight-bridge-v1.js?wb=20260818-1012','data-wb-iscanner-highlight');
+  loadScript('./iscanner-highlight-bridge-v2.js?wb=20260818-1024','data-wb-iscanner-highlight-v2');
 })();
