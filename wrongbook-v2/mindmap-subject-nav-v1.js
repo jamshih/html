@@ -2,23 +2,29 @@
 // Reuses the app's canonical SUBJECTS + setSubject() state flow.
 (function(){
   const VERSION='2026-08-18-mindmap-subject-nav-v3';
-  const ROOT_NAV_VERSION='2026-08-18-root-subject-nav-v1';
+  const ROOT_NAV_VERSION='2026-08-18-root-subject-gathering-v2';
   const HANDED_LAYOUT_VERSION='2026-08-18-handed-layout-v1';
   let installToken=0;
 
   function ensureRootSubjectNavigation(){
-    if(!document.querySelector('link[data-mm-root-subject-nav-style]')){
-      const link=document.createElement('link');
-      link.rel='stylesheet';
-      link.href=`./mindmap-root-subject-nav-v1.css?wb=${ROOT_NAV_VERSION}`;
-      link.dataset.mmRootSubjectNavStyle=ROOT_NAV_VERSION;
-      document.head.appendChild(link);
+    let style=document.querySelector('link[data-mm-root-subject-nav-style]');
+    const wantedHref=`./mindmap-root-subject-nav-v1.css?wb=${ROOT_NAV_VERSION}`;
+    if(!style){
+      style=document.createElement('link');
+      style.rel='stylesheet';
+      style.dataset.mmRootSubjectNavStyle=ROOT_NAV_VERSION;
+      document.head.appendChild(style);
     }
+    if(style.getAttribute('href')!==wantedHref)style.href=wantedHref;
+    style.dataset.mmRootSubjectNavStyle=ROOT_NAV_VERSION;
+
     if(window.WrongBookMindmapRootSubjectNav?.version===ROOT_NAV_VERSION){
       window.WrongBookMindmapRootSubjectNav.install?.();
       return;
     }
-    if(document.querySelector('script[data-mm-root-subject-nav-loader]'))return;
+    const existing=document.querySelector('script[data-mm-root-subject-nav-loader]');
+    if(existing&&existing.dataset.mmRootSubjectNavLoader!==ROOT_NAV_VERSION)existing.remove();
+    if(document.querySelector(`script[data-mm-root-subject-nav-loader="${ROOT_NAV_VERSION}"]`))return;
     const script=document.createElement('script');
     script.src=`./mindmap-root-subject-nav-v1.js?wb=${ROOT_NAV_VERSION}`;
     script.dataset.mmRootSubjectNavLoader=ROOT_NAV_VERSION;
