@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant-TW">
-<head><meta charset="utf-8"><meta name="qa-run" content="pr-validation"><title>Wrongbook recent problem open QA</title></head>
+<head><meta charset="utf-8"><meta name="qa-run" content="pr-validation-2"><title>Wrongbook recent problem open QA</title></head>
 <body data-status="RUNNING">
 <pre id="result">RUNNING</pre>
 <script>
@@ -21,30 +21,27 @@
   localStorage.setItem('wrongbook-v2-state',JSON.stringify(stored));
   localStorage.removeItem('wrongbook-v2-ink');
 
-  const out=document.getElementById('result');
+  const out=document.getElementById('result'),sleep=ms=>new Promise(r=>setTimeout(r,ms)),errors=[],fail=message=>{throw new Error(message)};
   const iframe=document.createElement('iframe');
   iframe.style.cssText='width:1280px;height:900px;border:0;position:absolute;left:-10000px;top:0';
   document.body.appendChild(iframe);
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  const errors=[];
-  const fail=message=>{throw new Error(message)};
-
-  iframe.src='../index.html?qaRecentProblemOpen=1';
-  await new Promise((resolve,reject)=>{iframe.onload=resolve;setTimeout(()=>reject(new Error('index load timeout')),10000)});
-  const w=iframe.contentWindow,d=w.document;
+  const w=iframe.contentWindow;
   w.addEventListener('error',e=>errors.push('error: '+(e.message||e.error?.message||'unknown')));
   w.addEventListener('unhandledrejection',e=>errors.push('rejection: '+(e.reason?.message||String(e.reason||'unknown'))));
   const originalError=w.console.error.bind(w.console);w.console.error=(...args)=>{errors.push('console.error: '+args.map(x=>typeof x==='string'?x:JSON.stringify(x)).join(' '));originalError(...args)};
+  iframe.src='../index.html?qaRecentProblemOpen=1';
+  await new Promise((resolve,reject)=>{iframe.onload=resolve;setTimeout(()=>reject(new Error('index load timeout')),10000)});
+  const d=w.document,stateNow=()=>w.eval('state');
 
   await sleep(2200);
-  if(w.state?.page!=='home')fail('app did not start on home');
+  if(stateNow()?.page!=='home')fail('app did not start on home; got '+String(stateNow()?.page));
   const recent=d.querySelector(`[data-problem="${problemId}"]`);
   if(!recent)fail('recent problem control not found');
 
   recent.click();
   await sleep(1800);
-  if(w.state?.page!=='notebook')fail('recent problem click did not enter notebook');
-  if(w.state?.selectedProblemId!==problemId)fail('selected problem id changed unexpectedly');
+  if(stateNow()?.page!=='notebook')fail('recent problem click did not enter notebook; got '+String(stateNow()?.page));
+  if(stateNow()?.selectedProblemId!==problemId)fail('selected problem id changed unexpectedly: '+String(stateNow()?.selectedProblemId));
   const workspace=d.querySelector('.pf-problem-workspace');
   if(!workspace)fail('problem workspace missing after recent click');
   if(!d.querySelector('#drawCanvas'))fail('drawing canvas missing');
@@ -54,17 +51,18 @@
 
   const dock=d.querySelector('.v5-tutor-dock');
   if(!dock)fail('tutor dock missing');
-  const navs=[...d.querySelectorAll('.v16-canonical-nav')].filter(el=>getComputedStyle(el).display!=='none');
-  const legacy=[...d.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav,.v5-tutor-step-nav')].filter(el=>getComputedStyle(el).display!=='none');
+  const navs=[...d.querySelectorAll('.v16-canonical-nav')].filter(el=>w.getComputedStyle(el).display!=='none');
+  const legacy=[...d.querySelectorAll('.v5-tutor-history-nav,.v7-tutor-step-nav,.v5-tutor-step-nav')].filter(el=>w.getComputedStyle(el).display!=='none');
   if(navs.length!==1)fail('expected exactly one compact navigator, got '+navs.length);
   if(legacy.length)fail('legacy navigator visible');
   const nav=navs[0],counter=nav.querySelector('.v14-tutor-nav-count');
   if(counter?.textContent.trim()!=='1 / 3')fail('unexpected initial navigator count: '+counter?.textContent);
 
   const metrics=w.__wrongbookTutorNavV16Metrics;
-  const settleStart={callbacks:metrics?.observerCallbacks||0,passes:metrics?.normalizationPasses||0,changes:metrics?.domChanges||0};
+  if(!metrics)fail('navigator metrics missing');
+  const settleStart={callbacks:metrics.observerCallbacks,passes:metrics.normalizationPasses,changes:metrics.domChanges};
   await sleep(900);
-  const settleEnd={callbacks:metrics?.observerCallbacks||0,passes:metrics?.normalizationPasses||0,changes:metrics?.domChanges||0};
+  const settleEnd={callbacks:metrics.observerCallbacks,passes:metrics.normalizationPasses,changes:metrics.domChanges};
   const idlePassDelta=settleEnd.passes-settleStart.passes;
   const idleChangeDelta=settleEnd.changes-settleStart.changes;
   if(idlePassDelta>4||idleChangeDelta>1)fail(`navigator observer did not settle: passes +${idlePassDelta}, changes +${idleChangeDelta}`);
@@ -87,7 +85,8 @@
   if(universalQA&&universalQA.pass!==true)fail('universal tutor QA failed: '+JSON.stringify(universalQA));
   if(errors.length)fail('runtime errors after click: '+errors.join(' | '));
 
-  const result={pass:true,flow:'home -> recent wrong problem -> workspace -> next -> previous',page:w.state.page,selectedProblemId:w.state.selectedProblemId,workspacePresent:true,canvasPresent:true,undoPresent:true,redoPresent:true,canonicalNavigatorCount:navs.length,legacyNavigatorCount:legacy.length,idleObserverPassDelta:idlePassDelta,idleDomChangeDelta:idleChangeDelta,sameTutorDockAcrossPaging:true,navQA,tutorQA,universalQA,runtimeErrors:errors};
+  const finalState=stateNow();
+  const result={pass:true,flow:'home -> recent wrong problem -> workspace -> next -> previous',page:finalState.page,selectedProblemId:finalState.selectedProblemId,workspacePresent:true,canvasPresent:true,undoPresent:true,redoPresent:true,canonicalNavigatorCount:navs.length,legacyNavigatorCount:legacy.length,idleObserverPassDelta:idlePassDelta,idleDomChangeDelta:idleChangeDelta,sameTutorDockAcrossPaging:true,navQA,tutorQA,universalQA,runtimeErrors:errors};
   document.body.dataset.status='PASS';out.textContent=JSON.stringify(result,null,2);
 })().catch(err=>{document.body.dataset.status='FAIL';document.getElementById('result').textContent=JSON.stringify({pass:false,error:err.message,stack:err.stack},null,2)});
 </script>
