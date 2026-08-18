@@ -69,7 +69,7 @@
 .mindmap--biology .v4tb-section-ribbon{left:18px;top:-12px}
 .mindmap--biology .v4tb-section-ribbon span{font-family:var(--mindmap-font-display);font-size:18px;font-weight:800;color:var(--mindmap-text);background:color-mix(in srgb,var(--branch) 24%,#fff4d9);border:1.5px solid color-mix(in srgb,var(--branch) 68%,#a08e72);border-radius:15px 7px 16px 8px;box-shadow:3px 3px 0 rgba(92,69,48,.06);padding:8px 15px}
 .mindmap--biology .v4tb-section-ribbon small{background:var(--mindmap-paper);color:#786d64}
-.mindmap--biology .v4tb-reading-cue{margin-bottom:11px;background:transparent;border:0;border-bottom:1px dashed color-mix(in srgb,var(--branch) 42%,#cec5b8);border-radius:0;padding:3px 4px 8px;color:#6b625b;font-size:10.5px}
+.mindmap--biology .v4tb-reading-cue{margin-bottom:11px;background:transparent;border:0;border-bottom:1px dashed color-mix(in srgb,var(--branch) 42%,#cec5b8);border-radius:0;padding:3px 4px 8px;color:#6b625b;font-size:11px}
 .mindmap--biology .v4tb-flow-body{grid-template-columns:minmax(125px,1fr) minmax(160px,.9fr);gap:12px;align-items:start}
 .mindmap--biology .v4tb-figure-composite{grid-template-columns:1fr}
 .mindmap--biology .v4tb-flow-before,.mindmap--biology .v4tb-flow-after{grid-column:1}
