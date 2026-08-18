@@ -34,6 +34,13 @@
   function page(){
     const s=typeof activeSubject==='function'?activeSubject():{id:'earth',name:'地球科學'};
     if(s.id!=='earth')return previousMindmapPage();
+    if(earthChapter()!==1&&typeof v4RefGenericMindmapPage==='function'){
+      const curriculum=typeof twCurriculumSubject==='function'?twCurriculumSubject('earth'):null;
+      const chapters=typeof v4tbCurriculumChapters==='function'?v4tbCurriculumChapters('earth',curriculum):[];
+      const target=chapters[earthChapter()-1]||chapters[0];
+      if(target)state.conceptChapter=target.title;
+      return v4RefGenericMindmapPage();
+    }
     if(earthChapter()!==1)return previousMindmapPage();
     const chapterNav=earthChapters.map((title,index)=>`<button class="${index===0?'active':''}" data-rm-chapter="${index+1}"><b>${String(index+1).padStart(2,'0')}</b><span>${e(title)}</span></button>`).join('');
     return `<div class="page-head rm-page-head"><div><div class="tw-badge">參考圖重建 · 互動填空</div><h2>心智圖學習 · 地球科學</h2><p>可選取文字、可作答；插畫、容器、連線與互動保持分層。</p></div><div class="rm-mode"><button class="${mode()==='recall'?'active':''}" data-rm-mode="recall">Recall 回想</button><button class="${mode()==='learn'?'active':''}" data-rm-mode="learn">Learn 答案</button><button data-rm-check ${mode()==='learn'?'disabled':''}>檢查答案</button></div></div>${typeof subjectTabs==='function'?subjectTabs():''}<nav class="rm-chapters" aria-label="地球科學心智圖章節">${chapterNav}</nav><div class="rm-stage">${sheet()}</div>`;
@@ -42,6 +49,12 @@
   mindmapPage=page;
   bind=function(){
     previousBind();
+    if(typeof activeSubject==='function'&&activeSubject().id==='earth'){
+      const chapterButtons=[...document.querySelectorAll('.v4tb-chapters button[data-concept-chapter]')];
+      const selectChapter=(title)=>{const index=chapterButtons.findIndex(button=>button.dataset.conceptChapter===title);state.refEarthChapter=index>=0?index+1:1;state.conceptChapter=title;state.earthMindSource='reference';if(typeof save==='function')save();if(typeof render==='function')render()};
+      chapterButtons.forEach(button=>button.onclick=()=>selectChapter(button.dataset.conceptChapter));
+      document.querySelectorAll('[data-v4-chapter]').forEach(button=>button.onclick=()=>selectChapter(button.dataset.v4Chapter));
+    }
     document.querySelectorAll('[data-rm-chapter]').forEach(button=>button.onclick=()=>{state.refEarthChapter=Number(button.dataset.rmChapter)||1;state.earthMindSource='reference';if(typeof save==='function')save();if(typeof render==='function')render()});
     document.querySelectorAll('[data-rm-mode]').forEach(button=>button.onclick=()=>{state.referenceMindmapMode=button.dataset.rmMode;state.referenceMindmapChecked=false;if(typeof save==='function')save();if(typeof render==='function')render()});
     document.querySelector('[data-rm-check]')?.addEventListener('click',()=>{state.referenceMindmapChecked=true;if(typeof save==='function')save();if(typeof render==='function')render()});

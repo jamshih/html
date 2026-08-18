@@ -188,17 +188,27 @@ function v4tbKnowledgeMap(subjectId,subjectName,chapter,chapterStats){
   </section>`;
 }
 function v4tbChapterAssets(subjectId,chapter){
-  if(subjectId!=='biology'||chapter.id!=='bio-cycle'||typeof mindmapApprovedAssetHtml!=='function')return'';
-  const ids=Object.values(window.MINDMAP_APPROVED_ASSETS||{}).filter(asset=>asset.subject==='biology'&&String(asset.owner||'').startsWith('biology:inventory:')).map(asset=>asset.id);
-  return mindmapApprovedAssetHtml(ids,{className:'mindmap-asset-group v4tb-chapter-assets',label:'生命週期與生殖概念插圖'});
+  if(typeof mindmapApprovedAssetHtml!=='function')return'';
+  if(subjectId==='biology'&&chapter.id==='bio-cycle'){
+    const ids=Object.values(window.MINDMAP_APPROVED_ASSETS||{}).filter(asset=>asset.subject==='biology'&&String(asset.owner||'').startsWith('biology:inventory:')).map(asset=>asset.id);
+    return mindmapApprovedAssetHtml(ids,{className:'mindmap-asset-group v4tb-chapter-assets',label:'生命週期與生殖概念插圖'});
+  }
+  if(subjectId==='earth'){
+    const idsByChapter={
+      'earth-astronomy':['earth-science-02__telescope','earth-science-02__star-sparkles'],
+      'earth-observe':['earth-science-03__planetesimal'],
+      'earth-interior':['earth-science-04__seismograph'],
+      'earth-atmos':['earth-science-05__sun']
+    };
+    const ids=idsByChapter[chapter.id]||[];
+    return mindmapApprovedAssetHtml(ids,{className:'mindmap-asset-group v4tb-chapter-assets',label:'地球科學核准概念插圖'});
+  }
+  return'';
 }
 function v4tbCurriculumChapters(subjectId,curriculum){
   const chapters=Array.isArray(curriculum?.chapters)?curriculum.chapters:[];
-  if(subjectId!=='biology')return chapters;
-  const groups=[
-    ['bio-cell','bio-membrane'],['bio-enzyme','bio-resp'],['bio-photo'],['bio-mendel'],['bio-molecular','bio-biotech'],
-    ['bio-evolution'],['bio-plant'],['bio-animal','bio-immunity'],['bio-cycle'],['bio-ecology']
-  ];
+  const groups=subjectId==='biology'?[['bio-cell','bio-membrane'],['bio-enzyme','bio-resp'],['bio-photo'],['bio-mendel'],['bio-molecular','bio-biotech'],['bio-evolution'],['bio-plant'],['bio-animal','bio-immunity'],['bio-cycle'],['bio-ecology']]:subjectId==='earth'?[['earth-stars'],['earth-astronomy'],['earth-observe','earth-geohistory'],['earth-interior','earth-tectonics','earth-rock'],['earth-atmos','earth-weather','earth-climate'],['earth-ocean']]:null;
+  if(!groups)return chapters;
   const byId=Object.fromEntries(chapters.map(chapter=>[chapter.id,chapter]));
   return groups.map(ids=>ids.map(id=>byId[id]).filter(Boolean)).filter(group=>group.length).map(group=>{
     const primary=group[0];
