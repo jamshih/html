@@ -18,7 +18,8 @@
   style.textContent=`
     .wb-ai-sticker-v4{
       --wb-ai-sticker-x:0px;--wb-ai-sticker-y:0px;
-      translate:var(--wb-ai-sticker-x) var(--wb-ai-sticker-y);
+      transform:translate3d(var(--wb-ai-sticker-x),var(--wb-ai-sticker-y),0);
+      will-change:transform;backface-visibility:hidden;
       cursor:grab!important;touch-action:none!important;
       -webkit-user-select:none!important;user-select:none!important;
       box-sizing:border-box!important;
@@ -26,7 +27,7 @@
     .wb-ai-sticker-v4 *:not(${INTERACTIVE}){cursor:grab!important}
     .wb-ai-sticker-v4 ${INTERACTIVE}{cursor:auto!important;touch-action:auto!important;user-select:auto!important}
     .wb-ai-sticker-v4.wb-ai-is-dragging,.wb-ai-sticker-v4.wb-ai-is-dragging *:not(${INTERACTIVE}){cursor:grabbing!important}
-    #paper,.paper,.v3-paper,[data-wb-writing-surface],[data-wb-writing-paper]{translate:none!important}
+    #paper,.paper,.v3-paper,[data-wb-writing-surface],[data-wb-writing-paper]{transform:none!important;translate:none!important}
   `;
   document.head.appendChild(style);
 
@@ -78,10 +79,40 @@
     });
   }
 
+  function writingSurfaceFor(card){
+    const closest=card?.closest?.(WRITING);if(closest)return closest;
+    return [...document.querySelectorAll(WRITING)].filter(el=>el.contains(card)).sort((a,b)=>area(a)-area(b))[0]||null;
+  }
+
+  function dragBounds(card){
+    const surface=writingSurfaceFor(card),r=surface?.getBoundingClientRect?.();
+    if(r&&r.width>0&&r.height>0)return{left:r.left,top:r.top,right:r.right,bottom:r.bottom,surface};
+    return{left:0,top:0,right:innerWidth,bottom:innerHeight,surface:null};
+  }
+
+  function dragLimits(card,startRect){
+    // Keep the whole visible card inside the worksheet when possible. This avoids transformed
+    // overflow changing the page scroll geometry while the pointer is moving.
+    const b=dragBounds(card);
+    let minDx=b.left+INSET-startRect.left,maxDx=b.right-INSET-startRect.right,minDy=b.top+INSET-startRect.top,maxDy=b.bottom-INSET-startRect.bottom;
+    if(minDx>maxDx){const mid=(minDx+maxDx)/2;minDx=maxDx=mid}
+    if(minDy>maxDy){const mid=(minDy+maxDy)/2;minDy=maxDy=mid}
+    return{minDx,maxDx,minDy,maxDy,surface:b.surface};
+  }
+
+  function clampSavedOffset(card){
+    const r=card.getBoundingClientRect(),b=dragBounds(card);if(!b.surface)return;
+    let dx=0,dy=0;
+    if(r.left<b.left+INSET)dx=(b.left+INSET)-r.left;else if(r.right>b.right-INSET)dx=(b.right-INSET)-r.right;
+    if(r.top<b.top+INSET)dy=(b.top+INSET)-r.top;else if(r.bottom>b.bottom-INSET)dy=(b.bottom-INSET)-r.bottom;
+    if(dx||dy)setOffset(card,(Number(card.dataset.wbStickerX)||0)+dx,(Number(card.dataset.wbStickerY)||0)+dy);
+  }
+
   function upgrade(card){
     if(!eligible(card)||card.dataset[READY]==='1')return false;
     card.dataset[READY]='1';card.classList.add('wb-ai-sticker-v4');card.dataset.aiStickerDraggable='true';
     const saved=readSaved(card);setOffset(card,saved?.x||0,saved?.y||0);
+    requestAnimationFrame(()=>{if(card.isConnected)clampSavedOffset(card)});
     return true;
   }
 
@@ -106,32 +137,30 @@
     });
   }
 
-  function dragLimits(card,startRect){
-    // Keep the visible card in the viewport, but do not create/reparent into a drag layer.
-    return{
-      minDx:INSET-startRect.left,
-      maxDx:(innerWidth-INSET)-startRect.right,
-      minDy:INSET-startRect.top,
-      maxDy:(innerHeight-INSET)-startRect.bottom
-    };
-  }
-
   function start(card,e){
     if(active||!eligible(card)||interactive(e.target))return;
     if(e.pointerType==='mouse'&&e.button!==0)return;
     const r=card.getBoundingClientRect();
-    active={card,id:e.pointerId,startX:e.clientX,startY:e.clientY,startRect:r,baseX:Number(card.dataset.wbStickerX)||0,baseY:Number(card.dataset.wbStickerY)||0,parent:card.parentNode,z:getComputedStyle(card).zIndex,limits:dragLimits(card,r)};
+    active={card,id:e.pointerId,startX:e.clientX,startY:e.clientY,startRect:r,baseX:Number(card.dataset.wbStickerX)||0,baseY:Number(card.dataset.wbStickerY)||0,parent:card.parentNode,z:getComputedStyle(card).zIndex,limits:dragLimits(card,r),raf:0,pendingX:null,pendingY:null};
     card.classList.add('wb-ai-is-dragging');
     try{card.setPointerCapture(e.pointerId)}catch{}
     e.preventDefault();e.stopPropagation();
   }
+  function paintMove(d){
+    d.raf=0;if(active!==d||d.pendingX===null||d.pendingY===null)return;
+    setOffset(d.card,d.pendingX,d.pendingY);d.pendingX=d.pendingY=null;
+  }
   function move(e){
     const d=active;if(!d||e.pointerId!==d.id)return;
     const dx=clamp(e.clientX-d.startX,d.limits.minDx,d.limits.maxDx),dy=clamp(e.clientY-d.startY,d.limits.minDy,d.limits.maxDy);
-    setOffset(d.card,d.baseX+dx,d.baseY+dy);e.preventDefault();
+    d.pendingX=d.baseX+dx;d.pendingY=d.baseY+dy;
+    if(!d.raf)d.raf=requestAnimationFrame(()=>paintMove(d));
+    e.preventDefault();
   }
   function end(e){
     const d=active;if(!d||e.pointerId!==d.id)return;
+    if(d.raf){cancelAnimationFrame(d.raf);d.raf=0}
+    if(d.pendingX!==null&&d.pendingY!==null)setOffset(d.card,d.pendingX,d.pendingY);
     active=null;d.card.classList.remove('wb-ai-is-dragging');
     try{d.card.releasePointerCapture(e.pointerId)}catch{}
     // Same layer contract: parent and stacking order are never changed by drag.
@@ -159,7 +188,8 @@
       writingDraggable:[...document.querySelectorAll(WRITING)].filter(x=>x.classList.contains('wb-ai-sticker-v4')).length,
       oversizedDraggable:cards.filter(hasSmallerCompleteCard).length,
       globalPortal:Boolean(document.getElementById('wb-ai-sticker-v2-layer')),
-      sameParentLayer:true,forcedTopZ:false,wholeCardDrag:true,tightVisibleHitbox:true,includesContainerAndText:true
+      sameParentLayer:true,forcedTopZ:false,wholeCardDrag:true,tightVisibleHitbox:true,includesContainerAndText:true,
+      worksheetBounded:true,rafBatched:true,gpuTransform:true
     };
   };
 })();
