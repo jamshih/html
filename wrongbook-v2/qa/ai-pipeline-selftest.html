@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wrongbook AI pipeline self-test</title><style>body{font-family:system-ui;margin:20px}.card{width:520px;min-height:280px;border:1px solid #ddd;border-radius:18px;background:#fff}pre{white-space:pre-wrap}</style></head><body><section id="diagramCard" class="card"><div><strong>測試圖解</strong><span> AI 圖解</span></div><svg viewBox="0 0 400 200"><path d="M20 100H380" stroke="#555"/></svg></section><pre id="result" data-status="RUNNING">RUNNING</pre><script>var state={subject:'physics'};var SUPABASE_PUBLISHABLE_KEY='';function selectedProblem(){return{concept:'斜面受力',problemText:'物體靜止在斜面上。'}};try{localStorage.setItem('wrongbook:diagram-spec:v1:qa-stale','{"bad":true}')}catch{}</script><script src="../on-device-image-preprocess-v1.js"></script><script src="../ai-diagram-runtime-fix-v1.js"></script><script src="../ai-diagram-tools-v1.js"></script><script src="../ai-diagram-sticker-v2.js"></script><script>
+<!doctype html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wrongbook AI pipeline self-test</title><style>body{font-family:system-ui;margin:20px}.card{width:520px;min-height:280px;border:1px solid #ddd;border-radius:18px;background:#fff}.panel{width:620px;border:1px solid #ddd;border-radius:18px;padding:14px;margin-bottom:18px}.paper{position:relative;min-height:360px;border:1px solid #ddd;border-radius:16px;padding:18px}.legacy-diagram-card{width:480px;border:1px solid #ccc;border-radius:16px;background:#fff}.legacy-head{padding:12px 16px;border-bottom:1px solid #ddd}.legacy-visual{height:150px}.legacy-text{padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap}.legacy-text span{padding:6px 9px;border-radius:9px;background:#f3f3f3}.paper-toolbar{margin-top:18px}pre{white-space:pre-wrap}</style></head><body><section id="writingPanel" class="panel"><h3>原題就是工作紙</h3><div id="paper" class="paper v3-paper"><div id="legacySticker" class="legacy-diagram-card"><div class="legacy-head"><strong>細胞呼吸位置</strong><span> AI 圖解</span></div><svg class="legacy-visual" viewBox="0 0 400 150"><path d="M40 75H360" stroke="#555" stroke-width="4"/></svg><div class="legacy-text"><span id="legacyCaption">丙酮酸 → 進入粒線體</span><span>克氏循環：粒線體基質</span><span>電子傳遞鏈：粒線體內膜</span></div></div><canvas id="drawCanvas" class="canvas-layer" width="580" height="320"></canvas><div class="paper-toolbar"><button>✎</button></div></div></section><pre id="result" data-status="RUNNING">RUNNING</pre><script>var state={subject:'physics'};var SUPABASE_PUBLISHABLE_KEY='';function selectedProblem(){return{concept:'斜面受力',problemText:'物體靜止在斜面上。'}};try{localStorage.setItem('wrongbook:diagram-spec:v1:qa-stale','{"bad":true}')}catch{}</script><script src="../on-device-image-preprocess-v1.js"></script><script src="../ai-diagram-runtime-fix-v1.js"></script><script src="../ai-diagram-tools-v1.js"></script><script src="../ai-diagram-sticker-v3.js"></script><script>
 (async()=>{const checks=[];const ok=(name,value,detail='')=>checks.push({name,ok:Boolean(value),detail});try{
   const src=document.createElement('canvas');src.width=1800;src.height=1200;const c=src.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,src.width,src.height);c.fillStyle='#111';for(let y=300;y<=760;y+=92){c.fillRect(260,y,1040,18);c.fillRect(300,y+30,760,12)}c.strokeStyle='#111';c.lineWidth=7;c.beginPath();c.moveTo(1120,420);c.lineTo(1420,650);c.stroke();const blob=await new Promise(r=>src.toBlob(r,'image/jpeg',.95));const file=new File([blob],'sheet.jpg',{type:'image/jpeg'});const processed=await wbPreprocessImageFile(file);
   ok('preprocess returns JPEG',processed.mimeType==='image/jpeg');
@@ -9,18 +9,44 @@
   ok('QA declares original upload disabled',__wrongbookImagePreprocessQA().wholeOriginalUpload===false);
   ok('stale diagram cache migrated',localStorage.getItem('wrongbook:diagram-spec:v1:qa-stale')===null);
 
-  const renderTarget=document.createElement('section');renderTarget.className='card';document.body.appendChild(renderTarget);wbRenderDiagramSpec(renderTarget,{title:'受力圖',kind:'free_body',elements:[{type:'rect',x:430,y:270,width:140,height:90,label:'物體',style:'secondary'},{type:'vector',x1:500,y1:315,x2:500,y2:520,label:'mg',style:'accent',arrowEnd:true},{type:'vector',x1:500,y1:315,x2:430,y2:120,label:'N',style:'primary',arrowEnd:true}],essentialTerms:['重力','正向力'],notes:[]},{subject:'physics',title:'受力圖',concept:'受力',problemText:''});
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+  const writing=document.getElementById('writingPanel'),paper=document.getElementById('paper'),legacy=document.getElementById('legacySticker'),caption=document.getElementById('legacyCaption');
+  ok('writing session is marked static',writing.dataset.wbWritingSurface==='1');
+  ok('paper is marked static',paper.dataset.wbWritingPaper==='1');
+  ok('writing session is not draggable',!writing.classList.contains('wb-ai-sticker-v3'));
+  ok('paper is not draggable',!paper.classList.contains('wb-ai-sticker-v3'));
+  ok('nested AI card is the sticker root',legacy.classList.contains('wb-ai-sticker-v3'));
+  ok('sticker root includes explanatory text',legacy.contains(caption)&&legacy.textContent.includes('克氏循環：粒線體基質'));
+
+  const parentBefore=legacy.parentNode,zBefore=getComputedStyle(legacy).zIndex,cardBefore=legacy.getBoundingClientRect(),textBefore=caption.getBoundingClientRect();
+  legacy.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:31,pointerType:'mouse',button:0,clientX:cardBefore.left+80,clientY:cardBefore.top+80}));
+  window.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,cancelable:true,pointerId:31,pointerType:'mouse',clientX:cardBefore.left+170,clientY:cardBefore.top+125}));
+  window.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,cancelable:true,pointerId:31,pointerType:'mouse',clientX:cardBefore.left+170,clientY:cardBefore.top+125}));
+  const cardAfter=legacy.getBoundingClientRect(),textAfter=caption.getBoundingClientRect();
+  const cardDx=cardAfter.left-cardBefore.left,cardDy=cardAfter.top-cardBefore.top,textDx=textAfter.left-textBefore.left,textDy=textAfter.top-textBefore.top;
+  ok('mouse drag changes sticker position',Math.abs(cardDx)>20||Math.abs(cardDy)>20,`${cardDx},${cardDy}`);
+  ok('container and text move together',Math.abs(cardDx-textDx)<1.5&&Math.abs(cardDy-textDy)<1.5,`card ${cardDx},${cardDy}; text ${textDx},${textDy}`);
+  ok('sticker stays in original DOM layer',legacy.parentNode===parentBefore);
+  ok('sticker does not force a new z-index',getComputedStyle(legacy).zIndex===zBefore,`${zBefore} -> ${getComputedStyle(legacy).zIndex}`);
+  ok('no global floating portal exists',!document.getElementById('wb-ai-sticker-v2-layer'));
+
+  const paperBefore=paper.getBoundingClientRect();paper.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:32,pointerType:'mouse',button:0,clientX:paperBefore.right-30,clientY:paperBefore.bottom-30}));window.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,cancelable:true,pointerId:32,pointerType:'mouse',clientX:paperBefore.right-100,clientY:paperBefore.bottom-100}));window.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,cancelable:true,pointerId:32,pointerType:'mouse',clientX:paperBefore.right-100,clientY:paperBefore.bottom-100}));const paperAfter=paper.getBoundingClientRect();
+  ok('dragging worksheet itself does nothing',Math.abs(paperAfter.left-paperBefore.left)<1&&Math.abs(paperAfter.top-paperBefore.top)<1);
+
+  const renderTarget=document.createElement('section');renderTarget.className='card';document.body.appendChild(renderTarget);wbRenderDiagramSpec(renderTarget,{title:'受力圖',kind:'free_body',elements:[{type:'rect',x:430,y:270,width:140,height:90,label:'物體',style:'secondary'},{type:'vector',x1:500,y1:315,x2:500,y2:520,label:'mg',style:'accent',arrowEnd:true},{type:'vector',x1:500,y1:315,x2:430,y2:120,label:'N',style:'primary',arrowEnd:true}],essentialTerms:['重力','正向力'],notes:['正向力垂直接觸面']},{subject:'physics',title:'受力圖',concept:'受力',problemText:''});
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
   ok('dedicated diagram rendered',Boolean(renderTarget.querySelector('.wb-dd-svg')));
   ok('diagram contains real vectors',renderTarget.querySelectorAll('line[marker-end]').length>=2,String(renderTarget.querySelectorAll('line[marker-end]').length));
-  ok('diagram has explicit sticker contract',Boolean(renderTarget.dataset.aiDiagramCard));
+  ok('dedicated diagram whole card is draggable',renderTarget.classList.contains('wb-ai-sticker-v3'));
+  ok('dedicated diagram retains its text container',renderTarget.textContent.includes('正向力垂直接觸面'));
   ok('diagram labels remain visible',getComputedStyle(renderTarget.querySelector('text')).fill!=='none',getComputedStyle(renderTarget.querySelector('text')).fill);
   ok('diagram omits teacher-facing wording',!/學生能夠|協助學生|學習目標|推論出/.test(renderTarget.textContent));
 
-  const sticker=renderTarget;const before=sticker.getBoundingClientRect();sticker.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:41,pointerType:'mouse',button:0,clientX:before.left+80,clientY:before.top+80}));window.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,cancelable:true,pointerId:41,pointerType:'mouse',clientX:before.left+210,clientY:before.top+150}));window.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,cancelable:true,pointerId:41,pointerType:'mouse',clientX:before.left+210,clientY:before.top+150}));const after=sticker.getBoundingClientRect();
-  ok('AI diagram becomes floating sticker',sticker.classList.contains('wb-ai-is-floating'));
-  ok('mouse drag changes sticker position',Math.abs(after.left-before.left)>20||Math.abs(after.top-before.top)>20,`${before.left},${before.top} -> ${after.left},${after.top}`);
-  const sqa=__wrongbookAiStickerV2QA();ok('whole-card drag runtime active',sqa.wholeCardDrag===true);ok('orphan guard active',sqa.orphanGuard===true);
+  const sqa=__wrongbookAiStickerV3QA();
+  ok('whole-card drag runtime active',sqa.wholeCardDrag===true);
+  ok('writing surfaces reported non-draggable',sqa.writingDraggable===0,String(sqa.writingDraggable));
+  ok('same-parent layer contract active',sqa.sameParentLayer===true&&sqa.globalPortal===false);
+  ok('container plus text contract active',sqa.includesContainerAndText===true);
 }catch(e){checks.push({name:'uncaught error',ok:false,detail:String(e&&e.stack||e)})}
 const failed=checks.filter(x=>!x.ok);const el=document.getElementById('result');el.dataset.status=failed.length?'FAIL':'PASS';el.textContent=JSON.stringify({status:el.dataset.status,checks},null,2);document.title='AI_PIPELINE_'+el.dataset.status;
 })();
