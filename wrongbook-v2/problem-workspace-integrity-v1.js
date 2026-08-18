@@ -3,7 +3,7 @@
    Also repairs the known coordinate-geometry prompt and adds safe ink redo without replacing the ink engine. */
 (function(){
   'use strict';
-  const VERSION='2026-08-18-problem-workspace-integrity-v1';
+  const VERSION='2026-08-18-problem-workspace-integrity-v1.1';
   if(window.__problemWorkspaceIntegrityV1===VERSION)return;
   window.__problemWorkspaceIntegrityV1=VERSION;
   document.documentElement.dataset.problemWorkspaceIntegrity=VERSION;
@@ -51,14 +51,16 @@
   const redoByProblem=new Map();
   let patchQueued=false;
 
+  function appState(){try{return state}catch{return null}}
+  function inkState(){try{return drawing}catch{return null}}
   function problem(){
     try{return typeof selectedProblem==='function'?selectedProblem():null}catch{return null}
   }
-  function problemId(){return problem()?.id||window.drawing?.key||'current'}
+  function problemId(){return problem()?.id||inkState()?.key||'current'}
   function hasChoices(p){return Array.isArray(p?.options)&&p.options.length>0}
 
   function repairKnownCoordinatePrompt(){
-    const problems=window.state?.problems;
+    const s=appState(),problems=s?.problems;
     if(!Array.isArray(problems))return false;
     let changed=false;
     const prefix='10. 空間中有兩點 A(1, 5, -4)、B(-14, 15';
@@ -140,20 +142,21 @@
   function queuePatch(){if(patchQueued)return;patchQueued=true;queueMicrotask(patch)}
 
   document.addEventListener('click',function(e){
+    const ink=inkState();
     const undo=e.target.closest?.('[data-action="undoInk"]');
-    if(undo&&window.drawing?.paths?.length){
+    if(undo&&ink?.paths?.length){
       const key=problemId(),stack=redoByProblem.get(key)||[];
-      stack.push(window.drawing.paths[window.drawing.paths.length-1]);
+      stack.push(ink.paths[ink.paths.length-1]);
       redoByProblem.set(key,stack.slice(-50));
       return; /* existing ink-v3 undo listener owns the actual pop/save */
     }
     const redo=e.target.closest?.('[data-action="redoInk"]');
     if(redo){
       e.preventDefault();e.stopPropagation();
-      const key=problemId(),stack=redoByProblem.get(key)||[],path=stack.pop();
-      if(!path||!window.drawing)return;
-      window.drawing.paths=Array.isArray(window.drawing.paths)?window.drawing.paths:[];
-      window.drawing.paths.push(path);redoByProblem.set(key,stack);
+      const key=problemId(),stack=redoByProblem.get(key)||[],path=stack.pop(),current=inkState();
+      if(!path||!current)return;
+      current.paths=Array.isArray(current.paths)?current.paths:[];
+      current.paths.push(path);redoByProblem.set(key,stack);
       try{redrawCanvas()}catch{}
       try{saveInk()}catch{}
       return;
