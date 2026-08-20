@@ -1,0 +1,119 @@
+{
+  "version": "hearframe-m2-curated-sources-v4",
+  "proofPrompt": "I'm scared everyone is moving ahead of me and I don't know whether I'm making the right choices.",
+  "policy": {
+    "compositionUnit": "complete authentic sentence/thought",
+    "wordSpliceAllowed": false,
+    "requiredDistinctSpeakers": 5,
+    "preferredDistinctSpeakers": 6,
+    "targetDurationSeconds": [60, 90],
+    "maxSpeakerShare": 0.30,
+    "ingestWindowPolicy": "Index bounded reflective/advice-rich windows from human-visual-approved, locally renderable Commons sources. Resolve current media URLs through Commons API by exact file title instead of persisting guessed upload paths. The story planner must retrieve real thought IDs; it may not write replacement dialogue."
+  },
+  "sources": [
+    {
+      "source_id": "m2-obama-farewell-2017",
+      "speaker_id": "barack-obama",
+      "speaker": "Barack Obama",
+      "page_title": "File:20170110 President Obama Farewell Speech HD.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:20170110_President_Obama_Farewell_Speech_HD.webm",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/20170110_President_Obama_Farewell_Speech_HD.webm",
+      "source_kind": "public-speech",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "approved_m1_public_domain",
+      "max_ingest_seconds": 300,
+      "pinned_thoughts": [
+        {
+          "stage": "resolution",
+          "start": 227.75,
+          "end": 232.25,
+          "transcript": "Change only happens when ordinary people get involved, and they get engaged, and they come together to demand it."
+        }
+      ]
+    },
+    {
+      "source_id": "m2-jane-goodall-green-interview",
+      "speaker_id": "jane-goodall",
+      "speaker": "Jane Goodall",
+      "reference_id": "ref-00119",
+      "page_title": "File:Jane Goodall, The Green Interview.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Jane_Goodall,_The_Green_Interview.webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 374,
+      "retrieval_hints": ["hope", "future", "change", "people", "difference", "choice", "young people", "responsibility", "believe", "action"]
+    },
+    {
+      "source_id": "m2-steve-wozniak-interview",
+      "speaker_id": "steve-wozniak",
+      "speaker": "Steve Wozniak",
+      "reference_id": "ref-00164",
+      "page_title": "File:Interview with Steve Wozniak.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Interview_with_Steve_Wozniak.webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["learn", "create", "passion", "curiosity", "failure", "choice", "work", "invent", "education", "life"]
+    },
+    {
+      "source_id": "m2-greta-gerwig-fade-in",
+      "speaker_id": "greta-gerwig",
+      "speaker": "Greta Gerwig",
+      "reference_id": "ref-00169",
+      "page_title": "File:Greta Gerwig interview - Fade In.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Greta_Gerwig_interview_-_Fade_In.webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 159,
+      "retrieval_hints": ["fear", "confidence", "work", "creative", "try", "learn", "choice", "mistake", "career", "life"]
+    },
+    {
+      "source_id": "m2-burnie-burns-tstv",
+      "speaker_id": "burnie-burns",
+      "speaker": "Burnie Burns",
+      "reference_id": "ref-00133",
+      "page_title": "File:Burnie Burns interview with TSTV.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Burnie_Burns_interview_with_TSTV.webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_3_human_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["career", "start", "success", "failure", "learn", "work", "opportunity", "student", "choice", "keep going"]
+    },
+    {
+      "source_id": "m2-jimmy-wales-wikipediaday",
+      "speaker_id": "jimmy-wales",
+      "speaker": "Jimmy Wales",
+      "reference_id": "ref-00182",
+      "page_title": "File:Jimmy Wales interview for WikipediaDay 2019.webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Jimmy_Wales_interview_for_WikipediaDay_2019.webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_sa_4_self_published",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["learn", "community", "build", "future", "change", "people", "trust", "idea", "mistake", "responsibility"]
+    },
+    {
+      "source_id": "m2-andrew-yang-growth-minds",
+      "speaker_id": "andrew-yang",
+      "speaker": "Andrew Yang",
+      "reference_id": "ref-00217",
+      "page_title": "File:Andrew Yang (Full Interview).webm",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_(Full_Interview).webm",
+      "source_kind": "public-interview",
+      "source_capability": "locally_renderable",
+      "license_capability_status": "commons_cc_by_3_reviewed",
+      "visual_approval": "APPROVE",
+      "max_ingest_seconds": 420,
+      "retrieval_hints": ["childhood", "failure", "future", "choice", "career", "risk", "fear", "work", "opportunity", "change", "believe"]
+    }
+  ]
+}

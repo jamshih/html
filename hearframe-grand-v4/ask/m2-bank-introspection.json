@@ -1,0 +1,140 @@
+{
+  "version": "hearframe-m2-bank-introspection-v4",
+  "source": "hearframe-grand-v4/ask/public-speech-interview-bank.json",
+  "rowCount": 1866,
+  "rowContainerKey": "videos",
+  "rowKeyFrequency": [
+    [
+      "title",
+      1866
+    ],
+    [
+      "pageUrl",
+      1866
+    ],
+    [
+      "sourceUrl",
+      1866
+    ],
+    [
+      "mime",
+      1866
+    ],
+    [
+      "bytes",
+      1866
+    ],
+    [
+      "width",
+      1866
+    ],
+    [
+      "height",
+      1866
+    ],
+    [
+      "referenceId",
+      1866
+    ],
+    [
+      "auditStatus",
+      1866
+    ],
+    [
+      "sourceKind",
+      1866
+    ],
+    [
+      "auditEvidence",
+      1866
+    ],
+    [
+      "auditReasons",
+      1866
+    ],
+    [
+      "auditPolicyVersion",
+      1866
+    ],
+    [
+      "discoveryBucket",
+      1858
+    ],
+    [
+      "discoveryQuery",
+      1858
+    ],
+    [
+      "speechPriority",
+      1858
+    ],
+    [
+      "catalogStatus",
+      1858
+    ],
+    [
+      "licenseStatus",
+      1858
+    ],
+    [
+      "alignmentStatus",
+      1858
+    ],
+    [
+      "speechValidationStatus",
+      122
+    ],
+    [
+      "wordBoundaryStatus",
+      122
+    ],
+    [
+      "expansionBatch",
+      122
+    ],
+    [
+      "license",
+      8
+    ],
+    [
+      "licenseUrl",
+      8
+    ],
+    [
+      "artist",
+      8
+    ],
+    [
+      "credit",
+      8
+    ],
+    [
+      "description",
+      8
+    ],
+    [
+      "categories",
+      8
+    ],
+    [
+      "catalogVerification",
+      8
+    ]
+  ],
+  "sourceKinds": [
+    [
+      "public-interview",
+      1650
+    ],
+    [
+      "public-speech",
+      216
+    ]
+  ],
+  "capabilities": [],
+  "staleAlignmentFieldRows": 122,
+  "expectedCountedReadyReferences": 131,
+  "traceableCountedReadyReferences": 131,
+  "phraseOnlyCuratedStarters": 2,
+  "readyReferenceTraceComplete": true
+}
