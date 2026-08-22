@@ -16,7 +16,7 @@
 <div id="units" class="units"></div>
 </main><script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id),API='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-stitch-director',KEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx';
+const $=id=>document.getElementById(id),API='https://bnzmipqaoldlmsufnlty.supabase.co/functions/v1/hearframe-stitch-director',KEY='sb_publishable_qPgqytcif45ym5JWBg1kEQ_n5Va8plA';
 const SPEECH=/\b(speech|address|remarks|keynote|inaugural|farewell|commencement|testimony)\b/i,INTERVIEW=/\b(interview|q\s*&\s*a|questions?\s+and\s+answers?|conversation\s+with|in\s+conversation|press\s+conference|press\s+briefing)\b/i,REJECT=/\b(news\s+clip|b[- ]?roll|footage|trailer|commercial|advertisement|promo|music\s+video|gameplay|animation)\b/i;
 let catalog,rawIndex,metaById=new Map(),tokens={},units=[],playing=false,stopping=false,recent=[];
 const norm=s=>String(s||'').toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/g,''),num=v=>Number.isFinite(Number(v))?Number(v):0,esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
