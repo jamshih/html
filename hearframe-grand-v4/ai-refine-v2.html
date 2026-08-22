@@ -12,12 +12,12 @@
 <main>
 <div class="eyebrow">HEARFRAME / GEMINI AUDIO-ONLY PRECISION LAB · v2</div>
 <h1>Listen. Compare.<br>Move the cut.</h1>
-<p class="lead">This version removes cross-origin audio capture. Hearframe fetches its own already-rendered MP4, decodes only the audio track in the browser, renders bounded WAV candidate windows, and sends those audio candidates to the shared Interview AIBot Gemini backend. Gemini never sees the video and cannot invent a timestamp.</p>
+<p class="lead">This version removes cross-origin audio capture. Hearframe fetches its own already-rendered MP4, decodes only the audio track in the browser, renders bounded WAV candidate windows, and sends those audio candidates to the shared SearchRecall Listening Gemini backend. Gemini never sees the video and cannot invent a timestamp.</p>
 
 <div class="grid">
 <section class="card">
-  <h2>1 · Shared Interview AIBot backend</h2>
-  <div class="note">Your existing Interview AIBot Supabase Edge Function is preconfigured. The Gemini API key remains server-side.</div>
+  <h2>1 · Shared SearchRecall Listening backend</h2>
+  <div class="note">The SearchRecall Listening Supabase Edge Function is preconfigured. The Gemini API key remains server-side.</div>
   <div class="status" id="backendStatus">Checking backend…</div>
   <div class="row"><button id="testBackend" class="primary">Test Gemini backend</button></div>
 </section>
@@ -65,8 +65,8 @@
 (()=>{
 'use strict';
 const Core=window.HearframeAICore,$=id=>document.getElementById(id);
-const BACKEND='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai';
-const APIKEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx';
+const BACKEND='https://bnzmipqaoldlmsufnlty.supabase.co/functions/v1/hearframe-ai';
+const APIKEY='sb_publishable_qPgqytcif45ym5JWBg1kEQ_n5Va8plA';
 const BASE={h:{start:1.308,end:1.500},w:{start:122.440,end:122.700}};
 const clips={h:{...BASE.h},w:{...BASE.w}};
 const MEDIA={
