@@ -12,13 +12,13 @@
 <main>
 <div class="eyebrow">HEARFRAME / GEMINI AUDIO-ONLY PRECISION LAB</div>
 <h1>Listen. Compare.<br>Move the cut.</h1>
-<p class="lead">This is an isolated lab beside the working v4.6 player. It does not replace its playback code. The browser renders real candidate audio windows; the shared Interview AIBot backend gives Gemini only those WAV candidates; Gemini must choose one real candidate. A coarse → fine → micro pass then updates the proposed word window.</p>
+<p class="lead">This is an isolated lab beside the working v4.6 player. It does not replace its playback code. The browser renders real candidate audio windows; the shared SearchRecall Listening backend gives Gemini only those WAV candidates; Gemini must choose one real candidate. A coarse → fine → micro pass then updates the proposed word window.</p>
 
 <div class="grid">
 <section class="card">
-  <h2>1 · Shared Interview AIBot backend</h2>
-  <div class="note">Preconfigured to the existing Interview AIBot Supabase Edge Function. Only a browser-safe Supabase publishable key is used here; the Gemini API key stays in Supabase Edge Function Secrets and is never entered into Hearframe.</div>
-  <div class="field"><label for="backend">INTERVIEW AIBOT SHARED BACKEND</label><input id="backend" placeholder="Interview AIBot Edge Function URL" autocomplete="off" /></div>
+  <h2>1 · Shared SearchRecall Listening backend</h2>
+  <div class="note">Preconfigured to the SearchRecall Listening Supabase Edge Function. Only a browser-safe Supabase publishable key is used here; the Gemini API key stays in Supabase Edge Function Secrets and is never entered into Hearframe.</div>
+  <div class="field"><label for="backend">SEARCHRECALL LISTENING BACKEND</label><input id="backend" placeholder="SearchRecall Listening Edge Function URL" autocomplete="off" /></div>
   <div class="row"><button id="saveBackend">Save URL</button><button id="testBackend" class="primary">Test Gemini backend</button></div>
   <div class="status" id="backendStatus">Not tested.</div>
 </section>
@@ -72,8 +72,8 @@
 'use strict';
 const Core=window.HearframeAICore;
 const $=id=>document.getElementById(id);
-const DEFAULT_BACKEND='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/hearframe-ai';
-const INTERVIEW_PUBLISHABLE_KEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx';
+const DEFAULT_BACKEND='https://bnzmipqaoldlmsufnlty.supabase.co/functions/v1/hearframe-ai';
+const SEARCHRECALL_PUBLISHABLE_KEY='sb_publishable_qPgqytcif45ym5JWBg1kEQ_n5Va8plA';
 const NIXON=[
  'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm',
  'https://upload.wikimedia.org/wikipedia/commons/2/23/20170110_President_Obama_Farewell_Speech_HD.webm'
@@ -92,7 +92,7 @@ const graphs=new WeakMap();
 let sourcesLoaded=false,busy=false;
 
 const backendInput=$('backend'),backendStatus=$('backendStatus'),criticStatus=$('criticStatus'),directorStatus=$('directorStatus'),passes=$('passes'),previewStatus=$('previewStatus');
-backendInput.value=localStorage.getItem('hearframeInterviewBackend')||DEFAULT_BACKEND;
+backendInput.value=localStorage.getItem('hearframeListeningBackend')||DEFAULT_BACKEND;
 const corpusStatus=$('corpusStatus'),runDirectorBtn=$('runDirector');
 runDirectorBtn.disabled=true;
 const corpusVocabularyPromise=fetch('./ask/corpus-vocabulary.json?v=reference-100-v1',{cache:'no-store'})
@@ -121,16 +121,16 @@ refreshTimes();
 
 function baseUrl(){
  const value=Core.backendBase(backendInput.value);
- if(!value)throw new Error('Enter the deployed Interview AIBot base URL first.');
+ if(!value)throw new Error('Enter the deployed SearchRecall Listening base URL first.');
  return value;
 }
 async function api(path,options={}){
- const res=await fetch(baseUrl()+path,{...options,headers:{'content-type':'application/json','apikey':INTERVIEW_PUBLISHABLE_KEY,...(options.headers||{})}});
+ const res=await fetch(baseUrl()+path,{...options,headers:{'content-type':'application/json','apikey':SEARCHRECALL_PUBLISHABLE_KEY,...(options.headers||{})}});
  const text=await res.text();let data;try{data=JSON.parse(text)}catch{data={error:text||`HTTP ${res.status}`}}
  if(!res.ok)throw new Error(`${data.error||'request_failed'} (${res.status})`);
  return data;
 }
-$('saveBackend').onclick=()=>{const value=Core.backendBase(backendInput.value);localStorage.setItem('hearframeInterviewBackend',value);backendInput.value=value;setStatus(backendStatus,'Backend URL saved locally. Only the Supabase publishable key is in the browser; GEMINI_API_KEY remains server-side.','good')};
+$('saveBackend').onclick=()=>{const value=Core.backendBase(backendInput.value);localStorage.setItem('hearframeListeningBackend',value);backendInput.value=value;setStatus(backendStatus,'Backend URL saved locally. Only the Supabase publishable key is in the browser; GEMINI_API_KEY remains server-side.','good')};
 $('testBackend').onclick=async()=>{try{setStatus(backendStatus,'Testing shared backend…');const data=await api('/api/shared-ai/health',{method:'GET',headers:{}});if(!data.configured)throw new Error('Backend is reachable, but GEMINI_API_KEY is not configured on the server.');setStatus(backendStatus,`Connected · ${data.provider} · ${data.model} · audio=${data.audioInput} · store=${data.geminiStore}`,'good')}catch(e){setStatus(backendStatus,e.message,'bad')}};
 
 $('runDirector').onclick=async()=>{try{
