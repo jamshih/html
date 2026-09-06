@@ -1,0 +1,39 @@
+name: Hearframe M2 corpus introspection main
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/hearframe-m2-introspect-bank.py'
+      - '.github/workflows/hearframe-m2-introspect-main.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Inspect bank schema
+        run: python .github/scripts/hearframe-m2-introspect-bank.py
+      - name: Commit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hearframe-grand-v4/ask/m2-bank-introspection.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Generate Hearframe M2 bank introspection"
+          for n in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; sleep 2; continue; }
+            git push origin HEAD:main && exit 0
+            sleep 2
+          done
+          exit 1

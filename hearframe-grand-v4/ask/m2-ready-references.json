@@ -1,0 +1,5983 @@
+{
+  "version": "hearframe-m2-ready-references-v2",
+  "sourceOfTruth": "production-stitch-index.json + production-stitch-index-report.json",
+  "definition": "The exact word-indexed English/alignment-ready references counted by production-stitch-index-report. These are still NOT visual_approved or production_ready for cinematic rendering.",
+  "expectedReadyCount": 131,
+  "traceableReadyCount": 131,
+  "traceComplete": true,
+  "references": [
+    {
+      "referenceId": "ref-00101",
+      "title": "File:Marriage Equality in New York- Interview with Lt. Dan Choi.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Marriage_Equality_in_New_York-_Interview_with_Lt._Dan_Choi.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Marriage_Equality_in_New_York-_Interview_with_Lt._Dan_Choi.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 439,
+      "sampleWindows": [
+        {
+          "start": 10.023,
+          "end": 11.565,
+          "label": "out City Hall today?",
+          "score": 0.7057,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.402,
+          "end": 28.343,
+          "label": "already wife because they",
+          "score": 0.8662,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.949,
+          "end": 37.789,
+          "label": "and I was here",
+          "score": 0.8752,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.781,
+          "end": 53.722,
+          "label": "the only ingredient needed",
+          "score": 0.7555,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.2,
+        59.831
+      ]
+    },
+    {
+      "referenceId": "ref-00102",
+      "title": "File:Interview with Belarus gay activist.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Belarus_gay_activist.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/Interview_with_Belarus_gay_activist.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 491,
+      "sampleWindows": [
+        {
+          "start": 13.965,
+          "end": 14.626,
+          "label": "the big screen",
+          "score": 0.9833,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.433,
+          "end": 29.754,
+          "label": "biting my nails all the",
+          "score": 0.9452,
+          "kind": "phrase"
+        },
+        {
+          "start": 41.621,
+          "end": 42.841,
+          "label": "recalled some feelings I've",
+          "score": 0.8788,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.646,
+          "end": 53.587,
+          "label": "Belarus saying, well, we hope we",
+          "score": 0.9225,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        11.644,
+        59.831
+      ]
+    },
+    {
+      "referenceId": "ref-00104",
+      "title": "File:Babita Sinha - Interview for the Millennium Village Project (Jharkhand).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Babita_Sinha_-_Interview_for_the_Millennium_Village_Project_(Jharkhand).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/Babita_Sinha_-_Interview_for_the_Millennium_Village_Project_%28Jharkhand%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 561,
+      "sampleWindows": [
+        {
+          "start": 4.035,
+          "end": 5.677,
+          "label": "this project and the initiative we",
+          "score": 0.8945,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.83,
+          "end": 21.51,
+          "label": "the goals and",
+          "score": 0.8127,
+          "kind": "phrase"
+        },
+        {
+          "start": 30.054,
+          "end": 31.194,
+          "label": "mortality and",
+          "score": 0.8995,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.306,
+          "end": 47.007,
+          "label": "priority,",
+          "score": 0.714,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.291,
+        59.742
+      ]
+    },
+    {
+      "referenceId": "ref-00105",
+      "title": "File:Bernhard Hoeper - Interview for Millennium Village Project.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Bernhard_Hoeper_-_Interview_for_Millennium_Village_Project.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Bernhard_Hoeper_-_Interview_for_Millennium_Village_Project.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 615,
+      "sampleWindows": [
+        {
+          "start": 4.133,
+          "end": 4.854,
+          "label": "looking into",
+          "score": 0.9655,
+          "kind": "phrase"
+        },
+        {
+          "start": 17.241,
+          "end": 18.942,
+          "label": "in 15 different locations all",
+          "score": 0.95,
+          "kind": "phrase"
+        },
+        {
+          "start": 31.53,
+          "end": 32.451,
+          "label": "are very much into",
+          "score": 0.9695,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.634,
+          "end": 49.537,
+          "label": "the situation right",
+          "score": 0.94,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.131,
+        59.922
+      ]
+    },
+    {
+      "referenceId": "ref-00106",
+      "title": "File:Interview of Amlan Das Gupta at Digital Humanities Consultation 2013.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_of_Amlan_Das_Gupta_at_Digital_Humanities_Consultation_2013.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/15/Interview_of_Amlan_Das_Gupta_at_Digital_Humanities_Consultation_2013.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 311,
+      "sampleWindows": [
+        {
+          "start": 14.843,
+          "end": 17.344,
+          "label": "up from 2000 to",
+          "score": 0.7288,
+          "kind": "phrase"
+        },
+        {
+          "start": 22.647,
+          "end": 25.668,
+          "label": "of Ahmed about, the doing part.",
+          "score": 0.78,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.672,
+          "end": 34.973,
+          "label": "the digital for",
+          "score": 0.7087,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.271,
+          "end": 48.511,
+          "label": "history",
+          "score": 0.385,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        11.561,
+        56.094
+      ]
+    },
+    {
+      "referenceId": "ref-00107",
+      "title": "File:Interview with the developers of Gopher.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_the_developers_of_Gopher.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Interview_with_the_developers_of_Gopher.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 65,
+      "phraseOccurrenceCount": 529,
+      "sampleWindows": [
+        {
+          "start": 8.944,
+          "end": 9.444,
+          "label": "I can't believe",
+          "score": 0.8007,
+          "kind": "phrase"
+        },
+        {
+          "start": 21.689,
+          "end": 22.49,
+          "label": "to think about",
+          "score": 0.946,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.856,
+          "end": 43.738,
+          "label": "make a campus-wide information system, but",
+          "score": 0.9025,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.165,
+          "end": 52.645,
+          "label": "but it",
+          "score": 0.93,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        4.762,
+        59.451
+      ]
+    },
+    {
+      "referenceId": "ref-00110",
+      "title": "File:George Monbiot interview with The Green Interview.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:George_Monbiot_interview_with_The_Green_Interview.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/George_Monbiot_interview_with_The_Green_Interview.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 66,
+      "phraseOccurrenceCount": 415,
+      "sampleWindows": [
+        {
+          "start": 23.632,
+          "end": 24.533,
+          "label": "original, and",
+          "score": 0.9965,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.399,
+          "end": 33.639,
+          "label": "author",
+          "score": 0.942,
+          "kind": "token"
+        },
+        {
+          "start": 43.646,
+          "end": 44.747,
+          "label": "movement that aims to",
+          "score": 0.9735,
+          "kind": "phrase"
+        },
+        {
+          "start": 55.703,
+          "end": 56.144,
+          "label": "I'm driven",
+          "score": 0.91,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        20.81,
+        59.851
+      ]
+    },
+    {
+      "referenceId": "ref-00119",
+      "title": "File:Jane Goodall, The Green Interview.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jane_Goodall%2C_The_Green_Interview.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Jane_Goodall%2C_The_Green_Interview.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 496,
+      "sampleWindows": [
+        {
+          "start": 24.502,
+          "end": 26.983,
+          "label": "Goodall set out to study chimpanzees",
+          "score": 0.939,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.445,
+          "end": 34.845,
+          "label": "opened a whole new window into",
+          "score": 0.968,
+          "kind": "phrase"
+        },
+        {
+          "start": 43.517,
+          "end": 44.898,
+          "label": "Alarmed at what human beings were",
+          "score": 0.936,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.044,
+          "end": 52.565,
+          "label": "protecting",
+          "score": 0.954,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        21.041,
+        59.871
+      ]
+    },
+    {
+      "referenceId": "ref-00120",
+      "title": "File:Kartikeya Sarabhai, The Green Interview.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Kartikeya_Sarabhai%2C_The_Green_Interview.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kartikeya_Sarabhai%2C_The_Green_Interview.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 49,
+      "phraseOccurrenceCount": 361,
+      "sampleWindows": [
+        {
+          "start": 23.225,
+          "end": 24.266,
+          "label": "environmental crisis",
+          "score": 0.9875,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.93,
+          "end": 29.111,
+          "label": "of his",
+          "score": 0.92,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.601,
+          "end": 41.321,
+          "label": "we started it",
+          "score": 0.9713,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.419,
+          "end": 51.74,
+          "label": "instance,",
+          "score": 0.905,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        20.503,
+        57.247
+      ]
+    },
+    {
+      "referenceId": "ref-00122",
+      "title": "File:PRISM - Snowden Interview - Laura Poitras HQ.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:PRISM_-_Snowden_Interview_-_Laura_Poitras_HQ.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ae/PRISM_-_Snowden_Interview_-_Laura_Poitras_HQ.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 54,
+      "phraseOccurrenceCount": 425,
+      "sampleWindows": [
+        {
+          "start": 15.226,
+          "end": 17.487,
+          "label": "Allen Hamilton as an infrastructure analyst",
+          "score": 0.8383,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.405,
+          "end": 31.908,
+          "label": "systems administrator, senior",
+          "score": 0.9567,
+          "kind": "phrase"
+        },
+        {
+          "start": 44.199,
+          "end": 46.801,
+          "label": "interested in in trying to understand",
+          "score": 0.9192,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.445,
+          "end": 52.986,
+          "label": "crossed this",
+          "score": 0.929,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.382,
+        59.591
+      ]
+    },
+    {
+      "referenceId": "ref-00126",
+      "title": "File:Interview with Rita Niineste.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Rita_Niineste.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Interview_with_Rita_Niineste.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 43,
+      "phraseOccurrenceCount": 311,
+      "sampleWindows": [
+        {
+          "start": 8.916,
+          "end": 10.498,
+          "label": "and I'm Estonian and",
+          "score": 0.9138,
+          "kind": "phrase"
+        },
+        {
+          "start": 26.713,
+          "end": 28.154,
+          "label": "a bit more than five",
+          "score": 0.9534,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.78,
+          "end": 36.542,
+          "label": "work at the European",
+          "score": 0.9275,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.212,
+          "end": 51.634,
+          "label": "linguistic and translation related events.",
+          "score": 0.9094,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.673,
+        59.748
+      ]
+    },
+    {
+      "referenceId": "ref-00128",
+      "title": "File:Interview with Helen Bickham.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Helen_Bickham.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Interview_with_Helen_Bickham.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 63,
+      "phraseOccurrenceCount": 601,
+      "sampleWindows": [
+        {
+          "start": 6.954,
+          "end": 7.274,
+          "label": "living",
+          "score": 0.937,
+          "kind": "token"
+        },
+        {
+          "start": 24.708,
+          "end": 25.629,
+          "label": "by someone at the",
+          "score": 0.9617,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.895,
+          "end": 38.357,
+          "label": "trying to get your residence",
+          "score": 0.9448,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.314,
+          "end": 54.396,
+          "label": "phone call and they said",
+          "score": 0.918,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.131,
+        60.002
+      ]
+    },
+    {
+      "referenceId": "ref-00129",
+      "title": "File:Mahatma Gandhi first film interview (30 April 1931).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Mahatma_Gandhi_first_film_interview_(30_April_1931).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Mahatma_Gandhi_first_film_interview_%2830_April_1931%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 35,
+      "phraseOccurrenceCount": 271,
+      "sampleWindows": [
+        {
+          "start": 30.694,
+          "end": 30.854,
+          "label": "Yes,",
+          "score": 0.631,
+          "kind": "token"
+        },
+        {
+          "start": 39.299,
+          "end": 39.659,
+          "label": "can get all",
+          "score": 0.7193,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.203,
+          "end": 46.823,
+          "label": "talkie of him.",
+          "score": 0.6753,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.819,
+          "end": 59.198,
+          "label": "Moreover, he has a very deep prejudice against being photographed at all.",
+          "score": 0.9417,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.794,
+        59.198
+      ]
+    },
+    {
+      "referenceId": "ref-00131",
+      "title": "File:Exclusive interview with Paul Smith.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Exclusive_interview_with_Paul_Smith.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Exclusive_interview_with_Paul_Smith.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 615,
+      "sampleWindows": [
+        {
+          "start": 7.724,
+          "end": 8.844,
+          "label": "we are is at",
+          "score": 0.881,
+          "kind": "phrase"
+        },
+        {
+          "start": 21.968,
+          "end": 24.408,
+          "label": "box, 12 feet square.",
+          "score": 0.8872,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.023,
+          "end": 38.283,
+          "label": "Covent",
+          "score": 0.879,
+          "kind": "token"
+        },
+        {
+          "start": 50.648,
+          "end": 51.508,
+          "label": "made it out of wood.",
+          "score": 0.962,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        4.523,
+        59.231
+      ]
+    },
+    {
+      "referenceId": "ref-00133",
+      "title": "File:Burnie Burns interview with TSTV.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Burnie_Burns_interview_with_TSTV.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Burnie_Burns_interview_with_TSTV.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 660,
+      "sampleWindows": [
+        {
+          "start": 10.214,
+          "end": 12.479,
+          "label": "of 1993 1996 when",
+          "score": 0.791,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.938,
+          "end": 30.098,
+          "label": "internet was just getting big, and",
+          "score": 0.8972,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.881,
+          "end": 40.341,
+          "label": "take only computer science courses",
+          "score": 0.9658,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.813,
+          "end": 52.355,
+          "label": "I'm get my",
+          "score": 0.807,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.865,
+        59.982
+      ]
+    },
+    {
+      "referenceId": "ref-00134",
+      "title": "File:David Suzuki interview at Occupy Montreal.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:David_Suzuki_interview_at_Occupy_Montreal.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/David_Suzuki_interview_at_Occupy_Montreal.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 62,
+      "phraseOccurrenceCount": 444,
+      "sampleWindows": [
+        {
+          "start": 16.121,
+          "end": 16.582,
+          "label": "think a lot of",
+          "score": 0.9243,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.563,
+          "end": 33.343,
+          "label": "are rising up and",
+          "score": 0.9643,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.968,
+          "end": 40.469,
+          "label": "and stop serving",
+          "score": 0.911,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.038,
+          "end": 52.099,
+          "label": "The economy by itself",
+          "score": 0.929,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        12.052,
+        59.951
+      ]
+    },
+    {
+      "referenceId": "ref-00137",
+      "title": "File:Sound Futures- Balinese Gamelan Case Study - Interview with Dalang.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Sound_Futures-_Balinese_Gamelan_Case_Study_-_Interview_with_Dalang.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/06/Sound_Futures-_Balinese_Gamelan_Case_Study_-_Interview_with_Dalang.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 35,
+      "phraseOccurrenceCount": 376,
+      "sampleWindows": [
+        {
+          "start": 10.026,
+          "end": 11.566,
+          "label": "just few people learn",
+          "score": 0.833,
+          "kind": "phrase"
+        },
+        {
+          "start": 22.829,
+          "end": 24.63,
+          "label": "choice from their",
+          "score": 0.7397,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.834,
+          "end": 39.438,
+          "label": "from vayang or drama, just",
+          "score": 0.8018,
+          "kind": "phrase"
+        },
+        {
+          "start": 47.628,
+          "end": 48.489,
+          "label": "is tater.",
+          "score": 0.878,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.625,
+        59.201
+      ]
+    },
+    {
+      "referenceId": "ref-00141",
+      "title": "File:Archie Shepp interview 1978.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Archie_Shepp_interview_1978.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Archie_Shepp_interview_1978.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 74,
+      "phraseOccurrenceCount": 769,
+      "sampleWindows": [
+        {
+          "start": 6.235,
+          "end": 8.296,
+          "label": "Norman Connors are getting into now?",
+          "score": 0.7242,
+          "kind": "phrase"
+        },
+        {
+          "start": 22.906,
+          "end": 24.547,
+          "label": "20s to that syndrome and",
+          "score": 0.8298,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.9,
+          "end": 36.581,
+          "label": "metamorphosed",
+          "score": 0.95,
+          "kind": "token"
+        },
+        {
+          "start": 48.727,
+          "end": 49.947,
+          "label": "soul music, if you like, in",
+          "score": 0.8932,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.331,
+        58.61
+      ]
+    },
+    {
+      "referenceId": "ref-00144",
+      "title": "File:Interview with Prime Minister of Bhutan at Rio-20.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Prime_Minister_of_Bhutan_at_Rio-20.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Interview_with_Prime_Minister_of_Bhutan_at_Rio-20.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 46,
+      "phraseOccurrenceCount": 332,
+      "sampleWindows": [
+        {
+          "start": 21.305,
+          "end": 21.865,
+          "label": "We should",
+          "score": 0.768,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.353,
+          "end": 35.275,
+          "label": "happened and difficult negotiations are going",
+          "score": 0.9388,
+          "kind": "phrase"
+        },
+        {
+          "start": 43.147,
+          "end": 44.107,
+          "label": "Brazil has done an",
+          "score": 0.8662,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.109,
+          "end": 55.25,
+          "label": "with which Bhutan will not",
+          "score": 0.9368,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        14.62,
+        59.591
+      ]
+    },
+    {
+      "referenceId": "ref-00145",
+      "title": "File:Interview of Julian Chonigolo, National Archivist, Solomon Islands.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_of_Julian_Chonigolo%2C_National_Archivist%2C_Solomon_Islands.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/Interview_of_Julian_Chonigolo%2C_National_Archivist%2C_Solomon_Islands.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 377,
+      "sampleWindows": [
+        {
+          "start": 8.204,
+          "end": 9.244,
+          "label": "National Archivist.",
+          "score": 0.8505,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.507,
+          "end": 23.967,
+          "label": "Pacific",
+          "score": 0.887,
+          "kind": "token"
+        },
+        {
+          "start": 37.033,
+          "end": 38.394,
+          "label": "a very active member of",
+          "score": 0.9148,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.682,
+          "end": 49.723,
+          "label": "on simple ways of",
+          "score": 0.8097,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.183,
+        59.811
+      ]
+    },
+    {
+      "referenceId": "ref-00146",
+      "title": "File:Interview with Bernard Rizu, Record Manager, National Archives of Solomon Islands. By Eric Boamah.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Bernard_Rizu%2C_Record_Manager%2C_National_Archives_of_Solomon_Islands._By_Eric_Boamah.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/58/Interview_with_Bernard_Rizu%2C_Record_Manager%2C_National_Archives_of_Solomon_Islands._By_Eric_Boamah.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 398,
+      "sampleWindows": [
+        {
+          "start": 8.451,
+          "end": 9.031,
+          "label": "My job",
+          "score": 0.9225,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.564,
+          "end": 24.784,
+          "label": "advice government",
+          "score": 0.928,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.207,
+          "end": 35.288,
+          "label": "I do arrangements and",
+          "score": 0.7435,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.651,
+          "end": 50.852,
+          "label": "of challenges that we're",
+          "score": 0.766,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.305,
+        59.32
+      ]
+    },
+    {
+      "referenceId": "ref-00147",
+      "title": "File:Interview with Barbara Firth.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Barbara_Firth.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Interview_with_Barbara_Firth.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 416,
+      "sampleWindows": [
+        {
+          "start": 5.166,
+          "end": 6.107,
+          "label": "of areas where",
+          "score": 0.9343,
+          "kind": "phrase"
+        },
+        {
+          "start": 17.215,
+          "end": 18.436,
+          "label": "of us who work on that",
+          "score": 0.8522,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.351,
+          "end": 28.051,
+          "label": "decided to",
+          "score": 0.999,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.478,
+          "end": 50.198,
+          "label": "this is what our",
+          "score": 0.9325,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.523,
+        58.93
+      ]
+    },
+    {
+      "referenceId": "ref-00148",
+      "title": "File:Interview avec Karen Kamensek.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_avec_Karen_Kamensek.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/03/Interview_avec_Karen_Kamensek.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 563,
+      "sampleWindows": [
+        {
+          "start": 23.23,
+          "end": 24.411,
+          "label": "something light-hearted.",
+          "score": 0.9515,
+          "kind": "phrase"
+        },
+        {
+          "start": 30.455,
+          "end": 30.855,
+          "label": "said, I want",
+          "score": 0.87,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.956,
+          "end": 40.938,
+          "label": "usually from operas or operetta",
+          "score": 0.911,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.485,
+          "end": 52.326,
+          "label": "my favorite American",
+          "score": 0.9573,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        20.848,
+        59.871
+      ]
+    },
+    {
+      "referenceId": "ref-00149",
+      "title": "File:Interview with DOUGLAS J. CUOMO, COMPOSER - Arjuna's Dilemma.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_DOUGLAS_J._CUOMO%2C_COMPOSER_-_Arjuna%27s_Dilemma.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Interview_with_DOUGLAS_J._CUOMO%2C_COMPOSER_-_Arjuna%27s_Dilemma.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 307,
+      "sampleWindows": [
+        {
+          "start": 24.173,
+          "end": 25.874,
+          "label": "Karishma Singhani, owner of",
+          "score": 0.8622,
+          "kind": "phrase"
+        },
+        {
+          "start": 30.718,
+          "end": 33.3,
+          "label": "to interview Douglas J. Kimo.",
+          "score": 0.9302,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.904,
+          "end": 41.724,
+          "label": "for concerts,",
+          "score": 0.9445,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.827,
+          "end": 51.488,
+          "label": "world music, classical,",
+          "score": 0.949,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        20.81,
+        57.85
+      ]
+    },
+    {
+      "referenceId": "ref-00156",
+      "title": "File:GLAMonTAPE Interview Merete Sanderhoff.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:GLAMonTAPE_Interview_Merete_Sanderhoff.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/70/GLAMonTAPE_Interview_Merete_Sanderhoff.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 449,
+      "sampleWindows": [
+        {
+          "start": 17.529,
+          "end": 18.569,
+          "label": "it, of the",
+          "score": 0.916,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.873,
+          "end": 32.614,
+          "label": "of a collection of our scope,",
+          "score": 0.8472,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.832,
+          "end": 41.474,
+          "label": "care of it on behalf of",
+          "score": 0.9007,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.723,
+          "end": 52.804,
+          "label": "can to make it",
+          "score": 0.9503,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        12.187,
+        59.891
+      ]
+    },
+    {
+      "referenceId": "ref-00157",
+      "title": "File:Armin Navabi interviewed by Maryam Namazie 2015.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Armin_Navabi_interviewed_by_Maryam_Namazie_2015.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Armin_Navabi_interviewed_by_Maryam_Namazie_2015.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 65,
+      "phraseOccurrenceCount": 619,
+      "sampleWindows": [
+        {
+          "start": 13.536,
+          "end": 14.897,
+          "label": "as a kid,",
+          "score": 0.8197,
+          "kind": "phrase"
+        },
+        {
+          "start": 30.343,
+          "end": 31.123,
+          "label": "afterlife and",
+          "score": 0.911,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.546,
+          "end": 43.647,
+          "label": "Iran most people didn't seem to",
+          "score": 0.9313,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.209,
+          "end": 54.03,
+          "label": "to me it seemed like if",
+          "score": 0.9568,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.071,
+        59.665
+      ]
+    },
+    {
+      "referenceId": "ref-00162",
+      "title": "File:Interview with Special Agent Debra S. of the FBI (2012).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Special_Agent_Debra_S._of_the_FBI_(2012).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Interview_with_Special_Agent_Debra_S._of_the_FBI_%282012%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 78,
+      "phraseOccurrenceCount": 688,
+      "sampleWindows": [
+        {
+          "start": 6.653,
+          "end": 7.873,
+          "label": "communicating with a",
+          "score": 0.967,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.177,
+          "end": 24.798,
+          "label": "was 97, so I",
+          "score": 0.9278,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.747,
+          "end": 39.128,
+          "label": "close and he said",
+          "score": 0.8448,
+          "kind": "phrase"
+        },
+        {
+          "start": 47.835,
+          "end": 48.696,
+          "label": "it by half a pound.",
+          "score": 0.9158,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.271,
+        59.33
+      ]
+    },
+    {
+      "referenceId": "ref-00164",
+      "title": "File:Interview with Steve Wozniak.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Steve_Wozniak.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Interview_with_Steve_Wozniak.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 72,
+      "phraseOccurrenceCount": 471,
+      "sampleWindows": [
+        {
+          "start": 10.378,
+          "end": 11.258,
+          "label": "I'm very excited about",
+          "score": 0.9045,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.846,
+          "end": 25.106,
+          "label": "this was",
+          "score": 0.926,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.695,
+          "end": 41.796,
+          "label": "to you about education first.",
+          "score": 0.9428,
+          "kind": "phrase"
+        },
+        {
+          "start": 55.567,
+          "end": 56.288,
+          "label": "name was well known",
+          "score": 0.9487,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        4.234,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-00166",
+      "title": "File:DTNS LABS Interview - Richard Kowalski, Consumer Electronics Association.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:DTNS_LABS_Interview_-_Richard_Kowalski%2C_Consumer_Electronics_Association.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c1/DTNS_LABS_Interview_-_Richard_Kowalski%2C_Consumer_Electronics_Association.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 73,
+      "phraseOccurrenceCount": 587,
+      "sampleWindows": [
+        {
+          "start": 12.091,
+          "end": 13.754,
+          "label": "i'm telling and uh... joining us",
+          "score": 0.848,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.531,
+          "end": 28.151,
+          "label": "Yeah, few",
+          "score": 0.7295,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.274,
+          "end": 39.334,
+          "label": "so nice to have",
+          "score": 0.9185,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.24,
+          "end": 51.44,
+          "label": "home",
+          "score": 0.954,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.123,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-00169",
+      "title": "File:Greta Gerwig interview - Fade In.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Greta_Gerwig_interview_-_Fade_In.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/29/Greta_Gerwig_interview_-_Fade_In.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 596,
+      "sampleWindows": [
+        {
+          "start": 10.444,
+          "end": 11.085,
+          "label": "before you actually",
+          "score": 0.8253,
+          "kind": "phrase"
+        },
+        {
+          "start": 21.419,
+          "end": 22.34,
+          "label": "it because",
+          "score": 0.8135,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.609,
+          "end": 36.489,
+          "label": "much about you or",
+          "score": 0.9647,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.159,
+          "end": 51.499,
+          "label": "dressed",
+          "score": 0.991,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.58,
+        59.41
+      ]
+    },
+    {
+      "referenceId": "ref-00170",
+      "title": "File:Jacob Markstrom interview (1).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jacob_Markstrom_interview_(1).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Jacob_Markstrom_interview_%281%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 49,
+      "phraseOccurrenceCount": 536,
+      "sampleWindows": [
+        {
+          "start": 3.635,
+          "end": 7.939,
+          "label": "of all this training and with",
+          "score": 0.5142,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.37,
+          "end": 19.471,
+          "label": "July so I",
+          "score": 0.7017,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.803,
+          "end": 35.363,
+          "label": "waiting for me",
+          "score": 0.892,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.31,
+          "end": 51.693,
+          "label": "want to get hurt, but that's",
+          "score": 0.7877,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.251,
+        59.029
+      ]
+    },
+    {
+      "referenceId": "ref-00171",
+      "title": "File:VOA Interview- Leon Panetta.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:VOA_Interview-_Leon_Panetta.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/20/VOA_Interview-_Leon_Panetta.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 595,
+      "sampleWindows": [
+        {
+          "start": 7.71,
+          "end": 9.311,
+          "label": "a very important NATO",
+          "score": 0.9968,
+          "kind": "phrase"
+        },
+        {
+          "start": 25.355,
+          "end": 27.155,
+          "label": "military missions in that part",
+          "score": 0.9664,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.635,
+          "end": 40.357,
+          "label": "later, but if Turkey",
+          "score": 0.9325,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.984,
+          "end": 51.545,
+          "label": "system from",
+          "score": 0.9365,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.295,
+        59.631
+      ]
+    },
+    {
+      "referenceId": "ref-00172",
+      "title": "File:Interview with Dr. Eugene Parker.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Dr._Eugene_Parker.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Interview_with_Dr._Eugene_Parker.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 555,
+      "sampleWindows": [
+        {
+          "start": 5.196,
+          "end": 6.196,
+          "label": "We've been talking about him",
+          "score": 0.932,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.727,
+          "end": 19.128,
+          "label": "you just",
+          "score": 0.9605,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.029,
+          "end": 33.509,
+          "label": "interesting things which",
+          "score": 0.939,
+          "kind": "phrase"
+        },
+        {
+          "start": 45.731,
+          "end": 47.292,
+          "label": "be fascinating",
+          "score": 0.941,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.111,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-00174",
+      "title": "File:Interview with Annie Laurie Gaylor.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Annie_Laurie_Gaylor.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Interview_with_Annie_Laurie_Gaylor.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 55,
+      "phraseOccurrenceCount": 492,
+      "sampleWindows": [
+        {
+          "start": 4.823,
+          "end": 5.544,
+          "label": "work you've done on",
+          "score": 0.918,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.206,
+          "end": 19.047,
+          "label": "the subjugation of",
+          "score": 0.9033,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.99,
+          "end": 34.37,
+          "label": "role of the",
+          "score": 0.8327,
+          "kind": "phrase"
+        },
+        {
+          "start": 47.921,
+          "end": 48.542,
+          "label": "are inferior",
+          "score": 0.91,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.757,
+        59.25
+      ]
+    },
+    {
+      "referenceId": "ref-00175",
+      "title": "File:Interview with Mayor Tom Barrett.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Mayor_Tom_Barrett.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/Interview_with_Mayor_Tom_Barrett.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 627,
+      "sampleWindows": [
+        {
+          "start": 6.217,
+          "end": 6.457,
+          "label": "votes?",
+          "score": 0.452,
+          "kind": "token"
+        },
+        {
+          "start": 17.087,
+          "end": 17.448,
+          "label": "but initial",
+          "score": 0.4735,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.463,
+          "end": 36.884,
+          "label": "you as Milwaukee's",
+          "score": 0.5677,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.737,
+          "end": 49.398,
+          "label": "who understood",
+          "score": 0.574,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.091,
+        59.39
+      ]
+    },
+    {
+      "referenceId": "ref-00177",
+      "title": "File:Sex & Prostitution.Kajsa Ekis Ekman interview in Appelscha TV 2.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Sex_%26_Prostitution.Kajsa_Ekis_Ekman_interview_in_Appelscha_TV_2.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Sex_%26_Prostitution.Kajsa_Ekis_Ekman_interview_in_Appelscha_TV_2.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 64,
+      "phraseOccurrenceCount": 597,
+      "sampleWindows": [
+        {
+          "start": 7.857,
+          "end": 8.458,
+          "label": "I also write",
+          "score": 0.9587,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.727,
+          "end": 22.689,
+          "label": "book about prostitution and surrogacy.",
+          "score": 0.927,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.32,
+          "end": 35.861,
+          "label": "completely legal to",
+          "score": 0.8897,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.29,
+          "end": 50.571,
+          "label": "only of patriarchy but of",
+          "score": 0.8284,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.111,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-00179",
+      "title": "File:Interview of Daniel Mietchen at Accelerating Science Award Program 2013.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_of_Daniel_Mietchen_at_Accelerating_Science_Award_Program_2013.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Interview_of_Daniel_Mietchen_at_Accelerating_Science_Award_Program_2013.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 13,
+      "phraseOccurrenceCount": 94,
+      "sampleWindows": [
+        {
+          "start": 1.135,
+          "end": 1.677,
+          "label": "working",
+          "score": 1.0,
+          "kind": "token"
+        },
+        {
+          "start": 4.285,
+          "end": 5.148,
+          "label": "the biological",
+          "score": 0.8995,
+          "kind": "phrase"
+        },
+        {
+          "start": 6.132,
+          "end": 9.242,
+          "label": "literature more machine readable and",
+          "score": 0.8922,
+          "kind": "phrase"
+        },
+        {
+          "start": 9.322,
+          "end": 11.108,
+          "label": "more standard compliant in",
+          "score": 0.9245,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.071,
+        12.312
+      ]
+    },
+    {
+      "referenceId": "ref-00180",
+      "title": "File:Interview- Jenna Bush Hager.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview-_Jenna_Bush_Hager.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/96/Interview-_Jenna_Bush_Hager.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 72,
+      "phraseOccurrenceCount": 521,
+      "sampleWindows": [
+        {
+          "start": 8.291,
+          "end": 10.292,
+          "label": "celebrity music and art",
+          "score": 0.9177,
+          "kind": "phrase"
+        },
+        {
+          "start": 25.038,
+          "end": 25.278,
+          "label": "Since",
+          "score": 0.863,
+          "kind": "token"
+        },
+        {
+          "start": 36.545,
+          "end": 36.785,
+          "label": "Bus",
+          "score": 0.747,
+          "kind": "token"
+        },
+        {
+          "start": 52.336,
+          "end": 54.7,
+          "label": "grandfather are former presidents of the",
+          "score": 0.8793,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.287,
+        59.771
+      ]
+    },
+    {
+      "referenceId": "ref-00181",
+      "title": "File:Nancy Roman interview VOA.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Nancy_Roman_interview_VOA.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Nancy_Roman_interview_VOA.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 56,
+      "phraseOccurrenceCount": 427,
+      "sampleWindows": [
+        {
+          "start": 5.376,
+          "end": 8.218,
+          "label": "our modern life depends on",
+          "score": 0.9418,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.769,
+          "end": 22.05,
+          "label": "we wouldn't have cell",
+          "score": 0.8313,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.708,
+          "end": 37.909,
+          "label": "no idea how I",
+          "score": 0.9207,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.895,
+          "end": 49.495,
+          "label": "to know what",
+          "score": 0.9027,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.071,
+        59.188
+      ]
+    },
+    {
+      "referenceId": "ref-00182",
+      "title": "File:Jimmy Wales interview for WikipediaDay 2019.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Jimmy_Wales_interview_for_WikipediaDay_2019.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Jimmy_Wales_interview_for_WikipediaDay_2019.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 649,
+      "sampleWindows": [
+        {
+          "start": 9.247,
+          "end": 9.587,
+          "label": "the questions",
+          "score": 0.8465,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.981,
+          "end": 24.482,
+          "label": "of people.",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.772,
+          "end": 38.554,
+          "label": "of the top 100 websites back",
+          "score": 0.8648,
+          "kind": "phrase"
+        },
+        {
+          "start": 44.559,
+          "end": 46.561,
+          "label": "job we might be top 100",
+          "score": 0.8307,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.383,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-00188",
+      "title": "File:Interview with Jimmy Bangash on LGBT rights and marching at Pride.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Jimmy_Bangash_on_LGBT_rights_and_marching_at_Pride.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/06/Interview_with_Jimmy_Bangash_on_LGBT_rights_and_marching_at_Pride.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 68,
+      "phraseOccurrenceCount": 599,
+      "sampleWindows": [
+        {
+          "start": 7.698,
+          "end": 8.119,
+          "label": "council",
+          "score": 0.838,
+          "kind": "token"
+        },
+        {
+          "start": 20.85,
+          "end": 21.771,
+          "label": "LGBT and",
+          "score": 0.845,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.813,
+          "end": 34.454,
+          "label": "In those meetings, we had",
+          "score": 0.9412,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.542,
+          "end": 50.383,
+          "label": "coverage of",
+          "score": 0.845,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.451,
+        59.871
+      ]
+    },
+    {
+      "referenceId": "ref-00196",
+      "title": "File:President Jimmy Carter Interview September 2019.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Jimmy_Carter_Interview_September_2019.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/President_Jimmy_Carter_Interview_September_2019.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 626,
+      "sampleWindows": [
+        {
+          "start": 3.913,
+          "end": 4.334,
+          "label": "Everybody",
+          "score": 0.996,
+          "kind": "token"
+        },
+        {
+          "start": 18.423,
+          "end": 19.363,
+          "label": "reflection at",
+          "score": 0.9745,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.036,
+          "end": 38.476,
+          "label": "my active participation.",
+          "score": 0.9167,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.149,
+          "end": 51.811,
+          "label": "hard for you to",
+          "score": 0.9183,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.091,
+        59.229
+      ]
+    },
+    {
+      "referenceId": "ref-00197",
+      "title": "File:Interview with Western Sahara advocate Tecber Ahmed Saleh.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Western_Sahara_advocate_Tecber_Ahmed_Saleh.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Interview_with_Western_Sahara_advocate_Tecber_Ahmed_Saleh.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 58,
+      "phraseOccurrenceCount": 486,
+      "sampleWindows": [
+        {
+          "start": 3.833,
+          "end": 4.853,
+          "label": "visiting Australia.",
+          "score": 0.914,
+          "kind": "phrase"
+        },
+        {
+          "start": 21.681,
+          "end": 24.103,
+          "label": "raising awareness among the",
+          "score": 0.9032,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.067,
+          "end": 38.97,
+          "label": "the occupation because of importing Moroccans",
+          "score": 0.888,
+          "kind": "phrase"
+        },
+        {
+          "start": 47.916,
+          "end": 48.697,
+          "label": "would you like to talk about",
+          "score": 0.9283,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.571,
+        56.088
+      ]
+    },
+    {
+      "referenceId": "ref-00198",
+      "title": "File:Kara Fern - Interview, The.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Kara_Fern_-_Interview%2C_The.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/Kara_Fern_-_Interview%2C_The.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 74,
+      "phraseOccurrenceCount": 525,
+      "sampleWindows": [
+        {
+          "start": 10.96,
+          "end": 11.801,
+          "label": "William Vulpas.",
+          "score": 0.8555,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.674,
+          "end": 26.676,
+          "label": "Rolling Stone, Matt Tybee said",
+          "score": 0.8924,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.307,
+          "end": 37.707,
+          "label": "the face",
+          "score": 0.918,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.572,
+          "end": 53.473,
+          "label": "statement because we don't currently have",
+          "score": 0.9245,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        4.053,
+        59.91
+      ]
+    },
+    {
+      "referenceId": "ref-00200",
+      "title": "File:Interview for Stocking Slavery.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_for_Stocking_Slavery.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/Interview_for_Stocking_Slavery.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 37,
+      "phraseOccurrenceCount": 207,
+      "sampleWindows": [
+        {
+          "start": 16.809,
+          "end": 17.55,
+          "label": "And you want to",
+          "score": 0.8563,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.574,
+          "end": 25.134,
+          "label": "beautiful woman",
+          "score": 0.414,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.201,
+          "end": 38.463,
+          "label": "foot rest, a seat cushion,",
+          "score": 0.8346,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.116,
+          "end": 52.356,
+          "label": "Do you",
+          "score": 0.879,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        3.982,
+        59.242
+      ]
+    },
+    {
+      "referenceId": "ref-00203",
+      "title": "File:Interview with Lina Ben Mhenni.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Lina_Ben_Mhenni.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/43/Interview_with_Lina_Ben_Mhenni.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 42,
+      "phraseOccurrenceCount": 332,
+      "sampleWindows": [
+        {
+          "start": 14.99,
+          "end": 17.311,
+          "label": "teacher assistant of linguistics at the",
+          "score": 0.84,
+          "kind": "phrase"
+        },
+        {
+          "start": 26.836,
+          "end": 27.516,
+          "label": "journalist",
+          "score": 0.704,
+          "kind": "token"
+        },
+        {
+          "start": 40.559,
+          "end": 43.561,
+          "label": "about the revolution of",
+          "score": 0.8892,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.565,
+          "end": 50.986,
+          "label": "Tunisian",
+          "score": 0.932,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        9.107,
+        57.95
+      ]
+    },
+    {
+      "referenceId": "ref-00206",
+      "title": "File:Internet Hall of Fame 2014 Michael Kende interview.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Internet_Hall_of_Fame_2014_Michael_Kende_interview.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Internet_Hall_of_Fame_2014_Michael_Kende_interview.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 88,
+      "phraseOccurrenceCount": 628,
+      "sampleWindows": [
+        {
+          "start": 3.936,
+          "end": 4.556,
+          "label": "FCC,",
+          "score": 0.799,
+          "kind": "token"
+        },
+        {
+          "start": 16.811,
+          "end": 18.513,
+          "label": "at MCI, WorldCom,",
+          "score": 0.7597,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.646,
+          "end": 34.687,
+          "label": "still true today, is",
+          "score": 0.8867,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.159,
+          "end": 50.4,
+          "label": "make sure it stayed that way",
+          "score": 0.9023,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.171,
+        58.69
+      ]
+    },
+    {
+      "referenceId": "ref-00208",
+      "title": "File:Harm aversion interview with Christian Keysers and Valeria Gazzola.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Harm_aversion_interview_with_Christian_Keysers_and_Valeria_Gazzola.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Harm_aversion_interview_with_Christian_Keysers_and_Valeria_Gazzola.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 418,
+      "sampleWindows": [
+        {
+          "start": 10.663,
+          "end": 12.544,
+          "label": "Since I'm right now,",
+          "score": 0.8698,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.17,
+          "end": 20.61,
+          "label": "because I'm",
+          "score": 0.8355,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.305,
+          "end": 35.605,
+          "label": "agreeing",
+          "score": 0.932,
+          "kind": "token"
+        },
+        {
+          "start": 46.148,
+          "end": 47.168,
+          "label": "to be discovered in this",
+          "score": 0.9698,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.397,
+        56.21
+      ]
+    },
+    {
+      "referenceId": "ref-00209",
+      "title": "File:Video interview with Thomas Rivinius about closest black hole.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Video_interview_with_Thomas_Rivinius_about_closest_black_hole.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Video_interview_with_Thomas_Rivinius_about_closest_black_hole.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 451,
+      "sampleWindows": [
+        {
+          "start": 7.911,
+          "end": 8.491,
+          "label": "for the recent",
+          "score": 0.8977,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.635,
+          "end": 24.815,
+          "label": "Well,",
+          "score": 0.997,
+          "kind": "token"
+        },
+        {
+          "start": 33.498,
+          "end": 36.339,
+          "label": "and we will probably",
+          "score": 0.9305,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.383,
+          "end": 47.984,
+          "label": "sequence of images that looks",
+          "score": 0.8998,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.45,
+        54.532
+      ]
+    },
+    {
+      "referenceId": "ref-00210",
+      "title": "File:Interview with Naomi Martisius about strategic bone tool raw material selection by Neandertals.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Naomi_Martisius_about_strategic_bone_tool_raw_material_selection_by_Neandertals.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Interview_with_Naomi_Martisius_about_strategic_bone_tool_raw_material_selection_by_Neandertals.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 48,
+      "phraseOccurrenceCount": 338,
+      "sampleWindows": [
+        {
+          "start": 6.536,
+          "end": 7.076,
+          "label": "that correct",
+          "score": 0.912,
+          "kind": "phrase"
+        },
+        {
+          "start": 25.68,
+          "end": 26.8,
+          "label": "time zone and because",
+          "score": 0.794,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.213,
+          "end": 37.054,
+          "label": "discovery, its",
+          "score": 0.912,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.467,
+          "end": 53.908,
+          "label": "Yeah, anything first that",
+          "score": 0.8385,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.275,
+        59.89
+      ]
+    },
+    {
+      "referenceId": "ref-00211",
+      "title": "File:Interview with Anthony Boccaletti about possible exoplanet formation.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_Anthony_Boccaletti_about_possible_exoplanet_formation.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Interview_with_Anthony_Boccaletti_about_possible_exoplanet_formation.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 341,
+      "sampleWindows": [
+        {
+          "start": 3.224,
+          "end": 4.664,
+          "label": "findings on formation of",
+          "score": 0.8545,
+          "kind": "phrase"
+        },
+        {
+          "start": 11.966,
+          "end": 12.466,
+          "label": "be studied.",
+          "score": 0.937,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.176,
+          "end": 37.938,
+          "label": "study, the inferences and",
+          "score": 0.9572,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.808,
+          "end": 55.429,
+          "label": "about objects that",
+          "score": 0.932,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.603,
+        59.871
+      ]
+    },
+    {
+      "referenceId": "ref-00213",
+      "title": "File:LibreOffice interview - Michael Meeks.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:LibreOffice_interview_-_Michael_Meeks.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/LibreOffice_interview_-_Michael_Meeks.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 776,
+      "sampleWindows": [
+        {
+          "start": 12.911,
+          "end": 13.091,
+          "label": "couldn't",
+          "score": 0.935,
+          "kind": "token"
+        },
+        {
+          "start": 24.406,
+          "end": 25.728,
+          "label": "effort get underway and",
+          "score": 0.8748,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.555,
+          "end": 39.716,
+          "label": "better structured, so",
+          "score": 0.9787,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.39,
+          "end": 52.672,
+          "label": "can contribute without being",
+          "score": 0.9227,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        9.446,
+        57.742
+      ]
+    },
+    {
+      "referenceId": "ref-00214",
+      "title": "File:Margott interview for Wikidata Education Week.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Margott_interview_for_Wikidata_Education_Week.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Margott_interview_for_Wikidata_Education_Week.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 336,
+      "sampleWindows": [
+        {
+          "start": 24.736,
+          "end": 24.996,
+          "label": "third",
+          "score": 0.998,
+          "kind": "token"
+        },
+        {
+          "start": 31.559,
+          "end": 33.179,
+          "label": "member of Wikimediants of",
+          "score": 0.883,
+          "kind": "phrase"
+        },
+        {
+          "start": 42.043,
+          "end": 43.083,
+          "label": "let us know more about",
+          "score": 0.9174,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.401,
+          "end": 53.842,
+          "label": "actually",
+          "score": 0.954,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        17.213,
+        59.831
+      ]
+    },
+    {
+      "referenceId": "ref-00215",
+      "title": "File:Nigel Short Interview With VOA Persian.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Nigel_Short_Interview_With_VOA_Persian.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Nigel_Short_Interview_With_VOA_Persian.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 51,
+      "phraseOccurrenceCount": 373,
+      "sampleWindows": [
+        {
+          "start": 2.072,
+          "end": 5.532,
+          "label": "passed as yet,",
+          "score": 0.9823,
+          "kind": "phrase"
+        },
+        {
+          "start": 15.275,
+          "end": 17.855,
+          "label": "passed and the Iranian Chess",
+          "score": 0.8634,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.496,
+          "end": 31.837,
+          "label": "get some guarantees that this thing",
+          "score": 0.9157,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.096,
+          "end": 52.898,
+          "label": "your players or",
+          "score": 0.9213,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.111,
+        58.027
+      ]
+    },
+    {
+      "referenceId": "ref-00217",
+      "title": "File:Andrew Yang (Full Interview).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_(Full_Interview).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Andrew_Yang_%28Full_Interview%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 50,
+      "phraseOccurrenceCount": 482,
+      "sampleWindows": [
+        {
+          "start": 19.437,
+          "end": 19.858,
+          "label": "Yang.",
+          "score": 0.976,
+          "kind": "token"
+        },
+        {
+          "start": 28.508,
+          "end": 29.449,
+          "label": "but before people were sitting",
+          "score": 0.8096,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.418,
+          "end": 39.999,
+          "label": "entrepreneur, I have",
+          "score": 0.6337,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.546,
+          "end": 52.566,
+          "label": "there's there's a lot of",
+          "score": 0.8606,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        14.952,
+        59.931
+      ]
+    },
+    {
+      "referenceId": "ref-00222",
+      "title": "File:I Am Queen Mary Interview with La Vaughn Belle and Jeannette Ehlers.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:I_Am_Queen_Mary_Interview_with_La_Vaughn_Belle_and_Jeannette_Ehlers.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/I_Am_Queen_Mary_Interview_with_La_Vaughn_Belle_and_Jeannette_Ehlers.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 56,
+      "phraseOccurrenceCount": 393,
+      "sampleWindows": [
+        {
+          "start": 8.571,
+          "end": 9.913,
+          "label": "Islands based in St. Croix.",
+          "score": 0.8042,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.303,
+          "end": 20.025,
+          "label": "of my material, I work",
+          "score": 0.9228,
+          "kind": "phrase"
+        },
+        {
+          "start": 31.955,
+          "end": 32.235,
+          "label": "And my",
+          "score": 0.9085,
+          "kind": "phrase"
+        },
+        {
+          "start": 45.741,
+          "end": 48.182,
+          "label": "mainly within the fields of performance,",
+          "score": 0.929,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.788,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-00230",
+      "title": "File:Bryce Harper 1-on-1 interview with Ken Rosenthal.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Bryce_Harper_1-on-1_interview_with_Ken_Rosenthal.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/Bryce_Harper_1-on-1_interview_with_Ken_Rosenthal.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 64,
+      "phraseOccurrenceCount": 541,
+      "sampleWindows": [
+        {
+          "start": 12.523,
+          "end": 13.924,
+          "label": "difference you've noticed just",
+          "score": 0.9315,
+          "kind": "phrase"
+        },
+        {
+          "start": 26.111,
+          "end": 27.092,
+          "label": "and Mike Rizzo,",
+          "score": 0.8343,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.307,
+          "end": 41.507,
+          "label": "Philly, very excited.",
+          "score": 0.9357,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.05,
+          "end": 53.99,
+          "label": "you come to a new team",
+          "score": 0.9212,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        8.401,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-00238",
+      "title": "File:Interview flusha (ESL One Cologne 2016).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_flusha_(ESL_One_Cologne_2016).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Interview_flusha_%28ESL_One_Cologne_2016%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 615,
+      "sampleWindows": [
+        {
+          "start": 13.113,
+          "end": 13.713,
+          "label": "easily versus",
+          "score": 0.7375,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.99,
+          "end": 30.871,
+          "label": "for quite a long time and",
+          "score": 0.8953,
+          "kind": "phrase"
+        },
+        {
+          "start": 42.456,
+          "end": 44.378,
+          "label": "like some of us",
+          "score": 0.8722,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.066,
+          "end": 55.347,
+          "label": "of was away I had",
+          "score": 0.8966,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        6.79,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-00239",
+      "title": "File:Interview with actor producer Robin Nicolle.mpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Interview_with_actor_producer_Robin_Nicolle.mpg",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Interview_with_actor_producer_Robin_Nicolle.mpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 691,
+      "sampleWindows": [
+        {
+          "start": 6.335,
+          "end": 7.676,
+          "label": "in 2018 I decided",
+          "score": 0.6875,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.104,
+          "end": 19.784,
+          "label": "board to help me with",
+          "score": 0.9376,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.615,
+          "end": 37.295,
+          "label": "people for minor",
+          "score": 0.8547,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.766,
+          "end": 53.126,
+          "label": "that's sort",
+          "score": 0.8115,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.271,
+        59.571
+      ]
+    },
+    {
+      "referenceId": "ref-00240",
+      "title": "File:The Florida Project Interview with Bria Vinaite.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:The_Florida_Project_Interview_with_Bria_Vinaite.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/The_Florida_Project_Interview_with_Bria_Vinaite.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 77,
+      "phraseOccurrenceCount": 604,
+      "sampleWindows": [
+        {
+          "start": 10.211,
+          "end": 10.591,
+          "label": "so happy",
+          "score": 0.9445,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.504,
+          "end": 24.805,
+          "label": "Yeah, it was really fun to",
+          "score": 0.7983,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.659,
+          "end": 37.739,
+          "label": "journey did you finally",
+          "score": 0.9167,
+          "kind": "phrase"
+        },
+        {
+          "start": 47.961,
+          "end": 48.341,
+          "label": "first time I",
+          "score": 0.812,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        4.185,
+        59.67
+      ]
+    },
+    {
+      "referenceId": "ref-00597",
+      "title": "File:President Clinton's Remarks Regarding Columbine HS Shooting (1999).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Clinton%27s_Remarks_Regarding_Columbine_HS_Shooting_(1999).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/81/President_Clinton%27s_Remarks_Regarding_Columbine_HS_Shooting_%281999%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 51,
+      "phraseOccurrenceCount": 354,
+      "sampleWindows": [
+        {
+          "start": 22.503,
+          "end": 22.903,
+          "label": "Hillary and",
+          "score": 0.87,
+          "kind": "phrase"
+        },
+        {
+          "start": 30.526,
+          "end": 31.787,
+          "label": "fire on their classmates",
+          "score": 0.9637,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.371,
+          "end": 44.093,
+          "label": "Commission Chair Patricia Holloway and expressed",
+          "score": 0.8787,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.103,
+          "end": 50.644,
+          "label": "Eric Holder",
+          "score": 0.668,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        19.281,
+        56.709
+      ]
+    },
+    {
+      "referenceId": "ref-00786",
+      "title": "File:Attorney General Merrick Garland Delivers Remarks Announcing Motion to Unseal Search Warrant.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Attorney_General_Merrick_Garland_Delivers_Remarks_Announcing_Motion_to_Unseal_Search_Warrant.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attorney_General_Merrick_Garland_Delivers_Remarks_Announcing_Motion_to_Unseal_Search_Warrant.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 83,
+      "phraseOccurrenceCount": 592,
+      "sampleWindows": [
+        {
+          "start": 7.748,
+          "end": 8.749,
+          "label": "Department of Justice",
+          "score": 0.9697,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.257,
+          "end": 21.117,
+          "label": "property receipt",
+          "score": 0.917,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.824,
+          "end": 36.984,
+          "label": "on the day of the search.",
+          "score": 0.9147,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.728,
+          "end": 51.108,
+          "label": "to the former president's counsel",
+          "score": 0.9138,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.765,
+        59.591
+      ]
+    },
+    {
+      "referenceId": "ref-01080",
+      "title": "File:Moscow State University- President Reagan's Address at Moscow State University - 5-31-88.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Moscow_State_University-_President_Reagan%27s_Address_at_Moscow_State_University_-_5-31-88.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Moscow_State_University-_President_Reagan%27s_Address_at_Moscow_State_University_-_5-31-88.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 29,
+      "phraseOccurrenceCount": 249,
+      "sampleWindows": [
+        {
+          "start": 33.249,
+          "end": 33.429,
+          "label": "and I",
+          "score": 0.995,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.431,
+          "end": 39.931,
+          "label": "pleasure to",
+          "score": 0.98,
+          "kind": "phrase"
+        },
+        {
+          "start": 44.113,
+          "end": 44.773,
+          "label": "all for turning",
+          "score": 0.92,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.755,
+          "end": 50.655,
+          "label": "taking your final",
+          "score": 0.9377,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        28.367,
+        59.811
+      ]
+    },
+    {
+      "referenceId": "ref-01327",
+      "title": "File:An address by Opposition Leader - Anthony Albanese.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:An_address_by_Opposition_Leader_-_Anthony_Albanese.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6c/An_address_by_Opposition_Leader_-_Anthony_Albanese.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 88,
+      "phraseOccurrenceCount": 620,
+      "sampleWindows": [
+        {
+          "start": 6.632,
+          "end": 6.952,
+          "label": "pleasure",
+          "score": 0.873,
+          "kind": "token"
+        },
+        {
+          "start": 17.755,
+          "end": 19.595,
+          "label": "like to welcome the Shadow",
+          "score": 0.7808,
+          "kind": "phrase"
+        },
+        {
+          "start": 31.718,
+          "end": 32.018,
+          "label": "I know",
+          "score": 0.8945,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.126,
+          "end": 48.987,
+          "label": "pay my respects",
+          "score": 0.9583,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.411,
+        58.79
+      ]
+    },
+    {
+      "referenceId": "ref-01343",
+      "title": "File:Abuse on the blockchain – Guest lecture at Stanford University by Molly White (2022).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Abuse_on_the_blockchain_%E2%80%93_Guest_lecture_at_Stanford_University_by_Molly_White_(2022).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Abuse_on_the_blockchain_%E2%80%93_Guest_lecture_at_Stanford_University_by_Molly_White_%282022%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 84,
+      "phraseOccurrenceCount": 841,
+      "sampleWindows": [
+        {
+          "start": 7.994,
+          "end": 8.434,
+          "label": "you gave a little",
+          "score": 0.8077,
+          "kind": "phrase"
+        },
+        {
+          "start": 22.843,
+          "end": 23.864,
+          "label": "as I started to see sort",
+          "score": 0.9195,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.445,
+          "end": 37.965,
+          "label": "what blockchains",
+          "score": 0.8565,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.394,
+          "end": 50.635,
+          "label": "or permission blockchains and",
+          "score": 0.827,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.35,
+        59.089
+      ]
+    },
+    {
+      "referenceId": "ref-01381",
+      "title": "File:Keynote Amitabh Behar - Wikimedia Summit 2024.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Keynote_Amitabh_Behar_-_Wikimedia_Summit_2024.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Keynote_Amitabh_Behar_-_Wikimedia_Summit_2024.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 51,
+      "phraseOccurrenceCount": 366,
+      "sampleWindows": [
+        {
+          "start": 10.874,
+          "end": 14.155,
+          "label": "And I must say, hugely privileged.",
+          "score": 0.9565,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.279,
+          "end": 24.719,
+          "label": "was speaking to did not",
+          "score": 0.9714,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.113,
+          "end": 38.933,
+          "label": "solidarities",
+          "score": 0.976,
+          "kind": "token"
+        },
+        {
+          "start": 50.283,
+          "end": 50.583,
+          "label": "ways",
+          "score": 0.834,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.151,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-01382",
+      "title": "File:Keynote Amitabh Behar V2- Wikimedia Summit 2024.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Keynote_Amitabh_Behar_V2-_Wikimedia_Summit_2024.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Keynote_Amitabh_Behar_V2-_Wikimedia_Summit_2024.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 407,
+      "sampleWindows": [
+        {
+          "start": 5.337,
+          "end": 5.657,
+          "label": "I'm not",
+          "score": 0.9325,
+          "kind": "phrase"
+        },
+        {
+          "start": 16.529,
+          "end": 18.931,
+          "label": "But I wanted to start by",
+          "score": 0.9452,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.571,
+          "end": 33.031,
+          "label": "one is",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 47.856,
+          "end": 51.38,
+          "label": "custodians of public knowledge and I",
+          "score": 0.9047,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.952,
+        59.21
+      ]
+    },
+    {
+      "referenceId": "ref-016",
+      "title": "File:\"Federal Employees- A Conversation with President Carter,\" WHCA C752.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22Federal_Employees-_A_Conversation_with_President_Carter%2C%22_WHCA_C752.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/%22Federal_Employees-_A_Conversation_with_President_Carter%2C%22_WHCA_C752.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "legacy-audited-v2",
+      "tokenOccurrenceCount": 29,
+      "phraseOccurrenceCount": 0,
+      "sampleWindows": [
+        {
+          "start": 29.077,
+          "end": 29.657,
+          "label": "1979,",
+          "score": 0.933,
+          "kind": "token"
+        },
+        {
+          "start": 33.88,
+          "end": 34.04,
+          "label": "meet",
+          "score": 1.0,
+          "kind": "token"
+        },
+        {
+          "start": 37.083,
+          "end": 37.303,
+          "label": "group",
+          "score": 0.974,
+          "kind": "token"
+        },
+        {
+          "start": 40.445,
+          "end": 40.966,
+          "label": "employees,",
+          "score": 0.891,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        27.295,
+        44.369
+      ]
+    },
+    {
+      "referenceId": "ref-01675",
+      "title": "File:Remarks from María Sefidari, 21-11-2020.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Mar%C3%ADa_Sefidari%2C_21-11-2020.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Remarks_from_Mar%C3%ADa_Sefidari%2C_21-11-2020.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 64,
+      "phraseOccurrenceCount": 549,
+      "sampleWindows": [
+        {
+          "start": 7.116,
+          "end": 8.016,
+          "label": "the Board of Trustees, to",
+          "score": 0.9202,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.705,
+          "end": 22.466,
+          "label": "Trustees, welcome everyone.",
+          "score": 0.89,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.928,
+          "end": 35.369,
+          "label": "want you to know",
+          "score": 0.9377,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.514,
+          "end": 47.514,
+          "label": "one of the greatest of this",
+          "score": 0.993,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.611,
+        59.299
+      ]
+    },
+    {
+      "referenceId": "ref-01676",
+      "title": "File:Remarks from Kaarel Vaidla, 21-11-2020.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Kaarel_Vaidla%2C_21-11-2020.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/93/Remarks_from_Kaarel_Vaidla%2C_21-11-2020.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 84,
+      "phraseOccurrenceCount": 603,
+      "sampleWindows": [
+        {
+          "start": 5.396,
+          "end": 7.859,
+          "label": "thank you appreciation and",
+          "score": 0.93,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.775,
+          "end": 25.618,
+          "label": "out what we'll start with in",
+          "score": 0.9372,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.469,
+          "end": 37.649,
+          "label": "we'll",
+          "score": 0.877,
+          "kind": "token"
+        },
+        {
+          "start": 49.701,
+          "end": 51.683,
+          "label": "of registration for December 5th and",
+          "score": 0.8603,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.251,
+        59.871
+      ]
+    },
+    {
+      "referenceId": "ref-01677",
+      "title": "File:Remarks from Ryan Merkley, 21-11-2020.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Ryan_Merkley%2C_21-11-2020.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/Remarks_from_Ryan_Merkley%2C_21-11-2020.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 61,
+      "phraseOccurrenceCount": 489,
+      "sampleWindows": [
+        {
+          "start": 13.363,
+          "end": 14.923,
+          "label": "I am the chief of staff",
+          "score": 0.9057,
+          "kind": "phrase"
+        },
+        {
+          "start": 23.907,
+          "end": 25.548,
+          "label": "this point.",
+          "score": 0.985,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.98,
+          "end": 37.14,
+          "label": "folks to think about",
+          "score": 0.958,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.826,
+          "end": 52.567,
+          "label": "large institutions and even large movements",
+          "score": 0.9227,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.02,
+        59.751
+      ]
+    },
+    {
+      "referenceId": "ref-01678",
+      "title": "File:Remarks from Sandister Tei, 21-11-2020.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Sandister_Tei%2C_21-11-2020.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Remarks_from_Sandister_Tei%2C_21-11-2020.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 53,
+      "phraseOccurrenceCount": 472,
+      "sampleWindows": [
+        {
+          "start": 3.959,
+          "end": 4.319,
+          "label": "the next",
+          "score": 0.9435,
+          "kind": "phrase"
+        },
+        {
+          "start": 17.342,
+          "end": 18.262,
+          "label": "on the line right now?",
+          "score": 0.7972,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.229,
+          "end": 38.51,
+          "label": "say good afternoon first",
+          "score": 0.9657,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.057,
+          "end": 51.119,
+          "label": "named the Wikimedia off the year.",
+          "score": 0.8447,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.698,
+        58.644
+      ]
+    },
+    {
+      "referenceId": "ref-01679",
+      "title": "File:Remarks from Katherine Maher, 21-11-2020.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Katherine_Maher%2C_21-11-2020.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Remarks_from_Katherine_Maher%2C_21-11-2020.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 69,
+      "phraseOccurrenceCount": 690,
+      "sampleWindows": [
+        {
+          "start": 4.114,
+          "end": 4.334,
+          "label": "getting",
+          "score": 0.928,
+          "kind": "token"
+        },
+        {
+          "start": 20.826,
+          "end": 21.886,
+          "label": "almost hopping in my",
+          "score": 0.957,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.622,
+          "end": 39.985,
+          "label": "couldn't possibly work this idea",
+          "score": 0.9356,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.347,
+          "end": 52.247,
+          "label": "our values and we",
+          "score": 0.919,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.071,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-01681",
+      "title": "File:Remarks from María Sefidari, 22-11-2020 a.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Mar%C3%ADa_Sefidari%2C_22-11-2020_a.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/25/Remarks_from_Mar%C3%ADa_Sefidari%2C_22-11-2020_a.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 74,
+      "phraseOccurrenceCount": 599,
+      "sampleWindows": [
+        {
+          "start": 5.739,
+          "end": 7.339,
+          "label": "for almost 20 years",
+          "score": 0.9267,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.441,
+          "end": 21.122,
+          "label": "of this movement,",
+          "score": 0.9463,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.774,
+          "end": 34.254,
+          "label": "we want our collective future to",
+          "score": 0.9572,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.838,
+          "end": 52.398,
+          "label": "moment has the",
+          "score": 0.875,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.318,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-01683",
+      "title": "File:Remarks from Sandister Tei, 22-11-2020 a.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Sandister_Tei%2C_22-11-2020_a.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Remarks_from_Sandister_Tei%2C_22-11-2020_a.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 573,
+      "sampleWindows": [
+        {
+          "start": 4.914,
+          "end": 5.494,
+          "label": "we need to have",
+          "score": 0.9357,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.382,
+          "end": 21.003,
+          "label": "to affiliates.",
+          "score": 0.767,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.366,
+          "end": 32.926,
+          "label": "since 2017.",
+          "score": 0.9145,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.665,
+          "end": 51.786,
+          "label": "here and other",
+          "score": 0.853,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.331,
+        59.711
+      ]
+    },
+    {
+      "referenceId": "ref-01684",
+      "title": "File:Remarks from Katherine Maher, 22-11-2020 a.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_from_Katherine_Maher%2C_22-11-2020_a.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Remarks_from_Katherine_Maher%2C_22-11-2020_a.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 57,
+      "phraseOccurrenceCount": 626,
+      "sampleWindows": [
+        {
+          "start": 5.768,
+          "end": 7.209,
+          "label": "delight to",
+          "score": 0.9625,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.498,
+          "end": 21.639,
+          "label": "we have today on",
+          "score": 0.9027,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.344,
+          "end": 36.025,
+          "label": "movement strategy, I'm",
+          "score": 0.9027,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.879,
+          "end": 53.862,
+          "label": "the opportunity to go out",
+          "score": 0.9872,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.784,
+        59.891
+      ]
+    },
+    {
+      "referenceId": "ref-021",
+      "title": "File:-OpenEd20 Keynote- Jessie Loyer.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:-OpenEd20_Keynote-_Jessie_Loyer.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/-OpenEd20_Keynote-_Jessie_Loyer.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "legacy-audited-v2",
+      "tokenOccurrenceCount": 45,
+      "phraseOccurrenceCount": 0,
+      "sampleWindows": [
+        {
+          "start": 14.567,
+          "end": 14.807,
+          "label": "believe",
+          "score": 0.858,
+          "kind": "token"
+        },
+        {
+          "start": 22.632,
+          "end": 22.812,
+          "label": "has",
+          "score": 1.0,
+          "kind": "token"
+        },
+        {
+          "start": 29.996,
+          "end": 30.136,
+          "label": "kind",
+          "score": 1.0,
+          "kind": "token"
+        },
+        {
+          "start": 37.079,
+          "end": 37.6,
+          "label": "companies,",
+          "score": 0.987,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        12.306,
+        44.528
+      ]
+    },
+    {
+      "referenceId": "ref-02434",
+      "title": "File:President Obama's Remarks on Iran (with Persian subtitles).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Obama%27s_Remarks_on_Iran_(with_Persian_subtitles).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/President_Obama%27s_Remarks_on_Iran_%28with_Persian_subtitles%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 574,
+      "sampleWindows": [
+        {
+          "start": 9.022,
+          "end": 9.823,
+          "label": "I'll take your questions.",
+          "score": 0.9432,
+          "kind": "phrase"
+        },
+        {
+          "start": 21.947,
+          "end": 23.808,
+          "label": "imprisonments of the last few days.",
+          "score": 0.9237,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.629,
+          "end": 36.569,
+          "label": "States respects the",
+          "score": 0.924,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.141,
+          "end": 49.842,
+          "label": "to a remarkable",
+          "score": 0.9703,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        3.48,
+        59.851
+      ]
+    },
+    {
+      "referenceId": "ref-02685",
+      "title": "File:Blockchain solutionism – Guest lecture at the University of Texas at Austin by Molly White (2022).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Blockchain_solutionism_%E2%80%93_Guest_lecture_at_the_University_of_Texas_at_Austin_by_Molly_White_(2022).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Blockchain_solutionism_%E2%80%93_Guest_lecture_at_the_University_of_Texas_at_Austin_by_Molly_White_%282022%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 620,
+      "sampleWindows": [
+        {
+          "start": 7.734,
+          "end": 9.375,
+          "label": "am a researcher and",
+          "score": 0.9042,
+          "kind": "phrase"
+        },
+        {
+          "start": 26.204,
+          "end": 26.585,
+          "label": "Web3",
+          "score": 0.772,
+          "kind": "token"
+        },
+        {
+          "start": 37.736,
+          "end": 38.857,
+          "label": "Web3 and crypto.",
+          "score": 0.8777,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.927,
+          "end": 55.028,
+          "label": "before we get started, let's",
+          "score": 0.9006,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.491,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-02718",
+      "title": "File:2016-08-06 President Obama's Weekly Address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2016-08-06_President_Obama%27s_Weekly_Address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/75/2016-08-06_President_Obama%27s_Weekly_Address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 86,
+      "phraseOccurrenceCount": 534,
+      "sampleWindows": [
+        {
+          "start": 14.967,
+          "end": 15.828,
+          "label": "as heated as it",
+          "score": 0.9178,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.074,
+          "end": 29.214,
+          "label": "all,",
+          "score": 1.0,
+          "kind": "token"
+        },
+        {
+          "start": 42.602,
+          "end": 43.443,
+          "label": "to root on Team",
+          "score": 0.9313,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.927,
+          "end": 53.188,
+          "label": "jump.",
+          "score": 0.997,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.725,
+        59.851
+      ]
+    },
+    {
+      "referenceId": "ref-02719",
+      "title": "File:Remarks Honoring the 1994 US Winter Olympic Athletes.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Remarks_Honoring_the_1994_US_Winter_Olympic_Athletes.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Remarks_Honoring_the_1994_US_Winter_Olympic_Athletes.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 30,
+      "phraseOccurrenceCount": 373,
+      "sampleWindows": [
+        {
+          "start": 37.514,
+          "end": 39.215,
+          "label": "you while we wait for",
+          "score": 0.9392,
+          "kind": "phrase"
+        },
+        {
+          "start": 44.98,
+          "end": 45.24,
+          "label": "West",
+          "score": 0.973,
+          "kind": "token"
+        },
+        {
+          "start": 48.763,
+          "end": 50.084,
+          "label": "how pleased I am",
+          "score": 0.871,
+          "kind": "phrase"
+        },
+        {
+          "start": 55.928,
+          "end": 56.248,
+          "label": "to start",
+          "score": 0.9725,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        14.234,
+        59.651
+      ]
+    },
+    {
+      "referenceId": "ref-02808",
+      "title": "File:Indiana Green Party Testimony opposing SB389 Eliminating Protections for Indiana's Isolated Wetlands.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Indiana_Green_Party_Testimony_opposing_SB389_Eliminating_Protections_for_Indiana%27s_Isolated_Wetlands.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Indiana_Green_Party_Testimony_opposing_SB389_Eliminating_Protections_for_Indiana%27s_Isolated_Wetlands.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 61,
+      "phraseOccurrenceCount": 354,
+      "sampleWindows": [
+        {
+          "start": 5.075,
+          "end": 5.695,
+          "label": "is the Sierra",
+          "score": 0.9393,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.73,
+          "end": 26.291,
+          "label": "former chair of the",
+          "score": 0.953,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.245,
+          "end": 35.065,
+          "label": "200 years, 85%.",
+          "score": 0.7917,
+          "kind": "phrase"
+        },
+        {
+          "start": 45.676,
+          "end": 46.116,
+          "label": "live in",
+          "score": 0.908,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.091,
+        59.65
+      ]
+    },
+    {
+      "referenceId": "ref-03070",
+      "title": "File:President Reagan’s Remarks during the Recommissioning of USS New Jersey on December 28, 1982.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%E2%80%99s_Remarks_during_the_Recommissioning_of_USS_New_Jersey_on_December_28%2C_1982.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/President_Reagan%E2%80%99s_Remarks_during_the_Recommissioning_of_USS_New_Jersey_on_December_28%2C_1982.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 44,
+      "phraseOccurrenceCount": 339,
+      "sampleWindows": [
+        {
+          "start": 8.533,
+          "end": 10.075,
+          "label": "privilege to present to you",
+          "score": 0.9616,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.575,
+          "end": 38.475,
+          "label": "members of the crew",
+          "score": 0.9395,
+          "kind": "phrase"
+        },
+        {
+          "start": 44.86,
+          "end": 45.36,
+          "label": "of us here,",
+          "score": 0.9163,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.986,
+          "end": 53.806,
+          "label": "navy blue and",
+          "score": 0.9463,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        6.892,
+        59.351
+      ]
+    },
+    {
+      "referenceId": "ref-039",
+      "title": "File:\"SIT UP STRAIGHT AND LOOK AT ME\" - SDI Speeches on MCRD Parris Island.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:%22SIT_UP_STRAIGHT_AND_LOOK_AT_ME%22_-_SDI_Speeches_on_MCRD_Parris_Island.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/07/%22SIT_UP_STRAIGHT_AND_LOOK_AT_ME%22_-_SDI_Speeches_on_MCRD_Parris_Island.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "legacy-audited-v2",
+      "tokenOccurrenceCount": 43,
+      "phraseOccurrenceCount": 0,
+      "sampleWindows": [
+        {
+          "start": 6.141,
+          "end": 6.421,
+          "label": "senior",
+          "score": 0.867,
+          "kind": "token"
+        },
+        {
+          "start": 13.184,
+          "end": 13.544,
+          "label": "house.",
+          "score": 0.597,
+          "kind": "token"
+        },
+        {
+          "start": 26.029,
+          "end": 26.469,
+          "label": "seniors,",
+          "score": 0.789,
+          "kind": "token"
+        },
+        {
+          "start": 39.504,
+          "end": 39.844,
+          "label": "spirit.",
+          "score": 0.999,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.678,
+        44.949
+      ]
+    },
+    {
+      "referenceId": "ref-04958",
+      "title": "File:Keynote Speech by Actor Ed Asner and his son Matt Asner CDC’s 2016 Autism Awareness Month Event.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Keynote_Speech_by_Actor_Ed_Asner_and_his_son_Matt_Asner_CDC%E2%80%99s_2016_Autism_Awareness_Month_Event.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Keynote_Speech_by_Actor_Ed_Asner_and_his_son_Matt_Asner_CDC%E2%80%99s_2016_Autism_Awareness_Month_Event.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 66,
+      "phraseOccurrenceCount": 466,
+      "sampleWindows": [
+        {
+          "start": 4.587,
+          "end": 5.627,
+          "label": "CDC for having us",
+          "score": 0.9635,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.891,
+          "end": 19.251,
+          "label": "we live in",
+          "score": 0.8777,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.581,
+          "end": 33.821,
+          "label": "water",
+          "score": 0.882,
+          "kind": "token"
+        },
+        {
+          "start": 53.369,
+          "end": 53.629,
+          "label": "of years",
+          "score": 0.7855,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.766,
+        59.111
+      ]
+    },
+    {
+      "referenceId": "ref-055",
+      "title": "File:2018 AUSA Annual Meeting & Exposition Opening Ceremony.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2018_AUSA_Annual_Meeting_%26_Exposition_Opening_Ceremony.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9e/2018_AUSA_Annual_Meeting_%26_Exposition_Opening_Ceremony.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "legacy-audited-v2",
+      "tokenOccurrenceCount": 19,
+      "phraseOccurrenceCount": 0,
+      "sampleWindows": [
+        {
+          "start": 27.97,
+          "end": 28.11,
+          "label": "good",
+          "score": 1.0,
+          "kind": "token"
+        },
+        {
+          "start": 30.371,
+          "end": 30.511,
+          "label": "ask",
+          "score": 0.999,
+          "kind": "token"
+        },
+        {
+          "start": 33.213,
+          "end": 33.533,
+          "label": "begin",
+          "score": 0.983,
+          "kind": "token"
+        },
+        {
+          "start": 35.934,
+          "end": 36.194,
+          "label": "find",
+          "score": 1.0,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        27.51,
+        38.715
+      ]
+    },
+    {
+      "referenceId": "ref-063",
+      "title": "File:2018 West Virginia State of the State Address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2018_West_Virginia_State_of_the_State_Address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/2018_West_Virginia_State_of_the_State_Address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "legacy-audited-v2",
+      "tokenOccurrenceCount": 16,
+      "phraseOccurrenceCount": 0,
+      "sampleWindows": [
+        {
+          "start": 2.964,
+          "end": 3.264,
+          "label": "House",
+          "score": 0.99,
+          "kind": "token"
+        },
+        {
+          "start": 4.587,
+          "end": 5.769,
+          "label": "Virginia's",
+          "score": 0.882,
+          "kind": "token"
+        },
+        {
+          "start": 8.714,
+          "end": 8.934,
+          "label": "Ready",
+          "score": 0.821,
+          "kind": "token"
+        },
+        {
+          "start": 11.338,
+          "end": 11.498,
+          "label": "been",
+          "score": 1.0,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.962,
+        12.16
+      ]
+    },
+    {
+      "referenceId": "ref-06589",
+      "title": "File:SRJC We The Future- Keynote Speaker Boots Riley.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:SRJC_We_The_Future-_Keynote_Speaker_Boots_Riley.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/SRJC_We_The_Future-_Keynote_Speaker_Boots_Riley.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 583,
+      "sampleWindows": [
+        {
+          "start": 5.595,
+          "end": 8.378,
+          "label": "hip-hop legend, MC for one of",
+          "score": 0.8605,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.287,
+          "end": 19.627,
+          "label": "feature",
+          "score": 0.861,
+          "kind": "token"
+        },
+        {
+          "start": 34.608,
+          "end": 35.809,
+          "label": "never remember this, but",
+          "score": 0.991,
+          "kind": "phrase"
+        },
+        {
+          "start": 44.254,
+          "end": 44.694,
+          "label": "in your life",
+          "score": 0.9753,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.191,
+        59.103
+      ]
+    },
+    {
+      "referenceId": "ref-06592",
+      "title": "File:Zohran Mamdani speech at 2026 Knicks Championship Ceremony.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Zohran_Mamdani_speech_at_2026_Knicks_Championship_Ceremony.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/39/Zohran_Mamdani_speech_at_2026_Knicks_Championship_Ceremony.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 75,
+      "phraseOccurrenceCount": 551,
+      "sampleWindows": [
+        {
+          "start": 3.988,
+          "end": 4.388,
+          "label": "to our",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.655,
+          "end": 30.356,
+          "label": "windows of electronic stores and from",
+          "score": 0.9408,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.421,
+          "end": 41.822,
+          "label": "signal flickers, alongside",
+          "score": 0.9167,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.314,
+          "end": 53.975,
+          "label": "as the memory",
+          "score": 0.928,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.367,
+        59.951
+      ]
+    },
+    {
+      "referenceId": "ref-06933",
+      "title": "File:Richard Dawkins on free speech and Islam(ism).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Richard_Dawkins_on_free_speech_and_Islam(ism).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/33/Richard_Dawkins_on_free_speech_and_Islam%28ism%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 573,
+      "sampleWindows": [
+        {
+          "start": 3.856,
+          "end": 5.118,
+          "label": "chief oppositions",
+          "score": 0.872,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.355,
+          "end": 20.197,
+          "label": "children, especially to be denied",
+          "score": 0.9096,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.437,
+          "end": 36.017,
+          "label": "I have",
+          "score": 0.9315,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.986,
+          "end": 54.428,
+          "label": "that KPFA, KPFA is a",
+          "score": 0.8852,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.031,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-07025",
+      "title": "File:President Trump Delivers Remarks Feb 29 2020.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Trump_Delivers_Remarks_Feb_29_2020.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/75/President_Trump_Delivers_Remarks_Feb_29_2020.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 48,
+      "phraseOccurrenceCount": 382,
+      "sampleWindows": [
+        {
+          "start": 5.957,
+          "end": 8.199,
+          "label": "congratulate all of",
+          "score": 0.821,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.125,
+          "end": 18.945,
+          "label": "going on 20",
+          "score": 0.921,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.606,
+          "end": 35.046,
+          "label": "That's been",
+          "score": 0.8865,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.174,
+          "end": 52.735,
+          "label": "of the great,",
+          "score": 0.8997,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.554,
+        57.797
+      ]
+    },
+    {
+      "referenceId": "ref-071",
+      "title": "File:2009 G20 Summit protests in Pittsburgh.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2009_G20_Summit_protests_in_Pittsburgh.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/32/2009_G20_Summit_protests_in_Pittsburgh.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-interview",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "legacy-audited-v2",
+      "tokenOccurrenceCount": 4,
+      "phraseOccurrenceCount": 0,
+      "sampleWindows": [
+        {
+          "start": 0.771,
+          "end": 1.011,
+          "label": "got",
+          "score": 0.606,
+          "kind": "token"
+        },
+        {
+          "start": 2.812,
+          "end": 3.072,
+          "label": "again",
+          "score": 0.42,
+          "kind": "token"
+        },
+        {
+          "start": 3.092,
+          "end": 3.332,
+          "label": "never",
+          "score": 0.53,
+          "kind": "token"
+        },
+        {
+          "start": 3.392,
+          "end": 3.692,
+          "label": "allows",
+          "score": 0.398,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.771,
+        3.692
+      ]
+    },
+    {
+      "referenceId": "ref-07363",
+      "title": "File:President Reagan's Remarks at Ceremony for Young Astronauts Program on South Lawn, October 17, 1984.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Remarks_at_Ceremony_for_Young_Astronauts_Program_on_South_Lawn%2C_October_17%2C_1984.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e3/President_Reagan%27s_Remarks_at_Ceremony_for_Young_Astronauts_Program_on_South_Lawn%2C_October_17%2C_1984.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 42,
+      "phraseOccurrenceCount": 341,
+      "sampleWindows": [
+        {
+          "start": 33.884,
+          "end": 35.285,
+          "label": "Anderson, the men and women of",
+          "score": 0.9077,
+          "kind": "phrase"
+        },
+        {
+          "start": 41.728,
+          "end": 42.509,
+          "label": "all of you who have",
+          "score": 0.9724,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.031,
+          "end": 46.891,
+          "label": "to welcome you to the White",
+          "score": 0.9218,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.857,
+          "end": 56.602,
+          "label": "Program, as you know, an",
+          "score": 0.9132,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        26.7,
+        59.249
+      ]
+    },
+    {
+      "referenceId": "ref-07694",
+      "title": "File:NASA Astronaut Mike Barratt’s Speech at the 2025 Human Research Program Investigators’ Workshop (jsc2025m000007).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:NASA_Astronaut_Mike_Barratt%E2%80%99s_Speech_at_the_2025_Human_Research_Program_Investigators%E2%80%99_Workshop_(jsc2025m000007).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/19/NASA_Astronaut_Mike_Barratt%E2%80%99s_Speech_at_the_2025_Human_Research_Program_Investigators%E2%80%99_Workshop_%28jsc2025m000007%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 85,
+      "phraseOccurrenceCount": 487,
+      "sampleWindows": [
+        {
+          "start": 9.595,
+          "end": 10.696,
+          "label": "It is my great honor",
+          "score": 0.905,
+          "kind": "phrase"
+        },
+        {
+          "start": 22.199,
+          "end": 23.26,
+          "label": "board specialties in",
+          "score": 0.841,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.288,
+          "end": 35.608,
+          "label": "joining",
+          "score": 0.955,
+          "kind": "token"
+        },
+        {
+          "start": 49.571,
+          "end": 50.473,
+          "label": "the transition from",
+          "score": 0.9777,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.167,
+        59.49
+      ]
+    },
+    {
+      "referenceId": "ref-07791",
+      "title": "File:Michel Bauwens keynote on Open Source culture.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Michel_Bauwens_keynote_on_Open_Source_culture.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Michel_Bauwens_keynote_on_Open_Source_culture.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 52,
+      "phraseOccurrenceCount": 562,
+      "sampleWindows": [
+        {
+          "start": 15.884,
+          "end": 17.184,
+          "label": "is a really nostalgic experience",
+          "score": 0.7024,
+          "kind": "phrase"
+        },
+        {
+          "start": 31.433,
+          "end": 32.634,
+          "label": "the corporate library British",
+          "score": 0.6733,
+          "kind": "phrase"
+        },
+        {
+          "start": 42.92,
+          "end": 43.281,
+          "label": "consider",
+          "score": 0.915,
+          "kind": "token"
+        },
+        {
+          "start": 51.125,
+          "end": 52.786,
+          "label": "and that's not so easy all",
+          "score": 0.8955,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        9.94,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-07798",
+      "title": "File:2016-02-20 President Obama's Weekly Address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2016-02-20_President_Obama%27s_Weekly_Address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/2016-02-20_President_Obama%27s_Weekly_Address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 85,
+      "phraseOccurrenceCount": 558,
+      "sampleWindows": [
+        {
+          "start": 16.985,
+          "end": 17.965,
+          "label": "to Havana next month,",
+          "score": 0.896,
+          "kind": "phrase"
+        },
+        {
+          "start": 25.248,
+          "end": 26.149,
+          "label": "ago, to begin",
+          "score": 0.9997,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.918,
+          "end": 36.258,
+          "label": "help the",
+          "score": 0.9465,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.765,
+          "end": 50.106,
+          "label": "as Cuba",
+          "score": 0.927,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.682,
+        59.891
+      ]
+    },
+    {
+      "referenceId": "ref-07799",
+      "title": "File:2016-03-05 President Obama's Weekly Address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2016-03-05_President_Obama%27s_Weekly_Address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/2016-03-05_President_Obama%27s_Weekly_Address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 76,
+      "phraseOccurrenceCount": 576,
+      "sampleWindows": [
+        {
+          "start": 15.162,
+          "end": 15.803,
+          "label": "of innovation,",
+          "score": 0.995,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.128,
+          "end": 28.129,
+          "label": "moon and",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.105,
+          "end": 41.545,
+          "label": "the future through our ideas",
+          "score": 0.851,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.049,
+          "end": 53.149,
+          "label": "getting a ride to",
+          "score": 0.921,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.48,
+        59.771
+      ]
+    },
+    {
+      "referenceId": "ref-07804",
+      "title": "File:Weekly Address- Celebrating Independence Day.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Weekly_Address-_Celebrating_Independence_Day.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Weekly_Address-_Celebrating_Independence_Day.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 616,
+      "sampleWindows": [
+        {
+          "start": 10.415,
+          "end": 10.635,
+          "label": "filled",
+          "score": 0.958,
+          "kind": "token"
+        },
+        {
+          "start": 22.941,
+          "end": 24.022,
+          "label": "Independence Day is all",
+          "score": 0.9143,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.046,
+          "end": 38.506,
+          "label": "free to think and worship and",
+          "score": 0.9742,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.289,
+          "end": 49.809,
+          "label": "us, it",
+          "score": 0.998,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        5.873,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-07833",
+      "title": "File:Andrew Yang Speech (ending of the retreat)on Dec 3rd Produced by DingDingTV.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_Speech_(ending_of_the_retreat)on_Dec_3rd_Produced_by_DingDingTV.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Andrew_Yang_Speech_%28ending_of_the_retreat%29on_Dec_3rd_Produced_by_DingDingTV.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 925,
+      "sampleWindows": [
+        {
+          "start": 4.532,
+          "end": 4.893,
+          "label": "been with",
+          "score": 0.8905,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.317,
+          "end": 19.698,
+          "label": "some of you",
+          "score": 0.9283,
+          "kind": "phrase"
+        },
+        {
+          "start": 34.266,
+          "end": 35.487,
+          "label": "family over the last number of",
+          "score": 0.9022,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.843,
+          "end": 47.184,
+          "label": "vision",
+          "score": 0.958,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.331,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-07837",
+      "title": "File:Andrew Yang in Silicon Valley Full Speech (Produced by DingDingTV).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_in_Silicon_Valley_Full_Speech_(Produced_by_DingDingTV).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/87/Andrew_Yang_in_Silicon_Valley_Full_Speech_%28Produced_by_DingDingTV%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 57,
+      "phraseOccurrenceCount": 503,
+      "sampleWindows": [
+        {
+          "start": 13.324,
+          "end": 13.725,
+          "label": "to thank",
+          "score": 0.903,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.91,
+          "end": 26.531,
+          "label": "we're going through the greatest economic",
+          "score": 0.866,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.496,
+          "end": 37.097,
+          "label": "this realization over a period",
+          "score": 0.7876,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.826,
+          "end": 52.846,
+          "label": "69 US patents",
+          "score": 0.696,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        6.281,
+        59.731
+      ]
+    },
+    {
+      "referenceId": "ref-07838",
+      "title": "File:Civic Leadership Retreat 2018 - Andrew Yang - Luncheon Speech on Dec 3rd Produced by DingDingTV.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Civic_Leadership_Retreat_2018_-_Andrew_Yang_-_Luncheon_Speech_on_Dec_3rd_Produced_by_DingDingTV.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Civic_Leadership_Retreat_2018_-_Andrew_Yang_-_Luncheon_Speech_on_Dec_3rd_Produced_by_DingDingTV.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 73,
+      "phraseOccurrenceCount": 539,
+      "sampleWindows": [
+        {
+          "start": 15.125,
+          "end": 15.865,
+          "label": "at UC Berkeley.",
+          "score": 0.8967,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.288,
+          "end": 30.749,
+          "label": "was born in Schenectady, New",
+          "score": 0.9014,
+          "kind": "phrase"
+        },
+        {
+          "start": 39.677,
+          "end": 40.578,
+          "label": "the West Coast, I take",
+          "score": 0.9032,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.946,
+          "end": 53.807,
+          "label": "community for years.",
+          "score": 0.9387,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        8.883,
+        59.771
+      ]
+    },
+    {
+      "referenceId": "ref-07855",
+      "title": "File:Andrew Yang Speech in Silicon Valley Entrepreneurs Festival 2019- Produced by DingDingTV.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Andrew_Yang_Speech_in_Silicon_Valley_Entrepreneurs_Festival_2019-_Produced_by_DingDingTV.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Andrew_Yang_Speech_in_Silicon_Valley_Entrepreneurs_Festival_2019-_Produced_by_DingDingTV.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 443,
+      "sampleWindows": [
+        {
+          "start": 22.009,
+          "end": 22.449,
+          "label": "music for",
+          "score": 0.8765,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.331,
+          "end": 35.571,
+          "label": "it's like",
+          "score": 0.767,
+          "kind": "phrase"
+        },
+        {
+          "start": 43.118,
+          "end": 44.139,
+          "label": "there, but I'm sure they didn't.",
+          "score": 0.8975,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.946,
+          "end": 54.887,
+          "label": "impact of technology on",
+          "score": 0.9533,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        14.427,
+        59.631
+      ]
+    },
+    {
+      "referenceId": "ref-07918",
+      "title": "File:State of the Union Address (January 27, 2010) Barack Obama (WhiteHouse.gov-reedit).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:State_of_the_Union_Address_(January_27%2C_2010)_Barack_Obama_(WhiteHouse.gov-reedit).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/State_of_the_Union_Address_%28January_27%2C_2010%29_Barack_Obama_%28WhiteHouse.gov-reedit%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 46,
+      "phraseOccurrenceCount": 316,
+      "sampleWindows": [
+        {
+          "start": 19.199,
+          "end": 21.56,
+          "label": "of Congress, distinguished",
+          "score": 0.9237,
+          "kind": "phrase"
+        },
+        {
+          "start": 31.348,
+          "end": 33.57,
+          "label": "Congress information about",
+          "score": 0.907,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.601,
+          "end": 47.922,
+          "label": "And they've done so in",
+          "score": 0.9306,
+          "kind": "phrase"
+        },
+        {
+          "start": 56.548,
+          "end": 56.929,
+          "label": "tempting",
+          "score": 0.896,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        14.735,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-07924",
+      "title": "File:Address Before a Joint Session of Congress (February 24, 2009) - Barack Obama (WhiteHouse.gov).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Address_Before_a_Joint_Session_of_Congress_(February_24%2C_2009)_-_Barack_Obama_(WhiteHouse.gov).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Address_Before_a_Joint_Session_of_Congress_%28February_24%2C_2009%29_-_Barack_Obama_%28WhiteHouse.gov%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 23,
+      "phraseOccurrenceCount": 115,
+      "sampleWindows": [
+        {
+          "start": 22.425,
+          "end": 25.666,
+          "label": "Madam Speaker, Mr. Vice President,",
+          "score": 0.9424,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.227,
+          "end": 29.787,
+          "label": "of Congress, the First",
+          "score": 0.9718,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.529,
+          "end": 34.109,
+          "label": "here, someone.",
+          "score": 0.4925,
+          "kind": "phrase"
+        },
+        {
+          "start": 56.117,
+          "end": 57.28,
+          "label": "not only to address",
+          "score": 0.961,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        9.32,
+        58.723
+      ]
+    },
+    {
+      "referenceId": "ref-07974",
+      "title": "File:2013 Senate testimony Ed Lu.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2013_Senate_testimony_Ed_Lu.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/16/2013_Senate_testimony_Ed_Lu.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 80,
+      "phraseOccurrenceCount": 588,
+      "sampleWindows": [
+        {
+          "start": 12.992,
+          "end": 13.913,
+          "label": "B-612 Foundation",
+          "score": 0.8675,
+          "kind": "phrase"
+        },
+        {
+          "start": 25.236,
+          "end": 25.396,
+          "label": "city",
+          "score": 0.877,
+          "kind": "token"
+        },
+        {
+          "start": 37.316,
+          "end": 39.777,
+          "label": "the bomb used in Hiroshima, or",
+          "score": 0.9318,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.146,
+          "end": 52.766,
+          "label": "impact before that",
+          "score": 0.807,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.591,
+        59.611
+      ]
+    },
+    {
+      "referenceId": "ref-07976",
+      "title": "File:2016-01-30 President Obama's Weekly Address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2016-01-30_President_Obama%27s_Weekly_Address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/2016-01-30_President_Obama%27s_Weekly_Address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 83,
+      "phraseOccurrenceCount": 562,
+      "sampleWindows": [
+        {
+          "start": 14.516,
+          "end": 15.096,
+          "label": "live in a time",
+          "score": 0.7515,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.966,
+          "end": 29.227,
+          "label": "changes aren't new, and",
+          "score": 0.887,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.746,
+          "end": 39.326,
+          "label": "answer to that",
+          "score": 0.9647,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.829,
+          "end": 53.009,
+          "label": "set",
+          "score": 0.856,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.753,
+        59.951
+      ]
+    },
+    {
+      "referenceId": "ref-07991",
+      "title": "File:Trends in Militancy across South Asia- A Region on the Brink- Keynote.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Trends_in_Militancy_across_South_Asia-_A_Region_on_the_Brink-_Keynote.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/Trends_in_Militancy_across_South_Asia-_A_Region_on_the_Brink-_Keynote.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 433,
+      "sampleWindows": [
+        {
+          "start": 3.173,
+          "end": 4.795,
+          "label": "for coming and certainly",
+          "score": 0.8628,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.185,
+          "end": 19.246,
+          "label": "Yesterday was a bad day.",
+          "score": 0.9464,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.287,
+          "end": 39.249,
+          "label": "are families and communities and",
+          "score": 0.9122,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.225,
+          "end": 55.929,
+          "label": "to watch this region be torn",
+          "score": 0.911,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.111,
+        58.375
+      ]
+    },
+    {
+      "referenceId": "ref-08034",
+      "title": "File:2013 State of the Net Luncheon Keynote- Rep. Goodlatte w- Travis Kalanick, CEO of UBER.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2013_State_of_the_Net_Luncheon_Keynote-_Rep._Goodlatte_w-_Travis_Kalanick%2C_CEO_of_UBER.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/7/71/2013_State_of_the_Net_Luncheon_Keynote-_Rep._Goodlatte_w-_Travis_Kalanick%2C_CEO_of_UBER.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 55,
+      "phraseOccurrenceCount": 504,
+      "sampleWindows": [
+        {
+          "start": 3.249,
+          "end": 5.171,
+          "label": "the Internet Caucus Advisory",
+          "score": 0.9035,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.383,
+          "end": 20.723,
+          "label": "I think",
+          "score": 0.975,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.526,
+          "end": 38.966,
+          "label": "importance as a",
+          "score": 0.8933,
+          "kind": "phrase"
+        },
+        {
+          "start": 49.509,
+          "end": 50.769,
+          "label": "a networking of",
+          "score": 0.8737,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.507,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-08141",
+      "title": "File:Vice President Harris Delivers Remarks at the CEO Summit.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Vice_President_Harris_Delivers_Remarks_at_the_CEO_Summit.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Vice_President_Harris_Delivers_Remarks_at_the_CEO_Summit.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 57,
+      "phraseOccurrenceCount": 424,
+      "sampleWindows": [
+        {
+          "start": 9.494,
+          "end": 10.014,
+          "label": "Commerce",
+          "score": 0.932,
+          "kind": "token"
+        },
+        {
+          "start": 22.586,
+          "end": 23.047,
+          "label": "a shared",
+          "score": 0.7225,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.626,
+          "end": 38.167,
+          "label": "a priority I know that everyone",
+          "score": 0.9607,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.07,
+          "end": 50.591,
+          "label": "ties directly impacts the",
+          "score": 0.976,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.652,
+        58.708
+      ]
+    },
+    {
+      "referenceId": "ref-08142",
+      "title": "File:President Biden Delivers Remarks at the IV CEO Summit of the Americas.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Biden_Delivers_Remarks_at_the_IV_CEO_Summit_of_the_Americas.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/President_Biden_Delivers_Remarks_at_the_IV_CEO_Summit_of_the_Americas.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 59,
+      "phraseOccurrenceCount": 512,
+      "sampleWindows": [
+        {
+          "start": 12.918,
+          "end": 13.538,
+          "label": "year and a half,",
+          "score": 0.9393,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.611,
+          "end": 27.791,
+          "label": "really",
+          "score": 0.957,
+          "kind": "token"
+        },
+        {
+          "start": 37.017,
+          "end": 38.818,
+          "label": "for a simple reason, because",
+          "score": 0.8054,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.111,
+          "end": 54.593,
+          "label": "are ready to",
+          "score": 0.917,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.771,
+        59.228
+      ]
+    },
+    {
+      "referenceId": "ref-08144",
+      "title": "File:Prime Minister Trudeau delivers remarks at the III CEO Summit of the Americas in Peru.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Prime_Minister_Trudeau_delivers_remarks_at_the_III_CEO_Summit_of_the_Americas_in_Peru.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Prime_Minister_Trudeau_delivers_remarks_at_the_III_CEO_Summit_of_the_Americas_in_Peru.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 84,
+      "phraseOccurrenceCount": 667,
+      "sampleWindows": [
+        {
+          "start": 5.066,
+          "end": 6.486,
+          "label": "I was here last for the",
+          "score": 0.9618,
+          "kind": "phrase"
+        },
+        {
+          "start": 15.469,
+          "end": 16.849,
+          "label": "this time around, Peru has a",
+          "score": 0.9292,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.608,
+          "end": 30.408,
+          "label": "that he will be an",
+          "score": 0.956,
+          "kind": "phrase"
+        },
+        {
+          "start": 46.955,
+          "end": 47.556,
+          "label": "society.",
+          "score": 1.0,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.625,
+        59.891
+      ]
+    },
+    {
+      "referenceId": "ref-08148",
+      "title": "File:Vice President Harris Delivers Remarks at the APEC CEO Summit.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Vice_President_Harris_Delivers_Remarks_at_the_APEC_CEO_Summit.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Vice_President_Harris_Delivers_Remarks_at_the_APEC_CEO_Summit.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 39,
+      "phraseOccurrenceCount": 280,
+      "sampleWindows": [
+        {
+          "start": 2.171,
+          "end": 4.092,
+          "label": "the United States, Kamala Harris.",
+          "score": 0.9022,
+          "kind": "phrase"
+        },
+        {
+          "start": 33.492,
+          "end": 34.334,
+          "label": "And I know that it's been",
+          "score": 0.895,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.501,
+          "end": 50.463,
+          "label": "you all for the warm welcome.",
+          "score": 0.9393,
+          "kind": "phrase"
+        },
+        {
+          "start": 55.427,
+          "end": 56.788,
+          "label": "the exceptional leadership that",
+          "score": 0.9738,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.49,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-08157",
+      "title": "File:Maryana Iskander and Jimmy Wales - WikiStipendiya Awards Ceremony address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Maryana_Iskander_and_Jimmy_Wales_-_WikiStipendiya_Awards_Ceremony_address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/4/48/Maryana_Iskander_and_Jimmy_Wales_-_WikiStipendiya_Awards_Ceremony_address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 70,
+      "phraseOccurrenceCount": 482,
+      "sampleWindows": [
+        {
+          "start": 9.257,
+          "end": 10.438,
+          "label": "name is Wales,",
+          "score": 0.8373,
+          "kind": "phrase"
+        },
+        {
+          "start": 20.727,
+          "end": 22.068,
+          "label": "celebration of the",
+          "score": 0.9387,
+          "kind": "phrase"
+        },
+        {
+          "start": 41.24,
+          "end": 42.561,
+          "label": "added nearly 800",
+          "score": 0.8233,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.188,
+          "end": 55.989,
+          "label": "we created more than 40,000 new",
+          "score": 0.7183,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        2.852,
+        59.831
+      ]
+    },
+    {
+      "referenceId": "ref-08210",
+      "title": "File:Straight Talk Africa- Leaders Address UNGA, Talk Sustainable Goals.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Straight_Talk_Africa-_Leaders_Address_UNGA%2C_Talk_Sustainable_Goals.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Straight_Talk_Africa-_Leaders_Address_UNGA%2C_Talk_Sustainable_Goals.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 387,
+      "sampleWindows": [
+        {
+          "start": 7.511,
+          "end": 9.234,
+          "label": "New York with a warning on",
+          "score": 0.9257,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.415,
+          "end": 21.637,
+          "label": "the week-long event, what does",
+          "score": 0.919,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.842,
+          "end": 29.503,
+          "label": "seem to ask",
+          "score": 0.9783,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.806,
+          "end": 54.246,
+          "label": "to Straight",
+          "score": 0.9125,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        4.607,
+        59.851
+      ]
+    },
+    {
+      "referenceId": "ref-08405",
+      "title": "File:2014 State Of The Union Address Enhanced.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2014_State_Of_The_Union_Address_Enhanced.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/59/2014_State_Of_The_Union_Address_Enhanced.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 62,
+      "phraseOccurrenceCount": 440,
+      "sampleWindows": [
+        {
+          "start": 14.297,
+          "end": 16.418,
+          "label": "in America, a",
+          "score": 0.8187,
+          "kind": "phrase"
+        },
+        {
+          "start": 24.081,
+          "end": 24.781,
+          "label": "to its highest",
+          "score": 0.9147,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.387,
+          "end": 36.748,
+          "label": "the more",
+          "score": 0.7055,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.755,
+          "end": 52.835,
+          "label": "fuel-efficient cars in",
+          "score": 0.959,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.231,
+        58.438
+      ]
+    },
+    {
+      "referenceId": "ref-08407",
+      "title": "File:GLAM-WIKI 2015 - 11 April - Keynote speech by Paul Keller.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:GLAM-WIKI_2015_-_11_April_-_Keynote_speech_by_Paul_Keller.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/GLAM-WIKI_2015_-_11_April_-_Keynote_speech_by_Paul_Keller.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 67,
+      "phraseOccurrenceCount": 632,
+      "sampleWindows": [
+        {
+          "start": 13.373,
+          "end": 14.574,
+          "label": "anyway, thanks for",
+          "score": 0.908,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.442,
+          "end": 29.702,
+          "label": "people in the room know me,",
+          "score": 0.9232,
+          "kind": "phrase"
+        },
+        {
+          "start": 41.554,
+          "end": 42.535,
+          "label": "and then found myself in a",
+          "score": 0.9428,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.965,
+          "end": 53.445,
+          "label": "what you see",
+          "score": 0.8923,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.51,
+        59.951
+      ]
+    },
+    {
+      "referenceId": "ref-08409",
+      "title": "File:2016-03-12 President Obama's Weekly Address.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2016-03-12_President_Obama%27s_Weekly_Address.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/2016-03-12_President_Obama%27s_Weekly_Address.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 573,
+      "sampleWindows": [
+        {
+          "start": 14.824,
+          "end": 16.185,
+          "label": "the most influential figures of",
+          "score": 0.8884,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.573,
+          "end": 29.993,
+          "label": "in 11",
+          "score": 0.8195,
+          "kind": "phrase"
+        },
+        {
+          "start": 42.802,
+          "end": 43.522,
+          "label": "to have a strong",
+          "score": 0.9327,
+          "kind": "phrase"
+        },
+        {
+          "start": 53.748,
+          "end": 55.309,
+          "label": "her husband and an elegant",
+          "score": 0.9676,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.362,
+        59.911
+      ]
+    },
+    {
+      "referenceId": "ref-08410",
+      "title": "File:Weekly Address - President Obama's Supreme Court Nomination.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Weekly_Address_-_President_Obama%27s_Supreme_Court_Nomination.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Weekly_Address_-_President_Obama%27s_Supreme_Court_Nomination.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 82,
+      "phraseOccurrenceCount": 530,
+      "sampleWindows": [
+        {
+          "start": 16.237,
+          "end": 16.857,
+          "label": "is appointing a",
+          "score": 0.7327,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.122,
+          "end": 27.963,
+          "label": "essential task",
+          "score": 0.914,
+          "kind": "phrase"
+        },
+        {
+          "start": 38.159,
+          "end": 39.7,
+          "label": "short-term politics in",
+          "score": 0.869,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.606,
+          "end": 51.126,
+          "label": "unmatched",
+          "score": 0.945,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.834,
+        59.931
+      ]
+    },
+    {
+      "referenceId": "ref-08411",
+      "title": "File:HE Mr Baron Waqa, MP President, Nauru (Republic of) - speech at Connect Asia-Pacific 2013 Summit.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:HE_Mr_Baron_Waqa%2C_MP_President%2C_Nauru_(Republic_of)_-_speech_at_Connect_Asia-Pacific_2013_Summit.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/HE_Mr_Baron_Waqa%2C_MP_President%2C_Nauru_%28Republic_of%29_-_speech_at_Connect_Asia-Pacific_2013_Summit.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 232,
+      "sampleWindows": [
+        {
+          "start": 10.698,
+          "end": 13.399,
+          "label": "Lok Shinwatra, Prime Minister",
+          "score": 0.8932,
+          "kind": "phrase"
+        },
+        {
+          "start": 28.607,
+          "end": 29.988,
+          "label": "who have spoken before me,",
+          "score": 0.9898,
+          "kind": "phrase"
+        },
+        {
+          "start": 37.637,
+          "end": 38.358,
+          "label": "those affected",
+          "score": 0.9775,
+          "kind": "phrase"
+        },
+        {
+          "start": 48.304,
+          "end": 52.847,
+          "label": "God will guide them and wish",
+          "score": 0.9133,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        6.936,
+        59.931
+      ]
+    },
+    {
+      "referenceId": "ref-08415",
+      "title": "File:Donald Trump’s acceptance speech RNC July 2016.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Donald_Trump%E2%80%99s_acceptance_speech_RNC_July_2016.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Donald_Trump%E2%80%99s_acceptance_speech_RNC_July_2016.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 32,
+      "phraseOccurrenceCount": 193,
+      "sampleWindows": [
+        {
+          "start": 3.562,
+          "end": 4.423,
+          "label": "be so",
+          "score": 0.985,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.411,
+          "end": 32.893,
+          "label": "carefully crafted lies, and the media",
+          "score": 0.9208,
+          "kind": "phrase"
+        },
+        {
+          "start": 45.558,
+          "end": 46.939,
+          "label": "But here, at",
+          "score": 0.8833,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.261,
+          "end": 55.042,
+          "label": "honor the American people with the",
+          "score": 0.9322,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.34,
+        56.963
+      ]
+    },
+    {
+      "referenceId": "ref-08416",
+      "title": "File:Melania Trump's plagiarised speech compared with Michelle Obama's.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Melania_Trump%27s_plagiarised_speech_compared_with_Michelle_Obama%27s.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Melania_Trump%27s_plagiarised_speech_compared_with_Michelle_Obama%27s.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 48,
+      "phraseOccurrenceCount": 520,
+      "sampleWindows": [
+        {
+          "start": 5.716,
+          "end": 7.438,
+          "label": "values that you work",
+          "score": 0.962,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.087,
+          "end": 20.308,
+          "label": "word is your bond,",
+          "score": 0.8522,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.779,
+          "end": 31.601,
+          "label": "people with respect that",
+          "score": 0.9303,
+          "kind": "phrase"
+        },
+        {
+          "start": 43.094,
+          "end": 44.976,
+          "label": "many generations to follow",
+          "score": 0.982,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        1.353,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-08418",
+      "title": "File:President Reagan's Radio Address to the Nation on Prayer, September 18, 1982.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Radio_Address_to_the_Nation_on_Prayer%2C_September_18%2C_1982.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/19/President_Reagan%27s_Radio_Address_to_the_Nation_on_Prayer%2C_September_18%2C_1982.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 71,
+      "phraseOccurrenceCount": 497,
+      "sampleWindows": [
+        {
+          "start": 21.123,
+          "end": 22.564,
+          "label": "for our citizens of Jewish faith.",
+          "score": 0.925,
+          "kind": "phrase"
+        },
+        {
+          "start": 35.717,
+          "end": 36.818,
+          "label": "speaking for all Americans,",
+          "score": 0.9577,
+          "kind": "phrase"
+        },
+        {
+          "start": 45.703,
+          "end": 45.943,
+          "label": "blessed",
+          "score": 0.977,
+          "kind": "token"
+        },
+        {
+          "start": 55.568,
+          "end": 56.069,
+          "label": "of origin",
+          "score": 0.854,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        7.3,
+        59.951
+      ]
+    },
+    {
+      "referenceId": "ref-08419",
+      "title": "File:Ronald Reagan's Acceptance Speech at Republican National Convention, July 17, 1980.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Ronald_Reagan%27s_Acceptance_Speech_at_Republican_National_Convention%2C_July_17%2C_1980.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Ronald_Reagan%27s_Acceptance_Speech_at_Republican_National_Convention%2C_July_17%2C_1980.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 5,
+      "phraseOccurrenceCount": 20,
+      "sampleWindows": [
+        {
+          "start": 12.724,
+          "end": 13.784,
+          "label": "for using up prime",
+          "score": 0.7372,
+          "kind": "phrase"
+        },
+        {
+          "start": 12.964,
+          "end": 14.285,
+          "label": "using up prime time.",
+          "score": 0.8815,
+          "kind": "phrase"
+        },
+        {
+          "start": 18.866,
+          "end": 19.587,
+          "label": "Thank you very",
+          "score": 0.9787,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.647,
+          "end": 19.967,
+          "label": "much.",
+          "score": 1.0,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        12.724,
+        51.93
+      ]
+    },
+    {
+      "referenceId": "ref-08420",
+      "title": "File:President Ronald Reagan's Speech at the Berlin Wall, June 12, 1987.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Ronald_Reagan%27s_Speech_at_the_Berlin_Wall%2C_June_12%2C_1987.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/President_Ronald_Reagan%27s_Speech_at_the_Berlin_Wall%2C_June_12%2C_1987.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 38,
+      "phraseOccurrenceCount": 221,
+      "sampleWindows": [
+        {
+          "start": 37.201,
+          "end": 37.961,
+          "label": "Mayor Deepkin,",
+          "score": 0.9235,
+          "kind": "phrase"
+        },
+        {
+          "start": 43.246,
+          "end": 44.127,
+          "label": "visited Berlin.",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.525,
+          "end": 53.086,
+          "label": "since then, two other presidents",
+          "score": 0.9506,
+          "kind": "phrase"
+        },
+        {
+          "start": 55.988,
+          "end": 56.569,
+          "label": "today, I",
+          "score": 0.856,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        32.136,
+        59.631
+      ]
+    },
+    {
+      "referenceId": "ref-08421",
+      "title": "File:Ronald Reagan's Inaugural Address, January 20, 1981.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Ronald_Reagan%27s_Inaugural_Address%2C_January_20%2C_1981.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ronald_Reagan%27s_Inaugural_Address%2C_January_20%2C_1981.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 60,
+      "phraseOccurrenceCount": 380,
+      "sampleWindows": [
+        {
+          "start": 9.661,
+          "end": 10.501,
+          "label": "the West Front of the",
+          "score": 0.966,
+          "kind": "phrase"
+        },
+        {
+          "start": 19.966,
+          "end": 21.126,
+          "label": "as 40th President",
+          "score": 0.845,
+          "kind": "phrase"
+        },
+        {
+          "start": 32.732,
+          "end": 33.873,
+          "label": "Front, facing",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 42.54,
+          "end": 46.062,
+          "label": "the participants, including",
+          "score": 0.9083,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        6.419,
+        59.77
+      ]
+    },
+    {
+      "referenceId": "ref-08422",
+      "title": "File:President Reagan's Acceptance Speech at the Republican National Convention, August 23, 1984.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:President_Reagan%27s_Acceptance_Speech_at_the_Republican_National_Convention%2C_August_23%2C_1984.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/President_Reagan%27s_Acceptance_Speech_at_the_Republican_National_Convention%2C_August_23%2C_1984.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 16,
+      "phraseOccurrenceCount": 104,
+      "sampleWindows": [
+        {
+          "start": 43.639,
+          "end": 47.502,
+          "label": "Mr. Vice President delegates to",
+          "score": 0.9042,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.084,
+          "end": 50.384,
+          "label": "fellow",
+          "score": 0.948,
+          "kind": "token"
+        },
+        {
+          "start": 56.208,
+          "end": 56.609,
+          "label": "enjoy",
+          "score": 0.95,
+          "kind": "token"
+        },
+        {
+          "start": 58.39,
+          "end": 59.611,
+          "label": "the size of the heart of",
+          "score": 0.9798,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        36.91,
+        59.971
+      ]
+    },
+    {
+      "referenceId": "ref-08423",
+      "title": "File:The President's Radio Address (1996).webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:The_President%27s_Radio_Address_(1996).webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/The_President%27s_Radio_Address_%281996%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 565,
+      "sampleWindows": [
+        {
+          "start": 16.47,
+          "end": 17.09,
+          "label": "to move children",
+          "score": 0.8457,
+          "kind": "phrase"
+        },
+        {
+          "start": 29.897,
+          "end": 30.798,
+          "label": "a remarkable group",
+          "score": 0.9013,
+          "kind": "phrase"
+        },
+        {
+          "start": 43.032,
+          "end": 43.973,
+          "label": "I am especially pleased",
+          "score": 0.9755,
+          "kind": "phrase"
+        },
+        {
+          "start": 52.623,
+          "end": 54.745,
+          "label": "love we can truly repair the",
+          "score": 0.9175,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        11.307,
+        59.931
+      ]
+    },
+    {
+      "referenceId": "ref-08424",
+      "title": "File:20160709 VPOTUS Weekly Address HD.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:20160709_VPOTUS_Weekly_Address_HD.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/5/50/20160709_VPOTUS_Weekly_Address_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 73,
+      "phraseOccurrenceCount": 545,
+      "sampleWindows": [
+        {
+          "start": 14.514,
+          "end": 15.034,
+          "label": "the seven who",
+          "score": 0.8093,
+          "kind": "phrase"
+        },
+        {
+          "start": 26.577,
+          "end": 27.137,
+          "label": "and the generous",
+          "score": 0.7987,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.28,
+          "end": 37.56,
+          "label": "on, the guy always had",
+          "score": 0.9222,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.501,
+          "end": 52.243,
+          "label": "think they could help, that",
+          "score": 0.915,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.573,
+        59.19
+      ]
+    },
+    {
+      "referenceId": "ref-08425",
+      "title": "File:20161008 Weekly Address HD.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:20161008_Weekly_Address_HD.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f4/20161008_Weekly_Address_HD.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 78,
+      "phraseOccurrenceCount": 497,
+      "sampleWindows": [
+        {
+          "start": 14.8,
+          "end": 16.101,
+          "label": "of what would become the worst",
+          "score": 0.9105,
+          "kind": "phrase"
+        },
+        {
+          "start": 26.643,
+          "end": 27.704,
+          "label": "some smart decisions we",
+          "score": 0.941,
+          "kind": "phrase"
+        },
+        {
+          "start": 36.406,
+          "end": 38.007,
+          "label": "sector jobs and cutting the",
+          "score": 0.9148,
+          "kind": "phrase"
+        },
+        {
+          "start": 50.163,
+          "end": 51.725,
+          "label": "2007, real",
+          "score": 0.809,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        10.699,
+        59.791
+      ]
+    },
+    {
+      "referenceId": "ref-10345",
+      "title": "File:WikidataCon 2017 - Keynote 2 Michael Kreil datajournalist at Data Sciences and Stories.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:WikidataCon_2017_-_Keynote_2_Michael_Kreil_datajournalist_at_Data_Sciences_and_Stories.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/WikidataCon_2017_-_Keynote_2_Michael_Kreil_datajournalist_at_Data_Sciences_and_Stories.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 63,
+      "phraseOccurrenceCount": 516,
+      "sampleWindows": [
+        {
+          "start": 10.268,
+          "end": 12.009,
+          "label": "so many people are coming here.",
+          "score": 0.9203,
+          "kind": "phrase"
+        },
+        {
+          "start": 27.56,
+          "end": 29.861,
+          "label": "worlds, currently between data and",
+          "score": 0.8876,
+          "kind": "phrase"
+        },
+        {
+          "start": 40.245,
+          "end": 41.766,
+          "label": "and stories for other companies.",
+          "score": 0.8122,
+          "kind": "phrase"
+        },
+        {
+          "start": 51.068,
+          "end": 52.209,
+          "label": "show you what we are actually",
+          "score": 0.9078,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        6.165,
+        58.411
+      ]
+    },
+    {
+      "referenceId": "ref-10477",
+      "title": "File:Sumana-Harihareswara-wikicon-2014-keynote.webm",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Sumana-Harihareswara-wikicon-2014-keynote.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Sumana-Harihareswara-wikicon-2014-keynote.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "public-speech-interview-v2",
+      "enabledBatch": "production-audited-english-v1",
+      "tokenOccurrenceCount": 79,
+      "phraseOccurrenceCount": 526,
+      "sampleWindows": [
+        {
+          "start": 8.695,
+          "end": 9.856,
+          "label": "No, that's okay.",
+          "score": 0.453,
+          "kind": "phrase"
+        },
+        {
+          "start": 25.143,
+          "end": 27.764,
+          "label": "Sumina has worked for Calabra, GNOME,",
+          "score": 0.8732,
+          "kind": "phrase"
+        },
+        {
+          "start": 41.311,
+          "end": 42.071,
+          "label": "Feminism and",
+          "score": 0.8925,
+          "kind": "phrase"
+        },
+        {
+          "start": 54.946,
+          "end": 55.026,
+          "label": "who",
+          "score": 0.986,
+          "kind": "token"
+        }
+      ],
+      "alignmentTimeRange": [
+        0.831,
+        59.951
+      ]
+    }
+  ],
+  "phraseOnlyCuratedStarters": [
+    {
+      "referenceId": "curated-starter:jfk",
+      "title": "John F. Kennedy · public speech · 1961",
+      "pageUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/John_F._Kennedy_Inauguration_Speech.ogv/John_F._Kennedy_Inauguration_Speech.ogv.360p.vp9.webm",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "curated-starter-public-speech-v1",
+      "enabledBatch": null,
+      "tokenOccurrenceCount": 0,
+      "phraseOccurrenceCount": 2,
+      "sampleWindows": [
+        {
+          "start": 122.186,
+          "end": 123.997,
+          "label": "the world is very different now",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 842.299,
+          "end": 843.507,
+          "label": "ask what you can do",
+          "score": 1.0,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        122.186,
+        843.507
+      ]
+    },
+    {
+      "referenceId": "curated-starter:obama",
+      "title": "Barack Obama · public speech · 2017",
+      "pageUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
+      "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/23/20170110_President_Obama_Farewell_Speech_HD.webm/20170110_President_Obama_Farewell_Speech_HD.webm.360p.vp9.webm",
+      "sourceKind": "public-speech",
+      "auditPolicyVersion": "curated-starter-public-speech-v1",
+      "enabledBatch": null,
+      "tokenOccurrenceCount": 0,
+      "phraseOccurrenceCount": 4,
+      "sampleWindows": [
+        {
+          "start": 80.891,
+          "end": 81.132,
+          "label": "you can",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 228.039,
+          "end": 232.196,
+          "label": "change only happens when ordinary people get involved",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 401.271,
+          "end": 403.606,
+          "label": "yes our progress has been uneven",
+          "score": 1.0,
+          "kind": "phrase"
+        },
+        {
+          "start": 598.131,
+          "end": 598.898,
+          "label": "we need to do so",
+          "score": 1.0,
+          "kind": "phrase"
+        }
+      ],
+      "alignmentTimeRange": [
+        80.891,
+        598.898
+      ]
+    }
+  ]
+}

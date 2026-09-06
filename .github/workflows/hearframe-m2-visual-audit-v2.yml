@@ -1,0 +1,82 @@
+name: Hearframe Milestone 2 visual audit v2
+
+on:
+  push:
+    branches: [agent/hearframe-m2]
+    paths:
+      - '.github/scripts/hearframe-m2-visual-audit.py'
+      - 'hearframe-grand-v4/ask/m2-ready-references.json'
+      - 'hearframe-grand-v4/ask/m2-visual-review-overrides.json'
+      - '.github/workflows/hearframe-m2-visual-audit-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hearframe-m2-visual-audit-v2
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/hearframe-m2
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install visual QA stack
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          pip install 'opencv-python-headless>=4.10,<5' 'numpy<3'
+      - uses: actions/cache@v4
+        with:
+          path: .hearframe-m2-visual-frames
+          key: hearframe-m2-visual-v2-${{ hashFiles('hearframe-grand-v4/ask/m2-ready-references.json') }}
+      - name: Inspect actual aligned-region frames
+        id: audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python .github/scripts/hearframe-m2-visual-audit.py 2>&1 | tee hearframe-grand-v4/ask/m2-visual-audit.log
+      - name: Upload review sheets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hearframe-m2-visual-review-v2
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            hearframe-grand-v4/ask/m2-full-visual-audit.json
+            hearframe-grand-v4/ask/m2-visual-audit.log
+            hearframe-grand-v4/ask/m2-visual-sheets/*.jpg
+      - name: Commit audit evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'hearframe-m2-visual-auditor'
+          git config user.email 'actions@users.noreply.github.com'
+          for f in hearframe-grand-v4/ask/m2-full-visual-audit.json hearframe-grand-v4/ask/m2-visual-audit.log; do
+            [ -e "$f" ] && git add "$f"
+          done
+          if [ -d hearframe-grand-v4/ask/m2-visual-sheets ]; then git add hearframe-grand-v4/ask/m2-visual-sheets; fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Generate Hearframe M2 full visual audit v2 [skip ci]'
+          for n in 1 2 3 4; do
+            git fetch origin agent/hearframe-m2
+            git rebase origin/agent/hearframe-m2 || { git rebase --abort || true; sleep $((n*2)); continue; }
+            git push origin HEAD:agent/hearframe-m2 && exit 0
+            sleep $((n*2))
+          done
+          exit 1
+      - name: Fail if audit execution failed
+        if: steps.audit.outcome != 'success'
+        run: exit 1
