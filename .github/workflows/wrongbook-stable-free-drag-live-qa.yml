@@ -1,0 +1,41 @@
+name: Wrongbook Stable Free Drag Live QA
+
+on:
+  pull_request:
+    paths:
+      - 'wrongbook-v2/qa/mindmap-stable-free-drag-live-v1.js'
+      - '.github/workflows/wrongbook-stable-free-drag-live-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-free-drag:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: node --check wrongbook-v2/qa/mindmap-stable-free-drag-live-v1.js
+      - name: Install Playwright core
+        run: |
+          mkdir -p /tmp/wb-live-pw
+          cd /tmp/wb-live-pw
+          npm init -y >/dev/null 2>&1
+          npm install playwright-core@1.55.0 --no-save
+          ln -s /tmp/wb-live-pw/node_modules "$GITHUB_WORKSPACE/node_modules"
+      - name: Test actual GitHub Pages node clicks and free drag
+        env:
+          CHROMIUM_PATH: /usr/bin/chromium
+        run: |
+          set -o pipefail
+          node wrongbook-v2/qa/mindmap-stable-free-drag-live-v1.js | tee /tmp/wb-free-drag-live-result.json
+      - name: Upload live QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongbook-stable-free-drag-live-qa
+          path: |
+            /tmp/wb-free-drag-live-result.json
+            /tmp/wrongbook-free-drag-live-desktop.png
+            /tmp/wrongbook-free-drag-live-mobile.png
+          if-no-files-found: warn
