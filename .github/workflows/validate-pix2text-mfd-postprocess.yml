@@ -1,0 +1,77 @@
+name: Validate Pix2Text MFD postprocess
+
+on:
+  push:
+    branches:
+      - automation/pix2text-mfd-v2-20260921
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compare reference and portable ONNX path
+        shell: bash
+        run: |
+          set -euo pipefail
+          pip install --quiet onnxruntime pillow numpy ultralytics==8.3.123
+          curl -L --fail --retry 4 'https://huggingface.co/breezedeus/pix2text-mfd-1.5/resolve/main/pix2text-mfd-1.5.onnx?download=true' -o model.onnx
+          curl -L --fail --retry 4 'https://raw.githubusercontent.com/breezedeus/Pix2Text/main/docs/examples/mixed.jpg' -o sample.jpg
+          cat > compare.py <<'PY'
+          import numpy as np
+          from PIL import Image
+          import onnxruntime as ort
+          from ultralytics import YOLO
+
+          im=Image.open("sample.jpg").convert("RGB")
+          src=np.asarray(im)
+          h,w=src.shape[:2]
+          long=768
+          scale=min(long/w,long/h)
+          nw=max(1,round(w*scale)); nh=max(1,round(h*scale))
+          # Ultralytics rect letterbox: minimum stride-aligned rectangle.
+          cw=int(np.ceil(nw/32)*32); ch=int(np.ceil(nh/32)*32)
+          px=(cw-nw)/2; py=(ch-nh)/2
+          resized=np.asarray(im.resize((nw,nh),Image.Resampling.BILINEAR))
+          canvas=np.full((ch,cw,3),114,dtype=np.uint8)
+          left=int(round(px-0.1)); top=int(round(py-0.1))
+          canvas[top:top+nh,left:left+nw]=resized
+          x=np.transpose(canvas.astype(np.float32)/255.0,(2,0,1))[None]
+          sess=ort.InferenceSession("model.onnx",providers=["CPUExecutionProvider"])
+          y=sess.run(None,{sess.get_inputs()[0].name:x})[0][0] # 6,N
+          candidates=[]
+          for i in range(y.shape[1]):
+              scores=y[4:,i]; cls=int(np.argmax(scores)); conf=float(scores[cls])
+              if conf<0.25: continue
+              cx,cy,bw,bh=map(float,y[:4,i])
+              candidates.append([cx-bw/2,cy-bh/2,cx+bw/2,cy+bh/2,conf,cls])
+          def iou(a,b):
+              x1=max(a[0],b[0]);y1=max(a[1],b[1]);x2=min(a[2],b[2]);y2=min(a[3],b[3])
+              inter=max(0,x2-x1)*max(0,y2-y1)
+              return inter/max((a[2]-a[0])*(a[3]-a[1])+(b[2]-b[0])*(b[3]-b[1])-inter,1e-9)
+          kept=[]
+          for c in sorted(candidates,key=lambda z:z[4],reverse=True):
+              if all(c[5]!=k[5] or iou(c,k)<=0.45 for k in kept):
+                  kept.append(c)
+          mapped=[]
+          for c in kept:
+              x1=(c[0]-left)/scale;y1=(c[1]-top)/scale;x2=(c[2]-left)/scale;y2=(c[3]-top)/scale
+              mapped.append([max(0,x1),max(0,y1),min(w,x2),min(h,y2),c[4],c[5]])
+          mapped=sorted(mapped,key=lambda z:(z[1],z[0]))
+
+          ref=YOLO("model.onnx",task="detect").predict(src[:,:,::-1],imgsz=768,conf=0.25,device="cpu",verbose=False)[0]
+          refs=[]
+          for box,conf,cls in zip(ref.boxes.xyxy.cpu().numpy(),ref.boxes.conf.cpu().numpy(),ref.boxes.cls.cpu().numpy()):
+              refs.append([*map(float,box),float(conf),int(cls)])
+          refs=sorted(refs,key=lambda z:(z[1],z[0]))
+          print("source",w,h,"portable-input",cw,ch,"scale",scale,"pad",left,top)
+          print("names",ref.names)
+          print("reference",len(refs))
+          for z in refs: print(" REF",z)
+          print("portable",len(mapped))
+          for z in mapped: print(" OUR",z)
+          PY
+          python compare.py
