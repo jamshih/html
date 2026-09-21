@@ -19,7 +19,7 @@ jobs:
           set -euo pipefail
           python -m pip install --quiet onnx onnxruntime
           curl -L --fail --retry 5 --retry-delay 2             'https://huggingface.co/breezedeus/pix2text-mfd-1.5/resolve/main/pix2text-mfd-1.5.onnx?download=true'             -o pix2text-mfd-1.5.onnx
-          test "$(stat -c %s pix2text-mfd-1.5.onnx)" = "80343293"
+          stat -c "bytes=%s" pix2text-mfd-1.5.onnx
           echo "40d4fc852d99bcbf25a9478897d2f49fbbb8f7fdd6569c088cd1c31386293bd7  pix2text-mfd-1.5.onnx" | sha256sum -c -
           python - <<'PY'
           import onnxruntime as ort, json
