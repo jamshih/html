@@ -1,0 +1,67 @@
+name: Inspect latest Math OCR v2 run
+
+on:
+  push:
+    branches:
+      - automation/pix2text-mfd-v2-20260921
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch artifacts and build contact sheet
+        shell: bash
+        run: |
+          set -euo pipefail
+          pip install --quiet pillow requests
+          BASE='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/wrongbook-math-v2-inspect-latest'
+          KEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx'
+          for f in 01-source.jpg 03-mfd-model-input.png 04-region-01-crop.jpg 05-region-01-formulanet-input.png 06-region-02-crop.jpg 07-region-02-formulanet-input.png 08-region-03-crop.jpg 09-region-03-formulanet-input.png 10-region-04-crop.jpg 11-region-04-formulanet-input.png 12-results.json; do
+            curl -L --fail --retry 3 "$BASE?key=$KEY&file=$f" -o "$f"
+          done
+          cat > sheet.py <<'PY'
+          from PIL import Image,ImageDraw,ImageFont
+          import json, os, math
+          files=[
+            ("source","01-source.jpg"),
+            ("MFD input","03-mfd-model-input.png"),
+            ("region 1 crop","04-region-01-crop.jpg"),
+            ("region 1 FormulaNet","05-region-01-formulanet-input.png"),
+            ("region 2 crop","06-region-02-crop.jpg"),
+            ("region 2 FormulaNet","07-region-02-formulanet-input.png"),
+            ("region 3 crop","08-region-03-crop.jpg"),
+            ("region 3 FormulaNet","09-region-03-formulanet-input.png"),
+            ("region 4 crop","10-region-04-crop.jpg"),
+            ("region 4 FormulaNet","11-region-04-formulanet-input.png"),
+          ]
+          W=1200; cellw=580; cellh=360; margin=20
+          rows=math.ceil(len(files)/2)
+          sheet=Image.new("RGB",(W,rows*cellh+margin),(245,245,245))
+          d=ImageDraw.Draw(sheet)
+          for i,(title,fp) in enumerate(files):
+            im=Image.open(fp).convert("RGB")
+            if title=="source":
+              data=json.load(open("12-results.json"))
+              dr=ImageDraw.Draw(im)
+              for j,r in enumerate(data["regions"],1):
+                b=r["box"]; x1=b["x"]; y1=b["y"]; x2=x1+b["width"]; y2=y1+b["height"]
+                dr.rectangle((x1,y1,x2,y2),outline=(255,0,0),width=12)
+                dr.text((x1,max(0,y1-35)),str(j),fill=(255,0,0))
+            im.thumbnail((cellw-20,cellh-50))
+            x=margin+(i%2)*cellw; y=margin+(i//2)*cellh
+            d.text((x,y),title,fill=(0,0,0))
+            sheet.paste(im,(x,y+28))
+          sheet.save("math-v2-contact-sheet.jpg",quality=92)
+          PY
+          python sheet.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: latest-math-v2-inspection
+          path: |
+            math-v2-contact-sheet.jpg
+            12-results.json
+          retention-days: 1
