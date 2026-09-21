@@ -1,0 +1,57 @@
+name: Validate Math OCR v2 orientation on latest scan
+
+on:
+  push:
+    branches:
+      - automation/pix2text-mfd-v2-20260921
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run MFD on source normal vs flipped
+        shell: bash
+        run: |
+          set -euo pipefail
+          pip install --quiet ultralytics==8.3.123 pillow
+          BASE='https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/wrongbook-math-v2-inspect-latest'
+          KEY='sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx'
+          curl -L --fail --retry 3 "$BASE?key=$KEY&file=01-source.jpg" -o source.jpg
+          curl -L --fail --retry 4 'https://huggingface.co/breezedeus/pix2text-mfd-1.5/resolve/main/pix2text-mfd-1.5.onnx?download=true' -o model.onnx
+          cat > test.py <<'PY'
+          from PIL import Image,ImageOps,ImageDraw
+          import numpy as np, json
+          from ultralytics import YOLO
+          model=YOLO("model.onnx",task="detect")
+          src=Image.open("source.jpg").convert("RGB")
+          out={}
+          sheets=[]
+          for name,im in [("normal",src),("vflip",ImageOps.flip(src))]:
+            arr=np.asarray(im)[:,:,::-1]
+            r=model.predict(arr,imgsz=768,conf=0.25,device="cpu",verbose=False)[0]
+            rows=[]
+            draw=ImageDraw.Draw(im)
+            for i,(box,conf,cls) in enumerate(zip(r.boxes.xyxy.cpu().numpy(),r.boxes.conf.cpu().numpy(),r.boxes.cls.cpu().numpy()),1):
+              x1,y1,x2,y2=map(float,box); c=float(conf); k=int(cls)
+              rows.append({"box":[x1,y1,x2,y2],"confidence":c,"class":r.names[k]})
+              draw.rectangle((x1,y1,x2,y2),outline="red" if k==0 else "blue",width=10)
+              draw.text((x1,max(0,y1-28)),f"{i} {r.names[k]} {c:.2f}",fill="red" if k==0 else "blue")
+            out[name]=rows
+            im.thumbnail((900,900))
+            im.save(f"{name}-overlay.jpg",quality=90)
+          print(json.dumps(out,indent=2))
+          open("detections.json","w").write(json.dumps(out,indent=2))
+          PY
+          python test.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: latest-orientation-validation
+          path: |
+            normal-overlay.jpg
+            vflip-overlay.jpg
+            detections.json
+          retention-days: 1
