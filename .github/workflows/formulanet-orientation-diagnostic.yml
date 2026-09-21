@@ -1,0 +1,100 @@
+name: Diagnose FormulaNet orientation
+
+on:
+  push:
+    branches:
+      - automation/formulanet-orientation-diagnostic-20260921
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install runtime
+        run: pip install --quiet onnxruntime pillow numpy tokenizers
+      - name: Download exact assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 4 'https://github.com/GreatV/oar-ocr/releases/download/v0.3.0/pp-formulanet-s.onnx' -o model.onnx
+          curl -L --fail --retry 4 'https://www.modelscope.cn/api/v1/models/greatv/oar-ocr/repo?Revision=master&FilePath=pp-formulanet-tokenizer.json' -o tokenizer.json
+          curl -L --fail --retry 4 'https://rfpkznuntzxfoeeavwwf.supabase.co/storage/v1/object/sign/wb-scanner-lab-debug/math/4a7d9a73-c4c7-4223-9672-2d542e5bb4ef/01-source.jpg?token=eyJraWQiOiI0OTRmMDAyYi04ZGUzLTQyMzEtOTNiNi0zM2Q5MGEyZWE4ZDYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3Yi1zY2FubmVyLWxhYi1kZWJ1Zy9tYXRoLzRhN2Q5YTczLWM0YzctNDIyMy05NjcyLTJkNTQyZTViYjRlZi8wMS1zb3VyY2UuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4OTk5MzUxNSwiZXhwIjoxNzg5OTk3MTE1fQ.GtzApGhGzB8hAxANfe22Gtt_rTCJz-ucxTqmefeFcVg' -o source.jpg
+      - name: Run upstream-equivalent preprocessing + ONNX
+        shell: bash
+        run: |
+          cat > diagnose.py <<'PY'
+          from PIL import Image, ImageOps
+          import numpy as np, onnxruntime as ort
+          from tokenizers import Tokenizer
+
+          def preprocess(im, flip=False):
+              im=im.convert('RGB')
+              if flip:
+                  im=ImageOps.flip(im)
+              gray=np.array(im.convert('L'), dtype=np.float32)
+              mn=float(gray.min()); mx=float(gray.max())
+              if mx>mn:
+                  norm=(gray-mn)/(mx-mn)*255.0
+                  ys,xs=np.where(norm<200)
+                  if len(xs)>0 and xs.min()<xs.max() and ys.min()<ys.max():
+                      im=im.crop((int(xs.min()),int(ys.min()),int(xs.max())+1,int(ys.max())+1))
+              w,h=im.size
+              scale=384.0/max(w,h)
+              nw=max(1,min(384,int(w*scale))); nh=max(1,min(384,int(h*scale)))
+              im=im.resize((nw,nh),Image.Resampling.BILINEAR)
+              canvas=Image.new('RGB',(384,384),(0,0,0))
+              canvas.paste(im,((384-nw)//2,(384-nh)//2))
+              arr=np.asarray(canvas,dtype=np.float32)
+              # upstream uses BGR normalize then luminance; same mean/std each channel,
+              # algebraically equal to RGB luminance then scalar normalize
+              lum=(0.299*arr[:,:,0]+0.587*arr[:,:,1]+0.114*arr[:,:,2])/255.0
+              tensor=((lum-0.7931)/0.1738).astype(np.float32)[None,None,:,:]
+              return canvas,tensor
+
+          tok=Tokenizer.from_file('tokenizer.json')
+          vocab=tok.get_vocab(with_added_tokens=True)
+          bos=next((vocab[k] for k in ['<s>','[BOS]','<bos>','[CLS]'] if k in vocab),0)
+          eos=next((vocab[k] for k in ['</s>','[EOS]','<eos>','[SEP]'] if k in vocab),2)
+          vs=tok.get_vocab_size(with_added_tokens=True)
+          sess=ort.InferenceSession('model.onnx',providers=['CPUExecutionProvider'])
+          print('INPUTS',[(x.name,x.type,x.shape) for x in sess.get_inputs()])
+          print('OUTPUTS',[(x.name,x.type,x.shape) for x in sess.get_outputs()])
+          name=sess.get_inputs()[0].name
+          im=Image.open('source.jpg')
+
+          for label,flip in [('normal',False),('vertical_flip',True)]:
+              canvas,tensor=preprocess(im,flip=flip)
+              canvas.save(f'{label}.png')
+              outs=sess.run(None,{name:tensor})
+              candidates=[]
+              for meta,val in zip(sess.get_outputs(),outs):
+                  a=np.asarray(val)
+                  if a.dtype==np.int64 and a.ndim==2:
+                      candidates.append((meta.name,a))
+              print('\nVARIANT',label,'candidate_count',len(candidates))
+              for oname,a in candidates:
+                  row=a[0].tolist()
+                  filt=[]; eos_found=False
+                  for x in row:
+                      x=int(x)
+                      if x==eos: eos_found=True; break
+                      if x<0 or x>=vs: break
+                      if x==bos: continue
+                      filt.append(x)
+                  latex=tok.decode(filt,skip_special_tokens=True)
+                  print('OUTPUT',oname,'raw_count',len(row),'filtered',len(filt),'eos',eos_found)
+                  print('PREFIX',row[:96])
+                  print('LATEX',repr(latex[:2000]))
+          PY
+          python diagnose.py
+      - name: Upload model inputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: formulanet-orientation-diagnostic
+          path: |
+            normal.png
+            vertical_flip.png
+          retention-days: 1
