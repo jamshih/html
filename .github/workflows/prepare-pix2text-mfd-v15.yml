@@ -1,0 +1,43 @@
+name: Prepare Pix2Text MFD 1.5
+
+on:
+  push:
+    branches:
+      - automation/pix2text-mfd-v2-20260921
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download and inspect model
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet onnx onnxruntime
+          curl -L --fail --retry 5 --retry-delay 2             'https://huggingface.co/breezedeus/pix2text-mfd-1.5/resolve/main/pix2text-mfd-1.5.onnx?download=true'             -o pix2text-mfd-1.5.onnx
+          test "$(stat -c %s pix2text-mfd-1.5.onnx)" = "80343293"
+          echo "40d4fc852d99bcbf25a9478897d2f49fbbb8f7fdd6569c088cd1c31386293bd7  pix2text-mfd-1.5.onnx" | sha256sum -c -
+          python - <<'PY'
+          import onnxruntime as ort, json
+          s=ort.InferenceSession("pix2text-mfd-1.5.onnx",providers=["CPUExecutionProvider"])
+          meta={
+            "inputs":[{"name":x.name,"shape":x.shape,"type":x.type} for x in s.get_inputs()],
+            "outputs":[{"name":x.name,"shape":x.shape,"type":x.type} for x in s.get_outputs()],
+            "metadata":dict(s.get_modelmeta().custom_metadata_map or {})
+          }
+          print(json.dumps(meta,indent=2))
+          open("model-io.json","w").write(json.dumps(meta,indent=2))
+          PY
+      - name: Upload model + metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: pix2text-mfd-1.5-ios-assets
+          path: |
+            pix2text-mfd-1.5.onnx
+            model-io.json
+          compression-level: 0
+          retention-days: 1
