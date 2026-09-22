@@ -1,0 +1,114 @@
+name: FormulaNet S vs plus-S benchmark
+on:
+  push:
+    branches:
+      - automation/formulanet-ab-benchmark-20260922
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Clone benchmark runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/X3ZvaWQ/paddleocr.js.git paddleocrjs
+          cd paddleocrjs
+          bun install --frozen-lockfile
+
+      - name: Download models, tokenizer, and exact v2.7.1 crops
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p paddleocrjs/bench-assets
+          curl -L --fail --retry 4             "https://github.com/GreatV/oar-ocr/releases/download/v0.3.0/pp-formulanet-s.onnx"             -o paddleocrjs/bench-assets/pp-formulanet-s.onnx
+          curl -L --fail --retry 4             "https://huggingface.co/x3zvawq/paddleocr-js-onnx/resolve/main/PP_FormulaNet_plus_S/PP-FormulaNet_plus-S_infer.onnx?download=true"             -o paddleocrjs/bench-assets/pp-formulanet-plus-s.onnx
+          curl -L --fail --retry 4             "https://www.modelscope.cn/api/v1/models/greatv/oar-ocr/repo?Revision=master&FilePath=pp-formulanet-tokenizer.json"             -o paddleocrjs/bench-assets/tokenizer.json
+          curl -L --fail --retry 4             "https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/tmp-v271-formula-crop-proxy?k=region5"             -o paddleocrjs/bench-assets/region5.jpg
+          curl -L --fail --retry 4             "https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/tmp-v271-formula-crop-proxy?k=region8"             -o paddleocrjs/bench-assets/region8.jpg
+
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick >/dev/null
+          convert paddleocrjs/bench-assets/region5.jpg paddleocrjs/bench-assets/region5.png
+          convert paddleocrjs/bench-assets/region8.jpg paddleocrjs/bench-assets/region8.png
+
+          sha256sum paddleocrjs/bench-assets/*.onnx paddleocrjs/bench-assets/tokenizer.json | tee paddleocrjs/bench-assets/model-sha256.txt
+          test "$(stat -c %s paddleocrjs/bench-assets/pp-formulanet-s.onnx)" = "231878904"
+          test "$(stat -c %s paddleocrjs/bench-assets/pp-formulanet-plus-s.onnx)" = "333913284"
+
+      - name: Write benchmark
+        shell: bash
+        run: |
+          cat > paddleocrjs/bench.ts <<'TS'
+          import * as ort from "onnxruntime-node";
+          import { writeFile } from "node:fs/promises";
+          import {
+            createFormulaTokenizerVocabulary,
+            FormulaRecognitionService,
+            getFormulaRecognitionPresetOptions,
+          } from "./src/index.ts";
+          import { createSession, loadJson, loadPngImage } from "./examples/_shared.ts";
+
+          const root = "bench-assets";
+          const tokenizerJson = await loadJson(`${root}/tokenizer.json`, "tokenizer");
+          const tokenizerVocabulary = createFormulaTokenizerVocabulary(tokenizerJson);
+          const crops = ["region5", "region8"];
+
+          async function runModel(label: string, preset: "PP-FormulaNet-S" | "PP-FormulaNet_plus-S", path: string) {
+            const t0 = performance.now();
+            const session = await createSession(ort, path, label);
+            const loadMS = performance.now() - t0;
+            const recognizer = new FormulaRecognitionService(ort, session, {
+              ...getFormulaRecognitionPresetOptions(preset),
+              tokenizerVocabulary,
+            });
+            const outputs:any[] = [];
+            for (const crop of crops) {
+              const image = await loadPngImage(`${root}/${crop}.png`);
+              const s = performance.now();
+              const result = await recognizer.run(image);
+              outputs.push({
+                crop,
+                formula: result.formula,
+                token_count: result.tokens.length,
+                recognition_ms: performance.now() - s,
+              });
+            }
+            return { label, preset, model_load_ms: loadMS, outputs };
+          }
+
+          const sResult = await runModel("S", "PP-FormulaNet-S", `${root}/pp-formulanet-s.onnx`);
+          const plusResult = await runModel("plus-S", "PP-FormulaNet_plus-S", `${root}/pp-formulanet-plus-s.onnx`);
+          const payload = {
+            generated_at: new Date().toISOString(),
+            note: "Exact v2.7.1 region 5 and 8 source crops; both models use the same paddleocr.js official FormulaNet preprocessing/tokenizer path.",
+            results: [sResult, plusResult],
+          };
+          console.log(JSON.stringify(payload, null, 2));
+          await writeFile("bench-results.json", JSON.stringify(payload, null, 2));
+          TS
+
+      - name: Run S vs plus-S
+        working-directory: paddleocrjs
+        shell: bash
+        run: |
+          set -euo pipefail
+          bun bench.ts | tee ../bench-output.txt
+
+      - name: Upload benchmark
+        uses: actions/upload-artifact@v4
+        with:
+          name: formulanet-ab-results
+          path: |
+            paddleocrjs/bench-results.json
+            paddleocrjs/bench-assets/model-sha256.txt
+            bench-output.txt
+          if-no-files-found: error
+          retention-days: 3
