@@ -1,0 +1,16 @@
+name: Fetch latest v2.1 summary
+on:
+  push:
+    branches:
+      - automation/pix2text-mfd-v2-20260921
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch summary
+        run: curl -fsSL 'https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/wrongbook-math-v21-public-summary' -o latest-v21-summary.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: latest-v21-summary
+          path: latest-v21-summary.json
+          retention-days: 1
