@@ -1,0 +1,50 @@
+name: Prepare FormulaNet plus-S AB asset
+
+on:
+  push:
+    branches:
+      - automation/formulanet-plus-s-ab-20260922
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install inspectors
+        run: pip install --quiet onnx onnxruntime
+      - name: Download converted ONNX assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 5 --retry-delay 2             'https://huggingface.co/X3ZvaWQ/paddleocr-js-onnx/resolve/main/PP_FormulaNet_plus_S/PP-FormulaNet_plus-S_infer.onnx'             -o PP-FormulaNet_plus-S_infer.onnx
+          curl -L --fail --retry 5 --retry-delay 2             'https://huggingface.co/X3ZvaWQ/paddleocr-js-onnx/resolve/main/PP_FormulaNet_S/PP-FormulaNet-S_infer.onnx'             -o PP-FormulaNet-S_reference.onnx
+          stat -c 'plus_s_bytes=%s' PP-FormulaNet_plus-S_infer.onnx
+          stat -c 's_bytes=%s' PP-FormulaNet-S_reference.onnx
+          sha256sum PP-FormulaNet_plus-S_infer.onnx PP-FormulaNet-S_reference.onnx
+      - name: Inspect ONNX contract
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, onnxruntime as ort
+          out={}
+          for fn in ['PP-FormulaNet_plus-S_infer.onnx','PP-FormulaNet-S_reference.onnx']:
+              s=ort.InferenceSession(fn,providers=['CPUExecutionProvider'])
+              out[fn]={
+                  'inputs':[{'name':x.name,'shape':x.shape,'type':x.type} for x in s.get_inputs()],
+                  'outputs':[{'name':x.name,'shape':x.shape,'type':x.type} for x in s.get_outputs()],
+                  'metadata':dict(s.get_modelmeta().custom_metadata_map or {}),
+              }
+          print(json.dumps(out,indent=2))
+          open('formulanet-ab-model-io.json','w').write(json.dumps(out,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: formulanet-plus-s-ab-assets
+          path: |
+            PP-FormulaNet_plus-S_infer.onnx
+            formulanet-ab-model-io.json
+          compression-level: 0
+          retention-days: 1
