@@ -1,0 +1,25 @@
+name: Inspect v2.8 OCR log
+on:
+  push:
+    branches:
+      - automation/inspect-v28-log-20260922
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch log
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3             "https://rfpkznuntzxfoeeavwwf.supabase.co/functions/v1/wrongbook-math-v28-inspect?key=sb_publishable_Nt8ik0KBWLdi8hucG9oDRQ_cnMyQ9Gx"             -o v28-log.json
+          python -m json.tool v28-log.json >/dev/null
+          wc -c v28-log.json
+      - name: Upload log
+        uses: actions/upload-artifact@v4
+        with:
+          name: v28-log
+          path: v28-log.json
+          if-no-files-found: error
+          retention-days: 1
