@@ -1,0 +1,29 @@
+name: Fetch PP-FormulaNet plus-S
+on:
+  push:
+    branches:
+      - automation/fetch-formulanet-plus-s-20260922
+
+jobs:
+  fetch-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Download converted PP-FormulaNet plus-S ONNX
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          curl -L --fail --retry 3 --retry-delay 2             "https://huggingface.co/x3zvawq/paddleocr-js-onnx/resolve/main/PP_FormulaNet_plus_S/PP-FormulaNet_plus-S_infer.onnx?download=true"             -o out/PP-FormulaNet_plus-S_infer.onnx
+          test -s out/PP-FormulaNet_plus-S_infer.onnx
+          ls -lh out/PP-FormulaNet_plus-S_infer.onnx
+          sha256sum out/PP-FormulaNet_plus-S_infer.onnx | tee out/SHA256SUMS.txt
+
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pp-formulanet-plus-s-onnx
+          path: out/
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 1
