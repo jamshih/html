@@ -1,28 +1,42 @@
-name: Fetch PP-FormulaNet plus-S
+name: Fetch PP-FormulaNet plus-S chunks
 on:
   push:
     branches:
       - automation/fetch-formulanet-plus-s-20260922
 
 jobs:
-  fetch-model:
+  fetch-model-chunk:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        idx: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     steps:
-      - name: Download converted PP-FormulaNet plus-S ONNX
+      - name: Download chunk
         shell: bash
+        env:
+          IDX: ${{ matrix.idx }}
         run: |
           set -euo pipefail
+          TOTAL=333913284
+          CHUNK=16777216
+          START=$((IDX * CHUNK))
+          END=$((START + CHUNK - 1))
+          if [ "$END" -ge "$TOTAL" ]; then END=$((TOTAL - 1)); fi
           mkdir -p out
-          curl -L --fail --retry 3 --retry-delay 2             "https://huggingface.co/x3zvawq/paddleocr-js-onnx/resolve/main/PP_FormulaNet_plus_S/PP-FormulaNet_plus-S_infer.onnx?download=true"             -o out/PP-FormulaNet_plus-S_infer.onnx
-          test -s out/PP-FormulaNet_plus-S_infer.onnx
-          ls -lh out/PP-FormulaNet_plus-S_infer.onnx
-          sha256sum out/PP-FormulaNet_plus-S_infer.onnx | tee out/SHA256SUMS.txt
+          NAME=$(printf "chunk-%02d.bin" "$IDX")
+          curl -L --fail --retry 3 --retry-delay 2             -H "Range: bytes=${START}-${END}"             "https://huggingface.co/x3zvawq/paddleocr-js-onnx/resolve/main/PP_FormulaNet_plus_S/PP-FormulaNet_plus-S_infer.onnx?download=true"             -o "out/${NAME}"
+          EXPECTED=$((END - START + 1))
+          ACTUAL=$(stat -c%s "out/${NAME}")
+          test "$ACTUAL" -eq "$EXPECTED"
+          printf "%s %s %s\n" "$START" "$END" "$ACTUAL" > "out/${NAME}.range.txt"
+          sha256sum "out/${NAME}" > "out/${NAME}.sha256"
 
-      - name: Upload model artifact
+      - name: Upload chunk artifact
         uses: actions/upload-artifact@v4
         with:
-          name: pp-formulanet-plus-s-onnx
+          name: plus-s-chunk-${{ matrix.idx }}
           path: out/
           compression-level: 0
           if-no-files-found: error
